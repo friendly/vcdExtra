@@ -1,0 +1,13 @@
+Package: vcdExtra
+Type: Package
+Title: vcd additions
+Version: 0.1
+Date: 2009-01-25
+Author: Michael Friendly
+Maintainer: Michael Friendly <friendly@yorku.ca>
+Depends: vcd
+Suggests: ca,gmodels
+Description: Provides additional data sets, methods and documentation to complement the vcd package for Visualizing Categorical Data.
+License: GPL version 2 or newer
+LazyLoad: yes
+LazyData: yes
