@@ -34,5 +34,5 @@ Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.
 %~~ Optional links to other man pages, e.g. ~~
 %~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
-\examples{
-}
+%\examples{
+%}
