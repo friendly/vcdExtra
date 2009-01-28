@@ -1,5 +1,5 @@
 # last modified 27 January 2008 by M. Friendly
-export(expand.dft,mosaic.glm,mosaic.gnm)
+export(expand.dft,collapse.table,mosaic.glm,mosaic.gnm)
 import(vcd)
 S3method(mosaic, glm)
 S3method(mosaic, gnm)

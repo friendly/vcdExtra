@@ -7,7 +7,7 @@ Extensions and additions to vcd: Visualizing Categorical Data
 }
 \description{
 This package provides additional data sets, documentation, and
-a few functions designed to extend the vcd package.
+a few functions designed to extend the vcd package.  
 }
 \details{
 \tabular{ll}{
@@ -26,7 +26,8 @@ Michael Friendly
 Maintainer: Michael Friendly <friendly@yorku.ca>
 }
 \references{
-~~ Literature or other references for background information ~~
+Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.
+% TODO: ref to JSS strucplot paper, gnm vignette
 }
 \keyword{ package }
 \seealso{
