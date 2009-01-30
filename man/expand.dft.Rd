@@ -1,5 +1,6 @@
 \name{expand.dft}
 \alias{expand.dft}
+\alias{expand.table}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Expand a frequency table to case form}
 \description{
@@ -8,6 +9,8 @@
 }
 \usage{
 expand.dft(x, var.names = NULL, freq = "Freq", ...)
+
+expand.table(x, var.names = NULL, freq = "Freq", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,9 +22,9 @@ expand.dft(x, var.names = NULL, freq = "Freq", ...)
   \code{na.strings} (default: \code{na.strings=NA} if there are missing cells) and \code{as.is}
   (default: \code{as.is=FALSE}, converting character vectors to factors).}
 }
-%\details{
-%  ~~ If necessary, more details than the description above ~~
-%}
+\details{
+ \code{expand.table} is a synonym for \code{expand.dft}.
+}
 \value{
 A data frame containing the factors in the table and as many observations as are
 represented by the total of the \code{freq} variable.

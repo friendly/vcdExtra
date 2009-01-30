@@ -40,3 +40,5 @@ expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
   DF
 }
 
+# make this a synonym
+expand.table <- expand.dft
