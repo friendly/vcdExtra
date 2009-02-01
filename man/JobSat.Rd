@@ -32,5 +32,6 @@ Table 2.8, p. 57.
 \examples{
 data(JobSat)
 assocstats(JobSat)
+Gamma(JobSat)
 }
 \keyword{datasets}

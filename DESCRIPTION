@@ -2,7 +2,7 @@ Package: vcdExtra
 Type: Package
 Title: vcd additions
 Version: 0.2
-Date: 2009-01-30
+Date: 2009-02-01
 Author: Michael Friendly
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: vcd
