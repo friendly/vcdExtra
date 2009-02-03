@@ -28,7 +28,7 @@ are initial implementations, intended to complement the
 
 In addition ...
 \describe{
-  \item{vcd-tutorial}{\code{vignette("vcd-tutorial", package = "vcdExtra") }}
+  \item{vcd-tutorial}{Tutorial: Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
 }
 \author{
