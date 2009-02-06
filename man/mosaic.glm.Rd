@@ -9,18 +9,30 @@ or for a generalized nonlinear model fitted with \code{\link[gnm]{gnm}}.
 These methods apply only to models with discrete factors.
 }
 \usage{
-\method{mosaic}{glm}(x, residuals = NULL, ..., residuals_type = "deviance")
+%\method{mosaic}{glm}(x, residuals = NULL, ..., residuals_type = "deviance")
+\method{mosaic}{glm}(x, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
+residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
 
 \method{mosaic}{gnm}(x, residuals = NULL, ..., residuals_type = "deviance")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ A \code{glm} or \code{gnm} object }
+   \item{panel}{Panel function used to draw the plot for visualizing the observed values, residuals 
+   and expected values. Currently, one of \code{"mosaic"}, \code{"assoc"}, or \code{"sieve"}
+   in \code{vcd}.}
+  \item{type}{A character string indicating whether the 
+  \code{"observed"} or the \code{"expected"} values of the table should be visualized
+  by the area of the tiles or bars.}
   \item{residuals}{ An optional array or vector of residuals corresponding to the cells in the
   data, for example, as calculated by \code{residuals.glm(x)}, \code{residuals.gnm(x)}.}
-  \item{\dots}{ Other arguments passed to \code{\link[vcd]{mosaic}} }
   \item{residuals_type}{ The type of residuals, used as a label for the legend in the mosaic
-  plot }
+  plot.  As well, if \code{residuals} argument is \code{NULL}, residuals are calculated internally
+  and used in the display.}
+  \item{gp}{Object of class \code{"gpar"}, shading function or a corresponding generating function (see details and shadings). 
+  Ignored if shade = FALSE.}
+  \item{gp_args}{A list of arguments for the shading-generating function, if specified.}
+  \item{\dots}{ Other arguments passed to the \code{panel} function e.g., \code{\link[vcd]{mosaic}} }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -30,12 +42,9 @@ The \code{structable} visualized by \code{\link[vcd]{mosaic}} is returned invisi
 
 }
 %\references{ ~put references to the literature/web site here ~ }
-\author{Michael Friendly}
-\note{
-The current version is BUGGED -- residuals are not shaded correctly.
-The examples below are intended simply to demonstrate the bug. 
- 
-}
+\author{Michael Friendly, with help from Achim Zeileis}
+%\note{
+%}
 \seealso{\code{\link[stats]{glm}}, \code{\link[gnm]{gnm}}, \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}}
 \examples{
 GSStab <- xtabs(count ~ sex + party, data=GSS)
@@ -49,8 +58,12 @@ stdtab <- array(std, dim=dim(GSStab), dimnames=dimnames(GSStab))
 mosaic(GSStab, gp=shading_Friendly, residuals=stdtab, residuals_type="Std\nresiduals", 
        labeling = labeling_residuals)
 
-## BUGGED
+
+# Using externally calculated residuals
 mosaic.glm(mod.glm1, residuals=std, labeling = labeling_residuals, shade=TRUE)
+
+# Using residuals_type
+mosaic.glm(mod.glm1, residuals_type="rstandard", labeling = labeling_residuals, shade=TRUE)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

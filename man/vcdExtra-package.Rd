@@ -13,12 +13,13 @@ a few functions designed to extend the vcd package.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.2\cr
-Date: \tab 2009-02-01\cr
+Version: \tab 0.3-0\cr
+Date: \tab 2009-02-06\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
-The main purpose of this package is to introduce extensions of
+The main purpose of this package is to serve as a sandbox for
+introducing extensions of
 mosaic plots that apply to loglinear models fitted using
 \code{glm()} and related, generalized nonlinear models fitted
 with \code{gnm()} in the \code{\link[gnm]{gnm-package}} package.
@@ -26,10 +27,13 @@ The methods \code{\link{mosaic.glm}} and \code{\link{mosaic.gnm}}
 are initial implementations, intended to complement the
 \code{\link[vcd]{mosaic.loglm}} method in the vcd package.
 
-In addition ...
+In addition, there are several new data sets, a new vignette,
 \describe{
   \item{vcd-tutorial}{Tutorial: Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
+and a few functions for manipulating categorical data sets.
+
+Some of these extensions may be migrated into vcd.
 }
 \author{
 Michael Friendly
