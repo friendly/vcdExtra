@@ -6,3 +6,7 @@ Version 0.2 (2009-2-1)
 
 Added vcd-tutorial vignette
 
+Version 0.3-0 (2009-2-6)
+
+o Fixed bugs in mosaic.glm and mosaic.gnm
+
