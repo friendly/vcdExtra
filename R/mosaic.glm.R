@@ -21,7 +21,7 @@ is.discrete.model <- function(model)
 	if (!inherits(x,"glm")) stop("mosaic.glm requires a glm object")
 	# this should work for any glm family, where all predictors are factors
 	# But maybe not sensible for non-count data??
-	if (!is.discrete.model(x)) stop("only factors are allowed")
+	#if (!is.discrete.model(x)) stop("only factors are allowed")
 	
 	xlevels <- x$xlevels
 	df.residual <- x$df.residual

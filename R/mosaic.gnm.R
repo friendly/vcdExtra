@@ -9,7 +9,7 @@
 	require(vcd)
 	
 	if (!inherits(x,"gnm")) stop("mosaic.gnm requires a gnm object")
-	if (!is.discrete.model(x)) stop("only factors are allowed")
+	#if (!is.discrete.model(x)) stop("only factors are allowed")
 	
 	xlevels <- x$xlevels
 	df.residual <- x$df.residual
