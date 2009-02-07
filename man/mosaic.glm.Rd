@@ -4,7 +4,8 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Mosaic plots for fitted generalized linear and generalized nonlinear models }
 \description{
-Procduces mosaic plots for a log-linear model fitted with \code{\link[stats]{glm}}
+Procduces mosaic plots (and other plots in the \code{\link[vcd]{strucplot}} framework) 
+for a log-linear model fitted with \code{\link[stats]{glm}}
 or for a generalized nonlinear model fitted with \code{\link[gnm]{gnm}}.
 These methods apply only to models with discrete factors.
 }
@@ -13,7 +14,8 @@ These methods apply only to models with discrete factors.
 \method{mosaic}{glm}(x, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
 residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
 
-\method{mosaic}{gnm}(x, residuals = NULL, ..., residuals_type = "deviance")
+\method{mosaic}{gnm}(x, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
+residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,16 +28,22 @@ residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_arg
   by the area of the tiles or bars.}
   \item{residuals}{ An optional array or vector of residuals corresponding to the cells in the
   data, for example, as calculated by \code{residuals.glm(x)}, \code{residuals.gnm(x)}.}
-  \item{residuals_type}{ The type of residuals, used as a label for the legend in the mosaic
-  plot.  As well, if \code{residuals} argument is \code{NULL}, residuals are calculated internally
-  and used in the display.}
+  \item{residuals_type}{If the \code{residuals} argument is \code{NULL}, residuals are calculated internally
+  and used in the display.  In this case, \code{residual_type} can be \code{"pearson"}, 
+  \code{"deviance"} or \code{"rstandard"}.  Otherwise (when \code{residuals} is supplied),
+  \code{residuals_type} is used as a label for the legend in the 
+  plot.  
+   }
   \item{gp}{Object of class \code{"gpar"}, shading function or a corresponding generating function (see details and shadings). 
   Ignored if shade = FALSE.}
   \item{gp_args}{A list of arguments for the shading-generating function, if specified.}
   \item{\dots}{ Other arguments passed to the \code{panel} function e.g., \code{\link[vcd]{mosaic}} }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+For both poisson family generalized linear models and loglinear models, standardized residuals
+provided by \code{rstandard}
+(sometimes called adjusted residuals) are often preferred because they have 
+constant unit asymptotic variance
 }
 \value{
 The \code{structable} visualized by \code{\link[vcd]{mosaic}} is returned invisibly.

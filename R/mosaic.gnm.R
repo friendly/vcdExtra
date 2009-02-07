@@ -21,8 +21,10 @@
 	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels) 
 	
 	
+	residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance", "rstandard"))
 	if (missing(residuals))
-		residuals <- residuals(x, type=residuals_type)
+		residuals <- if (residuals_type=="rstandard") rstandard(x)
+				else residuals(x, type=residuals_type)
 	
 	# reshape the residuals to conform to the structure of data
 	if (!inherits(residuals, "table") && !is.null(x$table.attr)) {
