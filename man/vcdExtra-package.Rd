@@ -13,8 +13,8 @@ a few functions designed to extend the vcd package.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.3-1\cr
-Date: \tab 2009-02-07\cr
+Version: \tab 0.3-2\cr
+Date: \tab 2009-02-08\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -24,8 +24,9 @@ mosaic plots that apply to loglinear models fitted using
 \code{glm()} and related, generalized nonlinear models fitted
 with \code{gnm()} in the \code{\link[gnm]{gnm-package}} package.
 The methods \code{\link{mosaic.glm}} and \code{\link{mosaic.gnm}}
-are initial implementations, intended to complement the
-\code{\link[vcd]{mosaic.loglm}} method in the vcd package.
+are initial implementations, intended to extend the
+\code{\link[vcd]{mosaic.loglm}} method in the vcd package
+to a wider class of models.
 
 In addition, there are several new data sets, a new vignette,
 \describe{
@@ -38,7 +39,7 @@ Some of these extensions may be migrated into vcd.
 \author{
 Michael Friendly
 
-Maintainer: Michael Friendly <friendly@yorku.ca>
+Maintainer: Michael Friendly <friendly AT yorku.ca>
 }
 \references{
 Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.

@@ -7,19 +7,25 @@
 Procduces mosaic plots (and other plots in the \code{\link[vcd]{strucplot}} framework) 
 for a log-linear model fitted with \code{\link[stats]{glm}}
 or for a generalized nonlinear model fitted with \code{\link[gnm]{gnm}}.
-These methods apply only to models with discrete factors.
+
+These methods extend the range of strucplot
+visualizations well beyond the models that can
+be fit with \code{\link[MASS]{loglm}}.
+They are intended for models for counts using the Poisson family (or quasi-poisson),
+but should be sensible as long as (a) the response variable is non-negative and (b) the
+predictors visualzed in the \code{strucplot} are discrete factors.
 }
 \usage{
-%\method{mosaic}{glm}(x, residuals = NULL, ..., residuals_type = "deviance")
 \method{mosaic}{glm}(x, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
-residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
+     residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
 
 \method{mosaic}{gnm}(x, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
-residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
+     residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ A \code{glm} or \code{gnm} object }
+  \item{x}{ A \code{glm} or \code{gnm} object. The response variable, typically a 
+  cell frequency, should be non-negative. }
    \item{panel}{Panel function used to draw the plot for visualizing the observed values, residuals 
    and expected values. Currently, one of \code{"mosaic"}, \code{"assoc"}, or \code{"sieve"}
    in \code{vcd}.}
@@ -34,7 +40,8 @@ residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_arg
   \code{residuals_type} is used as a label for the legend in the 
   plot.  
    }
-  \item{gp}{Object of class \code{"gpar"}, shading function or a corresponding generating function (see details and shadings). 
+  \item{gp}{Object of class \code{"gpar"}, shading function or a corresponding generating function 
+  (see \code{\link[vcd]{strucplot}} Details and \code{\link[vcd]{shadings}}). 
   Ignored if shade = FALSE.}
   \item{gp_args}{A list of arguments for the shading-generating function, if specified.}
   \item{\dots}{ Other arguments passed to the \code{panel} function e.g., \code{\link[vcd]{mosaic}} }
@@ -43,10 +50,10 @@ residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_arg
 For both poisson family generalized linear models and loglinear models, standardized residuals
 provided by \code{rstandard}
 (sometimes called adjusted residuals) are often preferred because they have 
-constant unit asymptotic variance
+constant unit asymptotic variance.
 }
 \value{
-The \code{structable} visualized by \code{\link[vcd]{mosaic}} is returned invisibly.
+The \code{structable} visualized by \code{\link[vcd]{strucplot}} is returned invisibly.
 
 }
 %\references{ ~put references to the literature/web site here ~ }
@@ -67,12 +74,49 @@ mosaic(GSStab, gp=shading_Friendly, residuals=stdtab, residuals_type="Std\nresid
        labeling = labeling_residuals)
 
 
-# Using externally calculated residuals
+# Using externally calculated residuals with the glm() object
 mosaic.glm(mod.glm1, residuals=std, labeling = labeling_residuals, shade=TRUE)
 
 # Using residuals_type
 mosaic.glm(mod.glm1, residuals_type="rstandard", labeling = labeling_residuals, shade=TRUE)
 
+## Ordinal factors and structured associations
+data(Mental)
+xtabs(Freq ~ mental+ses, data=Mental)
+long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
+
+# fit independence model
+# Residual deviance: 47.418 on 15 degrees of freedom
+indep <- glm(Freq ~ mental+ses,
+                family = poisson, data = Mental)
+
+long.labels <- list(set_varnames = c(mental="Mental Health Status", 
+                                     ses="Parent SES"))
+mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, labeling=labeling_residuals)
+# or, show as a sieve diagram
+mosaic(indep, labeling_args = long.labels, panel=sieve, gp=shading_Friendly)
+
+# fit linear x linear (uniform) association.  Use integer scores for rows/cols 
+Cscore <- as.numeric(Mental$ses)
+Rscore <- as.numeric(Mental$mental)
+
+linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
+                family = poisson, data = Mental)
+mosaic(linlin,residuals_type="rstandard", 
+ labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly)
+
+##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)
+Mental$mental <- C(Mental$mental, treatment)
+Mental$ses <- C(Mental$ses, treatment)
+library(gnm)
+RC1model <- gnm(Freq ~ ses + mental + Mult(ses, mental),
+                family = poisson, data = Mental)
+
+\dontrun{
+## BUGGED ##
+mosaic(RC1model,residuals_type="rstandard", 
+ labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
