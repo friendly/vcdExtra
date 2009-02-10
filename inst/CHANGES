@@ -17,3 +17,5 @@ o Added more examples to mosaic.glm.Rd
 Version 0.3-3 (2009-2-10)
 
 o Fixed bugs in mosaic.gnm
+o Fixed print.GKgamma
+o Added example of GKgamma to vcd-tutorial
