@@ -13,3 +13,7 @@ o Fixed bugs in mosaic.glm and mosaic.gnm
 Version 0.3-2 (2009-2-8)
 
 o Added more examples to mosaic.glm.Rd
+
+Version 0.3-3 (2009-2-10)
+
+o Fixed bugs in mosaic.gnm

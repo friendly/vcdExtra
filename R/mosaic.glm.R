@@ -32,6 +32,9 @@ is.discrete.model <- function(model)
 	}
 	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels) 
 	
+	type <- match.arg(tolower(type), c("observed", "expected"))
+	if (any(observed < 0)) stop("requires a non-negative response vector")
+
 	residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance", "rstandard"))
 	if (missing(residuals))
 		residuals <- if (residuals_type=="rstandard") rstandard(x)

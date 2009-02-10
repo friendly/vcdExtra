@@ -13,13 +13,17 @@
 	
 	xlevels <- x$xlevels
 	df.residual <- x$df.residual
-	observed <- x$data
+	# gnm objects dont have a $data component
+	#observed <- x$data
 	# if a data.frame, extract the frequencies, re-shape as a table
-	if (inherits(observed, "data.frame")) {
-		observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
-	}
+#	if (inherits(observed, "data.frame")) {
+#		observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
+#	}
+	observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
 	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels) 
 	
+	type <- match.arg(tolower(type), c("observed", "expected"))
+	if (any(observed < 0)) stop("requires a non-negative response vector")
 	
 	residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance", "rstandard"))
 	if (missing(residuals))

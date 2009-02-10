@@ -103,20 +103,20 @@ Rscore <- as.numeric(Mental$mental)
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
 mosaic(linlin,residuals_type="rstandard", 
- labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly)
+ labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+ main="Lin x Lin model")
 
 ##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)
+if (require(gnm)) {
 Mental$mental <- C(Mental$mental, treatment)
 Mental$ses <- C(Mental$ses, treatment)
-library(gnm)
 RC1model <- gnm(Freq ~ ses + mental + Mult(ses, mental),
                 family = poisson, data = Mental)
 
-\dontrun{
-## BUGGED ##
 mosaic(RC1model,residuals_type="rstandard", 
- labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly)
-}
+ labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+ main="RC1 model")
+ }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

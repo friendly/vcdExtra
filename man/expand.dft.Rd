@@ -36,7 +36,7 @@ represented by the total of the \code{freq} variable.
 %\note{ ~~further notes~~ 
 % ~Make other sections like Warning with \section{Warning }{....} ~
 %}
-\seealso{ \code{\link[utils]{type.convert}}}
+\seealso{ \code{\link[utils]{type.convert}}, \code{\link[gnm]{expandCategorical}}}
 \examples{
 library(vcd)
 art <- xtabs(~Treatment + Improved, data = Arthritis)
