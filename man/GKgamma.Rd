@@ -10,12 +10,16 @@ Goodman and Kruskal (1954).
 }
 \usage{
 GKgamma(x, level = 0.95)
+
+%\method{print}{GKgamma}{x, digits = 3, ...}
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{A two-way frequency table, in matrix or table form.  The rows and columns
   	are considered to be ordinal factors}
   \item{level}{Confidence level for a significance test of \eqn{\gamma \ne =}{gamma !=0}}
+%  \item{digits}{Number of digits printed by the print method}
+%  \item{...}{Other arguments}
 }
 %\details{
 %  ~~ If necessary, more details than the description above ~~
