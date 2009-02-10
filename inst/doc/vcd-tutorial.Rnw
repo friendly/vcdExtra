@@ -685,12 +685,19 @@ With a large sample size, even a small degree of association can show a
 significant $\chi^2$, as in the example below for the \data{GSS} data.
 
 The  \codefun{assocstats}  function in \pkg{vcd}  calculates  the   $\phi$
-coefficient,  contingency coefficient,  and Cramer's  V for  an $r \times c$  table. 
+contingency coefficient,  and Cramer's  V for  an $r \times c$  table. 
 The input must be in table form, a two-way $r \times c$ table.  
 It won't work with \data{GSS} in frequency form, but by now you should know how
 to convert.
 <<assoc1,results=verbatim>>=
 assocstats(GSStab)
+@
+
+For tables with ordinal variables, like \data{JobSat}, some people prefer the
+Goodman-Kruskal $\gamma$ statistic, based on a comparison of concordant
+and discordant pairs of observations in the case-form equivalent of a two-way table.
+<<gamma,results=verbatim>>=
+GKgamma(JobSat)
 @
 
 A web article by Richard Darlington,
