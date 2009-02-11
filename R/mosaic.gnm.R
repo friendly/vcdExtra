@@ -1,4 +1,5 @@
-## TODO: fix residuals_type for gnm objects
+## TODO: fix xlevels to exclude special terms like Diag(), Mult, etc
+## TODO: should have a way to specify a subset of the variables to be shown in the mosaic
 
 `mosaic.gnm` <-
 		function(x, panel=mosaic, type=c("observed", "expected"), residuals=NULL, 
@@ -12,6 +13,11 @@
 	#if (!is.discrete.model(x)) stop("only factors are allowed")
 	
 	xlevels <- x$xlevels
+	## gnm objects can include some special terms that are functions of the primary table
+	## variables.  Need to exclue these for the mosaic display.  Note sure if this is the best way
+	special <- grep("[[:punct:]]", names(xlevels))
+	if (length(special)) xlevels <- xlevels[-special]
+
 	df.residual <- x$df.residual
 	# gnm objects dont have a $data component
 	#observed <- x$data
@@ -20,7 +26,7 @@
 #		observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
 #	}
 	observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
-	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels) 
+	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels) 	
 	
 	type <- match.arg(tolower(type), c("observed", "expected"))
 	if (any(observed < 0)) stop("requires a non-negative response vector")

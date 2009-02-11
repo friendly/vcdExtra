@@ -24,12 +24,19 @@ is.discrete.model <- function(model)
 	#if (!is.discrete.model(x)) stop("only factors are allowed")
 	
 	xlevels <- x$xlevels
+	## glm objects can include some special terms that are functions of the primary table
+	## variables.  Need to exclue these for the mosaic display.  Note sure if this is the best way
+	special <- grep("[[:punct:]]", names(xlevels))
+	if (length(special)) xlevels <- xlevels[-special]
+
 	df.residual <- x$df.residual
-	observed <- x$data
-	# if a data.frame, extract the frequencies, re-shape as a table
-	if (inherits(observed, "data.frame")) {
-		observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
-	}
+#	observed <- x$data
+#	# if a data.frame, extract the frequencies, re-shape as a table
+#	if (inherits(observed, "data.frame")) {
+#		observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
+#	}
+
+	observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
 	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels) 
 	
 	type <- match.arg(tolower(type), c("observed", "expected"))
