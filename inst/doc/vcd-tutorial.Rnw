@@ -694,7 +694,8 @@ assocstats(GSStab)
 @
 
 For tables with ordinal variables, like \data{JobSat}, some people prefer the
-Goodman-Kruskal $\gamma$ statistic, based on a comparison of concordant
+Goodman-Kruskal $\gamma$ statistic (\citet[\S 2.4.3]{Agresti:2002})
+based on a comparison of concordant
 and discordant pairs of observations in the case-form equivalent of a two-way table.
 <<gamma,results=verbatim>>=
 GKgamma(JobSat)

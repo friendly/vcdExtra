@@ -1,5 +1,14 @@
-# last modified 27 January 2008 by M. Friendly
-export(expand.dft,expand.table,collapse.table,mosaic.glm,mosaic.gnm,GKgamma,print.GKgamma)
+# last modified 23 Feb 2009 by M. Friendly
 import(vcd)
+export(
+	expand.dft,expand.table,collapse.table,
+	mosaic.glm,mosaic.gnm,
+	GKgamma,print.GKgamma,
+	print.Kappa)
+
 S3method(mosaic, glm)
 S3method(mosaic, gnm)
+S3method(print, GKgamma)
+
+S3method("print", "Kappa")
+

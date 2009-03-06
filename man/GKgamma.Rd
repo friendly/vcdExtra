@@ -66,4 +66,5 @@ GKgamma(JobSat)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{htest}
+\keyword{category}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
