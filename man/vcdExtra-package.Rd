@@ -13,8 +13,8 @@ a few functions designed to extend the vcd package.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.3-4\cr
-Date: \tab 2009-02-11\cr
+Version: \tab 0.3-5\cr
+Date: \tab 2009-03-06\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }

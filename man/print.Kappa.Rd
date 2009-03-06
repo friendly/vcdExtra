@@ -22,17 +22,14 @@
 }
 %\references{ ~put references to the literature/web site here ~ }
 \author{ Michael Friendly}
-%\note{ ~~further notes~~ 
-%
-% ~Make other sections like Warning with \section{Warning }{....} ~
-%}
-\seealso{ \code{\link[vcd]{confint}} for confidence intervals on Kappa}
+
+\seealso{ \code{\link[vcd]{confint}}}
 \examples{
 data("SexualFun")
 Kappa(SexualFun)
 
-  }
 }
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{htest}

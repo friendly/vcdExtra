@@ -3,12 +3,13 @@
 #  or to pass residuals calculated by another function, e.g., rstandard(), rstudent()
 # 
 #  Allow to apply to any model with discrete factors
-# last modified: 2/6/2009 2:45PM
+# last modified: 3/6/2009 1:51PM
 #  - fixed buggy version using ideas from vcd:::plot.loglm
+#  - now use $data component when it is a table
 
 ## TODO: move to utility.R
-is.discrete.model <- function(model)
-	all(attr(terms(model), "dataClasses")[-1] %in% c("factor", "ordered"))
+#is.discrete.model <- function(model)
+# 	all(attr(terms(model), "dataClasses")[-1] %in% c("factor", "ordered"))
 
 
 `mosaic.glm` <-
@@ -23,25 +24,30 @@ is.discrete.model <- function(model)
 	# But maybe not sensible for non-count data??
 	#if (!is.discrete.model(x)) stop("only factors are allowed")
 	
-	xlevels <- x$xlevels
-	## glm objects can include some special terms that are functions of the primary table
-	## variables.  Need to exclue these for the mosaic display.  Note sure if this is the best way
-	special <- grep("[[:punct:]]", names(xlevels))
-	if (length(special)) xlevels <- xlevels[-special]
-
+	
 	df.residual <- x$df.residual
-#	observed <- x$data
-#	# if a data.frame, extract the frequencies, re-shape as a table
-#	if (inherits(observed, "data.frame")) {
-#		observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
-#	}
-
-	observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
+	observed <- x$data
+	if (inherits(observed, "table")) {
+		# 
+		xlevels <- dimnames(x$data)
+	}
+	
+	# if a data.frame, extract the frequencies, re-shape as a table
+	if (inherits(observed, "data.frame")) {
+		xlevels <- x$xlevels
+		## glm objects can include some special terms that are functions of the primary table
+		## variables.  Need to exclue these for the mosaic display.  Note sure if this is the best way
+		special <- grep("[[:punct:]]", names(xlevels))
+		if (length(special)) xlevels <- xlevels[-special]
+		observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
+	}
+	
+#	observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels) 
 	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels) 
 	
 	type <- match.arg(tolower(type), c("observed", "expected"))
 	if (any(observed < 0)) stop("requires a non-negative response vector")
-
+	
 	residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance", "rstandard"))
 	if (missing(residuals))
 		residuals <- if (residuals_type=="rstandard") rstandard(x)

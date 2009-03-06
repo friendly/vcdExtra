@@ -24,3 +24,7 @@ Version 0.3-4 (2009-2-11)
 
 o Fixed bugs in mosaic.glm, mosaic.gnm in models with terms like Diag(dest, origin)
   that get included in x$xlevels
+
+Version 0.3-5 (2009-3-6)
+
+o mosaic.glm now uses object$data if available
