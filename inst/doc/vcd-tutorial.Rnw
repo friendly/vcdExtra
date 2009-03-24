@@ -139,31 +139,34 @@ The first thing you need to know is that categorical data can be represented in
 three different forms in \proglang{R}, and it is sometimes necessary to convert
 from one form to another, for carrying out statistical tests, fitting models
 or visualizing the results.  Once a data object exists in \proglang{R}, 
-you can examine its structure with
-the \codefun{str} function. 
+you can examine its complete structure with
+the \codefun{str} function, or view the names of its components with the
+\codefun{names} function.
  
 \begin{description}
   \item[case form] a data frame containing individual observations, with one or
   more factors, used as the classifying variables. In case form, there may also
   be numeric covariates. 
   The total number of observations
-  is \code{nrow(X)}.
+  is \code{nrow(X)}, and the number of variables is \code{ncol(X)}.
   	
 \emph{Example}: The \data{Arthritis} data is available in case form in the \pkg{vcd} package. 
 There are two explanatory factors: \code{Treatment} and \code{Sex}. \code{Age}
 is a covariate, and \code{Improved} is the response--- an ordered factor,
 with levels 
-\Sexpr{paste(levels(Arthritis$Improved),collapse=' < ')}.  Excluding \code{Age}, we have
+\Sexpr{paste(levels(Arthritis$Improved),collapse=' < ')}.  Excluding \code{Age}, we would have
 a $2 \times 2 \times 3$ contingency table for \code{Treatment}, \code{Sex} and \code{Improved}.
 %\code{"None" < "Some" < "Marked"}.
 <<case-form,results=verbatim>>=
-str(Arthritis)      # show the structure
-Arthritis[1:5,]     # first 5 observations
+names(Arthritis)      # show the variables
+str(Arthritis)        # show the structure
+head(Arthritis,5)     # first 5 observations, same as Arthritis[1:5,] 
 @
   
   \item[frequency form] a data frame containing one or more factors, and a frequency 
   variable, often called \code{Freq} or \code{count}.  The total number of observations
-  is \code{sum(X[,"Freq"])} or some equivalent form.
+  is \code{sum(X$Freq)},  \code{sum(X[,"Freq"])} or some equivalent form.
+  The number of cells in the table is \code{nrow(X)}.
 
 \emph{Example}: For small frequency tables, it is often convenient to enter them in frequency form
 using \codefun{expand.grid} for the factors and \codefun{c} to list the counts in a vector.
@@ -176,6 +179,7 @@ GSS <- data.frame(
               party=c("dem", "indep", "rep")),
   count=c(279,165,73,47,225,191))
 GSS
+names(GSS)
 str(GSS)
 sum(GSS$count)
 @
@@ -291,7 +295,7 @@ changes variable names and level labels respectively.
 We will use the following version of \data{UCBAdmissions} in
 \secref{sec:mantel} below.%
 \footnote{
-Changing \code{Admit} to \code{Admit?} might be useful for display purposes, but it
+Changing \code{Admit} to \code{Admit?} might be useful for display purposes, but is
 dangerous--- because it is then
 difficult to use that variable name in a model formula.
 }
@@ -305,7 +309,7 @@ ftable(UCB)
 \subsection[structable]{\codefun{structable}}
 For 3-way and larger tables
 the \codefun{structable} function in \pkg{vcd} provides a convenient and flexible tabular display.
-The variables assigned to the rows and columns of a two-way display to be specified
+The variables assigned to the rows and columns of a two-way display can be specified
 by a model formula.
 <<structable,results=verbatim>>=
 structable(HairEyeColor)                   # show the table: default
@@ -423,7 +427,7 @@ as.data.frame(GSStab)
 \emph{Example}: Convert the \code{Arthritis} data in case form to a 3-way table of
 \code{Treatment} $\times$ \code{Sex} $\times$ \code{Improved}.%
 \footnote{
-Unfortunately, \codefun{table} does not allow a \code{data} argument to provide
+\codefun{table} does not allow a \code{data} argument to provide
 an environment in which the table variables are to be found.  In the 
 examples in \secref{sec:table} I used \code{attach(mydata)} for this purpose,
 but \codefun{attach} leaves the variables in the global environment,
@@ -714,10 +718,11 @@ Don't confuse this with \codefun{kappa} in base \proglang{R} that computes somet
 entirely different (the condition number of a matrix).
 }
 Normal-theory $z$-tests can be obtained by dividing $\kappa$ by its asymptotic standard
-error (ASE).
+error (ASE).  A \codefun{confint} method for \code{Kappa} objects provides confidence intervals.
 <<kappa,results=verbatim>>=
 (K <- Kappa(SexualFun))
 (Z <- K$Weighted[1]/K$Weighted[2])
+confint(K)
 @
 
 A visualization of agreement, both unweighted and weighted for degree of departure
@@ -773,7 +778,7 @@ It can be seen that most of the association is accounted for by the ordering
 of both hair color and eye color along Dimension 1, a dark to light dimension.
 <<ca-haireye0,echo=TRUE,eval=FALSE>>=
 plot(ca(HairEye), main="Hair Color and Eye Color")
-title(xlab="Dim 1", ylab="Dim 2")
+title(xlab="Dim 1 (89.4%)", ylab="Dim 2 (9.5%)")
 @
 
 \setkeys{Gin}{width=0.7\textwidth}
@@ -781,7 +786,7 @@ title(xlab="Dim 1", ylab="Dim 2")
 \begin{center}
 <<ca-haireye,results=hide,fig=TRUE,echo=FALSE>>=
 plot(ca(HairEye), main="Hair Color and Eye Color")
-title(xlab="Dim 1", ylab="Dim 2")
+title(xlab="Dim 1 (89.4%)", ylab="Dim 2 (9.5%)")
 @
 \caption{Correspondence analysis plot for the \data{HairEye} data.}
 \label{fig:ca-haireye}
@@ -796,12 +801,17 @@ linear models with the \codefun{glm}  function using the \code{family='poisson'}
 and the \pkg{gnm} package provides a wider range of generalized \emph{nonlinear} models,
 particularly for testing structured associations.
 The visualization methods for these models are most advanced for models fit using \codefun{loglm},
-so this approach is emphasized here.
+so this approach is emphasized here.  Some extensions of these methods for models
+fit using \codefun{glm} and \codefun{gnm} are contained in the \pkg{vcdExtra} package.
 
 Assume we  have a 3-way  contingency table based  on
 variables A, B, and C.  
 The possible different forms of \loglin\ models for a 3-way table are shown in \tabref{tab:loglin-3way}.
-The \textbf{Model formula} column shows how to express each model in \proglang{R}.
+The \textbf{Model formula} column shows how to express each model for \codefun{logglm} in \proglang{R}.%
+\footnote{
+For \codefun{glm}, or \codefun{gnm} with the data in the form of a frequency data.frame, the same model is specified
+in the form \code{glm(Freq ~ ..., family="poisson")}.
+}
 In the \textbf{Interpretation} column, the symbol ``$\perp$'' is to be read as ``is independent of,''
 and ``$\given$'' means ``conditional on,'' or ``adjusting for,'' or just ``given''.
 
@@ -877,6 +887,24 @@ anova(hec.1, hec.2, hec.3)
 %Martin Theus and Stephan Lauer have written an excellent article on  Visualizing
 %Loglinear Models, using  mosaic plots. There  is also great  tutorial example by
 %Kevin Quinn on analyzing loglinear models via glm.
+
+\subsection[Fitting with glm() and gnm()]{Fitting with \codefun{glm} and \codefun{gnm}}\label{sec:glm}
+The \codefun{glm} approach, and extensions of this in the \pkg{gnm} allows a
+much wider class of models for frequency data to be fit than can be handled by
+\codefun{loglm}.  Of particular importance are models for ordinal factors and for
+square tables, where we can test more structured hypotheses about the patterns
+of association than are provided in the tests of general assosiation under
+\codefun{loglm}. 
+
+\3mph{Example}:
+The data \code{Mental} gives a two-way table classifying young people by
+their mental health status and parents' socioeconomic status (SES), where
+both of these variables are ordered factors.
+Simple ways of handling ordinal variables involve assigning scores to the table
+categories, and the simplest cases are to use integer scores, either for the row variable (``column
+effects'' model), the column variable (``row effects'' model), or both (``uniform association''
+model).
+
 
 
 \section{Mosaic plots}\label{sec:mosaic}
