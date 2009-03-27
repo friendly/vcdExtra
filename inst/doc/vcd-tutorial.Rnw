@@ -165,7 +165,9 @@ head(Arthritis,5)     # first 5 observations, same as Arthritis[1:5,]
   
   \item[frequency form] a data frame containing one or more factors, and a frequency 
   variable, often called \code{Freq} or \code{count}.  The total number of observations
-  is \code{sum(X$Freq)},  \code{sum(X[,"Freq"])} or some equivalent form.
+  is 
+  \verb|sum(X$Freq)|,  
+  \code{sum(X[,"Freq"])} or some equivalent form.
   The number of cells in the table is \code{nrow(X)}.
 
 \emph{Example}: For small frequency tables, it is often convenient to enter them in frequency form
@@ -717,11 +719,10 @@ $\kappa$ for a square two-way table with the same row and column categories \cit
 Don't confuse this with \codefun{kappa} in base \proglang{R} that computes something
 entirely different (the condition number of a matrix).
 }
-Normal-theory $z$-tests can be obtained by dividing $\kappa$ by its asymptotic standard
+Normal-theory $z$-tests are obtained by dividing $\kappa$ by its asymptotic standard
 error (ASE).  A \codefun{confint} method for \code{Kappa} objects provides confidence intervals.
 <<kappa,results=verbatim>>=
 (K <- Kappa(SexualFun))
-(Z <- K$Weighted[1]/K$Weighted[2])
 confint(K)
 @
 
@@ -807,10 +808,10 @@ fit using \codefun{glm} and \codefun{gnm} are contained in the \pkg{vcdExtra} pa
 Assume we  have a 3-way  contingency table based  on
 variables A, B, and C.  
 The possible different forms of \loglin\ models for a 3-way table are shown in \tabref{tab:loglin-3way}.
-The \textbf{Model formula} column shows how to express each model for \codefun{logglm} in \proglang{R}.%
+The \textbf{Model formula} column shows how to express each model for \codefun{loglm} in \proglang{R}.%
 \footnote{
 For \codefun{glm}, or \codefun{gnm} with the data in the form of a frequency data.frame, the same model is specified
-in the form \code{glm(Freq ~ ..., family="poisson")}.
+in the form \code{glm(Freq} $\sim$ \code{..., family="poisson")}.
 }
 In the \textbf{Interpretation} column, the symbol ``$\perp$'' is to be read as ``is independent of,''
 and ``$\given$'' means ``conditional on,'' or ``adjusting for,'' or just ``given''.
@@ -889,23 +890,62 @@ anova(hec.1, hec.2, hec.3)
 %Kevin Quinn on analyzing loglinear models via glm.
 
 \subsection[Fitting with glm() and gnm()]{Fitting with \codefun{glm} and \codefun{gnm}}\label{sec:glm}
-The \codefun{glm} approach, and extensions of this in the \pkg{gnm} allows a
+The \codefun{glm} approach, and extensions of this in the \pkg{gnm} package allows a
 much wider class of models for frequency data to be fit than can be handled by
 \codefun{loglm}.  Of particular importance are models for ordinal factors and for
 square tables, where we can test more structured hypotheses about the patterns
 of association than are provided in the tests of general assosiation under
 \codefun{loglm}. 
 
-\3mph{Example}:
-The data \code{Mental} gives a two-way table classifying young people by
+\emph{Example}:
+The data \code{Mental} in the \pkg{vcdExtra} package gives a two-way table in frequency form
+classifying young people by
 their mental health status and parents' socioeconomic status (SES), where
 both of these variables are ordered factors.
+<<mental1,results=verbatim>>=
+str(Mental)
+xtabs(Freq ~ mental+ses, data=Mental)   # display the frequency table
+@
 Simple ways of handling ordinal variables involve assigning scores to the table
 categories, and the simplest cases are to use integer scores, either for the row variable (``column
 effects'' model), the column variable (``row effects'' model), or both (``uniform association''
 model).
 
+<<mental2>>=
+indep <- glm(Freq ~ mental + ses, family = poisson, data = Mental)  # independence model
+@
+To fit more parsimonious models than general association, we can define
+numeric scores for the row and column categories
+<<mental3>>=
+# Use integer scores for rows/cols 
+Cscore <- as.numeric(Mental$ses)
+Rscore <- as.numeric(Mental$mental)	
+@
+Then, the row effects model, the column effects model, and the uniform association
+model can be fit as follows:
+<<mental4,results=verbatim>>=
+# column effects model (ses)
+coleff <- glm(Freq ~ mental + ses + Rscore:ses, family = poisson, data = Mental)
 
+# row effects model (mental)
+roweff <- glm(Freq ~ mental + ses + mental:Cscore, family = poisson, data = Mental)
+
+# linear x linear association
+linlin <- glm(Freq ~ mental + ses + Rscore:Cscore, family = poisson, data = Mental)
+
+# compare models using AIC
+AIC(indep, roweff, coleff, linlin)
+@
+In model comparisons, we can carry out tests of \emph{nested} models with
+\codefun{anova} when those models are listed from smallest to largest.
+Here, there are two separate paths from the most restrictive (independence) model
+through the model of uniform association, to those that allow only one of
+row effects or column effects.
+<<mental5,results=verbatim>>=
+anova(indep, linlin, coleff, test="Chisq")	
+anova(indep, linlin, roweff, test="Chisq")	
+@
+The model of linear by linear association seems best on all accounts.
 
 \section{Mosaic plots}\label{sec:mosaic}
 
@@ -953,7 +993,7 @@ In contrast, one of the other shading schemes, from \citet{vcd:Friendly:1994}
 (use: \verb|gp = shading_Friendly|), 
 uses fixed cutoffs of $\pm 2, \pm 4$,
 to shade cells which are \emph{individually} significant
-at approximately $\alpha = 0.5$ and $\alpha = 0.001$ levels, respectively.
+at approximately $\alpha = 0.05$ and $\alpha = 0.001$ levels, respectively.
 The right panel below uses \verb|gp = shading_Friendly|.
 
 \setkeys{Gin}{width=0.5\textwidth}
@@ -1054,8 +1094,42 @@ mosaic(~ Day + Network + Time, data=TV2,
          expected=~Day:Time + Day:Network + Time:Network, 
          legend=FALSE, gp=shading_Friendly)
 @
+\subsection[Mosaics for glm() and gnm() models]{Mosaics for \codefun{glm} and \codefun{gnm} models}\label{sec:mosglm}
+The \pkg{vcdExtra} provides some additional methods, \codefun{mosaic.glm} and \codefun{mosaic.gnm}
+for models fit with \codefun{glm} and \codefun{gnm}.  These are not restricted to the 
+Poisson family, but only apply to cases where the response variable is non-negative. 
 
-\section[Continuous predictors]{Continuous predictors: spine and conditional density plots}
+Here, we plot the independence and the linear-by-linear association model
+for the Mental health data from \secref{sec:glm}.
+These examples illustrate some of the options for labeling (variable names and
+residuals printed in cells).
+<<mental-plots,eval=FALSE>>=
+long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
+mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, 
+	   labeling=labeling_residuals,
+       main="Mental health data: Independence")
+
+mosaic(linlin,residuals_type="rstandard", labeling_args = long.labels, 
+		labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+		main="Mental health data: Linear x Linear")
+@
+
+\setkeys{Gin}{width=0.49\textwidth}
+<<mental-plots1,fig=TRUE,echo=FALSE,height=6,width=6>>=
+long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
+mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, 
+	   labeling=labeling_residuals,
+       main="Mental health data: Independence")
+@
+<<mental-plots2,fig=TRUE,echo=FALSE,height=6,width=6>>=
+long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
+mosaic(linlin,residuals_type="rstandard", labeling_args = long.labels, 
+		labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+		main="Mental health data: Linear x Linear")
+@
+
+
+\section[Continuous predictors]{Continuous predictors: spine and conditional density plots}\label{sec:contin}
 When continuous predictors are available---and potentially important--- in explaining a
 categorical outcome, models for that outcome include:
 logistic regression (binary response), 
