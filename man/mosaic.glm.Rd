@@ -1,6 +1,5 @@
 \name{mosaic.glm}
 \alias{mosaic.glm}
-\alias{mosaic.gnm}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Mosaic plots for fitted generalized linear and generalized nonlinear models }
 \description{
@@ -13,19 +12,23 @@ visualizations well beyond the models that can
 be fit with \code{\link[MASS]{loglm}}.
 They are intended for models for counts using the Poisson family (or quasi-poisson),
 but should be sensible as long as (a) the response variable is non-negative and (b) the
-predictors visualzed in the \code{strucplot} are discrete factors.
+predictors visualized in the \code{strucplot} are discrete factors.
 }
 \usage{
-\method{mosaic}{glm}(x, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
-     residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
-
-\method{mosaic}{gnm}(x, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
+\method{mosaic}{glm}(x, formula = NULL, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
      residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ A \code{glm} or \code{gnm} object. The response variable, typically a 
-  cell frequency, should be non-negative. }
+    cell frequency, should be non-negative. }
+  \item{formula}{ A formula object with the indexing factors of the plot
+    separated by '+' on the right hand side. A formula must be provided
+    unless \code{x$data} inherits from class \code{"table"} -- in which case the
+    indexing factors of this table are used, or \code{x$data} is a data frame
+    containing \emph{only} the response and a set of factors that exactly
+    cross-classify the data -- in which case the set of cross-classifying
+    factors are used. }
    \item{panel}{Panel function used to draw the plot for visualizing the observed values, residuals 
    and expected values. Currently, one of \code{"mosaic"}, \code{"assoc"}, or \code{"sieve"}
    in \code{vcd}.}

@@ -2,12 +2,11 @@
 import(vcd)
 export(
 	expand.dft,expand.table,collapse.table,
-	mosaic.glm,mosaic.gnm,
+	mosaic.glm,
 	GKgamma,print.GKgamma,
 	print.Kappa)
 
 S3method(mosaic, glm)
-S3method(mosaic, gnm)
 S3method(print, GKgamma)
 
 S3method("print", "Kappa")

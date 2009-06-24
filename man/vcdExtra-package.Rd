@@ -23,10 +23,9 @@ introducing extensions of
 mosaic plots that apply to loglinear models fitted using
 \code{glm()} and related, generalized nonlinear models fitted
 with \code{gnm()} in the \code{\link[gnm]{gnm-package}} package.
-The methods \code{\link{mosaic.glm}} and \code{\link{mosaic.gnm}}
-are initial implementations, intended to extend the
-\code{\link[vcd]{mosaic.loglm}} method in the vcd package
-to a wider class of models.
+The method \code{\link{mosaic.glm}} is an initial implementation,
+intended to extend the \code{\link[vcd]{mosaic.loglm}} method in the vcd
+package to a wider class of models.
 
 In addition, there are several new data sets, a new vignette,
 \describe{

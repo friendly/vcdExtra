@@ -20,7 +20,6 @@ berkeley <- as.data.frame(UCBAdmissions)
 mod.3 <- glm(Freq ~ Dept * (Gender+Admit), data=berkeley, family="poisson")
 summary(mod.3)
 
-# BUGGED
-# this is incorrect-- the large residuals should all be in Dept A
-mosaic(mod.3,residuals_type="rstandard", labeling=labeling_residuals)
+# (BUG FIXED )the large residuals are all in Dept A
+mosaic(mod.3, residuals_type="rstandard", labeling=labeling_residuals)
 
