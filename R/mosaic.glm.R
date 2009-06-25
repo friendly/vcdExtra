@@ -28,31 +28,22 @@
 
 	df.residual <- x$df.residual
 	observed <- x$data
-	if (inherits(observed, "table")) {
-		#
-		xlevels <- dimnames(x$data)
-	}
-        else if (!is.null(formula)) {
-            ft <- terms(formula, data = observed)
-            ff <- model.frame(ft, data = observed)
-            xlevels <- .getXlevels(ft, ff)
-        }
+	if (inherits(observed, "table"))
+            formula <- reformulate(names(dimnames(observed)))
         else if (inherits(observed, "data.frame")) {
             ## ok if equivalent to as.data.frame(xtab)
             attr.terms <- attributes(terms(x))
-            response <- attr.terms$variables[[2]] #always response?
-            ## assume everything else is an indexing factor (for now)
-            factors <- eval(substitute(subset(observed, select = -response)))
-            ft <- terms(~ ., data = factors)
+            resp <- deparse(attr.terms$variables[[2]])
+            factors <- setdiff(colnames(observed), resp)
+            ## assume everything bar response is an indexing factor (for now)
+            formula <- reformulate(factors)
             ok <- TRUE
-            if (all(attr(ft, "dataClasses") == "factor")) {
-                xlevels <- .getXlevels(ft, model.frame(ft, data = factors))
+            if (all(sapply(observed[factors], .MFclass) == "factor")) {
                 ## check cross-classifying
-                per.cell <- c(tapply(x$y, factors, length))
+                per.cell <- tapply(observed[,1], observed[factors], length)
                 if (ok <- isTRUE(all(per.cell == 1))) {
-                    f <- formula(ft)
-                    warning("no formula provided, assuming ", deparse(f), "\n",
-                            call. = FALSE)
+                    warning("no formula provided, assuming ", deparse(formula),
+                            "\n", call. = FALSE)
                 }
             }
             if (!ok)
@@ -63,21 +54,28 @@
             stop("cannot identify indexing factors - please provide formula",
                  call. = FALSE)
 
+        ## get indexing factors allowing for missing data, subset etc
+
+        factors <- model.frame(formula, data = observed, subset = x$call$subset)
+        if (!is.null(x$na.action) && inherits(x$na.action, c("omit", "exclude")))
+            factors <- factors[-x$na.action,]
+
 	# if a data.frame, extract the frequencies, re-shape as a table
 	if (inherits(observed, "data.frame"))
-            observed <- array(x$y, dim=lapply(xlevels,length), dimnames=xlevels)
+            observed <- tapply(x$y, factors, I)
 
-	expected <- array(fitted(x), dim=lapply(xlevels,length), dimnames=xlevels)
+	expected <- tapply(fitted(x), factors, I)
 
 	type <- match.arg(tolower(type), c("observed", "expected"))
-	if (any(observed < 0)) stop("requires a non-negative response vector")
+	if (any(observed < 0, na.rm = TRUE))
+            stop("requires a non-negative response vector")
 
 	residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance", "rstandard"))
 	if (missing(residuals))
 		residuals <- if (residuals_type=="rstandard") rstandard(x)
 				else residuals(x, type=residuals_type)
 	# reshape the residuals to conform to the structure of data
-	residuals <- array(residuals, dim=lapply(xlevels,length), dimnames=xlevels)
+	residuals <- tapply(residuals, factors, I)
 
 	gp <- if (inherits(gp, "grapcon_generator"))
 				do.call("gp", c(list(observed, residuals, expected, x$df.residual),
