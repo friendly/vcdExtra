@@ -3,26 +3,27 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Collapse levels of a table}
 \description{
-Collapse a contingency table or ftable by re-assigning levels of table variables
+Collapse (or re-label) variables in a
+a contingency table or ftable by re-assigning levels of the table variables
 }
 \usage{
 collapse.table(table, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{table}{A table or ftable object}
+  \item{table}{A \code{table} or \code{ftable} object}
   \item{\dots}{ A collection of one or more assignments of factors of the table to
   a list of levels }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+Each of the \code{\dots} arguments must be of the form 
+\code{variable = levels}, where \code{variable} is the name of one of the table
+dimensions, and \code{levels} is a character or numeric vector of length equal
+to the corresponding dimension of the table.
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+A \code{xtabs} and \code{table} objects, representing the original table with
+one or more of its factors collapsed or rearranged into other levels.
 }
 %\references{ ~put references to the literature/web site here ~ }
 \author{Michael Friendly}
@@ -30,7 +31,8 @@ collapse.table(table, ...)
 %
 % ~Make other sections like Warning with \section{Warning }{....} ~
 %}
-\seealso{ \code{\link{expand.dft}}, ~~~ }
+\seealso{ \code{\link{expand.dft}}
+}
 \examples{
 # create some sample data in table form
 sex <- c("Male", "Female")
@@ -47,6 +49,10 @@ t2 <- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"))
 # collapse age to 3 levels and pool education: "low" and "med" to "low"
 t3 <- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"), 
     education=c("low", "low", "high"))
+
+# change labels for levels of education to 1:3
+t4 <- collapse.table(t1,  education=1:3)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

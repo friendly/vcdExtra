@@ -23,7 +23,9 @@
 %\references{ ~put references to the literature/web site here ~ }
 \author{ Michael Friendly}
 
-\seealso{ \code{\link[vcd]{confint}}}
+\seealso{ 
+\code{\link[vcd]{confint.Kappa}}
+}
 \examples{
 data("SexualFun")
 Kappa(SexualFun)
