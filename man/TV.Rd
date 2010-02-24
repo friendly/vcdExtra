@@ -1,13 +1,14 @@
 \name{TV}
 \alias{TV}
-\docType{data}
-\title{ TV viewing data}
+
+\title{TV Viewing Data}
+
 \description{
   This data set \code{TV} comprises a 5 x 11 x 3 contingency table based on
-  audience viewing data from Neilsen
-Media Research for the week starting November 6, 1995.
-
+  audience viewing data from Neilsen Media Research for the week starting
+  November 6, 1995.
 }
+
 \usage{data(TV)}
 \format{
   A 5 x 11 x 3 array of cell frequencies with the following structure:
@@ -19,6 +20,7 @@ Media Research for the week starting November 6, 1995.
   ..$ Network: chr [1:3] "ABC" "CBS" "NBC"
 }
 }
+
 \details{
 The original data, \code{tv.dat}, contains two additional networks: "Fox" and "Other", with small
 frequencies. These levels were removed in the current version.
@@ -26,27 +28,34 @@ There is also a fourth factor, transition State
 transition (turn the television Off, Switch channels, or Persist in viewing the current channel).
 The \code{TV} data here includes only the Persist observations.
 }
+
 \source{
 The original data, \code{tv.dat}, came from the initial implementation of 
 mosaic displays in R by Jay Emerson. Similar data had been used by
 Hartigan and Kleiner (1984) as an illustration.
 }
+
 \references{
-Hartigan, J. A. & Kleiner, B. A Mosaic of Television Ratings The American Statistician, 1984, 38, 32-35
+  Hartigan, J. A. & Kleiner, B. A Mosaic of Television Ratings The American Statistician, 1984, 38, 32-35
 }
+
 \examples{
 data(TV)
 structable(TV)
+doubledecker(TV)
 
 # reduce number of levels of Time
 TV.df <- as.data.frame.table(TV)
-levels(TV.df$Time) <- c(rep("8:00-8:59",4),rep("9:00-9:59",4), rep("10:00-10:44",3))
+levels(TV.df$Time) <- rep(c("8:00-8:59", "9:00-9:59", "10:00-10:44"), c(4, 4, 3))
 TV2 <- xtabs(Freq ~ Day + Time + Network, TV.df)
 
 # re-label for mosaic display
 levels(TV.df$Time) <- c("8", "9", "10")
 # fit mode of joint independence, showing association of Network with Day*Time
-mosaic(~ Day + Network + Time, data=TV.df, expected=~Day:Time+Network, legend=FALSE)
-
+mosaic(~ Day + Network + Time, data = TV.df, expected = ~ Day:Time + Network, legend = FALSE)
+# with doubledecker arrangement
+mosaic(~ Day + Network + Time, data = TV.df, expected = ~ Day:Time + Network,
+  split = c(TRUE, TRUE, FALSE), spacing = spacing_highlighting, legend = FALSE)
 }
+
 \keyword{datasets}
