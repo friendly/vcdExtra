@@ -1,6 +1,6 @@
 Version 0.4-0 (2010-02-23)
 
-o Added new datasets: data/{Abortion, Bartlett, Caesar, Cancer, Detergent, Dyke, Gilby, Heart} 
+o Added new datasets: data/{Abortion, Bartlett, Caesar, Cancer, Detergent, Dyke, Gilby, Heart, Heckman, Hoyt, Mobility} 
   from mosdata.sas via md2r.sas converter.
 o Fixed small documentation warnings
 o Switched inst/CHANGES to NEWS
