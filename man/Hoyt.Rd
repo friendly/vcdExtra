@@ -54,7 +54,19 @@ Analysis of complex contingency tables,
 \examples{
 data(Hoyt)
 
-# example goes here
+# display the table
+structable(Status+Sex ~ Rank+Occupation, data=Hoyt)
+
+# mosaic for independence model
+plot(Hoyt, shade=TRUE)
+
+# examine all pairwise mosaics
+pairs(Hoyt, shade=TRUE)
+
+# collapse Status to College vs. Non-College
+Hoyt1 <- collapse.table(Hoyt, Status=c("College", rep("Non-College",3)))
+plot(Hoyt1, shade=TRUE)
+
 }
 
 \keyword{datasets}

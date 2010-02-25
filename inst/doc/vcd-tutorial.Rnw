@@ -54,7 +54,7 @@ categorical data, independence, conditional independence,
 
 %\SweaveOpts{engine=R,eps=TRUE,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
 \SweaveOpts{engine=R,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
-\SweaveOpts{prefix.string=fig/vcd-tut}
+\SweaveOpts{prefix.string=fig/vcd-tut,eps=FALSE}
 \setkeys{Gin}{width=0.7\textwidth}
 %\VignetteIndexEntry{Tutorial: Working with categorical data with R and the vcd package}
 %\VignetteDepends{vcd,gmodels,ca}

@@ -20,7 +20,8 @@ data(Mobility)
 %\details{ }
 \source{
 
-Falguerolles, A. de and Mathieu, (1988). \emph{COMPSTAT 88}.
+Falguerolles, A. de and Mathieu, J. R. (1988). 
+\emph{Proceedings of COMPSTAT 88}, Copenhagen,  Denmark, Springer-Verlag.
 
  % \cite{FeathermanHauser:78}
 
