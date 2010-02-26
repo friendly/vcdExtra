@@ -43,6 +43,10 @@ Hand, D. and Daly, F. and Lunn, A. D.and McConway, K. J. and Ostrowski, E. (1994
 data(Bartlett)
 
 # example goes here
+fourfold(Bartlett, mfrow=c(1,2))
+
+mosaic(Bartlett, shade=TRUE)
+
 }
 
 \keyword{datasets}
