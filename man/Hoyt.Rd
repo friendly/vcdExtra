@@ -3,8 +3,11 @@
 \docType{data}
 \title{Minnesota High School Graduates}
 \description{Minnesota high school graduates of June 1930 were classified with respect to 
-(a) position by thirds in their graduating class, (b) post-high school status in April 1939 (4 levels), (c) sex, 
-(d) father's occupational status (7 levels, from 1=High to 7=Low).
+(a) \code{Rank} by thirds in their graduating class, (b) post-high school \code{Status} in April 1939 (4 levels), (c) \code{Sex}, 
+(d) father's \code{Occupation}al status (7 levels, from 1=High to 7=Low).
+
+The data were first presented by Hoyt et al. (1959) and have been analyzed by Fienberg(1980), Plackett(1974)
+and others.
 }
 
 \usage{
@@ -66,6 +69,42 @@ pairs(Hoyt, shade=TRUE)
 # collapse Status to College vs. Non-College
 Hoyt1 <- collapse.table(Hoyt, Status=c("College", rep("Non-College",3)))
 plot(Hoyt1, shade=TRUE)
+
+#################################################
+# fitting models with loglm, plotting with mosaic
+#################################################
+
+# fit baseline log-linear model for Status as response
+
+hoyt.mod0 <- loglm(~ Status + (Sex*Rank*Occupation), data=Hoyt1)
+hoyt.mod0
+mosaic(hoyt.mod0, gp=shading_Friendly, main="Baseline model: Status + (Sex*Rank*Occ)")
+
+# add one-way association of Status with factors
+hoyt.mod1 <- loglm(~ Status * (Sex + Rank + Occupation) + (Sex*Rank*Occupation), data=Hoyt1)
+hoyt.mod1
+mosaic(hoyt.mod1, gp=shading_Friendly, main="Status * (Sex + Rank + Occ)")
+
+# can we drop any terms?
+drop1(hoyt.mod1, test="Chisq")
+
+# assess model fit
+anova(hoyt.mod0, hoyt.mod1)
+
+# what terms to add?
+add1(hoyt.mod1, ~.^2, test="Chisq")
+
+# add interaction of Sex:Occupation on Status
+hoyt.mod2 <- update(hoyt.mod1, ~.+Status:Sex:Occupation)
+mosaic(hoyt.mod2, gp=shading_Friendly, main="Adding Status:Sex:Occupation")
+
+# compare model fits
+anova(hoyt.mod0, hoyt.mod1, hoyt.mod2)
+
+# Alternatively, try stepwise analysis, heading toward the saturated model
+steps <- step(hoyt.mod0, direction="forward", scope=~Status*Sex*Rank*Occupation)
+# display anova
+steps$anova
 
 }
 
