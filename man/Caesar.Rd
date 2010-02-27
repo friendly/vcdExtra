@@ -21,7 +21,12 @@ data(Caesar)
   }
 }
 
-%\details { }
+\details {
+\code{Infection} is regarded as the response variable here. 
+There are quite a few 0 cells here, particularly when  \code{Risk}
+is absent and the Caesarian section was unplanned.
+Should these be treated as structural or sampling zeros?
+}
 \source{
 
 %  \cite{Fahrmeir:94}
@@ -34,12 +39,32 @@ New York: Springer Verlag.
 %\references{
 %}
 
-\seealso{\code{link[Fahrmeir]{caesar}} for the same data recorded as a frequency data frame
+\seealso{\code{\link[Fahrmeir]{caesar}} for the same data recorded as a frequency data frame
 with other variables.}
 \examples{
 data(Caesar)
+#display table;  note that there are quite a few 0 cells
+structable(Caesar)
 
-# example goes here
+# baseline model, Infection as response
+Caesar.mod0 <- loglm(~Infection + (Risk*Antibiotics+Planned), data=Caesar)
+Caesar.mod0
+
+mosaic(Caesar.mod0)
+
+# structural zeros?
+start <- 0+ (Caesar >0)
+start[1,,1,1] <- 1
+structable(start)
+
+Caesar.mod0s <- loglm(~Infection + (Risk*Antibiotics+Planned), data=Caesar, start=start)
+Caesar.mod0s
+
+\dontrun{
+## throws errors
+mosaic (Caesar.mod0s)
+mosaic (Caesar.mod0s, start=as.vector(start))
+}
 }
 
 \keyword{datasets}
