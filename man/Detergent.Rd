@@ -44,6 +44,17 @@ The use of chi-square for preference testing in multidimensional problems.
 data(Detergent)
 
 # example goes here
+mosaic(Detergent, shade=TRUE)
+
+(det.mod0 <- loglm(~ Preference + Temperature + M_User + Water_softness, data=Detergent))
+# examine addition of two-way terms
+add1(det.mod0, ~ .^2, test="Chisq")
+
+# model for Preference as a response
+(det.mod1 <- loglm(~ Preference + (Temperature * M_User * Water_softness), data=Detergent))
+mosaic(det.mod0)
+
+
 }
 
 \keyword{datasets}
