@@ -1,3 +1,8 @@
+Version 0.4-1 (2010-02-21)
+
+o Added example(Caesar), illustrating structural zeros
+o Re-named Heckman variables to e1971, ..., e1968 (errors from loglm); began example(Heckman)
+
 Version 0.4-0 (2010-02-23)
 
 o Added new datasets: data/{Abortion, Bartlett, Caesar, Cancer, Detergent, Dyke, Gilby, Heart, Heckman, Hoyt, Mobility} 

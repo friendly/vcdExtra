@@ -21,7 +21,7 @@ data(Caesar)
   }
 }
 
-\details {
+\details{
 \code{Infection} is regarded as the response variable here. 
 There are quite a few 0 cells here, particularly when  \code{Risk}
 is absent and the Caesarian section was unplanned.
@@ -47,24 +47,36 @@ data(Caesar)
 structable(Caesar)
 
 # baseline model, Infection as response
-Caesar.mod0 <- loglm(~Infection + (Risk*Antibiotics+Planned), data=Caesar)
+Caesar.mod0 <- loglm(~Infection + (Risk*Antibiotics*Planned), data=Caesar)
 Caesar.mod0
 
-mosaic(Caesar.mod0)
+mosaic(Caesar.mod0, main="Baseline model")
 
-# structural zeros?
-start <- 0+ (Caesar >0)
-start[1,,1,1] <- 1
-structable(start)
+# Illustrate handling structural zeros
+zeros <- 0+ (Caesar >0)
+zeros[1,,1,1] <- 1
+structable(zeros)
 
-Caesar.mod0s <- loglm(~Infection + (Risk*Antibiotics+Planned), data=Caesar, start=start)
+# fit model excluding possible structural zeros
+Caesar.mod0s <- loglm(~Infection + (Risk*Antibiotics*Planned), data=Caesar, 
+	start=zeros)
 Caesar.mod0s
 
-\dontrun{
-## throws errors
+anova(Caesar.mod0, Caesar.mod0s, test="Chisq")
+
 mosaic (Caesar.mod0s)
-mosaic (Caesar.mod0s, start=as.vector(start))
-}
+
+# what terms to add?
+add1(Caesar.mod0, ~.^2, test="Chisq")
+
+# add Association of Infection:Antibiotics
+Caesar.mod1 <- update(Caesar.mod0, ~.+Infection:Antibiotics)
+anova(Caesar.mod0, Caesar.mod1, test="Chisq")
+
+mosaic(Caesar.mod1, gp=shading_Friendly, main="Adding Infection:Antibiotics")
+
+
+
 }
 
 \keyword{datasets}
