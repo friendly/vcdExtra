@@ -3,8 +3,8 @@
 \docType{data}
 \title{Sources of knowledge of cancer}
 \description{Observational data on a sample of 1729 individuals, cross-classified in a 2^5 table according to their sources of 
-information (read newspapers, listen to the radio, do'solid' reading, attend lectures) and whether they have
-good or poor knowledge regarding cancer.  Knowledge of canceris often treated as the response.}
+information (read newspapers, listen to the radio, do 'solid' reading, attend lectures) and whether they have
+good or poor knowledge regarding cancer.  Knowledge of cancer is often treated as the response.}
 
 \usage{
 data(Dyke)
@@ -47,7 +47,15 @@ Oxford, UK: Oxford University Press, p. 57.
 \examples{
 data(Dyke)
 
-# example goes here
+# independence model
+mosaic(Dyke, shade=TRUE)
+
+# baseline model, Knowledge as response
+dyke.mod0 <- loglm(~ Knowledge + (Reading * Radio * Lectures * Newspaper), data=Dyke)
+dyke.mod0
+
+mosaic(dyke.mod0)
+
 }
 
 \keyword{datasets}
