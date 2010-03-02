@@ -26,7 +26,7 @@ predictors visualized in the \code{strucplot} are discrete factors.
     separated by '+'. A formula must be provided unless \code{x$data}
     inherits from class \code{"table"} -- in which case the indexing
     factors of this table are used, or \code{x$data} (model.frame(x) if
-    x$data is an environment) is a data frame containing \emph{only} the
+    \code{x$data} is an environment) is a data frame containing \emph{only} the
     response and a set of factors that exactly cross-classify the data
     -- in which case the set of cross-classifying factors are used. }
    \item{panel}{Panel function used to draw the plot for visualizing the observed values, residuals 
@@ -55,12 +55,18 @@ provided by \code{rstandard}
 (sometimes called adjusted residuals) are often preferred because they have 
 constant unit asymptotic variance.
 }
+%\note{
+%In the current version, the \code{glm} or \code{gnm} object \emph{must} have been fit using
+%the \code{data} argument to supply a data.frame or table, rather than with variables
+%in the global environment.
+%}
+
 \value{
 The \code{structable} visualized by \code{\link[vcd]{strucplot}} is returned invisibly.
 
 }
 %\references{ ~put references to the literature/web site here ~ }
-\author{Michael Friendly, with help from Achim Zeileis}
+\author{Heather Turner, Michael Friendly, with help from Achim Zeileis}
 %\note{
 %}
 \seealso{\code{\link[stats]{glm}}, \code{\link[gnm]{gnm}}, \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}}
