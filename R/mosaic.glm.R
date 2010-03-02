@@ -50,7 +50,7 @@
                          "$data - please provide formula", call. = FALSE)
             }
             else
-                stop("cannot identify indexing factors - please provide formula",
+                stop("cannot identify indexing factors - please provide one-sided formula for factors in plot",
                      call. = FALSE)
         }
         if (length(formula) == 3) formula <- formula[-2]
