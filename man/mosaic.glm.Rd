@@ -22,13 +22,13 @@ predictors visualized in the \code{strucplot} are discrete factors.
 \arguments{
   \item{x}{ A \code{glm} or \code{gnm} object. The response variable, typically a 
     cell frequency, should be non-negative. }
-  \item{formula}{ A formula object with the indexing factors of the plot
-    separated by '+' on the right hand side. A formula must be provided
-    unless \code{x$data} inherits from class \code{"table"} -- in which case the
-    indexing factors of this table are used, or \code{x$data} is a data frame
-    containing \emph{only} the response and a set of factors that exactly
-    cross-classify the data -- in which case the set of cross-classifying
-    factors are used. }
+  \item{formula}{ A one-sided formula with the indexing factors of the plot
+    separated by '+'. A formula must be provided unless \code{x$data}
+    inherits from class \code{"table"} -- in which case the indexing
+    factors of this table are used, or \code{x$data} (model.frame(x) if
+    x$data is an environment) is a data frame containing \emph{only} the
+    response and a set of factors that exactly cross-classify the data
+    -- in which case the set of cross-classifying factors are used. }
    \item{panel}{Panel function used to draw the plot for visualizing the observed values, residuals 
    and expected values. Currently, one of \code{"mosaic"}, \code{"assoc"}, or \code{"sieve"}
    in \code{vcd}.}
