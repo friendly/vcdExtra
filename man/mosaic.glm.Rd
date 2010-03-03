@@ -1,5 +1,8 @@
 \name{mosaic.glm}
 \alias{mosaic.glm}
+\alias{sieve.glm}
+\alias{assoc.glm}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Mosaic plots for fitted generalized linear and generalized nonlinear models }
 \description{
@@ -17,6 +20,8 @@ predictors visualized in the \code{strucplot} are discrete factors.
 \usage{
 \method{mosaic}{glm}(x, formula = NULL, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
      residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
+\method{sieve}{glm}(x,  ...)
+\method{assoc}{glm}(x,  ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -54,6 +59,9 @@ For both poisson family generalized linear models and loglinear models, standard
 provided by \code{rstandard}
 (sometimes called adjusted residuals) are often preferred because they have 
 constant unit asymptotic variance.
+
+The \code{sieve} and \code{assoc} methods are simple convenience interfaces to this plot method, setting the panel argument accordingly. 
+
 }
 %\note{
 %In the current version, the \code{glm} or \code{gnm} object \emph{must} have been fit using

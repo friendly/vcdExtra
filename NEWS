@@ -4,6 +4,7 @@ o Added example(Caesar), illustrating structural zeros
 o Re-named Heckman variables to e1971, ..., e1968 (errors from loglm); began example(Heckman)
 o Added example(Detergent), example(Dyke)
 o Fixed bug with mosaic.glm when data in global environment (Heather Turner)
+o Added sieve.glm and assoc.glm methods (MF)
 
 Version 0.4-0 (2010-02-23)
 

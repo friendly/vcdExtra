@@ -86,3 +86,16 @@
 			residuals_type=residuals_type, gp=gp, ...)
 }
 
+## convenience functions for sieve and assoc plots
+sieve.glm <-
+		function (x, ...) 
+{
+	mosaic(x, panel = sieve, ...)
+}
+
+assoc.glm <-
+		function (x, ...) 
+{
+	mosaic(x, panel = assoc, ...)
+}
+
