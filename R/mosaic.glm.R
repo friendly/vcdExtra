@@ -32,11 +32,10 @@
             if (inherits(observed, "table"))
                 formula <- reformulate(names(dimnames(observed)))
             else if (inherits(observed, "data.frame")) {
-                ## ok if equivalent to as.data.frame(xtab)
-                attr.terms <- attributes(terms(x))
-                resp <- deparse(attr.terms$variables[[2]])
-                factors <- setdiff(colnames(observed), resp)
-                ## assume everything bar response is an indexing factor (for now)
+                ## get all factors excluding response
+                factors <- sapply(observed, inherits, "factor")
+                resp <- as.character(x$formula[[2]])
+                factors <- setdiff(colnames(observed[factors]), resp)
                 formula <- reformulate(factors)
                 ok <- TRUE
                 ## check cross-classifying

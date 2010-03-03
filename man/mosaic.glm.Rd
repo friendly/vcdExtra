@@ -25,10 +25,10 @@ predictors visualized in the \code{strucplot} are discrete factors.
   \item{formula}{ A one-sided formula with the indexing factors of the plot
     separated by '+'. A formula must be provided unless \code{x$data}
     inherits from class \code{"table"} -- in which case the indexing
-    factors of this table are used, or \code{x$data} (model.frame(x) if
-    \code{x$data} is an environment) is a data frame containing \emph{only} the
-    response and a set of factors that exactly cross-classify the data
-    -- in which case the set of cross-classifying factors are used. }
+    factors of this table are used, or the factors in \code{x$data}
+    (or model.frame(x) if \code{x$data} is an environment) exactly
+    cross-classify the data -- in which case this set of
+    cross-classifying factors are used. } 
    \item{panel}{Panel function used to draw the plot for visualizing the observed values, residuals 
    and expected values. Currently, one of \code{"mosaic"}, \code{"assoc"}, or \code{"sieve"}
    in \code{vcd}.}
