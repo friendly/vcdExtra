@@ -3,4 +3,6 @@ occStatus     Occupational status data: Compare mosaic using expected= to mosaic
 ucb-glm       UCBAdmissions data: Conditional independence via loglm() and glm()
 vision-quasi  VisualAcuity data: Quasi- and Symmetry models
 yaish-unidiff Yaish data: Unidiff model for 3-way table
+Wong2-3       Political views and support for women to work (U, R, C, R+C and RC(1) models)
+
 

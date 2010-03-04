@@ -3,12 +3,15 @@ import(vcd)
 export(
 	expand.dft,expand.table,collapse.table,
 	mosaic.glm, sieve.glm, assoc.glm,
+	modFit, modFit.glm, modFit.loglm,
 	GKgamma,print.GKgamma,
 	print.Kappa)
 
 S3method(mosaic, glm)
 S3method(sieve, glm)
 S3method(assoc, glm)
+S3method(modFit, glm)
+S3method(modFit, loglm)
 S3method(print, GKgamma)
 S3method(print, Kappa)
 

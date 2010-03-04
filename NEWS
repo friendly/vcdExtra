@@ -5,6 +5,8 @@ o Re-named Heckman variables to e1971, ..., e1968 (errors from loglm); began exa
 o Added example(Detergent), example(Dyke)
 o Fixed bug with mosaic.glm when data in global environment (Heather Turner)
 o Added sieve.glm and assoc.glm methods (MF)
+o Added modFit.glm and modFit.loglm
+o Added demo(Wong2-3)
 
 Version 0.4-0 (2010-02-23)
 

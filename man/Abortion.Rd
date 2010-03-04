@@ -1,4 +1,5 @@
 \name{Abortion}
+\Rdversion{1.1}
 \alias{Abortion}
 \docType{data}
 \title{Abortion Opinion Data}
