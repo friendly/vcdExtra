@@ -13,8 +13,8 @@ a few functions designed to extend the vcd package.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.4-1\cr
-Date: \tab 2010-02-25\cr
+Version: \tab 0.4-2\cr
+Date: \tab 2010-03-09\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -29,7 +29,7 @@ package to a wider class of models.
 
 In addition, there are several new data sets, a new vignette,
 \describe{
-  \item{vcd-tutorial}{Tutorial: Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
+  \item{vcd-tutorial}{Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
 and a few functions for manipulating categorical data sets.
 

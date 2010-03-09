@@ -29,7 +29,7 @@
 
 %% almost as usual
 \author{Michael Friendly\\York University, Toronto}
-\title{Tutorial: Working with categorical data with \proglang{R} and the \pkg{vcd} package}
+\title{Working with categorical data with \proglang{R} and the \pkg{vcd} and \pkg{vcdExtra} packages}
 
 %% for pretty printing and a nice hypersummary also set:
 \Plainauthor{Michael Friendly} %% comma-separated
@@ -42,15 +42,17 @@ This tutorial describes the creation of frequency and contingency tables
 from categorical variables, along with tests of independence, measures
 of association, and methods for graphically displaying results. 
 The framework is provided by the \proglang{R} package \pkg{vcd},
-but other packages are used to help with various tasks.
+but other packages are used to help with various tasks.  
+The \pkg{vcdExtra} package extends the graphical methods provided by
+\pkg{vcd}.
 }
 
 \Keywords{contingency tables, mosaic plots, sieve plots, 
-categorical data, independence, conditional independence,
+categorical data, independence, conditional independence, generalized linear models,
 \proglang{R}}
 \Plainkeywords{contingency tables, mosaic plots, 
   sieve plots, categorical data, independence, 
-  conditional independence, R}
+  conditional independence, generalized linear models, R}
 
 %\SweaveOpts{engine=R,eps=TRUE,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
 \SweaveOpts{engine=R,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
@@ -118,7 +120,10 @@ in my book, \emph{Visualizing Categorical Data} \citep{vcd:Friendly:2000}, for w
 \pkg{vcd} is a partial \proglang{R} companion, covering topics not otherwise
 available in \proglang{R}.  On the other hand, the implementation of graphical
 methods in \pkg{vcd} is more general in many respects than what I provided in
-\proglang{SAS}.
+\proglang{SAS}. Statistical models for categorical data in \proglang{R} have
+been extended considerably with the \pkg{gnm} package for generalized \emph{nonlinear}
+models.  The \pkg{vcdExtra} package extends \pkg{vcd} to models fit using
+\codefun{glm} and \codefun{gnm}.
 
 A more complete theoretical description of these statistical
 methods is provided in Agresti's \citeyearpar{vcd:Agresti:2002}
@@ -220,7 +225,7 @@ str(JobSat)
 
 \end{description}
 
-\subsection{Ordered factors and reordered tables}
+\subsection{Ordered factors and reordered tables}\label{sec:ordered-factors}
 In table form, the values of the table factors are ordered by their position in the table.
 Thus in the \data{JobSat} data, both \code{income} and \code{satisfaction} represent ordered
 factors, and the \emph{positions} of the values in the rows and columns reflects their
@@ -801,7 +806,7 @@ models.  Equivalent models can also be fit (from a different perspective) as gen
 linear models with the \codefun{glm}  function using the \code{family='poisson'} argument,
 and the \pkg{gnm} package provides a wider range of generalized \emph{nonlinear} models,
 particularly for testing structured associations.
-The visualization methods for these models are most advanced for models fit using \codefun{loglm},
+The visualization methods for these models was originally developed for models fit using \codefun{loglm},
 so this approach is emphasized here.  Some extensions of these methods for models
 fit using \codefun{glm} and \codefun{gnm} are contained in the \pkg{vcdExtra} package.
 
@@ -810,8 +815,9 @@ variables A, B, and C.
 The possible different forms of \loglin\ models for a 3-way table are shown in \tabref{tab:loglin-3way}.
 The \textbf{Model formula} column shows how to express each model for \codefun{loglm} in \proglang{R}.%
 \footnote{
-For \codefun{glm}, or \codefun{gnm} with the data in the form of a frequency data.frame, the same model is specified
-in the form \code{glm(Freq} $\sim$ \code{..., family="poisson")}.
+For \codefun{glm}, or \codefun{gnm}, with the data in the form of a frequency data.frame, the same model is specified
+in the form \code{glm(Freq} $\sim$ \code{..., family="poisson")}, where \texttt{Freq} is  the name
+of the cell frequency variable and \texttt{...} specifies the \textbf{Model formula}.
 }
 In the \textbf{Interpretation} column, the symbol ``$\perp$'' is to be read as ``is independent of,''
 and ``$\given$'' means ``conditional on,'' or ``adjusting for,'' or just ``given''.
@@ -835,7 +841,7 @@ and ``$\given$'' means ``conditional on,'' or ``adjusting for,'' or just ``given
 
 
 
-For example, the formula \verb|~A + B + C| specifies the model of mutual independence with
+For example, the formula \verb|~A + B + C| specifies the model of \emph{mutual independence} with
 no associations among the three factors.  In standard notation for the expected frequencies
 $m_{ijk}$, this corresponds to
 \begin{equation*}
@@ -844,16 +850,22 @@ $m_{ijk}$, this corresponds to
 The parameters $\lambda_i^A , \lambda_j^B$ and  $\lambda_k^C$ pertain to the differences among the
 one-way marginal frequencies for the factors A, B and C. 
 
-Similarly, the model of joint independence allows an association between A and B, but specifies that
+Similarly, the model of \emph{joint independence} allows an association between A and B, but specifies that
 C is independent of both of these and their combinations,
 \begin{equation*}
 	\log ( m_{ijk} ) = \mu + \lambda_i^A + \lambda_j^B + \lambda_k^C + \lambda_{ij}^{AB} \equiv \texttt{A * B + C}
 \end{equation*}
+where the parameters $\lambda_{ij}^{AB}$ pertain to the overall association between A and B (collapsing over C).
 
 In the literature or text books, you will often find these models expressed in shorthand symbolic notation,
 using brackets, \texttt{[ ]} to enclose the \emph{high-order terms} in the model.
-Thus, the joint independence model can be denoted \texttt{[AB][C]}, as shown in the Symbol column in 
+Thus, the joint independence model can be denoted \texttt{[AB][C]}, as shown in the \textbf{Symbol} column in 
 \tabref{tab:loglin-3way}.
+
+Models of \emph{conditional independence} allow (and fit)  two of the three possible
+two-way associations.  There are three such models, depending on which variable is conditioned upon.
+For a given conditional independence model, e.g., \texttt{[AB][AC]}, the given variable is the one
+common to all terms, so this example has the interpretation $(B \perp C) \given A$.
 
 
 \subsection[Fitting with loglm()]{Fitting with \codefun{loglm}}\label{sec:loglm}
@@ -1054,7 +1066,7 @@ on the vertical axis and \code{Network} on the horizontal,
   \verb|labeling_args = list(abbreviate = c(Time = 2))| for a similar effect.
 \end{itemize}
 
-The following call to \codefun{mosaic} produces \figref{fig:TV-mosaic}
+The following call to \codefun{mosaic} produces \figref{fig:TV-mosaic}:
 <<TV-mosaic0,eval=FALSE>>=
 dimnames(TV2)$Time <- c("8", "9", "10")     # re-level for mosaic display
 mosaic(~ Day + Network + Time, data=TV2, expected=~Day:Time + Network, 
@@ -1095,8 +1107,13 @@ mosaic(~ Day + Network + Time, data=TV2,
          legend=FALSE, gp=shading_Friendly)
 @
 \subsection[Mosaics for glm() and gnm() models]{Mosaics for \codefun{glm} and \codefun{gnm} models}\label{sec:mosglm}
-The \pkg{vcdExtra} provides some additional methods, \codefun{mosaic.glm} and \codefun{mosaic.gnm}
-for models fit with \codefun{glm} and \codefun{gnm}.  These are not restricted to the 
+The \pkg{vcdExtra} package provides an additional method, \codefun{mosaic.glm} 
+for models fit with \codefun{glm} and \codefun{gnm}.%
+\footnote{
+Models fit with \codefun{gnm} are of \code{class = c("gnm", "glm", "lm")},
+so all \code{*.glm} methods apply, unless overridden in the \pkg{gnm} package.
+}
+These are not restricted to the 
 Poisson family, but only apply to cases where the response variable is non-negative. 
 
 Here, we plot the independence and the linear-by-linear association model
@@ -1106,19 +1123,19 @@ residuals printed in cells).
 <<mental-plots,eval=FALSE>>=
 long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
 mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, 
-	   labeling=labeling_residuals,
-       main="Mental health data: Independence")
+     labeling=labeling_residuals,
+     main="Mental health data: Independence")
 
 mosaic(linlin,residuals_type="rstandard", labeling_args = long.labels, 
-		labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
-		main="Mental health data: Linear x Linear")
+     labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+     main="Mental health data: Linear x Linear")
 @
 
 \setkeys{Gin}{width=0.49\textwidth}
 <<mental-plots1,fig=TRUE,echo=FALSE,height=6,width=6>>=
 long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
 mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, 
-	   labeling=labeling_residuals,
+    labeling=labeling_residuals,
        main="Mental health data: Independence")
 @
 <<mental-plots2,fig=TRUE,echo=FALSE,height=6,width=6>>=
@@ -1127,6 +1144,102 @@ mosaic(linlin,residuals_type="rstandard", labeling_args = long.labels,
 		labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
 		main="Mental health data: Linear x Linear")
 @
+
+The \pkg{gnm} also fits a wide variety of models with nonlinear terms or terms for
+structured associations of table variables.  In the following, we fit the RC(1)
+model
+\begin{equation*}
+	\log ( m_{ij} ) = \mu + \lambda_i^A + \lambda_j^B + \phi \mu_i \nu_j 
+\end{equation*}
+This is similar to the linear by linear model, except that the row effect
+parameters ($\mu_i$) and column parameters ($\nu_j$) are estimated from the data
+rather than given assigned equally-spaced values.  The multiplicative terms
+are specified by the \codefun{Mult}.
+
+<<mental-RC1, eval=FALSE>>=
+Mental$mental <- C(Mental$mental, treatment)
+Mental$ses <- C(Mental$ses, treatment)
+RC1model <- gnm(Freq ~ mental + ses + Mult(mental, ses),
+                family = poisson, data = Mental)
+mosaic(RC1model, residuals_type="rstandard", labeling_args = long.labels, 
+       labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+       main="Mental health data: RC(1) model")
+@
+Other forms of nonlinear terms are provided for the inverse of a predictor
+(codefun{Inv}) and the exponential of a predictor (codefun{Exp}).
+You should read \code{vignette("gnmOverview")} for further details.
+
+\subsection{Mosaic tips and techniques}\label{sec:tips}
+
+The \pkg{vcd} package implements an extremely general collection of graphical methods for
+$n$-way frequency tables within the strucplot framework, which includes mosaic plots
+(\codefun{mosaic}), as well as association plots (\codefun{assoc}), sieve diagrams
+(\codefun{sieve}), as well as tabular displays (\codefun{structable}).
+
+The graphical methods in \pkg{vcd}  support a wide of options that control almost all of the details
+of the plots, but it is often difficult to determine what arguments you need to supply
+to achieve a given effect from the \code{help()}.  As a first step, you should read the 
+\code{vignette("strucplot")} in \pkg{vcd} to understand the overall structure of
+these plot methods.  The notes below describe a few useful things that may not be obvious,
+or can be done in different ways.
+
+\subsubsection{Changing the labels for variables and levels}
+With data in contingency table form or as a frequency data frame, it often happens
+that the variable names and/or the level values of the factors, while suitable
+for analysis, are less than adequate when used in mosaic plots and other strucplot
+displays.  
+
+For example, we might prefer that a variable named \code{ses} appear
+as \code{"Socioeconomic Status"}, or a factor with levels \code{c("M", "F")}
+be labeled using \code{c("Male", "Female")} in a plot.  Or, sometimes we
+start with a factor whose levels are fully spelled out
+(e.g., \code{c("strongly disagree", "disagree", "neutral", "agree", "strongly agree")}),
+only to find that the level labels overlap in graphic displays.
+
+The structplot framework in \pkg{vcd} provides an extremely large variety of
+functions and options for controlling almost all details of text labels in mosaics
+and other plots.  See \code{help(labelings)} for an overview. 
+
+For example, in \secref{sec:ordered-factors} we showed how to rearrange the dimensions
+of the \code{UCBAdmissions} table, change the names of the table variables, and
+relabel the levels of one of the table variables.
+The code below changes the actual table for plotting purposes, but we pointed out that
+these changes can create other problems in analysis.
+
+<<reorder3a,results=hide>>=
+UCB <- aperm(UCBAdmissions, c(2, 1, 3))
+names(dimnames(UCB)) <- c("Sex", "Admit?", "Department")
+dimnames(UCB)[[2]] <- c("Yes", "No")
+@
+
+The same effects can be achieved \emph{without} modifying the data
+using the \verb|set_varnames| and
+\verb|set_labels| options in \codefun{mosaic} as follows:
+
+<<reorder3b,results=hide, keep.source=TRUE>>=
+vnames <- list(set_varnames = c(Admit="Admission", Gender="Sex", Dept="Department"))
+
+lnames <- list(Admit = c("Yes", "No"),
+              Gender = c("Males", "Females"),
+              Dept = LETTERS[1:6])
+
+mosaic(UCBAdmissions, labeling_args=vnames, set_labels=lnames)
+@
+
+In some cases, it may be sufficient to abbreviate (or clip, or rotate) level names to avoid 
+overlap.  For example, the statements below produce another version of
+\figref{fig:TV-mosaic} with days of the week abbreviated to their first three letters.
+Section 4 in the \code{vignette("strucplot")} provides many other examples.
+
+<<TV-mosaic2,results=hide>>=
+dimnames(TV2)$Time <- c("8", "9", "10")     # re-level for mosaic display
+mosaic(~ Day + Network + Time, data=TV2, expected=~Day:Time + Network, 
+         legend=FALSE, gp=shading_Friendly, 
+         labeling_args=list(abbreviate=c(Day=3)) )
+@
+
+%\subsubsection{Fitting complex models with glm() and gnm()}
+
 
 
 \section[Continuous predictors]{Continuous predictors: spine and conditional density plots}\label{sec:contin}

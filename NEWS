@@ -1,3 +1,7 @@
+Version 0.4-2 (2010-03-09)
+
+o Revised vignette("vcd-tutorial")
+
 Version 0.4-1 (2010-02-21)
 
 o Added example(Caesar), illustrating structural zeros

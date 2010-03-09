@@ -38,6 +38,8 @@ Wong23 <- data.frame(Freq, polviews, fefam, Rscore, Cscore)
 # do a correspondence analysis first, to see the row/category relations
 Wong23.xtab <- xtabs(Freq ~ polviews+fefam, data=Wong23)
 dimnames(Wong23.xtab) <- long.lnames
+library(ca)
+
 plot(ca(Wong23.xtab))
 title(main="Political views and support for women to work", 
       xlab="Dim 1 (90.8%)", ylab="Dim 2 (8.5%)")
