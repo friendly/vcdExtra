@@ -4,5 +4,5 @@ ucb-glm       UCBAdmissions data: Conditional independence via loglm() and glm()
 vision-quasi  VisualAcuity data: Quasi- and Symmetry models
 yaish-unidiff Yaish data: Unidiff model for 3-way table
 Wong2-3       Political views and support for women to work (U, R, C, R+C and RC(1) models)
-
+Wong3-1       Political views, support for women to work and national welfare spending (3-way, marginal, and conditional independence models)
 
