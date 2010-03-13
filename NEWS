@@ -1,7 +1,10 @@
 Version 0.4-2 (2010-03-09)
 
-o Revised vignette("vcd-tutorial")
-o Added demo(Wong3-1)
+o Revised vignette("vcd-tutorial"): added some hints for mosaic(), corrected stuff regarding prior
+  limitations of mosaic.glm()
+o Added demo(Wong3-1): three-way table, with models of conditional association
+o Added Suggest: effects for effects plots of glm(), multinom() and polr() models
+o Added demo(housing): visualize models fit in example(housing, package="MASS")
 
 Version 0.4-1 (2010-02-21)
 
