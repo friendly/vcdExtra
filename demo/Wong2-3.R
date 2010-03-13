@@ -115,9 +115,24 @@ mosaic(Wong23.RC1, formula=~polviews+fefam, main="RC(1) model",
 	labeling_args=long.vnames, set_labels=long.lnames, residuals_type="rstandard",
 	labeling=labeling_residuals, suppress=1, gp=shading_Friendly)
 
-models <- list(Wong23.O, Wong23.U, Wong23.R, Wong23.C, Wong23.RplusC, Wong23.RC1)
+#####################################
+# Summarize the collection of models
+models <- list(Indep=Wong23.O, Uniform=Wong23.U, RowEff=Wong23.R, ColEff=Wong23.C, RplusC=Wong23.RplusC, RC1=Wong23.RC1)
+res <- lapply(models, residuals)
+boxplot(as.data.frame(res), main="Residuals from various models")
+
+aic <- t(as.data.frame(lapply(models, extractAIC)))
+colnames(aic) <- c("df", "AIC")
+aic
+# sort by df
+aic <- aic[order(aic[,1]),]
+plot(aic, type = "b", main="AIC plot")
+text(aic, labels=rownames(aic), pos=1)
 
 ######################################
 # compare models;  they are not nested, so only some Chisq tests make sense
 anova(Wong23.O, Wong23.U, Wong23.R, Wong23.C, Wong23.RplusC, Wong23.RC1)
+
+anova(Wong23.O, Wong23.U, Wong23.R, Wong23.RplusC, test="Chisq")
+anova(Wong23.O, Wong23.U, Wong23.C, Wong23.RplusC, test="Chisq")
 

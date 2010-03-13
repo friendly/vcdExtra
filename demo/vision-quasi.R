@@ -16,7 +16,8 @@ mosaic(quasi.indep, residuals_type="rstandard", gp=shading_Friendly,
 symmetry <- glm(Freq ~ Symm(right, left),
        data = women, family = poisson)
 # BUG FIXED
-mosaic(symmetry, main="Symmetry model (women)")
+mosaic(symmetry, residuals_type="rstandard", gp=shading_Friendly,
+		main="Symmetry model (women)")
 
 quasi.symm <- glm(Freq ~ right + left + Symm(right, left),
        data = women, family = poisson)
