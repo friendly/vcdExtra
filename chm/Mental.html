@@ -1,0 +1,90 @@
+<html><head><title>Mental impariment and parents SES</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Mental(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Mental">
+<param name="keyword" value=" Mental impariment and parents SES">
+</object>
+
+
+<h2>Mental impariment and parents SES</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A 6 x 4 contingency table representing the cross-classification of
+mental health status (<code>mental</code>) of 1660 young New York residents by
+their parents' socioeconomic status (<code>ses</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Mental)</pre>
+
+
+<h3>Format</h3>
+
+<p>
+A data frame frequency table with 24 observations on the following 3 variables.
+<dl>
+<dt><code>ses</code></dt><dd>an ordered factor with levels <code>1</code> &lt; <code>2</code> &lt; <code>3</code> &lt; <code>4</code> &lt; <code>5</code> &lt; <code>6</code></dd>
+<dt><code>mental</code></dt><dd>an ordered factor with levels <code>Well</code> &lt; <code>Mild</code> &lt; <code>Moderate</code> &lt; <code>Impaired</code></dd>
+<dt><code>Freq</code></dt><dd>cell frequency: a numeric vector</dd>
+</dl>
+
+<h3>Details</h3>
+
+<p>
+Both <code>ses</code> and <code>mental</code> can be treated as ordered factors or
+integer scores.  For <code>ses</code>, 1="High" and 6="Low".
+</p>
+
+
+<h3>Source</h3>
+
+<p>
+Haberman, S. J. 
+<EM>The Analysis of Qualitative Data: New Developments</EM>, Academic Press, 1979, Vol. II,
+p. 375.
+</p>
+<p>
+Srole, L.; Langner, T. S.; Michael, S. T.; Kirkpatrick, P.; Opler, M. K. &amp; Rennie, T. A. C. 
+<EM>Mental Health in the Metropolis: The Midtown Manhattan Study</EM>,
+NYU Press, 1978, p. 289
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Friendly, M. <EM>Visualizing Categorical Data</EM>, Cary, NC: SAS Institute, 2000, Appendix B.7.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Mental)
+str(Mental)
+(Mental.tab &lt;- xtabs(Freq ~ ses+mental, data=Mental))
+
+# mosaic and sieve plots
+mosaic(Mental.tab, gp=shading_Friendly)
+sieve(Mental.tab, gp=shading_Friendly)
+
+library(ca)
+plot(ca(Mental.tab), main="Mental impairment &amp; SES")
+title(xlab="Dim 1", ylab="Dim 2")
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.2 <a href="00Index.html">Index]</a></div>
+
+</body></html>

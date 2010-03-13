@@ -1,0 +1,72 @@
+<html><head><title>Cross-classification of job satisfaction by income</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>JobSat(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   JobSat">
+<param name="keyword" value=" Cross-classification of job satisfaction by income">
+</object>
+
+
+<h2>Cross-classification of job satisfaction by income</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This data set is a contingency table of job satisfaction by income for a small sample
+of black males from the 1996 General Social Survey, as used by Agresti (2002) for
+an example.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(JobSat)</pre>
+
+
+<h3>Format</h3>
+
+<p>
+A 4 x 4 contingency table of <code>income</code> by <code>satisfaction</code>, with the following structure:
+<pre>
+ table [1:4, 1:4] 1 2 1 0 3 3 6 1 10 10 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ income      : chr [1:4] "&lt; 15k" "15-25k" "25-40k" "&gt; 40k"
+  ..$ satisfaction: chr [1:4] "VeryD" "LittleD" "ModerateS" "VeryS"
+</pre>
+</p>
+
+
+<h3>Details</h3>
+
+<p>
+Both <code>income</code> and <code>satisfaction</code> are ordinal variables, and are so ordered in the
+table.  Measures of association, visualizations, and models should take ordinality into
+account.
+</p>
+
+
+<h3>Source</h3>
+
+<p>
+Agresti, A. Categorical Data Analysis John Wiley &amp; Sons, 2002,
+Table 2.8, p. 57.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(JobSat)
+assocstats(JobSat)
+GKgamma(JobSat)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.2 <a href="00Index.html">Index]</a></div>
+
+</body></html>

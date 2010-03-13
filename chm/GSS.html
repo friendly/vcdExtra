@@ -1,0 +1,62 @@
+<html><head><title>General Social Survey&ndash; Sex and Party affiliation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>GSS(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   GSS">
+<param name="keyword" value=" General Social Survey&ndash; Sex and Party affiliation">
+</object>
+
+
+<h2>General Social Survey&ndash; Sex and Party affiliation</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Data from the General Social Survey, 1991, on the relation between 
+sex and party affiliation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(GSS)</pre>
+
+
+<h3>Format</h3>
+
+<p>
+A data frame in frequency form with 6 observations on the following 3 variables.
+<dl>
+<dt><code>sex</code></dt><dd>a factor with levels <code>female</code> <code>male</code></dd>
+<dt><code>party</code></dt><dd>a factor with levels <code>dem</code> <code>indep</code> <code>rep</code></dd>
+<dt><code>count</code></dt><dd>a numeric vector</dd>
+</dl>
+
+<h3>Source</h3>
+
+<p>
+Agresti, A. Categorical Data Analysis John Wiley &amp; Sons, 2002,
+Table 3.11, p. 106.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(GSS)
+## maybe str(GSS) ; plot(GSS) ...
+(GSStab &lt;- xtabs(count ~ sex + party, data=GSS))
+
+mod.glm &lt;- glm(count ~ sex + party, family = poisson, data = GSS)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

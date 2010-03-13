@@ -1,0 +1,89 @@
+<html><head><title>Student opinion about the war in Vietnam</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Vietnam(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Vietnam">
+<param name="keyword" value=" Student opinion about the war in Vietnam">
+</object>
+
+
+<h2>Student opinion about the war in Vietnam</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A survey of student opinion on the Vietnam War was taken at the
+University of North Carolina at Chapel Hill in May 1967 and published
+in the student newspaper. Students were asked to fill in ballot
+papers stating which policy out of A,B,C or D they supported.
+Responses were cross-classified by gender/year.
+</p>
+<p>
+The result is a 2 x 5 x 4 contingency table, with factors
+<code>sex</code>, <code>yr</code> and <code>resp</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Vietnam)</pre>
+
+
+<h3>Format</h3>
+
+<p>
+A data frame in frequency form with 40 observations on the following 4 variables.
+<dl>
+<dt><code>sex</code></dt><dd>a factor with levels <code>F</code> <code>M</code></dd>
+<dt><code>yr</code></dt><dd>an ordered factor with levels <code>Fresh</code> &lt; <code>Soph</code> &lt; <code>Jr</code> &lt; <code>Sr</code> &lt; <code>Grad</code></dd>
+<dt><code>resp</code></dt><dd>a factor with levels <code>A</code> <code>B</code> <code>C</code> <code>D</code></dd>
+<dt><code>Freq</code></dt><dd>a numeric vector</dd>
+</dl>
+
+<h3>Details</h3>
+
+<p>
+The response categories can be considered ordered in terms of attitude about the war
+in Vietnam:
+<dl>
+<dt>A</dt><dd>defeat North Vietnam by widespread bombing and land invasion</dd>
+<dt>B</dt><dd>follow the present policy</dd>
+<dt>C</dt><dd>withdraw troops to strong points and open negotiations on elections involving the Viet Cong</dd>
+<dt>D</dt><dd>immediate withdrawal of all U.S. troops</dd>
+</dl>
+
+<h3>Source</h3>
+
+<p>
+Aitkin, M. A., Anderson, D., Francis, B., &amp; Hinde, J. 
+<EM>Statistical Modelling in GLIM</EM>,
+Clarendon Press, 1989
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Friendly, M. <EM>Visualizing Categorical Data</EM>, Cary, NC: SAS Institute, 2000, Appendix B.12.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Vietnam)
+str(Vietnam) 
+# make it into a table
+Vietnam.table &lt;- xtabs(Freq ~ sex+yr+resp, data=Vietnam)
+structable(Vietnam.table)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.1 <a href="00Index.html">Index]</a></div>
+
+</body></html>

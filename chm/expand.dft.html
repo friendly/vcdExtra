@@ -1,0 +1,112 @@
+<html><head><title>Expand a frequency table to case form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>expand.dft(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   expand.dft">
+<param name="keyword" value="R:   expand.table">
+<param name="keyword" value=" Expand a frequency table to case form">
+</object>
+
+
+<h2>Expand a frequency table to case form</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Converts a frequency table, given either as a table object or a data frame in frequency form
+to a data frame representing individual observations in the table.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+expand.dft(x, var.names = NULL, freq = "Freq", ...)
+
+expand.table(x, var.names = NULL, freq = "Freq", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A table object, or a data frame in frequency form containing factors and one numeric variable
+representing the cell frequency for that combination of factors. </td></tr>
+<tr valign="top"><td><code>var.names</code></td>
+<td>
+A list of variable names for the factors, if you wish to override those already in the table</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+The name of the frequency variable in the table</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Other arguments passed down to <code>type.convert</code>.  In particular, pay attention to 
+<code>na.strings</code> (default: <code>na.strings=NA</code> if there are missing cells) and <code>as.is</code>
+(default: <code>as.is=FALSE</code>, converting character vectors to factors).</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>expand.table</code> is a synonym for <code>expand.dft</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame containing the factors in the table and as many observations as are
+represented by the total of the <code>freq</code> variable.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Mark Schwarz
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Posted on R-Help, Jan 20, 2009.
+<a href="http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html">http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('utils', 'type.convert.html')" style="text-decoration: underline; color: blue; cursor: hand">type.convert</a></code>, <code><a onclick="findlink('gnm', 'expandCategorical.html')" style="text-decoration: underline; color: blue; cursor: hand">expandCategorical</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(vcd)
+art &lt;- xtabs(~Treatment + Improved, data = Arthritis)
+art
+artdf &lt;- expand.dft(art)
+str(artdf)
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.3-2 <a href="00Index.html">Index]</a></div>
+
+</body></html>

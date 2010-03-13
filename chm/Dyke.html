@@ -1,0 +1,103 @@
+<html><head><title>Sources of knowledge of cancer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>Dyke(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   Dyke">
+<param name="keyword" value=" Sources of knowledge of cancer">
+</object>
+
+
+<h2>Sources of knowledge of cancer</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Observational data on a sample of 1729 individuals, cross-classified in a 2^5 table according to their sources of 
+information (read newspapers, listen to the radio, do 'solid' reading, attend lectures) and whether they have
+good or poor knowledge regarding cancer.  Knowledge of cancer is often treated as the response.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+data(Dyke)
+</pre>
+
+
+<h3>Format</h3>
+
+<p>
+A     5-dimensional array resulting from cross-tabulating    5 variables for  1729 observations. The variable names and their levels are:
+</p>
+
+<table summary="Rd table">
+<tr>
+  <td align="right">No </td>  <td align="left"> Name </td>  <td align="left"> Levels </td>
+</tr>
+<tr>
+  <td align="right"> 1</td>  <td align="left"> <code>Knowledge</code></td>  <td align="left"> <code>"Good", "Poor"</code></td>
+</tr>
+<tr>
+  <td align="right"> 2</td>  <td align="left"> <code>Reading</code></td>  <td align="left"> <code>"No", "Yes"</code></td>
+</tr>
+<tr>
+  <td align="right"> 3</td>  <td align="left"> <code>Radio</code></td>  <td align="left"> <code>"No", "Yes"</code></td>
+</tr>
+<tr>
+  <td align="right"> 4</td>  <td align="left"> <code>Lectures</code></td>  <td align="left"> <code>"No", "Yes"</code></td>
+</tr>
+<tr>
+  <td align="right"> 5</td>  <td align="left"> <code>Newspaper</code></td>  <td align="left"> <code>"No", "Yes"</code></td>
+</tr>
+</table>
+
+
+<h3>Source</h3>
+
+<p>
+Fienberg, S. E. (1980).
+<EM>The Analysis of Cross-Classified Categorical Data</EM>
+Cambridge, MA: MIT Press, p. 85, Table 5-6.
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Dyke, G. V. and Patterson, H. D. (1952).
+Analysis of factorial arrangements when the data are proportions.
+<EM>Biometrics</EM>, 8, 1-12.
+</p>
+<p>
+Lindsey, J. K. (1993). 
+<EM>Models for Repeated Measurements</EM>
+Oxford, UK: Oxford University Press, p. 57.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Dyke)
+
+# independence model
+mosaic(Dyke, shade=TRUE)
+
+# baseline model, Knowledge as response
+dyke.mod0 &lt;- loglm(~ Knowledge + (Reading * Radio * Lectures * Newspaper), data=Dyke)
+dyke.mod0
+
+mosaic(dyke.mod0)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.4-1 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

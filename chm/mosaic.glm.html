@@ -1,0 +1,203 @@
+<html><head><title>Mosaic plots for fitted generalized linear and generalized nonlinear models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>mosaic.glm(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   mosaic.glm">
+<param name="keyword" value="R:   sieve.glm">
+<param name="keyword" value="R:   assoc.glm">
+<param name="keyword" value=" Mosaic plots for fitted generalized linear and generalized nonlinear models">
+</object>
+
+
+<h2>Mosaic plots for fitted generalized linear and generalized nonlinear models</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Procduces mosaic plots (and other plots in the <code><a onclick="findlink('vcd', 'strucplot.html')" style="text-decoration: underline; color: blue; cursor: hand">strucplot</a></code> framework) 
+for a log-linear model fitted with <code><a onclick="findlink('stats', 'glm.html')" style="text-decoration: underline; color: blue; cursor: hand">glm</a></code>
+or for a generalized nonlinear model fitted with <code><a onclick="findlink('gnm', 'gnm.html')" style="text-decoration: underline; color: blue; cursor: hand">gnm</a></code>.
+</p>
+<p>
+These methods extend the range of strucplot
+visualizations well beyond the models that can
+be fit with <code><a onclick="findlink('MASS', 'loglm.html')" style="text-decoration: underline; color: blue; cursor: hand">loglm</a></code>.
+They are intended for models for counts using the Poisson family (or quasi-poisson),
+but should be sensible as long as (a) the response variable is non-negative and (b) the
+predictors visualized in the <code>strucplot</code> are discrete factors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'glm':
+mosaic(x, formula = NULL, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
+     residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
+## S3 method for class 'glm':
+sieve(x,  ...)
+## S3 method for class 'glm':
+assoc(x,  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A <code>glm</code> or <code>gnm</code> object. The response variable, typically a 
+cell frequency, should be non-negative. </td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+A one-sided formula with the indexing factors of the plot
+separated by '+'. A formula must be provided unless <code>x$data</code>
+inherits from class <code>"table"</code> &ndash; in which case the indexing
+factors of this table are used, or the factors in <code>x$data</code>
+(or model.frame(x) if <code>x$data</code> is an environment) exactly
+cross-classify the data &ndash; in which case this set of
+cross-classifying factors are used. </td></tr>
+<tr valign="top"><td><code>panel</code></td>
+<td>
+Panel function used to draw the plot for visualizing the observed values, residuals 
+and expected values. Currently, one of <code>"mosaic"</code>, <code>"assoc"</code>, or <code>"sieve"</code>
+in <code>vcd</code>.</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+A character string indicating whether the 
+<code>"observed"</code> or the <code>"expected"</code> values of the table should be visualized
+by the area of the tiles or bars.</td></tr>
+<tr valign="top"><td><code>residuals</code></td>
+<td>
+An optional array or vector of residuals corresponding to the cells in the
+data, for example, as calculated by <code>residuals.glm(x)</code>, <code>residuals.gnm(x)</code>.</td></tr>
+<tr valign="top"><td><code>residuals_type</code></td>
+<td>
+If the <code>residuals</code> argument is <code>NULL</code>, residuals are calculated internally
+and used in the display.  In this case, <code>residual_type</code> can be <code>"pearson"</code>, 
+<code>"deviance"</code> or <code>"rstandard"</code>.  Otherwise (when <code>residuals</code> is supplied),
+<code>residuals_type</code> is used as a label for the legend in the 
+plot.  
+</td></tr>
+<tr valign="top"><td><code>gp</code></td>
+<td>
+Object of class <code>"gpar"</code>, shading function or a corresponding generating function 
+(see <code><a onclick="findlink('vcd', 'strucplot.html')" style="text-decoration: underline; color: blue; cursor: hand">strucplot</a></code> Details and <code><a onclick="findlink('vcd', 'shadings.html')" style="text-decoration: underline; color: blue; cursor: hand">shadings</a></code>). 
+Ignored if shade = FALSE.</td></tr>
+<tr valign="top"><td><code>gp_args</code></td>
+<td>
+A list of arguments for the shading-generating function, if specified.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Other arguments passed to the <code>panel</code> function e.g., <code><a onclick="findlink('vcd', 'mosaic.html')" style="text-decoration: underline; color: blue; cursor: hand">mosaic</a></code> </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+For both poisson family generalized linear models and loglinear models, standardized residuals
+provided by <code>rstandard</code>
+(sometimes called adjusted residuals) are often preferred because they have 
+constant unit asymptotic variance.
+</p>
+<p>
+The <code>sieve</code> and <code>assoc</code> methods are simple convenience interfaces to this plot method, setting the panel argument accordingly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The <code>structable</code> visualized by <code><a onclick="findlink('vcd', 'strucplot.html')" style="text-decoration: underline; color: blue; cursor: hand">strucplot</a></code> is returned invisibly.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Heather Turner, Michael Friendly, with help from Achim Zeileis
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a onclick="findlink('stats', 'glm.html')" style="text-decoration: underline; color: blue; cursor: hand">glm</a></code>, <code><a onclick="findlink('gnm', 'gnm.html')" style="text-decoration: underline; color: blue; cursor: hand">gnm</a></code>, <code><a onclick="findlink('vcd', 'plot.loglm.html')" style="text-decoration: underline; color: blue; cursor: hand">plot.loglm</a></code>, <code><a onclick="findlink('vcd', 'mosaic.html')" style="text-decoration: underline; color: blue; cursor: hand">mosaic</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+GSStab &lt;- xtabs(count ~ sex + party, data=GSS)
+# using the data in table form
+mod.glm1 &lt;- glm(Freq ~ sex + party, family = poisson, data = GSStab)
+res &lt;- residuals(mod.glm1)    
+std &lt;- rstandard(mod.glm1)
+
+# For mosaic.default(), need to re-shape residuals to conform to data
+stdtab &lt;- array(std, dim=dim(GSStab), dimnames=dimnames(GSStab))
+mosaic(GSStab, gp=shading_Friendly, residuals=stdtab, residuals_type="Std\nresiduals", 
+       labeling = labeling_residuals)
+
+# Using externally calculated residuals with the glm() object
+mosaic.glm(mod.glm1, residuals=std, labeling = labeling_residuals, shade=TRUE)
+
+# Using residuals_type
+mosaic.glm(mod.glm1, residuals_type="rstandard", labeling = labeling_residuals, shade=TRUE)
+
+## Ordinal factors and structured associations
+data(Mental)
+xtabs(Freq ~ mental+ses, data=Mental)
+long.labels &lt;- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
+
+# fit independence model
+# Residual deviance: 47.418 on 15 degrees of freedom
+indep &lt;- glm(Freq ~ mental+ses,
+                family = poisson, data = Mental)
+
+long.labels &lt;- list(set_varnames = c(mental="Mental Health Status", 
+                                     ses="Parent SES"))
+mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, labeling=labeling_residuals)
+# or, show as a sieve diagram
+mosaic(indep, labeling_args = long.labels, panel=sieve, gp=shading_Friendly)
+
+# fit linear x linear (uniform) association.  Use integer scores for rows/cols 
+Cscore &lt;- as.numeric(Mental$ses)
+Rscore &lt;- as.numeric(Mental$mental)
+
+linlin &lt;- glm(Freq ~ mental + ses + Rscore:Cscore,
+                family = poisson, data = Mental)
+mosaic(linlin,residuals_type="rstandard", 
+ labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+ main="Lin x Lin model")
+
+##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)
+if (require(gnm)) {
+Mental$mental &lt;- C(Mental$mental, treatment)
+Mental$ses &lt;- C(Mental$ses, treatment)
+RC1model &lt;- gnm(Freq ~ ses + mental + Mult(ses, mental),
+                family = poisson, data = Mental)
+
+mosaic(RC1model,residuals_type="rstandard", 
+ labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+ main="RC1 model")
+ }
+</pre>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.4-1 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

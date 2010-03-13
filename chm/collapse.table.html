@@ -1,0 +1,101 @@
+<html><head><title>Collapse levels of a table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>collapse.table(vcdExtra)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   collapse.table">
+<param name="keyword" value=" Collapse levels of a table">
+</object>
+
+
+<h2>Collapse levels of a table</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Collapse (or re-label) variables in a
+a contingency table or ftable by re-assigning levels of the table variables
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+collapse.table(table, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>table</code></td>
+<td>
+A <code>table</code> or <code>ftable</code> object</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+A collection of one or more assignments of factors of the table to
+a list of levels </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Each of the <code>...</code> arguments must be of the form 
+<code>variable = levels</code>, where <code>variable</code> is the name of one of the table
+dimensions, and <code>levels</code> is a character or numeric vector of length equal
+to the corresponding dimension of the table.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A <code>xtabs</code> and <code>table</code> objects, representing the original table with
+one or more of its factors collapsed or rearranged into other levels.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Michael Friendly
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="expand.dft.html">expand.dft</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# create some sample data in table form
+sex &lt;- c("Male", "Female")
+age &lt;- letters[1:6]
+education &lt;- c("low", 'med', 'high')
+data &lt;- expand.grid(sex=sex, age=age, education=education)
+counts &lt;- rpois(36, 100) 
+data &lt;- cbind(data, counts)
+t1 &lt;- xtabs(counts ~ sex + age + education, data=data)
+
+# collapse age to 3 levels
+t2 &lt;- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"))
+
+# collapse age to 3 levels and pool education: "low" and "med" to "low"
+t3 &lt;- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"), 
+    education=c("low", "low", "high"))
+
+# change labels for levels of education to 1:3
+t4 &lt;- collapse.table(t1,  education=1:3)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>vcdExtra</em> version 0.4-0 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

@@ -127,7 +127,7 @@ aic
 # sort by df
 aic <- aic[order(aic[,1]),]
 plot(aic, type = "b", main="AIC plot")
-text(aic, labels=rownames(aic), pos=1)
+text(aic, labels=rownames(aic), pos=c(4,1,3,1,3,1))
 
 ######################################
 # compare models;  they are not nested, so only some Chisq tests make sense
