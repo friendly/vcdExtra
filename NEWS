@@ -6,6 +6,7 @@ o Added demo(Wong3-1): three-way table, with models of conditional association
 o Added Suggest: effects for effects plots of glm(), multinom() and polr() models
 o Added demo(housing): visualize models fit in example(housing, package="MASS")
 o Updated demo(Wong2-3): added model comparison plots, glmlist processing
+o Added Suggest: VGAM
 
 Version 0.4-1 (2010-02-21)
 

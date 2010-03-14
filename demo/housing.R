@@ -96,10 +96,15 @@ plot(house.effm, 'Type', xlab='Type of dwelling', style="stacked",
 ##########################
 # proportional odds model
 ##########################
-# NB:  We are *not* testing the proportional odds assumption here
 
 (house.plr <- polr(Sat ~ Infl + Type + Cont,
                    data = housing, weights = Freq))
+
+# Test proportional odds assumption by likelihood ratio test
+# NB: multinom() objects do not have a df.residual component, so we have
+#     to use the difference in edf to get df for the test
+pchisq(deviance(house.plr) - deviance(house.mult), 
+		df = house.mult$edf -house.plr$edf, lower.tail = FALSE)
 
 # try more complex models
 house.plr2 <- stepAIC(house.plr, ~.^2)
