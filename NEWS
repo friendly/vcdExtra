@@ -9,6 +9,7 @@ o Added demo(housing): visualize models fit in example(housing, package="MASS") 
 o Updated demo(Wong2-3): added model comparison plots, glmlist processing
 o Added Suggest: VGAM
 o Extended package description in vcdExtra-package.Rd
+o Added glmlist()
 
 Version 0.4-1 (2010-02-21)
 
