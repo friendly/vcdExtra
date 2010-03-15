@@ -31,9 +31,22 @@ In addition, there are several new data sets, a new vignette,
 \describe{
   \item{vcd-tutorial}{Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
-and a few functions for manipulating categorical data sets.
-
+and a few functions for manipulating categorical data sets and working with models for
+categorical data.
 Some of these extensions may be migrated into vcd.
+
+In addition, a collection of demos illustrate fitting and visualizing a wide variety of models:
+\describe{
+  \item{mental-glm}{Mental health data: mosaics for glm() and gnm() models}
+  \item{occStatus}{Occupational status data: Compare mosaic using expected= to mosaic.glm}
+  \item{ucb-glm}{UCBAdmissions data: Conditional independence via loglm() and glm()}
+  \item{vision-quasi}{VisualAcuity data: Quasi- and Symmetry models}
+  \item{yaish-unidiff}{Yaish data: Unidiff model for 3-way table}
+  \item{Wong2-3}{Political views and support for women to work (U, R, C, R+C and RC(1) models)}
+  \item{Wong3-1}{Political views, support for women to work and national welfare spending (3-way, marginal, and conditional independence models)}
+  \item{housing}{Visualize glm(), multinom() and polr() models from example(housing, package="MASS")}
+}
+
 }
 \author{
 Michael Friendly
