@@ -1,4 +1,5 @@
 \name{Gilby}
+\Rdversion{1.1}
 \alias{Gilby}
 \docType{data}
 \title{Clothing and Intelligence Rating of Children}

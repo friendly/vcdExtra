@@ -1,4 +1,5 @@
 \name{Cancer}
+\Rdversion{1.1}
 \alias{Cancer}
 \docType{data}
 \title{Survival of Breast Cancer Patients}

@@ -1,4 +1,5 @@
 \name{Heckman}
+\Rdversion{1.1}
 \alias{Heckman}
 \docType{data}
 \title{Labour Force Participation of Married Women 1967-1971}

@@ -31,8 +31,13 @@ one or more of its factors collapsed or rearranged into other levels.
 %
 % ~Make other sections like Warning with \section{Warning }{....} ~
 %}
-\seealso{ \code{\link{expand.dft}}
+\seealso{ 
+\code{\link{expand.dft}}
+
+\code{\link[base]{margin.table}} "collapses" a table in a different way, by
+summing over table dimensions.
 }
+
 \examples{
 # create some sample data in table form
 sex <- c("Male", "Female")

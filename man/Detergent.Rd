@@ -1,4 +1,5 @@
 \name{Detergent}
+\Rdversion{1.1}
 \alias{Detergent}
 \docType{data}
 \title{Detergent preference data}

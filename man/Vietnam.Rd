@@ -1,7 +1,8 @@
 \name{Vietnam}
+\Rdversion{1.1}
 \alias{Vietnam}
 \docType{data}
-\title{Student opinion about the war in Vietnam}
+\title{Student Opinion About the War in Vietnam}
 \description{
 A survey of student opinion on the Vietnam War was taken at the
 University of North Carolina at Chapel Hill in May 1967 and published

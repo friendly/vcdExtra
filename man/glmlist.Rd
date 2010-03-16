@@ -3,12 +3,14 @@
 \alias{glmlist}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Create a glmlist object
+Create a glmlist Object
 }
 \description{
 Creates a \code{glmlist} object containing a list of fitted glm objects with their names.
+
 The intention is to provide an object class to facilitate model comparison,
-extraction, summary and plotting of model components, etc.
+extraction, summary and plotting of model components, etc., perhaps using
+\code{lapply} or similar.
 }
 \usage{
 glmlist(...)
@@ -16,10 +18,12 @@ glmlist(...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{\dots}{
-One or more glm objects, optionally assigned names as in \code{list}
+One or more glm objects, optionally assigned names as in \code{list}.
 }
 }
 \details{
+The arguments to \code{glmlist} are of the form \code{value} or \code{name=value}.
+
 Any objects which do not inherit class \code{glm} are excluded, with a warning.
 }
 \value{
@@ -43,7 +47,12 @@ Michael Friendly
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is similar
+The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is similar, but perplexingly
+more general.
+
+The function \code{\link[stats]{anova.glm}} also handles \code{glmlist objects}
+
+
 }
 \examples{
 data(Mental)

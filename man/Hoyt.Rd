@@ -1,4 +1,5 @@
 \name{Hoyt}
+\Rdversion{1.1}
 \alias{Hoyt}
 \docType{data}
 \title{Minnesota High School Graduates}

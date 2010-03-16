@@ -1,4 +1,5 @@
 \name{Mobility}
+\Rdversion{1.1}
 \alias{Mobility}
 \docType{data}
 \title{Social Mobility data}

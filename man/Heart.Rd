@@ -1,4 +1,5 @@
 \name{Heart}
+\Rdversion{1.1}
 \alias{Heart}
 \docType{data}
 \title{Sex, Occupation and Heart Disease}

@@ -1,4 +1,5 @@
 \name{JobSat}
+\Rdversion{1.1}
 \alias{JobSat}
 \docType{data}
 \title{Cross-classification of job satisfaction by income}

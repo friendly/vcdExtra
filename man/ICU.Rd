@@ -1,4 +1,5 @@
 \name{ICU}
+\Rdversion{1.1}
 \alias{ICU}
 \docType{data}
 \title{Death in the ICU}

@@ -32,7 +32,8 @@ In addition, there are several new data sets, a new vignette,
   \item{vcd-tutorial}{Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
 and a few functions for manipulating categorical data sets and working with models for
-categorical data.
+categorical data. A new class, \code{\link{glmlist}}, is introduced for working with
+collections of \code{glm} objects.
 Some of these extensions may be migrated into vcd.
 
 In addition, a collection of demos illustrate fitting and visualizing a wide variety of models:

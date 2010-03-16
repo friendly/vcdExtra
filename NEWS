@@ -9,7 +9,8 @@ o Added demo(housing): visualize models fit in example(housing, package="MASS") 
 o Updated demo(Wong2-3): added model comparison plots, glmlist processing
 o Added Suggest: VGAM
 o Extended package description in vcdExtra-package.Rd
-o Added glmlist()
+o Added glmlist() to facilitate processing, extraction, plotting, etc. of a collection of glm() models
+o Added summarize methods for glm and glmlist objects
 
 Version 0.4-1 (2010-02-21)
 

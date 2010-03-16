@@ -1,10 +1,12 @@
 \name{Bartlett}
+\Rdversion{1.1}
 \alias{Bartlett}
 \docType{data}
 \title{Bartlett data on plum root cuttings}
 \description{In an experiment to investigate the effect of cuitting length (two levels) and planting time (two levels) 
 on the survival of plum root cuttings, 240 cuttings were planted for each of the 2 x 2 combinations of these factors, 
-and their survival was later recorded.  
+and their survival was later recorded. 
+ 
 Bartlett (1935) used these data to illustrate a method for testing for no three-way interaction in a contingency table.}
 
 \usage{

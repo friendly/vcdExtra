@@ -1,4 +1,5 @@
 \name{Dyke}
+\Rdversion{1.1}
 \alias{Dyke}
 \docType{data}
 \title{Sources of knowledge of cancer}
