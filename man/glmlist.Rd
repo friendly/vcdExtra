@@ -78,6 +78,9 @@ names(mods)
 
 #extract model components
 unlist(lapply(mods, deviance))
+
+res <- lapply(mods, residuals)
+boxplot(as.data.frame(res), main="Residuals from various models")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
