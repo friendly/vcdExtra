@@ -5,7 +5,7 @@
 \alias{modFit.glm}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Brief summary of Model Fit for a glm or loglm object
+Brief Summary of Model Fit for a glm or loglm Object
 }
 \description{
 Formats a brief summary of model fit for a \code{glm} or \code{loglm} object, showing
@@ -56,9 +56,9 @@ Michael Friendly
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-%\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-%}
+\seealso{
+\code{\link{summarize}}
+}
 \examples{
 data(Mental)
 (Mental.tab <- xtabs(Freq ~ ses+mental, data=Mental))

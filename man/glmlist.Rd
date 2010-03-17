@@ -1,33 +1,38 @@
 \name{glmlist}
 \Rdversion{1.1}
 \alias{glmlist}
+\alias{loglmlist}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Create a glmlist Object
+Create a Model List Object
 }
 \description{
-Creates a \code{glmlist} object containing a list of fitted glm objects with their names.
+\code{glmlist} creates a \code{glmlist} object containing a list of fitted \code{glm} objects with their names.
+\code{loglmlist} does the same for \code{loglm} objects.
 
-The intention is to provide an object class to facilitate model comparison,
+The intention is to provide object classes to facilitate model comparison,
 extraction, summary and plotting of model components, etc., perhaps using
 \code{lapply} or similar.
 }
 \usage{
 glmlist(...)
+loglmlist(...)
+
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{\dots}{
-One or more glm objects, optionally assigned names as in \code{list}.
+One or more model objects, as appropriate to the function,
+optionally assigned names as in \code{list}.
 }
 }
 \details{
-The arguments to \code{glmlist} are of the form \code{value} or \code{name=value}.
+The arguments to \code{glmlist}  or \code{loglmlist} are of the form \code{value} or \code{name=value}.
 
-Any objects which do not inherit class \code{glm} are excluded, with a warning.
+Any objects which do not inherit the appropriate class \code{glm} or \code{loglm} are excluded, with a warning.
 }
 \value{
-An object of class \code{glmlist}, just like a \code{list},
+An object of class \code{glmlist} \code{loglmlist}, just like a \code{list},
 except that each is given a \code{name} attribute.
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}

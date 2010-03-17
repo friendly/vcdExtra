@@ -48,6 +48,7 @@ structable(Caesar)
 
 # baseline model, Infection as response
 Caesar.mod0 <- loglm(~Infection + (Risk*Antibiotics*Planned), data=Caesar)
+# NB: Pearson chisq cannot be computed due to the 0 cells
 Caesar.mod0
 
 mosaic(Caesar.mod0, main="Baseline model")

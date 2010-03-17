@@ -6,7 +6,7 @@ Date: 2010-03-09
 Author: Michael Friendly with Heather Turner, David Firth and Achim Zeileis
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: vcd,gnm
-Suggests: ca,gmodels,Fahrmeir,effects,VGAM
+Suggests: ca,gmodels,Fahrmeir,effects,VGAM,plyr
 Description: Provides additional data sets, methods and documentation to complement the vcd package for Visualizing Categorical Data.
 	In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models.
 License: GPL version 2 or newer
