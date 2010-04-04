@@ -1,6 +1,7 @@
 Version 0.4-3 (2010-03-25)
 
 o Added demo(mosaic3d-demo), a proof-of-concept for doing 3D mosaic displays
+o Added mosaic3d()
 
 
 Version 0.4-2 (2010-03-09)
