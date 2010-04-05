@@ -6,7 +6,8 @@ export(
 	modFit, modFit.glm, modFit.loglm,
 	GKgamma,print.GKgamma,
 	glmlist, loglmlist, summarize, 
-	print.Kappa)
+	print.Kappa,
+	mosaic3d)
 
 S3method(mosaic, glm)
 S3method(sieve, glm)
