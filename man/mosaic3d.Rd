@@ -14,12 +14,13 @@ according to the table margins, generating a nested set of 3D tiles.
 Residuals from a given loglinear model are then used to color or shade each of the tiles.
 
 
-This is an initial implementation.  The arguments and details are subject to change.
+This is an initial, experimental implementation.  The arguments and details are subject to change.
 
 }
 \usage{
-mosaic3d(observed, expected = NULL, residuals = NULL, margin = NULL, spacing = 0.1, split_dir = 1:3, 
-shading = shading_basic, alpha = 0.4, labeling_args = list(), ...)
+mosaic3d(observed, expected = NULL, residuals = NULL, margin = NULL, 
+         spacing = 0.1, split_dir = 1:3, 
+         shading = shading_basic, alpha = 0.5, labeling_args = list(), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -93,7 +94,7 @@ Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.
 Web materials: \url{http://www.math.yorku.ca/SCS/vcd/}.
 
 Theus, M. & Lauer, S. R. W. (1999)
-Visualizing Loglinear Models 
+Visualizing Loglinear Models, 
 \emph{Journal of Computational and Graphical Statistics}, \bold{8}, 396-412.
 
 
