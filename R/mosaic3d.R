@@ -2,11 +2,10 @@
 ## Produce a 3D mosaic plot using rgl
 #####################################
 
-# TODO:  
-#  -- if ndim>3, must adjust baseline for labels to avoid overplotting, or else
-#     provide for labels at max or min
-#  -- generalize the calculation of residuals
-#  -- provide formula interface
+# TODO: if ndim>3, must adjust baseline for labels to avoid overplotting, or else provide for labels at max or min
+# TODO: generalize the calculation of residuals
+# TODO: provide formula interface
+# TODO: allow display of type=c("observed", "expected")
 
 # provide observed array of counts and either residuals, expected frequencies,
 # or a loglin set of margins to fit
@@ -37,7 +36,7 @@ mosaic3d <- function(observed, expected=NULL, residuals=NULL, margin=NULL,
 		}
 		else {
 			marg <- matrix(marg, nrow=levels[k])
-			shapelist <- split3dlist(shapelist, marg, split_dir[k], space=spacing[k])
+			shapelist <- split3d(shapelist, marg, split_dir[k], space=spacing[k])
 			label3d(shapelist[1:levels[k]], split_dir[k], dn[[k]], vnames[k], ...)
 		}
 	}
@@ -55,50 +54,50 @@ mosaic3d <- function(observed, expected=NULL, residuals=NULL, margin=NULL,
 	
 }
 
-# split a 3D object along dimension dim, according to the proportions or
-# frequencies specified in vector p
-
-split3d <- function(obj, p, dim, space=.10) {
-	range <-range3d(obj)
-	min <- range[1,]
-	p <- p/sum(p)                 # assure proportions
-	uspace <- space/(length(p)-1) # unit space between objects
-	scales <- p * (1-space)
-	shifts <- c(0, cumsum(p)[-length(p)])*diff(range[,dim])
-	result <- list()
-	for (i in seq_along(p)) {
-		xscale <- yscale <- zscale <- 1
-		xshift <- yshift <- zshift <- 0
-		
-		if (dim == 1 || dim=='x') {
-			xscale <- scales[i]
-			xshift <- shifts[i] + min[1]*(1-xscale) + (uspace * (i-1))
-		} else if (dim == 2|| dim=='y') {
-			yscale <- scales[i]
-			yshift <- shifts[i] + min[2]*(1-yscale) + (uspace * (i-1))
-		} else if (dim == 3|| dim=='y') {
-			zscale <- scales[i]
-			zshift <- shifts[i] + min[3]*(1-zscale) + (uspace * (i-1))
-		}
-		
-		result[[i]] <- translate3d(scale3d(obj, xscale, yscale, zscale),
-				xshift, yshift, zshift)
-		
-	}
-	result
-}
-
-# split a list of 3D objects, according to the proportions specified in
-# the columns of p.
-# TODO: Could a single function handle all cases?
-
-split3dlist <- function(obj, p, dim, space=.10) {
-	sl <- list()
-	for (i in seq_along(obj)) {
-		sl <- c(sl, split3d(obj[[i]], p[,i], dim=dim, space=space))
-	}
-	sl	
-}
+## split a 3D object along dimension dim, according to the proportions or
+## frequencies specified in vector p
+#
+#split3d <- function(obj, p, dim, space=.10) {
+#	range <-range3d(obj)
+#	min <- range[1,]
+#	p <- p/sum(p)                 # assure proportions
+#	uspace <- space/(length(p)-1) # unit space between objects
+#	scales <- p * (1-space)
+#	shifts <- c(0, cumsum(p)[-length(p)])*diff(range[,dim])
+#	result <- list()
+#	for (i in seq_along(p)) {
+#		xscale <- yscale <- zscale <- 1
+#		xshift <- yshift <- zshift <- 0
+#		
+#		if (dim == 1 || dim=='x') {
+#			xscale <- scales[i]
+#			xshift <- shifts[i] + min[1]*(1-xscale) + (uspace * (i-1))
+#		} else if (dim == 2|| dim=='y') {
+#			yscale <- scales[i]
+#			yshift <- shifts[i] + min[2]*(1-yscale) + (uspace * (i-1))
+#		} else if (dim == 3|| dim=='y') {
+#			zscale <- scales[i]
+#			zshift <- shifts[i] + min[3]*(1-zscale) + (uspace * (i-1))
+#		}
+#		
+#		result[[i]] <- translate3d(scale3d(obj, xscale, yscale, zscale),
+#				xshift, yshift, zshift)
+#		
+#	}
+#	result
+#}
+#
+## split a list of 3D objects, according to the proportions specified in
+## the columns of p.
+## TODO: Could a single function handle all cases?
+#
+#split3dlist <- function(obj, p, dim, space=.10) {
+#	sl <- list()
+#	for (i in seq_along(obj)) {
+#		sl <- c(sl, split3d(obj[[i]], p[,i], dim=dim, space=space))
+#	}
+#	sl	
+#}
 
 # basic shading_Friendly, adapting the simple code used in mosaicplot()
 
@@ -115,17 +114,17 @@ shading_basic <- function(residuals, shade=TRUE) {
 	colors[as.numeric(cut(residuals, breaks))]
 }
 
-# return a 2 x 3 matrix containing the range of a 3D object
-
-range3d <- function(obj) {
-	if (!"vb" %in% names(obj)) stop("Not a mesh3d or shape3d object")
-	x <- with(obj, range(vb[1,]/vb[4,]))
-	y <- with(obj, range(vb[2,]/vb[4,]))
-	z <- with(obj, range(vb[3,]/vb[4,]))
-	result <- cbind(x,y,z)
-	rownames(result)<- c('min', 'max')
-	result
-}
+## return a 2 x 3 matrix containing the range of a 3D object
+#
+#range3d <- function(obj) {
+#	if (!"vb" %in% names(obj)) stop("Not a mesh3d or shape3d object")
+#	x <- with(obj, range(vb[1,]/vb[4,]))
+#	y <- with(obj, range(vb[2,]/vb[4,]))
+#	z <- with(obj, range(vb[3,]/vb[4,]))
+#	result <- cbind(x,y,z)
+#	rownames(result)<- c('min', 'max')
+#	result
+#}
 
 # provide labels for 3D objects below their extent along a given dimension
 # FIXME: kludge for interline gap between level labels and variable name
