@@ -3,31 +3,103 @@
 #####################################
 
 # TODO: if ndim>3, must adjust baseline for labels to avoid overplotting, or else provide for labels at max or min
-# TODO: generalize the calculation of residuals
 # TODO: provide formula interface
-# TODO: allow display of type=c("observed", "expected")
+# TODO: handle zero cells 
+# DONE: generalize the calculation of residuals
+# DONE: allow display of type=c("observed", "expected")
 
 # provide observed array of counts and either residuals, expected frequencies,
 # or a loglin set of margins to fit
 
-mosaic3d <- function(observed, expected=NULL, residuals=NULL, margin=NULL,
-		spacing=0.1, split_dir=1:3, shading=shading_basic, alpha=0.5,
-		labeling_args=list(), ...) {
-	
+mosaic3d <- function(x, expected=NULL, residuals=NULL, 
+		type = c("observed", "expected"), residuals_type = NULL,
+		shape=cube3d(alpha=alpha), alpha=0.5,
+		spacing=0.1, split_dir=1:3, shading=shading_basic, 
+		labeling_args=list(), newpage=TRUE, box=FALSE, ...) {
 	
 	if (!require(rgl)) stop("rgl is required")
-	dn <- dimnames(observed)
-	vnames <- names(dn)
-	levels <- dim(observed)
-	ndim <- length(levels)
+
+  type <- match.arg(type)
+  if (is.null(residuals)) {
+      residuals_type <- if (is.null(residuals_type)) 
+          "pearson"
+      else match.arg(tolower(residuals_type), c("pearson", 
+          "deviance", "ft"))
+  }
+
+  ## convert structable object
+  if (is.structable(x)) {
+    x <- as.table(x)
+  }
+
+  ## table characteristics	
+  levels <- dim(x)
+  ndim <- length(levels)
+  dn <- dimnames(x)
+  if (is.null(dn))
+    dn <- dimnames(x) <- lapply(levels, seq)
+  vnames <- names(dimnames(x))
+  if (is.null(vnames))
+    vnames <- names(dn) <- names(dimnames(x)) <- LETTERS[1:ndim]
+
+  ## replace NAs by 0
+  if (any(nas <- is.na(x))) x[nas] <- 0
+
+##	# fit model, if necessary to obtain residuals
+##	if (is.null(residuals)) {
+##		if (is.null(expected)) {
+##			if (is.null(margin)) margin <- as.list(1:ndim)
+##			expected <- stats::loglin(observed, margin, fit = TRUE, print = FALSE)$fit
+##		}
+##		residuals = (observed - expected)/sqrt(expected)
+##	}
+
+  ## model fitting:
+  ## calculate expected if needed
+  if ((is.null(expected) && is.null(residuals)) ||
+      !is.numeric(expected)) {
+      if (inherits(expected, "formula")) {
+          fm <- loglm(expected, x, fitted = TRUE)
+          expected <- fitted(fm)
+          df <- fm$df
+      } else {
+          if (is.null(expected))
+              expected <-  as.list(1:ndim)
+          fm <- loglin(x, expected, fit = TRUE, print = FALSE)
+          expected <- fm$fit
+          df <- fm$df
+      }
+  }
+
+  ## compute residuals
+  if (is.null(residuals))
+    residuals <- switch(residuals_type,
+                        pearson = (x - expected) / sqrt(ifelse(expected > 0, expected, 1)),
+                        deviance = {
+                          tmp <- 2 * (x * log(ifelse(x == 0, 1, x / ifelse(expected > 0, expected, 1))) - (x - expected))
+                          tmp <- sqrt(pmax(tmp, 0))
+                          ifelse(x > expected, tmp, -tmp)
+                        },
+                        ft = sqrt(x) + sqrt(x + 1) - sqrt(4 * expected + 1)
+                        )
+  ## replace NAs by 0
+  if (any(nas <- is.na(residuals))) residuals[nas] <- 0
+
+	# switch observed and expected if required
+  observed <- if (type == "observed") x else expected
+  expected <- if (type == "observed") expected else x
+
 	
 	# replicate arguments to number of dimensions
 	spacing <- rep(spacing, length=ndim)
 	split_dir <- rep(split_dir, length=ndim)
 	
-	shapelist <- cube3d(alpha=alpha)
+
+	shapelist <- shape
+	# sanity check
+	if (!inherits(shapelist, "shape3d")) stop("shape must be a shape3d object")
 	
-	open3d()
+	if (newpage) open3d()
 	for (k in 1:ndim) {
 		marg <- margin.table(observed, k:1)
 		if (k==1) {
@@ -40,64 +112,13 @@ mosaic3d <- function(observed, expected=NULL, residuals=NULL, margin=NULL,
 			label3d(shapelist[1:levels[k]], split_dir[k], dn[[k]], vnames[k], ...)
 		}
 	}
-	# fit model, if necessary to obtain residuals
-	if (is.null(residuals)) {
-		if (is.null(expected)) {
-			if (is.null(margin)) margin <- as.list(1:ndim)
-			expected <- stats::loglin(observed, margin, fit = TRUE, print = FALSE)$fit
-		}
-		residuals = (observed - expected)/sqrt(expected)
-	}
 	col <- shading(residuals)
 	# display
 	shapelist3d(shapelist, col=col, ...)
+
+	invisible(structable(observed))
 	
 }
-
-## split a 3D object along dimension dim, according to the proportions or
-## frequencies specified in vector p
-#
-#split3d <- function(obj, p, dim, space=.10) {
-#	range <-range3d(obj)
-#	min <- range[1,]
-#	p <- p/sum(p)                 # assure proportions
-#	uspace <- space/(length(p)-1) # unit space between objects
-#	scales <- p * (1-space)
-#	shifts <- c(0, cumsum(p)[-length(p)])*diff(range[,dim])
-#	result <- list()
-#	for (i in seq_along(p)) {
-#		xscale <- yscale <- zscale <- 1
-#		xshift <- yshift <- zshift <- 0
-#		
-#		if (dim == 1 || dim=='x') {
-#			xscale <- scales[i]
-#			xshift <- shifts[i] + min[1]*(1-xscale) + (uspace * (i-1))
-#		} else if (dim == 2|| dim=='y') {
-#			yscale <- scales[i]
-#			yshift <- shifts[i] + min[2]*(1-yscale) + (uspace * (i-1))
-#		} else if (dim == 3|| dim=='y') {
-#			zscale <- scales[i]
-#			zshift <- shifts[i] + min[3]*(1-zscale) + (uspace * (i-1))
-#		}
-#		
-#		result[[i]] <- translate3d(scale3d(obj, xscale, yscale, zscale),
-#				xshift, yshift, zshift)
-#		
-#	}
-#	result
-#}
-#
-## split a list of 3D objects, according to the proportions specified in
-## the columns of p.
-## TODO: Could a single function handle all cases?
-#
-#split3dlist <- function(obj, p, dim, space=.10) {
-#	sl <- list()
-#	for (i in seq_along(obj)) {
-#		sl <- c(sl, split3d(obj[[i]], p[,i], dim=dim, space=space))
-#	}
-#	sl	
-#}
 
 # basic shading_Friendly, adapting the simple code used in mosaicplot()
 
@@ -114,17 +135,6 @@ shading_basic <- function(residuals, shade=TRUE) {
 	colors[as.numeric(cut(residuals, breaks))]
 }
 
-## return a 2 x 3 matrix containing the range of a 3D object
-#
-#range3d <- function(obj) {
-#	if (!"vb" %in% names(obj)) stop("Not a mesh3d or shape3d object")
-#	x <- with(obj, range(vb[1,]/vb[4,]))
-#	y <- with(obj, range(vb[2,]/vb[4,]))
-#	z <- with(obj, range(vb[3,]/vb[4,]))
-#	result <- cbind(x,y,z)
-#	rownames(result)<- c('min', 'max')
-#	result
-#}
 
 # provide labels for 3D objects below their extent along a given dimension
 # FIXME: kludge for interline gap between level labels and variable name

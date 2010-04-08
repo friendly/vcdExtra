@@ -1,8 +1,8 @@
 Package: vcdExtra
 Type: Package
 Title: vcd additions
-Version: 0.4-3
-Date: 2010-03-25
+Version: 0.5-0
+Date: 2010-04-08
 Author: Michael Friendly with Heather Turner, David Firth,  Achim Zeileis and Duncan Murdoch
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: vcd,gnm

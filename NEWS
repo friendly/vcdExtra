@@ -1,9 +1,14 @@
+Version 0.5-0 (2010-04-28)
+
+o Fleshed out mosaic3d, allowing display of observed or expected, internally calculated or externally
+  supplied residuals, specifying the initial 3D shape, etc.  This completes the 'top-level' work on
+  mosaic3d(), borrowing code from vcd::strucplot.
+
 Version 0.4-3 (2010-03-25)
 
 o Added demo(mosaic3d-demo), a proof-of-concept for doing 3D mosaic displays
-o Added mosaic3d()
+o Added mosaic3d(), an initial basic version.
 o Factored out split3d() and gave it S3 methods
-
 
 Version 0.4-2 (2010-03-09)
 

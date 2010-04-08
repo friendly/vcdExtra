@@ -17,13 +17,13 @@ split3d.shape3d <- function(obj, p, dim, space=.10, ...) {
 		xscale <- yscale <- zscale <- 1
 		xshift <- yshift <- zshift <- 0
 		
-		if (dim == 1 || dim=='x') {
+		if (dim == 1 || tolower(dim)=='x') {
 			xscale <- scales[i]
 			xshift <- shifts[i] + min[1]*(1-xscale) + (uspace * (i-1))
-		} else if (dim == 2|| dim=='y') {
+		} else if (dim == 2|| tolower(dim)=='y') {
 			yscale <- scales[i]
 			yshift <- shifts[i] + min[2]*(1-yscale) + (uspace * (i-1))
-		} else if (dim == 3|| dim=='y') {
+		} else if (dim == 3|| tolower(dim)=='y') {
 			zscale <- scales[i]
 			zshift <- shifts[i] + min[3]*(1-zscale) + (uspace * (i-1))
 		}

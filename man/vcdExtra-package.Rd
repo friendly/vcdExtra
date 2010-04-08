@@ -8,13 +8,15 @@ Extensions and additions to vcd: Visualizing Categorical Data
 \description{
 This package provides additional data sets, documentation, and
 a few functions designed to extend the vcd package.  
+In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and
+adds a 3D version in mosaic3d.
 }
 \details{
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.4-3\cr
-Date: \tab 2010-03-25\cr
+Version: \tab 0.5-0\cr
+Date: \tab 2010-04-08\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -25,7 +27,9 @@ mosaic plots that apply to loglinear models fitted using
 with \code{gnm()} in the \code{\link[gnm]{gnm-package}} package.
 The method \code{\link{mosaic.glm}} 
 extends the \code{\link[vcd]{mosaic.loglm}} method in the vcd
-package to this wider class of models.
+package to this wider class of models.  \code{\link{mosaic3d}}
+introduces a 3D generalization of mosaic displays using the
+rgl package.
 
 In addition, there are several new data sets, a new vignette,
 \describe{
@@ -36,7 +40,7 @@ categorical data. A new class, \code{\link{glmlist}}, is introduced for working 
 collections of \code{glm} objects.
 Some of these extensions may be migrated into vcd.
 
-In addition, a collection of demos illustrate fitting and visualizing a wide variety of models:
+A collection of demos is included to illustrate fitting and visualizing a wide variety of models:
 \describe{
   \item{mental-glm}{Mental health data: mosaics for glm() and gnm() models}
   \item{occStatus}{Occupational status data: Compare mosaic using expected= to mosaic.glm}
@@ -60,7 +64,7 @@ Web materials: \url{http://www.math.yorku.ca/SCS/vcd/}.
 
 Meyer, D.; Zeileis, A. & Hornik, K. 
 The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd 
-\emph{Journal of Statistical Software}, 2006, 17, 1-48.
+\emph{Journal of Statistical Software}, 2006, \bold{17}, 1-48.
 Available in R via \code{vignette("strucplot", package = "vcd")}
 
 Turner, H. and Firth, D. \emph{Generalized nonlinear models in R: An overview of the gnm package},
@@ -70,7 +74,9 @@ Turner, H. and Firth, D. \emph{Generalized nonlinear models in R: An overview of
 }
 \keyword{ package }
 \seealso{
-\code{\link[gnm]{gnm-package}},\code{\link[vcd]{mosaic}}
+\code{\link[gnm]{gnm-package}}, for an extended range of models for contingency tables
+
+\code{\link[vcd]{mosaic}} for details on mosaic displays within the strucplot framework.
 %~~ Optional links to other man pages, e.g. ~~
 %~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
