@@ -4,6 +4,7 @@
 \alias{split3d.shape3d}
 \alias{split3d.list}
 \alias{range3d}
+\alias{center3d}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Subdivide a 3D Object
@@ -16,7 +17,7 @@ according to the proportions or frequencies specified in vector(s).
 \code{split3d} is the basic workhorse used in \code{\link{mosaic3d}},
 	but may be useful in other contexts.
 
-\code{range3d} is a utility function, also useful in other contexts.
+\code{range3d} and \code{center3d} are utility functions, also useful in other contexts.
 }
 \usage{
 
@@ -27,6 +28,8 @@ split3d(obj, ...)
 \method{split3d}{list}(obj, p, dim, space = 0.1, ...)
 
 range3d(obj)
+
+center3d(obj)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -69,6 +72,9 @@ equal to that of the input object(s).
 \code{range3d} returns a 2 x 3 matrix, whose first row contains
 the minima on dimensions x, y, z, and whose second row contains
 the maxima.
+
+\code{center3d} returns a numeric vector containing
+the means of the minima and maxima on dimensions x, y, z.
 }
 \author{
 Duncan Murdoch, with refinements by Michael Friendly

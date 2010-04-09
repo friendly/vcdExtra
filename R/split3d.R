@@ -62,3 +62,7 @@ range3d <- function(obj) {
   result
 }
 
+center3d <- function(obj) {
+	range <-range3d(obj)
+	colMeans(range)
+}

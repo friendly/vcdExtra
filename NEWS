@@ -3,6 +3,8 @@ Version 0.5-0 (2010-04-28)
 o Fleshed out mosaic3d, allowing display of observed or expected, internally calculated or externally
   supplied residuals, specifying the initial 3D shape, etc.  This completes the 'top-level' work on
   mosaic3d(), borrowing code from vcd::strucplot.
+o Added initial handling for zero cells in the table to mosaic3d().  
+o Added center3d() for finding the mean coordinates of shape3d objects.
 
 Version 0.4-3 (2010-03-25)
 

@@ -4,7 +4,8 @@
 
 # TODO: if ndim>3, must adjust baseline for labels to avoid overplotting, or else provide for labels at max or min
 # TODO: provide formula interface
-# TODO: handle zero cells 
+# TODO: handle zero margins (causes display to be erased in shapelist3d)
+# DONE: handle zero cells 
 # DONE: generalize the calculation of residuals
 # DONE: allow display of type=c("observed", "expected")
 
@@ -14,7 +15,7 @@
 mosaic3d <- function(x, expected=NULL, residuals=NULL, 
 		type = c("observed", "expected"), residuals_type = NULL,
 		shape=cube3d(alpha=alpha), alpha=0.5,
-		spacing=0.1, split_dir=1:3, shading=shading_basic, 
+		spacing=0.1, split_dir=1:3, shading=shading_basic, zero_size=.05,
 		labeling_args=list(), newpage=TRUE, box=FALSE, ...) {
 	
 	if (!require(rgl)) stop("rgl is required")
@@ -94,13 +95,15 @@ mosaic3d <- function(x, expected=NULL, residuals=NULL,
 	spacing <- rep(spacing, length=ndim)
 	split_dir <- rep(split_dir, length=ndim)
 	
-
+	zeros <- observed <= .Machine$double.eps
+	
 	shapelist <- shape
 	# sanity check
 	if (!inherits(shapelist, "shape3d")) stop("shape must be a shape3d object")
 	
 	if (newpage) open3d()
 	for (k in 1:ndim) {
+# TODO: no longer have to separate k==1 from rest
 		marg <- margin.table(observed, k:1)
 		if (k==1) {
 			shapelist <- split3d(shapelist, marg, split_dir[k], space=spacing[k])
@@ -109,16 +112,29 @@ mosaic3d <- function(x, expected=NULL, residuals=NULL,
 		else {
 			marg <- matrix(marg, nrow=levels[k])
 			shapelist <- split3d(shapelist, marg, split_dir[k], space=spacing[k])
+			names(shapelist) <- apply(as.matrix(expand.grid(dn[1:k])), 1, paste, collapse=":")
 			label3d(shapelist[1:levels[k]], split_dir[k], dn[[k]], vnames[k], ...)
 		}
 	}
-	col <- shading(residuals)
-	# display
-	shapelist3d(shapelist, col=col, ...)
 
-	invisible(structable(observed))
+	# assign colors
+	# TODO: allow alpha to control transparency of side walls
+	col <- shading(residuals)
+
+	# display, but exclude the zero cells
+	shapelist3d(shapelist[!as.vector(zeros)], col=col[!as.vector(zeros)], ...)
+
+	# plot markers for zero cells
+	if (any(zeros)) {
+		ctrs <- t(sapply(shapelist, center3d))
+		spheres3d(ctrs[as.vector(zeros),], radius=zero_size)
+	}
+
+#	invisible(structable(observed))
+	invisible(shapelist)
 	
 }
+
 
 # basic shading_Friendly, adapting the simple code used in mosaicplot()
 
@@ -157,5 +173,6 @@ label3d <- function(objlist, dim, text, varname, offset=.05, adj=c(0.5, 1), labe
 	result <- c(labels = texts3d(xyz, texts=text, adj=adj, ...))
 	invisible(result)
 }
+
 
 

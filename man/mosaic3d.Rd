@@ -25,7 +25,7 @@ This is an initial implementation.  The arguments and details are subject to cha
 mosaic3d(x, expected = NULL, residuals = NULL,  
 	type = c("observed", "expected"), residuals_type = NULL, 
 	shape = cube3d(alpha = alpha), alpha = 0.5, 
-	spacing = 0.1, split_dir = 1:3, shading = shading_basic, 
+	spacing = 0.1, split_dir = 1:3, shading = shading_basic, zero_size=.05,
 	labeling_args = list(), newpage = TRUE, box=FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -82,6 +82,9 @@ returning a vector of colors.  At present, only the default
 to the use of the \code{shade} argument in \code{\link[graphics]{mosaicplot}}
 or to the use of \code{gp=shading_Friendly} in \code{\link[vcd]{mosaic}}.
 }
+  \item{zero_size}{
+ The radius of a small sphere used to mark zero cells in the display.
+ }
   \item{labeling_args}{
 This argument is intended to be used to specify details of the rendering
 of labels for the table dimensions, but at present has no effect.
@@ -110,7 +113,7 @@ where  the  expected  frequencies  are  optionally  computed  for  a   specified
 loglinear model.
 }
 \value{
-Invisibly, an object of class \code{"structable"} corresponding to the plot.
+Invisibly, the list of \code{shape3d} objects used to draw the 3D mosaic.
 }
 \references{
 Friendly, M. (1995).
@@ -145,17 +148,17 @@ Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 
 \examples{
 # 2 x 2 x 2
-	mosaic3d(Bartlett, box=TRUE)
-  # compare with model of mutual independence
-	mosaic3d(Bartlett, type="expected", box=TRUE)
+mosaic3d(Bartlett, box=TRUE)
+# compare with model of mutual independence
+mosaic3d(Bartlett, type="expected", box=TRUE)
 	
 # 2 x 2 x 3
-	mosaic3d(Heart, box=TRUE)
+mosaic3d(Heart, box=TRUE)
 	
 \dontrun{
 # 2 x 2 x 2 x 3
 # illustrates infelicities in labeling >3 dimensions
-	mosaic3d(Detergent)
+mosaic3d(Detergent)
 }
 
 }
