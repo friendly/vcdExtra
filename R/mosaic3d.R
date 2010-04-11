@@ -2,20 +2,21 @@
 ## Produce a 3D mosaic plot using rgl
 #####################################
 
-# TODO: if ndim>3, must adjust baseline for labels to avoid overplotting, or else provide for labels at max or min
 # TODO: provide formula interface
 # TODO: handle zero margins (causes display to be erased in shapelist3d)
 # DONE: handle zero cells 
 # DONE: generalize the calculation of residuals
 # DONE: allow display of type=c("observed", "expected")
+# DONE: if ndim>3, provide for labels at max or min
 
-# provide observed array of counts and either residuals, expected frequencies,
+# mosaic3d: provide observed array of counts and either residuals, expected frequencies,
 # or a loglin set of margins to fit
 
 mosaic3d <- function(x, expected=NULL, residuals=NULL, 
 		type = c("observed", "expected"), residuals_type = NULL,
 		shape=cube3d(alpha=alpha), alpha=0.5,
 		spacing=0.1, split_dir=1:3, shading=shading_basic, zero_size=.05,
+		label_edge,
 		labeling_args=list(), newpage=TRUE, box=FALSE, ...) {
 	
 	if (!require(rgl)) stop("rgl is required")
@@ -45,15 +46,6 @@ mosaic3d <- function(x, expected=NULL, residuals=NULL,
 
   ## replace NAs by 0
   if (any(nas <- is.na(x))) x[nas] <- 0
-
-##	# fit model, if necessary to obtain residuals
-##	if (is.null(residuals)) {
-##		if (is.null(expected)) {
-##			if (is.null(margin)) margin <- as.list(1:ndim)
-##			expected <- stats::loglin(observed, margin, fit = TRUE, print = FALSE)$fit
-##		}
-##		residuals = (observed - expected)/sqrt(expected)
-##	}
 
   ## model fitting:
   ## calculate expected if needed
@@ -94,6 +86,9 @@ mosaic3d <- function(x, expected=NULL, residuals=NULL,
 	# replicate arguments to number of dimensions
 	spacing <- rep(spacing, length=ndim)
 	split_dir <- rep(split_dir, length=ndim)
+	if(missing(label_edge)) 
+		label_edge <- rep( c('-', '+'), each=3, length=ndim)
+	else label_edge <- rep(label_edge, length=ndim)
 	
 	zeros <- observed <= .Machine$double.eps
 	
@@ -103,17 +98,19 @@ mosaic3d <- function(x, expected=NULL, residuals=NULL,
 	
 	if (newpage) open3d()
 	for (k in 1:ndim) {
-# TODO: no longer have to separate k==1 from rest
 		marg <- margin.table(observed, k:1)
 		if (k==1) {
 			shapelist <- split3d(shapelist, marg, split_dir[k], space=spacing[k])
-			label3d(shapelist, split_dir[k], dn[[k]], vnames[k], ...)
+			label3d(shapelist, split_dir[k], dn[[k]], vnames[k], edge=label_edge[k], ...)
 		}
 		else {
 			marg <- matrix(marg, nrow=levels[k])
 			shapelist <- split3d(shapelist, marg, split_dir[k], space=spacing[k])
 			names(shapelist) <- apply(as.matrix(expand.grid(dn[1:k])), 1, paste, collapse=":")
-			label3d(shapelist[1:levels[k]], split_dir[k], dn[[k]], vnames[k], ...)
+			L <- length(shapelist)
+			label_cells <- if (label_edge[k]=='-') 1:levels[k] 
+											else (L-levels[k]+1):L
+			label3d(shapelist[label_cells], split_dir[k], dn[[k]], vnames[k], edge=label_edge[k], ...)
 		}
 	}
 
@@ -152,20 +149,26 @@ shading_basic <- function(residuals, shade=TRUE) {
 }
 
 
-# provide labels for 3D objects below their extent along a given dimension
+# provide labels for 3D objects below/above their extent along a given dimension
 # FIXME: kludge for interline gap between level labels and variable name
 # TODO: how to pass & extract labeling_args, e.g., labeling_args=list(at='min', fontsize=10)
 
-label3d <- function(objlist, dim, text, varname, offset=.05, adj=c(0.5, 1), labeling_args, ...) {
+label3d <- function(objlist, dim, text, varname, offset=.05, adj, edge="-", gap=.1, labeling_args, ...) {
+	if(missing(adj)) {
+		if (dim < 3) adj <- ifelse(edge == '-', c(0.5, 1), c(0.5, 0))
+		else         adj <- ifelse(edge == '-', c(1, 0.5), c(0, 0.5))
+	}
 	ranges <- lapply(objlist, range3d)
 	loc <- t(sapply(ranges, colMeans))   # positions of labels on dimension dim
 	min <- t(sapply(ranges, function(x) x[1,]))  # other dimensions at min values
 	max <- t(sapply(ranges, function(x) x[2,]))  # other dimensions at max values
-	xyz <- min - offset
+	xyz <- if (edge == '-') (min - offset) else (max + offset)
 	xyz[,dim] <- loc[,dim]
 	if(!missing(varname)) {
-		loclab <- colMeans(loc)               # NB: doesn't take gaps into acct
-		xyzlab <- min[1,] - offset - .15
+		loclab <- colMeans(loc)               # NB: doesn't take space into acct
+		xyzlab <- if (edge == '-') 
+			min[1,] - offset - gap
+			else max[1,] + offset + gap
 		xyzlab[dim] <- loclab[dim]
 		xyz <- rbind(xyz, xyzlab)
 		text <- c(text, varname)

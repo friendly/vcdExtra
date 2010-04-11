@@ -26,6 +26,7 @@ mosaic3d(x, expected = NULL, residuals = NULL,
 	type = c("observed", "expected"), residuals_type = NULL, 
 	shape = cube3d(alpha = alpha), alpha = 0.5, 
 	spacing = 0.1, split_dir = 1:3, shading = shading_basic, zero_size=.05,
+	label_edge,
 	labeling_args = list(), newpage = TRUE, box=FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -85,6 +86,15 @@ or to the use of \code{gp=shading_Friendly} in \code{\link[vcd]{mosaic}}.
   \item{zero_size}{
  The radius of a small sphere used to mark zero cells in the display.
  }
+  \item{label_edge}{
+A character vector composed of \code{c("-", "+")} indicating whether the
+labels for a given table dimension are to be written at the minima (\code{"-"})
+or maxima (\code{"+"}) of the \emph{other} dimensions in the plot.
+The default is \code{rep( c('-', '+'), each=3, length=ndim)}, meaning
+that the first three table variables are labeled at the minima,
+and successive ones at the maxima.
+ }
+ 
   \item{labeling_args}{
 This argument is intended to be used to specify details of the rendering
 of labels for the table dimensions, but at present has no effect.
@@ -157,7 +167,7 @@ mosaic3d(Heart, box=TRUE)
 	
 \dontrun{
 # 2 x 2 x 2 x 3
-# illustrates infelicities in labeling >3 dimensions
+# illustrates a 4D table
 mosaic3d(Detergent)
 }
 

@@ -5,6 +5,8 @@ o Fleshed out mosaic3d, allowing display of observed or expected, internally cal
   mosaic3d(), borrowing code from vcd::strucplot.
 o Added initial handling for zero cells in the table to mosaic3d().  
 o Added center3d() for finding the mean coordinates of shape3d objects.
+o Added demo(mosaic-hec) comparing 2D and 3D mosaics for HairEyeColor data
+o Gave mosaic3d a label_edge argument, allowing labels for dimensions at minima or maxima
 
 Version 0.4-3 (2010-03-25)
 
