@@ -1,12 +1,15 @@
 \name{mosaic3d}
 \Rdversion{1.1}
 \alias{mosaic3d}
+\alias{mosaic3d.default}
+\alias{mosaic3d.loglm}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 3D Mosaic Plots
 }
 \description{
-Produces a 3D mosaic plot for a contingency table using the \code{\link[rgl]{rgl-package}}.
+Produces a 3D mosaic plot for a contingency table (or a \code{link[MASS]{loglm}} model)
+ using the \code{\link[rgl]{rgl-package}}.
  
 Generalizing the 2D mosaic plot, this begins
 with a given 3D shape
@@ -18,11 +21,15 @@ table cells.
 Residuals from a given loglinear model are then used to color or shade each of the tiles.
 
 
-This is an initial implementation.  The arguments and details are subject to change.
+This is a developing implementation.  The arguments and details are subject to change.
 }
 
 \usage{
-mosaic3d(x, expected = NULL, residuals = NULL,  
+mosaic3d(x, ...)
+
+\method{mosaic3d}{loglm}(x, type = c("observed", "expected"), residuals_type = c("pearson", "deviance"), ...)
+
+\method{mosaic3d}{default}(x, expected = NULL, residuals = NULL,  
 	type = c("observed", "expected"), residuals_type = NULL, 
 	shape = cube3d(alpha = alpha), alpha = 0.5, 
 	spacing = 0.1, split_dir = 1:3, shading = shading_basic, zero_size=.05,
@@ -32,21 +39,23 @@ mosaic3d(x, expected = NULL, residuals = NULL,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-A multidimensional \code{array} or \code{table} or \code{\link[vcd]{structable}} 
+A \code{link[MASS]{loglm}} model object. Alternatively,
+a multidimensional \code{array} or \code{table} or \code{\link[vcd]{structable}} 
 of frequencies in a contingency table. 
 In the present implementation, the dimensions are taken in sequential order.
 Use \code{link[base]{aperm}} or \code{\link[vcd]{structable}} to change this.
 }
   \item{expected}{
-optionally, an array of expected frequencies of the same dimension as \code{x}, or alternatively 
+optionally, for contingency tables,
+an array of expected frequencies of the same dimension as \code{x}, or alternatively 
 the corresponding loglinear model specification as used by \code{link[stats]{loglin}}
 or \code{link[MASS]{loglm}} (see \code{\link[vcd]{structable}} for details).}
   \item{residuals}{
 optionally, an array of residuals of the same dimension as \code{x} (see details).
 }
   \item{type}{
-a character string indicating whether the \code{observed} or the \code{expected} 
-frequencies in the table should be visualized.
+a character string indicating whether the \code{"observed"} or the \code{"expected"} 
+frequencies in the table should be visualized by the volume of the 3D tiles.
 }
   \item{residuals_type}{
 a character string indicating the type of residuals to be computed when none are
@@ -106,7 +115,7 @@ logical indicating whether a new page should be created for the plot or not.
 logical indicating whether a bounding box should be drawn around the plot.
 }
   \item{\dots}{
-Other arguments passed down to 3D functions.
+Other arguments passed down to \code{mosaic.default} or  3D functions.
 }
 }
 \details{
@@ -116,14 +125,19 @@ of loglinear models (the iterative proportional fitting algorithm,
 the structure of various models for 3-way and n-way tables, etc.),
 but no implementation of 3D mosaics was previously available.	
 
-Residuals, used to color and shade the 3D tiles, can be passed explicitly,
+For the default method,
+residuals, used to color and shade the 3D tiles, can be passed explicitly,
 or, more typically,
-are computed as  needed from observed and expected  frequencies,
-where  the  expected  frequencies  are  optionally  computed  for  a   specified
-loglinear model.
+are computed as  needed from observed and expected  frequencies.
+In this case, the  expected  frequencies  are  optionally  computed  for  a   specified
+loglinear model given by the \code{expected} argument.
+For the loglm method, residuals and observed frequencies are calculated from the model
+object.
 }
 \value{
-Invisibly, the list of \code{shape3d} objects used to draw the 3D mosaic.
+Invisibly, the list of \code{shape3d} objects used to draw the 3D mosaic,
+with names corresponding to the concatenation of the level labels, separated
+by ":".
 }
 \references{
 Friendly, M. (1995).
@@ -159,7 +173,7 @@ Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 \examples{
 # 2 x 2 x 2
 mosaic3d(Bartlett, box=TRUE)
-# compare with model of mutual independence
+# compare with expected frequencies under model of mutual independence
 mosaic3d(Bartlett, type="expected", box=TRUE)
 	
 # 2 x 2 x 3
@@ -169,6 +183,9 @@ mosaic3d(Heart, box=TRUE)
 # 2 x 2 x 2 x 3
 # illustrates a 4D table
 mosaic3d(Detergent)
+
+# compare 2D and 3D mosaics
+demo("mosaic-hec")
 }
 
 }

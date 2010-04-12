@@ -8,18 +8,47 @@
 # DONE: generalize the calculation of residuals
 # DONE: allow display of type=c("observed", "expected")
 # DONE: if ndim>3, provide for labels at max or min
+# DONE: make object oriented and provide a loglm method
 
 # mosaic3d: provide observed array of counts and either residuals, expected frequencies,
 # or a loglin set of margins to fit
 
-mosaic3d <- function(x, expected=NULL, residuals=NULL, 
+mosaic3d <- function(x, ...) {
+	UseMethod("mosaic3d")
+}
+
+mosaic3d.loglm <-
+function (x, type = c("observed", "expected"), 
+    residuals_type = c("pearson", "deviance"), 
+#    gp = shading_hcl, gp_args = list(), 
+    ...) 
+{
+    residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance"))
+    if (is.null(x$fitted)) 
+        x <- update(x, fitted = TRUE)
+    expected <- fitted(x)
+    residuals <- residuals(x, type = "pearson")
+    observed <- residuals * sqrt(expected) + expected
+    if (residuals_type == "deviance") 
+        residuals <- residuals(x, type = "deviance")
+#    gp <- if (inherits(gp, "grapcon_generator")) 
+#        do.call("gp", c(list(observed, residuals, expected, x$df), 
+#            as.list(gp_args)))
+#    else gp
+    mosaic3d.default(observed, residuals = residuals, expected = expected, 
+        type = type, residuals_type = residuals_type, 
+#        gp = gp, 
+        ...)
+}
+
+mosaic3d.default <- function(x, expected=NULL, residuals=NULL, 
 		type = c("observed", "expected"), residuals_type = NULL,
 		shape=cube3d(alpha=alpha), alpha=0.5,
 		spacing=0.1, split_dir=1:3, shading=shading_basic, zero_size=.05,
 		label_edge,
 		labeling_args=list(), newpage=TRUE, box=FALSE, ...) {
 	
-	if (!require(rgl)) stop("rgl is required")
+  if (!require(rgl)) stop("rgl is required")
 
   type <- match.arg(type)
   if (is.null(residuals)) {
@@ -88,7 +117,6 @@ mosaic3d <- function(x, expected=NULL, residuals=NULL,
 	split_dir <- rep(split_dir, length=ndim)
 	if(missing(label_edge)) 
 		label_edge <- rep( c('-', '+'), each=3, length=ndim)
-	else label_edge <- rep(label_edge, length=ndim)
 	
 	zeros <- observed <= .Machine$double.eps
 	

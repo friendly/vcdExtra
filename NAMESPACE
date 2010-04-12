@@ -22,4 +22,6 @@ S3method(print, GKgamma)
 S3method(print, Kappa)
 S3method(split3d, shape3d)
 S3method(split3d, list)
+S3method(mosaic3d, default)
+S3method(mosaic3d, loglm)
 
