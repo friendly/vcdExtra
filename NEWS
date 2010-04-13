@@ -8,6 +8,7 @@ o Added center3d() for finding the mean coordinates of shape3d objects.
 o Added demo(mosaic-hec) comparing 2D and 3D mosaics for HairEyeColor data
 o Gave mosaic3d a label_edge argument, allowing labels for dimensions at minima or maxima
 o Made mosaic3d object oriented, giving it a loglm method
+o Added Kway(), fitting fit all 0-way, 1-way, 2-way, ... k-way models in a glm
 
 Version 0.4-3 (2010-03-25)
 

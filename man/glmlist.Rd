@@ -12,7 +12,7 @@ Create a Model List Object
 
 The intention is to provide object classes to facilitate model comparison,
 extraction, summary and plotting of model components, etc., perhaps using
-\code{lapply} or similar.
+\code{\link[base]{lapply}} or similar.
 }
 \usage{
 glmlist(...)
@@ -80,6 +80,8 @@ names(mods)
 # assign new names
 mods <- glmlist(Indep=indep, Col=coleff, Row=roweff, LinxLin=linlin)
 names(mods)
+
+summarize(mods)
 
 #extract model components
 unlist(lapply(mods, deviance))
