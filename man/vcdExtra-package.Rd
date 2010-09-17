@@ -15,8 +15,8 @@ adds a 3D version in mosaic3d.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.5-0\cr
-Date: \tab 2010-04-08\cr
+Version: \tab 0.5-1\cr
+Date: \tab 2010-09-17\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }

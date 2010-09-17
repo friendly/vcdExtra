@@ -1,3 +1,7 @@
+Version 0.5-1 (2010-09-17)
+
+o Added Yamaguchi87 data (three-way mobility table)
+
 Version 0.5-0 (2010-04-28)
 
 o Fleshed out mosaic3d, allowing display of observed or expected, internally calculated or externally
