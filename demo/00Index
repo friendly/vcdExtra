@@ -8,4 +8,4 @@ Wong3-1       Political views, support for women to work and national welfare sp
 housing       Visualize glm(), multinom() and polr() models from example(housing, package="MASS")
 mosaic3d-demo   proof-of-concept for exploring 3D mosaic plots
 mosaic3d-hec	2D and 3D visualizations of HairEyeColor data
-
+yamaguchi-xie	Yamaguchi data with models from Xie(1992) for homogeneous and log multiplicative layer effect models

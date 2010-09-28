@@ -7,7 +7,10 @@ Occupational Mobility in Three Countries
 \description{
 Yamaguchi (1987) presented this three-way frequency table,
 cross-classifying occupational categories of sons and fathers
-in the United States, United Kingdom and Japan.
+in the United States, United Kingdom and Japan.  This data set has
+become a classic for models comparing two-way mobility tables across
+layers corresponding to countries, groups or time (e.g.,
+Goodman and Hout, 1998; Xie, 1992).
 
 The US data were derived from the 1973 OCG-II survey; those
 for the UK from the 1972 Oxford Social Mobility Survey; those
@@ -47,6 +50,10 @@ Goodman, L. A. and Hout, M. (1998).
 Statistical Methods and Graphical Displays for Analyzing How the Association Between Two Qualitative Variables Differs Among Countries, Among Groups, Or Over Time: 
 A Modified Regression-Type Approach.
 \emph{Sociological Methodology}, 28 (1), 175-230.
+
+Xie, Yu (1992).
+The log-multiplicative layer effect model for comparing mobility tables.
+\emph{American Sociological Review}, 57 (June), 380-395.
 }
 \examples{
 data(Yamaguchi87)
@@ -54,6 +61,11 @@ data(Yamaguchi87)
 structable(~ Father + Son + Country, Yamaguchi87)
 # create table form
 Yama.tab <- xtabs(Freq ~ Son + Father + Country, data=Yamaguchi87)
+
+# define mosaic labeling_args for convenient reuse in 3-way displays
+largs <- list(rot_labels=c(right=0), offset_varnames = c(right = 0.6), offset_labels = c(right = 0.2),
+              set_varnames = c(Son="Son's status", Father="Father's status") 
+             )
 
 ###################################
 # Fit some models & display mosaics
@@ -63,7 +75,8 @@ yama.indep <- glm(Freq ~ Son + Father + Country, data=Yamaguchi87, family=poisso
 anova(yama.indep)
 
 mosaic(yama.indep, ~Son+Father, main="[S][F] ignoring country")
-mosaic(yama.indep, ~Country + Son + Father, condvars="Country", 
+mosaic(yama.indep, ~Country + Son + Father, condvars="Country",
+       labeling_args=largs, 
        main='[S][F][C] Mutual independence') 
 
 # no association between S and F given country ('perfect mobility')
@@ -71,7 +84,12 @@ mosaic(yama.indep, ~Country + Son + Father, condvars="Country",
 yama.noRC <- glm(Freq ~ (Son + Father) * Country, data=Yamaguchi87, family=poisson)
 anova(yama.noRC)
 mosaic(yama.noRC, ~Country + Son + Father, condvars="Country", 
-       main="[SC][FC] Perfect mobility")
+       labeling_args=largs, 
+       main="[SC][FC] No [SF] (perfect mobility)")
 
+# ignore diagonal cells
+yama.quasi <- update(yama.noRC, ~ . + Diag(Son,Father):Country)
+anova(yama.quasi)
+mosaic(yama.quasi, ~Son+Father, main="Quasi [S][F]")
 }
 \keyword{datasets}

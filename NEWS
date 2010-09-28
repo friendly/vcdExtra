@@ -1,6 +1,8 @@
 Version 0.5-1 (2010-09-17)
 
 o Added Yamaguchi87 data (three-way mobility table)
+o Added demo(yamaguchi-xie) illustrating fitting and visualization of the models of homogeneous and 
+  log multiplicative layer effects fit in Xie (1992, Table 1)
 
 Version 0.5-0 (2010-04-28)
 
@@ -12,7 +14,7 @@ o Added center3d() for finding the mean coordinates of shape3d objects.
 o Added demo(mosaic-hec) comparing 2D and 3D mosaics for HairEyeColor data
 o Gave mosaic3d a label_edge argument, allowing labels for dimensions at minima or maxima
 o Made mosaic3d object oriented, giving it a loglm method
-o Added Kway(), fitting fit all 0-way, 1-way, 2-way, ... k-way models in a glm
+o Added Kway(), fitting all 0-way, 1-way, 2-way, ... k-way models in a glm
 
 Version 0.4-3 (2010-03-25)
 
