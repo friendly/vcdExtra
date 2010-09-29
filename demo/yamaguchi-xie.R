@@ -70,6 +70,9 @@ summarize(yamaCx)
 # cross-nationally homogeneous row and col effect associations I (Xie, model (R+C)_o)
 yamaRpCo <- update(yamaDiag, ~ . + Rscore:Father + Son:Cscore)
 summarize(yamaRpCo)
+mosaic(yamaRpCx, ~Country + Son + Father, condvars="Country", 
+		labeling_args=largs,
+		main="Model RpCx: log multiplicative iS + jF : Country")
 
 # cross-nationally log multiplicative row and col effect associations I (Xie, model (R+C)_x)
 yamaRpCx <- update(yamaDiag, ~ . + Mult(Rscore:Father + Son:Cscore, Exp(Country)))
@@ -82,6 +85,9 @@ summarize(yamaRCo)
 # cross-nationally log multiplicative row and col effect associations II (Xie, model RC_x)
 yamaRCx <- update(yamaDiag, ~ . + Mult(Son,Father, Exp(Country)))
 summarize(yamaRCx)
+mosaic(yamaRCx, ~Country + Son + Father, condvars="Country", 
+		labeling_args=largs,
+		main="Model RCx: log multiplicative RC : Country")
 
 yamaFIo <- update(yamaDiag, ~ . + Son:Father)
 summarize(yamaFIo)
