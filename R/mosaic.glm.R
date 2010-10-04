@@ -27,55 +27,82 @@
 
 	df.residual <- x$df.residual
 	observed <- x$data
+
+        if (is.null(formula) && inherits(observed, "table"))
+            formula <- reformulate(names(dimnames(observed)))
+
         if (is.null(formula)) {
             if (is.environment(observed)) observed <- model.frame(x)
-            if (inherits(observed, "table"))
-                formula <- reformulate(names(dimnames(observed)))
-            else if (inherits(observed, "data.frame")) {
-                ## get all factors excluding response
-                factors <- sapply(observed, inherits, "factor")
-                resp <- as.character(x$formula[[2]])
-                factors <- setdiff(colnames(observed[factors]), resp)
-                formula <- reformulate(factors)
-                ok <- TRUE
-                ## check cross-classifying
-                per.cell <- tapply(observed[,1], observed[factors], length)
-                if (ok <- isTRUE(all(per.cell == 1))) {
-                    warning("no formula provided, assuming ", deparse(formula),
-                            "\n", call. = FALSE)
-                }
-                if (!ok)
-                    stop("cannot identify indexing factors from ", substitute(x),
-                         "$data - please provide formula", call. = FALSE)
+            else {
+                if (inherits(observed, "table"))
+                    observed <- as.data.frame(observed)
+                if (!is.null(x$call$subset))
+                    observed <- subset(observed, eval(x$call$subset, observed))
+                if (!is.null(x$na.action))
+                    observed <- observed[-x$na.action,]
             }
-            else
-                stop("cannot identify indexing factors - please provide one-sided formula for factors in plot",
-                     call. = FALSE)
+            ## get all factors excluding response
+            factors <- sapply(observed, inherits, "factor")
+            resp <- as.character(x$formula[[2]])
+            factors <- observed[setdiff(colnames(observed[factors]), resp)]
+            ## drop unused levels
+            for(nm in names(factors)) {
+                f <- factors[[nm]]
+                if(is.factor(f) &&
+                   length(unique(f[!is.na(f)])) < length(levels(f)))
+                    factors[[nm]] <- factors[[nm]][, drop = TRUE]
+            }
+            ok <- TRUE
+            ## check cross-classifying
+            per.cell <- tapply(observed[,1], factors, length)
+            if (ok <- isTRUE(all(per.cell == 1))) {
+              warning("no formula provided, assuming ", deparse(formula),
+                      "\n", call. = FALSE)
+            }
+            if (!ok)
+              stop("cannot identify indexing factors from ", substitute(x),
+                   "$data - please provide formula", call. = FALSE)
         }
-        if (length(formula) == 3) formula <- formula[-2]
-        ## get indexing factors allowing for missing data, subset etc
+        else {
+            if (length(formula) == 3) formula <- formula[-2]
+            ## get indexing factors allowing for missing data, subset etc
+            factors <- do.call("model.frame", list(formula = formula, data = observed,
+                                                   subset = x$call$subset,
+                                                   na.action = na.pass))
+            ## following loop needed due to bug in model.frame.default (fixed for R 2.12)
+            for(nm in names(factors)) {
+                f <- factors[[nm]]
+                if(is.factor(f) && length(unique(f[!is.na(f)])) < length(levels(f)))
+                    factors[[nm]] <- factors[[nm]][, drop = TRUE]
+            }
+            if (!is.null(x$na.action))
+                factors <- factors[-x$na.action,]
+        }
 
-        factors <- do.call("model.frame", list(formula = formula, data = observed,
-                                               subset = x$call$subset))
-        if (!is.null(x$na.action) && inherits(x$na.action, c("omit", "exclude")))
-            factors <- factors[-x$na.action,]
-
-	# if necessary create observed table
-	if (!is.table(observed))
-            observed <- as.table(tapply(x$y, factors, sum))
-
+        observed <- as.table(tapply(x$y, factors, sum))
 	expected <- as.table(tapply(fitted(x), factors, sum))
 
 	type <- match.arg(tolower(type), c("observed", "expected"))
 	if (any(observed < 0, na.rm = TRUE))
             stop("requires a non-negative response vector")
 
-	residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance", "rstandard"))
-	if (missing(residuals))
-		residuals <- if (residuals_type=="rstandard") rstandard(x)
-				else residuals(x, type=residuals_type)
-	# reshape the residuals to conform to the structure of data
-	residuals <- as.table(tapply(residuals, factors, sum))
+        ## reshape the residuals to conform to the structure of data
+
+        ## if one residual per cell, use residuals_type
+        if (nlevels(interaction(factors)) == length(x$y)) {
+            residuals_type <- match.arg(tolower(residuals_type),
+                                        c("pearson", "deviance", "rstandard"))
+            if (missing(residuals))
+                residuals <- if (residuals_type=="rstandard") rstandard(x)
+                else residuals(x, type=residuals_type)
+            residuals <- as.table(tapply(residuals, factors, sum))
+        }
+        ## for marginal views, use aggregated working residuals
+        else {
+            if (missing(residuals)) residuals(x, type = "working")
+            residuals <- meanResiduals(x, factors)
+            residuals_type <- "working" #what is this used for?
+        }
 
 	gp <- if (inherits(gp, "grapcon_generator"))
 				do.call("gp", c(list(observed, residuals, expected, x$df.residual),
@@ -88,13 +115,13 @@
 
 ## convenience functions for sieve and assoc plots
 sieve.glm <-
-		function (x, ...) 
+		function (x, ...)
 {
 	mosaic(x, panel = sieve, ...)
 }
 
 assoc.glm <-
-		function (x, ...) 
+		function (x, ...)
 {
 	mosaic(x, panel = assoc, ...)
 }
