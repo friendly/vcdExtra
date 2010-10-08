@@ -21,9 +21,6 @@
 
 	require(vcd)
 	if (!inherits(x,"glm")) stop("mosaic.glm requires a glm object")
-	# this should work for any glm family, where all predictors are factors
-	# But maybe not sensible for non-count data??
-	#if (!is.discrete.model(x)) stop("only factors are allowed")
 
 	df.residual <- x$df.residual
 	observed <- x$data
@@ -34,8 +31,6 @@
         if (is.null(formula)) {
             if (is.environment(observed)) observed <- model.frame(x)
             else {
-                if (inherits(observed, "table"))
-                    observed <- as.data.frame(observed)
                 if (!is.null(x$call$subset))
                     observed <- subset(observed, eval(x$call$subset, observed))
                 if (!is.null(x$na.action))
@@ -54,8 +49,7 @@
             }
             ok <- TRUE
             ## check cross-classifying
-            per.cell <- tapply(observed[,1], factors, length)
-            if (ok <- isTRUE(all(per.cell == 1))) {
+            if (ok <- isTRUE(all(table(factors) == 1))) {
               warning("no formula provided, assuming ", deparse(formula),
                       "\n", call. = FALSE)
             }
@@ -79,8 +73,17 @@
                 factors <- factors[-x$na.action,]
         }
 
-        observed <- as.table(tapply(x$y, factors, sum))
-	expected <- as.table(tapply(fitted(x), factors, sum))
+        if (x$family$family == "poisson") {
+            observed <- as.table(tapply(x$y, factors, sum))
+            expected <- as.table(tapply(fitted(x), factors, sum))
+        }
+        else{
+            observed <- as.table(tapply(x$prior.weights, factors, sum))
+            expected <- as.table(tapply(x$prior.weights * x$weights, factors, sum))
+        }
+        ## replace any missing values with zero
+        observed[is.na(observed)] <- 0 #else strucplot would do this
+        expected[is.na(expected)] <- 0
 
 	type <- match.arg(tolower(type), c("observed", "expected"))
 	if (any(observed < 0, na.rm = TRUE))
@@ -88,8 +91,8 @@
 
         ## reshape the residuals to conform to the structure of data
 
-        ## if one residual per cell, use residuals_type
-        if (nlevels(interaction(factors)) == length(x$y)) {
+        ## if max one residual per cell, use residuals_type
+        if (max(table(factors)) == 1) {
             residuals_type <- match.arg(tolower(residuals_type),
                                         c("pearson", "deviance", "rstandard"))
             if (missing(residuals))
@@ -103,6 +106,8 @@
             residuals <- meanResiduals(x, factors)
             residuals_type <- "working" #what is this used for?
         }
+        ## replace any missing values with zero
+        residuals[is.na(residuals)] <- 0
 
 	gp <- if (inherits(gp, "grapcon_generator"))
 				do.call("gp", c(list(observed, residuals, expected, x$df.residual),

@@ -29,19 +29,14 @@ meanResiduals <- function(object, by = NULL, standardized = TRUE, as.table = TRU
     stop("`by' must be specified in order to compute grouped residuals")
   if (!is.list(by))
     stop("`by' must be a list")
-  f <- interaction(by)
-  agg.wts <- rowsum(w, f)
-  res <- rowsum(r * w, f)/agg.wts
+  agg.wts <- tapply(w, by, sum) #unlike rowsum, keeps all levels of interaction
+  res <- tapply(r * w, by, sum)/agg.wts
   if (standardized) res <- res * sqrt(agg.wts)
-  if (as.table){
-    dim <- sapply(by, nlevels)
-    dimnames <- lapply(by, levels)
-    tab <- as.table(array(res, dim = dim, dimnames = dimnames))
-    agg.wts <- as.table(array(agg.wts, dim = dim, dimnames = dimnames))
-    structure(tab, weights = agg.wts)
+  if (!as.table){
+    structure(c(tab), weights = c(agg.wts))
   }
   else
-    structure(res, weights = agg.wts)
+    structure(as.table(res), weights = as.table(agg.wts))
 }
 
 
