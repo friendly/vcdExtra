@@ -19,7 +19,7 @@ survey. They pertain to men aged 20-64.
 }
 \usage{data(Yamaguchi87)}
 \format{
-  A frequency data frame with 75 observations on the following 4 variables.
+  A frequency data frame with 75 observations on the following 4 variables. The total sample size is 28887.
   \describe{
     \item{\code{Son}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
     \item{\code{Father}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
@@ -32,13 +32,17 @@ Five status categories -- upper and lower
 nonmanuals (\code{UpNM}, \code{LoNM}), 
 upper and lower manuals (\code{UpM}, \code{LoM}), 
 and \code{Farm}) are used for both fathers' occupations and
-sons' occupations. Upper nonmanuals are professionals,
+sons' occupations. 
+
+Upper nonmanuals are professionals,
 managers, and officials; lower
 nonmanuals are proprietors, sales workers, and
 clerical workers; upper manuals are skilled
 workers; lower manuals are semi-skilled and
 unskilled nonfarm workers; and farm workers
 are farmers and farm laborers.
+
+Some of the models from Xie (1992), Table 1, are fit in \code{demo(yamaguchi-xie)}.
 }
 \source{
 Yamaguchi, K. (1987). 
