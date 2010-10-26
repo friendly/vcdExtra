@@ -4,6 +4,7 @@ o Added Yamaguchi87 data (three-way mobility table)
 o Added demo(yamaguchi-xie) illustrating fitting and visualization of the models of homogeneous and 
   log multiplicative layer effects fit in Xie (1992, Table 1)
 o Added BIC to summarize() and friends
+o Added Hauser79 data (two-way mobility table)
 
 Version 0.5-0 (2010-04-28)
 
