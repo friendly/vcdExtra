@@ -13,7 +13,7 @@ stat.summarize <- function(deviance, df, onames, n) {
 		names(result) <- c("LR Chisq", "Df", "Pr(>Chisq)", "AIC")
 	}
 	else {
-		bic <- deviance - 2*log(n)*df
+		bic <- deviance - log(n)*df
 		result <- data.frame(deviance, df, p, aic, bic)
 		names(result) <- c("LR Chisq", "Df", "Pr(>Chisq)", "AIC", "BIC")
 	}
