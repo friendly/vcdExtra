@@ -8,7 +8,7 @@ export(
 	glmlist, loglmlist, summarize, 
 	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
-	Kway)
+	Kway, Crossings, meanResiduals)
 
 S3method(mosaic, glm)
 S3method(sieve, glm)
