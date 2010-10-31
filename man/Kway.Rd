@@ -3,7 +3,7 @@
 \alias{Kway}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Fit all k-way models in a glm
+Fit All K-way Models in a GLM
 }
 \description{
 Generate and fit all 0-way, 1-way, 2-way, ... k-way terms in a glm.
@@ -13,7 +13,11 @@ loglinear models (or \code{glm}s
 in the poission family), where it is desired to find the 
 highest-order terms necessary to achieve a satisfactory fit.
 
-It is also intended as an example of a generating function
+Using \code{\link[stats]{anova}} on the resulting \code{\link{glmlist}}
+object will then give sequential tests of the pooled contributions of
+all terms of degree \eqn{k+1} over and above those of degree \eqn{k}. 
+
+This function is also intended as an example of a generating function
 for \code{\link{glmlist}} objects, to facilitate model comparison, extraction, 
 summary and plotting of model components, etc., perhaps using \code{lapply} or similar. 
 
@@ -53,9 +57,16 @@ Prefix used to label the models fit in the \code{glmlist} object.
 }
 \details{
 With \code{y} as the response in the \code{formula}, the 0-way (null) model
-is \code{y ~ 1}.  The 1-way ("main effects") model is that specified in the
+is \code{y ~ 1}.  
+The 1-way ("main effects") model is that specified in the
 \code{formula} argument.  The k-way model is generated using the formula
 \code{. ~ .^k}.
+With the default \code{order = nt}, the final model is the saturated model.
+
+As presently written, the function requires a two-sided formula with an explicit
+response on the LHS. For frequency data in table form (e.g., produced by \code{xtabs})
+you the \code{data} argument is coerced to a data.frame, so you
+should  supply the \code{formula} in the form \code{Freq ~ } \dots.
 }
 \value{
 An object of class \code{glmlist}, of length \code{order+1}
@@ -89,7 +100,19 @@ summarize(mods3)
 mods4 <- Kway(Freq ~ A + B + C + D, data=df, family=poisson)
 summarize(mods4)
 
+# JobSatisfaction data
+data(JobSatisfaction, package="vcd")
+modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, family=poisson, prefix="JSat")
+summarize(modSat)
+anova(modSat, test="Chisq")
 
+# Rochdale data: very sparse, in table form
+data(Rochdale, package="vcd")
+\dontrun{
+modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child + Education + HusbandEducation + Asian + HouseholdWorking,
+ data=Rochdale, family=poisson)
+summarize(modRoch)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

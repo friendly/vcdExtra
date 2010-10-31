@@ -6,6 +6,9 @@ o Added demo(yamaguchi-xie) illustrating fitting and visualization of the models
 o Added BIC to summarize() and friends
 o Added Hauser79 data (two-way mobility table), plus some examples from Powers and Xie (2008)
 o Added Crossings() to construct interactions for Goodman 1972 crossings model.
+o Added datasets() to list datasets in packages
+o Extended description and examples of Kway()
+o Added meanResiduals() and extended mosaic.glm() (Heather Turner)
 
 Version 0.5-0 (2010-04-28)
 

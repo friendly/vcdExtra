@@ -1,4 +1,4 @@
-# last modified 7 Apr 2010 by M. Friendly
+# last modified 31 Oct 2010 by M. Friendly
 import(vcd)
 export(
 	expand.dft,expand.table,collapse.table,
@@ -8,7 +8,8 @@ export(
 	glmlist, loglmlist, summarize, 
 	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
-	Kway, Crossings, meanResiduals)
+	Kway, Crossings, meanResiduals, datasets
+	)
 
 S3method(mosaic, glm)
 S3method(sieve, glm)
