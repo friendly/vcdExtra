@@ -32,6 +32,9 @@ CImodel <- gnm(Freq ~ educ*orig + educ*dest, family = poisson,
 ## compute mean residuals over origin and destination
 meanResiduals(CImodel, model.frame(CImodel)[c("orig", "dest")])
 
+## display mean residuals for origin and destination
+mosaic(CImodel, ~orig+dest)
+
 ## non-aggregated residuals
 res1 <- meanResiduals(CImodel,
                       model.frame(CImodel)[c("educ", "orig", "dest")])
