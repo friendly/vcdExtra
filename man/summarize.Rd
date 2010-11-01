@@ -26,24 +26,26 @@ This implementation is experimental, and is subject to change.
 summarize(object, ...)
 
 \method{summarize}{glm}(object, ..., test = NULL)
-\method{summarize}{glmlist}(object, ..., test = NULL)
+\method{summarize}{glmlist}(object, ..., test = NULL, sortby=NULL)
 
 \method{summarize}{loglm}(object, ...)
-\method{summarize}{loglmlist}(object, ...)
+\method{summarize}{loglmlist}(object, ..., sortby=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 
   \item{object, \dots}{objects of class \code{glm}, 
-  	typically the result of a call to \code{glm}, or a list of objects for the "glmlist" method.
+  	typically the result of a call to \code{glm}, or a list of objects for the \code{glmlist} method.
   	Alternatively, objects of class \code{loglm} or a "loglmlist" object
 }
-%  \item{\dots}{
-%%%     ~~Describe \code{\dots} here~~
-%}
 
   \item{test}{
 Not used in the current implementation.
+}
+
+  \item{sortby}{
+For \code{glmlist} and \code{loglmlist} objects, either a numeric or character string specifying
+the column in the result for which the rows are sorted (in decreasing order).
 }
 
 }
@@ -51,12 +53,8 @@ Not used in the current implementation.
 %%  ~~ If necessary, more details than the description above ~~
 %}
 \value{
-A data frame with columns \code{c("LR Chisq", "Df", "Pr(>Chisq)", "AIC")}.
+A data frame (also of class \code{anova}) with columns \code{c("LR Chisq", "Df", "Pr(>Chisq)", "AIC", "BIC")}.
 Row names are taken from the names of the model object(s).
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 }
 %\references{
 %%% ~put references to the literature/web site here ~

@@ -9,6 +9,7 @@ o Added Crossings() to construct interactions for Goodman 1972 crossings model.
 o Added datasets() to list datasets in packages
 o Extended description and examples of Kway()
 o Added meanResiduals() and extended mosaic.glm() (Heather Turner)
+o summarize() gets a sortby argument for glmlist and loglmlist objects
 
 Version 0.5-0 (2010-04-28)
 

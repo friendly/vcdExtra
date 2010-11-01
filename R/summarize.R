@@ -37,7 +37,7 @@ summarize.glm <-function(object, ..., test=NULL){
 	result
 }
 
-summarize.glmlist <-function(object, ..., test=NULL){
+summarize.glmlist <-function(object, ..., test=NULL, sortby=NULL){
 	nmodels <- length(object)
 	if (nmodels == 1) 
 		return(summarize.glm(object[[1]], test = test))
@@ -51,6 +51,9 @@ summarize.glmlist <-function(object, ..., test=NULL){
 	resdev <- as.numeric(lapply(object, function(x) x$deviance))
 	n <- as.numeric(lapply(object, function(x) sum(fitted(x))))
 	result <- stat.summarize(resdev, resdf, oname, n)
+	if (!is.null(sortby)) {
+		result <- result[order(result[,sortby], decreasing=TRUE),]
+	}
 	result
 }
 
@@ -67,7 +70,7 @@ summarize.loglm <-function(object, ...){
 	result
 }
 
-summarize.loglmlist <-function(object, ...){
+summarize.loglmlist <-function(object, ..., sortby=NULL){
 	nmodels <- length(object)
 	if (nmodels == 1) 
 		return(summarize.loglm(object[[1]]))
@@ -81,6 +84,9 @@ summarize.loglmlist <-function(object, ...){
 	resdev <- as.numeric(lapply(object, function(x) x$deviance))
 	n <- as.numeric(lapply(object, function(x) sum(fitted(x))))
 	result <- stat.summarize(resdev, resdf, oname, n)
+	if (!is.null(sortby)) {
+		result <- result[order(result[,sortby], decreasing=TRUE),]
+	}
 	result
 }
 

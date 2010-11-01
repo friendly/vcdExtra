@@ -84,10 +84,22 @@ hauser.RC <- update(hauser.indep, ~ . + Mult(Son,Father))
 mosaic(hauser.RC, ~Father+Son, main="RC model", gp=shading_Friendly)
 summarize(hauser.RC)
 
+# crossings models 
+hauser.CR <- update(hauser.indep, ~ . + Crossings(Father,Son))
+mosaic(hauser.topo, ~Father+Son, main="Crossings model", gp=shading_Friendly)
+summarize(hauser.CR)
+
+hauser.CRdiag <- update(hauser.indep, ~ . + Crossings(Father,Son) + Diag(Father,Son))
+summarize(hauser.CRdiag)
+
 
 # compare model fit statistics
-sumry <- summarize(glmlist(hauser.indep, hauser.roweff, hauser.UA, hauser.UAdiag, hauser.quasi, hauser.qsymm,  hauser.topo, hauser.RC))
+modlist <- glmlist(hauser.indep, hauser.roweff, hauser.UA, hauser.UAdiag, hauser.quasi, hauser.qsymm,  
+     hauser.topo, hauser.RC, hauser.CR, hauser.CRdiag)
+sumry <- summarize(modlist)
 sumry[order(sumry$AIC, decreasing=TRUE),]
+# or, more simply
+summarize(modlist, sortby="AIC")
 
 op <- par(xpd=TRUE)
 # mods <- gsub('hauser\\.', '', rownames(sumry))
