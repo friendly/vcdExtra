@@ -33,7 +33,7 @@ meanResiduals <- function(object, by = NULL, standardized = TRUE, as.table = TRU
   res <- tapply(r * w, by, sum)/agg.wts
   if (standardized) res <- res * sqrt(agg.wts)
   if (!as.table){
-    structure(c(tab), weights = c(agg.wts))
+    structure(c(res), weights = c(agg.wts))
   }
   else
     structure(as.table(res), weights = as.table(agg.wts))
