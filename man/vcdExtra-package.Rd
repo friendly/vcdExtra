@@ -36,9 +36,15 @@ In addition, there are several new data sets, a new vignette,
   \item{vcd-tutorial}{Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
 and a few functions for manipulating categorical data sets and working with models for
-categorical data. A new class, \code{\link{glmlist}}, is introduced for working with
-collections of \code{glm} objects.
-Some of these extensions may be migrated into vcd.
+categorical data, 
+
+A new class, \code{\link{glmlist}}, is introduced for working with
+collections of \code{glm} objects, e.g., \code{\link{Kway}} for fitting
+all K-way models from a basic marginal model, and \code{\link{summarize}}
+for brief statistical summaries of goodnes-of-fit for a collection of
+models.
+
+Some of these extensions may be migrated into vcd or gnm.
 
 A collection of demos is included to illustrate fitting and visualizing a wide variety of models:
 \describe{
@@ -60,7 +66,7 @@ Maintainer: Michael Friendly <friendly AT yorku.ca>
 }
 \references{
 Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.
-Web materials: \url{http://www.math.yorku.ca/SCS/vcd/}.
+Web materials: \url{http://www.datavis.ca/books/vcd/}.
 
 Meyer, D.; Zeileis, A. & Hornik, K. 
 The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd 

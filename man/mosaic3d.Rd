@@ -145,7 +145,7 @@ Conceptual and Visual Models for Categorical Data,
 \emph{The American Statistician}, \bold{49}, 153-160.
 
 Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.
-Web materials: \url{http://www.math.yorku.ca/SCS/vcd/}.
+Web materials: \url{http://www.datavis.ca/books/vcd/}.
 
 Theus, M. & Lauer, S. R. W. (1999)
 Visualizing Loglinear Models. 

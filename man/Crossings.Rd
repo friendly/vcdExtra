@@ -33,7 +33,7 @@ Berkeley, CA: University of California Press, pp. 649-696.
 
 }
 \author{
-Michael Friendly
+Michael Friendly and Heather Turner
 }
 %\note{
 %%  ~~further notes~~
