@@ -1,4 +1,4 @@
-# last modified 31 Oct 2010 by M. Friendly
+# last modified 28 Nov 2010 by M. Friendly
 import(vcd)
 export(
 	expand.dft,expand.table,collapse.table,
@@ -8,7 +8,8 @@ export(
 	glmlist, loglmlist, summarize, 
 	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
-	Kway, Crossings, meanResiduals, datasets
+	Kway, Crossings, meanResiduals, datasets,
+	loddsratio
 	)
 
 S3method(mosaic, glm)
@@ -16,6 +17,7 @@ S3method(sieve, glm)
 S3method(assoc, glm)
 S3method(modFit, glm)
 S3method(modFit, loglm)
+
 S3method(summarize, glm)
 S3method(summarize, glmlist)
 S3method(summarize, loglm)
@@ -24,6 +26,16 @@ S3method(print, GKgamma)
 S3method(print, Kappa)
 S3method(split3d, shape3d)
 S3method(split3d, list)
+
 S3method(mosaic3d, default)
 S3method(mosaic3d, loglm)
+
+S3method(loddsratio, default)
+S3method(coef, loddsratio)
+S3method(confint, loddsratio)
+S3method(dim, loddsratio)
+S3method(dimnames, loddsratio)
+S3method(print, loddsratio)
+S3method(vcov, loddsratio)
+
 

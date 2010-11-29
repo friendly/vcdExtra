@@ -1,3 +1,8 @@
+Version 0.5-2 (2010-11-28)
+
+o Added loddsratio and related methods for log odds ratios, generalizing vcd::oddsratio from
+  2 x 2 (x strata) tables to R x C (x strata) tables
+
 Version 0.5-1 (2010-09-17)
 
 o Added Yamaguchi87 data (three-way mobility table)

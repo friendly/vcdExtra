@@ -7,22 +7,24 @@ Extensions and additions to vcd: Visualizing Categorical Data
 }
 \description{
 This package provides additional data sets, documentation, and
-a few functions designed to extend the vcd package.  
+a few functions designed to extend the \code{vcd} package for Visualizing Categorical Data
+and the \code{gnm} package for Generalized Nonlinear Models. 
 In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and
-adds a 3D version in mosaic3d.
+adds a 3D version in \code{\link{mosaic3d}}.
 }
 \details{
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.5-1\cr
-Date: \tab 2010-09-17\cr
+Version: \tab 0.5-2\cr
+Date: \tab 2010-11-28\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
 The main purpose of this package is to serve as a sandbox for
 introducing extensions of
-mosaic plots that apply to loglinear models fitted using
+mosaic plots and related graphical methods
+that apply to loglinear models fitted using
 \code{glm()} and related, generalized nonlinear models fitted
 with \code{gnm()} in the \code{\link[gnm]{gnm-package}} package.
 The method \code{\link{mosaic.glm}} 
@@ -36,13 +38,21 @@ In addition, there are several new data sets, a new vignette,
   \item{vcd-tutorial}{Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
 and a few functions for manipulating categorical data sets and working with models for
-categorical data, 
+categorical data. 
 
 A new class, \code{\link{glmlist}}, is introduced for working with
 collections of \code{glm} objects, e.g., \code{\link{Kway}} for fitting
 all K-way models from a basic marginal model, and \code{\link{summarize}}
 for brief statistical summaries of goodnes-of-fit for a collection of
 models.
+
+For square tables with ordered factors, \code{\link{Crossings}} supplements the 
+specification of terms in model formulas using
+\code{\link[gnm]{Symm}},
+\code{\link[gnm]{Diag}}, 
+\code{\link[gnm]{Topo}}, etc. in the \code{\link[gnm]{gnm-package}}.
+
+
 
 Some of these extensions may be migrated into vcd or gnm.
 
@@ -57,7 +67,12 @@ A collection of demos is included to illustrate fitting and visualizing a wide v
   \item{Wong3-1}{Political views, support for women to work and national welfare spending (3-way, marginal, and conditional independence models)}
   \item{housing}{Visualize glm(), multinom() and polr() models from example(housing, package="MASS")}
 }
+Use \code{ demo(package="vcdExtra")} for a complete current list.
 
+The vcdExtra now contains a large number of data sets illustrating various forms of categorical data analysis
+and related visualizations, from simple to advanced. Use \code{data(package="vcdExtra")} for a
+complete list, or \code{datasets(package="vcdExtra")} for an annotated one showing the \code{class} and
+\code{dim} for each data set.
 }
 \author{
 Michael Friendly
