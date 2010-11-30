@@ -15,23 +15,39 @@
 # -- Added log= argument to print, coef methods, and added confint.loddsratio method,
 #    allowing log=FALSE
 
+# -- Incorporated Z code additions, fixing some <FIXME>s
+
 loddsratio <- function(x, ...)
   UseMethod("loddsratio")
 
 
-loddsratio.default <- function(x, strata=NULL, ref = NULL, correct = any(x == 0), ...)
+loddsratio.default <- function(x, strata = NULL, log = TRUE,
+  ref = NULL, correct = any(x == 0), ...)
 {
-	L <- length(d <- dim(x))
-	if (any(d<2)) stop("All table dimensions must be 2 or greater")
-  if (L > 2 && is.null(strata)) 
-        strata <- 3:L
-  if (L - length(strata) > 2) 
-        stop("All but 2 dimensions must be specified as strata.")
+  ## check dimensions
+  L <- length(d <- dim(x))
+  if(any(d < 2L)) stop("All table dimensions must be 2 or greater")
+  if(L > 2L & is.null(strata)) strata <- 3L:L
+  if(is.character(strata)) strata <- which(names(dimnames(x)) == strata)
+  if(L - length(strata) != 2L) stop("All but 2 dimensions must be specified as strata.")
 
   ## dimensions of primary R x C table
-  R <- d[1]   # nrow(x)
-  C <- d[2]   # ncol(x)
-  X <- apply(x, 1:2, sum)
+  ## <FIXME>
+  ## Z: This seems to ignore strata settings different from the defaults
+  ## or am I missing something?
+  ## M: OK, fixed, though not perhaps elegantly
+  ## </FIXME>
+  dp <- if (length(strata)) d[-strata] else d
+  dn <- if (length(strata)) dimnames(x)[-strata] else dimnames(x)
+  R <- dp[1]
+  C <- dp[2]
+  ## <FIXME>
+  ## Z: Computing the sum over a couple of margins should be fast but the computation
+  ## is really unnecessary, isn't it? taking a suitable subset, or setting up an
+  ## zero matrix with the right dimensions and dimnames should be sufficient.
+  ## </FIXME>
+#  X <- apply(x, (1:L)[-strata], sum)
+	X <- matrix(0, R, C, dimnames=dn)
   
   ## process reference categories (always return list of length
   ## two with reference for rows/cols, respectively)
@@ -82,23 +98,16 @@ loddsratio.default <- function(x, strata=NULL, ref = NULL, correct = any(x == 0)
 		}
     rn <- as.vector(outer( dimnames(contr)[[1]], sn, paste, sep='|'))
     cn <- as.vector(outer( dimnames(contr)[[2]], sn, paste, sep='|'))
-		contr <- kronecker(diag(prod(dim(x)[strata])), contr) 
+    contr <- kronecker(diag(prod(dim(x)[strata])), contr) 
 		rownames(contr) <- rn
 		colnames(contr) <- cn
 		}
 
-
   ## dimnames for array version
   dn <- list(rep("", R-1), rep("", C-1))
-  for(i in 1:(R-1)) {
-  	dn[[1]][i] <- paste(rownames(x)[Rix[i,]], collapse = ":")
-  }
-  for(j in 1:(C-1)) {
-  	dn[[2]][j] <- paste(colnames(x)[Cix[j,]], collapse = ":")
-  }
-  if (!is.null(strata)) {
-  	dn <- c(dn, dimnames(x)[strata])
-	}
+  for(i in 1:(R-1)) dn[[1]][i] <- paste(rownames(x)[Rix[i,]], collapse = ":")
+  for(j in 1:(C-1)) dn[[2]][j] <- paste(colnames(x)[Cix[j,]], collapse = ":")
+  if (!is.null(strata)) dn <- c(dn, dimnames(x)[strata])
   if (!is.null(names(dimnames(x)))) names(dn) <- names(dimnames(x))
 
   ## point estimates
@@ -110,35 +119,54 @@ loddsratio.default <- function(x, strata=NULL, ref = NULL, correct = any(x == 0)
 
   rval <- structure(list(
     coefficients = coef,
-    dnames = dn,
+    dimnames = dn,
+    dim = as.integer(sapply(dn, length)),
     vcov = vcov,
-    contrasts = contr
+    contrasts = contr,
+    log = log
   ), class = "loddsratio")
   rval
 }
 
 ## dim methods
-dimnames.loddsratio <- function(x, ...) x$dnames
-dim.loddsratio <- function(x, ...) as.integer(sapply(x$dnames, length))
+dimnames.loddsratio <- function(x, ...) x$dimnames
+dim.loddsratio <- function(x, ...) x$dim
+
 
 ## straightforward methods
-coef.loddsratio <- function(object, log=TRUE, ...) 
-	if (log) object$coefficients else exp(object$coefficients)
-vcov.loddsratio <- function(object, ...) object$vcov
+coef.loddsratio <- function(object, log = object$log, ...)
+  if(log) object$coefficients else exp(object$coefficients)
+
+vcov.loddsratio <- function(object, log = object$log, ...)
+  if(log) object$vcov else diag(exp(object$coefficients)) %*% object$vcov %*% diag(exp(object$coefficients))
+
 
 confint.loddsratio <- function(object, parm, level=0.95, log=TRUE, ...) {
 	if (log) confint.default(object, parm=parm, level=level, ... ) 
 	else exp(confint.default(object, parm=parm, level=level, ... ))
 }
 
+
 ## print method
-print.loddsratio <- function(x, log=TRUE, ...) {
-    obj <- if (log) coef(x) else exp(coef(x))
-		print(drop(array(obj, dim=dim(x), dimnames=dimnames(x)), ...))
-	invisible(x)       # should the result be the object or the printed array??? 
+print.loddsratio <- function(x, log = x$log, ...) {
+  ## <README>
+  ## Z: Maybe add some more introductory info, especially
+  ## in case of strata?
+  ## M: Hmm, we don't have info on which were the strata
+  ## </README>
+  print(drop(array(coef(x, log = log), dim = dim(x), dimnames = dimnames(x)), ...))
+  invisible(x)
 }
 
+## reshape coef() methods
+as.matrix.loddsratio <- function (x, log=x$log, ...) {
+	if (length(dim(x))==2) matrix(coef(x, log = log), ncol = dim(x)[2], dimnames=dimnames(x))
+	else {
+		matrix(coef(x, log = log), ncol = prod(dim(x)[-1]), 
+			dimnames=list(dimnames(x)[1], apply(expand.grid(dimnames(x)[-1]), 1, paste, collapse = ":"))) 
+	}
+}
 
-
-
+as.array.loddsratio <- function (x, log=x$log, ...) 
+	drop(array(coef(x, log = log), dim = dim(x), dimnames=dimnames(x)))
 
