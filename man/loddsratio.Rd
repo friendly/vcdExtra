@@ -10,7 +10,8 @@
 \alias{vcov.loddsratio}
 \alias{as.matrix.loddsratio}
 \alias{as.array.loddsratio}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{as.data.frame.loddsratio}
+
 \title{
 Calculate Log Odds Ratios for Frequency Tables
 }

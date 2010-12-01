@@ -39,5 +39,6 @@ S3method(print, loddsratio)
 S3method(vcov, loddsratio)
 S3method(as.matrix, loddsratio)
 S3method(as.array, loddsratio)
+S3method(as.data.frame, loddsratio)
 
 

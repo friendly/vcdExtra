@@ -16,6 +16,9 @@
 #    allowing log=FALSE
 
 # -- Incorporated Z code additions, fixing some <FIXME>s
+# -- Added as.matrix and as.array methods
+# -- Added header to print method
+# -- Added as.data.frame method (for use in plots)
 
 loddsratio <- function(x, ...)
   UseMethod("loddsratio")
@@ -149,14 +152,15 @@ confint.loddsratio <- function(object, parm, level=0.95, log=TRUE, ...) {
 
 ## print method
 print.loddsratio <- function(x, log = x$log, ...) {
-  ## <README>
-  ## Z: Maybe add some more introductory info, especially
-  ## in case of strata?
-  ## M: Hmm, we don't have info on which were the strata
-  ## </README>
-  print(drop(array(coef(x, log = log), dim = dim(x), dimnames = dimnames(x)), ...))
-  invisible(x)
+	vn <- names(dimnames(x))
+	header <- c(if(log) "log" else "",
+			"odds ratios for", vn[1], "and", vn[2],
+			if (length(vn)>2) c("by", paste(vn[-(1:2)], collapse=', ')), "\n\n")
+	cat(paste(header, sep=" "))
+	print(drop(array(coef(x, log = log), dim = dim(x), dimnames = dimnames(x)), ...))
+	invisible(x)
 }
+
 
 ## reshape coef() methods
 as.matrix.loddsratio <- function (x, log=x$log, ...) {
@@ -170,3 +174,13 @@ as.matrix.loddsratio <- function (x, log=x$log, ...) {
 as.array.loddsratio <- function (x, log=x$log, ...) 
 	drop(array(coef(x, log = log), dim = dim(x), dimnames=dimnames(x)))
 
+# <FIXME>
+# The LOR column should be OR if log=FALSE
+# Should row.names=NULL be supplied as default?
+# </FIXME>
+#as.data.frame.loddsratio <- function(x, row.names = NULL, optional = FALSE, log=x$log, ...)
+as.data.frame.loddsratio <- function(x, ..., log=x$log)
+		data.frame(expand.grid(dimnames(x)), 
+			LOR = coef(x, log=log),
+			ASE = diag(vcov(x, log=log)),  ...
+	)
