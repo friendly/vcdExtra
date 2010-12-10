@@ -52,7 +52,7 @@ loddsratio(x, \dots)
   \item{correct}{Logical. Should a continuity correction be applied (by adding
     0.5 to all table entries) before computing odds ratios? By default, this
     not employed unless there are any zero cells in the table,
-    but this correction is often recommendedto reduce bias when some frequencies 
+    but this correction is often recommended to reduce bias when some frequencies 
     are small (Fleiss, 1981).}
   \item{object}{An object of class \code{loddsratio} as computed by
     \code{loddsratio}.}

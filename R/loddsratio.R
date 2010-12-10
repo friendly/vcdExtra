@@ -16,9 +16,10 @@
 #    allowing log=FALSE
 
 # -- Incorporated Z code additions, fixing some <FIXME>s
-# -- Added as.matrix and as.array methods
+# -- Added as.matrix and as.array methods; had to make as.array S3 generic
 # -- Added header to print method
 # -- Added as.data.frame method (for use in plots)
+# --   "LOR" is renamed "OR" if log=FALSE
 
 loddsratio <- function(x, ...)
   UseMethod("loddsratio")
@@ -35,22 +36,12 @@ loddsratio.default <- function(x, strata = NULL, log = TRUE,
   if(L - length(strata) != 2L) stop("All but 2 dimensions must be specified as strata.")
 
   ## dimensions of primary R x C table
-  ## <FIXME>
-  ## Z: This seems to ignore strata settings different from the defaults
-  ## or am I missing something?
-  ## M: OK, fixed, though not perhaps elegantly
-  ## </FIXME>
   dp <- if (length(strata)) d[-strata] else d
   dn <- if (length(strata)) dimnames(x)[-strata] else dimnames(x)
   R <- dp[1]
   C <- dp[2]
-  ## <FIXME>
-  ## Z: Computing the sum over a couple of margins should be fast but the computation
-  ## is really unnecessary, isn't it? taking a suitable subset, or setting up an
-  ## zero matrix with the right dimensions and dimnames should be sufficient.
-  ## </FIXME>
-#  X <- apply(x, (1:L)[-strata], sum)
-	X <- matrix(0, R, C, dimnames=dn)
+  # shadow matrix with proper dimnames
+  X <- matrix(0, R, C, dimnames=dn)
   
   ## process reference categories (always return list of length
   ## two with reference for rows/cols, respectively)
@@ -171,16 +162,24 @@ as.matrix.loddsratio <- function (x, log=x$log, ...) {
 	}
 }
 
-as.array.loddsratio <- function (x, log=x$log, ...) 
-	drop(array(coef(x, log = log), dim = dim(x), dimnames=dimnames(x)))
+as.array <- function(x, ...)
+	UseMethod("as.array")
+
+as.array.loddsratio <- function (x, log=x$log, ...) {
+	res <- array(coef(x, log = log), dim = dim(x), dimnames=dimnames(x))
+	drop(res)
+}
 
 # <FIXME>
 # The LOR column should be OR if log=FALSE
 # Should row.names=NULL be supplied as default?
 # </FIXME>
-#as.data.frame.loddsratio <- function(x, row.names = NULL, optional = FALSE, log=x$log, ...)
-as.data.frame.loddsratio <- function(x, ..., log=x$log)
-		data.frame(expand.grid(dimnames(x)), 
+as.data.frame.loddsratio <- function(x, row.names = NULL, optional, log=x$log, ...) {
+#as.data.frame.loddsratio <- function(x, ..., log=x$log) {
+	df <-data.frame(expand.grid(dimnames(x)), 
 			LOR = coef(x, log=log),
-			ASE = diag(vcov(x, log=log)),  ...
-	)
+			ASE = diag(vcov(x, log=log)), row.names=row.names,  ...
+	        )
+	if (!log) colnames(df)[ncol(df)-1] <- "OR"
+	df
+}
