@@ -8,6 +8,7 @@
 \alias{dimnames.loddsratio}
 \alias{print.loddsratio}
 \alias{vcov.loddsratio}
+\alias{as.array}
 \alias{as.matrix.loddsratio}
 \alias{as.array.loddsratio}
 \alias{as.data.frame.loddsratio}
@@ -31,6 +32,9 @@ loddsratio(x, \dots)
 \method{coef}{loddsratio}(object, log = object$log, \dots)
 \method{vcov}{loddsratio}(object, log = object$log, \dots)
 \method{print}{loddsratio}(x, log = x$log, \dots)
+
+as.array(x, \dots)
+\method{as.array}{loddsratio}(x, log=x$log, \dots)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -202,15 +206,27 @@ confint(lor.pun)
 if(require("lmtest")) coeftest(lor.pun)
 
 \dontrun{
-# visualize the log odds ratios
-matplot(as.array(lor.pun), type='b', xaxt='n', pch=15:17, cex=1.5,
+# visualize the log odds ratios, by education
+lor.pun.a <- as.array(lor.pun)
+matplot(lor.pun.a, type='b', xaxt='n', pch=15:17, cex=1.5,
+	ylab='log odds ratio: Attitude x Memory',
+	xlab='Age', xlim=c(0.5, 3), ylim=c(-2, 1), 
+	main="Attitudes toward corporal punishment")
+abline(h=0, col='gray')
+axis(side=1, at=1:3, labels=rownames(lor.pun.a))
+text(0.5, lor.pun.a[1,], colnames(lor.pun.a), pos=4, col=1:3)
+text(0.6, max(lor.pun.a[1,])+.2, "Education")
+
+# visualize the log odds ratios, by age
+matplot(t(lor.pun.a), type='b', xaxt='n', pch=15:17, cex=1.5,
 	ylab='log odds ratio: Attitude x Memory',
 	xlab='Education', xlim=c(0.5, 3), ylim=c(-2, 1), 
 	main="Attitudes toward corporal punishment")
 abline(h=0, col='gray')
-axis(side=1, at=1:3, labels=dimnames(lor.pun)[[4]])
-text(0.5, as.array(lor.pun)[1,], dimnames(lor.pun)[[3]], pos=4, col=1:3)
-text(0.6, 0.6, "Age")
+axis(side=1, at=1:3, labels=colnames(lor.pun.a))
+text(0.5, lor.pun.a[,1], rownames(lor.pun.a), pos=4, col=1:3)
+text(0.6, max(lor.pun.a[,1])+.2, "Age")
+
 }
 
 }
