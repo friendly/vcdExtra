@@ -20,6 +20,7 @@
 # -- Added header to print method
 # -- Added as.data.frame method (for use in plots)
 # --   "LOR" is renamed "OR" if log=FALSE
+# -- Revised as.matrix to drop leading 1:2 dimensions of length 1
 
 loddsratio <- function(x, ...)
   UseMethod("loddsratio")
@@ -155,10 +156,16 @@ print.loddsratio <- function(x, log = x$log, ...) {
 
 ## reshape coef() methods
 as.matrix.loddsratio <- function (x, log=x$log, ...) {
-	if (length(dim(x))==2) matrix(coef(x, log = log), ncol = dim(x)[2], dimnames=dimnames(x))
-	else {
-		matrix(coef(x, log = log), ncol = prod(dim(x)[-1]), 
-			dimnames=list(dimnames(x)[1], apply(expand.grid(dimnames(x)[-1]), 1, paste, collapse = ":"))) 
+	Coef <- coef(x, log = log)
+	if (length(dim(x))==2) matrix(Coef, ncol = dim(x)[2], dimnames=dimnames(x))
+	else {  # drop leading dimensions with length 1, then reshape
+		ddim <- which(dim(x)[1:2]==1)
+		dim(Coef) <- dim(x)[-ddim]
+		dimnames(Coef) <- dimnames(x)[-ddim]
+		if (length(dim(Coef))==1) Coef
+		else
+		matrix(Coef, ncol = prod(dim(Coef)[-1]), 
+			dimnames=list(dimnames(Coef)[[1]], apply(expand.grid(dimnames(Coef)[[-1]]), 1, paste, collapse = ":"))) 
 	}
 }
 
@@ -170,12 +177,7 @@ as.array.loddsratio <- function (x, log=x$log, ...) {
 	drop(res)
 }
 
-# <FIXME>
-# The LOR column should be OR if log=FALSE
-# Should row.names=NULL be supplied as default?
-# </FIXME>
 as.data.frame.loddsratio <- function(x, row.names = NULL, optional, log=x$log, ...) {
-#as.data.frame.loddsratio <- function(x, ..., log=x$log) {
 	df <-data.frame(expand.grid(dimnames(x)), 
 			LOR = coef(x, log=log),
 			ASE = diag(vcov(x, log=log)), row.names=row.names,  ...
