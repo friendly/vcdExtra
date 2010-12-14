@@ -18,28 +18,28 @@ largs <- list(rot_labels=c(right=0), offset_varnames = c(right = 0.6), offset_la
 # asserts same associations for all countries
 
 yamaNull <- gnm(Freq ~ (Son + Father) * Country, data=Yamaguchi87, family=poisson)
-summarize(yamaNull)
+summarise(yamaNull)
 mosaic(yamaNull, ~Country + Son + Father, condvars="Country", 
 	labeling_args=largs,
 	main="[SC][FC] Null SF association (perfect mobility)")
 
 # same, with data in xtabs form
 yamaNull <- gnm(Freq ~ (Son + Father) * Country, data=Yama.tab, family=poisson)
-summarize(yamaNull)
+summarise(yamaNull)
 mosaic(yamaNull, ~Country + Son + Father, condvars="Country", 
 	labeling_args=largs,
 	main="[SC][FC] Null SF association (perfect mobility)")
 
 # ignore diagonal cells, overall; NB: switch to gnm()
 yamaDiag0 <- gnm(Freq ~ (Son + Father) * Country + Diag(Son, Father), data=Yama.tab, family=poisson)
-summarize(yamaDiag0)
+summarise(yamaDiag0)
 # same, using update()
 yamaDiag0 <- update(yamaNull, ~ . + Diag(Son, Father))
-summarize(yamaDiag0)
+summarise(yamaDiag0)
 
 # ignore diagonal cells in each Country [Model NA in Xie(1992), Table 1]
 yamaDiag <- update(yamaNull, ~ . + Diag(Son, Father):Country)
-summarize(yamaDiag)
+summarise(yamaDiag)
 #mosaic(yamaDiag, ~Country + Son + Father, condvars="Country", main="[SC][FC] Quasi Perfect mobility")
 
 mosaic(yamaDiag, ~Country + Son + Father, condvars="Country", 
@@ -53,47 +53,47 @@ Cscore <- as.numeric(Yamaguchi87$Father)
 
 # cross-nationally homogeneous row effect associations (Xie, model R_o)
 yamaRo <- update(yamaDiag, ~ . + Rscore:Father)
-summarize(yamaRo)
+summarise(yamaRo)
 
 # cross-nationally log multiplicative row effect associations (Xie, model R_x)
 yamaRx <- update(yamaDiag, ~ . + Mult(Rscore:Father, Exp(Country)))
-summarize(yamaRx)
+summarise(yamaRx)
 
 # cross-nationally homogeneous col effect associations (Xie, model C_o)
 yamaCo <- update(yamaDiag, ~ . + Son:Cscore)
-summarize(yamaCo)
+summarise(yamaCo)
 
 # cross-nationally log multiplicative col effect associations (Xie, model C_x)
 yamaCx <- update(yamaDiag, ~ . + Mult(Son:Cscore, Exp(Country)))
-summarize(yamaCx)
+summarise(yamaCx)
 
 # cross-nationally homogeneous row and col effect associations I (Xie, model (R+C)_o)
 yamaRpCo <- update(yamaDiag, ~ . + Rscore:Father + Son:Cscore)
-summarize(yamaRpCo)
+summarise(yamaRpCo)
 mosaic(yamaRpCx, ~Country + Son + Father, condvars="Country", 
 		labeling_args=largs,
 		main="Model RpCx: log multiplicative iS + jF : Country")
 
 # cross-nationally log multiplicative row and col effect associations I (Xie, model (R+C)_x)
 yamaRpCx <- update(yamaDiag, ~ . + Mult(Rscore:Father + Son:Cscore, Exp(Country)))
-summarize(yamaRpCx)
+summarise(yamaRpCx)
 
 # cross-nationally homogeneous row and col effect associations II (Xie, model RC_o)
 yamaRCo <- update(yamaDiag, ~ . + Mult(Son,Father))
-summarize(yamaRCo)
+summarise(yamaRCo)
 
 # cross-nationally log multiplicative row and col effect associations II (Xie, model RC_x)
 yamaRCx <- update(yamaDiag, ~ . + Mult(Son,Father, Exp(Country)))
-summarize(yamaRCx)
+summarise(yamaRCx)
 mosaic(yamaRCx, ~Country + Son + Father, condvars="Country", 
 		labeling_args=largs,
 		main="Model RCx: log multiplicative RC : Country")
 
 yamaFIo <- update(yamaDiag, ~ . + Son:Father)
-summarize(yamaFIo)
+summarise(yamaFIo)
 
 yamaFIx <- update(yamaDiag, ~ . + Mult(Son:Father, Exp(Country)))
-summarize(yamaFIx)
+summarise(yamaFIx)
 
 models <- glmlist(yamaNull, yamaDiag, yamaRo, yamaRx, yamaCo, yamaCx, yamaRpCo, yamaRpCx, yamaRCo, yamaRCx, yamaFIo, yamaFIx)
-summarize(models)
+summarise(models)

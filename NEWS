@@ -5,6 +5,7 @@ o Added loddsratio and related methods for log odds ratios, generalizing vcd::od
 o Added as.matrix.loddsratio, as.array.loddsratio methods
 o Added some simple plot examples to example(loddsratio), anticipating a plot method
 o Added data(Fungicide), a 2 x 2 x 2 x 2 table
+o Renamed summarize() and related methods to summarise() to avoid conflict with plyr.
 
 Version 0.5-1 (2010-09-17)
 

@@ -21,7 +21,8 @@ Computes (log) odds ratios and their asymptotic variance covariance matrix for (
 Odds ratios are calculated for two array dimensions, separately for each level of
 all stratifying dimensions.
 This generalizes the \code{\link[vcd]{oddsratio}} methods in the vcd package from
-2 x 2 ( x strata) tables to R x C (x strata) tables.
+2 x 2 ( x strata) tables to R x C (x strata) tables.  In future versions, these
+functions may be renamed and or moved to the vcd package.
 }
 \usage{
 
@@ -168,6 +169,29 @@ lor.CM
 coef(lor.CM)
 confint(lor.CM)
 confint(lor.CM, log=FALSE)
+
+# odds ratio plot
+lor.CM.df <- as.data.frame(lor.CM)
+lor.CM.df <- within(lor.CM.df, 
+	{lower<-LOR-ASE
+	 upper<-LOR+ASE}
+	)
+range <- c(min(lor.CM.df$lower), max(lor.CM.df$upper))
+with(lor.CM.df, {
+	plot(LOR ~ as.numeric(Age), type='b', pch=16, xaxt='n',
+	  ylim=range, 
+		xlab="Age", ylab="Log odds ratio: Wheeze x Breathlessness",
+		main="CoalMiners data: Log odds ratio plot")
+	axis(side=1, at=as.numeric(Age), labels=Age)
+	segments(as.numeric(Age), lower, as.numeric(Age), upper)
+	}
+	)
+# fit linear models using WLS
+ase <- sqrt(diag(vcov(lor.CM)))
+abline(lm(LOR ~ as.numeric(Age), weights=1/ase, data=lor.CM.df), col="blue")
+age <- seq(25, 60, by = 5)
+qmod <- lm(LOR ~ poly(age,2), weights=1/ase, data=lor.CM.df)
+lines(fitted(qmod), col = "red", lwd=2)
 
 
 ## 2 x k x 2

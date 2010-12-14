@@ -81,7 +81,7 @@ names(mods)
 mods <- glmlist(Indep=indep, Col=coleff, Row=roweff, LinxLin=linlin)
 names(mods)
 
-summarize(mods)
+summarise(mods)
 
 #extract model components
 unlist(lapply(mods, deviance))

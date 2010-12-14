@@ -1,11 +1,11 @@
 
-# Summarize a glm object or glmlist
+# summarise a glm object or glmlist
 
-summarize <- function(object, ...) {
-	UseMethod("summarize")
+summarise <- function(object, ...) {
+	UseMethod("summarise")
 }
 
-stat.summarize <- function(deviance, df, onames, n) {
+stat.summarise <- function(deviance, df, onames, n) {
 	p <- pchisq(deviance, df, lower.tail=FALSE)
 	aic <- deviance - 2*df
 	if (missing(n)) {
@@ -25,22 +25,22 @@ stat.summarize <- function(deviance, df, onames, n) {
 }
 
 
-summarize.glm <-function(object, ..., test=NULL){
+summarise.glm <-function(object, ..., test=NULL){
 	dotargs <- list(...)
 	is.glm <- unlist(lapply(dotargs, function(x) inherits(x, "glm")))
 	dotargs <- dotargs[is.glm]
 	if (length(dotargs)) 
-		return(summarize.glmlist(c(list(object), dotargs), test = test))
+		return(summarise.glmlist(c(list(object), dotargs), test = test))
 	
 	oname <- as.character(sys.call())[2]
-	result <- stat.summarize(object$deviance, object$df.residual, oname, sum(fitted(object)))
+	result <- stat.summarise(object$deviance, object$df.residual, oname, sum(fitted(object)))
 	result
 }
 
-summarize.glmlist <-function(object, ..., test=NULL, sortby=NULL){
+summarise.glmlist <-function(object, ..., test=NULL, sortby=NULL){
 	nmodels <- length(object)
 	if (nmodels == 1) 
-		return(summarize.glm(object[[1]], test = test))
+		return(summarise.glm(object[[1]], test = test))
 	if (is.null(names(object))) {
 		oname <- as.character(sys.call())[-1]
 		oname <- oname[1:length(object)]
@@ -50,7 +50,7 @@ summarize.glmlist <-function(object, ..., test=NULL, sortby=NULL){
 	resdf <- as.numeric(lapply(object, function(x) x$df.residual))
 	resdev <- as.numeric(lapply(object, function(x) x$deviance))
 	n <- as.numeric(lapply(object, function(x) sum(fitted(x))))
-	result <- stat.summarize(resdev, resdf, oname, n)
+	result <- stat.summarise(resdev, resdf, oname, n)
 	if (!is.null(sortby)) {
 		result <- result[order(result[,sortby], decreasing=TRUE),]
 	}
@@ -58,22 +58,22 @@ summarize.glmlist <-function(object, ..., test=NULL, sortby=NULL){
 }
 
 
-summarize.loglm <-function(object, ...){
+summarise.loglm <-function(object, ...){
 	dotargs <- list(...)
 	is.loglm <- unlist(lapply(dotargs, function(x) inherits(x, "loglm")))
 	dotargs <- dotargs[is.loglm]
 	if (length(dotargs)) 
-		return(summarize.loglmlist(c(list(object), dotargs)))
+		return(summarise.loglmlist(c(list(object), dotargs)))
 	
 	oname <- as.character(sys.call())[2]
-	result <- stat.summarize(object$deviance, object$df, oname, sum(fitted(object)))
+	result <- stat.summarise(object$deviance, object$df, oname, sum(fitted(object)))
 	result
 }
 
-summarize.loglmlist <-function(object, ..., sortby=NULL){
+summarise.loglmlist <-function(object, ..., sortby=NULL){
 	nmodels <- length(object)
 	if (nmodels == 1) 
-		return(summarize.loglm(object[[1]]))
+		return(summarise.loglm(object[[1]]))
 	if (is.null(names(object))) {
 		oname <- as.character(sys.call())[-1]
 		oname <- oname[1:length(object)]
@@ -83,7 +83,7 @@ summarize.loglmlist <-function(object, ..., sortby=NULL){
 	resdf <- as.numeric(lapply(object, function(x) x$df))
 	resdev <- as.numeric(lapply(object, function(x) x$deviance))
 	n <- as.numeric(lapply(object, function(x) sum(fitted(x))))
-	result <- stat.summarize(resdev, resdf, oname, n)
+	result <- stat.summarise(resdev, resdf, oname, n)
 	if (!is.null(sortby)) {
 		result <- result[order(result[,sortby], decreasing=TRUE),]
 	}

@@ -1,10 +1,10 @@
-\name{summarize}
+\name{summarise}
 \Rdversion{1.1}
-\alias{summarize}
-\alias{summarize.glm}
-\alias{summarize.glmlist}
-\alias{summarize.loglm}
-\alias{summarize.loglmlist}
+\alias{summarise}
+\alias{summarise.glm}
+\alias{summarise.glmlist}
+\alias{summarise.loglm}
+\alias{summarise.loglmlist}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Brief Summary of Model Fit for glm and loglm Models
@@ -18,18 +18,18 @@ model goodness of fit for a collection of models fit to the same data.
 All \code{loglm} models have equivalent glm forms, but the 
 \code{print} and \code{summary} methods give quite different results
 
-\code{summarize} provides a brief summary for one or more \code{glm} or \code{loglm} models
+\code{summarise} provides a brief summary for one or more \code{glm} or \code{loglm} models
 This implementation is experimental, and is subject to change.
 }
 \usage{
 
-summarize(object, ...)
+summarise(object, ...)
 
-\method{summarize}{glm}(object, ..., test = NULL)
-\method{summarize}{glmlist}(object, ..., test = NULL, sortby=NULL)
+\method{summarise}{glm}(object, ..., test = NULL)
+\method{summarise}{glmlist}(object, ..., test = NULL, sortby=NULL)
 
-\method{summarize}{loglm}(object, ...)
-\method{summarize}{loglmlist}(object, ..., sortby=NULL)
+\method{summarise}{loglm}(object, ...)
+\method{summarise}{loglmlist}(object, ..., sortby=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -75,7 +75,7 @@ Michael Friendly
 data(Mental)
 indep <- glm(Freq ~ mental+ses,
                 family = poisson, data = Mental)
-summarize(indep)
+summarise(indep)
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
 
@@ -88,7 +88,7 @@ linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 
 # make a glmlist
 mods <- glmlist(indep, coleff, roweff, linlin)
-summarize(mods)
+summarise(mods)
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
