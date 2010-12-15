@@ -42,7 +42,17 @@ Brewlow, N. (1976), Regression analysis of the log odds ratio:
 }
 \examples{
 data(Fungicide)
-lor.fung <- loddsratio(Fungicide, correct=TRUE)
-confint(lor.fung)
+fung.lor <- loddsratio(Fungicide, correct=TRUE)
+fung.lor
+confint(fung.lor)
+
+# visualize odds ratios in fourfold plots
+cotabplot(Fungicide, panel=cotab_fourfold)
+#  -- fourfold() requires vcd >= 1.2-10
+\dontrun{
+fourfold(Fungicide, p_adjust_method="none")
+}
+
+
 }
 \keyword{datasets}
