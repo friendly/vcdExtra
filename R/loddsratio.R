@@ -180,7 +180,7 @@ as.array.loddsratio <- function (x, log=x$log, ...) {
 as.data.frame.loddsratio <- function(x, row.names = NULL, optional, log=x$log, ...) {
 	df <-data.frame(expand.grid(dimnames(x)), 
 			LOR = coef(x, log=log),
-			ASE = diag(vcov(x, log=log)), row.names=row.names,  ...
+			ASE = sqrt(diag(vcov(x, log=log))), row.names=row.names,  ...
 	        )
 	if (!log) colnames(df)[ncol(df)-1] <- "OR"
 	df
