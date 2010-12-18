@@ -167,7 +167,7 @@ Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 \code{\link[graphics]{mosaicplot}}
 
 \code{\link[stats]{loglin}},
-\code{link[MASS]{loglm}} for details on fitting loglinear models
+\code{\link[MASS]{loglm}} for details on fitting loglinear models
 }
 
 \examples{
