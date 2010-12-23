@@ -313,6 +313,22 @@ names(dimnames(UCB)) <- c("Sex", "Admit?", "Department")
 ftable(UCB)
 @
 
+There is one subtle ``gotcha'' here:  \codefun{aperm} returns an object of class \class{"array"},
+whereas \data{UCBAdmissions} is of class \class{"table"}, so methods defined for \code{table}
+objects will not work on the permuted array.
+The solution is to reassign the \code{class} of the result of  \codefun{aperm}.
+
+<<reorder4,results=verbatim, keep.source=TRUE>>=
+class(UCBAdmissions)
+class(UCB)
+str(as.data.frame(UCBAdmissions))  # OK
+str(as.data.frame(UCB))            # wrong
+
+class(UCB) <- "table"
+str(as.data.frame(UCB))            # now OK
+
+@
+
 \subsection[structable]{\codefun{structable}}
 For 3-way and larger tables
 the \codefun{structable} function in \pkg{vcd} provides a convenient and flexible tabular display.
