@@ -187,10 +187,9 @@ with(lor.CM.df, {
 	}
 	)
 # fit linear models using WLS
-ase <- sqrt(diag(vcov(lor.CM)))
-abline(lm(LOR ~ as.numeric(Age), weights=1/ase, data=lor.CM.df), col="blue")
+abline(lm(LOR ~ as.numeric(Age), weights=1/ASE, data=lor.CM.df), col="blue")
 age <- seq(25, 60, by = 5)
-qmod <- lm(LOR ~ poly(age,2), weights=1/ase, data=lor.CM.df)
+qmod <- lm(LOR ~ poly(age,2), weights=1/ASE, data=lor.CM.df)
 lines(fitted(qmod), col = "red", lwd=2)
 
 
@@ -229,7 +228,6 @@ lor.pun
 confint(lor.pun)
 if(require("lmtest")) coeftest(lor.pun)
 
-\dontrun{
 # visualize the log odds ratios, by education
 lor.pun.a <- as.array(lor.pun)
 matplot(lor.pun.a, type='b', xaxt='n', pch=15:17, cex=1.5,
@@ -251,7 +249,10 @@ axis(side=1, at=1:3, labels=colnames(lor.pun.a))
 text(0.5, lor.pun.a[,1], rownames(lor.pun.a), pos=4, col=1:3)
 text(0.6, max(lor.pun.a[,1])+.2, "Age")
 
-}
+# fit linear model using WLS
+lor.pun.df <- as.data.frame(lor.pun)
+pun.mod1 <- lm(LOR ~ as.numeric(age) * as.numeric(education), data=lor.pun.df, weights=1/sqrt(ASE))
+anova(pun.mod1)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
