@@ -30,7 +30,7 @@ mosaic(yamaNull, ~Country + Son + Father, condvars="Country",
 	labeling_args=largs,
 	main="[SC][FC] Null SF association (perfect mobility)")
 
-# ignore diagonal cells, overall; NB: switch to gnm()
+# ignore diagonal cells, overall; 
 yamaDiag0 <- gnm(Freq ~ (Son + Father) * Country + Diag(Son, Father), data=Yama.tab, family=poisson)
 summarise(yamaDiag0)
 # same, using update()
@@ -70,9 +70,9 @@ summarise(yamaCx)
 # cross-nationally homogeneous row and col effect associations I (Xie, model (R+C)_o)
 yamaRpCo <- update(yamaDiag, ~ . + Rscore:Father + Son:Cscore)
 summarise(yamaRpCo)
-mosaic(yamaRpCx, ~Country + Son + Father, condvars="Country", 
+mosaic(yamaRpCo, ~Country + Son + Father, condvars="Country", 
 		labeling_args=largs,
-		main="Model RpCx: log multiplicative iS + jF : Country")
+		main="Model RpCo: log multiplicative iS + jF : Country")
 
 # cross-nationally log multiplicative row and col effect associations I (Xie, model (R+C)_x)
 yamaRpCx <- update(yamaDiag, ~ . + Mult(Rscore:Father + Son:Cscore, Exp(Country)))

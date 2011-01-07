@@ -12,5 +12,6 @@ Description: Provides additional data sets, methods and documentation to complem
 	In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and
 	adds a 3D version in mosaic3d.
 License: GPL version 2 or newer
+URL: http://CRAN.R-project.org/package=vcdExtra
 LazyLoad: yes
 LazyData: yes
