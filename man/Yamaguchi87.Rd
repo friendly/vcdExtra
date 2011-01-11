@@ -87,7 +87,7 @@ mosaic(yama.indep, ~Country + Son + Father, condvars="Country",
 # asserts same associations for all countries
 yama.noRC <- glm(Freq ~ (Son + Father) * Country, data=Yamaguchi87, family=poisson)
 anova(yama.noRC)
-mosaic(yama.noRC, ~Country + Son + Father, condvars="Country", 
+mosaic(yama.noRC, ~~Country + Son + Father, condvars="Country", 
        labeling_args=largs, 
        main="[SC][FC] No [SF] (perfect mobility)")
 
@@ -95,5 +95,9 @@ mosaic(yama.noRC, ~Country + Son + Father, condvars="Country",
 yama.quasi <- update(yama.noRC, ~ . + Diag(Son,Father):Country)
 anova(yama.quasi)
 mosaic(yama.quasi, ~Son+Father, main="Quasi [S][F]")
+
+## see also:
+# demo(yamaguchi-xie)
+##
 }
 \keyword{datasets}

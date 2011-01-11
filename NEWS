@@ -7,6 +7,7 @@ o Added some simple plot examples to example(loddsratio), anticipating a plot me
 o Added data(Fungicide), a 2 x 2 x 2 x 2 table
 o Renamed summarize() and related methods to summarise() to avoid conflict with plyr.
 o Addition to vcd-tutorial vignette on use of aperm() with table objects
+o Updated demo(yamaguchi-xie) to correct row/col nomenclature and add plot of BIC
 
 Version 0.5-1 (2010-09-17)
 
