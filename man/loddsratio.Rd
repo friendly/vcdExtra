@@ -187,9 +187,9 @@ with(lor.CM.df, {
 	}
 	)
 # fit linear models using WLS
-abline(lm(LOR ~ as.numeric(Age), weights=1/ASE, data=lor.CM.df), col="blue")
+abline(lm(LOR ~ as.numeric(Age), weights=1/ASE^2, data=lor.CM.df), col="blue")
 age <- seq(25, 60, by = 5)
-qmod <- lm(LOR ~ poly(age,2), weights=1/ASE, data=lor.CM.df)
+qmod <- lm(LOR ~ poly(age,2), weights=1/ASE^2, data=lor.CM.df)
 lines(fitted(qmod), col = "red", lwd=2)
 
 
@@ -251,7 +251,7 @@ text(0.6, max(lor.pun.a[,1])+.2, "Age")
 
 # fit linear model using WLS
 lor.pun.df <- as.data.frame(lor.pun)
-pun.mod1 <- lm(LOR ~ as.numeric(age) * as.numeric(education), data=lor.pun.df, weights=1/sqrt(ASE))
+pun.mod1 <- lm(LOR ~ as.numeric(age) * as.numeric(education), data=lor.pun.df, weights=1/ASE^2)
 anova(pun.mod1)
 
 }

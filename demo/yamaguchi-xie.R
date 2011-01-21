@@ -125,4 +125,14 @@ axis(side=1, at=1:nrow(BIC), labels=rownames(BIC), cex.axis=1.2)
 text(5, BIC[5,], colnames(BIC), pos=2, col=1:2, cex=1.2)
 text(5, max(BIC[5,])+10, "Country model", pos=2, cex=1.3)
 
+AIC <- matrix(summarise(models)$AIC[-(1:2)], 5, 2, byrow=TRUE)
+dimnames(AIC) <- list("Father-Son model" = c("row eff", "col eff", "row+col", "RC(1)", "R:C"),
+		"Country model" = c("homogeneous", "log multiplicative"))
+AIC
+
+matplot(AIC, type='b', xlab="Father-Son model", xaxt='n', pch=15:16, cex=1.5, cex.lab=1.5,
+		main="Yamaguchi-Xie models: R:C model by Layer model Summary")
+axis(side=1, at=1:nrow(AIC), labels=rownames(AIC), cex.axis=1.2)
+text(5, AIC[5,], colnames(AIC), pos=2, col=1:2, cex=1.2)
+text(5, max(AIC[5,])+10, "Country model", pos=2, cex=1.3)
 
