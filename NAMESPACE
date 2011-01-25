@@ -9,7 +9,7 @@ export(
 	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
 	Kway, Crossings, meanResiduals, datasets,
-	loddsratio, as.array
+	loddsratio, as.array, aperm
 	)
 
 S3method(mosaic, glm)
@@ -40,5 +40,9 @@ S3method(vcov, loddsratio)
 S3method(as.matrix, loddsratio)
 S3method(as.array, loddsratio)
 S3method(as.data.frame, loddsratio)
+
+S3method(aperm, default)
+S3method(aperm, table)
+
 
 
