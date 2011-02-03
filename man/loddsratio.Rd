@@ -198,6 +198,19 @@ lor.Emp <-loddsratio(Employment)
 lor.Emp
 confint(lor.Emp)
 
+# visualize the log odds ratios
+lor.Emp.a <- as.array(lor.Emp)
+matplot(lor.Emp.a, type='b', xaxt='n', pch=15:16, cex=1.5,
+	ylab='log odds ratio: Employment Status x Length',
+	xlab='Employment Length', 
+	xlim=c(0.2, 5), 
+	main="Employment status data")
+abline(h=0, col='gray')
+axis(side=1, at=1:5, labels=rownames(lor.Emp.a))
+text(0.3, lor.Emp.a[1,], colnames(lor.Emp.a), pos=4, col=1:2)
+text(0.5, max(lor.Emp.a[1,])+.1, "Layoff cause")
+
+
 ## R x C case
 #data(Hauser79, package="vcdExtra")
 hauser.tab <- xtabs(Freq ~ Father+Son, data=Hauser79)
