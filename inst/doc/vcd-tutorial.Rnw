@@ -490,7 +490,7 @@ are read as \code{V1} -- \code{V4}, and the cell frequency is read
 as \code{V5}.  The file, stored in the \code{data/} directory
 of \pkg{vcdExtra}, can be read as follows:
 <<tv1,results=verbatim>>=
-tv.data<-read.table(system.file("data","tv.dat",package="vcdExtra"))
+tv.data<-read.table(system.file("doc","extdata","tv.dat",package="vcdExtra"))
 head(tv.data,5)
 @
 For a local file, just use \codefun{read.table} in this form:

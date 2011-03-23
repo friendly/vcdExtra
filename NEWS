@@ -9,6 +9,7 @@ o Renamed summarize() and related methods to summarise() to avoid conflict with 
 o Addition to vcd-tutorial vignette on use of aperm() with table objects
 o Updated demo(yamaguchi-xie) to correct row/col nomenclature and add plot of BIC
 o Added aperm() S3 generic to handle table objects
+o Moved tv.dat to inst/doc/extdata to avoid warnings in R 2.12+
 
 Version 0.5-1 (2010-09-17)
 
