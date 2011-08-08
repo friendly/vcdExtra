@@ -3,7 +3,13 @@ Type: Package
 Title: vcd additions
 Version: 0.5-2
 Date: 2010-11-28
-Author: Michael Friendly with Heather Turner, David Firth,  Achim Zeileis and Duncan Murdoch
+Author@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
+            person(given = "Heather", family = "Turner", role="ctb"),
+            person(given = "Achim", family = "Zeileis", role="ctb"),
+            person(given = "Duncan", family = "Murdoch", role="ctb"),
+            person(given = "David", family = "Firth", role="ctb")
+            )
+Author: Michael Friendly with Heather Turner, Achim Zeileis, Duncan Murdoch and David Firth
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: vcd,gnm
 Suggests: ca,gmodels,Fahrmeir,effects,VGAM,plyr,rgl,lmtest,MASS
