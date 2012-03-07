@@ -1,3 +1,7 @@
+Version 0.5-3 (2012-03-07)
+
+o Added Mammograms data
+
 Version 0.5-2 (2010-11-28)
 
 o Added loddsratio and related methods for log odds ratios, generalizing vcd::oddsratio from

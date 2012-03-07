@@ -16,8 +16,8 @@ adds a 3D version in \code{\link{mosaic3d}}.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.5-2\cr
-Date: \tab 2010-11-28\cr
+Version: \tab 0.5-3\cr
+Date: \tab 2012-03-07\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
