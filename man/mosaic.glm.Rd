@@ -134,6 +134,35 @@ mosaic(RC1model,residuals_type="rstandard",
  labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
  main="RC1 model")
  }
+ 
+ ############# UCB Admissions data, fit using glm()
+ 
+ structable(Dept ~ Admit+Gender,UCBAdmissions)
+ 
+berkeley <- as.data.frame(UCBAdmissions)
+berk.glm1 <- glm(Freq ~ Dept * (Gender+Admit), data=berkeley, family="poisson")
+summary(berk.glm1)
+mosaic(berk.glm1, gp=shading_Friendly, labeling=labeling_residuals, formula=~Admit+Dept+Gender)
+# the same, displaying studentized residuals; note use of formula to reorder factors in the mosaic
+mosaic(berk.glm1, residuals_type="rstandard", labeling=labeling_residuals, shade=TRUE, 
+	formula=~Admit+Dept+Gender, main="Model: [DeptGender][DeptAdmit]")
+
+## all two-way model
+berk.glm2 <- glm(Freq ~ (Dept + Gender + Admit)^2, data=berkeley, family="poisson")
+summary(berk.glm2)
+mosaic.glm(berk.glm2, residuals_type="rstandard", labeling = labeling_residuals, shade=TRUE,
+	formula=~Admit+Dept+Gender, main="Model: [DeptGender][DeptAdmit][AdmitGender]")
+anova(berk.glm1, berk.glm2, test="Chisq")
+
+# Add 1 df term for association of [GenderAdmit] only in Dept A
+berkeley <- within(berkeley, dept1AG <- (Dept=='A')*(Gender=='Female')*(Admit=='Admitted'))
+berkeley[1:6,]
+berk.glm3 <- glm(Freq ~ Dept * (Gender+Admit) + dept1AG, data=berkeley, family="poisson")
+summary(berk.glm3)
+mosaic.glm(berk.glm3, residuals_type="rstandard", labeling = labeling_residuals, shade=TRUE,
+	formula=~Admit+Dept+Gender, main="Model: [DeptGender][DeptAdmit] + DeptA*[GA]")
+anova(berk.glm1, berk.glm3, test="Chisq")
+ 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
