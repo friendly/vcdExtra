@@ -4,6 +4,7 @@ o Added Mammograms data
 o Extended mosaic.glm examples
 o Added Alligator data
 o Added DaytonSurvey data (5-way, 2x2x2x2x2)
+o Extended vcd-tutorial vignette with a section on collapsing over factors
 
 Version 0.5-2 (2010-11-28)
 

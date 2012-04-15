@@ -26,6 +26,24 @@
 \addtolength{\voffset}{-1cm}
 \addtolength{\textheight}{2cm}
 
+% Vignette examples
+\newcommand*{\Example}{\textbf{\emph{Example}}: }
+
+% R stuff
+\newcommand{\var}[1]{\textit{\texttt{#1}}}
+\newcommand{\data}[1]{\texttt{#1}}
+\newcommand{\class}[1]{\textsf{#1}}
+%% \code without `-' ligatures
+\def\nohyphenation{\hyphenchar\font=-1 \aftergroup\restorehyphenation}
+\def\restorehyphenation{\hyphenchar\font=`-}
+{\catcode`\-=\active%
+  \global\def\code{\bgroup%
+    \catcode`\-=\active \let-\codedash%
+    \Rd@code}}
+\def\codedash{-\discretionary{}{}{}}
+\def\Rd@code#1{\texttt{\nohyphenation#1}\egroup}
+
+\newcommand{\codefun}[1]{\code{#1()}}
 
 %% almost as usual
 \author{Michael Friendly\\York University, Toronto}
@@ -74,20 +92,6 @@ data(Arthritis)
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 @
 
-\newcommand{\var}[1]{\textit{\texttt{#1}}}
-\newcommand{\data}[1]{\texttt{#1}}
-\newcommand{\class}[1]{\textsf{#1}}
-%% \code without `-' ligatures
-\def\nohyphenation{\hyphenchar\font=-1 \aftergroup\restorehyphenation}
-\def\restorehyphenation{\hyphenchar\font=`-}
-{\catcode`\-=\active%
-  \global\def\code{\bgroup%
-    \catcode`\-=\active \let-\codedash%
-    \Rd@code}}
-\def\codedash{-\discretionary{}{}{}}
-\def\Rd@code#1{\texttt{\nohyphenation#1}\egroup}
-
-\newcommand{\codefun}[1]{\code{#1()}}
 
 
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,6 +99,7 @@ art <- xtabs(~Treatment + Improved, data = Arthritis)
 \SweaveOpts{keep.source=TRUE}
 
 \begin{document}
+%\SweaveOpts{concordance=TRUE}
 
 %% include your article here, just as usual
 %% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
@@ -104,11 +109,18 @@ art <- xtabs(~Treatment + Improved, data = Arthritis)
 
 
 This tutorial, part of the \pkg{vcdExtra} package,
- describes the creation of frequency and contingency tables
-from categorical variables, along with tests of independence, measures
-of association, and methods for graphically displaying results.
-It borrows structure and some ideas from from Robert Kabakoff's \emph{Quick-R} web page,
-\url{http://www.statmethods.net/stats/frequencies.html}.
+describes how to work with categorical data in the context of
+fitting statistical models in \proglang{R} and visualizing
+the results using the \pkg{vcd} and \pkg{vcdExtra} packages.
+It focuses first on methods and tools for creating
+and manipulating \proglang{R} data objects which represent
+frequency and contingency tables involving
+categorical variables.
+
+Further sections describe some simple methods for calculating 
+tests of independence and measures of association amomg 
+categorial variables, and also
+methods for graphically displaying results.
 
 There is much more to the analysis of categorical data than is described here,
 where the emphasis is on cross-tabulated tables of frequencies (``contingency tables''),
@@ -155,7 +167,8 @@ the \codefun{str} function, or view the names of its components with the
   The total number of observations
   is \code{nrow(X)}, and the number of variables is \code{ncol(X)}.
   	
-\emph{Example}: The \data{Arthritis} data is available in case form in the \pkg{vcd} package. 
+\Example
+The \data{Arthritis} data is available in case form in the \pkg{vcd} package. 
 There are two explanatory factors: \code{Treatment} and \code{Sex}. \code{Age}
 is a covariate, and \code{Improved} is the response--- an ordered factor,
 with levels 
@@ -175,7 +188,8 @@ head(Arthritis,5)     # first 5 observations, same as Arthritis[1:5,]
   \code{sum(X[,"Freq"])} or some equivalent form.
   The number of cells in the table is \code{nrow(X)}.
 
-\emph{Example}: For small frequency tables, it is often convenient to enter them in frequency form
+\Example 
+For small frequency tables, it is often convenient to enter them in frequency form
 using \codefun{expand.grid} for the factors and \codefun{c} to list the counts in a vector.
 The example below, from \cite{vcd:Agresti:2002} gives results for the 1991 General Social Survey,
 with respondents classified by sex and party identification.
@@ -197,14 +211,16 @@ sum(GSS$count)
   is \code{sum(X)}.  The number of dimensions of the table is \code{length(dimnames(X))},
   and the table sizes are given by \code{sapply(dimnames(X), length)}.
   	
-\emph{Example}: The \data{HairEyeColor} is stored in table form in \pkg{vcd}.  
+\Example 
+The \data{HairEyeColor} is stored in table form in \pkg{vcd}.  
 <<table-form1,results=verbatim>>=
 str(HairEyeColor)                      # show the structure
 sum(HairEyeColor)                      # number of cases
 sapply(dimnames(HairEyeColor), length) # table dimension sizes
 @
 
-\emph{Example}: Enter frequencies in a matrix, and assign \code{dimnames},
+\Example 
+Enter frequencies in a matrix, and assign \code{dimnames},
 giving the variable names and category labels.  Note that, by default,
 \codefun{matrix} uses the elements supplied by \emph{columns} in the
 result, unless you specify \code{byrow=TRUE}.
@@ -326,7 +342,6 @@ str(as.data.frame(UCB))            # wrong
 
 class(UCB) <- "table"
 str(as.data.frame(UCB))            # now OK
-
 @
 
 \subsection[structable]{\codefun{structable}}
@@ -388,9 +403,12 @@ table option  \code{exclude=NULL} if  the variable  is a  vector. If  the variab
 factor you  have to  create a  new factor  using \code{newfactor  <- factor(oldfactor,
 exclude=NULL)}. 
 
-\subsection{xtabs}\label{sec:xtabs}
+\subsection[xtabs]{\codefun{xtabs}}\label{sec:xtabs}
 
-The \codefun{xtabs} function allows you to create crosstabulations using formula style input.
+The \codefun{xtabs} function allows you to create crosstabulations of data using formula style input.
+This typically works with case-form data supplied in a data frame or a matrix.
+The result is a contingency table in array format, whose dimensions are determined by  
+the terms on the right side of the formula.
 
 <<xtabs-ex1>>=
 # 3-Way Frequency Table
@@ -400,13 +418,78 @@ summary(mytable)   # chi-square test of indepedence
 @
 
 If a variable is included on the left side of the formula, it is assumed to be a
-vector  of  frequencies  (useful  if  the  data  have  already  been tabulated).
+vector  of  frequencies  (useful if the data have already been tabulated in frequency form).
 
 <<xtabs-ex2,results=verbatim>>=
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
 summary(GSStab)
 @
 
+\subsection[Collapsing over table factors]{Collapsing over table factors: \codefun{aggregate} and \codefun{apply}}
+It sometimes happens that we have a data set with more variables or factors than 
+we want to analyse, or else, having done some initial analyses, we decide that
+certain factors are not important, and so should be excluded from graphic displays
+by collapsing (summing) over them.  For example, mosaic plots and fourfold displays
+are often simpler to construct from versions of the data collapsed over
+the factors which are not shown in the plots.
+
+The appropriate tools to use again depend on
+the form in which the data are represented--- a case-form data frame, a
+frequency-form data frame (\codefun{aggregate}), or a table-form array or table object (\codefun{apply}).
+
+When the data are in frequency form, and we want to produce another
+frequency data frame, \codefun{aggregate} is a handy tool, using
+the argument \code{FUN=sum} to sum the frequency variable over the 
+factors \emph{not} mentioned in the formula.
+
+\Example 
+The data frame \data{DaytonSurvey} in the \pkg{vcdExtra} package represents a
+$2^5$ table giving the frequencies of reported use (``ever used?'') of 
+alcohol, cigarettes and marijuana in a sample of high school seniors,
+also classified by sex and race.  
+
+<<dayton1, results=verbatim>>==
+str(DaytonSurvey)
+head(DaytonSurvey)
+@
+
+To focus on the associations among the
+substances, we want to collapse over sex and race. The right-hand side of the formula
+used in the call to \codefun{aggregate} gives the factors to be retained in the
+new frequency data frame, \code{Dayton.ACM.df}.
+
+<<dayton2, results=verbatim>>==
+# data in frequency form
+# collapse over sex and race
+Dayton.ACM.df <- aggregate(Freq ~ cigarette+alcohol+marijuana, data=DaytonSurvey, FUN=sum)
+Dayton.ACM.df
+@
+
+When the data are in table form, and we want to produce another
+table, \codefun{apply} with \code{FUN=sum} can be used in a similar way
+to sum the table over dimensions not mentioned in the \code{MARGIN}
+argument.
+
+
+\Example 
+To illustrate, we first convert the \data{DaytonSurvey} to a 5-way
+table using \codefun{xtabs}, giving \code{Dayton.tab}.  
+
+<<dayton3, results=verbatim>>==
+# in table form
+Dayton.tab <- xtabs(Freq~cigarette+alcohol+marijuana+sex+race, data=DaytonSurvey)
+structable(cigarette+alcohol+marijuana ~ sex+race, data=Dayton.tab)
+@
+Then, use \codefun{apply} on \code{Dayton.tab} to give the
+3-way table \code{Dayton.ACM.tab} summed over sex and race.
+The elements in this new table are the column sums for 
+\code{Dayton.tab} shown by \codefun{structable} just above.
+
+<<dayton4, results=verbatim>>==
+# collapse over sex and race
+Dayton.ACM.tab <- apply(Dayton.tab, MARGIN=1:3, FUN=sum)
+structable(cigarette+alcohol ~ marijuana, data=Dayton.ACM.tab)
+@
 
 \subsection{Converting among frequency tables and data frames}
 
@@ -442,12 +525,13 @@ The resulting
 representing the classifying factors and the table entries (as a column named by
 the \code{responseName} argument, defaulting to \code{Freq}. This is the inverse of \codefun{xtabs}.
 
-\emph{Example}: Convert the \code{GSStab} in table form to a data.frame in frequency form.
+\Example 
+Convert the \code{GSStab} in table form to a data.frame in frequency form.
 <<convert-ex1,results=verbatim>>=
 as.data.frame(GSStab)
 @
 
-\emph{Example}: Convert the \code{Arthritis} data in case form to a 3-way table of
+\Example Convert the \code{Arthritis} data in case form to a 3-way table of
 \code{Treatment} $\times$ \code{Sex} $\times$ \code{Improved}.%
 \footnote{
 \codefun{table} does not allow a \code{data} argument to provide
@@ -464,7 +548,7 @@ ftable(Art.tab)
 @
 
 
-There may also be times that you wil need an equivalent case form \code{data.frame}
+There may also be times that you will need an equivalent case form \code{data.frame}
 with factors  representing the table variables
 rather than the frequency  table.
 For example, the \codefun{mca} function in package \pkg{MASS}
@@ -473,7 +557,7 @@ Marc Schwartz provided code for \codefun{expand.dft} on the  Rhelp
 mailing list for converting a table back into a case form \code{data.frame}.
 This function is included in \pkg{vcdExtra}.
 
-\emph{Example}: Convert the \data{Arthritis} data in table form (\code{Art.tab}) back to a \code{data.frame}
+\Example Convert the \data{Arthritis} data in table form (\code{Art.tab}) back to a \code{data.frame}
 in case form, with factors
 \code{Treatment}, $\times$ \code{Sex} and \code{Improved}.
 <<convert-ex3,results=verbatim>>=
@@ -606,9 +690,14 @@ An exact test is unnecessary in this case.
 <<echo=TRUE,eval=FALSE>>=
 fisher.test(HairEye)
 @
-<<echo=FALSE,eval=TRUE,results=verbatim>>=
-cat(try(fisher.test(HairEye)))
-@
+%# <<echo=TRUE,eval=FALSE,results=verbatim>>=
+%# #cat(try(fisher.test(HairEye)))
+%# @
+\begin{Soutput}
+Error in fisher.test(HairEye) : FEXACT error 6.
+LDKEY is too small for this problem.
+Try increasing the size of the workspace.
+\end{Soutput}
 
 \subsection{Mantel-Haenszel test and conditional association}\label{sec:mantel}
 
@@ -925,7 +1014,7 @@ square tables, where we can test more structured hypotheses about the patterns
 of association than are provided in the tests of general assosiation under
 \codefun{loglm}. 
 
-\emph{Example}:
+\Example
 The data \code{Mental} in the \pkg{vcdExtra} package gives a two-way table in frequency form
 classifying young people by
 their mental health status and parents' socioeconomic status (SES), where
@@ -1135,33 +1224,34 @@ Poisson family, but only apply to cases where the response variable is non-negat
 Here, we plot the independence and the linear-by-linear association model
 for the Mental health data from \secref{sec:glm}.
 These examples illustrate some of the options for labeling (variable names and
-residuals printed in cells).
+residuals printed in cells).  Note that the formula supplied to \codefun{mosaic}
+for \code{glm} objects refers to the order of factors displayed in the plot, not the model.
 <<mental-plots,eval=FALSE>>=
 long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
-mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, 
-     labeling=labeling_residuals,
+mosaic(indep, ~ses+mental, residuals_type="rstandard",  
+     labeling_args = long.labels, labeling=labeling_residuals,
      main="Mental health data: Independence")
 
-mosaic(linlin,residuals_type="rstandard", labeling_args = long.labels, 
-     labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+mosaic(linlin, ~ses+mental, residuals_type="rstandard", 
+     labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
      main="Mental health data: Linear x Linear")
 @
 
 \setkeys{Gin}{width=0.49\textwidth}
 <<mental-plots1,fig=TRUE,echo=FALSE,height=6,width=6>>=
 long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
-mosaic(indep,residuals_type="rstandard", labeling_args = long.labels, 
-    labeling=labeling_residuals,
-       main="Mental health data: Independence")
+mosaic(indep, ~ses+mental, residuals_type="rstandard",  
+     labeling_args = long.labels, labeling=labeling_residuals,
+     main="Mental health data: Independence")
 @
 <<mental-plots2,fig=TRUE,echo=FALSE,height=6,width=6>>=
 long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
-mosaic(linlin,residuals_type="rstandard", labeling_args = long.labels, 
-		labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
-		main="Mental health data: Linear x Linear")
+mosaic(linlin, ~ses+mental, residuals_type="rstandard", 
+     labeling_args = long.labels, labeling=labeling_residuals, suppress=1, gp=shading_Friendly,
+     main="Mental health data: Linear x Linear")
 @
 
-The \pkg{gnm} also fits a wide variety of models with nonlinear terms or terms for
+The \pkg{gnm} package also fits a wide variety of models with nonlinear terms or terms for
 structured associations of table variables.  In the following, we fit the RC(1)
 model
 \begin{equation*}
