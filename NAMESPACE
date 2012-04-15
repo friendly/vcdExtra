@@ -1,4 +1,5 @@
-# last modified 28 Nov 2010 by M. Friendly
+# last modified 15 Apr 2012 by M. Friendly
+# - removed aperm, now that aperm.table is in base
 import(vcd)
 export(
 	expand.dft,expand.table,collapse.table,
@@ -9,7 +10,8 @@ export(
 	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
 	Kway, Crossings, meanResiduals, datasets,
-	loddsratio, as.array, aperm
+	loddsratio, as.array
+#	aperm
 	)
 
 S3method(mosaic, glm)
@@ -41,8 +43,8 @@ S3method(as.matrix, loddsratio)
 S3method(as.array, loddsratio)
 S3method(as.data.frame, loddsratio)
 
-S3method(aperm, default)
-S3method(aperm, table)
+#S3method(aperm, default)
+#S3method(aperm, table)
 
 
 
