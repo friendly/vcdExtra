@@ -321,7 +321,7 @@ We will use the following version of \data{UCBAdmissions} in
 Changing \code{Admit} to \code{Admit?} might be useful for display purposes, but is
 dangerous--- because it is then
 difficult to use that variable name in a model formula.
-See \secref{sec:tips} for options \code{labeling_args} and \code{set_labels}
+See \secref{sec:tips} for options \code{labeling\_args} and \code{set\_labels}
 to change variable and level names 
 for displays in the \code{strucplot} framework.
 }
