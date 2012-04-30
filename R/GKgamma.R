@@ -14,7 +14,7 @@ GKgamma<-function(x, level=0.95)
 	
     n <- nrow(x)
     m <- ncol(x)
-    pi.c<-pi.d<-matrix(0,nr=n,nc=m)
+    pi.c<-pi.d<-matrix(0, nrow=n, ncol=m)
         
     row.x<-row(x)
     col.x<-col(x)
