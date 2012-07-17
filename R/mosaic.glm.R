@@ -50,7 +50,8 @@
             ok <- TRUE
             ## check cross-classifying
             if (ok <- isTRUE(all(table(factors) == 1))) {
-              warning("no formula provided, assuming ", deparse(formula),
+              warning("no formula provided, assuming ",
+                      deparse(formula(terms(~ . , data = factors))),
                       "\n", call. = FALSE)
             }
             if (!ok)
@@ -60,9 +61,11 @@
         else {
             if (length(formula) == 3) formula <- formula[-2]
             ## get indexing factors allowing for missing data, subset etc
-            factors <- do.call("model.frame", list(formula = formula, data = observed,
+            factors <- do.call("model.frame", list(formula = formula,
+                                                   data = observed,
                                                    subset = x$call$subset,
-                                                   na.action = na.pass))
+                                                   na.action = na.pass,
+                                                   drop.unused.levels = TRUE))
             ## following loop needed due to bug in model.frame.default (fixed for R 2.12)
             for(nm in names(factors)) {
                 f <- factors[[nm]]
@@ -99,23 +102,29 @@
                 residuals <- if (residuals_type=="rstandard") rstandard(x)
                 else residuals(x, type=residuals_type)
             residuals <- as.table(tapply(residuals, factors, sum))
+            df <- x$df.residual
         }
         ## for marginal views, use aggregated working residuals
         else {
-            if (missing(residuals)) residuals(x, type = "working")
             residuals <- meanResiduals(x, factors)
             residuals_type <- "working" #what is this used for?
+            df <- attr(residuals, "df")
+            if (df == 0) {
+                warning("There are zero degrees of freedom ",
+                        "for the test of normality")
+                df <- NA
+            }
         }
         ## replace any missing values with zero
         residuals[is.na(residuals)] <- 0
 
 	gp <- if (inherits(gp, "grapcon_generator"))
-				do.call("gp", c(list(observed, residuals, expected, x$df.residual),
-								as.list(gp_args)))
-			else gp
+            do.call("gp", c(list(observed, residuals, expected, df),
+                            as.list(gp_args)))
+        else gp
 
 	panel(observed, residuals=residuals, expected=expected, type=type,
-			residuals_type=residuals_type, gp=gp, ...)
+              residuals_type=residuals_type, gp=gp, ...)
 }
 
 ## convenience functions for sieve and assoc plots
