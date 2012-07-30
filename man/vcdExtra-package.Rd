@@ -16,8 +16,8 @@ adds a 3D version in \code{\link{mosaic3d}}.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.5-3\cr
-Date: \tab 2012-03-07\cr
+Version: \tab 0.5-4\cr
+Date: \tab 2012-07-30\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -27,9 +27,14 @@ mosaic plots and related graphical methods
 that apply to loglinear models fitted using
 \code{glm()} and related, generalized nonlinear models fitted
 with \code{gnm()} in the \code{\link[gnm]{gnm-package}} package.
+
 The method \code{\link{mosaic.glm}} 
 extends the \code{\link[vcd]{mosaic.loglm}} method in the vcd
-package to this wider class of models.  \code{\link{mosaic3d}}
+package to this wider class of models.  This method also works for
+the generalized nonlinear models fit with the \code{\link[gnm]{gnm-package}} package,
+including models for square tables and models with multiplicative associations.
+
+\code{\link{mosaic3d}}
 introduces a 3D generalization of mosaic displays using the
 rgl package.
 

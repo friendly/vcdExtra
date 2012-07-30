@@ -1,5 +1,6 @@
-# last modified 15 Apr 2012 by M. Friendly
+# last modified 30 Jul 2012 by M. Friendly
 # - removed aperm, now that aperm.table is in base
+# - removed meanResiduals, which is now in gnm
 import(vcd)
 export(
 	expand.dft,expand.table,collapse.table,
@@ -9,9 +10,10 @@ export(
 	glmlist, loglmlist, summarise, 
 	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
-	Kway, Crossings, meanResiduals, datasets,
+	Kway, Crossings, 
+	datasets,
 	loddsratio, as.array
-#	aperm
+#	aperm, meanResiduals
 	)
 
 S3method(mosaic, glm)
