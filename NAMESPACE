@@ -1,7 +1,12 @@
-# last modified 30 Jul 2012 by M. Friendly
+# last modified 30 Nov 2012 by M. Friendly
 # - removed aperm, now that aperm.table is in base
 # - removed meanResiduals, which is now in gnm
+# - added HLtest & methods
+
+# we are a vcd extension
 import(vcd)
+
+# joy to the world
 export(
 	expand.dft,expand.table,collapse.table,
 	mosaic.glm, sieve.glm, assoc.glm,
@@ -12,10 +17,12 @@ export(
 	mosaic3d, split3d, range3d, center3d,
 	Kway, Crossings, 
 	datasets,
-	loddsratio, as.array
-#	aperm, meanResiduals
+	loddsratio, as.array,
+#	aperm, meanResiduals,
+	HLtest, HosmerLemeshow
 	)
 
+# basic methods for glm & loglm objects
 S3method(mosaic, glm)
 S3method(sieve, glm)
 S3method(assoc, glm)
@@ -28,12 +35,15 @@ S3method(summarise, loglm)
 S3method(summarise, loglmlist)
 S3method(print, GKgamma)
 S3method(print, Kappa)
+
+# mosaic3d related
 S3method(split3d, shape3d)
 S3method(split3d, list)
 
 S3method(mosaic3d, default)
 S3method(mosaic3d, loglm)
 
+# logoddsratio related methods
 S3method(loddsratio, default)
 S3method(coef, loddsratio)
 S3method(confint, loddsratio)
@@ -45,8 +55,12 @@ S3method(as.matrix, loddsratio)
 S3method(as.array, loddsratio)
 S3method(as.data.frame, loddsratio)
 
+# aperm method removed, as this is now in stats
 #S3method(aperm, default)
 #S3method(aperm, table)
 
-
+S3method(print, HLtest)
+S3method(summary, HLtest)
+S3method(plot, HLtest)
+S3method(rootogram, HLtest)
 
