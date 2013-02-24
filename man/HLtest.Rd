@@ -14,7 +14,7 @@ The \code{HLtest} function computes the classical Hosmer-Lemeshow (1980) goodnes
 for a binomial \code{glm} object in logistic regression
 
 The general idea is to assesses whether or not the observed event rates match expected event rates in subgroups of the 
-model population. The Hosmer–Lemeshow test specifically identifies subgroups as the deciles of fitted event values,
+model population. The Hosmer-Lemeshow test specifically identifies subgroups as the deciles of fitted event values,
 or other quantiles as determined by the \code{g} argument.
 Given these subgroups, a simple chisquare test on \code{g-2} df is used.
 
