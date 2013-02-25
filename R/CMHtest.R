@@ -19,6 +19,13 @@ CMHtest <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 	types=c("cor", "cmeans", "rmeans", "general"),
 	overall=FALSE, details=overall,  ...)
 {
+
+	snames <- function(x, strata) {
+	  	sn <- dimnames(x)[strata]
+	  	dn <- names(sn)
+	  	apply(expand.grid(sn), 1, function(x) paste(dn, x, sep=":", collapse = "|"))
+	}
+
   ## check dimensions
   L <- length(d <- dim(x))
   if(any(d < 2L)) stop("All table dimensions must be 2 or greater")
@@ -35,11 +42,13 @@ CMHtest <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 
   # handle strata
   if (!is.null(strata)) {
-  	res <- apply(x, strata, CMHtest2, rscores=rscores, cscores=cscores, 
-			types=types,details=details, ...)
-		# TODO: fix names if there are 2+ strata
-		if (is.null(names(res))) {}
-		# TODO: Calculate generalized CMG, controlling for strata
+  	sn <- snames(x, strata)
+  	
+  	res <- c(apply(x, strata, CMHtest2, rscores=rscores, cscores=cscores, 
+			types=types,details=details, ...))
+		# DONE: fix names if there are 2+ strata
+		names(res) <- sn
+		# TODO: Calculate generalized CMH, controlling for strata
 		if (overall) {message("overall CMH test not yet implemented")}
 		return(res)
 	}
@@ -51,7 +60,7 @@ CMHtest <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 #  DONE:  now allow rscores/cscores == 'midrank' for midrank scores
 #  DONE:  allow rscores/cscores=NULL for unordered factors, where ordinal
 #     scores don't make sense
-CMHtest2 <- function(x, rscores=1:R, cscores=1:C, 
+CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C, 
 	types=c("cor", "cmeans", "rmeans", "general"),
 	details=FALSE, ...) {
 
@@ -123,7 +132,7 @@ CMHtest2 <- function(x, rscores=1:R, cscores=1:C,
 	colnames(table) <- c("Chisq", "Df", "Prob")
 	rownames(table) <- types
 	xnames <- names(dimnames(x))
-	result <- list(table=table, names=xnames, rscores=rscores, cscores=cscores )
+	result <- list(table=table, names=xnames, rscores=rscores, cscores=cscores, stratum=stratum )
 	if (details) result <- c(result, list(A=A, V=V, n=n, m=m))
 	class(result) <- "CMHtest"
 	result
