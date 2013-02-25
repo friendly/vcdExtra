@@ -5,10 +5,10 @@ o Added CMHtest for general Cochran-Mantel-Haenszel tests
 
 Version 0.5-3 (2012-03-07)
 
-o Added Mammograms data
+o Added Mammograms data (4x4, ordered factors, agreement)
 o Extended mosaic.glm examples
-o Added Alligator data
-o Added DaytonSurvey data (5-way, 2x2x2x2x2)
+o Added Alligator data (4x2x2x5, in frequency form)
+o Added DaytonSurvey data (5-way, 2x2x2x2x2 in frequency form)
 o Extended vcd-tutorial vignette with a section on collapsing over factors
 o Removed aperm.* now that aperm.table is in base R
 
@@ -27,7 +27,7 @@ o Moved tv.dat to inst/doc/extdata to avoid warnings in R 2.12+
 
 Version 0.5-1 (2010-09-17)
 
-o Added Yamaguchi87 data (three-way mobility table)
+o Added Yamaguchi87 data (5x5x3 three-way mobility table in frequency form)
 o Added demo(yamaguchi-xie) illustrating fitting and visualization of the models of homogeneous and 
   log multiplicative layer effects fit in Xie (1992, Table 1)
 o Added BIC to summarize() and friends
