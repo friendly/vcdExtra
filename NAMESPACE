@@ -2,6 +2,7 @@
 # - removed aperm, now that aperm.table is in base
 # - removed meanResiduals, which is now in gnm
 # - added HLtest & methods
+# - added CMHtest
 
 # we are a vcd extension
 import(vcd)
@@ -19,7 +20,8 @@ export(
 	datasets,
 	loddsratio, as.array,
 #	aperm, meanResiduals,
-	HLtest, HosmerLemeshow
+	HLtest, HosmerLemeshow,
+	CMHtest
 	)
 
 # basic methods for glm & loglm objects
@@ -63,4 +65,6 @@ S3method(print, HLtest)
 S3method(summary, HLtest)
 S3method(plot, HLtest)
 S3method(rootogram, HLtest)
+
+S3method(print, CMHtest)
 
