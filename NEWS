@@ -2,6 +2,7 @@ Version 0.5-6 (2012-11-30)
 
 o Added Hosmer Lemeshow and HLtest methods, including plotting via vcd::rootogram()
 o Added CMHtest for general Cochran-Mantel-Haenszel tests
+o Revised vcd-tutorial vignette, adding a section on CMH tests; removed dependence on Z.cls
 
 Version 0.5-3 (2012-03-07)
 

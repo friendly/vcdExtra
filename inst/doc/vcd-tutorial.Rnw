@@ -1,6 +1,44 @@
-\documentclass{Z}
-%% need no \usepackage{Sweave}
+%\VignetteIndexEntry{Tutorial: Working with categorical data with R and the vcd package}
+%\VignetteDepends{vcd,gmodels,ca}
+%\VignetteKeywords{contingency tables, mosaic plots, sieve plots, categorical data, independence, conditional independence, R}
+%\VignettePackage{vcdExtra}
+
+%\documentclass{Z}
+\documentclass[10pt,twoside]{article}
+\usepackage{Sweave}
 \usepackage{bm}
+\usepackage[toc]{multitoc}   % for table of contents
+
+% from Z.cls
+\usepackage[authoryear,round,longnamesfirst]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+\bibliographystyle{jss}
+
+\usepackage{hyperref}
+\usepackage{color}
+%% colors
+\definecolor{Red}{rgb}{0.7,0,0}
+\definecolor{Blue}{rgb}{0,0,0.8}
+\hypersetup{%
+  hyperindex = {true},
+  colorlinks = {true},
+%  linktocpage = {true},
+  plainpages = {false},
+  linkcolor = {Blue},
+  citecolor = {Blue},
+  urlcolor = {Red},
+  pdfstartview = {Fit},
+  pdfpagemode = {UseOutlines},
+  pdfview = {XYZ null null null}
+}
+%\AtBeginDocument{
+%  \hypersetup{%
+%    pdfauthor = {Michael Friendly},
+%    pdftitle = {Tutorial: Working with categorical data with R and the vcd package},
+%    pdfkeywords = {contingency tables, mosaic plots, sieve plots, categorical data, independence, conditional independence, R}
+%  }
+%}
+
 
 % math stuff
 \newcommand*{\given}{\ensuremath{\, | \,}}
@@ -44,42 +82,26 @@
 \def\Rd@code#1{\texttt{\nohyphenation#1}\egroup}
 
 \newcommand{\codefun}[1]{\code{#1()}}
+\let\proglang=\textsf
+\newcommand{\pkg}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+\newcommand{\Rpackage}[1]{{\textsf{#1}}}
 
 %% almost as usual
 \author{Michael Friendly\\York University, Toronto}
 \title{Working with categorical data with \proglang{R} and the \pkg{vcd} and \pkg{vcdExtra} packages}
+\date{\footnotesize{Using \Rpackage{vcdExtra} version \Sexpr{packageDescription("vcdExtra")[["Version"]]}
+  and \Rpackage{vcd} version \Sexpr{packageDescription("vcd")[["Version"]]}; Date: \Sexpr{Sys.Date()}}}
+
 
 %% for pretty printing and a nice hypersummary also set:
-\Plainauthor{Michael Friendly} %% comma-separated
-\Shorttitle{vcd tutorial} %% a short title (if necessary)
-\Plaintitle{Tutorial: Working with categorical data with R and the vcd package}
-
-%% an abstract and keywords
-\Abstract{
-This tutorial describes the creation of frequency and contingency tables
-from categorical variables, along with tests of independence, measures
-of association, and methods for graphically displaying results. 
-The framework is provided by the \proglang{R} package \pkg{vcd},
-but other packages are used to help with various tasks.  
-The \pkg{vcdExtra} package extends the graphical methods provided by
-\pkg{vcd}.
-}
-
-\Keywords{contingency tables, mosaic plots, sieve plots, 
-categorical data, independence, conditional independence, generalized linear models,
-\proglang{R}}
-\Plainkeywords{contingency tables, mosaic plots, 
-  sieve plots, categorical data, independence, 
-  conditional independence, generalized linear models, R}
+%\Plainauthor{Michael Friendly} %% comma-separated
+%\Shorttitle{vcd tutorial} %% a short title (if necessary)
+%\Plaintitle{Tutorial: Working with categorical data with R and the vcd package}
 
 %\SweaveOpts{engine=R,eps=TRUE,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
 \SweaveOpts{engine=R,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
 \SweaveOpts{prefix.string=fig/vcd-tut,eps=FALSE}
 \setkeys{Gin}{width=0.7\textwidth}
-%\VignetteIndexEntry{Tutorial: Working with categorical data with R and the vcd package}
-%\VignetteDepends{vcd,gmodels,ca}
-%\VignetteKeywords{contingency tables, mosaic plots, sieve plots, categorical data, independence, conditional independence, R}
-%\VignettePackage{vcdExtra}
 
 <<preliminaries,echo=FALSE,results=hide>>=
 set.seed(1071)
@@ -97,14 +119,38 @@ art <- xtabs(~Treatment + Improved, data = Arthritis)
 %% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \SweaveOpts{keep.source=TRUE}
-
-\begin{document}
 %\SweaveOpts{concordance=TRUE}
 
-%% include your article here, just as usual
-%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+\begin{document}
+\maketitle
 
-\section[Introduction]{Introduction}
+%% an abstract and keywords
+\begin{abstract}
+This tutorial describes the creation of frequency and contingency tables
+from categorical variables, along with tests of independence, measures
+of association, and methods for graphically displaying results. 
+The framework is provided by the \proglang{R} package \pkg{vcd},
+but other packages are used to help with various tasks.  
+The \pkg{vcdExtra} package extends the graphical methods provided by
+\pkg{vcd}.
+\end{abstract}
+
+%\keywords{contingency tables, mosaic plots, sieve plots, 
+%categorical data, independence, conditional independence, generalized linear models,
+%\proglang{R}}
+%\Plainkeywords{contingency tables, mosaic plots, 
+%  sieve plots, categorical data, independence, 
+%  conditional independence, generalized linear models, R}
+
+{\small
+% \sloppy
+% \begin{multicols}{2}
+ \tableofcontents
+% \end{multicols}
+}
+
+
+\section[Introduction]{Introduction}\label{sec:intro}
 %% Note: If there is markup in \(sub)section, then it has to be escape as above.
 
 
@@ -145,7 +191,7 @@ the \proglang{Splus/R} companion by Laura Thompson,
 
 
 
-\section{Creating and manipulating frequency tables}
+\section[Creating tables]{Creating and manipulating frequency tables}\label{sec:creating}
 
 \proglang{R} provides many methods for creating frequency and contingency tables. Several are
 described below. In the examples below, we use some real examples and some anonymous
@@ -241,7 +287,7 @@ str(JobSat)
 
 \end{description}
 
-\subsection{Ordered factors and reordered tables}\label{sec:ordered-factors}
+\subsection[Ordered factors]{Ordered factors and reordered tables}\label{sec:ordered-factors}
 In table form, the values of the table factors are ordered by their position in the table.
 Thus in the \data{JobSat} data, both \code{income} and \code{satisfaction} represent ordered
 factors, and the \emph{positions} of the values in the rows and columns reflects their
@@ -347,7 +393,7 @@ ftable(UCB)
 %str(as.data.frame(UCB))            # now OK
 %@
 %
-\subsection[structable]{\codefun{structable}}
+\subsection[structable]{\codefun{structable}}\label{sec:structable}
 For 3-way and larger tables
 the \codefun{structable} function in \pkg{vcd} provides a convenient and flexible tabular display.
 The variables assigned to the rows and columns of a two-way display can be specified
@@ -428,7 +474,7 @@ vector  of  frequencies  (useful if the data have already been tabulated in freq
 summary(GSStab)
 @
 
-\subsection[Collapsing over table factors]{Collapsing over table factors: \codefun{aggregate} and \codefun{apply}}
+\subsection[Collapsing]{Collapsing over table factors: \codefun{aggregate} and \codefun{apply}}
 It sometimes happens that we have a data set with more variables or factors than 
 we want to analyse, or else, having done some initial analyses, we decide that
 certain factors are not important, and so should be excluded from graphic displays
@@ -494,7 +540,7 @@ Dayton.ACM.tab <- apply(Dayton.tab, MARGIN=1:3, FUN=sum)
 structable(cigarette+alcohol ~ marijuana, data=Dayton.ACM.tab)
 @
 
-\subsection{Converting among frequency tables and data frames}
+\subsection[Converting]{Converting among frequency tables and data frames}
 
 As we've seen, a given contingency table can be represented 
 equivalently in different forms,
@@ -675,7 +721,7 @@ derived via Monte Carlo simulation.
 chisq.test(HairEye)
 @
 
-\subsection{Fisher Exact Test}
+\subsection{Fisher Exact Test}\label{sec:Fisher}
 
 \code{fisher.test(X)} provides an  exact test of  independence. \code{X} must be  a two-way
 contingency table in table form.  Another form, 
@@ -702,7 +748,7 @@ LDKEY is too small for this problem.
 Try increasing the size of the workspace.
 \end{Soutput}
 
-\subsection{Mantel-Haenszel test and conditional association}\label{sec:mantel}
+\subsection[Mantel-Haenszel test]{Mantel-Haenszel test and conditional association}\label{sec:mantel}
 
 Use the  \code{mantelhaen.test(X)} function  to perform  a Cochran-Mantel-Haenszel 
 $\chi^2$ chi
@@ -796,6 +842,48 @@ plot(lor, xlab="Department", ylab="Log Odds Ratio (Admit | Gender)")
 \label{fig:oddsratio}
 \end{center}
 \end{figure}
+
+\subsection[CMH tests: ordinal factors]{Cochran-Mantel-Haenszel tests for ordinal factors}
+The standard $\chi^2$ tests for association in a two-way table
+treat both table factors as nominal (unordered) categories.
+When one or both factors of a two-way table are
+quantitative or ordinal, more powerful tests of association
+may be obtaianed by taking ordinality into account using
+row and or column scores to test for linear trends or differences
+in row or column means.
+
+More general versions of the CMH tests (Landis etal., 1978) are provided by assigning
+numeric scores to the row and/or column variables. 
+For example, with two ordinal factors (assumed to be equally spaced), assigning
+integer scores, \code{1:R} and \code{1:C} tests the linear $\times$ linear component
+of association, statistically equivalent to the Pearson correlation between the
+integer-scored table variables, with $\chi^2 = (n-1) r^2$, with only 1 $df$
+rather than $(R-1)\times(C-1)$ for the test of general association.
+
+When only one table
+variable is ordinal, these general CMH tests are analogous to an ANOVA, testing
+whether the row mean scores or column mean scores are equal, again consuming
+fewer $df$ than the test of general association.
+
+The \codefun{CMHtest} function in \pkg{vcdExtra} now calculates these various
+CMH tests for two possibly ordered factors, optionally stratified other factor(s).
+
+\Example
+Recall the $4 \times 4$ table, \code{JobSat} introduced in \secref{sec:creating},
+<<jobsat, results=verbatim>>=
+JobSat
+@
+
+Treating the \code{satisfaction} levels as equally spaced, but using
+midpoints of the \code{income} categories as row scores gives the following results:
+<<cmh1, results=verbatim>>=
+CMHtest(JobSat, rscores=c(7.5,20,32.5,60))
+@
+
+Note that with the relatively small cell frequencies, the test for general 
+give no evidence for association. However, the the \code{cor} test for linear x linear
+association on 1 df is nearly significant.
+
 \subsection{Measures of Association}
 
 There are a variety of statistical measures of \emph{strength} of association for
@@ -1292,7 +1380,7 @@ to achieve a given effect from the \code{help()}.  As a first step, you should r
 these plot methods.  The notes below describe a few useful things that may not be obvious,
 or can be done in different ways.
 
-\subsubsection{Changing the labels for variables and levels}
+\subsubsection[Changing labels]{Changing the labels for variables and levels}
 With data in contingency table form or as a frequency data frame, it often happens
 that the variable names and/or the level values of the factors, while suitable
 for analysis, are less than adequate when used in mosaic plots and other strucplot
