@@ -139,6 +139,9 @@ CMHtest(JobSat, rscores="midrank", cscores="midrank")
 data(MSPatients, package="vcd")
 CMHtest(MSPatients)
 
+# using a frequency data.frame
+CMHtest(xtabs(Freq~ses+mental, data=Mental))
+
 # Stokes etal, Table 5.1, p 92: two unordered factors
 parties <- matrix(
 	c(221, 160, 360, 140,
