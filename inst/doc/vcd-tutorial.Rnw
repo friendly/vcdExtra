@@ -70,7 +70,7 @@
 % R stuff
 \newcommand{\var}[1]{\textit{\texttt{#1}}}
 \newcommand{\data}[1]{\texttt{#1}}
-\newcommand{\class}[1]{\textsf{#1}}
+\newcommand{\class}[1]{\textsf{"#1"}}
 %% \code without `-' ligatures
 \def\nohyphenation{\hyphenchar\font=-1 \aftergroup\restorehyphenation}
 \def\restorehyphenation{\hyphenchar\font=`-}
@@ -131,7 +131,7 @@ from categorical variables, along with tests of independence, measures
 of association, and methods for graphically displaying results. 
 The framework is provided by the \proglang{R} package \pkg{vcd},
 but other packages are used to help with various tasks.  
-The \pkg{vcdExtra} package extends the graphical methods provided by
+The \pkg{vcdExtra} package extends the graphical and statistical methods provided by
 \pkg{vcd}.
 \end{abstract}
 
@@ -180,7 +180,7 @@ available in \proglang{R}.  On the other hand, the implementation of graphical
 methods in \pkg{vcd} is more general in many respects than what I provided in
 \proglang{SAS}. Statistical models for categorical data in \proglang{R} have
 been extended considerably with the \pkg{gnm} package for generalized \emph{nonlinear}
-models.  The \pkg{vcdExtra} package extends \pkg{vcd} to models fit using
+models.  The \pkg{vcdExtra} package extends \pkg{vcd} methods to models fit using
 \codefun{glm} and \codefun{gnm}.
 
 A more complete theoretical description of these statistical
@@ -1148,11 +1148,15 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore, family = poisson, data = Ment
 
 # linear x linear association
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore, family = poisson, data = Mental)
-
-# compare models using AIC
-AIC(indep, roweff, coleff, linlin)
 @
-In model comparisons, we can carry out tests of \emph{nested} models with
+The \codefun{summarize} in \pkg{vcdExtra} provides a nice, compact summary of the
+fit statistics for a set of models, collected into a \class{glmlist} object.
+Smaller is better for AIC and BIC.
+<<mental4a,results=verbatim>>=
+# compare models using AIC, BIC, etc
+summarise(glmlist(indep, roweff, coleff, linlin))
+@
+For specific model comparisons, we can also carry out tests of \emph{nested} models with
 \codefun{anova} when those models are listed from smallest to largest.
 Here, there are two separate paths from the most restrictive (independence) model
 through the model of uniform association, to those that allow only one of
@@ -1324,11 +1328,12 @@ so all \code{*.glm} methods apply, unless overridden in the \pkg{gnm} package.
 These are not restricted to the 
 Poisson family, but only apply to cases where the response variable is non-negative. 
 
+\Example
 Here, we plot the independence and the linear-by-linear association model
 for the Mental health data from \secref{sec:glm}.
 These examples illustrate some of the options for labeling (variable names and
-residuals printed in cells).  Note that the formula supplied to \codefun{mosaic}
-for \code{glm} objects refers to the order of factors displayed in the plot, not the model.
+residuals printed in cells).  Note that the \code{formula} supplied to \codefun{mosaic}
+for \class{glm} objects refers to the order of factors displayed in the plot, not the model.
 <<mental-plots,eval=FALSE>>=
 long.labels <- list(set_varnames = c(mental="Mental Health Status", ses="Parent SES"))
 mosaic(indep, ~ses+mental, residuals_type="rstandard",  
@@ -1375,8 +1380,8 @@ mosaic(RC1model, residuals_type="rstandard", labeling_args = long.labels,
        main="Mental health data: RC(1) model")
 @
 Other forms of nonlinear terms are provided for the inverse of a predictor
-(codefun{Inv}) and the exponential of a predictor (codefun{Exp}).
-You should read \code{vignette("gnmOverview")} for further details.
+(\codefun{Inv}) and the exponential of a predictor (\codefun{Exp}).
+You should read \code{vignette("gnmOverview", package="gnm")} for further details.
 
 \subsection{Mosaic tips and techniques}\label{sec:tips}
 
