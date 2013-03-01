@@ -14,6 +14,7 @@
 
 # DONE: this should be the main function, handling 2-way & higher-way tables
 #  With strata, use apply() or recursion over strata
+# DONE: With strata, calculate overall CMH tests controlling for strata
 
 CMHtest <- function(x, strata = NULL, rscores=1:R, cscores=1:C, 
 	types=c("cor", "cmeans", "rmeans", "general"),
@@ -44,22 +45,33 @@ CMHtest <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
   if (!is.null(strata)) {
   	sn <- snames(x, strata)
   	
+		# TODO: supply strata names as the stratum= argument in this call, or else modify 
+		#    the stratum component in res after
   	res <- c(apply(x, strata, CMHtest2, rscores=rscores, cscores=cscores, 
 			types=types,details=details, ...))
 		# DONE: fix names if there are 2+ strata
 		names(res) <- sn
-		# TODO: Calculate generalized CMH, controlling for strata
-		if (overall) {message("overall CMH test not yet implemented")}
+		# DONE: Calculate generalized CMH, controlling for strata
+		if (overall) {
+			if (!details) warning("Overall CMH tests not calculated because details=FALSE")
+			else {
+				resall <- CMHtest3(res, types=types)
+				res$ALL <- resall
+				}
+			}
 		return(res)
 	}
 	else CMHtest2(x, rscores=rscores, cscores=cscores, 
 		types=types,details=details, ...)	
 }
 
-# handle two-way case
+# handle two-way case, for a given stratum
 #  DONE:  now allow rscores/cscores == 'midrank' for midrank scores
 #  DONE:  allow rscores/cscores=NULL for unordered factors, where ordinal
 #     scores don't make sense
+#  DONE: modified to return all A matrices as a list
+#  DONE: cmh() moved outside
+
 CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C, 
 	types=c("cor", "cmeans", "rmeans", "general"),
 	details=FALSE, ...) {
@@ -68,14 +80,6 @@ CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
 	lkronecker <- function(x, y, make.dimnames=TRUE, ...)
 		kronecker(y, x, make.dimnames=make.dimnames, ...)
 		
-	# basic CMH calculation
-	cmh <- function(A, V, df) {
-		AVA <- A %*% V %*% t(A)
-		Q <- t(n-m) %*% t(A) %*% solve(AVA) %*% A %*% (n-m)
-		pvalue <- pchisq(Q, df, lower.tail=FALSE)
-		c(Q, df, pvalue)
-	}
-	 
 	# midrank scores (modified ridits) based on row/column totals
 	midrank <- function (n) {
 		cs <- cumsum(n)
@@ -107,37 +111,95 @@ CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
 	if (is.null(cscores)) types <- setdiff(types, c("rmeans", "cor"))
 
 	table <- NULL
+	Amats <- list()
 	if("cor" %in% types) {
 		A <- lkronecker( t(rscores), t(cscores) )
 		df <- 1
-		table <- rbind(table, cmh(A, V, df))
+		table <- rbind(table, cmh(n, m, A, V, df))
+		Amats$cor <- A
 		}
 	if("rmeans" %in% types) {
 		A <- lkronecker( cbind(diag(R-1), rep(0, R-1)), t(cscores))
 		df <- R-1
-		table <- rbind(table, cmh(A, V, df))
+		table <- rbind(table, cmh(n, m, A, V, df))
+		Amats$rmeans <- A
 		}
 	if("cmeans" %in% types) {
 		A <- lkronecker( t(rscores), cbind(diag(C-1), rep(0, C-1)))
 		df <- C-1
-		table <- rbind(table, cmh(A, V, df))
+		table <- rbind(table, cmh(n, m, A, V, df))
+		Amats$cmeans <- A
 		}
 	if ("general" %in% types) {
 		A <- lkronecker( cbind(diag(R-1), rep(0, R-1)), cbind(diag(C-1), rep(0, C-1)))
 		df <- (R-1)*(C-1)
-		table <- rbind(table, cmh(A, V, df))
+		table <- rbind(table, cmh(n, m, A, V, df))
+		Amats$general <- A
 		}
-
 
 	colnames(table) <- c("Chisq", "Df", "Prob")
 	rownames(table) <- types
 	xnames <- names(dimnames(x))
 	result <- list(table=table, names=xnames, rscores=rscores, cscores=cscores, stratum=stratum )
-	if (details) result <- c(result, list(A=A, V=V, n=n, m=m))
+	if (details) result <- c(result, list(A=Amats, V=V, n=n, m=m))
 	class(result) <- "CMHtest"
 	result
 }
 
+# do overall test, from a computed CMHtest list
+CMHtest3 <- function(object,
+	types=c("cor", "cmeans", "rmeans", "general")) 
+{
+	nstrat <- length(object)   # number of strata
+
+	# extract components, each a list of nstrat terms
+	n.list <- lapply(object, function(s) s$n)
+	m.list <- lapply(object, function(s) s$m)
+	V.list <- lapply(object, function(s) s$V)
+	A.list <- lapply(object, function(s) s$A)
+	nt <- sapply(lapply(object, function(s) s$n), sum)
+	Df <- object[[1]]$table[,"Df"]
+
+	if (length(types)==1 && types=="ALL") types <- c("general", "rmeans", "cmeans", "cor" )
+	types <- match.arg(types, several.ok=TRUE)
+
+	table <- list()
+	for (type in types) {
+		AVA <- 0
+		Anm <- 0
+		for (k in 1:nstrat) {
+			A <- A.list[[k]][[type]]
+			V <- V.list[[k]]
+			n <- n.list[[k]]
+			m <- m.list[[k]]
+			AVA <- AVA + A %*% V %*% t(A)
+			Anm <- Anm + A %*% (n-m)
+			}
+		Q <- t(Anm) %*% solve(AVA) %*% Anm
+		df <- Df[type]
+		pvalue <- pchisq(Q, df, lower.tail=FALSE)
+		table <- rbind(table, c(Q, df, pvalue))
+	}
+	rownames(table) <- types
+	colnames(table) <- c("Chisq", "Df", "Prob")
+	xnames <- object[[1]]$names
+	result=list(table=table, names=xnames, stratum="ALL")
+	class(result) <- "CMHtest"
+	result
+}
+
+
+
+# basic CMH calculation
+cmh <- function(n, m,A, V, df) {
+	AVA <- A %*% V %*% t(A)
+	Q <- t(n-m) %*% t(A) %*% solve(AVA) %*% A %*% (n-m)
+	pvalue <- pchisq(Q, df, lower.tail=FALSE)
+	c(Q, df, pvalue)
+}
+
+# TODO: incorporate stratum name in the heading
+# TODO: handle the printing of pvalues better
 
 print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
 	heading <- "Cochran-Mantel-Haenszel Statistics"

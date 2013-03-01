@@ -16,8 +16,8 @@ adds a 3D version in \code{\link{mosaic3d}}.
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.5-6\cr
-Date: \tab 2012-11-30\cr
+Version: \tab 0.5-7\cr
+Date: \tab 2013-03-01\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -27,9 +27,12 @@ mosaic plots and related graphical methods
 that apply to loglinear models fitted using
 \code{glm()} and related, generalized nonlinear models fitted
 with \code{gnm()} in the \code{\link[gnm]{gnm-package}} package.
+A related purpose is to fill in some holes in the analysis of
+categorical data in R, not provided in base R, the \pkg{vcd}, 
+or other commonly used packages.
 
 The method \code{\link{mosaic.glm}} 
-extends the \code{\link[vcd]{mosaic.loglm}} method in the vcd
+extends the \code{\link[vcd]{mosaic.loglm}} method in the \pkg{vcd}
 package to this wider class of models.  This method also works for
 the generalized nonlinear models fit with the \code{\link[gnm]{gnm-package}} package,
 including models for square tables and models with multiplicative associations.
@@ -38,7 +41,7 @@ including models for square tables and models with multiplicative associations.
 introduces a 3D generalization of mosaic displays using the
 rgl package.
 
-In addition, there are several new data sets, a new vignette,
+In addition, there are several new data sets, a tutorial vignette,
 \describe{
   \item{vcd-tutorial}{Working with categorical data with R and the vcd package, \code{vignette("vcd-tutorial", package = "vcdExtra") }}
 }
