@@ -1,3 +1,7 @@
+Version 0.5-7 (2013-03-01)
+
+o Completed CMHtest methods, adding overall tests across strata in a general way
+
 Version 0.5-6 (2012-11-30)
 
 o Added Hosmer Lemeshow and HLtest methods, including plotting via vcd::rootogram()

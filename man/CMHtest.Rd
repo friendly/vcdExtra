@@ -8,7 +8,9 @@ Generalized Cochran-Mantel-Haenszel Tests
 }
 \description{
 Provides generalized Cochran-Mantel-Haenszel tests of association of two possibly ordered factors, 
-optionally stratified other factor(s).
+optionally stratified other factor(s).  With strata, \code{CMHtest} calculates these tests for
+each level of the statifying variables and also provides overall tests controlling for the
+strata.
 
 For ordinal factors, more powerful tests than the test for general association
 (independence) are obtained by assigning scores to the row and columm categories. 
@@ -48,7 +50,7 @@ or \code{"ALL"} for all of these.
 }
   \item{overall}{
 logical. Whether to calculate overall tests, controlling for
-the stratifying factors. [Not yet implemented]
+the stratifying factors. 
 }
   \item{details}{
 logical.  Whether to include computational details in the result
@@ -66,22 +68,42 @@ The standard \eqn{\chi^2} tests for association in a two-way table
 treat both table factors as nominal (unordered) categories.
 When one or both factors of a two-way table are
 quantitative or ordinal, more powerful tests of association
-may be obtaianed by taking ordinality into account using
+may be obtained by taking ordinality into account using
 row and or column scores to test for linear trends or differences
 in row or column means.
 
-The CMH analysis produces generalized Cochran-Mantel-Haenszel statistics
+The CMH analysis for a two-way table produces generalized Cochran-Mantel-Haenszel statistics
 (Landis etal., 1978).
-These include the CMH correlation statistic (\code{"cor"}),
-treating both factors as ordered
-(for a given statum, this CMH statistic reduces to \eqn{(n-1) r^2},
-where \eqn{r} is the Pearson correlation between X and Y).
- 
-The ANOVA (row mean scores and column mean scores) statistics,
-treat the columns and rows respectively as ordinal,
-and are sensitive to location shifts over columns or rows.
 
-The CMH general association statistic treat both factors as unordered. 
+These include the CMH \bold{correlation} statistic (\code{"cor"}),
+treating both factors as ordered.
+For a given statum, with equally spaced row and column scores,
+this CMH statistic reduces to \eqn{(n-1) r^2},
+where \eqn{r} is the Pearson correlation between X and Y.
+With \code{"midrank"} scores, this CMH statistic is analogous
+to \eqn{(n-1) r_S^2}, using the Spearman rank correlation.
+ 
+The \bold{ANOVA} (row mean scores and column mean scores) statistics,
+treat the columns and rows respectively as ordinal,
+and are sensitive to mean shifts over columns or rows.
+These are transforms of the \eqn{F} statistics from one-way ANOVAs
+with equally spaced scores and to Kruskal-Wallis tests with
+\code{"midrank"} scores. 
+
+The CMH \bold{general} association statistic treat both factors as unordered,
+and give a test closely related to the Pearson \eqn{\chi^2} test.
+When there is more than one stratum, the overall general CMH statistic
+gives a stratum-adjusted Pearson \eqn{\chi^2},
+equivalent to what is calculated by \code{\link[stats]{mantelhaen.test}}.
+
+For a 3+ way table, one table of CMH tests is produced for each 
+combination of the factors identified as \code{strata}.
+If \code{overall=TRUE}, an additional table is calculated for
+the same two primary variables, controlling for (pooling over)
+the \code{strata} variables.
+These tests implicitly assume no interactions  between the 
+primary variables and the strata and will have low power in the
+presence of interactions.
 }
 
 \value{
@@ -95,6 +117,8 @@ An object of class \code{"CMHtest"} , a list with the following 4 components:
 If \code{details==TRUE}, additional components are included.
 
 If there are strata, the result is a list of \code{"CMHtest"} objects.
+If \code{overall=TRUE} another component, labeled \code{ALL}
+is appended to the list.
 }
 
 
@@ -135,9 +159,14 @@ data(JobSat, package="vcdExtra")
 CMHtest(JobSat)
 CMHtest(JobSat, rscores="midrank", cscores="midrank")
 
-# try a 3-way table (both factors ordinal)
+# A 3-way table (both factors ordinal)
 data(MSPatients, package="vcd")
 CMHtest(MSPatients)
+
+# also calculate overall tests, controlling for Patient
+CMHtest(MSPatients, overall=TRUE)
+# compare with mantelhaen.test
+mantelhaen.test(MSPatients)
 
 # using a frequency data.frame
 CMHtest(xtabs(Freq~ses+mental, data=Mental))
