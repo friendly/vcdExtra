@@ -43,15 +43,13 @@ CMHtest <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 
   # handle strata
   if (!is.null(strata)) {
-  	sn <- snames(x, strata)
-  	
-		# TODO: supply strata names as the stratum= argument in this call, or else modify 
-		#    the stratum component in res after
-  	res <- c(apply(x, strata, CMHtest2, rscores=rscores, cscores=cscores, 
+    sn <- snames(x, strata)
+    res <- c(apply(x, strata, CMHtest2, rscores=rscores, cscores=cscores, 
 			types=types,details=details, ...))
-		# DONE: fix names if there are 2+ strata
-		names(res) <- sn
-		# DONE: Calculate generalized CMH, controlling for strata
+    # DONE: fix names if there are 2+ strata
+    names(res) <- sn
+    for (i in seq_along(res)) res[[i]]$stratum <- sn[i]
+    # DONE: Calculate generalized CMH, controlling for strata
 		if (overall) {
 			if (!details) warning("Overall CMH tests not calculated because details=FALSE")
 			else {
@@ -86,7 +84,7 @@ CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
 		(2*cs - n +1) / (2*(cs[length(cs)]+1))
 	}
 
-  L <- length(d <- dim(x))
+    L <- length(d <- dim(x))
 	R <- d[1]
 	C <- d[2]
 	
@@ -198,26 +196,26 @@ cmh <- function(n, m,A, V, df) {
 	c(Q, df, pvalue)
 }
 
-# TODO: incorporate stratum name in the heading
+# DONE: incorporate stratum name in the heading
 # TODO: handle the printing of pvalues better
 
 print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
 	heading <- "Cochran-Mantel-Haenszel Statistics"
 	if (!is.null(x$names)) heading <- paste(heading, "for", paste(x$names, collapse=" by "))
+	if (!is.null(x$stratum)) heading <- paste(heading, 
+				ifelse(x$stratum=="ALL", "\n\tOverall tests, controlling for all strata", paste("\n\tin stratum", x$stratum)))
 	# TODO: determine score types (integer, midrank) for heading
-
+	
 	df <- x$table
 	types <- rownames(df)
 	labels <- list(cor="Nonzero correlation", rmeans="Row mean scores differ",
 			cmeans="Col mean scores differ", general="General association")
-	df <- data.frame("AltHypothesis"=as.character(unlist(labels[types])), df)
+	labels <- unlist(labels[types])  # select the labels for the types
+	df <- data.frame("AltHypothesis"=as.character(labels), df, stringsAsFactors=FALSE)
 	cat(heading,"\n\n")
 	print(df, digits=digits, ...)
-
-#	# TODO: use print.anova() method, but this screws up the AltHyp
-#	attr(df, "heading") <- paste(heading,"\n")
-#	class(df) <- c("anova", "data.frame")
-#	print(df)
+	cat("\n")
+	
 	invisible(x)
 }
 
