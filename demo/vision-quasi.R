@@ -27,3 +27,7 @@ mosaic(quasi.symm, residuals_type="rstandard", gp=shading_Friendly,
 # model comparisons: for *nested* models
 anova(indep, quasi.indep, quasi.symm, test="Chisq")
 anova(symmetry, quasi.symm, test="Chisq")
+
+# model summaries, with AIC and BIC
+models <- glmlist(indep, quasi.indep, symmetry, quasi.symm)
+summarise(models)
