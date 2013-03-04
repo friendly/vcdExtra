@@ -1,5 +1,7 @@
 \name{CMHtest}
 \alias{CMHtest}
+\alias{CMHtest.formula}
+\alias{CMHtest.default}
 \alias{Cochran Mantel Haenszel test}
 \alias{print.CMHtest}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -16,8 +18,11 @@ For ordinal factors, more powerful tests than the test for general association
 (independence) are obtained by assigning scores to the row and columm categories. 
 }
 \usage{
+CMHtest(x, ...)
 
-CMHtest(x, strata = NULL, 
+\method{CMHtest}{formula}(formula, data = NULL, subset = NULL, na.action = NULL, ...)
+
+\method{CMHtest}{default}(x, strata = NULL, 
    rscores = 1:R, cscores = 1:C, 
    types = c("cor", "cmeans", "rmeans", "general"), 
    overall=FALSE, details=overall, ...)
@@ -28,8 +33,22 @@ CMHtest(x, strata = NULL,
 \arguments{
 
   \item{x}{
-A 2+ way contingency table as a class \code{"table"} object.
+A 2+ way contingency table in array form, or a class \code{"table"} object
+with optional category labels specified in the dimnames(x) attribute.
 }
+  \item{formula}{a formula specifying the variables used to create a contingency table from \code{data}.
+  This should be a one-sided formula when \code{data} is in array form, and a two-sided formula
+  with a response \code{Freq} if \code{data} is a data frame with a cell frequency variable. 
+  For convenience, conditioning formulas can be specified indicating strata.
+}
+  \item{data}{either a data frame, or an object of class \code{"table"} or \code{"ftable"}.
+}
+  \item{subset}{an optional vector specifying a subset of observations to be used.
+}
+  \item{na.action}{a function which indicates what should happen when the data contain \code{NA}s. 
+  Ignored if \code{data} is a contingency table
+}
+
   \item{strata}{
 For a 3- or higher-way table, the names or numbers of the factors
 to be treated as strata.  By default, the first 2 factors are treated
@@ -56,7 +75,7 @@ the stratifying factors.
 logical.  Whether to include computational details in the result
 }
   \item{\dots}{
-Other arguments
+Other arguments passed to default method.
 }
 
   \item{digits}{
@@ -101,8 +120,9 @@ combination of the factors identified as \code{strata}.
 If \code{overall=TRUE}, an additional table is calculated for
 the same two primary variables, controlling for (pooling over)
 the \code{strata} variables.
-These tests implicitly assume no interactions  between the 
-primary variables and the strata and will have low power in the
+
+These overall tests implicitly assume no interactions  between the 
+primary variables and the strata and they will have low power in the
 presence of interactions.
 }
 
@@ -159,17 +179,32 @@ data(JobSat, package="vcdExtra")
 CMHtest(JobSat)
 CMHtest(JobSat, rscores="midrank", cscores="midrank")
 
+# formula interface
+CMHtest(~ ., data=JobSat)
+
 # A 3-way table (both factors ordinal)
 data(MSPatients, package="vcd")
 CMHtest(MSPatients)
+
 
 # also calculate overall tests, controlling for Patient
 CMHtest(MSPatients, overall=TRUE)
 # compare with mantelhaen.test
 mantelhaen.test(MSPatients)
 
+# formula interface
+CMHtest(~ ., data=MSPatients, overall=TRUE)
+
 # using a frequency data.frame
 CMHtest(xtabs(Freq~ses+mental, data=Mental))
+# or, more simply
+CMHtest(Freq~ses+mental, data=Mental)
+
+# conditioning formulae
+CMHtest(Freq~right+left|gender, data=VisualAcuity)
+ 
+CMHtest(Freq ~ attitude+memory|education+age, data=Punishment)
+
 
 # Stokes etal, Table 5.1, p 92: two unordered factors
 parties <- matrix(

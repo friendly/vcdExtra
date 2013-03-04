@@ -1,6 +1,7 @@
 Version 0.5-7 (2013-03-01)
 
 o Completed CMHtest methods, adding overall tests across strata in a general way
+o CMHtest now gets an S3 generic with a formula interface
 
 Version 0.5-6 (2012-11-30)
 

@@ -67,4 +67,6 @@ S3method(plot, HLtest)
 S3method(rootogram, HLtest)
 
 S3method(print, CMHtest)
+S3method(CMHtest,formula)
+S3method(CMHtest,default)
 

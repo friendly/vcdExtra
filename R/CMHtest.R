@@ -16,7 +16,66 @@
 #  With strata, use apply() or recursion over strata
 # DONE: With strata, calculate overall CMH tests controlling for strata
 
-CMHtest <- function(x, strata = NULL, rscores=1:R, cscores=1:C, 
+CMHtest <- function(x, ...)
+  UseMethod("CMHtest")
+
+CMHtest.formula <-
+function(formula, data = NULL, subset = NULL, na.action = NULL, ...)
+{
+
+  m <- match.call(expand.dots = FALSE)
+  edata <- eval(m$data, parent.frame())
+
+  fstr <- strsplit(paste(deparse(formula), collapse = ""), "~")
+  vars <- strsplit(strsplit(gsub(" ", "", fstr[[1]][2]), "\\|")[[1]], "\\+")
+  varnames <- vars[[1]]
+
+  condnames <- if (length(vars) > 1) vars[[2]] else NULL
+
+  dep <- gsub(" ", "", fstr[[1]][1])
+  if (!dep %in% c("","Freq")) {
+     if (all(varnames == ".")) {
+       varnames <- if (is.data.frame(data))
+         colnames(data)
+       else
+         names(dimnames(as.table(data)))
+       varnames <- varnames[-which(varnames %in% dep)]
+     }
+
+    varnames <- c(varnames, dep)
+  }
+
+  if (inherits(edata, "ftable") || inherits(edata, "table") || length(dim(edata)) > 2) {
+    condind <- NULL
+    dat <- as.table(data)
+    if(all(varnames != ".")) {
+      ind <- match(varnames, names(dimnames(dat)))
+      if (any(is.na(ind)))
+        stop(paste("Can't find", paste(varnames[is.na(ind)], collapse=" / "), "in", deparse(substitute(data))))
+
+      if (!is.null(condnames)) {
+        condind <- match(condnames, names(dimnames(dat)))
+        if (any(is.na(condind)))
+          stop(paste("Can't find", paste(condnames[is.na(condind)], collapse=" / "), "in", deparse(substitute(data))))
+        ind <- c(condind, ind)
+      }
+      dat <- margin.table(dat, ind)
+    }
+    CMHtest.default(dat, 
+                   strata = if (is.null(condind)) NULL else match(condnames, names(dimnames(dat))), ...)
+  } else {
+      m <- m[c(1, match(c("formula", "data", "subset", "na.action"), names(m), 0))]
+      m[[1]] <- as.name("xtabs")
+      m$formula <-
+          formula(paste(if("Freq" %in% colnames(data)) "Freq",
+                        "~",
+                        paste(c(varnames, condnames), collapse = "+")))
+      tab <- eval(m, parent.frame())
+      CMHtest.default(tab, ...)
+  }
+}
+
+CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C, 
 	types=c("cor", "cmeans", "rmeans", "general"),
 	overall=FALSE, details=overall,  ...)
 {
