@@ -4,14 +4,18 @@
 \title{ Print Kappa }
 \description{
   This is a replacement for the \code{print.Kappa} method in \code{vcd},
-  adding display of \code{z} values to the \code{vcd} version.
+  adding display of \code{z} values to the \code{vcd} version and
+  optional confidence intervals.
 }
 \usage{
-\method{print}{Kappa}(x, ...)
+\method{print}{Kappa}(x, digits=max(getOption("digits") - 3, 3), CI=FALSE, level=0.95,  ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ A Kappa object}
+  \item{digits}{number of digits to print}
+  \item{CI}{Include confidence intervals in the display?}
+  \item{level}{confidence level}
   \item{\dots}{ Other arguments }
 }
 %\details{
@@ -29,7 +33,10 @@
 \examples{
 data("SexualFun")
 Kappa(SexualFun)
+print(Kappa(SexualFun), CI=TRUE)
 
+# stratified 3-way table
+apply(MSPatients, 3, Kappa)
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
