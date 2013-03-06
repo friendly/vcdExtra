@@ -1,3 +1,7 @@
+Version 0.5-8 (2013-03-06)
+
+o Revised vcd-tutorial showing some examples of plyr
+
 Version 0.5-7 (2013-03-01)
 
 o Completed CMHtest methods, adding overall tests across strata in a general way
