@@ -1005,12 +1005,22 @@ Use the \pkg{ca} package for correspondence analysis for visually exploring rela
 between rows and columns in contingency tables.  For an $r \times c$ table,
 the method provides a breakdown of the Pearson $\chi^2$ for association in up to $M = \min(r-1, c-1)$
 dimensions, and finds scores for the row ($x_{im}$) and column ($y_{jm}$) categories
-such that the observations have the maximum possible correlations.
+such that the observations have the maximum possible correlations.%
+\footnote{
+	Related methods are the non-parametric
+	CMH tests using assumed row/column scores (\secref{sec:CMH}),
+	the analogous \codefun{glm} model-based methods (\secref{sec:CMH}),
+	and the more general RC models which can be fit using \codefun{gnm}.
+	Correspondence analysis differs in that it is a primarily
+	descriptive/exploratory method (no significance tests), but is
+	directly tied to informative graphic displays of the row/column categories.
+}	
+	
 
 
 Here, we carry out a simple correspondence analysis of the \data{HairEye} data.
 The printed results show that nearly 99\% of the association between hair color and eye color
-can be accounted for in 2 dimensions.
+can be accounted for in 2 dimensions, of which the first dimension accounts for 90\%.
 <<ca1,results=verbatim>>=
 library(ca)
 ca(HairEye)
@@ -1210,6 +1220,45 @@ For comparison, one might try the CMH tests on these data:
 <<mental6,results=verbatim>>=
 CMHtest(xtabs(Freq~ses+mental, data=Mental))
 @
+
+\subsection{Non-linear terms}
+The strength of the \pkg{gnm} package is that it handles a wide variety of models
+that handle non-linear terms, where the parameters enter the model beyond a simple
+linear function.
+The simplest example is the Goodman RC(1) model, which allows a multiplicative
+term to account for the association of the table variables.
+In the notation of generalized linear models with a log link, this can be expressed as
+\begin{equation*}
+\log \mu_{ij} = \alpha_i + \beta_j + \gamma_{i} \delta_{j}	
+\end{equation*}
+where the row-multiplicative effect parameters $\gamma_i$ and 
+corresponding column parameters $\delta_j$ are estimated from the data.%
+\footnote{
+This is similar in spirit to a correspondence analysis with a single
+dimension, but as a statistical model.
+}
+Similarly, the RC(2) model adds two multiplicative terms to
+the independence model,
+\begin{equation*}
+\log \mu_{ij} = \alpha_i + \beta_j + \gamma_{i1} \delta_{j1} + \gamma_{i2} \delta_{j2}
+\end{equation*}
+
+In the \pkg{gnm} package, these models may be fit using the \codefun{Mult}
+to specify the multiplicative term, and \codefun{instances} to specify several
+such terms.
+
+\Example
+For the \code{Mental} data, we fit the RC(1) and RC(2) models, and compare
+these with the independence model.
+
+<<mental7,results=verbatim>>=
+RC1 <- gnm(Freq ~ mental + ses + Mult(mental,ses), data=Mental, 
+             family=poisson, , verbose=FALSE)
+RC2 <- gnm(Freq ~ mental+ses + instances(Mult(mental,ses),2), data=Mental, 
+             family=poisson, verbose=FALSE)
+anova(indep, RC1, RC2, test="Chisq")
+@
+
 \section{Mosaic plots}\label{sec:mosaic}
 
 Mosaic plots provide an ideal method both for visualizing contingency tables and for 
