@@ -441,7 +441,8 @@ prop.table(mytable, 2) # column percentages
 @
 
 \codefun{table} can  also  generate  multidimensional  tables  based  on  3  or  more
-categorical variables. In  this case, use  the \codefun{ftable}  function to print  the
+categorical variables. In  this case, use  the \codefun{ftable}  or \codefun{structable}
+function to print  the
 results more attractively.
 
 <<table-ex2>>=
@@ -450,7 +451,8 @@ mytable <- table(A, B, C)
 ftable(mytable)
 @
 
-Table ignores missing values. To include \code{NA} as a category in counts, include the
+\codefun{table}  ignores missing values by default. 
+To include \code{NA} as a category in counts, include the
 table option  \code{exclude=NULL} if  the variable  is a  vector. If  the variable is a
 factor you  have to  create a  new factor  using \code{newfactor  <- factor(oldfactor,
 exclude=NULL)}. 
@@ -500,7 +502,7 @@ $2^5$ table giving the frequencies of reported use (``ever used?'') of
 alcohol, cigarettes and marijuana in a sample of high school seniors,
 also classified by sex and race.  
 
-<<dayton1, results=verbatim>>==
+<<dayton1, results=verbatim>>=
 str(DaytonSurvey)
 head(DaytonSurvey)
 @
@@ -510,10 +512,11 @@ substances, we want to collapse over sex and race. The right-hand side of the fo
 used in the call to \codefun{aggregate} gives the factors to be retained in the
 new frequency data frame, \code{Dayton.ACM.df}.
 
-<<dayton2, results=verbatim>>==
+<<dayton2, results=verbatim>>=
 # data in frequency form
 # collapse over sex and race
-Dayton.ACM.df <- aggregate(Freq ~ cigarette+alcohol+marijuana, data=DaytonSurvey, FUN=sum)
+Dayton.ACM.df <- aggregate(Freq ~ cigarette+alcohol+marijuana, 
+                           data=DaytonSurvey, FUN=sum)
 Dayton.ACM.df
 @
 
@@ -542,6 +545,24 @@ The elements in this new table are the column sums for
 Dayton.ACM.tab <- apply(Dayton.tab, MARGIN=1:3, FUN=sum)
 structable(cigarette+alcohol ~ marijuana, data=Dayton.ACM.tab)
 @
+
+
+
+Many of these operations can be performed using the \verb|**ply()| functions
+in the \pkg{plyr} package.
+For example, with the data in a frequency form data frame, use \codefun{ddply}
+to collapse over unmentioned factors, and \codefun{plyr::summarise}%
+\footnote{
+Ugh. This \pkg{plyr} function clashes with a function of the same name in \pkg{vcdExtra}.
+In this document I will use the explicit double-colon notation to keep them
+separate.
+}
+as the function to be applied to each piece.
+<<dayton5, eval=FALSE>>==
+Dayton.ACM.df <- ddply(DaytonSurvey, .(cigarette, alcohol, marijuana), 
+                       plyr::summarise, Freq=sum(Freq))
+@
+
 
 \subsection[Converting]{Converting among frequency tables and data frames}
 
@@ -611,7 +632,7 @@ This function is included in \pkg{vcdExtra}.
 
 \Example Convert the \data{Arthritis} data in table form (\code{Art.tab}) back to a \code{data.frame}
 in case form, with factors
-\code{Treatment}, $\times$ \code{Sex} and \code{Improved}.
+\code{Treatment}, \code{Sex} and \code{Improved}.
 <<convert-ex3,results=verbatim>>=
 Art.df <- expand.dft(Art.tab)
 str(Art.df)
@@ -623,7 +644,7 @@ If you've followed so far, you're ready for a more complicated example.
 The data file, \code{tv.dat} represents a 4-way table of size
 $5 \times 11 \times 5 \times 3$ where the table variables (unnamed in the file)
 are read as \code{V1} -- \code{V4}, and the cell frequency is read
-as \code{V5}.  The file, stored in the \code{data/} directory
+as \code{V5}.  The file, stored in the \code{doc/extdata} directory
 of \pkg{vcdExtra}, can be read as follows:
 <<tv1,results=verbatim>>=
 tv.data<-read.table(system.file("doc","extdata","tv.dat",package="vcdExtra"))
@@ -644,10 +665,10 @@ Media Research for the week starting November 6, 1995.
 
 \begin{flushleft}
 The table variables are:\\
-~~\code{V1}-- values 1:5 correspond to the days Monday--Friday;\\
-~~\code{V2}-- values 1:11 correspond to the quarter hour times 8:00PM through 10:30PM;\\
-~~\code{V3}-- values 1:5 correspond to ABC, CBS, NBC, Fox, and non-network choices;\\
-~~\code{V4}-- values 1:3 correspond to transition states: turn the television Off, Switch channels, 
+~~~\code{V1}-- values 1:5 correspond to the days Monday--Friday;\\
+~~~\code{V2}-- values 1:11 correspond to the quarter hour times 8:00PM through 10:30PM;\\
+~~~\code{V3}-- values 1:5 correspond to ABC, CBS, NBC, Fox, and non-network choices;\\
+~~~\code{V4}-- values 1:3 correspond to transition states: turn the television Off, Switch channels, 
  or Persist in viewing the current channel.
 \end{flushleft}
 	 
@@ -659,18 +680,36 @@ so \code{nrow(tv.data)}=\Sexpr{nrow(tv.data)};
 and reshape it into an array.
 <<tv2,results=hide>>=
 TV <- array(tv.data[,5], dim=c(5,11,5,3))                                        
-
 dimnames(TV) <- list(c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
                 c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
-                "9:45","10:00","10:15","10:30"),                            
+                  "9:45","10:00","10:15","10:30"),                            
                 c("ABC","CBS","NBC","Fox","Other"), c("Off","Switch","Persist"))
 names(dimnames(TV))<-c("Day", "Time", "Network", "State")
 @
 
-But this table is too large and awkward to work with. Among the networks,
+More generally (even if there are missing cells), we can 
+use \codefun{xtabs} (or \codefun{plyr::daply})
+to do the cross-tabulation, using \code{V5} as the
+frequency variable.  Here's how to do this same operation with \codefun{xtabs}:
+<<tv2a,eval=FALSE>>=
+TV <- xtabs(V5 ~ ., data=tv.data)
+dimnames(TV) <- list(Day=c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
+                Time=c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
+                       "9:45","10:00","10:15","10:30"),                            
+                Network=c("ABC","CBS","NBC","Fox","Other"), 
+                State=c("Off","Switch","Persist"))
+@
+
+But this 4-way table is too large and awkward to work with. Among the networks,
 Fox and Other occur infrequently. 
 We can also cut it down to a 3-way table by considering only viewers who persist
-with the current station.
+with the current station.%
+\footnote{This relies on the fact that that indexing
+an array drops dimensions of length 1 by default,
+using the argument \code{drop=TRUE};
+the result is coerced to the lowest possible dimension.
+}
+
 <<tv3,results=verbatim>>=
 TV <- TV[,,1:3,]     # keep only ABC, CBS, NBC
 TV <- TV[,,,3]       # keep only Persist -- now a 3 way table
@@ -1154,7 +1193,7 @@ fit statistics for a set of models, collected into a \class{glmlist} object.
 Smaller is better for AIC and BIC.
 <<mental4a,results=verbatim>>=
 # compare models using AIC, BIC, etc
-summarise(glmlist(indep, roweff, coleff, linlin))
+vcdExtra::summarise(glmlist(indep, roweff, coleff, linlin))
 @
 For specific model comparisons, we can also carry out tests of \emph{nested} models with
 \codefun{anova} when those models are listed from smallest to largest.

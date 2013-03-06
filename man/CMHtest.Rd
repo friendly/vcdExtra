@@ -150,11 +150,18 @@ Stokes, M. E. & Davis, C. S.  & Koch, G., (2000).
  Details of the computation are given at:
  \url{http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm
 }
- 
+
+Cochran, W. G. (1954), Some Methods for Strengthening the Common \eqn{\chi^2} Tests, 
+\emph{Biometrics}, 10, 417-451. 
+
 Landis, R. J., Heyman, E. R., and Koch, G. G. (1978). 
  Average Partial Association in Three-way Contingency Tables: 
  A Review and Discussion of Alternative Tests, 
  \emph{International Statistical Review}, \bold{46}, 237-254.
+
+Mantel, N. (1963), Chi-square Tests with One Degree of Freedom: Extensions of the Mantel-Haenszel Procedure,"
+\emph{Journal of the American Statistical Association}, 58, 690-700. 
+
 }
 \author{
 Michael Friendly
