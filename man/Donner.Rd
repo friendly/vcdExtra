@@ -1,0 +1,77 @@
+\name{Donner}
+\alias{Donner}
+\docType{data}
+\title{
+Survival in the Donner Party
+}
+\description{
+This data frame contains information on the members of the Donner Party,
+a group of people who attempted to migrate to California in 1846.
+They were trapped by an early blizzard on the eastern side of the
+Sierra Nevada mountains, and before they could be rescued, 
+nearly half of the party had died.
+
+What factors affected who lived and who died?
+
+}
+\usage{data(Donner)}
+\format{
+  A data frame with 90 observations on the following 5 variables.
+  \describe{
+    \item{\code{family}}{family name, a factor with 10 levels }
+    \item{\code{age}}{age of person, a numeric vector}
+    \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
+    \item{\code{survived}}{a numeric vector, 0 or 1}
+    \item{\code{death}}{date of death for those who died before rescue, a POSIXct}
+  }
+}
+\details{
+This data frame uses the person's name as row labels.
+\code{family} reflects a recoding of the last names of individuals
+to reduce the number of factor levels.
+The main families in the Donner party were: Donner, Graves, Breen and Reed.
+The families of Murphy, Foster and Pike are grouped as \code{'MurFosPik'},
+those of Fosdick and Wolfinger are coded as \code{'FosdWolf'}, and
+all others as \code{'Other'}.
+}
+
+
+\source{
+D. K. Grayson, 1990, "Donner party deaths: A demographic
+assessment", \emph{J. Anthropological Research}, \bold{46}, 223-242.
+
+Johnson, K. (1996). \emph{Unfortunate Emigrants: Narratives of the Donner Party}. 
+Logan, UT: Utah State University Press. 
+Additions, and dates of death from \url{www.metrogourmet.com/crossroads/KJroster.htm}.
+}
+
+\references{
+Ramsey, F.L. and Schafer, D.W. (2002). 
+\emph{The Statistical Sleuth: A Course in Methods of Data Analysis}, (2nd ed), Duxbury.
+}
+
+\seealso{
+\code{\link[alr3]{donner}} in \pkg{alr3},
+\code{\link[Sleuth2]{case2001}} in \pkg{Sleuth2}(adults only) provide similar data sets.
+}
+
+\examples{
+# fit some models
+(mod1 <- glm(survived ~ age + sex, data=Donner, family=binomial))
+(mod2 <- glm(survived ~ age * sex, data=Donner, family=binomial))
+anova(mod2, test="Chisq")
+
+(mod3 <- glm(survived ~ poly(age,2) * sex, data=Donner, family=binomial))
+anova(mod3, test="Chisq")
+summarise(glmlist(mod1, mod2, mod3))
+
+# plot fitted probabilities from mod3
+# idea from: http://www.ling.upenn.edu/~joseff/rstudy/summer2010_ggplot2_intro.html
+library(ggplot2)
+ggplot(Donner, aes(age, survived, color = sex))+
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2))
+
+
+}
+\keyword{datasets}

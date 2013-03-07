@@ -1,6 +1,7 @@
 Version 0.5-8 (2013-03-06)
 
 o Revised vcd-tutorial showing some examples of plyr; added a section on RC models
+o Added Donner data with example of ggplot2 plot for a binomial glm()
 
 Version 0.5-7 (2013-03-01)
 

@@ -39,7 +39,7 @@ including models for square tables and models with multiplicative associations.
 
 \code{\link{mosaic3d}}
 introduces a 3D generalization of mosaic displays using the
-rgl package.
+\pkg{rgl} package.
 
 In addition, there are several new data sets, a tutorial vignette,
 \describe{
@@ -77,7 +77,7 @@ A collection of demos is included to illustrate fitting and visualizing a wide v
 }
 Use \code{ demo(package="vcdExtra")} for a complete current list.
 
-The vcdExtra now contains a large number of data sets illustrating various forms of categorical data analysis
+The \pkg{vcdExtra} package now contains a large number of data sets illustrating various forms of categorical data analysis
 and related visualizations, from simple to advanced. Use \code{data(package="vcdExtra")} for a
 complete list, or \code{datasets(package="vcdExtra")} for an annotated one showing the \code{class} and
 \code{dim} for each data set.

@@ -1,7 +1,7 @@
 \name{collapse.table}
 \alias{collapse.table}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Collapse levels of a table}
+\title{Collapse Levels of a Table}
 \description{
 Collapse (or re-label) variables in a
 a contingency table or ftable by re-assigning levels of the table variables
