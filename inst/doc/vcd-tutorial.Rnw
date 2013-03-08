@@ -218,7 +218,7 @@ the \codefun{str} function, or view the names of its components with the
 \Example
 The \data{Arthritis} data is available in case form in the \pkg{vcd} package. 
 There are two explanatory factors: \code{Treatment} and \code{Sex}. \code{Age}
-is a covariate, and \code{Improved} is the response--- an ordered factor,
+is a numeric covariate, and \code{Improved} is the response--- an ordered factor,
 with levels 
 \code{\Sexpr{paste(levels(Arthritis$Improved),collapse=' < ')}}.  
 Excluding \code{Age}, we would have
@@ -479,7 +479,7 @@ vector  of  frequencies  (useful if the data have already been tabulated in freq
 summary(GSStab)
 @
 
-\subsection[Collapsing over factors]{Collapsing over table factors: \codefun{aggregate} and \codefun{apply}}
+\subsection[Collapsing over factors]{Collapsing over table factors: \codefun{aggregate}, \codefun{margin.table} and \codefun{apply}}
 It sometimes happens that we have a data set with more variables or factors than 
 we want to analyse, or else, having done some initial analyses, we decide that
 certain factors are not important, and so should be excluded from graphic displays
@@ -489,7 +489,8 @@ the factors which are not shown in the plots.
 
 The appropriate tools to use again depend on
 the form in which the data are represented--- a case-form data frame, a
-frequency-form data frame (\codefun{aggregate}), or a table-form array or table object (\codefun{apply}).
+frequency-form data frame (\codefun{aggregate}), or a table-form array or 
+table object (\codefun{margin.table} or \codefun{apply}).
 
 When the data are in frequency form, and we want to produce another
 frequency data frame, \codefun{aggregate} is a handy tool, using
@@ -523,7 +524,8 @@ Dayton.ACM.df
 When the data are in table form, and we want to produce another
 table, \codefun{apply} with \code{FUN=sum} can be used in a similar way
 to sum the table over dimensions not mentioned in the \code{MARGIN}
-argument.
+argument.  \codefun{margin.table} is just a wrapper for \codefun{apply}
+using the \codefun{sum} function.
 
 
 \Example 
@@ -543,6 +545,7 @@ The elements in this new table are the column sums for
 <<dayton4, results=verbatim>>==
 # collapse over sex and race
 Dayton.ACM.tab <- apply(Dayton.tab, MARGIN=1:3, FUN=sum)
+Dayton.ACM.tab <- margin.table(Dayton.tab, 1:3)   # same result
 structable(cigarette+alcohol ~ marijuana, data=Dayton.ACM.tab)
 @
 
@@ -561,6 +564,43 @@ as the function to be applied to each piece.
 <<dayton5, eval=FALSE>>==
 Dayton.ACM.df <- ddply(DaytonSurvey, .(cigarette, alcohol, marijuana), 
                        plyr::summarise, Freq=sum(Freq))
+@
+
+\subsection[Collapsing levels]{Collapsing table levels: \codefun{collapse.table}}
+
+A related problem arises when we have a table or array and for some purpose
+we want to reduce the number of levels of some factors by summing subsets
+of the frequencies.  For example, we may have initially coded Age in 10-year
+intervals, and decide that, either for analysis or display purposes, we
+want to reduce Age to 20-year intervals.  The \codefun{collapse.table} function
+in \pkg{vcdExtra} was designed for this purpose.
+
+\Example
+Create a 3-way table, and collapse Age from 10-year to 20-year intervals. 
+First, we generate a $2 \times 6 \times 3$ table of random counts from a 
+Poisson distribution with mean of 100.
+<<collapse1,results=verbatim>>=
+# create some sample data in frequency form
+sex <- c("Male", "Female")
+age <- c("10-19", "20-29",  "30-39", "40-49", "50-59", "60-69")
+education <- c("low", 'med', 'high')
+data <- expand.grid(sex=sex, age=age, education=education)
+counts <- rpois(36, 100)   # random Possion cell frequencies
+data <- cbind(data, counts)
+
+# make it into a 3-way table
+t1 <- xtabs(counts ~ sex + age + education, data=data)
+structable(t1)
+@ 
+Now collapse \code{age} to 20-year intervals, and \code{education}
+to 2 levels. In the arguments, levels of \code{age} and \code{education}
+given the same label are summed in the resulting smaller table.
+<<collapse2, results=verbatim>>=
+# collapse age to 3 levels, education to 2 levels
+t2 <- collapse.table(t1, 
+         age=c("10-29", "10-29",  "30-49", "30-49", "50-69", "50-69"),
+         education=c("<high", "<high", "high"))
+structable(t2)
 @
 
 
@@ -1544,7 +1584,7 @@ mosaic(~ Day + Network + Time, data=TV2, expected=~Day:Time + Network,
 
 
 
-\section[Continuous predictors]{Continuous predictors: spine and conditional density plots}\label{sec:contin}
+\section[Continuous predictors]{Continuous predictors}\label{sec:contin}
 When continuous predictors are available---and potentially important--- in explaining a
 categorical outcome, models for that outcome include:
 logistic regression (binary response), 
@@ -1553,6 +1593,7 @@ multinomial (generalized) logistic regression.
 Many of these are special cases of the generalized linear model using the
 \code{"poisson"} or \code{"binomial"} family and their relatives.
 
+\subsection{Spine and conditional density plots}\label{sec:spine}
 I don't go into fitting such models here, but I would be remiss not to illustrate some
 visualizations in \pkg{vcd} that are helpful here.
 The first of these is the spine plot or spinogram \citep{vcd:Hummel:1996}
@@ -1566,6 +1607,7 @@ the \emph{widths} of the bars corresponds to the relative frequencies of \code{x
 of the  bars then  correspond to  the conditional  relative frequencies  of {y} in
 every \code{x} group.
 
+\Example
 For the \data{Arthritis} data, we can see how \code{Improved} varies with \code{Age}
 as follows.  \codefun{spine} takes a formula of the form 
 \verb|y ~ x| with a single dependent factor and a single explanatory variable \code{x}
@@ -1622,6 +1664,84 @@ These may be real or artifactual, but they would be hard to see
 with most other visualization methods.
 When we switch from non-parametric data exploration to parametric
 statistical models, such effects are easily missed.
+
+\subsection[Model-based plots]{Model-based plots: effect plots and \pkg{ggplot2} plots}\label{sec:modelplots}
+The nonparametric conditional density plot uses smoothing methods
+to convey the distributions of the response variable,
+but displays that are simpler to interpret can often be obtained by plotting
+the predicted response from a parametric model.
+
+For complex \codefun{glm} models with interaction effects, the \pkg{effects}
+package  provides the most useful displays,
+plotting  the predicted values for a given term, averaging over other
+predictors not included in that term.  I don't illustrate this here, but
+see \citet{effects:1,effects:2} and \code{help(package="effects")}.
+
+Here I just briefly illustrate the capabilities of the \pkg{ggplot2} package
+for model-smoothed plots of categorical responses in \codefun{glm} models.
+
+\Example
+The \data{Donner} data frame in \pkg{vcdExtra} gives details on the survival
+of 90 members of the Donner party,
+a group of people who attempted to migrate to California in 1846.
+They were trapped by an early blizzard on the eastern side of the
+Sierra Nevada mountains, and before they could be rescued, 
+nearly half of the party had died.
+What factors affected who lived and who died?
+
+<<donner1, results=verbatim>>=
+data(Donner, package="vcdExtra")
+str(Donner)
+@
+A potential model of interest
+is the logistic regression model for $Pr(survived)$, allowing separate
+fits for males and females as a function of \code{age}.
+The key to this is the \verb|stat_smooth()| function, using
+	\code{method = "glm", family = binomial}. The \verb|formula = y ~ x|
+	specifies a linear fit on the logit scale (\figref{fig:donner3}, left)
+
+<<donner2a, fig=FALSE, eval=FALSE>>=
+# separate linear fits on age for M/F
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", family = binomial, formula = y ~ x,
+           alpha = 0.2, size=2, aes(fill = sex))
+@
+Alternatively, we can allow a quadratic relation with \code{age}
+by specifying \verb|formula = y ~ poly(x,2)| (\figref{fig:donner3}, right).
+<<donner2b, fig=FALSE, eval=FALSE>>=
+# separate quadratics
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2),
+           alpha = 0.2, size=2, aes(fill = sex))
+@
+
+\setkeys{Gin}{width=0.49\textwidth}
+\begin{figure}[htb]
+\begin{center}
+<<donner3a,fig=TRUE,echo=FALSE,height=6,width=6, results=hide>>=
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", family = binomial, formula = y ~ x,
+           alpha = 0.2, size=2, aes(fill = sex))
+
+@
+<<donner3b,fig=TRUE,echo=FALSE,height=6,width=6, results=hide>>=
+# separate quadratics
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2),
+           alpha = 0.2, size=2, aes(fill = sex))
+@
+\caption{Logistic regression plots for the  \data{Donner} data
+	showing survival vs. age, by sex. Left: linear logistic model; right: quadratic model}
+\label{fig:donner3}
+\end{center}
+\end{figure}
+These plots very nicely show (a) the fitted $Pr(survived)$ for males and females;
+(b) confidence bands around the smoothed model fits and (c) the individual
+observations by jittered points at 0 and 1 for those who died and survided, respectively.
 
 \bibliography{vcd,vcdExtra}
 

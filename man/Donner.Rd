@@ -76,12 +76,21 @@ anova(mod2, test="Chisq")
 anova(mod3, test="Chisq")
 summarise(glmlist(mod1, mod2, mod3))
 
-# plot fitted probabilities from mod3
+# plot fitted probabilities from mod2 and mod3
 # idea from: http://www.ling.upenn.edu/~joseff/rstudy/summer2010_ggplot2_intro.html
 library(ggplot2)
-ggplot(Donner, aes(age, survived, color = sex))+
+
+# separate linear fits on age for M/F
+ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2))
+  stat_smooth(method = "glm", family = binomial, formula = y ~ x,
+           alpha = 0.2, size=2, aes(fill = sex))
+
+# separate quadratics
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2),
+           alpha = 0.2, size=2, aes(fill = sex))
 
 
 }
