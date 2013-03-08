@@ -10,7 +10,7 @@ in the student newspaper. Students were asked to fill in ballot
 papers stating which policy out of A,B,C or D they supported.
 Responses were cross-classified by gender/year.
 
-The result is a 2 x 5 x 4 contingency table, with factors
+The result is a 2 x 5 x 4 contingency table (as a data frame in frequency form), with factors
 \code{sex}, \code{yr} and \code{resp}.
 
 }
@@ -50,5 +50,10 @@ str(Vietnam)
 # make it into a table
 Vietnam.table <- xtabs(Freq ~ sex+yr+resp, data=Vietnam)
 structable(Vietnam.table)
+
+# mosaic plots for mutual independence
+mosaic(Vietnam.table, shade=TRUE)
+mosaic(Vietnam.table, gp=shading_Friendly)
+
 }
 \keyword{datasets}

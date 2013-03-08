@@ -56,6 +56,17 @@ Ramsey, F.L. and Schafer, D.W. (2002).
 }
 
 \examples{
+# conditional density plots
+op <- par(mfrow=c(1,2), cex.lab=1.5)
+cdplot(factor(survived) ~ age, subset=sex=='Male', data=Donner, 
+    main="Donner party: Males", ylevels=2:1, ylab="Survived", yaxlabels=c("yes", "no"))
+with(Donner, rug(jitter(age[sex=="Male"]), col="white", quiet=TRUE))
+cdplot(factor(survived) ~ age, subset=sex=='Female', data=Donner, 
+    main="Donner party: Females", ylevels=2:1, ylab="Survived", yaxlabels=c("yes", "no"))
+with(Donner, rug(jitter(age[sex=="Female"]), col="white", quiet=TRUE))
+par(op)
+
+
 # fit some models
 (mod1 <- glm(survived ~ age + sex, data=Donner, family=binomial))
 (mod2 <- glm(survived ~ age * sex, data=Donner, family=binomial))
