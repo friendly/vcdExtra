@@ -41,6 +41,11 @@ to extract \code{class} and size information.
 }
 \value{
 A \code{data.frame} whose rows correspond to data sets found in \code{package}.
+The columns are:
+  \item{Item}{data set name}
+  \item{class}{class}
+  \item{dim}{an abbreviation of the dimensions of the data set}
+  \item{Title}{data set title}
 }
 %\references{
 %%% ~put references to the literature/web site here ~
