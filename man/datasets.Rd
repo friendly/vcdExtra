@@ -16,7 +16,9 @@ and dimension information (\code{dim} or code{length}) of each item,
 and formats these to provide additional descriptors.
 }
 \usage{
-datasets(package, allClass = FALSE, incPackage = length(package) > 1)
+datasets(package, allClass=FALSE, 
+    incPackage=length(package) > 1,
+    maxTitle=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +30,9 @@ include all classes of the item (\code{TRUE}) or just the last class (\code{FALS
 }
   \item{incPackage}{
 include the package name in result?
+}
+  \item{maxTitle}{
+maximum length of data set Title
 }
 }
 \details{
