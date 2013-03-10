@@ -41,7 +41,7 @@ to extract \code{class} and size information.
 }
 \value{
 A \code{data.frame} whose rows correspond to data sets found in \code{package}.
-The columns are:
+The columns (for a single package) are:
   \item{Item}{data set name}
   \item{class}{class}
   \item{dim}{an abbreviation of the dimensions of the data set}
@@ -65,7 +65,7 @@ Michael Friendly, with R-help from Curt Seeliger
 \examples{
 datasets("vcdExtra")
 datasets(c("vcd", "vcdExtra"))
-datasets("datasets")
+datasets("datasets", maxTitle=50)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
