@@ -4,6 +4,7 @@ o Revised vcd-tutorial showing some examples of plyr; added a section on RC mode
 o Added Donner data with example of ggplot2 plot for a binomial glm()
 o Added vcd-tutorial section using ggplot2 for Donner data
 o Enhanced datasets() to provide a maxTitle argument
+o Added doubledecker plots to Dyke.Rd
 
 Version 0.5-7 (2013-03-01)
 
