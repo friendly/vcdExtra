@@ -5,6 +5,7 @@ o Added Donner data with example of ggplot2 plot for a binomial glm()
 o Added vcd-tutorial section using ggplot2 for Donner data
 o Enhanced datasets() to provide a maxTitle argument
 o Added doubledecker plots to Dyke.Rd
+o Added Draft1970table data
 
 Version 0.5-7 (2013-03-01)
 
