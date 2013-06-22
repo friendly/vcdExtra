@@ -55,9 +55,10 @@ data(Draft1970)
 # scatterplot
 plot(Rank ~ Day, data=Draft1970)
 with(Draft1970, lines(lowess(Day, Rank), col="red", lwd=2))
-
+abline(lm(Rank ~ Day, data=Draft1970), col="blue")
+ 
 # boxplots
-plot(Rank ~ Month,data=Draft1970)
+plot(Rank ~ Month, data=Draft1970, col="bisque")
 
 lm(Rank ~ Month, data=Draft1970)
 anova(lm(Rank ~ Month, data=Draft1970))

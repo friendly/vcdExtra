@@ -43,9 +43,14 @@ Nonrandom Risk: The 1970 Draft Lottery,
 \emph{Journal of Statistics Education}, v.5, n.2
 \url{http://www.amstat.org/publications/jse/v5n2/datasets.starr.html}
 }
+
+\seealso{\code{\link{Draft1970}}
+}
+
 \examples{
 data(Draft1970table)
 chisq.test(Draft1970table)
+
 # plot.table -> graphics:::mosaicplot
 plot(Draft1970table, shade=TRUE)
 mosaic(Draft1970table, gp=shading_Friendly)
@@ -64,6 +69,23 @@ Draft1970df <- within(Draft1970df, {
   Risk <- ordered(Risk, levels=rev(levels(Risk)))
   })
 str(Draft1970df)
+
+# similar model, as a Poisson GLM  
+indep <- glm(Freq ~ Month + Risk, family = poisson, data = Draft1970df)
+
+mosaic(indep, residuals_type="rstandard", gp=shading_Friendly)
+
+# numeric scores for tests of ordinal factors
+Cscore <- as.numeric(Draft1970df$Risk)
+Rscore <- as.numeric(Draft1970df$Month)
+
+# linear x linear association between Month and Risk
+linlin <- glm(Freq ~ Month + Risk + Rscore:Cscore, family = poisson, data = Draft1970df)
+
+# compare models
+anova(indep, linlin, test="Chisq")
+mosaic(linlin, residuals_type="rstandard", gp=shading_Friendly)
+
 
 }
 \keyword{datasets}
