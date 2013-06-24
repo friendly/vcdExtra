@@ -62,5 +62,9 @@ plot(Rank ~ Month, data=Draft1970, col="bisque")
 
 lm(Rank ~ Month, data=Draft1970)
 anova(lm(Rank ~ Month, data=Draft1970))
+
+# make the table version
+Draft1970$Risk <- cut(Draft1970$Rank, breaks=3, labels=c("High", "Med", "Low"))
+with(Draft1970, table(Month, Risk))
 }
 \keyword{datasets}
