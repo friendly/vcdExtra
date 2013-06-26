@@ -27,7 +27,8 @@ This is a developing implementation.  The arguments and details are subject to c
 \usage{
 mosaic3d(x, ...)
 
-\method{mosaic3d}{loglm}(x, type = c("observed", "expected"), residuals_type = c("pearson", "deviance"), ...)
+\method{mosaic3d}{loglm}(x, type = c("observed", "expected"), 
+    residuals_type = c("pearson", "deviance"), ...)
 
 \method{mosaic3d}{default}(x, expected = NULL, residuals = NULL,  
 	type = c("observed", "expected"), residuals_type = NULL, 

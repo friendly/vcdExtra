@@ -18,8 +18,11 @@ but should be sensible as long as (a) the response variable is non-negative and 
 predictors visualized in the \code{strucplot} are discrete factors.
 }
 \usage{
-\method{mosaic}{glm}(x, formula = NULL, panel = mosaic, type = c("observed", "expected"), residuals = NULL, 
-     residuals_type = c("pearson", "deviance", "rstandard"), gp = shading_hcl, gp_args = list(), ...)
+\method{mosaic}{glm}(x, formula = NULL, panel = mosaic, 
+     type = c("observed", "expected"), 
+     residuals = NULL, 
+     residuals_type = c("pearson", "deviance", "rstandard"), 
+     gp = shading_hcl, gp_args = list(), ...)
 \method{sieve}{glm}(x,  ...)
 \method{assoc}{glm}(x,  ...)
 }

@@ -94,8 +94,9 @@ summarise(hauser.CRdiag)
 
 
 # compare model fit statistics
-modlist <- glmlist(hauser.indep, hauser.roweff, hauser.UA, hauser.UAdiag, hauser.quasi, hauser.qsymm,  
-     hauser.topo, hauser.RC, hauser.CR, hauser.CRdiag)
+modlist <- glmlist(hauser.indep, hauser.roweff, hauser.UA, hauser.UAdiag, 
+                   hauser.quasi, hauser.qsymm,  hauser.topo, 
+                   hauser.RC, hauser.CR, hauser.CRdiag)
 sumry <- summarise(modlist)
 sumry[order(sumry$AIC, decreasing=TRUE),]
 # or, more simply

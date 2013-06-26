@@ -102,15 +102,17 @@ summarise(mods4)
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
-modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, family=poisson, prefix="JSat")
+modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, 
+               family=poisson, prefix="JSat")
 summarise(modSat)
 anova(modSat, test="Chisq")
 
 # Rochdale data: very sparse, in table form
 data(Rochdale, package="vcd")
 \dontrun{
-modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child + Education + HusbandEducation + Asian + HouseholdWorking,
- data=Rochdale, family=poisson)
+modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child + 
+                     Education + HusbandEducation + Asian + HouseholdWorking,
+                data=Rochdale, family=poisson)
 summarise(modRoch)
 }
 }

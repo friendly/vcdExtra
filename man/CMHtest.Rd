@@ -219,7 +219,7 @@ parties <- matrix(
 	  200, 291, 160, 311,
 	  208, 106, 316, 97), nrow=3, ncol=4, byrow=TRUE)
 dimnames(parties) <- list(party=c("Dem", "Indep", "Rep"),
-						neighborhood=c("Bayside", "Highland", "Longview", "Sheffield"))
+             neighborhood=c("Bayside", "Highland", "Longview", "Sheffield"))
 CMHtest(parties, rscores=NULL, cscores=NULL)
 # compare with Pearson chisquare
 chisq.test(parties)

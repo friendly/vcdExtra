@@ -67,7 +67,8 @@ structable(~ Father + Son + Country, Yamaguchi87)
 Yama.tab <- xtabs(Freq ~ Son + Father + Country, data=Yamaguchi87)
 
 # define mosaic labeling_args for convenient reuse in 3-way displays
-largs <- list(rot_labels=c(right=0), offset_varnames = c(right = 0.6), offset_labels = c(right = 0.2),
+largs <- list(rot_labels=c(right=0), offset_varnames = c(right = 0.6), 
+              offset_labels = c(right = 0.2),
               set_varnames = c(Son="Son's status", Father="Father's status") 
              )
 
