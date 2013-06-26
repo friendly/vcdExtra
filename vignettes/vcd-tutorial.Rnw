@@ -1,9 +1,10 @@
+% !Rnw weave = Sweave
+%\VignetteEngine{Sweave}
 %\VignetteIndexEntry{Tutorial: Working with categorical data with R and the vcd package}
 %\VignetteDepends{vcd,gmodels,ca}
 %\VignetteKeywords{contingency tables, mosaic plots, sieve plots, categorical data, independence, conditional independence, R}
 %\VignettePackage{vcdExtra}
 
-%\documentclass{Z}
 \documentclass[10pt,twoside]{article}
 \usepackage{Sweave}
 \usepackage{bm}
@@ -347,12 +348,17 @@ Arthritis$Improved <- ordered(Arthritis$Improved, levels=c("None", "Some", "Mark
 With this order of  \code{Improved}, the response in this data,
 a mosaic display of \code{Treatment} and \code{Improved} (\figref{fig:arthritis})shows a clearly
 interpretable pattern.
-\setkeys{Gin}{width=0.7\textwidth}
-\begin{figure}[htb]
-\begin{center}
-<<Arthritis,fig=TRUE,echo=FALSE,height=6,width=7,results=hide>>=
+<<Arthritis,fig=TRUE,echo=FALSE,height=6,width=7,results=hide,include=FALSE>>=
 mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
 @
+
+%\setkeys{Gin}{width=0.7\textwidth}
+\begin{figure}[htb]
+\begin{center}
+%<<Arthritis,fig=TRUE,echo=FALSE,height=6,width=7,results=hide>>=
+%mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
+%@
+\includegraphics[width=0.7\textwidth]{fig/vcd-tut-Arthritis}
 \caption{Mosaic plot for the \data{Arthritis} data, showing the marginal model of independence
 	for Treatment and Improved.  Age, a covariate, and Sex are ignored here.}
 \label{fig:arthritis}
