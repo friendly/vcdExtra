@@ -1,9 +1,10 @@
+% !Rnw weave = Sweave
+%\VignetteEngine{Sweave}
 %\VignetteIndexEntry{Tutorial: Working with categorical data with R and the vcd package}
 %\VignetteDepends{vcd,gmodels,ca}
 %\VignetteKeywords{contingency tables, mosaic plots, sieve plots, categorical data, independence, conditional independence, R}
 %\VignettePackage{vcdExtra}
 
-%\documentclass{Z}
 \documentclass[10pt,twoside]{article}
 \usepackage{Sweave}
 \usepackage{bm}
@@ -109,6 +110,7 @@
 set.seed(1071)
 #library(vcd)
 library(vcdExtra)
+library(ggplot2)
 #data(Titanic)
 data(HairEyeColor)
 data(PreSex)
@@ -122,6 +124,7 @@ art <- xtabs(~Treatment + Improved, data = Arthritis)
 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 \maketitle
 
 %% an abstract and keywords
@@ -346,12 +349,17 @@ Arthritis$Improved <- ordered(Arthritis$Improved, levels=c("None", "Some", "Mark
 With this order of  \code{Improved}, the response in this data,
 a mosaic display of \code{Treatment} and \code{Improved} (\figref{fig:arthritis})shows a clearly
 interpretable pattern.
-\setkeys{Gin}{width=0.7\textwidth}
-\begin{figure}[htb]
-\begin{center}
-<<Arthritis,fig=TRUE,echo=FALSE,height=6,width=7,results=hide>>=
+<<Arthritis,fig=TRUE,echo=FALSE,height=6,width=7,results=hide,include=FALSE>>=
 mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
 @
+
+%\setkeys{Gin}{width=0.7\textwidth}
+\begin{figure}[htb]
+\begin{center}
+%<<Arthritis,fig=TRUE,echo=FALSE,height=6,width=7,results=hide>>=
+%mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
+%@
+\includegraphics[width=0.7\textwidth]{fig/vcd-tut-Arthritis}
 \caption{Mosaic plot for the \data{Arthritis} data, showing the marginal model of independence
 	for Treatment and Improved.  Age, a covariate, and Sex are ignored here.}
 \label{fig:arthritis}
@@ -616,8 +624,8 @@ but some \proglang{R} functions were designed for one particular representation.
  \begin{center}
    \begin{tabular}{llll}
 	\hline
-                 & \multicolumn{3}{c}{To this} \\
-	From this      &     Case form         & Frequency form             &  Table form \\
+                 & \multicolumn{3}{c}{\textbf{To this}} \\
+	\textbf{From this}      &     Case form         & Frequency form             &  Table form \\
 	\hline
 	Case form      &   noop                 & \verb|xtabs(~A+B)|        &  \verb|table(A,B)|  \\ 
 	Frequency form &  \verb|expand.dft(X)|  & noop                      & \verb|xtabs(count~A+B)|\\
@@ -645,7 +653,8 @@ as.data.frame(GSStab)
 @
 
 \Example Convert the \code{Arthritis} data in case form to a 3-way table of
-\code{Treatment} $\times$ \code{Sex} $\times$ \code{Improved}.%
+\code{Treatment} $\times$ \code{Sex} $\times$ \code{Improved}.
+Note the use of \codefun{with} to avoid having to use \code{Arthritis\$Treatment} etc. within the call to \codefun{table}.%
 \footnote{
 \codefun{table} does not allow a \code{data} argument to provide
 an environment in which the table variables are to be found.  In the 
@@ -907,6 +916,32 @@ subtable. The following gives a display (not shown) similar to \figref{fig:fourf
 cotabplot(UCB, panel = cotab_fourfold)
 @
 
+When we want to view the conditional
+probabilities of a response variable (e.g., \code{Admit})
+in relation to several factors,
+an alternative visualization is a \codefun{doubledecker} plot.
+This plot is a specialized version of a mosaic plot, which
+highlights the levels of the response variable (plotted vertically)
+in relation to the factors (shown horizontally). The following
+call produces \figref{fig:doubledecker}. In this plot, the
+association between \code{Admit} and \code{Gender} is shown
+where the heights of the highlighted conditional probabilities
+do not align.
+
+<<doubledecker,fig=TRUE, height=5,width=9,include=FALSE>>=
+doubledecker(Admit ~ Dept + Gender, data=UCBAdmissions)
+@
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{fig/vcd-tut-doubledecker}
+\caption{Doubledecker display for the \data{UCBAdmissions} data. The heights
+of the highlighted bars show the conditional probabilities of \texttt{Admit},
+given \texttt{Dept} and \texttt{Gender}.}
+\label{fig:doubledecker}
+\end{center}
+\end{figure}
+
 Finally, the there is a \codefun{plot} method for \code{oddsratio} objects.
 By default, it shows the 95\% confidence interval for the log odds ratio.
 \figref{fig:oddsratio} is produced by:
@@ -914,7 +949,7 @@ By default, it shows the 95\% confidence interval for the log odds ratio.
 plot(lor, xlab="Department", ylab="Log Odds Ratio (Admit | Gender)")
 @
 
-\setkeys{Gin}{width=0.4\textwidth}
+\setkeys{Gin}{width=0.5\textwidth}
 \begin{figure}[htb]
 \begin{center}
 <<oddsratio,fig=TRUE,height=6,width=6,echo=FALSE>>=
