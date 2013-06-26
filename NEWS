@@ -3,9 +3,10 @@ Version 0.5-8 (2013-03-06)
 o Revised vcd-tutorial showing some examples of plyr; added a section on RC models
 o Added Donner data with example of ggplot2 plot for a binomial glm()
 o Added vcd-tutorial section using ggplot2 for Donner data
-o Enhanced datasets() to provide a maxTitle argument
-o Added doubledecker plots to Dyke.Rd
-o Added Draft1970table and Draft1970 data sets
+o Enhanced datasets() to provide a maxTitle argument (rev 153)
+o Added doubledecker plots to Dyke.Rd (rev 156)
+o Added Draft1970table and Draft1970 data sets (rev 158)
+o Added example of doubledecker plots to vcd-tutorial vignette (rev 164)
 
 Version 0.5-7 (2013-03-01)
 

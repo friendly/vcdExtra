@@ -921,15 +921,19 @@ probabilities of a response variable (e.g., \code{Admit})
 in relation to several factors,
 an alternative visualization is a \codefun{doubledecker} plot.
 This plot is a specialized version of a mosaic plot, which
-highlights the levels of the response variable (plotted vertically)
+highlights the levels of a response variable (plotted vertically)
 in relation to the factors (shown horizontally). The following
-call produces \figref{fig:doubledecker}. In this plot, the
+call produces \figref{fig:doubledecker}, where we use indexing
+on the first factor (\code{Admit}) to make \code{Admitted}
+the highlighted level.
+
+In this plot, the
 association between \code{Admit} and \code{Gender} is shown
 where the heights of the highlighted conditional probabilities
-do not align.
+do not align. The excess of females admitted in Dept A stands out here.
 
 <<doubledecker,fig=TRUE, height=5,width=9,include=FALSE>>=
-doubledecker(Admit ~ Dept + Gender, data=UCBAdmissions)
+doubledecker(Admit ~ Dept + Gender, data=UCBAdmissions[2:1,,])
 @
 
 \begin{figure}[htb]
