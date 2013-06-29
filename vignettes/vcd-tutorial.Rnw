@@ -116,6 +116,7 @@ data(HairEyeColor)
 data(PreSex)
 data(Arthritis)
 art <- xtabs(~Treatment + Improved, data = Arthritis)
+if(!file.exists("fig")) dir.create("fig")
 @
 
 
