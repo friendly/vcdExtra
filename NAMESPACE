@@ -30,6 +30,7 @@ S3method(sieve, glm)
 S3method(assoc, glm)
 S3method(modFit, glm)
 S3method(modFit, loglm)
+S3method(mosaic, glmlist)
 
 S3method(summarise, glm)
 S3method(summarise, glmlist)
