@@ -103,7 +103,7 @@ summarise(mods4)
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
 modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, 
-               family=poisson, prefix="JSat")
+               family=poisson, prefix="JobSat")
 summarise(modSat)
 anova(modSat, test="Chisq")
 

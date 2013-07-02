@@ -31,7 +31,8 @@ predictors visualized in the \code{strucplot} are discrete factors.
   \item{x}{ A \code{glm} or \code{gnm} object. The response variable, typically a 
     cell frequency, should be non-negative. }
   \item{formula}{ A one-sided formula with the indexing factors of the plot
-    separated by '+'. A formula must be provided unless \code{x$data}
+    separated by '+', determining the order in which the variables are used in the mosaic. 
+    A formula must be provided unless \code{x$data}
     inherits from class \code{"table"} -- in which case the indexing
     factors of this table are used, or the factors in \code{x$data}
     (or model.frame(x) if \code{x$data} is an environment) exactly
@@ -80,7 +81,9 @@ The \code{structable} visualized by \code{\link[vcd]{strucplot}} is returned inv
 \author{Heather Turner, Michael Friendly, with help from Achim Zeileis}
 %\note{
 %}
-\seealso{\code{\link[stats]{glm}}, \code{\link[gnm]{gnm}}, \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}}
+\seealso{
+\code{\link[stats]{glm}}, \code{\link[gnm]{gnm}}, \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}
+}
 \examples{
 GSStab <- xtabs(count ~ sex + party, data=GSS)
 # using the data in table form

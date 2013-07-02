@@ -7,7 +7,8 @@ Mosaic Displays for a glmlist Object
 \description{
 This function provides a convenient interface for viewing mosaic displays
 associated with a collection of glm models for freqency tables that have
-been stored in a glmlist object.
+been stored in a \code{glmlist} object.  You can plot either selected models
+individually, or mosaics for all models in an array of viewports.
 
 
 }
@@ -24,25 +25,29 @@ been stored in a glmlist object.
 a \code{glmlist} object
 }
   \item{selection}{
-the index or name of one glm in \code{x}
+the index or name of one \code{glm} object in \code{x}.  If no selection is specified,
+a menu of model is presented or all models are plotted.
 }
   \item{type}{
 a character string indicating whether the \code{"observed"} or the \code{"expected"} values of the table should be visualized
 }
   \item{legend}{
-show a legend in the mosaic displays?
+show a legend in the mosaic display(s)?
 }
   \item{main}{
 either a logical, or a vector of character strings used for plotting the main title. 
-If main is a logical and \code{TRUE}, the name of the selected glm object  is used
+If main is a logical and \code{TRUE}, the name of the selected glm object  is used.
 
 }
   \item{ask}{
 logical: should the function display a menu of models, when one is not specified in \code{selection}?
+If \code{selection} is not supplied and \code{ask} is \code{TRUE} (the default), 
+a menu of model names is presented; 
+if \code{ask} is \code{FALSE}, mosaics for all models are plotted in an array.
 
 }
   \item{graphics}{
-logical: use a graphic menu when \code{ask=TRUE}?
+logical: use a graphic dialog box when \code{ask=TRUE}?
 }
   \item{rows,cols}{
 when \code{ask=FALSE}, the number of rows and columns in which to plot the mosaics.
@@ -51,12 +56,13 @@ when \code{ask=FALSE}, the number of rows and columns in which to plot the mosai
 start a new page? (only applies to \code{ask=FALSE})
 }
   \item{\dots}{
-other arguments passed to \code{\link{mosaic.glm}}. 
+other arguments passed to \code{\link{mosaic.glm}} and ultimately to \code{\link[vcd]{mosaic}}. 
 }
 }
-%\details{
-%%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{
+Most details of the plots produced can be controlled via \dots arguments
+as shown in some of the examples below.
+}
 \value{
 Returns the result of \code{\link{mosaic.glm}}.
 %%  ~Describe the value returned
@@ -65,9 +71,12 @@ Returns the result of \code{\link{mosaic.glm}}.
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 }
-%\references{
-%%% ~put references to the literature/web site here ~
-%}
+\references{
+ David Meyer, Achim Zeileis, and Kurt Hornik (2006). The Strucplot Framework: Visualizing Multi-Way
+  Contingency Tables with vcd. \emph{Journal of Statistical Software}, 17(3), 1-48. 
+  \url{http://www.jstatsoft.org/v17/i03/}, available as \code{vignette("strucplot", package="vcd")}.
+
+}
 \author{
 Michael Friendly
 }
@@ -79,7 +88,11 @@ Michael Friendly
 
 \seealso{
 \code{\link{glmlist}},
-\code{\link{Kway}},
+\code{\link{Kway}}
+
+\code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
+\code{\link[vcd]{strucplot}}, for the many parameters that control the details of mosaic plots.
+
 
 }
 \examples{
@@ -91,16 +104,38 @@ pairs(xtabs(Freq~management+supervisor+own, data=JobSatisfaction),
 
 modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, 
                family=poisson, prefix="JobSat")
+names(modSat)
+
 \dontrun{
 mosaic(modSat)              # uses menu, if interactive()
 }
 mosaic(modSat, "JobSat.1")  # model label
 mosaic(modSat, 2)           # model index
 
+# supply a formula to determine the order of variables in the mosaic
+mosaic(modSat, 2, formula=~own+supervisor+management)
+
 mosaic(modSat, ask=FALSE)   # uses viewports 
 
-# use a different panel function
-mosaic(modSat, 1, main=TRUE, panel=sieve)
+# use a different panel function, label the observed valued in the cells
+mosaic(modSat, 1, main=TRUE, panel=sieve, gp=shading_Friendly, labeling=labeling_values)
+
+data(Mental)
+indep <- glm(Freq ~ mental+ses,
+                family = poisson, data = Mental)
+Cscore <- as.numeric(Mental$ses)
+Rscore <- as.numeric(Mental$mental)
+
+coleff <- glm(Freq ~ mental + ses + Rscore:ses,
+                family = poisson, data = Mental)
+roweff <- glm(Freq ~ mental + ses + mental:Cscore,
+                family = poisson, data = Mental)
+linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
+                family = poisson, data = Mental)
+
+# assign names for the plot labels
+modMental <- glmlist(Indep=indep, ColEff=coleff, RowEff=roweff, `Lin x Lin`=linlin)
+mosaic(modMental, ask=FALSE, margins=c(3,1,1,2), labeling_args=list(abbreviate_labs=5))
 
 
 }

@@ -1,6 +1,6 @@
 Version 0.5-11 (2013-07-01)
 
-o Added mosaic.glmlist
+o Added mosaic.glmlist to plot mosaics (or other strucplots) for some or all models in a glmlist.
 
 
 Version 0.5-8 (2013-03-06)
