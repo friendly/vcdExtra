@@ -63,9 +63,9 @@ or conditionally independent
 
   \item{order}{
 For \code{markov}, this gives the order of the Markov chain model for the
-factors.  An \code{order=2} Markov chain allows associations among
+factors.  An \code{order=1} Markov chain allows associations among
 sequential pairs of factors, e.g., \code{[A,B], [B,C], [C,D]} \dots.
-An \code{order=3} Markov chain allows associations among
+An \code{order=2} Markov chain allows associations among
 sequential triples.
 }
 
@@ -114,13 +114,13 @@ This has not yet been implemented.
   
   \code{loglin2string} converts the output of one of these to a string
   describing the loglinear model in the shorthand bracket notation,
-  e.g., \code{[A,B] [A,C]}.  
+  e.g., \code{"[A,B] [A,C]"}.  
   
   
 }
 \value{
   For the main model specification functions, \code{conditional}, \code{joint}, 
-  \code{markov}, \dots
+  \code{markov}, \dots, the result is
    a list of vectors (terms), where the elements in each vector are the
    names of the factors. The elements of the list are given names
    \code{term1, term2, \dots}.
@@ -128,7 +128,7 @@ This has not yet been implemented.
 }
 \references{
 These functions were inspired by the original SAS implementation of
-mosaic displays,
+mosaic displays, described in the \emph{User's Guide},
 \url{http://www.datavis.ca/mosaics/mosaics.pdf}
 }
 \author{
@@ -164,6 +164,10 @@ conditional(4, with=3:4)
 mosaic(HairEyeColor, expected=joint(3))
 mosaic(HairEyeColor, expected=conditional(3))
 
+# use with loglm
+cond3 <- loglin2formula(conditional(3, table=HairEyeColor))
+cond3 <- loglin2formula(conditional(3))  # same, with factors 1,2,3
+loglm(cond3, data=HairEyeColor)
 
 saturated(3, HairEyeColor)
 loglin2formula(saturated(3, HairEyeColor))
