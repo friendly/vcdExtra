@@ -1,8 +1,9 @@
-# last modified 30 Nov 2012 by M. Friendly
+# last modified 04 Jul 2013 by M. Friendly
 # - removed aperm, now that aperm.table is in base
 # - removed meanResiduals, which is now in gnm
 # - added HLtest & methods
 # - added CMHtest
+# - added functions in loglin-utilities
 
 # we are a vcd extension
 import(vcd)
@@ -21,7 +22,9 @@ export(
 	loddsratio, as.array,
 #	aperm, meanResiduals,
 	HLtest, HosmerLemeshow,
-	CMHtest
+	CMHtest,
+	conditional, joint, markov, mutual, saturated,
+	loglin2formula, loglin2string
 	)
 
 # basic methods for glm & loglm objects
