@@ -15,7 +15,7 @@
 #' @export 
 
 joint <- function(nf, table=NULL, factors=1:nf, with=nf) {
-	if (!is.null(table)) factors <- names(dimnames(table))
+    if (!is.null(table)) factors <- names(dimnames(table))
     if (nf == 1) return (list(term1=factors[1]))
     if (nf == 2) return (list(term1=factors[1], term2=factors[2]))
     others <- setdiff(1:nf, with)
@@ -33,8 +33,8 @@ joint <- function(nf, table=NULL, factors=1:nf, with=nf) {
 #' @export 
 
 conditional <- function(nf, table=NULL, factors=1:nf, with=nf) {
-	if (!is.null(table)) factors <- names(dimnames(table))
-	if (nf == 1) return (list(term1=factors[1]))
+    if (!is.null(table)) factors <- names(dimnames(table))
+    if (nf == 1) return (list(term1=factors[1]))
     if (nf == 2) return (list(term1=factors[1], term2=factors[2]))
     main <- setdiff(1:nf, with)
     others <- matrix(factors[with], length(with), length(main))
@@ -52,10 +52,10 @@ conditional <- function(nf, table=NULL, factors=1:nf, with=nf) {
 #' @export 
 
 mutual <- function(nf, table=NULL, factors=1:nf) {
-	if (!is.null(table)) factors <- names(dimnames(table))
-	result <- sapply(factors[1:nf], list)
-  names(result) <- paste('term', 1:length(result), sep='')
-  result  
+   if (!is.null(table)) factors <- names(dimnames(table))
+   result <- sapply(factors[1:nf], list)
+   names(result) <- paste('term', 1:length(result), sep='')
+   result  
   }
 
 
@@ -117,11 +117,12 @@ markov <- function(nf, factors=1:nf, order=1) {
 #' convert a loglin model to a model formula for loglm
 
 #' @param  x a list of terms in a loglinear model, such as returned by \code{joint}, \code{conditional}, \dots
+#' @param  env environment in which to evaluate the formula
 #' @source Code from Henrique Dallazuanna, <wwwhsd@gmail.com>, R-help 7-4-2013
 
-loglin2formula <- function(x) {
+loglin2formula <- function(x, env = parent.frame()) {
 	terms <- lapply(x, paste, collapse = ":")
-	as.formula(sprintf(" ~ %s", do.call(paste, c(terms, sep = "+"))))
+	formula(sprintf(" ~ %s", do.call(paste, c(terms, sep = "+"))), env=env)
 }
 
 #' convert a loglin model to a string, using bracket notation for the high-order terms

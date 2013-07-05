@@ -37,7 +37,7 @@ mutual(nf, table = NULL, factors = 1:nf)
 
 saturated(nf, table = NULL, factors = 1:nf)
 
-loglin2formula(x)
+loglin2formula(x, env = parent.frame())
 
 loglin2string(x, brackets = c("[", "]"), sep = ",", collapse = " ", abbrev)
 
@@ -74,6 +74,9 @@ a list of terms in a loglinear model, such as returned by \code{conditional}, \c
  \dots
 }
 
+  \item{env}{
+For \code{loglin2formula}, environment in which to evaluate the formula
+  }
   \item{brackets}{
 For \code{loglin2string}, 
 characters to use to surround model terms.  
