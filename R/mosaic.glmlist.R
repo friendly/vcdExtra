@@ -90,27 +90,3 @@ mod.call <- function(x) {
 		cap
 }
 
-TESTME <- FALSE
-if(TESTME) {
-# require(grid) 
-# gl <- grid.layout(3, 3, widths=rep(1,3), heights=rep(1,3)) 
-# gl <- grid.layout(3, 3)
-# grid.show.layout(gl) 
-
-library(vcdExtra)
-data(JobSatisfaction, package="vcd")
-# view all pairwise mosaics
-pairs(xtabs(Freq~management+supervisor+own, data=JobSatisfaction), shade=TRUE, diag_panel=pairs_diagonal_mosaic)
-modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, 
-               family=poisson, prefix="JobSat")
-
-mosaic(modSat)              # uses menu, if interactive()
-mosaic(modSat, "JobSat.1")  # model label
-mosaic(modSat, 2)           # model index
-
-mosaic(modSat, ask=FALSE)   # uses viewports 
-
-# use a different panel function
-mosaic(modSat, 1, main=TRUE, panel=sieve)
-
-}
