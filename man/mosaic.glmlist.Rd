@@ -1,38 +1,55 @@
 \name{mosaic.glmlist}
 \alias{mosaic.glmlist}
+\alias{mosaic.loglmlist}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Mosaic Displays for a glmlist Object
+Mosaic Displays for \code{glmlist} and \code{logllmlist} Objects
 }
 \description{
 This function provides a convenient interface for viewing mosaic displays
 associated with a collection of glm models for freqency tables that have
-been stored in a \code{glmlist} object.  You can plot either selected models
+been stored in a \code{glmlist} or \code{loglmlist} object.  You can plot either selected models
 individually, or mosaics for all models in an array of viewports.
 
 
 }
 \usage{
 \method{mosaic}{glmlist}(x, selection, 
-  type = c("observed", "expected"), 
-  legend = FALSE, main = NULL, 
-  ask = TRUE, graphics = TRUE, rows, cols, newpage = TRUE,
+  panel=mosaic,
+  type=c("observed", "expected"), 
+  legend=ask | !missing(selection),
+  main=NULL,
+  ask=TRUE, graphics=TRUE, rows, cols, newpage=TRUE,
+  ...)
+
+\method{mosaic}{loglmlist}(x, selection, 
+  panel=mosaic,
+  type=c("observed", "expected"), 
+  legend=ask | !missing(selection),
+  main=NULL,
+  ask=TRUE, graphics=TRUE, rows, cols, newpage=TRUE,
   ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-a \code{glmlist} object
+a \code{glmlist} or \code{loglmlist} object
 }
   \item{selection}{
-the index or name of one \code{glm} object in \code{x}.  If no selection is specified,
-a menu of model is presented or all models are plotted.
+the index or name of one \code{glm} or \code{loglm} object in \code{x}.  If no selection is specified,
+a menu of models is presented or all models are plotted.
+}
+
+  \item{panel}{
+a \code{\link[vcd]{strucplot}} panel function, typicially \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}}
 }
   \item{type}{
 a character string indicating whether the \code{"observed"} or the \code{"expected"} values of the table should be visualized
 }
   \item{legend}{
-show a legend in the mosaic display(s)?
+logical: show a legend for residuals in the mosaic display(s)?  The default behavior is to include a legend
+when only a single plot is shown, i.e., if \code{ask} is \code{TRUE} or a \code{selection} has been
+specified.
 }
   \item{main}{
 either a logical, or a vector of character strings used for plotting the main title. 
@@ -61,7 +78,8 @@ other arguments passed to \code{\link{mosaic.glm}} and ultimately to \code{\link
 }
 \details{
 Most details of the plots produced can be controlled via \dots arguments
-as shown in some of the examples below.
+as shown in some of the examples below.  In particular, with \code{panel=sieve}
+you need to also pass \code{gp=shading_Friendly} to get a color version.
 }
 \value{
 Returns the result of \code{\link{mosaic.glm}}.
@@ -87,7 +105,7 @@ Michael Friendly
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{glmlist}},
+\code{\link{glmlist}}, \code{\link{loglmlist}},
 \code{\link{Kway}}
 
 \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},

@@ -3,6 +3,9 @@ Version 0.5-11 (2013-07-01)
 o Added mosaic.glmlist to plot mosaics (or other strucplots) for some or all models in a glmlist (rev 169)
 o Added loglim-utilities.R, containing a suite of functions to provide a more conceptual way to specify
   loglinear models by type ('joint', 'conditional', 'mutual', 'markov', 'saturated') (rev 171)
+o Added mosaic.loglmlist, similar to mosaic.glmlist for models fit using MASS::loglm (rev 173)
+o Both mosaic.glmlist and mosaic.glmlist get an explicit panel=argument; both get some more sensible default
+  default arguments.
 
 
 Version 0.5-8 (2013-03-06)
