@@ -24,7 +24,7 @@ export(
 	HLtest, HosmerLemeshow,
 	CMHtest,
 	conditional, joint, markov, mutual, saturated,
-	loglin2formula, loglin2string
+	loglin2formula, loglin2string, seq_loglm
 	)
 
 # basic methods for glm & loglm objects

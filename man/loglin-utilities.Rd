@@ -1,4 +1,5 @@
 \name{loglin-utilities}
+\alias{loglin-utilities}
 \alias{conditional}
 \alias{joint}
 \alias{loglin2formula}
