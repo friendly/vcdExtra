@@ -19,7 +19,7 @@
                          gp = shading_hcl, gp_args = list(), ...)
 {
 
-	require(vcd)
+	#require(vcd)
 	if (!inherits(x,"glm")) stop("mosaic.glm requires a glm object")
 
 	df.residual <- x$df.residual

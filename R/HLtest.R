@@ -38,8 +38,8 @@ print.HLtest <- function(x, ...) {
 	heading <- "Hosmer and Lemeshow Goodness-of-Fit Test"
 	df <- data.frame("ChiSquare"=x$chisq, df=x$df, "P_value"= x$p.value)
 	cat(heading,"\n\n")
-  cat("Call:\n")
-  print(x$call)
+	cat("Call:\n")
+	print(x$call)
 	print(df, row.names=FALSE)
 	invisible(x)
 }
@@ -54,7 +54,7 @@ summary.HLtest <- function(object, ...) {
 
 ## Q: how to display any large chi residuals on the bars??
 rootogram.HLtest <- function(x, ...) {
-	vcd:::rootogram.default(as.numeric(x$table$obs), as.numeric(x$table$exp), 
+	rootogram(as.numeric(x$table$obs), as.numeric(x$table$exp), 
 		xlab="Fitted value group", names=1:x$groups, ...) 
 }
 

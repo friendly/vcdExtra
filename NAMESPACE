@@ -5,8 +5,9 @@
 # - added CMHtest
 # - added functions in loglin-utilities
 
-# we are a vcd extension
+# we are a vcd extension; do we need to import gnm here?
 import(vcd)
+import(gnm)
 
 # joy to the world
 export(

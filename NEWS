@@ -7,7 +7,8 @@ o Added mosaic.loglmlist, similar to mosaic.glmlist for models fit using MASS::l
 o Both mosaic.glmlist and mosaic.glmlist get an explicit panel=argument; both get some more sensible default
   default arguments (rev 175)
 o Added seq_loglm to fit sequential loglm models to marginal subtables, giving a loglmlist result (rev 176)
-o Added Accident data (rev 178)
+o Added Accident data (rev 178); fleshed out Accident examples (rev 180)
+o Fixed use of ::: for R 3.0.1 (rev 179)
 
 
 Version 0.5-8 (2013-03-06)
