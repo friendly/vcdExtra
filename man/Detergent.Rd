@@ -47,6 +47,7 @@ data(Detergent)
 # example goes here
 mosaic(Detergent, shade=TRUE)
 
+require(MASS)
 (det.mod0 <- loglm(~ Preference + Temperature + M_User + Water_softness, data=Detergent))
 # examine addition of two-way terms
 add1(det.mod0, ~ .^2, test="Chisq")

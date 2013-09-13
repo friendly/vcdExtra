@@ -60,6 +60,7 @@ data(Heckman)
 # independence model
 mosaic(Heckman, shade=TRUE)
 # same, as a loglm()
+require(MASS)
 (heckman.mod0 <- loglm(~ e1971+e1970+e1969+e1968+e1967, data=Heckman))
 mosaic(heckman.mod0, main="Independence model")
 
@@ -71,7 +72,7 @@ mosaic(heckman.mod1, main="1st order markov chain model")
 (heckman.mod2 <- loglm(~ e1971*e1970*e1969 + e1970*e1969*e1968 +e1969*e1968*e1967, data=Heckman))
 mosaic(heckman.mod2, main="2nd order markov chain model")
 
-# second-order markov chain: fits OK
+# third-order markov chain: fits OK
 (heckman.mod3 <- loglm(~ e1971*e1970*e1969*e1968 + e1970*e1969*e1968*e1967, data=Heckman))
 mosaic(heckman.mod2, main="3rd order markov chain model")
 

@@ -52,6 +52,7 @@ data(Dyke)
 mosaic(Dyke, shade=TRUE)
 
 # null model, Knowledge as response, independent of others
+require(MASS)
 dyke.mod0 <- loglm(~ Knowledge + (Reading * Radio * Lectures * Newspaper), data=Dyke)
 dyke.mod0
 mosaic(dyke.mod0)

@@ -59,6 +59,7 @@ zeros[1,,1,1] <- 1
 structable(zeros)
 
 # fit model excluding possible structural zeros
+require(MASS)
 Caesar.mod0s <- loglm(~Infection + (Risk*Antibiotics*Planned), data=Caesar, 
 	start=zeros)
 Caesar.mod0s

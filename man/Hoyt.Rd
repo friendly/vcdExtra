@@ -76,7 +76,7 @@ plot(Hoyt1, shade=TRUE)
 #################################################
 
 # fit baseline log-linear model for Status as response
-
+require(MASS)
 hoyt.mod0 <- loglm(~ Status + (Sex*Rank*Occupation), data=Hoyt1)
 hoyt.mod0
 mosaic(hoyt.mod0, gp=shading_Friendly, main="Baseline model: Status + (Sex*Rank*Occ)")
