@@ -61,6 +61,7 @@ Michael Friendly
 }
 \examples{
 data(Mental)
+require(MASS)
 (Mental.tab <- xtabs(Freq ~ ses+mental, data=Mental))
 (Mental.mod <- loglm(~ses+mental, Mental.tab))
 Mental.mod

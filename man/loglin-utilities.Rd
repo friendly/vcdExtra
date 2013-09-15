@@ -206,9 +206,10 @@ conditional(4, with=3:4)
 mosaic(HairEyeColor, expected=joint(3))
 mosaic(HairEyeColor, expected=conditional(3))
 
-# use with loglm
+# use with MASS::loglm
 cond3 <- loglin2formula(conditional(3, table=HairEyeColor))
 cond3 <- loglin2formula(conditional(3))  # same, with factors 1,2,3
+require(MASS)
 loglm(cond3, data=HairEyeColor)
 
 saturated(3, HairEyeColor)
@@ -220,4 +221,4 @@ loglin2string(saturated(3, HairEyeColor), brackets='{}', sep=', ')
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{models}
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
