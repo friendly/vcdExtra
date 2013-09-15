@@ -68,7 +68,7 @@ seq_loglm <- function(
 
   		form <- loglin2formula(expected)
 #  		mod <- loglm(formula=form, data=mtab, fitted=TRUE)
-      mod <- eval(bquote(loglm(.(form), data=mtab, fitted=fitted)))
+      mod <- eval(bquote(MASS::loglm(.(form), data=mtab, fitted=fitted)))
   		mod$model.string <- loglin2string(expected, brackets=if (i<nf) '()' else '[]')
   		
 		}
