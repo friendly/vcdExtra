@@ -9,8 +9,8 @@ o Both mosaic.glmlist and mosaic.glmlist get an explicit panel=argument; both ge
 o Added seq_loglm to fit sequential loglm models to marginal subtables, giving a loglmlist result (rev 176)
 o Added Accident data (rev 178); fleshed out Accident examples (rev 180)
 o Fixed use of ::: for R 3.0.1 (rev 179)
-o Fixed various problems related to use of MASS:loglm
-o Added Titanicp to datasets
+o Fixed various problems related to use of MASS:loglm (rev 181-183)
+o Added Titanicp to datasets (rev 185)
 
 
 
