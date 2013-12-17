@@ -1,8 +1,8 @@
 Package: vcdExtra
 Type: Package
 Title: vcd extensions and additions
-Version: 0.5-11
-Date: 2013-07-01
+Version: 0.5-12
+Date: 2013-12-16
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
             person(given = "Heather", family = "Turner", role="ctb"),
             person(given = "Achim", family = "Zeileis", role="ctb"),
