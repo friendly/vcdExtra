@@ -12,7 +12,7 @@ Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre")
 Author: Michael Friendly with Heather Turner, Achim Zeileis, Duncan Murdoch and David Firth
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.10), vcd, gnm (>= 1.0.3)
-Suggests: ca,gmodels,Fahrmeir,effects,VGAM,plyr,rgl,lmtest,nnet,ggplot2,Sleuth2,car
+Suggests: ca,gmodels,Fahrmeir,effects,VGAM,plyr,rgl,lmtest,nnet,ggplot2,Sleuth2,car,lattice
 Imports: MASS
 Description: Provides additional data sets, methods and documentation to complement the vcd package for Visualizing Categorical Data
     and the gnm package for Generalized Nonlinear Models.
