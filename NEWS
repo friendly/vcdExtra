@@ -4,6 +4,7 @@ o Added ShakeWords data set- word frequency counts from Shakespeare (rev 188)
 o Added Geissler data-- all family sizes for Saxony sex composition data (rev 190)
 o Added logseries functions for the logarithmic series distribution (rev 191)
 o Added Depends data -- dependencies of r packages (rev 192)
+o Fixed buglet in seq_loglm() not respecting arrays
 
 Version 0.5-11 (2013-07-01)
 

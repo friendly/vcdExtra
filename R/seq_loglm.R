@@ -29,7 +29,7 @@ seq_loglm <- function(
   if (inherits(x, "data.frame") && "Freq" %in% colnames(x)) {
     x <- xtabs(Freq ~ ., data=x)
   }
-  if (!inherits(x, "table")) stop("not an xtabs or table or data.frame with a 'Freq' variable")
+  if (!inherits(x, c("table", "array"))) stop("not an xtabs, table, array or data.frame with a 'Freq' variable")
   
 	nf <- length(dim(x))
 	x <- aperm(x, vorder)
@@ -72,7 +72,7 @@ seq_loglm <- function(
   		mod$model.string <- loglin2string(expected, brackets=if (i<nf) '()' else '[]')
   		
 		}
-  	cat(i, "  model.string: ", mod$model.string, "\n")
+#  	cat(i, "  model.string: ", mod$model.string, "\n")
 #  	cat("model:\n"); print(mod)
   	models[[i]] <- mod
 	}
