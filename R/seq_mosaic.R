@@ -54,7 +54,7 @@ seq_mosaic <- function(
   			)
     model.string <- loglin2string(expected, brackets=if (i<nf) '()' else '[]')
   	}
-		mosaic(mtab, expected=expected, df=df, main=model.string, ...)
+		panel(mtab, expected=expected, df=df, main=model.string, ...)
 	}
 }
 
