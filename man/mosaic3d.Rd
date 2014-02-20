@@ -33,7 +33,8 @@ mosaic3d(x, ...)
 \method{mosaic3d}{default}(x, expected = NULL, residuals = NULL,  
 	type = c("observed", "expected"), residuals_type = NULL, 
 	shape = cube3d(alpha = alpha), alpha = 0.5, 
-	spacing = 0.1, split_dir = 1:3, shading = shading_basic, zero_size=.05,
+	spacing = 0.1, split_dir = 1:3, shading = shading_basic, interpolate=c(2,4), 
+	zero_size=.05,
 	label_edge,
 	labeling_args = list(), newpage = TRUE, box=FALSE, ...)
 }
@@ -93,6 +94,10 @@ returning a vector of colors.  At present, only the default
 to the use of the \code{shade} argument in \code{\link[graphics]{mosaicplot}}
 or to the use of \code{gp=shading_Friendly} in \code{\link[vcd]{mosaic}}.
 }
+  \item{interpolate}{a vector of interpolation values for the \code{shading}
+  function.
+}
+
   \item{zero_size}{
  The radius of a small sphere used to mark zero cells in the display.
  }

@@ -44,7 +44,8 @@ function (x, type = c("observed", "expected"),
 mosaic3d.default <- function(x, expected=NULL, residuals=NULL, 
 		type = c("observed", "expected"), residuals_type = NULL,
 		shape=cube3d(alpha=alpha), alpha=0.5,
-		spacing=0.1, split_dir=1:3, shading=shading_basic, zero_size=.05,
+		spacing=0.1, split_dir=1:3, 
+		shading=shading_basic, interpolate=c(2,4), zero_size=.05,
 		label_edge,
 		labeling_args=list(), newpage=TRUE, box=FALSE, ...) {
 	
@@ -144,7 +145,7 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 
 	# assign colors
 	# TODO: allow alpha to control transparency of side walls
-	col <- shading(residuals)
+	col <- shading(residuals, interpolate=interpolate)
 
 	# display, but exclude the zero cells
 	shapelist3d(shapelist[!as.vector(zeros)], col=col[!as.vector(zeros)], ...)
@@ -163,12 +164,12 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 
 # basic shading_Friendly, adapting the simple code used in mosaicplot()
 
-shading_basic <- function(residuals, shade=TRUE) {
-	if (is.logical(shade)) 
-		shade <- c(2, 4)
-	else if (any(shade <= 0) || length(shade) > 5) 
-		stop("invalid 'shade' specification")
-	shade <- sort(shade)
+shading_basic <- function(residuals, interpolate=TRUE) {
+	if (is.logical(interpolate)) 
+		interpolate <- c(2, 4)
+	else if (any(interpolate <= 0) || length(interpolate) > 5) 
+		stop("invalid 'interpolate' specification")
+	shade <- sort(interpolate)
 	breaks <- c(-Inf, -rev(shade), 0, shade, Inf)
 	colors <- c(hsv(0, s = seq.int(1, to = 0, length.out = length(shade) + 
 									1)), hsv(4/6, s = seq.int(0, to = 1, length.out = length(shade) + 
