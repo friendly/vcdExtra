@@ -28,8 +28,8 @@ seq_mosaic <- function(
   if (inherits(x, "data.frame") && "Freq" %in% colnames(x)) {
     x <- xtabs(Freq ~ ., data=x)
   }
-  if (!inherits(x, "table")) stop("not an xtabs or table or data.frame with a 'Freq' variable")
-
+  if (!inherits(x, c("table", "array"))) stop("not an xtabs, table, array or data.frame with a 'Freq' variable")
+  
 	nf <- length(dim(x))
 	x <- aperm(x, vorder)
 	factors <- names(dimnames(x))

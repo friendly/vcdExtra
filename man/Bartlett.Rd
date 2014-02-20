@@ -3,7 +3,7 @@
 \alias{Bartlett}
 \docType{data}
 \title{Bartlett data on plum root cuttings}
-\description{In an experiment to investigate the effect of cuitting length (two levels) and planting time (two levels) 
+\description{In an experiment to investigate the effect of cutting length (two levels) and planting time (two levels) 
 on the survival of plum root cuttings, 240 cuttings were planted for each of the 2 x 2 combinations of these factors, 
 and their survival was later recorded. 
  
@@ -44,11 +44,10 @@ Hand, D. and Daly, F. and Lunn, A. D.and McConway, K. J. and Ostrowski, E. (1994
 \examples{
 data(Bartlett)
 
-# example goes here
 fourfold(Bartlett, mfrow=c(1,2))
 
 mosaic(Bartlett, shade=TRUE)
-
+pairs(Bartlett, gp=shading_Friendly)
 }
 
 \keyword{datasets}
