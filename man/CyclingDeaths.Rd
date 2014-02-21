@@ -5,7 +5,7 @@
 London Cycling Deaths
 }
 \description{
-A vector of the number of deaths of cyclists in London from 2005 through
+A data frame containing the number of deaths of cyclists in London from 2005 through
 2012 in each fortnightly period.  Aberdein & Spiegelhalter (2013)
 discuss these data in relation to the observation that six cyclists
 died in London between Nov. 5 and Nov. 13, 2013. 
@@ -13,9 +13,11 @@ died in London between Nov. 5 and Nov. 13, 2013.
 }
 \usage{data(CyclingDeaths)}
 \format{
-  The format is:
- Named int [1:208] 1 0 0 0 1 1 1 0 2 0 ...
- - attr(*, "names")= chr [1:208] "2005-01-01" "2005-01-15" "2005-01-29" "2005-02-12" ...
+  A data frame with 208 observations on the following 2 variables.
+  \describe{
+    \item{\code{date}}{a Date}
+    \item{\code{deaths}}{number of deaths, a numeric vector}
+  }
 }
 %\details{
 %%%  ~~ If necessary, more details than the __description__ above ~~
@@ -33,9 +35,13 @@ Have London's roads become more dangerous for cyclists?
 \examples{
 data(CyclingDeaths)
 
+plot(deaths ~ date, data=CyclingDeaths, type="h", 
+	lwd=3, ylab="Number of deaths", axes=FALSE)
+axis(1, at=seq(as.Date('2005-01-01'), by='years', length.out=9), labels=2005:2013)
+axis(2, at=0:3)
 
 # make a one-way frequency table
-CyclingDeaths.tab <- table(CyclingDeaths)
+CyclingDeaths.tab <- table(CyclingDeaths$deaths)
 
 gf <- goodfit(CyclingDeaths.tab)
 gf
