@@ -40,7 +40,8 @@ seq_mosaic <- function(
 		mtab <- margin.table(x, 1:i)
 		df <- NULL
 		if (i==1) {
-		  expected <- sum(mtab) / length(mtab)
+		  expected <- mtab
+		  expected[] <- sum(mtab) / length(mtab)
 		  df <- length(mtab)-1
 		  model.string = paste("=", factors[1])
 		  }
