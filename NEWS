@@ -8,7 +8,8 @@ o Fixed buglet in seq_loglm() not respecting arrays
 o Added seq_mosaic() (rev 194)
 o Added CyclingDeaths data (rev 196)
 o mosaic3d() gets an interpolate= option to control shading levels (rev 197)
-o Fixed bug in seq_mosaic, thx to David Meyer
+o Fixed bug in seq_mosaic, thx to David Meyer (rev 200)
+o Fixed bug in seq_loglm() when marginals != 1:nf
 
 Version 0.5-11 (2013-07-01)
 
