@@ -1,7 +1,7 @@
 Package: vcdExtra
 Type: Package
 Title: vcd extensions and additions
-Version: 0.5-12
+Version: 0.6-0
 Date: 2013-12-16
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
             person(given = "Heather", family = "Turner", role="ctb"),
@@ -9,7 +9,7 @@ Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre")
             person(given = "Duncan", family = "Murdoch", role="ctb"),
             person(given = "David", family = "Firth", role="ctb")
             )
-Author: Michael Friendly with Heather Turner, Achim Zeileis, Duncan Murdoch and David Firth
+#Author: Michael Friendly with Heather Turner, Achim Zeileis, Duncan Murdoch and David Firth
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.10), vcd, gnm (>= 1.0.3)
 Suggests: ca,gmodels,Fahrmeir,effects,VGAM,plyr,rgl,lmtest,nnet,ggplot2,Sleuth2,car,lattice
