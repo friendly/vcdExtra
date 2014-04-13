@@ -42,7 +42,7 @@ assessment", \emph{J. Anthropological Research}, \bold{46}, 223-242.
 
 Johnson, K. (1996). \emph{Unfortunate Emigrants: Narratives of the Donner Party}. 
 Logan, UT: Utah State University Press. 
-Additions, and dates of death from \url{www.metrogourmet.com/crossroads/KJroster.htm}.
+Additions, and dates of death from \url{http://user.xmission.com/~octa/DonnerParty/Roster.htm}.
 }
 
 \references{
