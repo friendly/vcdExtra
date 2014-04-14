@@ -7,18 +7,23 @@ ICU data set
 \description{
 The ICU data set consists of a sample of 200 subjects who were part of
 a much larger study on survival of patients following admission to an adult
-intensive care unit (ICU).  The major goal of this study was to develop a
+intensive care unit (ICU), derived from  
+Hosmer, Lemeshow and Sturdivant (2013) and Friendly (2000).
+
+The major goal of this study was to develop a
 logistic regression model to predict the probability of survival to hospital
 discharge of these patients and to study the risk factors associated with 
 ICU mortality. The clinical details of the study are described in 
 Lemeshow, Teres, Avrunin, and Pastides (1988).
 
+This data set is often used to illustrate model selection methods for
+logistic regression.
 }
 \usage{data(ICU)}
 \format{
-  A data frame with 200 observations on the following 23 variables.
+  A data frame with 200 observations on the following 22 variables.
   \describe{
-    \item{\code{id}}{Patient id code, a numeric vector}
+%    \item{\code{id}}{Patient id code, a numeric vector}
     \item{\code{died}}{Died before discharge?, a factor with levels \code{No} \code{Yes}}
     \item{\code{age}}{Patient age, a numeric vector}
     \item{\code{sex}}{Patient sex, a factor with levels \code{Female} \code{Male}}
@@ -44,9 +49,12 @@ Lemeshow, Teres, Avrunin, and Pastides (1988).
     \item{\code{uncons}}{a recoding of \code{coma} a factor with levels \code{No} \code{Yes}}
   }
 }
-%\details{
-%%  ~~ If necessary, more details than the __description__ above ~~
-%}
+\details{
+Patient ID numbers are the rownames of the data frame.
+
+Note that the last two variables \code{white} and \code{uncons} are a recoding of
+respectively \code{race} and \code{coma} to binary variables.
+}
 
 \source{
 M. Friendly (2000), \emph{Visualizing Categorical Data}, Appendix B.4. SAS Institute, Cary, NC. 
@@ -64,6 +72,41 @@ Lemeshow, S., Teres, D., Avrunin, J. S., Pastides, H. (1988). Predicting
 }
 \examples{
 data(ICU)
-## maybe str(ICU) ; plot(ICU) ...
+# remove redundant variables (race, coma)
+ICU1 <- ICU[,-c(5,21)]
+
+# fit full model
+icu.full <- glm(died ~ ., data=ICU1, family=binomial)
+summary(icu.full)
+
+# simpler model (found from a "best" subsets procedure)
+icu.mod1 <- glm(died ~ age + sex + cancer + systolic + admit + uncons, data=ICU1, family=binomial)
+summary(icu.mod1)
+
+# even simpler model
+icu.mod2 <- glm(died ~ age + cancer  + admit + uncons, data=ICU1, family=binomial)
+summary(icu.mod2)
+
+anova(icu.mod2, icu.mod1, icu.full, test="Chisq")
+
+## Reproduce Fig 6.12 from VCD
+
+icu.fit <- data.frame(ICU, prob=predict(icu.mod2, type="response"))
+
+# combine categorical risk factors to a single string
+risks <- ICU[, c("cancer", "admit", "uncons")]
+risks[,1] <- ifelse(risks[,1]=="Yes", "Cancer", "")
+risks[,2] <- ifelse(risks[,2]=="Emergency", "Emerg", "")
+risks[,3] <- ifelse(risks[,3]=="Yes", "Uncons", "")
+risks <- apply(risks, 1, paste, collapse="")
+risks[risks==""] <- "(none)"
+icu.fit$risks <- risks
+
+library(ggplot2)
+ggplot(icu.fit, aes(x=age, y=prob, color=risks)) +
+	geom_point(size=2) +
+	geom_line(size=1.25, alpha=0.5) +
+	theme_bw() + ylab("Probability of death")
+
 }
 \keyword{datasets}
