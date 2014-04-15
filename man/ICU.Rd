@@ -73,7 +73,7 @@ Lemeshow, S., Teres, D., Avrunin, J. S., Pastides, H. (1988). Predicting
 \examples{
 data(ICU)
 # remove redundant variables (race, coma)
-ICU1 <- ICU[,-c(5,21)]
+ICU1 <- ICU[,-c(4,20)]
 
 # fit full model
 icu.full <- glm(died ~ ., data=ICU1, family=binomial)
