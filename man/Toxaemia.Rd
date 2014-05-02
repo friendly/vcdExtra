@@ -42,6 +42,26 @@ Example 7.15.
 }
 \examples{
 data(Toxaemia)
-## maybe str(Toxaemia) ; plot(Toxaemia) ...
+
+tox.tab <- xtabs(Freq~class+smoke+hyper+urea,Toxaemia)
+ftable(tox.tab, row.vars=1)
+
+
+# symptoms by smoking
+mosaic(~smoke+hyper+urea, data=tox.tab, shade=TRUE)
+
+# symptoms by social class
+mosaic(~class+hyper+urea, data=tox.tab, shade=TRUE)
+
+# predictors
+mosaic(~smoke+class, data=tox.tab, shade=TRUE)
+
+# responses
+mosaic(~hyper+urea, data=tox.tab, shade=TRUE)
+
+# log odds ratios for urea and hypertension, by class and smoke
+LOR <-loddsratio(aperm(tox.tab))
+LOR
+
 }
 \keyword{datasets}
