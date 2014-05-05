@@ -1,8 +1,9 @@
 \name{Vietnam}
-\Rdversion{1.1}
 \alias{Vietnam}
 \docType{data}
-\title{Student Opinion About the War in Vietnam}
+\title{
+Student Opinion about the Vietnam War
+}
 \description{
 A survey of student opinion on the Vietnam War was taken at the
 University of North Carolina at Chapel Hill in May 1967 and published
@@ -10,50 +11,41 @@ in the student newspaper. Students were asked to fill in ballot
 papers stating which policy out of A,B,C or D they supported.
 Responses were cross-classified by gender/year.
 
-The result is a 2 x 5 x 4 contingency table (as a data frame in frequency form), with factors
-\code{sex}, \code{yr} and \code{resp}.
+The response categories were:
+\describe{
+ \item{\code{A}}{Defeat North Vietnam}
+ \item{\code{B}}{Present policy}
+ \item{\code{C}}{Negotiate}
+ \item{\code{D}}{Immediate withdrawal}
+}
 
 }
 \usage{data(Vietnam)}
 \format{
-  A data frame in frequency form with 40 observations on the following 4 variables.
+  A frequency data frame with 40 observations representing a 2 x 5 x 4 contingency table
+   on the following 4 variables.
   \describe{
-    \item{\code{sex}}{a factor with levels \code{F} \code{M}}
-    \item{\code{yr}}{an ordered factor with levels \code{Fresh} < \code{Soph} < \code{Jr} < \code{Sr} < \code{Grad}}
-    \item{\code{resp}}{a factor with levels \code{A} \code{B} \code{C} \code{D}}
-    \item{\code{Freq}}{a numeric vector}
+    \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
+    \item{\code{year}}{year of study, an ordered factor with levels
+       \code{Freshmen}, \code{Sophomore}, \code{Junior}, \code{Senior}, \code{Grad student}}
+    \item{\code{response}}{a factor with levels \code{A} \code{B} \code{C} \code{D}}
+    \item{\code{Freq}}{cell frequency, a numeric vector}
   }
 }
 \details{
-The response categories can be considered ordered in terms of attitude about the war
-in Vietnam:
- \describe{
-  \item{A}{defeat North Vietnam by widespread bombing and land invasion}
-  \item{B}{follow the present policy}
-  \item{C}{withdraw troops to strong points and open negotiations on elections involving the Viet Cong}
-  \item{D}{immediate withdrawal of all U.S. troops}
-  }
+For some analyses, it is useful to treat \code{year} as numeric,
+and possibly assign grad students a value \code{year=7}.
 }
 \source{
-Aitkin, M. A., Anderson, D., Francis, B., & Hinde, J. 
-\emph{Statistical Modelling in GLIM},
- Clarendon Press, 1989
-
+Aitken, M. etal, 1989,  \emph{Statistical Modelling in GLIM}
 }
 \references{
-Friendly, M. \emph{Visualizing Categorical Data}, Cary, NC: SAS Institute, 2000, Appendix B.12.
+Friendly, M.  (2000), \emph{Visualizing Categorical Data}, SAS Institute, Cary, NC,
+Example 7.9.
 
 }
 \examples{
 data(Vietnam)
-str(Vietnam) 
-# make it into a table
-Vietnam.table <- xtabs(Freq ~ sex+yr+resp, data=Vietnam)
-structable(Vietnam.table)
-
-# mosaic plots for mutual independence
-mosaic(Vietnam.table, shade=TRUE)
-mosaic(Vietnam.table, gp=shading_Friendly)
-
+## maybe str(Vietnam) ; plot(Vietnam) ...
 }
 \keyword{datasets}
