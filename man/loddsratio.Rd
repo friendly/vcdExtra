@@ -188,7 +188,7 @@ with(lor.CM.df, {
 	)
 # fit linear models using WLS
 abline(lm(LOR ~ as.numeric(Age), weights=1/ASE^2, data=lor.CM.df), col="blue")
-age <- seq(25, 60, by = 5)
+age <- seq(20, 60, by = 5)
 qmod <- lm(LOR ~ poly(age,2), weights=1/ASE^2, data=lor.CM.df)
 lines(fitted(qmod), col = "red", lwd=2)
 

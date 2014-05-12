@@ -19,6 +19,7 @@ export(
 	modFit, modFit.glm, modFit.loglm,
 	GKgamma,print.GKgamma,
 	glmlist, loglmlist, summarise, 
+	logLik.loglm,
 	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
 	Kway, Crossings, 
@@ -46,6 +47,7 @@ S3method(summarise, glm)
 S3method(summarise, glmlist)
 S3method(summarise, loglm)
 S3method(summarise, loglmlist)
+S3method(logLik, loglm)
 S3method(print, GKgamma)
 S3method(print, Kappa)
 
