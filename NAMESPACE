@@ -6,6 +6,7 @@
 # - added functions in loglin-utilities
 # - added logseries functions
 # - added seq_mosaic
+# - added logLik.loglm, blogits
 
 # we are a vcd extension; do we need to import gnm here?
 import(vcd)
@@ -31,7 +32,8 @@ export(
 	conditional, joint, markov, mutual, saturated,
 	loglin2formula, loglin2string, seq_loglm,
 	dlogseries, plogseries, qlogseries, rlogseries,
-	seq_mosaic
+	seq_mosaic,
+	blogits
 	)
 
 # basic methods for glm & loglm objects
