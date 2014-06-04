@@ -8,7 +8,7 @@ Log-Likelihood of a loglm Object
 Calculates the log-likelihood value of the \code{loglm} model represented by \code{object} 
 evaluated at the estimated coefficients.
 
-It allows the use of \code{\link[stats]{AIC}} and \code{\link[stats]{AIC}}, which require
+It allows the use of \code{\link[stats]{AIC}} and \code{\link[stats]{BIC}, which require
 that a \code{logLik} method exists to extract the corresponding log-likelihood for the 
 model.
 }
