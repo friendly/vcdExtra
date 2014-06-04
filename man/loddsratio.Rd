@@ -180,16 +180,16 @@ range <- c(min(lor.CM.df$lower), max(lor.CM.df$upper))
 with(lor.CM.df, {
 	plot(LOR ~ as.numeric(Age), type='b', pch=16, xaxt='n',
 	  ylim=range, 
-		xlab="Age", ylab="Log odds ratio: Wheeze x Breathlessness",
-		main="CoalMiners data: Log odds ratio plot")
+	  xlab="Age", ylab="Log odds ratio: Wheeze x Breathlessness",
+	  main="CoalMiners data: Log odds ratio plot")
 	axis(side=1, at=as.numeric(Age), labels=Age)
 	segments(as.numeric(Age), lower, as.numeric(Age), upper)
 	}
 	)
 # fit linear models using WLS
 abline(lm(LOR ~ as.numeric(Age), weights=1/ASE^2, data=lor.CM.df), col="blue")
-age <- seq(20, 60, by = 5)
-qmod <- lm(LOR ~ poly(age,2), weights=1/ASE^2, data=lor.CM.df)
+#age <- seq(20, 60, by = 5)
+qmod <- lm(LOR ~ poly(as.numeric(Age),2), weights=1/ASE^2, data=lor.CM.df)
 lines(fitted(qmod), col = "red", lwd=2)
 
 
