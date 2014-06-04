@@ -72,9 +72,12 @@ BIC(titanic.mod1, titanic.mod2, titanic.mod3)
 
 # compare with models fit using glm()
 titanic <- as.data.frame(Titanic)
-titanic.glm1 <- glm(Freq ~ (Class * Age * Sex) + Survived, data=titanic, family=poisson)
-titanic.glm2 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age + Sex), data=titanic, family=poisson)
-titanic.glm3 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age * Sex), data=titanic, family=poisson)
+titanic.glm1 <- glm(Freq ~ (Class * Age * Sex) + Survived, 
+                    data=titanic, family=poisson)
+titanic.glm2 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age + Sex), 
+                    data=titanic, family=poisson)
+titanic.glm3 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age * Sex), 
+                    data=titanic, family=poisson)
 
 logLik(titanic.glm1)
 AIC(titanic.glm1, titanic.glm2, titanic.glm3)

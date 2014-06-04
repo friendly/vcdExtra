@@ -77,10 +77,10 @@ levels <- matrix(c(
   5,  5,  5,  4,  1
   ), 5, 5, byrow=TRUE)
 
-hauser.topo <- update(hauser.indep, ~ . + Topo(Son,Father, spec=levels))
+hauser.topo <- update(hauser.indep, ~ . + Topo(Father, Son, spec=levels))
 mosaic(hauser.topo, ~Father+Son, main="Topological model", gp=shading_Friendly)
 
-hauser.RC <- update(hauser.indep, ~ . + Mult(Son,Father))
+hauser.RC <- update(hauser.indep, ~ . + Mult(Father, Son), verbose=FALSE)
 mosaic(hauser.RC, ~Father+Son, main="RC model", gp=shading_Friendly)
 summarise(hauser.RC)
 
@@ -102,14 +102,11 @@ sumry[order(sumry$AIC, decreasing=TRUE),]
 # or, more simply
 summarise(modlist, sortby="AIC")
 
-op <- par(xpd=TRUE)
-# mods <- gsub('hauser\\.', '', rownames(sumry))
 mods <- substring(rownames(sumry),8)
 with(sumry,
 	{plot(Df, AIC, cex=1.3, pch=19, xlab='Degrees of freedom', ylab='AIC')
-	text(Df, AIC, mods, adj=c(0.5,-.5), col='red')
+	text(Df, AIC, mods, adj=c(0.5,-.5), col='red', xpd=TRUE)
 	})
-par(op)
 
 
 }
