@@ -33,7 +33,8 @@ export(
 	loglin2formula, loglin2string, seq_loglm,
 	dlogseries, plogseries, qlogseries, rlogseries,
 	seq_mosaic,
-	blogits
+	blogits,
+	Summarise
 	)
 
 # basic methods for glm & loglm objects

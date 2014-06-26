@@ -1,0 +1,54 @@
+Summarise <- function(object, ..., saturated = NULL, sortby=NULL)
+{
+  ## interface methods for logLik() and nobs()
+  ## - use S4 methods if loaded
+  ## - use residuals() if nobs() is not available
+  logLik0 <- if("stats4" %in% loadedNamespaces()) stats4::logLik else logLik
+  nobs0   <- function(x, ...) {
+    nobs1 <- if("stats4" %in% loadedNamespaces()) stats4::nobs else nobs
+    nobs2 <- function(x, ...) NROW(residuals(x, ...))
+    rval <- try(nobs1(x, ...), silent = TRUE)
+    if(inherits(rval, "try-error") | is.null(rval)) rval <- nobs2(x, ...)
+    return(rval)
+  }
+
+  ## collect all objects
+  objects <- list(object, ...)
+  nmodels <- length(objects)
+  
+  ## check sample sizes
+  ns <- sapply(objects, nobs0)
+  if(any(ns != ns[1L])) stop("models were not all fitted to the same size of dataset")
+
+  ## extract log-likelihood and df
+  ll <- lapply(objects, logLik0)
+  df <- as.numeric(sapply(ll, function(x) attr(x, "df")))
+  ll <- sapply(ll, as.numeric)
+  
+  ## compute saturated reference value (use 0 if deviance is not available)
+  if(is.null(saturated)) {
+    dev <- try(sapply(objects, deviance), silent = TRUE)
+    if(inherits(dev, "try-error")) {
+      saturated <- 0
+    } else {
+      saturated <- ll + dev/2
+    }
+  }
+
+  ## setup ANOVA-style matrix
+  rval <- matrix(rep(NA, 5 * nmodels), ncol = 5)
+  colnames(rval) <- c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")
+  rownames(rval) <- as.character(sapply(match.call(), deparse)[-1L])[1:nmodels]
+  rval[,1] <- -2 * ll + 2 * df
+  rval[,2] <- -2 * ll + log(ns) * df
+  rval[,3] <- -2 * (ll - saturated)
+  rval[,4] <- df
+  rval[,5] <- pchisq(rval[,3], df, lower.tail = FALSE)
+
+	if (!is.null(sortby)) {
+		rval <- rval[order(rval[,sortby], decreasing=TRUE),]
+	}
+
+  ## return
+  structure(as.data.frame(rval), heading = "Likelihood summary table:", class = c("anova", "data.frame"))
+}
