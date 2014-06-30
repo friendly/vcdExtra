@@ -9,7 +9,7 @@ Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre")
             person(given = "Duncan", family = "Murdoch", role="ctb"),
             person(given = "David", family = "Firth", role="ctb")
             )
-Author: Michael Friendly, Heather Turner, Achim Zeilieis, Duncan Murdoch, David Firth
+Author: Michael Friendly [aut, cre], Heather Turner [ctb], Achim Zeileis [ctb], Duncan Murdoch [ctb], David Firth [ctb]
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.10), vcd, gnm (>= 1.0.3)
 Suggests: ca,gmodels,Fahrmeir,effects,VGAM,plyr,rgl,lmtest,nnet,ggplot2,Sleuth2,car,lattice,stats4
