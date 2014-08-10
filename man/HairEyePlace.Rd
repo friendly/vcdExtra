@@ -22,9 +22,10 @@ Becker and Clogg (1989).
   ..$ Hair : chr [1:5] "Fair" "Red" "Medium" "Dark" ...
   ..$ Place: chr [1:2] "Caithness" "Aberdeen"
 }
-%\details{
-%%%  ~~ If necessary, more details than the __description__ above ~~
-%}
+\details{
+The hair and eye colors are ordered as in the original source,
+suggesting that they form ordered categories.
+}
 \source{
 This data was taken from the \code{colors} data in \pkg{logmult}.
 }
@@ -36,8 +37,17 @@ Analysis of Sets of Two-Way Contingency Tables Using Association Models.
 Fisher, R.A. (1940) The precision of discriminant functions. 
 \emph{Annals of Eugenics}, 10, 422-429.
 }
+
 \examples{
 data(HairEyePlace)
-## maybe str(HairEyePlace) ; plot(HairEyePlace) ...
+
+# separate mosaics
+mosaic(HairEyePlace[,,1], shade=TRUE, main="Caithness")
+mosaic(HairEyePlace[,,2], shade=TRUE, main="Aberdeen")
+
+# condition on Place
+mosaic(~Hair + Eye |Place, data=HairEyePlace, shade=TRUE, legend=FALSE)
+
+
 }
 \keyword{datasets}
