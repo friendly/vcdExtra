@@ -1,3 +1,4 @@
+# fixed buglet when deviance() returns a null
 Summarise <- function(object, ..., saturated = NULL, sortby=NULL)
 {
   ## interface methods for logLik() and nobs()
@@ -28,7 +29,7 @@ Summarise <- function(object, ..., saturated = NULL, sortby=NULL)
   ## compute saturated reference value (use 0 if deviance is not available)
   if(is.null(saturated)) {
     dev <- try(sapply(objects, deviance), silent = TRUE)
-    if(inherits(dev, "try-error")) {
+    if(inherits(dev, "try-error") || any(sapply(dev, is.null))) {
       saturated <- 0
     } else {
       saturated <- ll + dev/2
