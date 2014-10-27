@@ -3,14 +3,19 @@
 # functions with glm(..., family=poisson) models.
 
 # allow for non-integer frequencies
+# allow for zero frequencies, with a zero= argument
 
-logLik.loglm <- function(object, ...) {
-  fr <- if(!is.null(object$frequencies)) unclass(object$frequencies) else {
-    unclass(update(object, keep.frequencies = TRUE)$frequencies)
-  }
-  df <- prod(dim(fr)) - object$df
-  structure(sum((log(fr) - 1) * fr - lgamma(fr + 1))  - object$deviance/2,
-    df = df, class = "logLik")
+logLik.loglm <- function(object, ..., zero=1E-10) {
+	fr <- if(!is.null(object$frequencies)) unclass(object$frequencies) else {
+				unclass(update(object, keep.frequencies = TRUE)$frequencies)
+			}
+	df <- prod(dim(fr)) - object$df
+	if (any(fr==0)) {
+		fr <- as.vector(fr)
+		fr[fr==0] <- zero
+	}
+	structure(sum((log(fr) - 1) * fr - lgamma(fr + 1))  - object$deviance/2,
+			df = df, class = "logLik")
 }
 
 

@@ -1,5 +1,7 @@
 Version 0.6.3 (2014-10-27)
 
+o Fixed bug in logLik.loglm when the data contain zero frequencies 
+
 Version 0.6-2 (2014-06-30)
 
 o added Summarise, to replace summarise

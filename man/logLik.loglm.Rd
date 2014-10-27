@@ -13,7 +13,7 @@ that a \code{logLik} method exists to extract the corresponding log-likelihood f
 model.
 }
 \usage{
-\method{logLik}{loglm}(object, ...)
+\method{logLik}{loglm}(object, ..., zero=1E-10)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,15 +23,18 @@ A \code{loglm} object
   \item{\dots}{
 For compatibility with the S3 generic; not used here
 }
+  \item{zero}{value used to replace zero frequencies in calculating the log-likelihood}
 }
+
 \details{
 If cell frequencies have not been stored with the \code{loglm} object
 (via the argument \code{keep.frequencies = TRUE}), they are obtained
 using \code{update}.
 
 This function calculates the log-likelihood in a way that allows for non-integer
-frequencies, such as the case where 0.5 has been added to all cell frequicies
-to allow for sampling zeros.
+frequencies, such as the case where 0.5 has been added to all cell frequencies
+to allow for sampling zeros.  If the frequencies still contain zero values,
+those are replaced by the value of \code{start}.
 
 For integer frequencies, it gives the same result as the corresponding
 model fit using \code{\link[stats]{glm}}, whereas \code{\link[stats]{glm}}
