@@ -9,13 +9,13 @@ stat.summarise <- function(deviance, df, onames, n) {
 	p <- pchisq(deviance, df, lower.tail=FALSE)
 	aic <- deviance - 2*df
 	if (missing(n)) {
-		result <- data.frame(deviance, df, p, aic)
-		names(result) <- c("LR Chisq", "Df", "Pr(>Chisq)", "AIC")
+		result <- data.frame(aic, deviance, df, p)
+		names(result) <- c("AIC", "LR Chisq", "Df", "Pr(>Chisq)")
 	}
 	else {
 		bic <- deviance - log(n)*df
-		result <- data.frame(deviance, df, p, aic, bic)
-		names(result) <- c("LR Chisq", "Df", "Pr(>Chisq)", "AIC", "BIC")
+		result <- data.frame(aic, bic, deviance, df, p)
+		names(result) <- c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")
 	}
 	
 	rownames(result) <- onames

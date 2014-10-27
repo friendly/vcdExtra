@@ -8,7 +8,7 @@
 \alias{dimnames.loddsratio}
 \alias{print.loddsratio}
 \alias{vcov.loddsratio}
-\alias{as.array}
+%\alias{as.array}
 \alias{as.matrix.loddsratio}
 \alias{as.array.loddsratio}
 \alias{as.data.frame.loddsratio}
@@ -34,7 +34,7 @@ loddsratio(x, \dots)
 \method{vcov}{loddsratio}(object, log = object$log, \dots)
 \method{print}{loddsratio}(x, log = x$log, \dots)
 
-as.array(x, \dots)
+%as.array(x, \dots)
 \method{as.array}{loddsratio}(x, log=x$log, \dots)
 }
 

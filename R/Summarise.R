@@ -1,4 +1,7 @@
 # fixed buglet when deviance() returns a null
+# fixed bug: residual df calculated incorrectly
+#  but this now depends on objects having a df.residual component
+#  TRUE for lm, glm, polr, negbin objects
 Summarise <- function(object, ..., saturated = NULL, sortby=NULL)
 {
   ## interface methods for logLik() and nobs()
@@ -12,6 +15,15 @@ Summarise <- function(object, ..., saturated = NULL, sortby=NULL)
     if(inherits(rval, "try-error") | is.null(rval)) rval <- nobs2(x, ...)
     return(rval)
   }
+  dof <- function(x) {
+  	if (inherits(x, "loglm")) {
+  		rval <- x$df 
+  		} else {
+  		rval <- try(x$df.residual, silent=TRUE)
+  		}
+  	if (inherits(rval, "try-error") || is.null(rval)) stop(paste("Can't determine residual df for a", class(x), "object"))
+  	rval
+  	}
 
   ## collect all objects
   objects <- list(object, ...)
@@ -21,9 +33,10 @@ Summarise <- function(object, ..., saturated = NULL, sortby=NULL)
   ns <- sapply(objects, nobs0)
   if(any(ns != ns[1L])) stop("models were not all fitted to the same size of dataset")
 
-  ## extract log-likelihood and df
+  ## extract log-likelihood and df (number of parameters)
   ll <- lapply(objects, logLik0)
-  df <- as.numeric(sapply(ll, function(x) attr(x, "df")))
+  par <- as.numeric(sapply(ll, function(x) attr(x, "df")))
+	df <- as.numeric(sapply(objects, function(x) dof(x)))
   ll <- sapply(ll, as.numeric)
   
   ## compute saturated reference value (use 0 if deviance is not available)
@@ -40,8 +53,8 @@ Summarise <- function(object, ..., saturated = NULL, sortby=NULL)
   rval <- matrix(rep(NA, 5 * nmodels), ncol = 5)
   colnames(rval) <- c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")
   rownames(rval) <- as.character(sapply(match.call(), deparse)[-1L])[1:nmodels]
-  rval[,1] <- -2 * ll + 2 * df
-  rval[,2] <- -2 * ll + log(ns) * df
+  rval[,1] <- -2 * ll + 2 * par
+  rval[,2] <- -2 * ll + log(ns) * par
   rval[,3] <- -2 * (ll - saturated)
   rval[,4] <- df
   rval[,5] <- pchisq(rval[,3], df, lower.tail = FALSE)

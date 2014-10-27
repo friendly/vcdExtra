@@ -36,9 +36,12 @@ saturated model log likelihood reference value (use 0 if deviance is not availab
 either a numeric or character string specifying
 the column in the result by which the rows are sorted (in decreasing order)}
 }
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+\details{
+The function relies on residual degrees of freedom for the LR chisq test being available
+in the model object.  This is true for objects inheriting from 
+\code{lm}, \code{glm}, \code{loglm}, \code{polr}
+and \code{negbin}.
+}
 \value{
 A data frame (also of class \code{anova}) with columns 
 \code{c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")}.

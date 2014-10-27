@@ -1,9 +1,12 @@
+Version 0.6.3 (2014-10-27)
+
 Version 0.6-2 (2014-06-30)
 
 o added Summarise, to replace summarise
 o Added HairEyePlace data - 4 x 5 x 2, Caithness and Aberdeen hair/eye color (rev 223)
 o Added PhdPubs data from Long (1997) - publications by PhD candidates
 o Allow Summarise to work with models w/o a deviance() function
+o Fixed bug in Summarise wrt degrees of freedom
 
 Version 0.6-1 (2014-04-14)
 

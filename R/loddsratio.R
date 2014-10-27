@@ -21,6 +21,7 @@
 # -- Added as.data.frame method (for use in plots)
 # --   "LOR" is renamed "OR" if log=FALSE
 # -- Revised as.matrix to drop leading 1:2 dimensions of length 1
+# -- Removed as.array generic, now in base
 
 loddsratio <- function(x, ...)
   UseMethod("loddsratio")
@@ -169,8 +170,8 @@ as.matrix.loddsratio <- function (x, log=x$log, ...) {
 	}
 }
 
-as.array <- function(x, ...)
-	UseMethod("as.array")
+#as.array <- function(x, ...)
+#	UseMethod("as.array")
 
 as.array.loddsratio <- function (x, log=x$log, ...) {
 	res <- array(coef(x, log = log), dim = dim(x), dimnames=dimnames(x))
