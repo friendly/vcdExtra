@@ -1,6 +1,6 @@
 Version 0.6.3 (2014-10-27)
 
-o Fixed bug in logLik.loglm when the data contain zero frequencies 
+o Fixed bug in logLik.loglm when the data contain zero frequencies (rev 228)
 
 Version 0.6-2 (2014-06-30)
 
