@@ -2,6 +2,8 @@
 \Rdversion{1.1}
 \alias{glmlist}
 \alias{loglmlist}
+\alias{coef.glmlist}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Create a Model List Object
@@ -10,13 +12,19 @@ Create a Model List Object
 \code{glmlist} creates a \code{glmlist} object containing a list of fitted \code{glm} objects with their names.
 \code{loglmlist} does the same for \code{loglm} objects.
 
+
 The intention is to provide object classes to facilitate model comparison,
 extraction, summary and plotting of model components, etc., perhaps using
 \code{\link[base]{lapply}} or similar.
+
+There exists a \code{\link[stats]{anova.glm}} method for \code{glmlist} objects.  Here,
+a \code{coef} method is also defined.
 }
 \usage{
 glmlist(...)
 loglmlist(...)
+
+\method{coef}{glmlist}(object, result=c("list", "matrix", "data.frame"), ...))
 
 }
 %- maybe also 'usage' for other objects documented here.
@@ -24,7 +32,9 @@ loglmlist(...)
   \item{\dots}{
 One or more model objects, as appropriate to the function,
 optionally assigned names as in \code{list}.
-}
+	}
+  \item{object}{a \code{glmlist} object}
+  \item{result}{type of the result to be returned}
 }
 \details{
 The arguments to \code{glmlist}  or \code{loglmlist} are of the form \code{value} or \code{name=value}.
@@ -33,7 +43,7 @@ Any objects which do not inherit the appropriate class \code{glm} or \code{loglm
 }
 \value{
 An object of class \code{glmlist} \code{loglmlist}, just like a \code{list},
-except that each is given a \code{name} attribute.
+except that each model is given a \code{name} attribute.
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
@@ -43,7 +53,8 @@ except that each is given a \code{name} attribute.
 %%% ~put references to the literature/web site here ~
 %}
 \author{
-Michael Friendly
+Michael Friendly;
+\code{coef} method by John Fox
 }
 %\note{
 %%%  ~~further notes~~
