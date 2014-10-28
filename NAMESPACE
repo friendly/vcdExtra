@@ -51,6 +51,10 @@ S3method(summarise, glm)
 S3method(summarise, glmlist)
 S3method(summarise, loglm)
 S3method(summarise, loglmlist)
+
+S3method(Summarise, glmlist)
+S3method(Summarise, default)
+
 S3method(logLik, loglm)
 S3method(print, GKgamma)
 S3method(print, Kappa)

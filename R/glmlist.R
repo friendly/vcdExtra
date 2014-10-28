@@ -57,3 +57,24 @@ nlist <- function(...) {
     names(args) <- vname[1:length(args)]
     return(args);
 }
+
+# coeficient method for a glmlist (from John Fox, r-help, 10-28-2014)
+
+coef.glmlist <- function(object, result=c("list", "matrix", "data.frame"),
+		...){
+	result <- match.arg(result)
+	coefs <- lapply(object, coef)
+	if (result == "list") return(coefs)
+	coef.names <- unique(unlist(lapply(coefs, names)))
+	n.mods <- length(object)
+	coef.matrix <- matrix(NA, length(coef.names), n.mods)
+	rownames(coef.matrix) <- coef.names
+	colnames(coef.matrix) <- names(object)
+	for (i in 1:n.mods){
+		coef <- coef(object[[i]])
+		coef.matrix[names(coef), i] <- coef
+	}
+	if (result == "matrix") return(coef.matrix)
+	as.data.frame(coef.matrix)
+}
+

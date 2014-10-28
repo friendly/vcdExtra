@@ -1,6 +1,8 @@
 Version 0.6.3 (2014-10-27)
 
 o Fixed bug in logLik.loglm when the data contain zero frequencies (rev 228)
+o Made Summarise generic, adding a method for "glmlist" objects (rev 230)
+o Added a coef() method for "glmlist" objects (thx: John Fox)
 
 Version 0.6-2 (2014-06-30)
 

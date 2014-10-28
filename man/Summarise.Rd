@@ -1,5 +1,8 @@
 \name{Summarise}
 \alias{Summarise}
+\alias{Summarise.glmlist}
+\alias{Summarise.default}
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Brief Summary of Model Fit for glm and loglm Models
@@ -20,7 +23,10 @@ for which \code{logLik} and \code{nobs} methods exist
 
 }
 \usage{
-Summarise(object, ..., saturated = NULL, sortby = NULL)
+Summarise(object, ...)
+
+\method{Summarise}{glmlist}(object, ..., saturated = NULL, sortby = NULL)
+\method{Summarise}{default}(object, ..., saturated = NULL, sortby = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
