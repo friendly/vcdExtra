@@ -26,6 +26,24 @@ Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 		rval
 }
 
+# could just do Summarise.loglmlist <- Summarise.glmlist
+Summarise.loglmlist <- function(object, ..., saturated = NULL, sortby=NULL)
+{
+	ns <- sapply(object, function(x) length(x$residuals))
+	if (any(ns != ns[1L])) 
+		stop("models were not all fitted to the same size of dataset")
+	nmodels <- length(object)
+	if (nmodels == 1) 
+		return(Summarise.default(object[[1L]], saturated=saturated))
+	
+	rval <- lapply(object, Summarise.default, saturated=saturated)
+	rval <- do.call(rbind, rval)    
+	if (!is.null(sortby)) {
+		rval <- rval[order(rval[,sortby], decreasing=TRUE),]
+	}
+	rval
+}
+
 Summarise.default <- function(object, ..., saturated = NULL, sortby=NULL)
 {
   ## interface methods for logLik() and nobs()

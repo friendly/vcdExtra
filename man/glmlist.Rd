@@ -24,9 +24,9 @@ a \code{coef} method is also defined.
 glmlist(...)
 loglmlist(...)
 
-\method{coef}{glmlist}(object, result=c("list", "matrix", "data.frame"), ...))
+\method{coef}{glmlist}(object, result=c("list", "matrix", "data.frame"), ...)
 
-}
+} 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{\dots}{

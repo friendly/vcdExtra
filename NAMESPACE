@@ -53,6 +53,7 @@ S3method(summarise, loglm)
 S3method(summarise, loglmlist)
 
 S3method(Summarise, glmlist)
+S3method(Summarise, loglmlist)
 S3method(Summarise, default)
 
 S3method(coef, glmlist)

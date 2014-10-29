@@ -1,6 +1,7 @@
 \name{Summarise}
 \alias{Summarise}
 \alias{Summarise.glmlist}
+\alias{Summarise.loglmlist}
 \alias{Summarise.default}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -26,6 +27,7 @@ for which \code{logLik} and \code{nobs} methods exist
 Summarise(object, ...)
 
 \method{Summarise}{glmlist}(object, ..., saturated = NULL, sortby = NULL)
+\method{Summarise}{loglmlist}(object, ..., saturated = NULL, sortby = NULL)
 \method{Summarise}{default}(object, ..., saturated = NULL, sortby = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
