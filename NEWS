@@ -3,8 +3,10 @@ Version 0.6.3 (2014-10-27)
 o Fixed bug in logLik.loglm when the data contain zero frequencies (rev 228)
 o Made Summarise generic, adding a method for "glmlist" objects (rev 230)
 o Added a coef() method for "glmlist" objects (thx: John Fox)
-o Added a Summarise.loglmlist method
-o Replaced all documentation uses of summarise() with Summarise()
+o Added a Summarise.loglmlist method (rev 232)
+o Replaced all documentation uses of summarise() with Summarise() (rev 233)
+o Added cutfac(), a convenience wrapper for cut() (rev 234)
+o Now Suggests: countreg
 
 Version 0.6-2 (2014-06-30)
 

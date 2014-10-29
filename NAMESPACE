@@ -1,12 +1,14 @@
-# last modified 20 Dec 2013 by M. Friendly
+# last modified 29 Oct 2014 by M. Friendly
 # - removed aperm, now that aperm.table is in base
 # - removed meanResiduals, which is now in gnm
-# - added HLtest & methods
-# - added CMHtest
-# - added functions in loglin-utilities
-# - added logseries functions
-# - added seq_mosaic
-# - added logLik.loglm, blogits
+# + added HLtest & methods
+# + added CMHtest
+# + added functions in loglin-utilities
+# + added logseries functions
+# + added seq_mosaic
+# + added logLik.loglm, blogits
+# - removed as.array generic, now in base
+# + added cutfac
 
 # we are a vcd extension; do we need to import gnm here?
 import(vcd)
@@ -35,7 +37,8 @@ export(
 	dlogseries, plogseries, qlogseries, rlogseries,
 	seq_mosaic,
 	blogits,
-	Summarise
+	Summarise,
+	cutfac
 	)
 
 # basic methods for glm & loglm objects
