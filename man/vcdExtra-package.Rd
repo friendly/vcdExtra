@@ -50,7 +50,7 @@ categorical data.
 
 A new class, \code{\link{glmlist}}, is introduced for working with
 collections of \code{glm} objects, e.g., \code{\link{Kway}} for fitting
-all K-way models from a basic marginal model, and \code{\link{summarise}}
+all K-way models from a basic marginal model, and \code{\link{Summarise}}
 for brief statistical summaries of goodnes-of-fit for a collection of
 models.
 

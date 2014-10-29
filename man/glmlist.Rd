@@ -18,7 +18,8 @@ extraction, summary and plotting of model components, etc., perhaps using
 \code{\link[base]{lapply}} or similar.
 
 There exists a \code{\link[stats]{anova.glm}} method for \code{glmlist} objects.  Here,
-a \code{coef} method is also defined.
+a \code{coef} method is also defined, collecting the coefficients from all models in
+a single object of type determined by \code{result}.
 }
 \usage{
 glmlist(...)
@@ -40,6 +41,9 @@ optionally assigned names as in \code{list}.
 The arguments to \code{glmlist}  or \code{loglmlist} are of the form \code{value} or \code{name=value}.
 
 Any objects which do not inherit the appropriate class \code{glm} or \code{loglm} are excluded, with a warning.
+
+In the \code{coef} method, coefficients from the different models are matched by name in the list of
+unique names across all models.
 }
 \value{
 An object of class \code{glmlist} \code{loglmlist}, just like a \code{list},
@@ -92,7 +96,9 @@ names(mods)
 mods <- glmlist(Indep=indep, Col=coleff, Row=roweff, LinxLin=linlin)
 names(mods)
 
-summarise(mods)
+Summarise(mods)
+
+coef(mods, result='data.frame')
 
 #extract model components
 unlist(lapply(mods, deviance))
