@@ -58,6 +58,8 @@ Achim Zeileis
 \code{\link[stats]{quantile}}
 }
 \examples{
+\donttest{
+# countreg not yet on CRAN
 if (require(countreg)) {
 data("CrabSatellites", package = "countreg")
 
@@ -70,6 +72,7 @@ with(CrabSatellites, lines(lowess(width, satellites), col="red", lwd=2))
 # boxplot, using deciles
 plot(satellites ~ cutfac(width), data=CrabSatellites,
      ylab="Number of satellites", xlab="Carapace width (deciles)")
+}
 }
 
 }

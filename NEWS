@@ -6,7 +6,7 @@ o Added a coef() method for "glmlist" objects (thx: John Fox)
 o Added a Summarise.loglmlist method (rev 232)
 o Replaced all documentation uses of summarise() with Summarise() (rev 233)
 o Added cutfac(), a convenience wrapper for cut() (rev 234)
-o Now Suggests: countreg
+o Now use rgl:: in all mosaic3d functions
 
 Version 0.6-2 (2014-06-30)
 

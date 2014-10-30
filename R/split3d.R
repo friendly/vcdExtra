@@ -28,7 +28,7 @@ split3d.shape3d <- function(obj, p, dim, space=.10, ...) {
 			zshift <- shifts[i] + min[3]*(1-zscale) + (uspace * (i-1))
 		}
 		
-		result[[i]] <- translate3d(scale3d(obj, xscale, yscale, zscale),
+		result[[i]] <- rgl::translate3d(rgl::scale3d(obj, xscale, yscale, zscale),
 				xshift, yshift, zshift)
 		
 	}

@@ -43,7 +43,7 @@ function (x, type = c("observed", "expected"),
 
 mosaic3d.default <- function(x, expected=NULL, residuals=NULL, 
 		type = c("observed", "expected"), residuals_type = NULL,
-		shape=cube3d(alpha=alpha), alpha=0.5,
+		shape=rgl::cube3d(alpha=alpha), alpha=0.5,
 		spacing=0.1, split_dir=1:3, 
 		shading=shading_basic, interpolate=c(2,4), zero_size=.05,
 		label_edge,
@@ -125,7 +125,7 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 	# sanity check
 	if (!inherits(shapelist, "shape3d")) stop("shape must be a shape3d object")
 	
-	if (newpage) open3d()
+	if (newpage) rgl::open3d()
 	for (k in 1:ndim) {
 		marg <- margin.table(observed, k:1)
 		if (k==1) {
@@ -148,12 +148,12 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 	col <- shading(residuals, interpolate=interpolate)
 
 	# display, but exclude the zero cells
-	shapelist3d(shapelist[!as.vector(zeros)], col=col[!as.vector(zeros)], ...)
+	rgl::shapelist3d(shapelist[!as.vector(zeros)], col=col[!as.vector(zeros)], ...)
 
 	# plot markers for zero cells
 	if (any(zeros)) {
 		ctrs <- t(sapply(shapelist, center3d))
-		spheres3d(ctrs[as.vector(zeros),], radius=zero_size)
+		rgl::spheres3d(ctrs[as.vector(zeros),], radius=zero_size)
 	}
 
 #	invisible(structable(observed))
@@ -202,7 +202,7 @@ label3d <- function(objlist, dim, text, varname, offset=.05, adj, edge="-", gap=
 		xyz <- rbind(xyz, xyzlab)
 		text <- c(text, varname)
 	}
-	result <- c(labels = texts3d(xyz, texts=text, adj=adj, ...))
+	result <- c(labels = rgl::texts3d(xyz, texts=text, adj=adj, ...))
 	invisible(result)
 }
 

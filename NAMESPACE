@@ -15,7 +15,7 @@
 import(vcd)
 import(gnm)
 import(grid)
-import(rgl)
+#import(rgl)
 importFrom(MASS, loglm)
 
 # joy to the world
