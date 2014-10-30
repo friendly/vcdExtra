@@ -1278,12 +1278,12 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore, family = poisson, data = Ment
 # linear x linear association
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore, family = poisson, data = Mental)
 @
-The \codefun{summarize} in \pkg{vcdExtra} provides a nice, compact summary of the
-fit statistics for a set of models, collected into a \class{glmlist} object.
+The \codefun{Summarize} in \pkg{vcdExtra} provides a nice, compact summary of
+the fit statistics for a set of models, collected into a \class{glmlist} object.
 Smaller is better for AIC and BIC.
 <<mental4a,results=verbatim>>=
 # compare models using AIC, BIC, etc
-vcdExtra::summarise(glmlist(indep, roweff, coleff, linlin))
+vcdExtra::Summarise(glmlist(indep, roweff, coleff, linlin))
 @
 For specific model comparisons, we can also carry out tests of \emph{nested} models with
 \codefun{anova} when those models are listed from smallest to largest.

@@ -9,10 +9,13 @@
 # + added logLik.loglm, blogits
 # - removed as.array generic, now in base
 # + added cutfac
+# + now required to import: grid
 
 # we are a vcd extension; do we need to import gnm here?
 import(vcd)
 import(gnm)
+import(grid)
+import(rgl)
 importFrom(MASS, loglm)
 
 # joy to the world

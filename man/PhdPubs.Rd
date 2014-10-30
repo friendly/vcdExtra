@@ -42,7 +42,8 @@ hist(PhdPubs$articles, breaks=0:19, col="pink", xlim=c(0,20),
 library(vcd)
 rootogram(goodfit(PhdPubs$articles), xlab="Number of Articles")
 # compare with negative binomial
-rootogram(goodfit(PhdPubs$articles, type="nbinomial"), xlab="Number of Articles", main="Negative binomial")
+rootogram(goodfit(PhdPubs$articles, type="nbinomial"), 
+	xlab="Number of Articles", main="Negative binomial")
 
 
 }
