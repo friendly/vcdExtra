@@ -32,12 +32,18 @@ The \code{TV} data here includes only the Persist observations.
 
 \source{
 The original data, \code{tv.dat}, came from the initial implementation of 
-mosaic displays in R by Jay Emerson. Similar data had been used by
+mosaic displays in R by Jay Emerson (1998). Similar data had been used by
 Hartigan and Kleiner (1984) as an illustration.
 }
 
 \references{
-  Hartigan, J. A. & Kleiner, B. A Mosaic of Television Ratings The American Statistician, 1984, 38, 32-35
+  Emerson, John W. Mosaic Displays in S-PLUS: A General Implementation and a Case Study.
+  \emph{Statistical Graphics and Computing Newsletter}, 1998, 9(1), 17--23, 
+  \url{http://www.stat.yale.edu/~jay/R/mosaic/v91.pdf}
+  
+  Hartigan, J. A. & Kleiner, B. A Mosaic of Television Ratings. \emph{The American Statistician}, 1984, 38, 32-35.
+  
+  
 }
 
 \examples{
