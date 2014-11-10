@@ -48,6 +48,6 @@ mosaic(HairEyePlace[,,2], shade=TRUE, main="Aberdeen")
 # condition on Place
 mosaic(~Hair + Eye |Place, data=HairEyePlace, shade=TRUE, legend=FALSE)
 
-
+cotabplot(~Hair+Eye|Place, data=HairEyePlace, shade=TRUE, legend=FALSE)
 }
 \keyword{datasets}

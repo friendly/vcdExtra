@@ -1,3 +1,8 @@
+Version 0.6.4 (2014-11-07)
+
+o Added Cormorants data
+
+
 Version 0.6.3 (2014-10-27)
 
 o Fixed bug in logLik.loglm when the data contain zero frequencies (rev 228)
