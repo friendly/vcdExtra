@@ -1,9 +1,9 @@
-Version 0.6.4 (2014-11-07)
+Version 0.6-4 (2014-11-07)
 
-o Added Cormorants data
+o Added Cormorants data (fixed to latest)
 
 
-Version 0.6.3 (2014-10-27)
+Version 0.6-3 (2014-10-27)
 
 o Fixed bug in logLik.loglm when the data contain zero frequencies (rev 228)
 o Made Summarise generic, adding a method for "glmlist" objects (rev 230)

@@ -29,9 +29,13 @@ as well as with characteristics of nesting sites.
     \item{\code{count}}{Number of birds advertising, a numeric vector}
   }
 }
-%\details{
-%%%  ~~ If necessary, more details than the __description__ above ~~
-%}
+\details{
+Observations were made on only 2 days in week 3, but 3 days in all other weeks.
+One should use log(days) as an offset, so that the response measures rate.
+
+\code{Cormorants$days <- ifelse(Cormorants$week==3, 2, 3)}
+
+}
 \source{
 Mc Rae, M. (2015)
 Spatial and Temporal Changes in Double-Crested Cormorant (Phalacrocorax auritus) Advertising Display through the Nesting Season.
