@@ -30,16 +30,16 @@ as well as with characteristics of nesting sites.
   }
 }
 \details{
-Observations were made on only 2 days in week 3, but 3 days in all other weeks.
+Observations were made on only 2 days in weeks 3 and 4, but 3 days in all other weeks.
 One should use log(days) as an offset, so that the response measures rate.
 
-\code{Cormorants$days <- ifelse(Cormorants$week==3, 2, 3)}
+\code{Cormorants$days <- ifelse(Cormorants$week \%in\% 3:4, 2, 3)}
 
 }
 \source{
-Mc Rae, M. (2015)
-Spatial and Temporal Changes in Double-Crested Cormorant (Phalacrocorax auritus) Advertising Display through the Nesting Season.
-Unpublished MA thesis, York University.
+Mc Rae, M. (2015).
+Spatial, Habitat and Frequency Changes in Double-crested Cormorant Advertising Display in a  Tree-nesting Colony.
+Unpublished MA project, Environmental Studies, York University.
 }
 %\references{
 %%%  ~~ possibly secondary sources and usages ~~

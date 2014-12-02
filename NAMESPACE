@@ -41,6 +41,7 @@ export(
 	seq_mosaic,
 	blogits,
 	Summarise,
+	LRstats,
 	cutfac
 	)
 
@@ -61,6 +62,10 @@ S3method(summarise, loglmlist)
 S3method(Summarise, glmlist)
 S3method(Summarise, loglmlist)
 S3method(Summarise, default)
+
+S3method(LRstats, glmlist)
+S3method(LRstats, loglmlist)
+S3method(LRstats, default)
 
 S3method(coef, glmlist)
 
