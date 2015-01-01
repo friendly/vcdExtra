@@ -4,14 +4,14 @@
 \title{Collapse Levels of a Table}
 \description{
 Collapse (or re-label) variables in a
-a contingency table or \code{ftable} object by re-assigning levels of the table variables.
+a contingency table, array or \code{ftable} object by re-assigning levels of the table variables.
 }
 \usage{
 collapse.table(table, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{table}{A \code{table} or \code{ftable} object}
+  \item{table}{A \code{\link[base]{table}}, \code{\link[base]{array}} or \code{\link[stats]{ftable}} object}
   \item{\dots}{ A collection of one or more assignments of factors of the table to
   a list of levels }
 }
@@ -22,7 +22,7 @@ dimensions, and \code{levels} is a character or numeric vector of length equal
 to the corresponding dimension of the table.
 }
 \value{
-A \code{xtabs} and \code{table} objects, representing the original table with
+A \code{xtabs} and \code{table} object, representing the original table with
 one or more of its factors collapsed or rearranged into other levels.
 }
 %\references{ ~put references to the literature/web site here ~ }
@@ -32,7 +32,7 @@ one or more of its factors collapsed or rearranged into other levels.
 % ~Make other sections like Warning with \section{Warning }{....} ~
 %}
 \seealso{ 
-\code{\link{expand.dft}}
+\code{\link{expand.dft}} expands a frequency data frame to case form.
 
 \code{\link[base]{margin.table}} "collapses" a table in a different way, by
 summing over table dimensions.
