@@ -52,7 +52,8 @@ library(ggplot2)
 ggplot(Cormorants, aes(count)) + geom_histogram(binwidth=0.5) + 
 	labs(x="Number of birds advertising")
 
-# Quick look at the data, on the log scale, for plots of `count ~ week`, stratified by something else.
+# Quick look at the data, on the log scale, for plots of `count ~ week`, 
+#   stratified by something else.
 library(ggplot2)
 ggplot(Cormorants, aes(week, count, color=height)) + geom_jitter() +
 	stat_smooth(method="loess", size=2) + scale_y_log10(breaks=c(1,2,5,10)) +
