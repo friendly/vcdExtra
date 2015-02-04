@@ -13,10 +13,10 @@ Responses were cross-classified by gender/year.
 
 The response categories were:
 \describe{
- \item{\code{A}}{Defeat North Vietnam}
- \item{\code{B}}{Present policy}
- \item{\code{C}}{Negotiate}
- \item{\code{D}}{Immediate withdrawal}
+ \item{\code{A}}{Defeat North Vietnam by widespread bombing and land invasion}
+ \item{\code{B}}{Maintain the present policy}
+ \item{\code{C}}{De-escalate military activity, stop bombing and begin negotiations}
+ \item{\code{D}}{Withdraw military forces Immediately}
 }
 
 }
