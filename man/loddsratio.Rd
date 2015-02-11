@@ -109,7 +109,7 @@ An object of class \code{loddsratio}, with the following components:
 \item{contrasts}{A matrix C, such that \code{C \%*\% as.vector(log(x))} gives the log odds
   ratios. Each row corresponds to one log odds ratio, and is all zero, except for 4 elements
   of \code{c(1, -1, -1, 1)} for a given 2 x 2 subtable.}
-\item{log}{A logical, indicating whether the value of \code{log} in the original call.}
+\item{log}{A logical, indicating the value of \code{log} in the original call.}
 }
 
 \references{
@@ -137,7 +137,10 @@ treating the \code{coefficients} vector as an (R-1) x (C-1) x strata array.
 The \code{confint} method computes confidence intervals for the log odds ratios
 (or for odds ratios, with \code{log=FALSE}).
 The \code{\link[lmtest]{coeftest}} method prints the asympotic standard errors,
- z tests (standardized log odds ratios), and the corresponding p values.   
+ z tests (standardized log odds ratios), and the corresponding p values. 
+
+The \code{as.array} and \code{as.data.frame} methods can be used to convert a 
+\code{loddsratio} object to a form suitable for plotting or further analysis.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
