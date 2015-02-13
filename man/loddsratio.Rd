@@ -119,6 +119,11 @@ Fleiss, J. L. (1981). \emph{Statistical Methods for Rates and Proportions}.
 2nd Edition. New York: Wiley.
 
 M. Friendly (2000), \emph{Visualizing Categorical Data}. SAS Institute, Cary, NC.
+
+Friendly, M., Turner, H,, Firth, D., Zeileis, A. (2011).
+\emph{Advances in Visualizing Categorical Data Using the vcd, gnm and vcdExtra Packages in R}.
+Correspondence Analysis and Related Methods (CARME 2011).
+\url{http://www.datavis.ca/papers/adv-vcd-4up.pdf}
 }
 \author{
 Achim Zeileis and Michael Friendly
