@@ -1,3 +1,7 @@
+Version 0.6-7 (2015-03-02)
+
+o Removed loddsratio (now in vcd) (rev 252)
+
 Version 0.6-6 (2015-02-04)
 
 o Minor doc changes

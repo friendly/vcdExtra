@@ -10,6 +10,7 @@
 # - removed as.array generic, now in base
 # + added cutfac
 # + now required to import: grid
+# - removed loddsratio (now in vcd)
 
 # we are a vcd extension; do we need to import gnm here?
 import(vcd)
@@ -30,7 +31,7 @@ export(
 	mosaic3d, split3d, range3d, center3d,
 	Kway, Crossings, 
 	datasets,
-	loddsratio, 
+#	loddsratio, 
 #	as.array,
 #	aperm, meanResiduals,
 	HLtest, HosmerLemeshow,
@@ -81,16 +82,16 @@ S3method(mosaic3d, default)
 S3method(mosaic3d, loglm)
 
 # logoddsratio related methods
-S3method(loddsratio, default)
-S3method(coef, loddsratio)
-S3method(confint, loddsratio)
-S3method(dim, loddsratio)
-S3method(dimnames, loddsratio)
-S3method(print, loddsratio)
-S3method(vcov, loddsratio)
-S3method(as.matrix, loddsratio)
-S3method(as.array, loddsratio)
-S3method(as.data.frame, loddsratio)
+#S3method(loddsratio, default)
+#S3method(coef, loddsratio)
+#S3method(confint, loddsratio)
+#S3method(dim, loddsratio)
+#S3method(dimnames, loddsratio)
+#S3method(print, loddsratio)
+#S3method(vcov, loddsratio)
+#S3method(as.matrix, loddsratio)
+#S3method(as.array, loddsratio)
+#S3method(as.data.frame, loddsratio)
 
 # aperm method removed, as this is now in stats
 #S3method(aperm, default)
