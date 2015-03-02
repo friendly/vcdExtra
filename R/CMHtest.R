@@ -15,6 +15,7 @@
 # DONE: this should be the main function, handling 2-way & higher-way tables
 #  With strata, use apply() or recursion over strata
 # DONE: With strata, calculate overall CMH tests controlling for strata
+# FIXED: rmeans and cmeans tests were labeled incorrectly
 
 CMHtest <- function(x, ...)
   UseMethod("CMHtest")
@@ -76,7 +77,7 @@ function(formula, data = NULL, subset = NULL, na.action = NULL, ...)
 }
 
 CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C, 
-	types=c("cor", "cmeans", "rmeans", "general"),
+	types=c("cor", "rmeans", "cmeans", "general"),
 	overall=FALSE, details=overall,  ...)
 {
 
@@ -130,7 +131,7 @@ CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 #  DONE: cmh() moved outside
 
 CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C, 
-	types=c("cor", "cmeans", "rmeans", "general"),
+	types=c("cor", "rmeans", "cmeans", "general"),
 	details=FALSE, ...) {
 
 	# left kronecker product
@@ -205,7 +206,7 @@ CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
 
 # do overall test, from a computed CMHtest list
 CMHtest3 <- function(object,
-	types=c("cor", "cmeans", "rmeans", "general")) 
+	types=c("cor", "rmeans", "cmeans", "general")) 
 {
 	nstrat <- length(object)   # number of strata
 

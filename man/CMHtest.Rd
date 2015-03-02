@@ -24,7 +24,7 @@ CMHtest(x, ...)
 
 \method{CMHtest}{default}(x, strata = NULL, 
    rscores = 1:R, cscores = 1:C, 
-   types = c("cor", "cmeans", "rmeans", "general"), 
+   types = c("cor", "rmeans", "cmeans", "general"), 
    overall=FALSE, details=overall, ...)
 
 \method{print}{CMHtest}(x, digits = max(getOption("digits") - 2, 3), ...)
