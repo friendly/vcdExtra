@@ -11,6 +11,7 @@
 # + added cutfac
 # + now required to import: grid
 # - removed loddsratio (now in vcd)
+# - removed print.Kappa (now in vcd)
 
 # we are a vcd extension; do we need to import gnm here?
 import(vcd)
@@ -27,7 +28,7 @@ export(
 	GKgamma,print.GKgamma,
 	glmlist, loglmlist, summarise, 
 	logLik.loglm,
-	print.Kappa,
+#	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
 	Kway, Crossings, 
 	datasets,
@@ -72,7 +73,7 @@ S3method(coef, glmlist)
 
 S3method(logLik, loglm)
 S3method(print, GKgamma)
-S3method(print, Kappa)
+#S3method(print, Kappa)
 
 # mosaic3d related
 S3method(split3d, shape3d)
