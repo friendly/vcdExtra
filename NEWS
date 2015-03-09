@@ -4,6 +4,7 @@ o Removed loddsratio (now in vcd) (rev 252)
 o Removed print.Kappa (now in vcd) (rev 253)
 o Fixed bug in CMHtest: rmeans and cmeans labels were reversed (rev 254)
 o Fixed error in Fungicide.Rd, now that we require vcd_1.3-3 (rev 254)
+o Added WorkerSat data - 2 x 2 x 2
 
 Version 0.6-6 (2015-02-04)
 

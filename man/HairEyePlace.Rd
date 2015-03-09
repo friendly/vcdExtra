@@ -2,7 +2,7 @@
 \alias{HairEyePlace}
 \docType{data}
 \title{
-Cross-Classifications of Eye Color by Hair Color in Caithness and Aberdeen
+Hair Color and Eye Color in Caithness and Aberdeen
 }
 \description{
 A three-way frequency table crossing eye color and hair color in two places, Caithness and Aberdeen,
