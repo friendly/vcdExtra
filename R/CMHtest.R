@@ -7,7 +7,7 @@
 # Ref: Landis, R. J., Heyman, E. R., and Koch, G. G. (1978), 
 #		Average Partial Association in Three-way Contingency Tables: 
 #		A Review and Discussion of Alternative Tests, 
-#		International Statistical Review, 46, 237–254. 
+#		International Statistical Review, 46, 237-254. 
 
 # See: https://onlinecourses.science.psu.edu/stat504/book/export/html/90
 # http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm

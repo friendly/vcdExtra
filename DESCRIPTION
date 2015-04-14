@@ -1,6 +1,6 @@
 Package: vcdExtra
 Type: Package
-Title: vcd Extensions and Additions
+Title: Vcd Extensions and Additions
 Version: 0.6-7
 Date: 2015-03-02
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
@@ -18,7 +18,8 @@ Description: Provides additional data sets, methods and documentation to complem
     and the gnm package for Generalized Nonlinear Models.
 	In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and
 	adds a 3D version in mosaic3d.  Additionally, methods are provided for comparing and visualizing lists of
-	glm and loglm objects.
+	glm and loglm objects. This package is now a support package for the book, "Discrete Data Analysis with R" by
+  Michael Friendly and David Meyer.
 License: GPL (>=2)
 URL: http://CRAN.R-project.org/package=vcdExtra
 LazyLoad: yes
