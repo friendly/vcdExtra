@@ -49,7 +49,7 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 		label_edge,
 		labeling_args=list(), newpage=TRUE, box=FALSE, ...) {
 	
-  if (!require(rgl)) stop("rgl is required")
+  if (!requireNamespace(rgl)) stop("rgl is required")
 
   type <- match.arg(type)
   if (is.null(residuals)) {
