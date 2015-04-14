@@ -30,7 +30,7 @@ A data frame containing the factors in the table and as many observations as are
 represented by the total of the \code{freq} variable.
 }
 \references{Posted on R-Help, Jan 20, 2009.
-\url{http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html}
+%\url{http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html}
 }
 \author{ Mark Schwarz }
 %\note{ ~~further notes~~ 
