@@ -1,3 +1,7 @@
+Version 0.6-8 (2015-04-15)
+
+o Fixed Title: and Description: for CRAN
+
 Version 0.6-7 (2015-04-02)
 
 o Removed loddsratio (now in vcd) (rev 252)
