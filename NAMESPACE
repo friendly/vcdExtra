@@ -26,7 +26,8 @@ export(
 	mosaic.glm, sieve.glm, assoc.glm,
 	modFit, modFit.glm, modFit.loglm,
 	GKgamma,print.GKgamma,
-	glmlist, loglmlist, summarise, 
+	glmlist, loglmlist, 
+	summarise, 
 	logLik.loglm,
 #	print.Kappa,
 	mosaic3d, split3d, range3d, center3d,
@@ -56,10 +57,10 @@ S3method(modFit, loglm)
 S3method(mosaic, glmlist)
 S3method(mosaic, loglmlist)
 
-S3method(summarise, glm)
-S3method(summarise, glmlist)
-S3method(summarise, loglm)
-S3method(summarise, loglmlist)
+#S3method(summarise, glm)
+#S3method(summarise, glmlist)
+#S3method(summarise, loglm)
+#S3method(summarise, loglmlist)
 
 S3method(Summarise, glmlist)
 S3method(Summarise, loglmlist)
@@ -73,7 +74,7 @@ S3method(coef, glmlist)
 
 S3method(logLik, loglm)
 S3method(print, GKgamma)
-#S3method(print, Kappa)
+#S3method(print, Kappa)  # moved to vcd
 
 # mosaic3d related
 S3method(split3d, shape3d)
@@ -82,7 +83,7 @@ S3method(split3d, list)
 S3method(mosaic3d, default)
 S3method(mosaic3d, loglm)
 
-# logoddsratio related methods
+# logoddsratio related methods -- moved to vcd
 #S3method(loddsratio, default)
 #S3method(coef, loddsratio)
 #S3method(confint, loddsratio)

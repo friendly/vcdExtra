@@ -1,6 +1,6 @@
 \name{vcdExtra-deprecated}
 \alias{vcdExtra-deprecated}
-%\alias{summarise.glm}
+\alias{summarise}
 %\alias{summarise.glm}
 %\alias{summarise.glmlist}
 %\alias{summarise.loglm}
@@ -9,22 +9,22 @@
 \title{Deprecated Functions in vcdExtra Package}
 %
 \description{
-  These functions are provided for compatibility with older versions of the \pkg{vcdExtra} package only, 
-  and may be removed eventually.
+  These functions are provided for compatibility with older versions of the \pkg{vcdExtra} package only. 
+  They are replaced by \code{\link{LRstats}}.
 }
 %
-%\usage{
-%summarise(...)
+\usage{
+summarise(...)
 %summarise.glm(...)
 %summarise.glmlist(...)
 %summarise.loglm(...)
 %summarise.loglmlist(...)
-%}
+}
 %
-%\arguments{
-%  \item{\dots}{pass arguments down.}
-%}
+\arguments{
+  \item{\dots}{pass arguments down.}
+}
 %
-%\details{
-%\code{summarise.*} have been replaced by \code{\link{LRstats}} functions.
-%}
+\details{
+\code{summarise.*} have been replaced by \code{\link{LRstats}} functions.
+}
