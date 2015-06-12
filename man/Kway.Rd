@@ -87,7 +87,8 @@ Michael Friendly and Heather Turner
 
 \seealso{
 \code{\link{glmlist}}, 
-\code{\link{Summarise}}
+\code{\link{Summarise}} (soon to be deprecated),
+\code{\link{LRstats}}
 }
 \examples{
 ## artificial data
@@ -96,15 +97,15 @@ Freq <- rpois(nrow(factors), lambda=40)
 df <- cbind(factors, Freq)
 
 mods3 <- Kway(Freq ~ A + B + C, data=df, family=poisson)
-Summarise(mods3)
+LRstats(mods3)
 mods4 <- Kway(Freq ~ A + B + C + D, data=df, family=poisson)
-Summarise(mods4)
+LRstats(mods4)
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
 modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, 
                family=poisson, prefix="JobSat")
-Summarise(modSat)
+LRstats(modSat)
 anova(modSat, test="Chisq")
 
 # Rochdale data: very sparse, in table form
@@ -113,7 +114,7 @@ data(Rochdale, package="vcd")
 modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child + 
                      Education + HusbandEducation + Asian + HouseholdWorking,
                 data=Rochdale, family=poisson)
-Summarise(modRoch)
+LRstats(modRoch)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

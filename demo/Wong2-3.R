@@ -116,7 +116,7 @@ mosaic(Wong23.RC1, formula=~polviews+fefam, main="RC(1) model",
 	labeling=labeling_residuals, suppress=1, gp=shading_Friendly)
 
 #####################################
-# summarise the collection of models
+# LRstats the collection of models
 models <- list(Indep=Wong23.O, Uniform=Wong23.U, RowEff=Wong23.R, ColEff=Wong23.C, RplusC=Wong23.RplusC, RC1=Wong23.RC1)
 res <- lapply(models, residuals)
 boxplot(as.data.frame(res), main="Residuals from various models")

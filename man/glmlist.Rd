@@ -72,7 +72,7 @@ more general.
 
 The function \code{\link[stats]{anova.glm}} also handles \code{glmlist objects}
 
-
+\code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist} object.
 }
 \examples{
 data(Mental)
@@ -96,7 +96,7 @@ names(mods)
 mods <- glmlist(Indep=indep, Col=coleff, Row=roweff, LinxLin=linlin)
 names(mods)
 
-Summarise(mods)
+LRstats(mods)
 
 coef(mods, result='data.frame')
 

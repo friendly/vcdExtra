@@ -30,4 +30,4 @@ anova(symmetry, quasi.symm, test="Chisq")
 
 # model summaries, with AIC and BIC
 models <- glmlist(indep, quasi.indep, symmetry, quasi.symm)
-summarise(models)
+LRstats(models)

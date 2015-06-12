@@ -74,7 +74,7 @@ anova(mod2, test="Chisq")
 
 (mod3 <- glm(survived ~ poly(age,2) * sex, data=Donner, family=binomial))
 anova(mod3, test="Chisq")
-Summarise(glmlist(mod1, mod2, mod3))
+LRstats(glmlist(mod1, mod2, mod3))
 
 # plot fitted probabilities from mod2 and mod3
 # idea from: http://www.ling.upenn.edu/~joseff/rstudy/summer2010_ggplot2_intro.html

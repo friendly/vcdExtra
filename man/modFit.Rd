@@ -57,7 +57,8 @@ Michael Friendly
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{Summarise}}
+\code{\link{Summarise}} (soon to be deprecated),
+\code{\link{LRstats}}
 }
 \examples{
 data(Mental)

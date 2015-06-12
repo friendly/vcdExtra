@@ -1,6 +1,7 @@
 Version 0.6-9 (2015-06-11)
 
 o Added Mice data 
+o Removed uses of summarise() and Summarise() from demos and examples, in preparation for deprecating them.
 
 Version 0.6-8 (2015-04-15)
 

@@ -58,23 +58,23 @@ structable(mode+gender ~ age+result, data=accident_tab)
 
 # mutual independence
 acc.mod0 <- glm(Freq ~ age+result+mode+gender, data=Accident, family=poisson)
-Summarise(acc.mod0)
+LRstats(acc.mod0)
 mosaic(acc.mod0, ~mode+age+gender+result)
 
 # result as a response
 acc.mod1 <- glm(Freq ~ age*mode*gender + result, data=Accident, family=poisson)
-Summarise(acc.mod1)
+LRstats(acc.mod1)
 mosaic(acc.mod1, ~mode+age+gender+result, 
     labeling_args = list(abbreviate = c(gender=1, result=4)))
 
 # allow two-way association of result with each explanatory variable
 acc.mod2 <- glm(Freq ~ age*mode*gender + result*(age+mode+gender), data=Accident, family=poisson)
-Summarise(acc.mod2)
+LRstats(acc.mod2)
 mosaic(acc.mod2, ~mode+age+gender+result, 
     labeling_args = list(abbreviate = c(gender=1, result=4)))
 
 acc.mods <- glmlist(acc.mod0, acc.mod1, acc.mod2)
-Summarise(acc.mods)
+LRstats(acc.mods)
 
 ## Binomial (logistic regression) models for result
 ## ------------------------------------------------

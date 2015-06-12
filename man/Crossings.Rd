@@ -58,10 +58,10 @@ structable(~Father+Son, data=Hauser79)
 
 hauser.indep <- gnm(Freq ~ Father + Son, data=Hauser79, family=poisson)
 hauser.CR <- update(hauser.indep, ~ . + Crossings(Father,Son))
-Summarise(hauser.CR)
+LRstats(hauser.CR)
 
 hauser.CRdiag <- update(hauser.indep, ~ . + Crossings(Father,Son) + Diag(Father,Son))
-Summarise(hauser.CRdiag)
+LRstats(hauser.CRdiag)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

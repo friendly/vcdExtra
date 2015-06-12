@@ -58,15 +58,15 @@ Fscore <- as.numeric(Hauser79$Father)
 
 # row effects model
 hauser.roweff <- update(hauser.indep, ~ . + Father*Sscore)
-Summarise(hauser.roweff)
+LRstats(hauser.roweff)
 
 # uniform association
 hauser.UA <- update(hauser.indep, ~ . + Fscore*Sscore)
-Summarise(hauser.UA)
+LRstats(hauser.UA)
 
 # uniform association, omitting diagonals
 hauser.UAdiag <- update(hauser.indep, ~ . + Fscore*Sscore + Diag(Father,Son))
-Summarise(hauser.UAdiag)
+LRstats(hauser.UAdiag)
 
 # Levels for Hauser 5-level model
 levels <- matrix(c(
@@ -82,25 +82,25 @@ mosaic(hauser.topo, ~Father+Son, main="Topological model", gp=shading_Friendly)
 
 hauser.RC <- update(hauser.indep, ~ . + Mult(Father, Son), verbose=FALSE)
 mosaic(hauser.RC, ~Father+Son, main="RC model", gp=shading_Friendly)
-Summarise(hauser.RC)
+LRstats(hauser.RC)
 
 # crossings models 
 hauser.CR <- update(hauser.indep, ~ . + Crossings(Father,Son))
 mosaic(hauser.topo, ~Father+Son, main="Crossings model", gp=shading_Friendly)
-Summarise(hauser.CR)
+LRstats(hauser.CR)
 
 hauser.CRdiag <- update(hauser.indep, ~ . + Crossings(Father,Son) + Diag(Father,Son))
-Summarise(hauser.CRdiag)
+LRstats(hauser.CRdiag)
 
 
 # compare model fit statistics
 modlist <- glmlist(hauser.indep, hauser.roweff, hauser.UA, hauser.UAdiag, 
                    hauser.quasi, hauser.qsymm,  hauser.topo, 
                    hauser.RC, hauser.CR, hauser.CRdiag)
-sumry <- Summarise(modlist)
+sumry <- LRstats(modlist)
 sumry[order(sumry$AIC, decreasing=TRUE),]
 # or, more simply
-Summarise(modlist, sortby="AIC")
+LRstats(modlist, sortby="AIC")
 
 mods <- substring(rownames(sumry),8)
 with(sumry,
