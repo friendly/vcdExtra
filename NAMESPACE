@@ -19,6 +19,12 @@ import(gnm)
 import(grid)
 #import(rgl)
 importFrom(MASS, loglm)
+# add inports for all base packages
+
+importFrom("grDevices", "hsv")
+importFrom("stats", "as.formula", "deviance", "family", "fitted", "formula", "glm", "logLik", "loglin", "model.frame", "na.pass", "nobs", "pchisq", "poisson", "qnorm", "quantile", "reformulate", "residuals", "rstandard", "runif", "terms", "update", "xtabs")
+importFrom("utils", "data", "menu", "type.convert")
+
 
 # joy to the world
 export(
