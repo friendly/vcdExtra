@@ -1,9 +1,13 @@
+Version 0.6-10 (2015-07-27)
+
+o Added HospVisits data
+
 Version 0.6-9 (2015-06-11)
 
 o Added Mice data 
 o Removed uses of summarise() and Summarise() from demos and examples, in preparation for deprecating them.
 o summarise() is now deprecated
-o Now use importsFrom() for all functions from base packages
+o Now use importsFrom() for all functions from recommended packages
 
 Version 0.6-8 (2015-04-15)
 
