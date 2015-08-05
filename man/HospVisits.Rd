@@ -14,14 +14,15 @@ visiting patterns, originally from Wing (1962).
   A 3 by 3 frequency table, with format:
  table [1:3, 1:3] 43 6 9 16 11 18 3 10 16
  - attr(*, "dimnames")=List of 2
-  ..$ visit: chr [1:3] "regularly" "infrequently" "never"
-  ..$ stay : chr [1:3] "2-10" "10-20" "20+"
+  ..$ visit: chr [1:3] "Regular" "Infrequent" "Never"
+  ..$ stay : chr [1:3] "2-9" "10-19" "20+"
 }
+
 \details{
 Both table variables can be considered ordinal.
 The variable \code{visit} refers to visiting patterns recorded hospital. 
 The category labels are abbreviations of those given by Goodman (1983);
-e.g., \code{"regularly"} is short for \dQuote{received visitors regularly or patient went home}.
+e.g., \code{"Regular"} is short for \dQuote{received visitors regularly or patient went home}.
 The variable \code{stay} refers to length of stay in hospital, in year groups.
 
 }
@@ -35,7 +36,7 @@ Wing, J. K. (1962). Institutionalism in Mental Hospitals,
 }
 \examples{
 data(HospVisits)
-mosaic(HospVisits, shade=TRUE)
+mosaic(HospVisits, gp=shading_Friendly)
 
 library(ca)
 ca(HospVisits)
