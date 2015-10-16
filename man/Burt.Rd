@@ -38,9 +38,9 @@ Burt, C. (1950). The factorial analysis of qualitative data,
 \emph{British Journal of Statistical Psychology}, 3(3), 166-185.
 Table IX.
 }
-\references{
+%\references{
 %%  ~~ possibly secondary sources and usages ~~
-}
+%}
 \examples{
 data(Burt)
 mosaic(Freq ~ Hair + Eyes + Head + Stature, data=Burt, shade=TRUE)
