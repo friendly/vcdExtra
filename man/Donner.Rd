@@ -83,13 +83,13 @@ library(ggplot2)
 # separate linear fits on age for M/F
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", family = binomial, formula = y ~ x,
+  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ x,
            alpha = 0.2, size=2, aes(fill = sex))
 
 # separate quadratics
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2),
+  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ poly(x,2),
            alpha = 0.2, size=2, aes(fill = sex))
 
 

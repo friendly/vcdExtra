@@ -1737,14 +1737,14 @@ A potential model of interest
 is the logistic regression model for $Pr(survived)$, allowing separate
 fits for males and females as a function of \code{age}.
 The key to this is the \verb|stat_smooth()| function, using
-	\code{method = "glm", family = binomial}. The \verb|formula = y ~ x|
+	\code{method = "glm", method.args = list(family = binomial)}. The \verb|formula = y ~ x|
 	specifies a linear fit on the logit scale (\figref{fig:donner3}, left)
 
 <<donner2a, fig=FALSE, eval=FALSE>>=
 # separate linear fits on age for M/F
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", family = binomial, formula = y ~ x,
+  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ x,
            alpha = 0.2, size=2, aes(fill = sex))
 @
 Alternatively, we can allow a quadratic relation with \code{age}
@@ -1753,7 +1753,7 @@ by specifying \verb|formula = y ~ poly(x,2)| (\figref{fig:donner3}, right).
 # separate quadratics
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2),
+  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ poly(x,2),
            alpha = 0.2, size=2, aes(fill = sex))
 @
 
@@ -1763,7 +1763,7 @@ ggplot(Donner, aes(age, survived, color = sex)) +
 <<donner3a,fig=TRUE,echo=FALSE,height=6,width=6, results=hide>>=
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", family = binomial, formula = y ~ x,
+  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ x,
            alpha = 0.2, size=2, aes(fill = sex))
 
 @
@@ -1771,7 +1771,7 @@ ggplot(Donner, aes(age, survived, color = sex)) +
 # separate quadratics
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", family = binomial, formula = y ~ poly(x,2),
+  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ poly(x,2),
            alpha = 0.2, size=2, aes(fill = sex))
 @
 \caption{Logistic regression plots for the  \data{Donner} data
