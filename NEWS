@@ -1,6 +1,7 @@
 Version 0.6-12 (2015-10-06)
 
 o Added Burt data
+o Fixed examples/vignette for ggplot_2.0.0
 
 
 Version 0.6-11 (2015-09-14)

@@ -11,13 +11,19 @@ a few functions designed to extend the \code{vcd} package for Visualizing Catego
 and the \code{gnm} package for Generalized Nonlinear Models. 
 In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and
 adds a 3D version in \code{\link{mosaic3d}}.
+
+This package is now a support package for the book, \emph{Discrete Data Analysis with R} by
+Michael Friendly and David Meyer, Chapman & Hall/CRC, 2016, 
+\url{https://www.crcpress.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/9781498725835}
+with a number of additional data sets,
+and functions.
 }
 \details{
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
 Version: \tab 0.6-12\cr
-Date: \tab 2015-10-06\cr
+Date: \tab 2015-12-06\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
