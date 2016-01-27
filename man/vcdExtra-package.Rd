@@ -17,13 +17,14 @@ Michael Friendly and David Meyer, Chapman & Hall/CRC, 2016,
 \url{https://www.crcpress.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/9781498725835}
 with a number of additional data sets,
 and functions.
+The web site for the book is \url{http://ddar.datavis.ca}.
 }
 \details{
 \tabular{ll}{
 Package: \tab vcdExtra\cr
 Type: \tab Package\cr
-Version: \tab 0.6-12\cr
-Date: \tab 2015-12-06\cr
+Version: \tab 0.7-0\cr
+Date: \tab 2016-01-27\cr
 License: \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -96,6 +97,10 @@ Maintainer: Michael Friendly <friendly AT yorku.ca>
 \references{
 Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.
 Web materials: \url{http://www.datavis.ca/books/vcd/}.
+
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 
 Meyer, D.; Zeileis, A. & Hornik, K. 
 The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd 

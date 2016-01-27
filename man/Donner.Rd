@@ -48,6 +48,11 @@ Additions, and dates of death from \url{http://user.xmission.com/~octa/DonnerPar
 \references{
 Ramsey, F.L. and Schafer, D.W. (2002). 
 \emph{The Statistical Sleuth: A Course in Methods of Data Analysis}, (2nd ed), Duxbury.
+
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+
 }
 
 \seealso{

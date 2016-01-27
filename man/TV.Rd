@@ -37,11 +37,15 @@ Hartigan and Kleiner (1984) as an illustration.
 }
 
 \references{
-  Emerson, John W. Mosaic Displays in S-PLUS: A General Implementation and a Case Study.
-  \emph{Statistical Graphics and Computing Newsletter}, 1998, 9(1), 17--23, 
-  \url{http://www.stat.yale.edu/~jay/R/mosaic/v91.pdf}
-  
-  Hartigan, J. A. & Kleiner, B. A Mosaic of Television Ratings. \emph{The American Statistician}, 1984, 38, 32-35.
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+
+Emerson, John W. Mosaic Displays in S-PLUS: A General Implementation and a Case Study.
+\emph{Statistical Graphics and Computing Newsletter}, 1998, 9(1), 17--23, 
+\url{http://www.stat.yale.edu/~jay/R/mosaic/v91.pdf}
+
+Hartigan, J. A. & Kleiner, B. A Mosaic of Television Ratings. \emph{The American Statistician}, 1984, 38, 32-35.
   
   
 }

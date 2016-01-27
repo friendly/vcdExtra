@@ -39,6 +39,11 @@ Toxaemic signs during pregnancy.
 \references{
 Friendly, M.  (2000), \emph{Visualizing Categorical Data}, SAS Institute, Cary, NC,
 Example 7.15.
+
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+Example 10.10.
 }
 \examples{
 data(Toxaemia)

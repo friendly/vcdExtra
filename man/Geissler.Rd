@@ -25,15 +25,20 @@ listed in the table supplied by Edwards (1958, Table 1).
 The data on family composition was available because, on the birth of a child,
 the parents had to state the sex of all their children on the birth certificate.
 These family records are not necessarily independent, because a given family
-may have had several children during this 10 year period.
+may have had several children during this 10 year period, included as 
+multiple records.
 }
 \source{
 Edwards, A. W. F. (1958).
 An Analysis Of Geissler's Data On The Human Sex Ratio.
 \emph{Annals of Human Genetics}, 
-23, 6-15
+23, 6-15.
 }
 \references{
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+
 Geissler, A. (1889).
 \emph{Beitrage zur Frage des Geschlechts verhaltnisses der Geborenen}
 Z. K. Sachsischen Statistischen Bureaus, 35, n.p.
