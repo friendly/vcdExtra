@@ -51,9 +51,13 @@ If this is not the case, either use \code{rev=TRUE} or supply
 \value{
 A data frame with \code{nrow(Y)} rows and \code{3 + ncol(row.vars)} columns
 }
-%\references{
-%%% ~put references to the literature/web site here ~
-%}
+\references{
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+
+
+}
 
 \author{
 Michael Friendly

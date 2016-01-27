@@ -29,8 +29,14 @@ expand.table(x, var.names = NULL, freq = "Freq", ...)
 A data frame containing the factors in the table and as many observations as are
 represented by the total of the \code{freq} variable.
 }
-\references{Posted on R-Help, Jan 20, 2009.
-%\url{http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html}
+\references{
+Originally posted on R-Help, Jan 20, 2009,
+http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html
+
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+
 }
 \author{ Mark Schwarz }
 %\note{ ~~further notes~~ 

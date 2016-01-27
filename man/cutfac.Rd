@@ -41,9 +41,12 @@ A \code{\link[base]{factor}} corresponding to \code{x} is returned
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
 }
-%\references{
-%% ~put references to the literature/web site here ~
-%}
+\references{
+Friendly, M. and Meyer, D. (2016). 
+\emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+
+}
 \author{
 Achim Zeileis
 }
