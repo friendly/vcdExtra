@@ -2,6 +2,7 @@ Version 0.7-0 (2016-01-27)
 
 o Added Glass data
 o introduce links and references to DDAR
+o added mcaplot() to plot MCA solutions in DDAR style
 
 Version 0.6-12 (2015-10-06)
 
