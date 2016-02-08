@@ -49,7 +49,7 @@ New York: Wiley-Interscience, Table 9.1, p. 362.
 }
 \references{
 Thompson, L. (2009). \emph{R (and S-PLUS) Manual to Accompany Agresti's Categorical Data},
-\url{https://home.comcast.net/~lthompson221/Splusdiscrete2.pdf} 
+\url{http://www.stat.ufl.edu/~aa/cda/Thompson_manual.pdf} 
 }
 \examples{
 data(DaytonSurvey)
