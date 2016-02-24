@@ -130,13 +130,18 @@ if(!file.exists("fig")) dir.create("fig")
 
 %% an abstract and keywords
 \begin{abstract}
-This tutorial describes the creation of frequency and contingency tables
+This tutorial describes the creation and manipulation of frequency and contingency tables
 from categorical variables, along with tests of independence, measures
 of association, and methods for graphically displaying results. 
 The framework is provided by the \proglang{R} package \pkg{vcd},
 but other packages are used to help with various tasks.  
 The \pkg{vcdExtra} package extends the graphical and statistical methods provided by
-\pkg{vcd}.
+\pkg{vcd}.  
+
+This package is now the main support package for the book
+\emph{Discrete Data Analysis with R: Visualizing and Modeling Techniques for Categorical
+and Count Data} \citep{FriendlyMeyer:2016:DDAR}.  The web page for the book,
+\href{http://ddar.datavis.ca}{ddar.datavis.ca}, gives further details.
 \end{abstract}
 
 %\keywords{contingency tables, mosaic plots, sieve plots, 
@@ -178,9 +183,13 @@ statistical tests, associated \loglin\ models, and visualization of \emph{how}
 variables are related.
 
 A more general treatment of graphical methods for categorical data is contained
-in my book, \emph{Visualizing Categorical Data} \citep{vcd:Friendly:2000}, for which
+in the book, \emph{Discrete Data Analysis with R: Visualizing and Modeling Techniques for Categorical
+and Count Data} \citep{FriendlyMeyer:2016:DDAR}. 
+An earlier book using SAS is
+\emph{Visualizing Categorical Data} \citep{vcd:Friendly:2000}, for which
 \pkg{vcd} is a partial \proglang{R} companion, covering topics not otherwise
-available in \proglang{R}.  On the other hand, the implementation of graphical
+available in \proglang{R}.  
+On the other hand, the implementation of graphical
 methods in \pkg{vcd} is more general in many respects than what I provided in
 \proglang{SAS}. Statistical models for categorical data in \proglang{R} have
 been extended considerably with the \pkg{gnm} package for generalized \emph{nonlinear}
@@ -191,7 +200,7 @@ A more complete theoretical description of these statistical
 methods is provided in Agresti's \citeyearpar{vcd:Agresti:2002,Agresti:2013}
 \emph{Categorical Data Analysis}. For this, see
 the \proglang{Splus/R} companion by Laura Thompson,
-\url{https://home.comcast.net/~lthompson221/Splusdiscrete2.pdf}
+\url{http://www.stat.ufl.edu/~aa/cda/Thompson_manual.pdf}
 and Agresti's support web page,
 \url{http://www.stat.ufl.edu/~aa/cda/cda.html}.
 

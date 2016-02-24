@@ -4,6 +4,7 @@ o Added Glass data
 o introduce links and references to DDAR
 o added mcaplot() to plot MCA solutions in DDAR style
 o added update.xtabs method
+o updated vignette to refer to DDAR
 
 Version 0.6-12 (2015-10-06)
 
