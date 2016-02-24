@@ -1,4 +1,4 @@
 .project
 .svn
 cran-comments.md
-
+inst/doc/*.pdf
