@@ -26,6 +26,9 @@ importFrom("grDevices", "hsv")
 importFrom("stats", "as.formula", "deviance", "family", "fitted", "formula", "glm", "logLik", "loglin", "model.frame", "na.pass", "nobs", "pchisq", "poisson", "qnorm", "quantile", "reformulate", "residuals", "rstandard", "runif", "terms", "update", "xtabs")
 importFrom("utils", "data", "menu", "type.convert")
 importFrom("ca", "cacoord", "multilines")
+importFrom("grDevices", "rgb")
+importFrom("graphics", "abline", "plot", "points", "text")
+importFrom("stats", "update.formula")
 
 # joy to the world
 export(
