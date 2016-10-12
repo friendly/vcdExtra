@@ -1,3 +1,7 @@
+Version 0.7-1 (2016-10-12)
+
+o Fixed buglet in expand.dft when table is 1-dim [Thx: Long Qu]
+
 Version 0.7-0 (2016-01-27)
 
 o Added Glass data

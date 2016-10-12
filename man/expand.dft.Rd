@@ -49,6 +49,11 @@ art <- xtabs(~Treatment + Improved, data = Arthritis)
 art
 artdf <- expand.dft(art)
 str(artdf)
+
+# 1D case
+(tab <- table(sample(head(letters), 20, replace=TRUE)))
+expand.table(tab, var.names="letter")
+
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

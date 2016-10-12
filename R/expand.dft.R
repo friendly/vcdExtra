@@ -15,7 +15,7 @@ expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
                function(i) x[rep(i, each = x[i, freq.col]), ],
                simplify = FALSE)
 
-  DF <- do.call("rbind", DF)[, -freq.col]
+  DF <- do.call("rbind", DF)[, -freq.col, drop=FALSE]
 
   for (i in 1:ncol(DF))
   {
