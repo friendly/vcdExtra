@@ -1,6 +1,7 @@
-Version 0.7-1 (2016-10-12)
+Version 0.7-1 (2017-09-28)
 
 o Fixed buglet in expand.dft when table is 1-dim [Thx: Long Qu]
+o Added zero.test, a simple score test for zero inflation
 
 Version 0.7-0 (2016-01-27)
 
