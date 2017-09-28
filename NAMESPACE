@@ -57,7 +57,8 @@ export(
 	LRstats,
 	cutfac,
   mcaplot,
-  update.xtabs
+  update.xtabs,
+  zero.test
 	)
 
 # basic methods for glm & loglm objects
