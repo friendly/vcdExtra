@@ -22,6 +22,7 @@ Description: Provides additional data sets, methods and documentation to complem
   Michael Friendly and David Meyer.
 License: GPL (>=2)
 URL: https://CRAN.R-project.org/package=vcdExtra
+BugReports: https://github.com/friendly/vcdExtra
 LazyLoad: yes
 LazyData: yes
 
