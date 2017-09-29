@@ -21,7 +21,7 @@ Description: Provides additional data sets, methods and documentation to complem
 	'glm' and 'loglm' objects. This package is now a support package for the book, "Discrete Data Analysis with R" by
   Michael Friendly and David Meyer.
 License: GPL (>=2)
-URL: http://CRAN.R-project.org/package=vcdExtra
+URL: https://CRAN.R-project.org/package=vcdExtra
 LazyLoad: yes
 LazyData: yes
 

@@ -2,3 +2,5 @@
 .svn
 cran-comments.md
 inst/doc/*.pdf
+^.*\.Rproj$
+^\.Rproj\.user$
