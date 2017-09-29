@@ -12,3 +12,8 @@ devtools::build_win(args=args)
 
 # submit to cran
 devtools::submit_cran(args=args)
+
+# Warning: 'inst/doc' file
+# 'vcd-tutorial.pdf'
+# ignored as vignettes have been rebuilt.
+# Run R CMD build with --no-build-vignettes to prevent rebuilding.
