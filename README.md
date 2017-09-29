@@ -38,7 +38,7 @@ introduces a 3D generalization of mosaic displays using the
 
 * A new class, `glmlist`, is introduced for working with
 collections of glm objects, e.g., `Kway()` for fitting
-all K-way models from a basic marginal model, and `summarise()`
+all K-way models from a basic marginal model, and `LRstats()`
 for brief statistical summaries of goodnes-of-fit for a collection of
 models.
 
