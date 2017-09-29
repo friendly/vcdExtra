@@ -93,11 +93,12 @@ Anova(acc.bin3)
 anova(acc.bin1, acc.bin2, acc.bin3, test="Chisq")
 
 # visualize probability of death with effect plots
+\dontrun{
 library(effects)
 plot(allEffects(acc.bin1), ylab='Pr (Died)')
 
 plot(allEffects(acc.bin2), ylab='Pr (Died)')
-
+}
 
 
 #}
