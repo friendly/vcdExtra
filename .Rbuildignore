@@ -5,4 +5,4 @@ inst/doc/*.pdf
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .build-steps.R
-
+Rplots.pdf
