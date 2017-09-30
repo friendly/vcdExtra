@@ -53,3 +53,14 @@ _Working with categorical data with R and the vcd package_, `vignette("vcd-tutor
 and a few useful utility functions for manipulating categorical data sets and working with models for
 categorical data. 
 
+## Installation
+
+Get the released version from CRAN:
+
+     install.packages("vcdExtra")
+
+The development version can be installed to your R library directly from this repo via:
+
+     if (!require(devtools)) install.packages("devtools")
+     library(devtools)
+     install_github("friendly/vcdExtra")
