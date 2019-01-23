@@ -1,3 +1,8 @@
+Version 0.7-3 (2018-06-04)
+
+o fix version number for gnm in DESCRIPTION
+
+
 Version 0.7-1 (2017-09-28)
 
 o Fixed buglet in expand.dft when table is 1-dim [Thx: Long Qu]

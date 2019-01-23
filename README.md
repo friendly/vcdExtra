@@ -6,7 +6,7 @@
 # vcdExtra <img src="inst/doc/vcdExtra-logo.png" align="right" height="250px" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
-Version 0.7-1
+Version 0.7-3
 
 This package provides additional data sets, documentation, and
 a few functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*
@@ -15,6 +15,8 @@ In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle
 adds a 3D version in `mosaic3d()`.
 
 `vcdExtra` is now a support package for the book [*Discrete Data Analysis with R*](http://ddar.datavis.ca) by Michael Friendly and David Meyer.
+
+### Details
 
 The main purpose of this package is to serve as a sandbox for
 introducing extensions of

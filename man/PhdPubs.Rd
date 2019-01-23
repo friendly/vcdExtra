@@ -19,16 +19,23 @@ a separate group of non-publishers?
     \item{\code{female}}{dummy variable for gender, coded \code{1} for female}
     \item{\code{married}}{dummy variable for marital status, coded \code{1} for married}
     \item{\code{kid5}}{number of young children, age 5 and under}
-    \item{\code{phdprestige}}{prestige of the PhD department}
+    \item{\code{phdprestige}}{prestige of the PhD department.  The higher the number the more prestigious the program. }
     \item{\code{mentor}}{number of publications by the mentor in the preceeding three years}
   }
 }
-%\details{
-%%  ~~ If necessary, more details than the __description__ above ~~
-%}
+\details{
+In this version of the data set, \code{phdprestige} had been rounded to the nearest integer.
+A Stata version with the continuous values was subsequently found at
+\url{http://www.stata-press.com/data/lf2/couart2.dta}
+
+}
 \source{
-Long, J. S. (1997) \emph{Regression Models for Categorical and Limited Dependent Variables},
+Long, J. S. (1997). \emph{Regression Models for Categorical and Limited Dependent Variables},
 Sage.
+
+Long, J. S. & Freese, J. (2006). \emph{Regression Models for Categorical Dependent Variables Using Stata}, 2nd Ed.,
+Stata Press.
+
 }
 %\references{
 %%  ~~ possibly secondary sources and usages ~~
