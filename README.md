@@ -3,7 +3,7 @@
 [![Rdoc](http://www.rdocumentation.org/badges/version/vcdExtra)](http://www.rdocumentation.org/packages/vcdExtra)
 
 
-# vcdExtra
+# vcdExtra <img src="inst/doc/vcdExtra-logo.png" align="right" height="250px" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
 Version 0.7-1
