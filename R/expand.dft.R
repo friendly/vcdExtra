@@ -12,7 +12,7 @@ expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
       stop(paste(sQuote("freq"), "not found in column names"))
 
   DF <- sapply(1:nrow(x),
-               function(i) x[rep(i, each = x[i, freq.col]), ],
+               function(i) x[rep(i, each = x[i, freq.col, drop = TRUE]), ],
                simplify = FALSE)
 
   DF <- do.call("rbind", DF)[, -freq.col, drop=FALSE]
