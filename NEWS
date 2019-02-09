@@ -1,6 +1,8 @@
 Version 0.7-3 (2018-06-04)
 
 o fix version number for gnm in DESCRIPTION
+o fix expand.dft and expand.table to work with tibbles [Thx: Duncan Murdoch]
+o vcdExtra gets a hex sticker
 
 
 Version 0.7-1 (2017-09-28)
