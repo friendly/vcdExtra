@@ -6,3 +6,4 @@ inst/doc/*.pdf
 ^\.Rproj\.user$
 .build-steps.R
 Rplots.pdf
+vcdExtra-logo.png
