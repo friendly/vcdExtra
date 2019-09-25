@@ -1,3 +1,8 @@
+Version 0.7-4 (2019-09-25)
+
+o Fix datasets() to work with packages not using LazyData #PR7 [Thx: Duncan Murdock]
+o Bump package version
+
 Version 0.7-3 (2018-06-04)
 
 o fix version number for gnm in DESCRIPTION
