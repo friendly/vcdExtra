@@ -9,28 +9,40 @@ datasets <- function(package, allClass=FALSE,
 		maxTitle=NULL) 
 {
 	# make sure requested packages are available and loaded
-	pkgs <- .packages()
 	for (i in seq_along(package)) {
-		if (! package[i] %in% pkgs) 
-			if (require(package[i], character.only=TRUE, quietly=TRUE))
+		if (!isNamespaceLoaded(package[i])) 
+			if (requireNamespace(package[i], quietly=TRUE))
 				cat(paste("Loading package:", package[i], "\n"))
 			else stop(paste("Package", package[i], "is not available"))
 	}
 	dsitems <- data(package=package)$results
-	wanted <- if (incPackage) c('Package', 'Item','Title') else c('Item','Title')
+	wanted <- c('Package', 'Item','Title')
 	ds <- as.data.frame(dsitems[,wanted], stringsAsFactors=FALSE)
-	# fix items with " (...)" in names, e.g., "BJsales.lead (BJsales)" in datasets
-	ds$Item <- gsub(" .*", "", ds$Item)
 	
-	getDim <- function(x) {
-		if (is.null(dim(get(x)))) length(get(x)) else paste(dim(get(x)), collapse='x')
+	getData <- function(x, pkg) {
+	  # fix items with " (...)" in names, e.g., "BJsales.lead (BJsales)" in datasets
+	  objname <- gsub(" .*", "", x)
+	  
+	  e <- loadNamespace(pkg)
+	  if (!exists(x, envir = e)) {
+	    dataname <- sub("^.*\\(", "", x)
+	    dataname <- sub("\\)$", "", dataname)
+	    e <- new.env()
+	    data(list = dataname, package = pkg, envir = e)
+	  }
+	  get(objname, envir = e)
 	}
-	getClass <- function(x) {
-		cl <- class(get(x))
+	getDim <- function(i) {
+	  data <- getData(ds$Item[i], ds$Package[i])
+		if (is.null(dim(data))) length(data) else paste(dim(data), collapse='x')
+	}
+	getClass <- function(i) {
+	  data <- getData(ds$Item[i], ds$Package[i])
+		cl <- class(data)
 		if (length(cl)>1 && !allClass) cl[length(cl)] else cl
 	}
-	ds$dim <- unlist(lapply(ds$Item, getDim ))
-	ds$class <- unlist(lapply(ds$Item, getClass ))
+	ds$dim <- unlist(lapply(seq_len(nrow(ds)), getDim ))
+	ds$class <- unlist(lapply(seq_len(nrow(ds)), getClass ))
 	if (!is.null(maxTitle)) ds$Title <- substr(ds$Title, 1, maxTitle)
 	if (incPackage)
 		ds[c('Package', 'Item','class','dim','Title')]
