@@ -23,7 +23,7 @@ died in London between Nov. 5 and Nov. 13, 2013.
 %%%  ~~ If necessary, more details than the __description__ above ~~
 %}
 \source{
-\url{http://data.gov.uk/dataset/road-accidents-safety-data},
+\url{https://data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-data},
 STATS 19 data, 2005-2012, using the files
 \code{Casualty0512.csv} and 
 \code{Accidents0512.csv}

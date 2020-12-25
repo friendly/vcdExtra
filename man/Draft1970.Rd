@@ -38,7 +38,7 @@ September 24.
 Starr, N. (1997).
 Nonrandom Risk: The 1970 Draft Lottery,
 \emph{Journal of Statistics Education}, v.5, n.2
-\url{http://www.amstat.org/publications/jse/v5n2/datasets.starr.html}
+\url{http://jse.amstat.org/v5n2/datasets.starr.html}
 
 }
 \references{
