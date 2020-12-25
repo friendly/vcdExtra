@@ -1,3 +1,7 @@
+Version 0.7-5 (2020-12-25)
+
+o Fix problem re use of rgl in mosaic3d examples
+
 Version 0.7-4 (2019-09-25)
 
 o Fix datasets() to work with packages not using LazyData #PR7 [Thx: Duncan Murdock]
