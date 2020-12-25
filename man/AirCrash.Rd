@@ -26,7 +26,7 @@ Excludes small planes (less than 6 passengers) and non-commercial (cargo, milita
 Originally from David McCandless,
 \url{http://www.informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/},
 with the data at
-\url{https://docs.google.com/spreadsheet/ccc?key=0AjOUPqcIwvnjdEx2akx5ZjJXSk9oM1E3dWpqZFJ6Nmc&usp=drive_web#gid=1},
+\url{https://docs.google.com/spreadsheets/d/1OvDq4_BtbR6nSnnHnjD5hVC3HQ-ulZPGbo0RDGbzM3Q/edit?usp=drive_web},
 downloaded April 14, 2015.
 }
 \references{
