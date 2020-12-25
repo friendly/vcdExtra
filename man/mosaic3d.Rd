@@ -178,13 +178,15 @@ Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 
 \examples{
 # 2 x 2 x 2
+in if(requireNamespace("rgl")){
 mosaic3d(Bartlett, box=TRUE)
 # compare with expected frequencies under model of mutual independence
 mosaic3d(Bartlett, type="expected", box=TRUE)
 	
 # 2 x 2 x 3
 mosaic3d(Heart, box=TRUE)
-	
+}
+
 \dontrun{
 # 2 x 2 x 2 x 3
 # illustrates a 4D table
