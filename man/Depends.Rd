@@ -20,7 +20,7 @@ dependencies declared in 4983 packages listed on CRAN on January 17, 2014.
 %}
 \source{
 Using code from
-\url{http://blog.revolutionanalytics.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies.html}
+\url{https://blog.revolutionanalytics.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies.html}
 
 }
 %\references{

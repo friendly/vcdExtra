@@ -92,7 +92,7 @@ Returns the result of \code{\link{mosaic.glm}}.
 \references{
  David Meyer, Achim Zeileis, and Kurt Hornik (2006). The Strucplot Framework: Visualizing Multi-Way
   Contingency Tables with vcd. \emph{Journal of Statistical Software}, 17(3), 1-48. 
-  \url{http://www.jstatsoft.org/v17/i03/}, available as \code{vignette("strucplot", package="vcd")}.
+  \url{https://www.jstatsoft.org/v17/i03/}, available as \code{vignette("strucplot", package="vcd")}.
 
 }
 \author{

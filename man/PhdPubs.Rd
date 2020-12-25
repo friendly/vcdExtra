@@ -26,7 +26,7 @@ a separate group of non-publishers?
 \details{
 In this version of the data set, \code{phdprestige} had been rounded to the nearest integer.
 A Stata version with the continuous values was subsequently found at
-\url{http://www.stata-press.com/data/lf2/couart2.dta}
+\url{https://www.stata-press.com/data/lf2/couart2.dta}
 
 }
 \source{
