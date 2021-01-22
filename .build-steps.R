@@ -3,15 +3,17 @@ Sys.setenv(RGL_USE_NULL = TRUE)
 
 #it is necessary to build manually, using
 
-Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.21/bin/gswin64c.exe")
-devtools::build(args = c('--resave-data','--compact-vignettes="gs+qpdf"'))
+#Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.21/bin/gswin64c.exe")
+Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.53.3/bin/gswin64c.exe")
+
+args = c('--resave-data','--compact-vignettes=both')
+devtools::build(args = args)
 
 # then, test with win builder
-args = c('--resave-data','--compact-vignettes="gs+qpdf"')
-devtools::build_win(args=args)
+devtools::check_win_devel(args=args)
 
 # submit to cran
-devtools::submit_cran(args=args)
+devtools::release(args=args)
 
 # Warning: 'inst/doc' file
 # 'vcd-tutorial.pdf'
