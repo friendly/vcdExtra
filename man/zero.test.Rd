@@ -42,12 +42,12 @@ The original R code came from a Stackexchange question,
 
 Van den Broek, J. (1995). 
 A Score Test for Zero Inflation in a Poisson Distribution. 
-\emph{Biometrics}, \bold{51}(2), 738-743. \code{doi:10.2307/2532959}
+\emph{Biometrics}, \bold{51}(2), 738-743. \doi{10.2307/2532959}
 
 Yang, Zhao, James W. Hardin, and Cheryl L. Addy (2010). 
 Score Tests for Zero-Inflation in Overdispersed Count Data. 
 \emph{Communications in Statistics - Theory and Methods} \bold{39} (11) 2008-2030. 
-\code{doi:10.1080/03610920902948228}
+\doi{10.1080/03610920902948228}
 
 }
 \author{
