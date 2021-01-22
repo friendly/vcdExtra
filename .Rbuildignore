@@ -7,3 +7,4 @@ inst/doc/*.pdf
 .build-steps.R
 Rplots.pdf
 vcdExtra-logo.png
+^CRAN-RELEASE$
