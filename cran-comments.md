@@ -1,6 +1,6 @@
 ## Test environments
 * local Windows 7 install, R version 3.6.3 (2020-02-29)
-* win-builder R Under development (unstable) (2017-09-12 r73242
+* win-builder R Under development (unstable) (2021-01-21 r79854)
 
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs 
