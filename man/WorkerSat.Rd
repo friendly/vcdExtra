@@ -21,7 +21,7 @@ Blue collar workers job satisfaction from large scale investigation in Denmark i
 %%%  ~~ If necessary, more details than the __description__ above ~~
 %}
 \source{
-\url{https://onlinecourses.science.psu.edu/stat504/node/131}
+\url{https://online.stat.psu.edu/stat504/lesson/10/10.2/10.2.9}
 }
 \references{
 Andersen, E. B. (1991)
