@@ -160,4 +160,3 @@ mosaic(modMental, ask=FALSE, margins=c(3,1,1,2), labeling_args=list(abbreviate_l
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{hplot}
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
