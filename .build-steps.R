@@ -12,6 +12,8 @@ devtools::build(args = args)
 # then, test with win builder
 devtools::check_win_devel(args=args)
 
+devtools::check_rhub()
+
 # submit to cran
 devtools::release(args=args)
 
