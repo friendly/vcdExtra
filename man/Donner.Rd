@@ -56,7 +56,7 @@ Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 }
 
 \seealso{
-\code{\link[alr3]{donner}} in \pkg{alr3},
+\code{donner} in \pkg{alr3},
 \code{\link[Sleuth2]{case2001}} in \pkg{Sleuth2}(adults only) provide similar data sets.
 }
 

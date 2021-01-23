@@ -45,7 +45,7 @@ Nonrandom Risk: The 1970 Draft Lottery,
 Fienberg, S. E. (1971), 
 "Randomization and Social Affairs: The 1970 Draft Lottery," \emph{Science}, 171, 255-261.
 
-\url{http://en.wikipedia.org/wiki/Draft_lottery_(1969)}
+\url{https://en.wikipedia.org/wiki/Draft_lottery_(1969)}
 
 }
 \seealso{\code{\link{Draft1970table}}

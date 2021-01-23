@@ -1,6 +1,6 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
-[![Rdoc](http://www.rdocumentation.org/badges/version/vcdExtra)](http://www.rdocumentation.org/packages/vcdExtra)
+[![Rdoc](http://www.rdocumentation.org/badges/version/vcdExtra)](https://www.rdocumentation.org/packages/vcdExtra)
 
 
 # vcdExtra <img src="vcdExtra-logo.png" align="right" height="200px" />

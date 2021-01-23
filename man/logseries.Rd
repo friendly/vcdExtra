@@ -80,7 +80,7 @@ and \eqn{0 < p <1}.  Note that counts \code{x==2} cannot occur.
 %% ...
 }
 \references{
-\url{http://en.wikipedia.org/wiki/Logarithmic_distribution}
+\url{https://en.wikipedia.org/wiki/Logarithmic_distribution}
 
 Fisher, R. A. and Corbet, A. S. and Williams, C. B. (1943).
 The relation between the number of species and the number of individuals 
