@@ -109,4 +109,3 @@ seq_mosaic(Titanic, type="mutual", panel=sieve,
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{hplots}
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
