@@ -14,6 +14,11 @@ devtools::check_win_devel(args=args)
 
 devtools::check_rhub()
 
+# reverse dependencies
+# > revdep()
+# [1] "aplore3" "catdata" "gnm"     "iarm"    "jmv" 
+revdepcheck::revdep_check(num_workers = 4)
+
 # submit to cran
 devtools::release(args=args)
 
