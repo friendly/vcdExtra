@@ -1,0 +1,185 @@
+---
+title: "vcdExtra Issue"
+author: "CMH Subgroup"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  html_document:
+    toc : true
+    toc_float: true
+    number_sections: true
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+The purpose of this document is to illustrate inconsistent results by the `vcdExtra 0.7-5` package when doing a CMH analysis under certain scenarios. We will use a mock data set to compare the results obtained from SAS's Proc FREQ and R's vcdExtra package.
+
+
+# SAS 
+
+## Analysis
+```{r, eval = FALSE}
+# data input
+data sas_cmh;
+  input x $ k $ y $ Freq @@;
+  datalines;
+  low yes yes 11 low yes no 43
+  low no yes 42 low no no 169
+  med yes yes 14 med yes no 104
+  med no yes 20 med no no 132
+  high yes yes 8 high yes no 196
+  high no yes 2 high no no 59
+  ;
+run;
+
+# CMH analysis
+proc freq data = sas_cmh;
+   tables k*x*y /
+           cmh noprint;
+   weight Freq;
+run;
+```
+
+## Results
+```{r, eval = FALSE}
+
+                                                         The FREQ Procedure
+
+                                                   Summary Statistics for x by y
+                                                         Controlling for k
+
+                                    Cochran-Mantel-Haenszel Statistics (Based on Table Scores)
+ 
+                                  Statistic    Alternative Hypothesis    DF       Value      Prob
+                                  ---------------------------------------------------------------
+                                      1        Nonzero Correlation        1      6.4586    0.0110
+                                      2        Row Mean Scores Differ     2     26.0278    <.0001
+                                      3        General Association        2     26.0278    <.0001
+
+
+                                                      Total Sample Size = 800
+```
+                                                      
+
+# R
+
+## Analysis
+```{r, eval = F}
+# libraries
+library(tidyverse)
+library(vcdExtra)
+
+# data input
+r_cmh <- tibble::tribble(
+                        ~x,    ~k,    ~y,   ~Freq,
+                       "low", "yes", "yes",    11,
+                       "low", "yes",  "no",    43,
+                       "low",  "no", "yes",    42,
+                       "low",  "no",  "no",   169,
+                       "med", "yes", "yes",    14,
+                       "med", "yes",  "no",   104,
+                       "med",  "no", "yes",    20,
+                       "med",  "no",  "no",   132,
+                      "high", "yes", "yes",     8,
+                      "high", "yes",  "no",   196,
+                      "high",  "no", "yes",     2,
+                      "high",  "no",  "no",    59
+                      )
+
+
+# CMH analysis
+CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE)$ALL$table
+```
+ 
+## Results
+```{r, eval = F}
+        Chisq    Df Prob        
+cor     6.458575 1  0.01104181  
+rmeans  26.02779 2  2.229135e-06
+cmeans  6.458575 1  0.01104181  
+general 26.02779 2  2.229135e-06
+```
+
+# Comparison
+At this point we can see that SAS and R generally agree on the output of the 3 test statistics, df and p-values for this example.  
+
+# Potential Bug
+For the R-based CMH analysis, we did not specify the `types` argument. In the previous example, all 3 test statistics (and a fourth) are computed automatically. We observed inconsistent results when explicitly specifying this parameter which might point to a potential issue in the package.
+
+## Test 1 - types = "ALL"
+In this test case, we repeat the analysis but specify the `types` parameter to be equal to `ALL`. According to the package documentation, this should again produce all 3 (and a fourth) sets of results.
+
+```{r, eval = F}
+CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types = "ALL")$ALL$table
+```
+
+```{r, eval = F}
+        Chisq    Df Prob        
+general 26.02779 1  3.365374e-07
+rmeans  26.02779 2  2.229135e-06
+cmeans  6.458575 1  0.01104181  
+cor     6.458575 2  0.03958569
+```
+
+In this example, we see the **test statistics match** with the previous R results, however the **degrees of freedom are mismatched**, leading to incorrect p-values.
+
+## Test 2 - types = "rmeans"
+In this test case, the `row means` test statistic is of particular interest and specify it directly.
+
+```{r, eval = F}
+CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types = "rmeans")$ALL$table
+```
+
+```{r, eval = F}
+       Chisq    Df Prob
+rmeans 26.02779 NA NA  
+```
+Here the test statistic is returned and appears to be correct, however the df and p-value are returned as NA.
+
+
+## Test 3 - random order
+In this final example, we chose random orders when requesting which test statistics should be computed.
+
+```{r, eval = F}
+# Order: cor, general, rmeans
+CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types=c("cor","general","rmeans"))$ALL$table
+
+# Order: rmeans, general, cor
+CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types=c("rmeans","general","cor"))$ALL$table
+```
+```{r, eval = F}   
+        Chisq    Df Prob        
+cor     6.458575 1  0.01104181  
+general 26.02779 2  2.229135e-06
+rmeans  26.02779 2  2.229135e-06
+
+        Chisq    Df Prob        
+rmeans  26.02779 1  3.365374e-07
+general 26.02779 2  2.229135e-06
+cor     6.458575 2  0.03958569  
+```
+
+We see that test statistics again match, but the degrees of freedom mixed up leading to incorrect p-values.
+
+# Recommendation
+Given the potential impact for efficacy analysis and the unclear nature of the issue, we caution against using this package at the current time. We plan to post this example to the package authors github page as an issue.
+
+However, if you choose to use the package, we advise:
+
+* Omitting the type parameter altogether. This seemed to provide consistent results with SAS.
+
+* For 2 x 2 x K designs, this might not be an issue as the test statistics, df and p-values are identical in this scenario. However, specifying a type argument in this design still technically results in mismatched, albeit equal, values. Please be aware of this. 
+ 
+# Versions
+
+SAS 9.4 was used for SAS-based computations
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(vcd)
+library(vcdExtra)
+sessionInfo()
+```

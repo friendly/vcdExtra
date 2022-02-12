@@ -6,6 +6,8 @@
 Extensions and additions to vcd: Visualizing Categorical Data
 }
 \description{
+\if{html}{\figure{vcdExtra-logo.png}{options: align='right' alt='logo' width='100'}}
+
 This package provides additional data sets, documentation, and
 a few functions designed to extend the \code{vcd} package for Visualizing Categorical Data
 and the \code{gnm} package for Generalized Nonlinear Models. 
@@ -21,11 +23,11 @@ The web site for the book is \url{http://ddar.datavis.ca}.
 }
 \details{
 \tabular{ll}{
-Package: \tab vcdExtra\cr
-Type: \tab Package\cr
-Version: \tab 0.7-5\cr
-Date: \tab 2021-01-22\cr
-License: \tab GPL version 2 or newer\cr
+Package:  \tab vcdExtra\cr
+Type:     \tab Package\cr
+Version:  \tab 0.7-5\cr
+Date:     \tab 2021-01-22\cr
+License:  \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
 The main purpose of this package is to serve as a sandbox for
@@ -69,7 +71,7 @@ specification of terms in model formulas using
 
 
 
-Some of these extensions may be migrated into vcd or gnm.
+Some of these extensions may be migrated into \pkg{vcd} or \pkg{gnm}.
 
 A collection of demos is included to illustrate fitting and visualizing a wide variety of models:
 \describe{
