@@ -25,8 +25,8 @@ The web site for the book is \url{http://ddar.datavis.ca}.
 \tabular{ll}{
 Package:  \tab vcdExtra\cr
 Type:     \tab Package\cr
-Version:  \tab 0.7-5\cr
-Date:     \tab 2021-01-22\cr
+Version:  \tab 0.7-6\cr
+Date:     \tab 2021-02-12\cr
 License:  \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }
@@ -94,7 +94,7 @@ complete list, or \code{datasets(package="vcdExtra")} for an annotated one showi
 \author{
 Michael Friendly
 
-Maintainer: Michael Friendly <friendly AT yorku.ca>
+Maintainer: Michael Friendly <friendly AT yorku.ca> || (\href{https://https://orcid.org/0000-0002-3237-0941}{ORCID})
 }
 \references{
 Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Insitute, 2000.
