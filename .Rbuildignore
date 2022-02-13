@@ -10,5 +10,4 @@ vcdExtra-logo.png
 ^CRAN-RELEASE$
 ^revdep/
 ^issues/
-
-
+^extra/
