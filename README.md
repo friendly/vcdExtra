@@ -1,7 +1,11 @@
+<!-- badges: start -->
+
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Rdoc](http://www.rdocumentation.org/badges/version/vcdExtra)](https://www.rdocumentation.org/packages/vcdExtra)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
+<!-- badges: end -->
 
 # vcdExtra <img src="vcdExtra-logo.png" align="right" height="200px" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
@@ -11,7 +15,7 @@ Version 0.7-6
 This package provides additional data sets, documentation, and
 a few functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*
 and the [gnm](https://CRAN.R-project.org/package=gnm) package for *Generalized Nonlinear Models*. 
-In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle `glm()` and `gnm()` models and
+In particular, `vcdExtra` extends mosaic, assoc and sieve plots from vcd to handle `glm()` and `gnm()` models and
 adds a 3D version in `mosaic3d()`.
 
 `vcdExtra` is now a support package for the book [*Discrete Data Analysis with R*](http://ddar.datavis.ca) by Michael Friendly and David Meyer.
