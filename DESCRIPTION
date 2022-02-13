@@ -12,7 +12,7 @@ Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre")
             person(given = "Matt", family = "Kumar", role="ctb"),
             person(given = "Shuguang", family = "Sun", role="ctb")
             )
-Author: Michael Friendly [aut, cre], Heather Turner [ctb], Achim Zeileis [ctb], Duncan Murdoch [ctb], David Firth [ctb]
+Author: Michael Friendly [aut, cre], Heather Turner [ctb], Achim Zeileis [ctb], Duncan Murdoch [ctb], David Firth [ctb], Matt Kumar [ctb], Shuguang Sun [ctb]
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.10), vcd, gnm (>= 1.0-3), grid
 Suggests: gmodels, Fahrmeir, effects, VGAM, plyr, lmtest, nnet, ggplot2, Sleuth2, car, lattice, stats4, rgl, AER

@@ -94,7 +94,7 @@ complete list, or \code{datasets(package="vcdExtra")} for an annotated one showi
 \author{
 Michael Friendly
 
-Maintainer: Michael Friendly <friendly AT yorku.ca> || (\href{https://https://orcid.org/0000-0002-3237-0941}{ORCID})
+Maintainer: Michael Friendly <friendly AT yorku.ca> || (\href{https://orcid.org/0000-0002-3237-0941}{ORCID})
 }
 \references{
 Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Institute, 2000.

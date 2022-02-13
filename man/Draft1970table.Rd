@@ -32,7 +32,7 @@ the chances of being called to serve in the US army.
 \source{
 This data is available in several forms, but the table version was obtained from
 
-\url{http://sas.uwaterloo.ca/~rwoldfor/software/eikosograms/data/draft-70}
+\url{https://sas.uwaterloo.ca/~rwoldfor/software/eikosograms/data/draft-70}
 }
 \references{
 Fienberg, S. E. (1971), 
