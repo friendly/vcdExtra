@@ -39,7 +39,7 @@ vector of quantiles representing the number of events.
 parameter for the distribution, \code{0 < prob < 1}
 }
   \item{log, log.p}{
-ogical; if TRUE, probabilities \code{p} are given as \code{log(p)}
+logical; if TRUE, probabilities \code{p} are given as \code{log(p)}
 }
 
   \item{lower.tail}{

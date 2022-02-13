@@ -15,7 +15,7 @@ each level of the statifying variables and also provides overall tests controlli
 strata.
 
 For ordinal factors, more powerful tests than the test for general association
-(independence) are obtained by assigning scores to the row and columm categories. 
+(independence) are obtained by assigning scores to the row and column categories. 
 }
 \usage{
 CMHtest(x, ...)

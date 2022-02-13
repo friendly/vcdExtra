@@ -25,7 +25,7 @@ or else a data.frame in frequency form, with the frequency variable named \code{
 
   \item{panel}{
 a \code{\link[vcd]{strucplot}} panel function, 
-typicially \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}. NOT yet implemented.}
+typically \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}. NOT yet implemented.}
 }
 
   \item{type}{

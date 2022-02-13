@@ -62,7 +62,7 @@ A class \code{HLtest} object  with the following components:
 %%  If it is a LIST, use
   \item{table}{A data.frame describing the results of partitioning the data into \code{g}
   	groups with the following columns: \code{cut}, \code{total}, \code{obs}, \code{exp}, \code{chi}}
-  \item{chisq}{The chisquared statistics}
+  \item{chisq}{The chisquare statistics}
   \item{df}{Degrees of freedom}
   \item{p.value}{p value}
   \item{groups}{Number of groups}

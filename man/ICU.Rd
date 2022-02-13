@@ -39,11 +39,11 @@ logistic regression.
     \item{\code{admit}}{Type of admission, a factor with levels \code{Elective} \code{Emergency}}
     \item{\code{fracture}}{Admission with a long bone, multiple, neck, single area, or hip fracture?
     a factor with levels \code{No} \code{Yes}}
-    \item{\code{po2}}{PO2 from inital blood gases, a factor with levels \code{>60} \code{<=60}}
-    \item{\code{ph}}{pH from inital blood gases, a factor with levels \code{>=7.25} \code{<7.25}}
-    \item{\code{pco}}{PCO2 from inital blood gases, a factor with levels \code{<=45} \code{>45}}
-    \item{\code{bic}}{Bicarbonate (HCO3) level from inital blood gases, a factor with levels \code{>=18} \code{<18}}
-    \item{\code{creatin}}{Creatinine, from inital blood gases, a factor with levels \code{<=2} \code{>2}}
+    \item{\code{po2}}{PO2 from initial blood gases, a factor with levels \code{>60} \code{<=60}}
+    \item{\code{ph}}{pH from initial blood gases, a factor with levels \code{>=7.25} \code{<7.25}}
+    \item{\code{pco}}{PCO2 from initial blood gases, a factor with levels \code{<=45} \code{>45}}
+    \item{\code{bic}}{Bicarbonate (HCO3) level from initial blood gases, a factor with levels \code{>=18} \code{<18}}
+    \item{\code{creatin}}{Creatinine, from initial blood gases, a factor with levels \code{<=2} \code{>2}}
     \item{\code{coma}}{Level of unconsciousness at admission to ICU,	a factor with levels \code{None} \code{Stupor} \code{Coma}}
     \item{\code{white}}{a recoding of \code{race},  a factor with levels \code{White} \code{Non-white}}
     \item{\code{uncons}}{a recoding of \code{coma} a factor with levels \code{No} \code{Yes}}

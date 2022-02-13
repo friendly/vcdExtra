@@ -37,7 +37,7 @@ Gart, J. J. (1971). The comparison of proportions: a review of significance test
    39, 148-169.
 }
 \references{
-Brewlow, N. (1976), Regression analysis of the log odds ratio:
+Breslow, N. (1976), Regression analysis of the log odds ratio:
    A method for retrospective studies, \emph{Biometrics}, 32(3), 409-416.
 }
 \examples{

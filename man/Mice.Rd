@@ -14,7 +14,7 @@ experiment has been published.
 }
 \usage{data("Mice")}
 \format{
-  A freqency data frame with 30 observations on the following 4 variables, representing a 5 x 2 x 3 contingency table.
+  A frequency data frame with 30 observations on the following 4 variables, representing a 5 x 2 x 3 contingency table.
   \describe{
     \item{\code{litter}}{litter size, a numeric vector}
     \item{\code{treatment}}{treatment, a factor with levels \code{A} \code{B}}

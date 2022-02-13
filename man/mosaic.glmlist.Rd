@@ -7,7 +7,7 @@ Mosaic Displays for \code{glmlist} and \code{logllmlist} Objects
 }
 \description{
 This function provides a convenient interface for viewing mosaic displays
-associated with a collection of glm models for freqency tables that have
+associated with a collection of glm models for frequency tables that have
 been stored in a \code{glmlist} or \code{loglmlist} object.  You can plot either selected models
 individually, or mosaics for all models in an array of viewports.
 
@@ -41,7 +41,7 @@ a menu of models is presented or all models are plotted.
 }
 
   \item{panel}{
-a \code{\link[vcd]{strucplot}} panel function, typicially \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}}
+a \code{\link[vcd]{strucplot}} panel function, typically \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}}
 }
   \item{type}{
 a character string indicating whether the \code{"observed"} or the \code{"expected"} values of the table should be visualized

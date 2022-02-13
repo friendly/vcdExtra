@@ -30,7 +30,7 @@ GKgamma(x, level = 0.95)
 %\describe{
   \item{gamma}{The gamma statistic}
   \item{C}{Total number of concordant pairs in the table}
-  \item{D}{Total number of disconcordant pairs in the table}
+  \item{D}{Total number of discordant pairs in the table}
   \item{sigma}{Standard error of gamma }
   \item{CIlevel}{Confidence level}
   \item{CI}{Confidence interval}

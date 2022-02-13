@@ -19,7 +19,7 @@ a data frame.
   }
 }
 \details{
-The draft lottery was used to determine the order in which elligible men would
+The draft lottery was used to determine the order in which eligible men would
 be called to the Selective Service draft.
 The days of the year (including  February 29) were represented by the  numbers 1
 through 366 written on slips of paper. The slips were placed in separate plastic

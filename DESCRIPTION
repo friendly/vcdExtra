@@ -3,6 +3,7 @@ Type: Package
 Title: 'vcd' Extensions and Additions
 Version: 0.7-6
 Date: 2022-02-12
+Language: en-US
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
             person(given = "Heather", family = "Turner", role="ctb"),
             person(given = "Achim", family = "Zeileis", role="ctb"),

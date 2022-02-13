@@ -2,7 +2,7 @@
 \Rdversion{1.1}
 \alias{Mental}
 \docType{data}
-\title{ Mental impariment and parents SES}
+\title{ Mental impairment and parents SES}
 \description{
 A 6 x 4 contingency table representing the cross-classification of
 mental health status (\code{mental}) of 1660 young New York residents by

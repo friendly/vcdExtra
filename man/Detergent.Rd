@@ -4,7 +4,7 @@
 \docType{data}
 \title{Detergent preference data}
 \description{Cross-classification of a sample of 1008 consumers according to 
-(a) the softness of the laundry water used, (b) previous use of detergent Brand M, (c) the termperature of laundry water used and (d) expressed preference for Brand X or Brand M in a blind trial.}
+(a) the softness of the laundry water used, (b) previous use of detergent Brand M, (c) the temperature of laundry water used and (d) expressed preference for Brand X or Brand M in a blind trial.}
 
 \usage{
 data(Detergent)

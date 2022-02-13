@@ -10,7 +10,7 @@ Generate and fit all 0-way, 1-way, 2-way, ... k-way terms in a glm.
 
 This function is designed mainly for hierarchical
 loglinear models (or \code{glm}s
-in the poission family), where it is desired to find the 
+in the poisson family), where it is desired to find the 
 highest-order terms necessary to achieve a satisfactory fit.
 
 Using \code{\link[stats]{anova}} on the resulting \code{\link{glmlist}}
