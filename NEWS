@@ -1,6 +1,7 @@
 Version 0.7-6 (2022-02-12)
 
-o Fix some issues with CMHtest `types` argument #PR11 [Thx: ShuguangSun, Matt Kumar ]
+o Fix some issues with CMHtest `types` argument #PR11 [Thx: ShuguangSun, Matt Kumar]
+o Fix some Winbuilder URL nits; extensive spell checking
 
 Version 0.7-5 (2020-12-25)
 

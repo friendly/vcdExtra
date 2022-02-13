@@ -173,8 +173,8 @@ frequency and contingency tables involving
 categorical variables.
 
 Further sections describe some simple methods for calculating 
-tests of independence and measures of association amomg 
-categorial variables, and also
+tests of independence and measures of association among 
+categorical variables, and also
 methods for graphically displaying results.
 
 There is much more to the analysis of categorical data than is described here,
@@ -477,7 +477,7 @@ exclude=NULL)}.
 
 \subsection[xtabs()]{\codefun{xtabs}}\label{sec:xtabs}
 
-The \codefun{xtabs} function allows you to create crosstabulations of data using formula style input.
+The \codefun{xtabs} function allows you to create cross-tabulations of data using formula style input.
 This typically works with case-form data supplied in a data frame or a matrix.
 The result is a contingency table in array format, whose dimensions are determined by  
 the terms on the right side of the formula.
@@ -867,7 +867,7 @@ mantelhaen.test(UCBAdmissions)
 The results show no evidence for association between admission and gender
 when adjusted for department.  However, we can easily see that the assumption
 of equal association across the strata (no 3-way association) is probably
-violated. For $2 \times 2 \times k$ tables, this can be examimed
+violated. For $2 \times 2 \times k$ tables, this can be examined
 from the odds ratios for each $2 \times 2$ table (\codefun{oddsratio}), and
 tested 
 by  using
@@ -896,7 +896,7 @@ with the null hypothesis.  In the extended version (the default), brighter color
 are used where the odds ratio is significantly different from 1.
 The following lines produce \figref{fig:fourfold1}.%
 \footnote{The color values \code{col[3:4]} were modified from their default values
-to show a greater contrast between significant and insignifcant associations here.}
+to show a greater contrast between significant and insignificant associations here.}
 <<fourfold1,fig=TRUE,height=6,width=9,results=hide,include=FALSE>>=
 col <- c("#99CCFF", "#6699CC", "#F9AFAF", "#6666A0", "#FF0000", "#000080")
 fourfold(UCB,mfrow=c(2,3), color=col)
@@ -1247,7 +1247,7 @@ The \codefun{glm} approach, and extensions of this in the \pkg{gnm} package allo
 much wider class of models for frequency data to be fit than can be handled by
 \codefun{loglm}.  Of particular importance are models for ordinal factors and for
 square tables, where we can test more structured hypotheses about the patterns
-of association than are provided in the tests of general assosiation under
+of association than are provided in the tests of general association under
 \codefun{loglm}. These are similar in spirit to the 
 non-parametric CMH tests described in \secref{sec:CMH}.
 
@@ -1587,7 +1587,7 @@ start with a factor whose levels are fully spelled out
 (e.g., \code{c("strongly disagree", "disagree", "neutral", "agree", "strongly agree")}),
 only to find that the level labels overlap in graphic displays.
 
-The structplot framework in \pkg{vcd} provides an extremely large variety of
+The strucplot framework in \pkg{vcd} provides an extremely large variety of
 functions and options for controlling almost all details of text labels in mosaics
 and other plots.  See \code{help(labelings)} for an overview. 
 
@@ -1790,7 +1790,7 @@ ggplot(Donner, aes(age, survived, color = sex)) +
 \end{figure}
 These plots very nicely show (a) the fitted $Pr(survived)$ for males and females;
 (b) confidence bands around the smoothed model fits and (c) the individual
-observations by jittered points at 0 and 1 for those who died and survided, respectively.
+observations by jittered points at 0 and 1 for those who died and survived, respectively.
 
 \bibliography{vcd,vcdExtra}
 
