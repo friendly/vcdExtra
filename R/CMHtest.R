@@ -1,13 +1,13 @@
 # Cochran-Mantel-Haenszel tests for ordinal factors in contingency tables
 
-# The code below follows Stokes, Davis & Koch, (2000). 
+# The code below follows Stokes, Davis & Koch, (2000).
 #   "Categorical Data Analysis using the SAS System", 2nd Ed.,
 #   pp 74--75, 92--101, 124--129.
 
-# Ref: Landis, R. J., Heyman, E. R., and Koch, G. G. (1978), 
-#		Average Partial Association in Three-way Contingency Tables: 
-#		A Review and Discussion of Alternative Tests, 
-#		International Statistical Review, 46, 237-254. 
+# Ref: Landis, R. J., Heyman, E. R., and Koch, G. G. (1978),
+#		Average Partial Association in Three-way Contingency Tables:
+#		A Review and Discussion of Alternative Tests,
+#		International Statistical Review, 46, 237-254.
 
 # See: https://onlinecourses.science.psu.edu/stat504/book/export/html/90
 # http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm
@@ -62,7 +62,7 @@ function(formula, data = NULL, subset = NULL, na.action = NULL, ...)
       }
       dat <- margin.table(dat, ind)
     }
-    CMHtest.default(dat, 
+    CMHtest.default(dat,
                    strata = if (is.null(condind)) NULL else match(condnames, names(dimnames(dat))), ...)
   } else {
       m <- m[c(1, match(c("formula", "data", "subset", "na.action"), names(m), 0))]
@@ -76,7 +76,7 @@ function(formula, data = NULL, subset = NULL, na.action = NULL, ...)
   }
 }
 
-CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C, 
+CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 	types=c("cor", "rmeans", "cmeans", "general"),
 	overall=FALSE, details=overall,  ...)
 {
@@ -104,7 +104,7 @@ CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
   # handle strata
   if (!is.null(strata)) {
     sn <- snames(x, strata)
-    res <- c(apply(x, strata, CMHtest2, rscores=rscores, cscores=cscores, 
+    res <- c(apply(x, strata, CMHtest2, rscores=rscores, cscores=cscores,
 			types=types,details=details, ...))
     # DONE: fix names if there are 2+ strata
     names(res) <- sn
@@ -119,8 +119,8 @@ CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 			}
 		return(res)
 	}
-	else CMHtest2(x, rscores=rscores, cscores=cscores, 
-		types=types,details=details, ...)	
+	else CMHtest2(x, rscores=rscores, cscores=cscores,
+		types=types,details=details, ...)
 }
 
 # handle two-way case, for a given stratum
@@ -130,14 +130,14 @@ CMHtest.default <- function(x, strata = NULL, rscores=1:R, cscores=1:C,
 #  DONE: modified to return all A matrices as a list
 #  DONE: cmh() moved outside
 
-CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C, 
+CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
 	types=c("cor", "rmeans", "cmeans", "general"),
 	details=FALSE, ...) {
 
 	# left kronecker product
 	lkronecker <- function(x, y, make.dimnames=TRUE, ...)
 		kronecker(y, x, make.dimnames=make.dimnames, ...)
-		
+
 	# midrank scores (modified ridits) based on row/column totals
 	midrank <- function (n) {
 		cs <- cumsum(n)
@@ -147,21 +147,21 @@ CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
     L <- length(d <- dim(x))
 	R <- d[1]
 	C <- d[2]
-	
+
 	if (is.character(rscores) && rscores=="midrank") rscores <- midrank(rowSums(x))
 	if (is.character(cscores) && cscores=="midrank") cscores <- midrank(colSums(x))
 
 	nt <- sum(x)
 	pr <- rowSums(x) / nt
 	pc <- colSums(x) / nt
-	
+
 	m <- as.vector(nt * outer(pr,pc))  # expected values under independence
 	n <- as.vector(x)                  # cell frequencies
-	
+
 	V1 <- (diag(pr) - pr %*% t(pr))
 	V2 <- (diag(pc) - pc %*% t(pc))
 	V <- (nt^2/(nt-1)) * lkronecker(V1, V2, make.dimnames=TRUE)
-	
+
 	if (length(types)==1 && types=="ALL") types <- c("general", "rmeans", "cmeans", "cor" )
 	types <- match.arg(types, several.ok=TRUE)
 	# handle is.null(rscores) etc here
@@ -169,31 +169,30 @@ CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
 	if (is.null(cscores)) types <- setdiff(types, c("rmeans", "cor"))
 
 	table <- NULL
-	Amats <- list()
-	if("cor" %in% types) {
-		A <- lkronecker( t(rscores), t(cscores) )
-		df <- 1
-		table <- rbind(table, cmh(n, m, A, V, df))
-		Amats$cor <- A
+    Amats <- list()
+	for (type in types) {
+        if("cor" == type) {
+            A <- lkronecker( t(rscores), t(cscores) )
+            df <- 1
+            table <- rbind(table, cmh(n, m, A, V, df))
+            Amats$cor <- A
+		} else if("rmeans" == type) {
+            A <- lkronecker( cbind(diag(R-1), rep(0, R-1)), t(cscores))
+            df <- R-1
+            table <- rbind(table, cmh(n, m, A, V, df))
+            Amats$rmeans <- A
+		} else if("cmeans" == type) {
+            A <- lkronecker( t(rscores), cbind(diag(C-1), rep(0, C-1)))
+            df <- C-1
+            table <- rbind(table, cmh(n, m, A, V, df))
+            Amats$cmeans <- A
+		} else if ("general" == type) {
+            A <- lkronecker( cbind(diag(R-1), rep(0, R-1)), cbind(diag(C-1), rep(0, C-1)))
+            df <- (R-1)*(C-1)
+            table <- rbind(table, cmh(n, m, A, V, df))
+            Amats$general <- A
 		}
-	if("rmeans" %in% types) {
-		A <- lkronecker( cbind(diag(R-1), rep(0, R-1)), t(cscores))
-		df <- R-1
-		table <- rbind(table, cmh(n, m, A, V, df))
-		Amats$rmeans <- A
-		}
-	if("cmeans" %in% types) {
-		A <- lkronecker( t(rscores), cbind(diag(C-1), rep(0, C-1)))
-		df <- C-1
-		table <- rbind(table, cmh(n, m, A, V, df))
-		Amats$cmeans <- A
-		}
-	if ("general" %in% types) {
-		A <- lkronecker( cbind(diag(R-1), rep(0, R-1)), cbind(diag(C-1), rep(0, C-1)))
-		df <- (R-1)*(C-1)
-		table <- rbind(table, cmh(n, m, A, V, df))
-		Amats$general <- A
-		}
+    }
 
 	colnames(table) <- c("Chisq", "Df", "Prob")
 	rownames(table) <- types
@@ -206,7 +205,7 @@ CMHtest2 <- function(x, stratum=NULL, rscores=1:R, cscores=1:C,
 
 # do overall test, from a computed CMHtest list
 CMHtest3 <- function(object,
-	types=c("cor", "rmeans", "cmeans", "general")) 
+	types=c("cor", "rmeans", "cmeans", "general"))
 {
 	nstrat <- length(object)   # number of strata
 
@@ -262,10 +261,10 @@ cmh <- function(n, m,A, V, df) {
 print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
 	heading <- "Cochran-Mantel-Haenszel Statistics"
 	if (!is.null(x$names)) heading <- paste(heading, "for", paste(x$names, collapse=" by "))
-	if (!is.null(x$stratum)) heading <- paste(heading, 
+	if (!is.null(x$stratum)) heading <- paste(heading,
 				ifelse(x$stratum=="ALL", "\n\tOverall tests, controlling for all strata", paste("\n\tin stratum", x$stratum)))
 	# TODO: determine score types (integer, midrank) for heading
-	
+
 	df <- x$table
 	types <- rownames(df)
 	labels <- list(cor="Nonzero correlation", rmeans="Row mean scores differ",
@@ -275,7 +274,6 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
 	cat(heading,"\n\n")
 	print(df, digits=digits, ...)
 	cat("\n")
-	
+
 	invisible(x)
 }
-
