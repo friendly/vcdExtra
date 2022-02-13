@@ -7,7 +7,9 @@ Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre")
             person(given = "Heather", family = "Turner", role="ctb"),
             person(given = "Achim", family = "Zeileis", role="ctb"),
             person(given = "Duncan", family = "Murdoch", role="ctb"),
-            person(given = "David", family = "Firth", role="ctb")
+            person(given = "David", family = "Firth", role="ctb"),
+            person(given = "Matt", family = "Kumar", role="ctb"),
+            person(given = "Shuguang", family = "Sun", role="ctb")
             )
 Author: Michael Friendly [aut, cre], Heather Turner [ctb], Achim Zeileis [ctb], Duncan Murdoch [ctb], David Firth [ctb]
 Maintainer: Michael Friendly <friendly@yorku.ca>
