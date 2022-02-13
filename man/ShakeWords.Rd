@@ -33,7 +33,7 @@ that appear more than 100 times, not listed in this data set.
 }
 \source{
 Bradley Efron and Ronald Thisted (1976).
-Estimating the Number of Unsen Species: How Many Words Did Shakespeare Know?
+Estimating the Number of Unseen Species: How Many Words Did Shakespeare Know?
 \emph{Biometrika},
 Vol. 63, No. 3, pp. 435-447, 
 %\url{http://www.jstor.org/stable/2335721}

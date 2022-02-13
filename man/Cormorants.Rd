@@ -6,7 +6,7 @@ Advertising Behavior by Males Cormorants
 }
 \description{
 Male double-crested cormorants use advertising behavior to attract females for breeding.
-In this study by Meagan Mc Rae (2015), cormorants were observed two or three times a week
+In this study by Meagan McRae (2015), cormorants were observed two or three times a week
 at six stations in a tree-nesting colony
 for an entire season, April 10, 2014-July 10, 2014.
 The number of advertising birds was counted and these observations were classified
@@ -37,7 +37,7 @@ One should use log(days) as an offset, so that the response measures rate.
 
 }
 \source{
-Mc Rae, M. (2015).
+McRae, M. (2015).
 Spatial, Habitat and Frequency Changes in Double-crested Cormorant Advertising Display in a  Tree-nesting Colony.
 Unpublished MA project, Environmental Studies, York University.
 }

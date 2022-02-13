@@ -6,7 +6,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Mosaic plots for fitted generalized linear and generalized nonlinear models }
 \description{
-Procduces mosaic plots (and other plots in the \code{\link[vcd]{strucplot}} framework) 
+Produces mosaic plots (and other plots in the \code{\link[vcd]{strucplot}} framework) 
 for a log-linear model fitted with \code{\link[stats]{glm}}
 or for a generalized nonlinear model fitted with \code{\link[gnm]{gnm}}.
 
