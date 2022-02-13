@@ -67,6 +67,5 @@ Get the released version from CRAN:
 
 The development version can be installed to your R library directly from this repo via:
 
-     if (!require(devtools)) install.packages("devtools")
-     library(devtools)
-     install_github("friendly/vcdExtra")
+     if (!require(remotes)) install.packages("remotes")
+     remotes::install_github("friendly/vcdExtra")
