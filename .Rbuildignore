@@ -11,3 +11,4 @@ vcdExtra-logo.png
 ^revdep/
 ^issues/
 ^extra/
+^CRAN-SUBMISSION$

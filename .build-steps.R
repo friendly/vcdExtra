@@ -18,6 +18,7 @@ devtools::check_rhub()
 devtools::revdep()
 # [1] "aplore3" "catdata" "gnm"     "iarm"    "jmv" 
 
+if (!require("revdepcheck")) remotes::install_github("r-lib/revdepcheck")
 revdepcheck::revdep_check(num_workers = 4)
 
 # submit to cran
