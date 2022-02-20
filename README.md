@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-# vcdExtra <img src="man/figures/vcdExtra-logo.png" align="right" height="200" />
+# vcdExtra <img src="man/figures/vcdExtra-logo.png" align="right" height="120" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
 Version 0.7-6
@@ -15,10 +15,12 @@ Version 0.7-6
 This package provides additional data sets, documentation, and
 a few functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*
 and the [gnm](https://CRAN.R-project.org/package=gnm) package for *Generalized Nonlinear Models*. 
-In particular, `vcdExtra` extends mosaic, assoc and sieve plots from vcd to handle `glm()` and `gnm()` models and
+In particular, `vcdExtra` extends mosaic, assoc and sieve plots from vcd to handle `glm()` and 
+`gnm()` models and
 adds a 3D version in `mosaic3d()`.
 
-`vcdExtra` is now a support package for the book [*Discrete Data Analysis with R*](http://ddar.datavis.ca) by Michael Friendly and David Meyer.
+`vcdExtra` is now a support package for the book [*Discrete Data Analysis with R*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835) (DDAR) by Michael Friendly and David Meyer. There is also a
+[web site for DDAR](http://ddar.datavis.ca) with all figures and code samples from the book.
 
 ### Details
 
@@ -27,9 +29,9 @@ introducing extensions of
 mosaic plots and related graphical methods
 that apply to loglinear models fitted using
 `glm()` and related, generalized nonlinear models fitted
-with `gnm()` in the gnm package.
+with `gnm()` in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 A related purpose is to fill in some holes in the analysis of
-categorical data in R, not provided in base R, vcd, 
+categorical data in R, not provided in base R, [vcd](https://CRAN.R-project.org/package=vcd), 
 or other commonly used packages.
 
 * The method `mosaic.glm()` 
@@ -55,7 +57,8 @@ specification of terms in model formulas using
 `Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
 * In addition, there are many new data sets, a tutorial vignette,
-_Working with categorical data with R and the vcd package_, `vignette("vcd-tutorial", package = "vcdExtra")`,
+(_Working with categorical data with R and the vcd package_)[https://cran.r-project.org/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf], 
+`vignette("vcd-tutorial", package = "vcdExtra")`,
 and a few useful utility functions for manipulating categorical data sets and working with models for
 categorical data. 
 
@@ -68,4 +71,8 @@ Get the released version from CRAN:
 The development version can be installed to your R library directly from this repo via:
 
      if (!require(remotes)) install.packages("remotes")
-     remotes::install_github("friendly/vcdExtra")
+     remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
+
+## References
+
+Friendly, M. & Meyer, D. (2016). _Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data_. Boca Raton, FL: Chapman & Hall/CRC.
