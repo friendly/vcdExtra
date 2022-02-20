@@ -27,3 +27,15 @@ tabs <- ds %>%
   
 knitr::kable(tabs)
 
+## -----------------
+# for pkgdown
+
+# all data sets
+dsn <- ds[,"Item"]
+writeLines(paste0("      - ",dsn))
+
+# functions
+fns <- sort(getNamespaceExports("vcdExtra"))
+writeLines(paste0("      - ",fns))
+
+
