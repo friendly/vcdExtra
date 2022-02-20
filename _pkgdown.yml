@@ -1,0 +1,126 @@
+url: http://friendly.github.io/vcdExtra
+
+template:
+  bootstrap: 5
+  params:
+    bootswatch: cosmo
+
+reference:
+
+  - title: Mosaics
+    desc: Extensions of mosaic and related displays
+    contents:
+      - assoc.glm
+      - mosaic.glm
+      - mosaic.glmlist
+      - glmlist
+      - sieve.glm
+      - mosaic3d
+      - center3d
+      - split3d
+      - range3d
+      - seq_mosaic
+
+  - title: Loglinear models
+    desc: Functions for constructing and manipulating loglinear models
+    contents:
+      - conditional
+      - Crossings
+      - joint
+      - Kway
+      - loglin2formula
+      - loglin2string
+      - loglmlist
+      - markov
+      - mutual
+      - saturated
+      - seq_loglm
+ 
+  - title: Statistical tests
+    desc: Statistical tests for categorical data
+    contents:
+      - CMHtest
+      - GKgamma
+      - print.GKgamma
+      - HLtest
+      - HosmerLemeshow
+      - logLik.loglm
+      - LRstats
+      - modFit
+      - modFit.glm
+      - modFit.loglm
+      - zero.test
+
+  - title: Distributions
+    desc: Statistical distributions
+    contents:
+      - dlogseries
+      - plogseries
+      - qlogseries
+      - rlogseries
+    
+  - title: Utility
+    desc: Utility functions in the package
+    contents:
+      - datasets
+      - blogits
+      - collapse.table
+      - cutfac
+      - expand.dft
+      - expand.table
+
+  - title: Other
+    desc:  Other functions in the package (not yet classified)
+    contents:
+      - mcaplot
+      - summarise
+      - Summarise
+      - update.xtabs
+      - vcdExtra-package
+  
+  - title: Data
+    desc: Some small data sets used in examples or in DDAR
+    contents:
+      - Abortion
+      - Accident
+      - AirCrash
+      - Alligator
+      - Bartlett
+      - Burt
+      - Caesar
+      - Cancer
+      - Cormorants
+      - CyclingDeaths
+      - DaytonSurvey
+      - Depends
+      - Detergent
+      - Donner
+      - Draft1970
+      - Draft1970table
+      - Dyke
+      - Fungicide
+      - GSS
+      - Geissler
+      - Gilby
+      - Glass
+      - HairEyePlace
+      - Hauser79
+      - Heart
+      - Heckman
+      - HospVisits
+      - Hoyt
+      - ICU
+      - JobSat
+      - Mammograms
+      - Mental
+      - Mice
+      - Mobility
+      - PhdPubs
+      - ShakeWords
+      - TV
+      - Titanicp
+      - Toxaemia
+      - Vietnam
+      - Vote1980
+      - WorkerSat
+      - Yamaguchi87
