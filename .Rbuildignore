@@ -12,3 +12,6 @@ vcdExtra-logo.png
 ^issues/
 ^extra/
 ^CRAN-SUBMISSION$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

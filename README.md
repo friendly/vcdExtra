@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-# vcdExtra <img src="vcdExtra-logo.png" align="right" height="200px" />
+# vcdExtra <img src="man/figures/vcdExtra-logo.png" align="right" height="200" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
 Version 0.7-6
