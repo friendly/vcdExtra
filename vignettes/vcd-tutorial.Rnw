@@ -5,6 +5,7 @@
 %\VignetteKeywords{contingency tables, mosaic plots, sieve plots, categorical data, independence, conditional independence, R}
 %\VignettePackage{vcdExtra}
 
+\begin{document}
 \documentclass[10pt,twoside]{article}
 \usepackage{Sweave}
 \usepackage{bm}

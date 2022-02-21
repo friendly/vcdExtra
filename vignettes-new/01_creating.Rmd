@@ -1,0 +1,117 @@
+---
+title: "Creating and manipulating frequency tables"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating and manipulating frequency tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 7,
+  fig.path = "fig",
+  dev = "png",
+  comment = "##"
+)
+
+# Old Sweave options
+# \SweaveOpts{engine=R,eps=TRUE,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
+# \SweaveOpts{engine=R,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
+# \SweaveOpts{prefix.string=fig/vcd-tut,eps=FALSE}
+# \SweaveOpts{keep.source=TRUE}
+
+
+# preload datasets ???
+set.seed(1071)
+#library(vcd)
+library(vcdExtra)
+library(ggplot2)
+data(HairEyeColor)
+data(PreSex)
+data(Arthritis)
+art <- xtabs(~Treatment + Improved, data = Arthritis)
+if(!file.exists("fig")) dir.create("fig")
+
+```
+
+R provides many methods for creating frequency and contingency tables. Several are
+described below. In the examples below, we use some real examples and some anonymous
+ones, where the variables `A`, `B`, and `C`  represent
+categorical variables, and `X` represents an arbitrary R data object.
+
+The first thing you need to know is that categorical data can be represented in
+three different forms in R, and it is sometimes necessary to convert
+from one form to another, for carrying out statistical tests, fitting models
+or visualizing the results.  Once a data object exists in R, 
+you can examine its complete structure with
+the `str()` function, or view the names of its components with the
+`names()` function.
+ 
+
+* **case form** a data frame containing individual observations, with one or
+more factors, used as the classifying variables. In case form, there may also
+be numeric covariates. 
+The total number of observations is `nrow(X)`, and the number of variables is `ncol(X)`.
+  	
+***Example***:
+
+The `Arthritis` data is available in case form in the `vcd` package. 
+There are two explanatory factors: `Treatment` and `Sex`. `Age`
+is a numeric covariate, and `Improved` is the response--- an ordered factor,
+with levels
+`r paste(levels(Arthritis$Improved),collapse=' < ')`.  
+Excluding `Age`, we would have
+a $2 \times 2 \times 3$ contingency table for `Treatment`, `Sex` and `Improved`.
+%`"None" < "Some" < "Marked"`.
+
+```{r, case-form}
+names(Arthritis)      # show the variables
+str(Arthritis)        # show the structure
+head(Arthritis,5)     # first 5 observations, same as Arthritis[1:5,] 
+```
+  
+
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
