@@ -8,10 +8,14 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
-  comment = "#>",
+  comment = "##",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  fig.height = 5,
+  fig.width = 5
+#  out.width = "100%"
 )
+
+library(vcdExtra)
 ```
 
 <!-- badges: start -->
@@ -83,10 +87,126 @@ Get the released version from CRAN:
 
      install.packages("vcdExtra")
 
-The development version can be installed to your R library directly from this repo via:
+The development version can be installed to your R library directly from the GitHub repo via:
 
      if (!require(remotes)) install.packages("remotes")
      remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
+
+## Examples
+
+The dataset `Mental` is a data frame frequency table representing the cross-classification of mental health status (`mental`) of 1660 young New York residents by their parents' socioeconomic status (`ses`).
+Both are _ordered_ factors.
+
+```{r ex-mental1}
+data(Mental)
+str(Mental)
+
+# show as frequency table
+(Mental.tab <- xtabs(Freq ~ ses+mental, data=Mental))
+```
+
+
+These examples illustrate fitting loglinear models using `glm()` and models for _structured associations_ taking
+ordinality into account.
+
+
+#### Independence model
+Fit the independence model, `Freq ~ mental+ses`. This does not take ordinality into account.
+```{r ex-mental2}
+indep <- glm(Freq ~ mental+ses,
+             family = poisson, data = Mental)
+LRstats(indep)
+```
+
+`mosaic.glm()` is the mosaic method for `glm` objects.
+The default mosaic display for these data:
+```{r mental1}
+mosaic(indep)
+```
+
+It is usually better to use standardized residuals in mosaic displays.
+Here we also add longer labels for the table factors and display the
+values of residuals in the cells. 
+
+The formula, `~ ses + mental`
+here gives the order of the factors in the mosaic display,
+not the statistical model for independence. That is, the
+unit square is first split by `ses`, then by `mental` within
+each level of `ses`.
+```{r mental2}
+# labels for table factors
+long.labels <- list(set_varnames = c(mental="Mental Health Status", 
+                                     ses="Parent SES"))
+
+mosaic(indep, ~ ses + mental,
+       residuals_type="rstandard",
+       labeling_args = long.labels, 
+       labeling=labeling_residuals)
+```
+
+the opposite-corner pattern of the residuals clearly shows that association
+between Parent SES and mental health depends on the ordered levels of the factors.
+
+#### Ordinal models
+Ordinal models use numeric scores for the row and/or column variables.
+The simplest models use equally spaced integer scores.
+
+Using these, the term `Rscore:Cscore` represents an association
+constrained to be **linear x linear**; that is, the slopes for
+mental health status is assumed to vary linearly with Parent SES.
+
+```{r mental3}
+# fit linear x linear (uniform) association.  Use integer scores for rows/cols 
+Cscore <- as.numeric(Mental$ses)
+Rscore <- as.numeric(Mental$mental)
+
+linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
+              family = poisson, data = Mental)
+mosaic(linlin, ~ ses + mental,
+       residuals_type="rstandard", 
+       labeling_args = long.labels, 
+       labeling=labeling_residuals, 
+       suppress=1, 
+       gp=shading_Friendly,
+       main="Lin x Lin model")
+```
+
+Note that the test for linear x linear association consumes only 1 degree of freedom,
+compared to the `(r-1)*(c-1) = 15` degrees of freedom for general association.
+```{r}
+anova(linlin, test="Chisq")
+```
+
+
+Other models are possible between the independence model, `Freq ~ mental + ses`,
+and the saturated model `Freq ~ mental + ses + mental:ses`.
+The `update.glm()` method make these easy to specify, as addition of terms to
+the independence model.
+```{r}
+# use update.glm method to fit other models
+
+linlin <- update(indep, . ~ . + Rscore:Cscore)
+roweff <- update(indep, . ~ . + mental:Cscore)
+coleff <- update(indep, . ~ . + Rscore:ses)
+rowcol <- update(indep, . ~ . + Rscore:ses + mental:Cscore)
+```
+
+**Compare the models**: 
+For `glm` objects, the `print` and `summary` methods give too much information if all one wants to see is a brief summary of model goodness of fit, and there is no easy way to display a compact comparison of model goodness of fit for a collection of models fit to the same data.
+
+`LRstats()` provides a brief summary for one or more models fit to the same dataset.
+The likelihood ratio $\chi^2$ values (`LR Chisq`)test lack of fit.
+By these tests, none of the ordinal models show significant lack of fit.
+By the AIC and BIC statistics, the `linlin` model is the best, combining parsimony and goodness of fit.
+```{r}
+LRstats(indep, linlin, roweff, coleff, rowcol)
+```
+The `anova.glm()` function gives tests of nested models.
+```{r}
+anova(indep, linlin, roweff, test = "Chisq")
+
+```
+
 
 ## References
 
