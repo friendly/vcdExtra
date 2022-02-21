@@ -106,9 +106,139 @@
 </h2>
 <p>Get the released version from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
-<p>The development version can be installed to your R library directly from this repo via:</p>
+<p>The development version can be installed to your R library directly from the GitHub repo via:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"friendly/vcdExtra"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<p>The dataset <code>Mental</code> is a data frame frequency table representing the cross-classification of mental health status (<code>mental</code>) of 1660 young New York residents by their parents’ socioeconomic status (<code>ses</code>). Both are <em>ordered</em> factors.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">)</span>
+<span class="co">## 'data.frame':    24 obs. of  3 variables:</span>
+<span class="co">##  $ ses   : Ord.factor w/ 6 levels "1"&lt;"2"&lt;"3"&lt;"4"&lt;..: 1 1 1 1 2 2 2 2 3 3 ...</span>
+<span class="co">##  $ mental: Ord.factor w/ 4 levels "Well"&lt;"Mild"&lt;..: 1 2 3 4 1 2 3 4 1 2 ...</span>
+<span class="co">##  $ Freq  : int  64 94 58 46 57 94 54 40 57 105 ...</span>
+
+<span class="co"># show as frequency table</span>
+<span class="op">(</span><span class="va">Mental.tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">ses</span><span class="op">+</span><span class="va">mental</span>, data<span class="op">=</span><span class="va">Mental</span><span class="op">)</span><span class="op">)</span>
+<span class="co">##    mental</span>
+<span class="co">## ses Well Mild Moderate Impaired</span>
+<span class="co">##   1   64   94       58       46</span>
+<span class="co">##   2   57   94       54       40</span>
+<span class="co">##   3   57  105       65       60</span>
+<span class="co">##   4   72  141       77       94</span>
+<span class="co">##   5   36   97       54       78</span>
+<span class="co">##   6   21   71       54       71</span></code></pre></div>
+<p>These examples illustrate fitting loglinear models using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and models for <em>structured associations</em> taking ordinality into account.</p>
+<div class="section level4">
+<h4 id="independence-model">Independence model<a class="anchor" aria-label="anchor" href="#independence-model"></a>
+</h4>
+<p>Fit the independence model, <code>Freq ~ mental+ses</code>. This does not take ordinality into account.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">indep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span><span class="op">+</span><span class="va">ses</span>,
+             family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span>
+<span class="fu"><a href="reference/LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">indep</span><span class="op">)</span>
+<span class="co">## Likelihood summary table:</span>
+<span class="co">##          AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="co">## indep 209.59 220.19   47.418 15  3.155e-05 ***</span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></code></pre></div>
+<p><code><a href="reference/mosaic.glm.html">mosaic.glm()</a></code> is the mosaic method for <code>glm</code> objects. The default mosaic display for these data:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">mosaic</span><span class="op">(</span><span class="va">indep</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-mental1-1.png"><!-- --></p>
+<p>It is usually better to use standardized residuals in mosaic displays. Here we also add longer labels for the table factors and display the values of residuals in the cells.</p>
+<p>The formula, <code>~ ses + mental</code> here gives the order of the factors in the mosaic display, not the statistical model for independence. That is, the unit square is first split by <code>ses</code>, then by <code>mental</code> within each level of <code>ses</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># labels for table factors</span>
+<span class="va">long.labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>set_varnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mental<span class="op">=</span><span class="st">"Mental Health Status"</span>, 
+                                     ses<span class="op">=</span><span class="st">"Parent SES"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu">mosaic</span><span class="op">(</span><span class="va">indep</span>, <span class="op">~</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span>,
+       residuals_type<span class="op">=</span><span class="st">"rstandard"</span>,
+       labeling_args <span class="op">=</span> <span class="va">long.labels</span>, 
+       labeling<span class="op">=</span><span class="va">labeling_residuals</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-mental2-1.png"><!-- --></p>
+<p>the opposite-corner pattern of the residuals clearly shows that association between Parent SES and mental health depends on the ordered levels of the factors.</p>
+</div>
+<div class="section level4">
+<h4 id="ordinal-models">Ordinal models<a class="anchor" aria-label="anchor" href="#ordinal-models"></a>
+</h4>
+<p>Ordinal models use numeric scores for the row and/or column variables. The simplest models use equally spaced integer scores.</p>
+<p>Using these, the term <code>Rscore:Cscore</code> represents an association constrained to be <strong>linear x linear</strong>; that is, the slopes for mental health status is assumed to vary linearly with Parent SES.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># fit linear x linear (uniform) association.  Use integer scores for rows/cols </span>
+<span class="va">Cscore</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">$</span><span class="va">ses</span><span class="op">)</span>
+<span class="va">Rscore</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">$</span><span class="va">mental</span><span class="op">)</span>
+
+<span class="va">linlin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">Cscore</span>,
+              family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span>
+<span class="fu">mosaic</span><span class="op">(</span><span class="va">linlin</span>, <span class="op">~</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span>,
+       residuals_type<span class="op">=</span><span class="st">"rstandard"</span>, 
+       labeling_args <span class="op">=</span> <span class="va">long.labels</span>, 
+       labeling<span class="op">=</span><span class="va">labeling_residuals</span>, 
+       suppress<span class="op">=</span><span class="fl">1</span>, 
+       gp<span class="op">=</span><span class="va">shading_Friendly</span>,
+       main<span class="op">=</span><span class="st">"Lin x Lin model"</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-mental3-1.png"><!-- --></p>
+<p>Note that the test for linear x linear association consumes only 1 degree of freedom, compared to the <code>(r-1)*(c-1) = 15</code> degrees of freedom for general association.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">linlin</span>, test<span class="op">=</span><span class="st">"Chisq"</span><span class="op">)</span>
+<span class="co">## Analysis of Deviance Table</span>
+<span class="co">## </span>
+<span class="co">## Model: poisson, link: log</span>
+<span class="co">## </span>
+<span class="co">## Response: Freq</span>
+<span class="co">## </span>
+<span class="co">## Terms added sequentially (first to last)</span>
+<span class="co">## </span>
+<span class="co">## </span>
+<span class="co">##               Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    </span>
+<span class="co">## NULL                             23    217.400              </span>
+<span class="co">## mental         3  113.525        20    103.875 &lt; 2.2e-16 ***</span>
+<span class="co">## ses            5   56.457        15     47.418 6.543e-11 ***</span>
+<span class="co">## Rscore:Cscore  1   37.523        14      9.895 9.035e-10 ***</span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></code></pre></div>
+<p>Other models are possible between the independence model, <code>Freq ~ mental + ses</code>, and the saturated model <code>Freq ~ mental + ses + mental:ses</code>. The <code>update.glm()</code> method make these easy to specify, as addition of terms to the independence model.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># use update.glm method to fit other models</span>
+
+<span class="va">linlin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">Cscore</span><span class="op">)</span>
+<span class="va">roweff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">mental</span><span class="op">:</span><span class="va">Cscore</span><span class="op">)</span>
+<span class="va">coleff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">ses</span><span class="op">)</span>
+<span class="va">rowcol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span><span class="op">:</span><span class="va">Cscore</span><span class="op">)</span></code></pre></div>
+<p><strong>Compare the models</strong>: For <code>glm</code> objects, the <code>print</code> and <code>summary</code> methods give too much information if all one wants to see is a brief summary of model goodness of fit, and there is no easy way to display a compact comparison of model goodness of fit for a collection of models fit to the same data.</p>
+<p><code><a href="reference/LRstats.html">LRstats()</a></code> provides a brief summary for one or more models fit to the same dataset. The likelihood ratio <em>χ</em><sup>2</sup> values (<code>LR Chisq</code>)test lack of fit. By these tests, none of the ordinal models show significant lack of fit. By the AIC and BIC statistics, the <code>linlin</code> model is the best, combining parsimony and goodness of fit.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">linlin</span>, <span class="va">roweff</span>, <span class="va">coleff</span>, <span class="va">rowcol</span><span class="op">)</span>
+<span class="co">## Likelihood summary table:</span>
+<span class="co">##           AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="co">## indep  209.59 220.19   47.418 15  3.155e-05 ***</span>
+<span class="co">## linlin 174.07 185.85    9.895 14     0.7698    </span>
+<span class="co">## roweff 174.45 188.59    6.281 12     0.9013    </span>
+<span class="co">## coleff 179.00 195.50    6.829 10     0.7415    </span>
+<span class="co">## rowcol 179.22 198.07    3.045  8     0.9315    </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></code></pre></div>
+<p>The <code><a href="https://rdrr.io/r/stats/anova.glm.html" class="external-link">anova.glm()</a></code> function gives tests of nested models.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">linlin</span>, <span class="va">roweff</span>, test <span class="op">=</span> <span class="st">"Chisq"</span><span class="op">)</span>
+<span class="co">## Analysis of Deviance Table</span>
+<span class="co">## </span>
+<span class="co">## Model 1: Freq ~ mental + ses</span>
+<span class="co">## Model 2: Freq ~ mental + ses + Rscore:Cscore</span>
+<span class="co">## Model 3: Freq ~ mental + ses + mental:Cscore</span>
+<span class="co">##   Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    </span>
+<span class="co">## 1        15     47.418                          </span>
+<span class="co">## 2        14      9.895  1   37.523 9.035e-10 ***</span>
+<span class="co">## 3        12      6.281  2    3.614    0.1641    </span>
+<span class="co">## ---</span>
+<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

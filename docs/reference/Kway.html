@@ -148,19 +148,21 @@ models up to degree <code>order</code>.</p>
 <span class="r-in"><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 222.79 224.37   21.250 35     0.9674</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 230.70 240.20   19.156 30     0.9367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 242.16 264.33   14.625 22     0.8778</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 248.15 276.66   12.614 18     0.8140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 229.37 230.95   29.113 35     0.7474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 229.58 239.08   19.321 30     0.9330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 239.70 261.87   13.443 22     0.9201</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 245.01 273.51   10.753 18     0.9045</span>
 <span class="r-in"><span class="va">mods4</span> <span class="op">&lt;-</span> <span class="fu">Kway</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span> <span class="op">+</span> <span class="va">D</span>, data<span class="op">=</span><span class="va">df</span>, family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 222.79 224.37  21.2503 35     0.9674</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 232.37 243.45  18.8267 29     0.9257</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 247.57 279.24   8.0302 16     0.9480</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 265.55 316.22   2.0096  4     0.7340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 271.54 328.55   0.0000  0     1.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 229.37 230.95  29.1133 35     0.7474    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 231.46 242.54  19.2016 29     0.9160    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 247.29 278.96   9.0314 16     0.9121    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 266.96 317.63   4.7046  4     0.3190    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 270.26 327.26   0.0000  0     &lt;2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># JobSatisfaction data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">JobSatisfaction</span>, package<span class="op">=</span><span class="st">"vcd"</span><span class="op">)</span></span>
