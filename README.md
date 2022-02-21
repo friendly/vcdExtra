@@ -9,7 +9,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- badges: end -->
 
-# vcdExtra <img src="man/figures/vcdExtra-logo.png" align="right" height="120" />
+# vcdExtra <img src="man/figures/vcdExtra-logo.png" style="float:right; height:200px;" />
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
@@ -63,8 +63,8 @@ other commonly used packages.
 -   In addition, there are
 
     -   many new data sets; use `datasets("vcdExtra")` to see a list;
-    -   a (tutorial
-        vignette)\[<https://cran.r-project.org/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf>\].
+    -   a [tutorial
+        vignette](https://cran.r-project.org/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf).
         In the installed package, it can be viewed using
         `vignette("vcd-tutorial", package = "vcdExtra")`;
     -   a few useful utility functions for manipulating categorical data

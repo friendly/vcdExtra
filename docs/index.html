@@ -73,24 +73,31 @@
   <main id="main" class="col-md-9">
 <!-- badges: end -->
 <div class="section level1">
-<div class="page-header"><h1 id="vcdextra-">vcdExtra <img src="reference/figures/vcdExtra-logo.png" align="right" height="200"><a class="anchor" aria-label="anchor" href="#vcdextra-"></a>
+<div class="page-header"><h1 id="vcdextra-">vcdExtra <img src="reference/figures/vcdExtra-logo.png" style="float:right; height:200px;"><a class="anchor" aria-label="anchor" href="#vcdextra-"></a>
 </h1></div>
 <div class="section level2">
 <h2 id="extensions-and-additions-to-vcd-visualizing-categorical-data">Extensions and additions to vcd: Visualizing Categorical Data<a class="anchor" aria-label="anchor" href="#extensions-and-additions-to-vcd-visualizing-categorical-data"></a>
 </h2>
 <p>Version 0.7-6</p>
 <p>This package provides additional data sets, documentation, and a few functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>.</p>
-<p><code>vcdExtra</code> is now a support package for the book <a href="http://ddar.datavis.ca" class="external-link"><em>Discrete Data Analysis with R</em></a> by Michael Friendly and David Meyer.</p>
+<p><code>vcdExtra</code> is now a support package for the book <a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835" class="external-link"><em>Discrete Data Analysis with R</em></a> (DDAR) by Michael Friendly and David Meyer. There is also a <a href="http://ddar.datavis.ca" class="external-link">web site for DDAR</a> with all figures and code samples from the book.</p>
 <div class="section level3">
 <h3 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
 </h3>
-<p>The main purpose of this package is to serve as a sandbox for introducing extensions of mosaic plots and related graphical methods that apply to loglinear models fitted using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and related, generalized nonlinear models fitted with <code>gnm()</code> in the gnm package. A related purpose is to fill in some holes in the analysis of categorical data in R, not provided in base R, vcd, or other commonly used packages.</p>
+<p>The main purpose of this package is to serve as a sandbox for introducing extensions of mosaic plots and related graphical methods that apply to loglinear models fitted using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and related, generalized nonlinear models fitted with <code>gnm()</code> in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package. A related purpose is to fill in some holes in the analysis of categorical data in R, not provided in base R, <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>, or other commonly used packages.</p>
 <ul>
 <li><p>The method <code><a href="reference/mosaic.glm.html">mosaic.glm()</a></code> extends the <code>mosaic.loglm()</code> method in the vcd package to this wider class of models. This method also works for the generalized nonlinear models fit with the gnm package, including models for square tables and models with multiplicative associations.</p></li>
 <li><p><code><a href="reference/mosaic3d.html">mosaic3d()</a></code> introduces a 3D generalization of mosaic displays using the <a href="https://CRAN.R-project.org/package=rgl" class="external-link">rgl</a> package.</p></li>
 <li><p>A new class, <code>glmlist</code>, is introduced for working with collections of glm objects, e.g., <code><a href="reference/Kway.html">Kway()</a></code> for fitting all K-way models from a basic marginal model, and <code><a href="reference/LRstats.html">LRstats()</a></code> for brief statistical summaries of goodness-of-fit for a collection of models.</p></li>
-<li><p>For square tables with ordered factors, <code><a href="reference/Crossings.html">Crossings()</a></code> supplements the specification of terms in model formulas using <code>Symm()</code>, <code>Diag()</code>, <code>Topo(),</code> etc. in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package.</p></li>
-<li><p>In addition, there are many new data sets, a tutorial vignette, <em>Working with categorical data with R and the vcd package</em>, <code>vignette("vcd-tutorial", package = "vcdExtra")</code>, and a few useful utility functions for manipulating categorical data sets and working with models for categorical data.</p></li>
+<li><p>For <strong>square tables</strong> with ordered factors, <code><a href="reference/Crossings.html">Crossings()</a></code> supplements the specification of terms in model formulas using <code>Symm()</code>, <code>Diag()</code>, <code>Topo(),</code> etc. in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package.</p></li>
+<li>
+<p>In addition, there are</p>
+<ul>
+<li>many new data sets; use <code>datasets("vcdExtra")</code> to see a list;</li>
+<li>a <a href="https://cran.r-project.org/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf" class="external-link">tutorial vignette</a>. In the installed package, it can be viewed using <code>vignette("vcd-tutorial", package = "vcdExtra")</code>;</li>
+<li>a few useful utility functions for manipulating categorical data sets and working with models for categorical data.</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -101,7 +108,12 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
 <p>The development version can be installed to your R library directly from this repo via:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"friendly/vcdExtra"</span>)</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"friendly/vcdExtra"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Friendly, M. &amp; Meyer, D. (2016). <em>Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.</p>
 </div>
 </div>
 
@@ -140,9 +152,8 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=vcdExtra" class="external-link"><img src="http://www.r-pkg.org/badges/version/vcdExtra" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=vcdExtra" class="external-link"><img src="http://www.r-pkg.org/badges/version/vcdExtra" alt="CRAN_Status"></a></li>
 <li><a href="https://cran.r-project.org/package=vcdExtra" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra"></a></li>
-<li><a href="https://www.rdocumentation.org/packages/vcdExtra" class="external-link"><img src="http://www.rdocumentation.org/badges/version/vcdExtra" alt="Rdoc"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 </ul>
 </div>

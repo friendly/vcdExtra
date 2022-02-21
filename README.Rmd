@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-# vcdExtra <img src="man/figures/vcdExtra-logo.png" align="right" height="120" />
+# vcdExtra <img src="man/figures/vcdExtra-logo.png" style="float:right; height:200px;" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
 Version 0.7-6
