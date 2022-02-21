@@ -2,7 +2,9 @@
 title: "Creating and manipulating frequency tables"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_vignette:
+        fig_caption: yes
+bibliography: ["vcd.bib", "vcdExtra.bib"]
 vignette: >
   %\VignetteIndexEntry{Creating and manipulating frequency tables}
   %\VignetteEngine{knitr::rmarkdown}
@@ -76,6 +78,42 @@ str(Arthritis)        # show the structure
 head(Arthritis,5)     # first 5 observations, same as Arthritis[1:5,] 
 ```
   
+* **frequency form** a data frame containing one or more factors, and a frequency 
+variable, often called `Freq` or `count`.  The total number of observations
+is: `sum(X$Freq)`,  `sum(X[,"Freq"])` or some equivalent form.
+
+The number of cells in the table is `nrow(X)`.
+
+***Example***: 
+For small frequency tables, it is often convenient to enter them in frequency form
+using `expand.grid()` for the factors and `c()` to list the counts in a vector.
+The example below, from [@vcd:Agresti:2002] gives results for the 1991 General Social Survey,
+with respondents classified by sex and party identification.
+```{r, frequency-form}
+# Agresti (2002), table 3.11, p. 106
+GSS <- data.frame(
+  expand.grid(sex=c("female", "male"), 
+              party=c("dem", "indep", "rep")),
+  count=c(279,165,73,47,225,191))
+GSS
+names(GSS)
+str(GSS)
+sum(GSS$count)
+```
+
+* **table form**  a matrix, array or table object, whose elements are the frequencies
+in an $n$-way table.  The variable names (factors) and their levels are given by
+`dimnames(X)`. The total number of observations
+is `sum(X)`.  The number of dimensions of the table is `length(dimnames(X))`,
+and the table sizes are given by `sapply(dimnames(X), length)`.
+  	
+***Example***: 
+The `HairEyeColor` is stored in table form in `vcd`.  
+```{r, table-form1}
+str(HairEyeColor)                      # show the structure
+sum(HairEyeColor)                      # number of cases
+sapply(dimnames(HairEyeColor), length) # table dimension sizes
+```
 
 
 ## Styles
@@ -88,12 +126,12 @@ The `html_vignette` template includes a basic CSS theme. To override this theme 
 
 ## Figures
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+<!-- The figure sizes have been customised so that you can easily put two images side-by-side.  -->
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
+<!-- ```{r, fig.show='hold'} -->
+<!-- plot(1:10) -->
+<!-- plot(10:1) -->
+<!-- ``` -->
 
 You can enable figure captions by `fig_caption: yes` in YAML:
 
