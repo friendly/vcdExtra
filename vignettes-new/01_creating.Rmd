@@ -43,11 +43,13 @@ if(!file.exists("fig")) dir.create("fig")
 
 ```
 
+
 R provides many methods for creating frequency and contingency tables. Several are
 described below. In the examples below, we use some real examples and some anonymous
 ones, where the variables `A`, `B`, and `C`  represent
 categorical variables, and `X` represents an arbitrary R data object.
 
+## Forms of frequency data
 The first thing you need to know is that categorical data can be represented in
 three different forms in R, and it is sometimes necessary to convert
 from one form to another, for carrying out statistical tests, fitting models
@@ -57,7 +59,8 @@ the `str()` function, or view the names of its components with the
 `names()` function.
  
 
-* **case form** a data frame containing individual observations, with one or
+* **case form** 
+a data frame containing individual observations, with one or
 more factors, used as the classifying variables. In case form, there may also
 be numeric covariates. 
 The total number of observations is `nrow(X)`, and the number of variables is `ncol(X)`.
@@ -68,10 +71,9 @@ The `Arthritis` data is available in case form in the `vcd` package.
 There are two explanatory factors: `Treatment` and `Sex`. `Age`
 is a numeric covariate, and `Improved` is the response--- an ordered factor,
 with levels
-`r paste(levels(Arthritis$Improved),collapse=' < ')`.  
-Excluding `Age`, we would have
-a $2 \times 2 \times 3$ contingency table for `Treatment`, `Sex` and `Improved`.
-%`"None" < "Some" < "Marked"`.
+`r paste(levels(Arthritis$Improved),collapse=' < ')`.
+Excluding `Age`, this represents
+a $2 \times 2 \times 3$ contingency table for `Treatment`, `Sex` and `Improved`, but in case form.
 
 ```{r, case-form}
 names(Arthritis)      # show the variables
@@ -325,6 +327,277 @@ vector  of  frequencies  (useful if the data have already been tabulated in freq
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
 summary(GSStab)
 ```
+
+## Collapsing over table factors: `aggregate()`, `margin.table()` and `apply()`}
+
+It sometimes happens that we have a data set with more variables or factors than 
+we want to analyse, or else, having done some initial analyses, we decide that
+certain factors are not important, and so should be excluded from graphic displays
+by collapsing (summing) over them.  For example, mosaic plots and fourfold displays
+are often simpler to construct from versions of the data collapsed over
+the factors which are not shown in the plots.
+
+The appropriate tools to use again depend on
+the form in which the data are represented--- a case-form data frame, a
+frequency-form data frame (`aggregate()`), or a table-form array or 
+table object (`margin.table()` or `apply()`).
+
+When the data are in frequency form, and we want to produce another
+frequency data frame, `aggregate()` is a handy tool, using
+the argument `FUN=sum` to sum the frequency variable over the 
+factors *not* mentioned in the formula.
+
+***Example***: 
+The data frame `DaytonSurvey` in the `vcdExtra` package represents a
+$2^5$ table giving the frequencies of reported use (``ever used?'') of 
+alcohol, cigarettes and marijuana in a sample of high school seniors,
+also classified by sex and race.  
+
+```{r, dayton1}
+str(DaytonSurvey)
+head(DaytonSurvey)
+```
+
+To focus on the associations among the
+substances, we want to collapse over sex and race. The right-hand side of the formula
+used in the call to `aggregate()` gives the factors to be retained in the
+new frequency data frame, `Dayton.ACM.df`.
+
+```{r, dayton2}
+# data in frequency form
+# collapse over sex and race
+Dayton.ACM.df <- aggregate(Freq ~ cigarette+alcohol+marijuana, 
+                           data=DaytonSurvey, 
+                           FUN=sum)
+Dayton.ACM.df
+```
+
+When the data are in table form, and we want to produce another
+table, `apply()` with `FUN=sum` can be used in a similar way
+to sum the table over dimensions not mentioned in the `MARGIN`
+argument.  `margin.table()` is just a wrapper for `apply()`
+using the `sum()` function.
+
+
+***Example***: 
+To illustrate, we first convert the `DaytonSurvey` to a 5-way
+table using `xtabs()`, giving `Dayton.tab`.  
+
+```{r, dayton3}
+# in table form
+Dayton.tab <- xtabs(Freq ~ cigarette+alcohol+marijuana+sex+race, 
+                    data=DaytonSurvey)
+structable(cigarette+alcohol+marijuana ~ sex+race, 
+           data=Dayton.tab)
+```
+
+Then, use `apply()` on `Dayton.tab` to give the
+3-way table `Dayton.ACM.tab` summed over sex and race.
+The elements in this new table are the column sums for 
+`Dayton.tab` shown by `structable()` just above.
+
+```{r, dayton4}
+# collapse over sex and race
+Dayton.ACM.tab <- apply(Dayton.tab, MARGIN=1:3, FUN=sum)
+Dayton.ACM.tab <- margin.table(Dayton.tab, 1:3)   # same result
+
+structable(cigarette+alcohol ~ marijuana, data=Dayton.ACM.tab)
+```
+
+
+Many of these operations can be performed using the `**ply()` functions
+in the `plyr` package.
+For example, with the data in a frequency form data frame, use `ddply()`
+to collapse over unmentioned factors, and `plyr::summarise()`
+as the function to be applied to each piece.
+<!-- \footnote{ -->
+<!-- Ugh. This `plyr` function clashes with a function of the same name in `vcdExtra`. -->
+<!-- In this document I will use the explicit double-colon notation to keep them -->
+<!-- separate. -->
+<!-- } -->
+
+```{r, dayton5, eval=FALSE}
+library(plyr)
+Dayton.ACM.df <- plyr::ddply(DaytonSurvey, 
+                             .(cigarette, alcohol, marijuana), 
+                             plyr::summarise, Freq=sum(Freq))
+
+Dayton.ACM.df
+```
+
+## Collapsing table levels: `collapse.table()`
+
+A related problem arises when we have a table or array and for some purpose
+we want to reduce the number of levels of some factors by summing subsets
+of the frequencies.  For example, we may have initially coded Age in 10-year
+intervals, and decide that, either for analysis or display purposes, we
+want to reduce Age to 20-year intervals.  The `collapse.table()` function
+in `vcdExtra` was designed for this purpose.
+
+***Example***:
+Create a 3-way table, and collapse Age from 10-year to 20-year intervals. 
+First, we generate a $2 \times 6 \times 3$ table of random counts from a 
+Poisson distribution with mean of 100.
+```{r, collapse1}
+# create some sample data in frequency form
+sex <- c("Male", "Female")
+age <- c("10-19", "20-29",  "30-39", "40-49", "50-59", "60-69")
+education <- c("low", 'med', 'high')
+data <- expand.grid(sex=sex, age=age, education=education)
+counts <- rpois(36, 100)   # random Possion cell frequencies
+data <- cbind(data, counts)
+
+# make it into a 3-way table
+t1 <- xtabs(counts ~ sex + age + education, data=data)
+structable(t1)
+``` 
+Now collapse `age` to 20-year intervals, and `education`
+to 2 levels. In the arguments, levels of `age` and `education`
+given the same label are summed in the resulting smaller table.
+```{r, collapse2}
+# collapse age to 3 levels, education to 2 levels
+t2 <- collapse.table(t1, 
+         age=c("10-29", "10-29",  "30-49", "30-49", "50-69", "50-69"),
+         education=c("<high", "<high", "high"))
+structable(t2)
+```
+
+## Converting among frequency tables and data frames
+
+As we've seen, a given contingency table can be represented 
+equivalently in different forms,
+but some R functions were designed for one particular representation.
+
+The table below shows some handy tools for converting from one form to another.
+
+<!-- [htb] -->
+<!--  \caption{Tools for converting among different forms for categorical data} {#tab:convert} -->
+ 
+<!--    {llll} -->
+<!-- 	\hline -->
+<!--                  & \multicolumn{3}{c}{**To this**} \\ -->
+<!-- 	**From this**      &     Case form         & Frequency form             &  Table form \\ -->
+<!-- 	\hline -->
+<!-- 	Case form      &   noop                 & `xtabs(~A+B)`        &  `table(A,B)`  \\  -->
+<!-- 	Frequency form &  `expand.dft(X)`  & noop                      & `xtabs(count~A+B)`\\ -->
+<!-- 	Table form     &  `expand.dft(X)`  & `as.data.frame(X)`   &  noop \\ -->
+<!-- 	\hline -->
+   
+| **From this**  |                     | **To this**          |                   |
+|:---------------|:--------------------|:---------------------|-------------------|
+|	               |     Case form       | Frequency form       |  Table form       |
+|	Case form      |   noop              | `xtabs(~A+B)`        |  `table(A,B)`     |
+|	Frequency form |  `expand.dft(X)`    | noop                 | `xtabs(count~A+B)`|
+|	Table form     |  `expand.dft(X)`    | `as.data.frame(X)`   |  noop             |
+
+
+A contingency table in table form (an object of `class(table)`) can be converted
+to a data.frame with `as.data.frame()`.
+^[Because R is object-oriented, this is actually a short-hand for the function `as.data.frame.table()`.] 
+The resulting
+`data.frame` contains columns
+representing the classifying factors and the table entries (as a column named by
+the `responseName` argument, defaulting to `Freq`. This is the inverse of `xtabs()`.
+
+***Example***: 
+Convert the `GSStab` in table form to a data.frame in frequency form.
+```{r, convert-ex1}
+as.data.frame(GSStab)
+```
+
+***Example***: Convert the `Arthritis` data in case form to a 3-way table of
+`Treatment` $\times$ `Sex` $\times$ `Improved`.
+Note the use of `with()` to avoid having to use `Arthritis\$Treatment` etc. within the call to `table()`.%
+^[`table()` does not allow a `data` argument to provide an environment in which the table variables are to be found.  In the examples in \secref{sec:table} I used `attach(mydata)` for this purpose,
+but `attach()` leaves the variables in the global environment, while `with()` just evaluates the `table()` expression in a temporary environment of the data.]
+
+```{r, convert-ex2}
+Art.tab <-with(Arthritis, table(Treatment, Sex, Improved))
+str(Art.tab)
+ftable(Art.tab)
+```
+
+There may also be times that you will need an equivalent case form `data.frame`
+with factors  representing the table variables
+rather than the frequency  table.
+For example, the `mca()` function in package `MASS`
+only operates on data in this format. 
+Marc Schwartz provided code for `expand.dft()` on the  Rhelp
+mailing list for converting a table back into a case form `data.frame`.
+This function is included in `vcdExtra`.
+
+***Example***: Convert the `Arthritis` data in table form (`Art.tab`) back to a `data.frame`
+in case form, with factors
+`Treatment`, `Sex` and `Improved`.
+```{r, convert-ex3}
+Art.df <- expand.dft(Art.tab)
+str(Art.df)
+```
+
+## A complex example {#sec:complex}
+
+If you've followed so far, you're ready for a more complicated example.
+The data file, `tv.dat` represents a 4-way table of size
+$5 \times 11 \times 5 \times 3$ where the table variables (unnamed in the file)
+are read as `V1` -- `V4`, and the cell frequency is read
+as `V5`.  The file, stored in the `doc/extdata` directory
+of `vcdExtra`, can be read as follows:
+```{r, tv1}
+tv.data<-read.table(system.file("extdata","tv.dat", package="vcdExtra"))
+head(tv.data,5)
+```
+For a local file, just use `read.table()` in this form:
+```{r, tv2,eval=FALSE}
+tv.data<-read.table("C:/R/data/tv.dat")
+```
+The data `tv.dat` came from the initial implementation of 
+mosaic displays in R by Jay Emerson. 
+In turn, they came from the initial development of mosaic displays 
+[@vcd:Hartigan+Kleiner:1984]
+that illustrated the method with data on a large sample of TV viewers
+whose behavior had been recorded for the Neilson ratings.
+This data set contains sample television audience data from Neilsen
+Media Research for the week starting November 6, 1995.
+
+The table variables are:
+
+* `V1`-- values 1:5 correspond to the days Monday--Friday;
+* `V2`-- values 1:11 correspond to the quarter hour times 8:00PM through 10:30PM;
+* `V3`-- values 1:5 correspond to ABC, CBS, NBC, Fox, and non-network choices;
+* `V4`-- values 1:3 correspond to transition states: turn the television Off, Switch channels, or Persist in viewing the current channel.
+
+We are interested just the cell frequencies, and rely on the facts that the
+(a) the table is complete--- there are no missing cells,
+so `nrow(tv.data)` = `r nrow(tv.data)`;
+(b) the observations are ordered so that `V1` varies most rapidly and
+`V4` most slowly.  From this, we can just extract the frequency column
+and reshape it into an array.
+
+```{r, tv3}
+TV <- array(tv.data[,5], dim=c(5,11,5,3))                                        
+dimnames(TV) <- list(c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
+                c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
+                  "9:45","10:00","10:15","10:30"),                            
+                c("ABC","CBS","NBC","Fox","Other"), 
+                c("Off","Switch","Persist"))
+
+names(dimnames(TV))<-c("Day", "Time", "Network", "State")
+```
+
+More generally (even if there are missing cells), we can 
+use `xtabs()` (or `plyr::daply()`)
+to do the cross-tabulation, using `V5` as the
+frequency variable.  Here's how to do this same operation with `xtabs()`:
+```{r, tv3a,eval=FALSE}
+TV <- xtabs(V5 ~ ., data=tv.data)
+dimnames(TV) <- list(Day=c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
+                Time=c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
+                       "9:45","10:00","10:15","10:30"),                            
+                Network=c("ABC","CBS","NBC","Fox","Other"), 
+                State=c("Off","Switch","Persist"))
+```
+
+
 
 <!-- ## Styles -->
 

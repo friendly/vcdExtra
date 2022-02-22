@@ -525,7 +525,8 @@ $2^5$ table giving the frequencies of reported use (``ever used?'') of
 alcohol, cigarettes and marijuana in a sample of high school seniors,
 also classified by sex and race.  
 
-```{r, dayton1, results=verbatim}
+```{r, dayton1}
+data(DaytonSurvey, package = "vcdExtra")
 str(DaytonSurvey)
 head(DaytonSurvey)
 ```
@@ -535,7 +536,7 @@ substances, we want to collapse over sex and race. The right-hand side of the fo
 used in the call to `aggregate()` gives the factors to be retained in the
 new frequency data frame, `Dayton.ACM.df`.
 
-```{r, dayton2, results=verbatim}
+```{r, dayton2}
 # data in frequency form
 # collapse over sex and race
 Dayton.ACM.df <- aggregate(Freq ~ cigarette+alcohol+marijuana, 
@@ -554,7 +555,7 @@ using the `sum()` function.
 To illustrate, we first convert the `DaytonSurvey` to a 5-way
 table using `xtabs()`, giving `Dayton.tab`.  
 
-```{r, dayton3, results=verbatim}=
+```{r, dayton3}
 # in table form
 Dayton.tab <- xtabs(Freq~cigarette+alcohol+marijuana+sex+race, data=DaytonSurvey)
 structable(cigarette+alcohol+marijuana ~ sex+race, data=Dayton.tab)
@@ -564,7 +565,7 @@ Then, use `apply()` on `Dayton.tab` to give the
 The elements in this new table are the column sums for 
 `Dayton.tab` shown by `structable()` just above.
 
-```{r, dayton4, results=verbatim}=
+```{r, dayton4}
 # collapse over sex and race
 Dayton.ACM.tab <- apply(Dayton.tab, MARGIN=1:3, FUN=sum)
 Dayton.ACM.tab <- margin.table(Dayton.tab, 1:3)   # same result
@@ -576,16 +577,21 @@ structable(cigarette+alcohol ~ marijuana, data=Dayton.ACM.tab)
 Many of these operations can be performed using the `**ply()` functions
 in the `plyr` package.
 For example, with the data in a frequency form data frame, use `ddply()`
-to collapse over unmentioned factors, and `plyr::summarise()`%
+to collapse over unmentioned factors, and `plyr::summarise()`
+as the function to be applied to each piece.
 <!-- \footnote{ -->
 <!-- Ugh. This `plyr` function clashes with a function of the same name in `vcdExtra`. -->
 <!-- In this document I will use the explicit double-colon notation to keep them -->
 <!-- separate. -->
 <!-- } -->
-as the function to be applied to each piece.
-```{r, dayton5, eval=FALSE}=
-Dayton.ACM.df <- ddply(DaytonSurvey, .(cigarette, alcohol, marijuana), 
-                       plyr::summarise, Freq=sum(Freq))
+
+```{r, dayton5, eval=FALSE}
+library(plyr)
+Dayton.ACM.df <- plyr::ddply(DaytonSurvey, 
+                             .(cigarette, alcohol, marijuana), 
+                             plyr::summarise, Freq=sum(Freq))
+
+Dayton.ACM.df
 ```
 
 ## Collapsing table levels: `collapse.table()`
@@ -617,7 +623,7 @@ structable(t1)
 Now collapse `age` to 20-year intervals, and `education`
 to 2 levels. In the arguments, levels of `age` and `education`
 given the same label are summed in the resulting smaller table.
-```{r, collapse2, results=verbatim}
+```{r, collapse2}
 # collapse age to 3 levels, education to 2 levels
 t2 <- collapse.table(t1, 
          age=c("10-29", "10-29",  "30-49", "30-49", "50-69", "50-69"),
@@ -802,7 +808,7 @@ the  `CrossTable()`  function in  the `gmodels`  package produces  cross-tabulat
 modeled after `PROC FREQ` in SAS or `CROSSTABS` in SPSS. 
 It has a wealth of options for the quantities that can be shown in each cell.
 
-```{r, xtabs-ex2, results=verbatim}
+```{r, xtabs-ex2}
 # 2-Way Cross Tabulation
 library(gmodels)
 CrossTable(GSStab,prop.t=FALSE,prop.r=FALSE,prop.c=FALSE)
@@ -1005,13 +1011,13 @@ CMH tests for two possibly ordered factors, optionally stratified other factor(s
 
 ***Example***:
 Recall the $4 \times 4$ table, `JobSat` introduced in \secref{sec:creating},
-```{r, jobsat, results=verbatim}
+```{r, jobsat}
 JobSat
 ```
 
 Treating the `satisfaction` levels as equally spaced, but using
 midpoints of the `income` categories as row scores gives the following results:
-```{r, cmh1, results=verbatim}
+```{r, cmh1}
 CMHtest(JobSat, rscores=c(7.5,20,32.5,60))
 ```
 
