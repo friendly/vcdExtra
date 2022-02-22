@@ -6,7 +6,7 @@
 Extensions and additions to vcd: Visualizing Categorical Data
 }
 \description{
-\if{html}{\figure{man/figures/vcdExtra-logo.png}{options: align='right' alt='logo' width='100'}}
+\if{html}{\figure{man/figures/logo.png}{options: align='right' alt='logo' width='100'}}
 
 This package provides additional data sets, documentation, and
 a few functions designed to extend the \code{vcd} package for Visualizing Categorical Data
