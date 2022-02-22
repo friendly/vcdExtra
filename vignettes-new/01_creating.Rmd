@@ -2,8 +2,9 @@
 title: "Creating and manipulating frequency tables"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette:
-        fig_caption: yes
+output: 
+  rmarkdown::html_vignette:
+  fig_caption: yes
 bibliography: ["vcd.bib", "vcdExtra.bib"]
 vignette: >
   %\VignetteIndexEntry{Creating and manipulating frequency tables}
@@ -74,7 +75,9 @@ a $2 \times 2 \times 3$ contingency table for `Treatment`, `Sex` and `Improved`.
 
 ```{r, case-form}
 names(Arthritis)      # show the variables
+
 str(Arthritis)        # show the structure
+
 head(Arthritis,5)     # first 5 observations, same as Arthritis[1:5,] 
 ```
   
@@ -95,9 +98,11 @@ GSS <- data.frame(
   expand.grid(sex=c("female", "male"), 
               party=c("dem", "indep", "rep")),
   count=c(279,165,73,47,225,191))
+
 GSS
 names(GSS)
 str(GSS)
+
 sum(GSS$count)
 ```
 
@@ -111,8 +116,93 @@ and the table sizes are given by `sapply(dimnames(X), length)`.
 The `HairEyeColor` is stored in table form in `vcd`.  
 ```{r, table-form1}
 str(HairEyeColor)                      # show the structure
+
 sum(HairEyeColor)                      # number of cases
+
 sapply(dimnames(HairEyeColor), length) # table dimension sizes
+```
+***Example***: 
+Enter frequencies in a matrix, and assign `dimnames`,
+giving the variable names and category labels.  Note that, by default,
+`matrix()` uses the elements supplied by *columns* in the
+result, unless you specify `byrow=TRUE`.
+```{r, table-form2}
+# A 4 x 4 table  Agresti (2002, Table 2.8, p. 57) Job Satisfaction
+JobSat <- matrix(c(1,2,1,0, 
+                   3,3,6,1, 
+                   10,10,14,9, 
+                   6,7,12,11), 4, 4)
+
+dimnames(JobSat) = list(
+  income = c("< 15k", "15-25k", "25-40k", "> 40k"),
+  satisfaction = c("VeryD", "LittleD", "ModerateS", "VeryS")
+  )
+
+JobSat
+```
+
+`JobSat` is a **matrix**, not an object of `class("table")`, and some functions
+are happier with tables than matrices.
+You can coerce it to a table with `as.table()`,
+```{r, table-form3}
+JobSat <- as.table(JobSat)
+str(JobSat)
+```
+
+## Ordered factors and reordered tables {#sec:ordered-factors}
+
+In table form, the values of the table factors are ordered by their position in the table.
+Thus in the `JobSat` data, both `income` and `satisfaction` represent ordered
+factors, and the *positions* of the values in the rows and columns reflects their
+ordered nature.
+
+Yet, for analysis, there are time when you need *numeric* values for the levels
+of ordered factors in a table, e.g., to treat a factor as a quantitative variable.
+In such cases, you can simply re-assign the `dimnames` attribute of the table
+variables.  For example, here, we assign numeric values to `income` as the middle of their
+ranges, and treat `satisfaction` as equally spaced with integer scores.
+
+```{r, relevel, eval=FALSE}
+dimnames(JobSat)$income <- c(7.5,20,32.5,60)
+dimnames(JobSat)$satisfaction <- 1:4
+```
+
+For the  `HairEyeColor` data, hair color and eye color are ordered arbitrarily.
+For visualizing the data using mosaic plots and other methods described below, it 
+turns out to be more useful to assure that both hair color and eye color are
+ordered from dark to light.
+Hair colors are actually ordered this way already, and it is easiest to re-order
+eye colors by indexing. Again `str()` is your friend.
+
+```{r, reorder1}
+HairEyeColor <- HairEyeColor[, c(1,3,4,2), ]
+str(HairEyeColor)
+```
+This is also the order for both hair color and eye color shown in 
+the result of a correspondence analysis (\figref{fig:ca-haireye}) below.
+
+With data in  case form or frequency form, when you have ordered factors
+represented with character values, you must ensure that they are treated
+as ordered in R.
+<!-- \footnote{In SAS, many procedures offer the option -->
+<!-- 	`order = data | internal | formatted` to allow character values -->
+<!-- 	to be ordered according to (a) their order in the data set, (b) -->
+<!-- 	sorted internal value, or (c) sorted formatted representation -->
+<!-- 	provided by a SAS format. -->
+<!-- } -->
+
+Imagine that the `Arthritis` data was read from a text file.  
+By default the `Improved` will be ordered alphabetically:
+`Marked`,
+`None`,
+`Some` --- not what we want.  In this case, the function
+`ordered()` (and others) can be useful. 
+
+```{r, reorder2, echo=TRUE, eval=FALSE}
+Arthritis <- read.csv("arthritis.txt",header=TRUE)
+Arthritis$Improved <- ordered(Arthritis$Improved, 
+                              levels=c("None", "Some", "Marked")
+                              )
 ```
 
 
@@ -141,15 +231,6 @@ You can enable figure captions by `fig_caption: yes` in YAML:
 
 Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
 
-## More Examples
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+# References
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
