@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   fig.height = 6,
   fig.width = 7,
-  fig.path = "fig",
+  fig.path = "fig/tut01-",
   dev = "png",
   comment = "##"
 )
@@ -32,12 +32,12 @@ knitr::opts_chunk$set(
 
 # preload datasets ???
 set.seed(1071)
-#library(vcd)
+library(vcd)
 library(vcdExtra)
 library(ggplot2)
 data(HairEyeColor)
 data(PreSex)
-data(Arthritis)
+data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 if(!file.exists("fig")) dir.create("fig")
 
@@ -204,6 +204,19 @@ Arthritis$Improved <- ordered(Arthritis$Improved,
                               levels=c("None", "Some", "Marked")
                               )
 ```
+The dataset `Arthritis` in the `vcd` package is a data.frame in this form
+With this order of  `Improved`, the response in this data,
+a mosaic display of `Treatment` and `Improved` (\figref{fig:arthritis}) shows a clearly
+interpretable pattern.
+
+The original version of `mosaic` in the `vcd` package required the input to be 
+a contingency table in array form.
+
+```{r Arthritis, height=6, width=7, fig.cap="Mosaic plot for the `Arthritis` data ..."}
+data(Arthritis, package="vcd")
+art <- xtabs(~Treatment + Improved, data = Arthritis)
+mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
+```
 
 
 ## Styles
@@ -214,7 +227,7 @@ The `html_vignette` template includes a basic CSS theme. To override this theme 
       rmarkdown::html_vignette:
         css: mystyles.css
 
-## Figures
+<!-- ## Figures -->
 
 <!-- The figure sizes have been customised so that you can easily put two images side-by-side.  -->
 
@@ -223,13 +236,13 @@ The `html_vignette` template includes a basic CSS theme. To override this theme 
 <!-- plot(10:1) -->
 <!-- ``` -->
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+<!-- You can enable figure captions by `fig_caption: yes` in YAML: -->
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+<!--     output: -->
+<!--       rmarkdown::html_vignette: -->
+<!--         fig_caption: yes -->
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+<!-- Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**. -->
 
 
 # References
