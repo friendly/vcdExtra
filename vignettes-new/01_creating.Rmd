@@ -23,6 +23,11 @@ knitr::opts_chunk$set(
   comment = "##"
 )
 
+# save some typing
+knitr::set_alias(w = "fig.width",
+                 h = "fig.height",
+                 cap = "fig.cap")
+
 # Old Sweave options
 # \SweaveOpts{engine=R,eps=TRUE,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
 # \SweaveOpts{engine=R,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
@@ -59,8 +64,8 @@ the `str()` function, or view the names of its components with the
 `names()` function.
  
 
-* **case form** 
-a data frame containing individual observations, with one or
+### Case form
+Categorical data in case form are simply data frames containing individual observations, with one or
 more factors, used as the classifying variables. In case form, there may also
 be numeric covariates. 
 The total number of observations is `nrow(X)`, and the number of variables is `ncol(X)`.
@@ -83,11 +88,12 @@ str(Arthritis)        # show the structure
 head(Arthritis,5)     # first 5 observations, same as Arthritis[1:5,] 
 ```
   
-* **frequency form** a data frame containing one or more factors, and a frequency 
+### Frequency form
+Data in frequency form is also a data frame containing one or more factors, and a frequency 
 variable, often called `Freq` or `count`.  The total number of observations
 is: `sum(X$Freq)`,  `sum(X[,"Freq"])` or some equivalent form.
 
-The number of cells in the table is `nrow(X)`.
+The number of cells in the table is given by `nrow(X)`.
 
 ***Example***: 
 For small frequency tables, it is often convenient to enter them in frequency form
@@ -97,9 +103,9 @@ with respondents classified by sex and party identification.
 ```{r, frequency-form}
 # Agresti (2002), table 3.11, p. 106
 GSS <- data.frame(
-  expand.grid(sex=c("female", "male"), 
-              party=c("dem", "indep", "rep")),
-  count=c(279,165,73,47,225,191))
+  expand.grid(sex = c("female", "male"), 
+              party = c("dem", "indep", "rep")),
+  count = c(279,165,73,47,225,191))
 
 GSS
 names(GSS)
@@ -108,7 +114,8 @@ str(GSS)
 sum(GSS$count)
 ```
 
-* **table form**  a matrix, array or table object, whose elements are the frequencies
+### Table form 
+Table form data is represented by a `matrix`, `array` or `table` object, whose elements are the frequencies
 in an $n$-way table.  The variable names (factors) and their levels are given by
 `dimnames(X)`. The total number of observations
 is `sum(X)`.  The number of dimensions of the table is `length(dimnames(X))`,
@@ -256,6 +263,7 @@ The variables assigned to the rows and columns of a two-way display can be speci
 by a model formula.
 ```{r, structable}
 structable(HairEyeColor)                   # show the table: default
+
 structable(Hair+Sex ~ Eye, HairEyeColor)   # specify col ~ row variables
 ```
 It also returns an object of class `"structable"` which may be plotted with 
@@ -520,8 +528,9 @@ Note the use of `with()` to avoid having to use `Arthritis\$Treatment` etc. with
 but `attach()` leaves the variables in the global environment, while `with()` just evaluates the `table()` expression in a temporary environment of the data.]
 
 ```{r, convert-ex2}
-Art.tab <-with(Arthritis, table(Treatment, Sex, Improved))
+Art.tab <- with(Arthritis, table(Treatment, Sex, Improved))
 str(Art.tab)
+
 ftable(Art.tab)
 ```
 
@@ -530,7 +539,7 @@ with factors  representing the table variables
 rather than the frequency  table.
 For example, the `mca()` function in package `MASS`
 only operates on data in this format. 
-Marc Schwartz provided code for `expand.dft()` on the  Rhelp
+Marc Schwartz initially provided code for `expand.dft()` on the  Rhelp
 mailing list for converting a table back into a case form `data.frame`.
 This function is included in `vcdExtra`.
 
@@ -575,19 +584,17 @@ The table variables are:
 * `V4`-- values 1:3 correspond to transition states: turn the television Off, Switch channels, or Persist in viewing the current channel.
 
 We are interested just the cell frequencies, and rely on the facts that the
-(a) the table is complete--- there are no missing cells,
-so `nrow(tv.data)` = `r nrow(tv.data)`;
-(b) the observations are ordered so that `V1` varies most rapidly and
-`V4` most slowly.  From this, we can just extract the frequency column
-and reshape it into an array.
+
+(a) the table is complete--- there are no missing cells, so `nrow(tv.data)` = `r nrow(tv.data)`;
+(b) the observations are ordered so that `V1` varies most rapidly and `V4` most slowly.  From this, we can just extract the frequency column and reshape it into an array. [That would be dangerous if any observations were out of order.]
 
 ```{r, tv3}
 TV <- array(tv.data[,5], dim=c(5,11,5,3))                                        
 dimnames(TV) <- list(c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
-                c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
-                  "9:45","10:00","10:15","10:30"),                            
-                c("ABC","CBS","NBC","Fox","Other"), 
-                c("Off","Switch","Persist"))
+                     c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
+                       "9:45","10:00","10:15","10:30"),                            
+                     c("ABC","CBS","NBC","Fox","Other"), 
+                     c("Off","Switch","Persist"))
 
 names(dimnames(TV))<-c("Day", "Time", "Network", "State")
 ```
@@ -598,33 +605,102 @@ to do the cross-tabulation, using `V5` as the
 frequency variable.  Here's how to do this same operation with `xtabs()`:
 ```{r, tv3a,eval=FALSE}
 TV <- xtabs(V5 ~ ., data=tv.data)
-dimnames(TV) <- list(Day=c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
-                Time=c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
-                       "9:45","10:00","10:15","10:30"),                            
-                Network=c("ABC","CBS","NBC","Fox","Other"), 
-                State=c("Off","Switch","Persist"))
+dimnames(TV) <- list(Day = c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
+                     Time = c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
+                              "9:45","10:00","10:15","10:30"),                            
+                     Network = c("ABC","CBS","NBC","Fox","Other"), 
+                     State = c("Off","Switch","Persist"))
 
 # table dimensions
 dim(TV)
 ```
 
-The table is too large to display conveniently, but we can show a subtable
-by selecting the indices.  This call to `ftable()` subsets the first three
-levels of each factor.
+But this 4-way table is too large and awkward to work with. Among the networks,
+Fox and Other occur infrequently. 
+We can also cut it down to a 3-way table by considering only viewers who persist
+with the current station.
+^[This relies on the fact that that indexing an array drops dimensions of length 1 by default, using the argument `drop=TRUE`; the result is coerced to the lowest possible dimension.]
 
-```{r tv4}
-ftable(TV[1:3,1:3,1:3,1:3], col.vars = 3:4)
+
+```{r, tv4}
+TV2 <- TV[,,1:3,]      # keep only ABC, CBS, NBC
+TV2 <- TV2[,,,3]       # keep only Persist -- now a 3 way table
+structable(TV2)
+```
+
+Finally, for some purposes, we might want to collapse the 11 times into a smaller number.
+Half-hour time slots make more sense.
+Here, we use `as.data.frame.table()` to convert the table back to a data frame,
+ `levels()` to re-assign the values of `Time`,
+and finally, `xtabs()` to give a new, collapsed frequency table.
+
+```{r, tv5}
+TV.df <- as.data.frame.table(TV2)
+levels(TV.df$Time) <- c(rep("8:00", 2),
+                        rep("8:30", 2),
+                        rep("9:00", 2), 
+                        rep("9:30", 2), 
+                        rep("10:00",2),
+                            "10:30"
+                        )
+
+TV3 <- xtabs(Freq ~ Day + Time + Network, TV.df)
+
+structable(Day ~ Time+Network, TV3)
 ```
 
 We've come this far, so we might as well show a mosaic display. This is analogous to that used by
-@vcd:Hartigan+Kleiner:1984. The result is too complex to see very much.  It would be useful to simplify
-the table by collapsing one or more of the table dimensions, e.g., `Time`.
-
-```{r tv-mosaic, fig.height=7, fig.width=7}
-mosaic(TV[,,1:4,], shade=TRUE, 
-       labeling_args = list(abbreviate_labs = c(8,5,1,1)))
-
+@vcd:Hartigan+Kleiner:1984. 
+```{r tv-mosaic1, fig.height=6, fig.width=6}
+mosaic(TV3, shade = TRUE,
+       labeling = labeling_border(rot_labels = c(0, 0, 0, 90)))
 ```
+
+This mosaic displays can be read at several levels, corresponding to the successive splits of
+the tiles and the residual shading.
+Several trends are clear for viewers who persist:
+
+* Overall, there are about the same number of viewers on each weekday, with slightly more on Thursday.
+* Looking at time slots, viewership is slightly greater from 9:00 - 10:00 overall and also
+8:00 - 9:00 on Thursday and Friday
+
+From the residual shading of the tiles:
+
+* Monday: CBS dominates in all time slots.
+* Tuesday" ABC and CBS  dominate after 9:00
+* Thursday: is a largely NBC day
+* Friday: ABC dominates in the early evening
+
+<!-- ```{r, tv4} -->
+<!-- TV.df <- as.data.frame.table(TV) -->
+<!-- levels(TV.df$Time) <- c(rep("8:00-8:59",4), -->
+<!--                         rep("9:00-9:59",4),  -->
+<!--                         rep("10:00-10:44",3)) -->
+<!-- TV3 <- xtabs(Freq ~ Day + Time + Network, TV.df) -->
+
+<!-- structable(Day ~ Time+Network, TV3) -->
+<!-- ``` -->
+
+
+<!-- Whew! See \figref{fig:TV-mosaic} for a mosaic plot of the `TV3` data. -->
+
+<!-- The table is too large to display conveniently, but we can show a subtable -->
+<!-- by selecting the indices.  This call to `ftable()` subsets the first three -->
+<!-- levels of each factor. -->
+
+<!-- ```{r tv4} -->
+<!-- ftable(TV[1:3,1:3,1:3,1:3], col.vars = 3:4) -->
+<!-- ``` -->
+
+<!-- We've come this far, so we might as well show a mosaic display. This is analogous to that used by -->
+<!-- @vcd:Hartigan+Kleiner:1984. The result is too complex to see very much.  It would be useful to simplify -->
+<!-- the table by collapsing one or more of the table dimensions, e.g., `Time`. -->
+
+<!-- ```{r tv-mosaic2, fig.height=7, fig.width=7} -->
+<!-- mosaic(TV[,,1:4,], shade=TRUE,  -->
+<!--        labeling_args = list(abbreviate_labs = c(8,5,1,1))) -->
+
+<!-- ``` -->
 
 
 
@@ -644,14 +720,6 @@ mosaic(TV[,,1:4,], shade=TRUE,
 <!-- plot(1:10) -->
 <!-- plot(10:1) -->
 <!-- ``` -->
-
-<!-- You can enable figure captions by `fig_caption: yes` in YAML: -->
-
-<!--     output: -->
-<!--       rmarkdown::html_vignette: -->
-<!--         fig_caption: yes -->
-
-<!-- Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**. -->
 
 
 # References
