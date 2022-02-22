@@ -137,10 +137,10 @@ giving the variable names and category labels.  Note that, by default,
 result, unless you specify `byrow=TRUE`.
 ```{r, table-form2}
 # A 4 x 4 table  Agresti (2002, Table 2.8, p. 57) Job Satisfaction
-JobSat <- matrix(c(1,2,1,0, 
-                   3,3,6,1, 
-                   10,10,14,9, 
-                   6,7,12,11), 4, 4)
+JobSat <- matrix(c( 1, 2, 1, 0, 
+                    3, 3, 6, 1, 
+                   10,10,14, 9, 
+                    6, 7,12,11), 4, 4)
 
 dimnames(JobSat) = list(
   income = c("< 15k", "15-25k", "25-40k", "> 40k"),

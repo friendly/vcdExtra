@@ -1,0 +1,358 @@
+---
+title: "Tests of Independence"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+  fig_caption: yes
+bibliography: ["vcd.bib", "vcdExtra.bib"]
+vignette: >
+  %\VignetteIndexEntry{Tests of Independence}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 7,
+  fig.path = "fig/tut02-",
+  dev = "png",
+  comment = "##"
+)
+
+# save some typing
+knitr::set_alias(w = "fig.width",
+                 h = "fig.height",
+                 cap = "fig.cap")
+
+# Old Sweave options
+# \SweaveOpts{engine=R,eps=TRUE,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
+# \SweaveOpts{engine=R,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
+# \SweaveOpts{prefix.string=fig/vcd-tut,eps=FALSE}
+# \SweaveOpts{keep.source=TRUE}
+
+
+# preload datasets ???
+set.seed(1071)
+library(vcd)
+library(vcdExtra)
+library(ggplot2)
+data(HairEyeColor)
+data(PreSex)
+data(Arthritis, package="vcd")
+art <- xtabs(~Treatment + Improved, data = Arthritis)
+if(!file.exists("fig")) dir.create("fig")
+
+```
+
+OK, now we're ready to do some analyses.  This vignette focuses on relatively simple non-parametric
+tests and measures of association.
+
+## CrossTable
+
+For tabular displays,
+the  `CrossTable()`  function in  the `gmodels`  package produces  cross-tabulations
+modeled after `PROC FREQ` in SAS or `CROSSTABS` in SPSS. 
+It has a wealth of options for the quantities that can be shown in each cell.
+
+Recall the GSS data used earlier.
+```{r, GSStab}
+# Agresti (2002), table 3.11, p. 106
+GSS <- data.frame(
+  expand.grid(sex = c("female", "male"), 
+              party = c("dem", "indep", "rep")),
+  count = c(279,165,73,47,225,191))
+
+(GSStab <- xtabs(count ~ sex + party, data=GSS))
+```
+
+Generate a crosstable showing cell frequency and the cell contribution to $\chi^2$.
+```{r, xtabs-ex2}
+# 2-Way Cross Tabulation
+library(gmodels)
+CrossTable(GSStab, prop.t=FALSE, prop.r=FALSE, prop.c=FALSE)
+```
+
+There are  options to  report percentages  (row, column,  cell), specify decimal
+places, produce Chi-square,  Fisher, and McNemar  tests of independence,  report
+expected  and residual  values (pearson,  standardized, adjusted  standardized),
+include missing values as valid, annotate with row and column titles, and format
+as SAS or SPSS style output! See `help(CrossTable)` for details.
+
+## Chi-square test
+
+For 2-way tables you can use `chisq.test()` to test independence of the row
+and column variable. By default,  the $p$-value is calculated from  the asymptotic
+chi-squared distribution of the test  statistic. Optionally, the $p$-value can  be
+derived via Monte Carlo simulation. 
+
+```{r, chisq}
+(HairEye <- margin.table(HairEyeColor, c(1, 2)))
+
+chisq.test(HairEye)
+
+chisq.test(HairEye, simulate.p.value = TRUE)
+```
+
+## Fisher Exact Test {#sec:Fisher}
+
+`fisher.test(X)` provides an  **exact test** of  independence. `X` must be  a two-way
+contingency table in table form.  Another form, 
+`fisher.test(X, Y)` takes two
+categorical vectors of the same length.  
+For tables larger than $2 \times 2$ the method can be computationally intensive (or can fail) if
+the frequencies are not small.
+
+```{r fisher}
+fisher.test(GSStab)
+```
+
+Fisher's test is meant for tables with small total sample size.
+It generates an error for the `HairEye` data with $n$=592 total frequency.
+
+```{r fisher-error, error=TRUE}
+fisher.test(HairEye)
+```
+## Mantel-Haenszel test and conditional association {#sec:mantel}
+
+Use the  `mantelhaen.test(X)` function  to perform  a Cochran-Mantel-Haenszel 
+$\chi^2$ chi
+test  of   the  null  hypothesis   that  two  nominal   variables  are
+*conditionally independent*, $A \perp B \; | \; C$, in each stratum,  assuming that there is no  three-way
+interaction. `X` is  a 3 dimensional  contingency table, where  the last dimension
+refers to the strata.
+
+The `UCBAdmissions` serves as an example of a $2 \times 2 \times 6$ table,
+with `Dept` as the stratifying variable.
+```{r, mantel1}
+# UC Berkeley Student Admissions
+mantelhaen.test(UCBAdmissions)
+```
+
+The results show no evidence for association between admission and gender
+when adjusted for department.  However, we can easily see that the assumption
+of equal association across the strata (no 3-way association) is probably
+violated. For $2 \times 2 \times k$ tables, this can be examined
+from the odds ratios for each $2 \times 2$ table (`oddsratio()`), and
+tested by  using `woolf_test()` in `vcd`.
+
+```{r, mantel2}
+oddsratio(UCBAdmissions, log=FALSE)
+
+lor <- oddsratio(UCBAdmissions)  # capture log odds ratios
+summary(lor)
+
+woolf_test(UCBAdmissions) 
+``` 
+
+## Some plot methods
+
+### Fourfold displays
+
+We  can visualize the  odds ratios of  Admission for
+each  department  with  fourfold  displays  using  `fourfold()`.  The cell
+frequencies $n_{ij}$  of each  $2 \times  2$ table  are shown  as a  quarter circle whose
+radius is proportional to $\sqrt{n_{ij}}$, so  that its area is proportional to  the
+cell frequency.
+
+```{r, reorder3}
+UCB <- aperm(UCBAdmissions, c(2, 1, 3))
+dimnames(UCB)[[2]] <- c("Yes", "No")
+names(dimnames(UCB)) <- c("Sex", "Admit?", "Department")
+```
+Confidence rings for the odds ratio allow a visual test of the null of no association; 
+the rings for adjacent quadrants overlap *iff* the observed counts are consistent 
+with the null hypothesis.  In the extended version (the default), brighter colors
+are used where the odds ratio is significantly different from 1.
+The following lines produce \figref{fig:fourfold1}.
+<!-- \footnote{The color values `col[3:4]` were modified from their default values -->
+<!-- to show a greater contrast between significant and insignificant associations here.} -->
+
+
+
+```{r}
+#| fourfold1, 
+#| h=5, w=7.5, 
+#| cap = "Fourfold display for the `UCBAdmissions` data. Where the odds ratio differs
+#|   	significantly from 1.0, the confidence bands do not overlap, and the circle quadrants are
+#|  	shaded more intensely."
+col <- c("#99CCFF", "#6699CC", "#F9AFAF", "#6666A0", "#FF0000", "#000080")
+fourfold(UCB, mfrow=c(2,3), color=col)
+```
+ 
+
+Another `vcd` function, `cotabplot()`, provides a more general approach
+to visualizing conditional associations in contingency tables,
+similar to trellis-like plots produced by `coplot()` and lattice graphics.
+The `panel` argument supplies a function used to render each conditional 
+subtable. The following gives a display (not shown) similar to \figref{fig:fourfold1}.
+```{r fourfold2, eval=FALSE}
+cotabplot(UCB, panel = cotab_fourfold)
+```
+
+### Doubledecker plots
+
+When we want to view the conditional
+probabilities of a response variable (e.g., `Admit`)
+in relation to several factors,
+an alternative visualization is a `doubledecker()` plot.
+This plot is a specialized version of a mosaic plot, which
+highlights the levels of a response variable (plotted vertically)
+in relation to the factors (shown horizontally). The following
+call produces \figref{fig:doubledecker}, where we use indexing
+on the first factor (`Admit`) to make `Admitted`
+the highlighted level.
+
+In this plot, the
+association between `Admit` and `Gender` is shown
+where the heights of the highlighted conditional probabilities
+do not align. The excess of females admitted in Dept A stands out here.
+
+```{r}
+#| doubledecker, 
+#| h=5, w=8,
+#| out.width = "70%",
+#| cap = "Doubledecker display for the `UCBAdmissions` data. The heights
+#|     of the highlighted bars show the conditional probabilities of `Admit`,
+#|     given `Dept` and `Gender`."
+doubledecker(Admit ~ Dept + Gender, data=UCBAdmissions[2:1,,])
+```
+
+### Odds ratio plots
+Finally, the there is a `plot()` method for `oddsratio` objects.
+By default, it shows the 95% confidence interval for the log odds ratio.
+\figref{fig:oddsratio} is produced by:
+
+```{r}
+#| oddsratio,
+#| h=6, w=6,
+#| out.width = "60%",
+#| cap = "Log odds ratio plot for the `UCBAdmissions` data."
+plot(lor, 
+     xlab="Department", 
+     ylab="Log Odds Ratio (Admit | Gender)")
+```
+ {#fig:oddsratio}
+
+## Cochran-Mantel-Haenszel tests for ordinal factors {#sec:CMH}
+
+The standard $\chi^2$ tests for association in a two-way table
+treat both table factors as nominal (unordered) categories.
+When one or both factors of a two-way table are
+quantitative or ordinal, more powerful tests of association
+may be obtaianed by taking ordinality into account, using
+row and or column scores to test for linear trends or differences
+in row or column means.
+
+More general versions of the CMH tests (Landis etal., 1978) 
+[@Landis-etal:1978] are provided by assigning
+numeric scores to the row and/or column variables. 
+For example, with two ordinal factors (assumed to be equally spaced), assigning
+integer scores, `1:R` and `1:C` tests the linear $\times$ linear component
+of association. This is statistically equivalent to the Pearson correlation between the
+integer-scored table variables, with $\chi^2 = (n-1) r^2$, with only 1 $df$
+rather than $(R-1)\times(C-1)$ for the test of general association.
+
+When only one table
+variable is ordinal, these general CMH tests are analogous to an ANOVA, testing
+whether the row mean scores or column mean scores are equal, again consuming
+fewer $df$ than the test of general association.
+
+The `CMHtest()` function in `vcdExtra` calculates these various
+CMH tests for two possibly ordered factors, optionally stratified other factor(s).
+
+***Example***:
+```{r, table-form2, include=FALSE}
+## A 4 x 4 table  Agresti (2002, Table 2.8, p. 57) Job Satisfaction
+JobSat <- matrix(c(1,2,1,0, 3,3,6,1, 10,10,14,9, 6,7,12,11), 4, 4)
+dimnames(JobSat) = list(income=c("< 15k", "15-25k", "25-40k", "> 40k"),
+                satisfaction=c("VeryD", "LittleD", "ModerateS", "VeryS"))
+JobSat <- as.table(JobSat)
+```
+
+Recall the $4 \times 4$ table, `JobSat` introduced in \secref{sec:creating},
+```{r, jobsat}
+JobSat
+```
+
+Treating the `satisfaction` levels as equally spaced, but using
+midpoints of the `income` categories as row scores gives the following results:
+```{r, cmh1}
+CMHtest(JobSat, rscores=c(7.5,20,32.5,60))
+```
+
+Note that with the relatively small cell frequencies, the test for general 
+give no evidence for association. However, the the `cor` test for linear x linear
+association on 1 df is nearly significant. The `coin` package contains the
+functions `cmh_test()` and `lbl_test()`
+for CMH tests of general association and linear x linear association respectively.
+
+## Measures of Association
+
+There are a variety of statistical measures of *strength* of association for
+contingency tables--- similar in spirit to $r$ or $r^2$ for continuous variables.
+With a large sample size, even a small degree of association can show a 
+significant $\chi^2$, as in the example below for the `GSS` data.
+
+The  `assocstats()`  function in `vcd`  calculates  the   $\phi$
+contingency coefficient,  and Cramer's  V for  an $r \times c$  table. 
+The input must be in table form, a two-way $r \times c$ table.  
+It won't work with `GSS` in frequency form, but by now you should know how
+to convert.
+```{r, assoc1}
+assocstats(GSStab)
+```
+
+For tables with ordinal variables, like `JobSat`, some people prefer the
+Goodman-Kruskal $\gamma$ statistic
+[@vcd:Agresti:2002, \S 2.4.3]
+based on a comparison of concordant
+and discordant pairs of observations in the case-form equivalent of a two-way table.
+```{r, gamma}
+GKgamma(JobSat)
+```
+
+A web article by Richard Darlington,
+[http://node101.psych.cornell.edu/Darlington/crosstab/TABLE0.HTM]
+gives further description of these and other measures of association.
+
+## Measures of Agreement
+The
+`Kappa()` function in the `vcd` package calculates Cohen's $\kappa$ and weighted
+$\kappa$ for a square two-way table with the same row and column categories [@Cohen:60].
+\footnote{ 
+Don't confuse this with `kappa()` in base R that computes something
+entirely different (the condition number of a matrix).
+}
+Normal-theory $z$-tests are obtained by dividing $\kappa$ by its asymptotic standard
+error (ASE).  A `confint()` method for `Kappa` objects provides confidence intervals.
+```{r, kappa}
+data(SexualFun, package = "vcd")
+(K <- Kappa(SexualFun))
+confint(K)
+```
+
+A visualization of agreement [@Bangdiwala:87], both unweighted and weighted for degree of departure
+from exact agreement is provided by the `agreementplot()` function.
+\figref{fig:agreesex} shows the agreementplot for the `SexualFun` data,
+produced as shown below. 
+
+The Bangdiwala measures (returned by the function)
+represent the proportion of the
+shaded areas of the diagonal rectangles, using weights $w_1$ for exact agreement,
+and $w_2$ for partial agreement one step from the main diagonal.
+
+```{r}
+#| agreesex, 
+#| h=6, w=7,
+#| out.width = "60%",
+#| cap = "Agreement plot for the `SexualFun` data."
+agree <- agreementplot(SexualFun, main="Is sex fun?")
+unlist(agree)
+```
+
+
+## References

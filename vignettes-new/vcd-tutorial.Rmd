@@ -813,6 +813,7 @@ It has a wealth of options for the quantities that can be shown in each cell.
 library(gmodels)
 CrossTable(GSStab,prop.t=FALSE,prop.r=FALSE,prop.c=FALSE)
 ```
+
 There are  options to  report percentages  (row, column,  cell), specify decimal
 places, produce Chi-square,  Fisher, and McNemar  tests of independence,  report
 expected  and residual  values (pearson,  standardized, adjusted  standardized),
@@ -827,7 +828,7 @@ and column variable. By default,  the $p$-value is calculated from  the asymptot
 chi-squared distribution of the test  statistic. Optionally, the $p$-value can  be
 derived via Monte Carlo simulation. 
 
-```{r, chisq,results=verbatim}
+```{r, chisq}
 (HairEye <- margin.table(HairEyeColor, c(1, 2)))
 chisq.test(HairEye)
 ```
@@ -841,7 +842,7 @@ categorical vectors of the same length.
 For tables larger than $2 \times 2$ the method can be computationally intensive (or can fail) if
 the frequencies are not small.
 
-```{r, fisher,results=verbatim}
+```{r, fisher}
 fisher.test(GSStab)
 ```
 
@@ -850,7 +851,7 @@ An exact test is unnecessary in this case.
 ```{r, echo=TRUE,eval=FALSE}
 fisher.test(HairEye)
 ```
-%# ```{r, echo=TRUE,eval=FALSE,results=verbatim}
+%# ```{r, echo=TRUE,eval=FALSE}
 %# #cat(try(fisher.test(HairEye)))
 %# ```
 
@@ -870,7 +871,7 @@ refers to the strata.
 
 The `UCBAdmissions` serves as an example of a $2 \times 2 \times 6$ table,
 with `Dept` as the stratifying variable.
-```{r, mantel1,results=verbatim}
+```{r, mantel1}
 ## UC Berkeley Student Admissions
 mantelhaen.test(UCBAdmissions)
 ```
@@ -883,13 +884,13 @@ tested
 by  using
 `woolf_test()` in `vcd`.
 
-%```{r, mantel2,results=verbatim}
+%```{r, mantel2}
 %oddsRatio <- function(x) (x[1,1]*x[2,2])/(x[1,2]*x[2,1])
 %apply(UCBAdmissions, 3, oddsRatio)
 %
 %woolf_test(UCBAdmissions) 
 %``` 
-```{r, mantel2,results=verbatim}
+```{r, mantel2}
 oddsratio(UCBAdmissions, log=FALSE)
 lor <- oddsratio(UCBAdmissions)  # capture log odds ratios
 summary(lor)
@@ -967,7 +968,7 @@ given `Dept` and `Gender`.}
 
 
 Finally, the there is a `plot()` method for `oddsratio` objects.
-By default, it shows the 95\% confidence interval for the log odds ratio.
+By default, it shows the 95% confidence interval for the log odds ratio.
 \figref{fig:oddsratio} is produced by:
 ```{r, oddsratio0,eval=FALSE}
 plot(lor, xlab="Department", ylab="Log Odds Ratio (Admit | Gender)")
@@ -1039,7 +1040,7 @@ contingency coefficient,  and Cramer's  V for  an $r \times c$  table.
 The input must be in table form, a two-way $r \times c$ table.  
 It won't work with `GSS` in frequency form, but by now you should know how
 to convert.
-```{r, assoc1,results=verbatim}
+```{r, assoc1}
 assocstats(GSStab)
 ```
 
@@ -1047,7 +1048,7 @@ For tables with ordinal variables, like `JobSat`, some people prefer the
 Goodman-Kruskal $\gamma$ statistic (\citet[\S 2.4.3]{vcd:Agresti:2002})
 based on a comparison of concordant
 and discordant pairs of observations in the case-form equivalent of a two-way table.
-```{r, gamma,results=verbatim}
+```{r, gamma}
 GKgamma(JobSat)
 ```
 
@@ -1065,7 +1066,7 @@ entirely different (the condition number of a matrix).
 }
 Normal-theory $z$-tests are obtained by dividing $\kappa$ by its asymptotic standard
 error (ASE).  A `confint()` method for `Kappa` objects provides confidence intervals.
-```{r, kappa,results=verbatim}
+```{r, kappa}
 (K <- Kappa(SexualFun))
 confint(K)
 ```
@@ -1076,7 +1077,7 @@ from exact agreement is provided by the `agreementplot()` function.
 produced as shown below. The Bangdiwala measures represent the proportion of the
 shaded areas of the diagonal rectangles, using weights $w_1$ for exact agreement,
 and $w_2$ for partial agreement one step from the main diagonal.
-```{r, agreesex,fig=TRUE,height=6,width=7,results=verbatim,include=FALSE}
+```{r, agreesex,fig=TRUE,height=6,width=7,include=FALSE}
 agree <- agreementplot(SexualFun, main="Is sex fun?")
 unlist(agree)
 ```
@@ -1084,7 +1085,7 @@ unlist(agree)
 %\setkeys{Gin}{width=0.5\textwidth}
 [htb]
 
-%```{r, agreesex,fig=TRUE,height=6,width=7,results=verbatim}
+%```{r, agreesex,fig=TRUE,height=6,width=7}
 %agree <- agreementplot(SexualFun, main="Is sex fun?")
 %agree
 %```
@@ -1118,9 +1119,9 @@ such that the observations have the maximum possible correlations.%
 
 
 Here, we carry out a simple correspondence analysis of the `HairEye` data.
-The printed results show that nearly 99\% of the association between hair color and eye color
-can be accounted for in 2 dimensions, of which the first dimension accounts for 90\%.
-```{r, ca1,results=verbatim}
+The printed results show that nearly 99% of the association between hair color and eye color
+can be accounted for in 2 dimensions, of which the first dimension accounts for 90%.
+```{r, ca1}
 library(ca)
 ca(HairEye)
 ```
