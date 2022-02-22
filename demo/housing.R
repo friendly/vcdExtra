@@ -41,7 +41,7 @@ house.glm1 <- update(house.glm0, . ~ . + Sat*(Infl+Type+Cont))
 anova(house.glm0, house.glm1, test="Chisq")
 mosaic(house.glm1, labeling_args=largs, main='Model [IS][TS][CS]', gp=shading_Friendly)
 
-# Same model, fit by terative proportional scaling
+# Same model, fit by iterative proportional scaling
 (house.loglm <- loglm(Freq ~ Infl*Type*Cont + Sat*(Infl+Type+Cont), data = housing))
 
 # Can we drop any terms?
