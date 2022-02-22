@@ -389,11 +389,11 @@ We will use the following version of `UCBAdmissions` in
 Changing `Admit` to `Admit?` might be useful for display purposes, but is
 dangerous--- because it is then
 difficult to use that variable name in a model formula.
-See \secref{sec:tips} for options `labeling\_args` and `set\_labels`
+See \secref{sec:tips} for options `labeling_args` and `set_labels`
 to change variable and level names 
 for displays in the `strucplot` framework.
 }
-```{r, reorder3,results=verbatim}
+```{r, reorder3}
 UCB <- aperm(UCBAdmissions, c(2, 1, 3))
 dimnames(UCB)[[2]] <- c("Yes", "No")
 names(dimnames(UCB)) <- c("Sex", "Admit?", "Department")
@@ -405,7 +405,7 @@ ftable(UCB)
 %objects will not work on the permuted array.
 %The solution is to reassign the `class` of the result of  `aperm()`.
 %
-%```{r, reorder4,results=verbatim, keep.source=TRUE}
+%```{r, reorder4, keep.source=TRUE}
 %class(UCBAdmissions)
 %class(UCB)
 %str(as.data.frame(UCBAdmissions))  # OK
@@ -415,12 +415,14 @@ ftable(UCB)
 %str(as.data.frame(UCB))            # now OK
 %```
 %
+
 ## `structable()` {#sec:structable}
+
 For 3-way and larger tables
 the `structable()` function in `vcd` provides a convenient and flexible tabular display.
 The variables assigned to the rows and columns of a two-way display can be specified
 by a model formula.
-```{r, structable,results=verbatim}
+```{r, structable}
 structable(HairEyeColor)                   # show the table: default
 structable(Hair+Sex ~ Eye, HairEyeColor)   # specify col ~ row variables
 ```
@@ -437,7 +439,7 @@ You  can  generate frequency  tables from factor variables  using the  `table()`
 proportions using  the `prop.table()` function,  and marginal  frequencies using
 `margin.table()`.
 
-```{r, setup}
+```{r, table-setup}
  n=500
  A <- factor(sample(c("a1","a2"), n, rep=TRUE))
  B <- factor(sample(c("b1","b2"), n, rep=TRUE))
@@ -493,12 +495,13 @@ summary(mytable)   # chi-square test of indepedence
 If a variable is included on the left side of the formula, it is assumed to be a
 vector  of  frequencies  (useful if the data have already been tabulated in frequency form).
 
-```{r, xtabs-ex2,results=verbatim}
+```{r, xtabs-ex2}
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
 summary(GSStab)
 ```
 
 ## Collapsing over table factors: `aggregate, \codefun{margin.table()` and `apply()`}
+
 It sometimes happens that we have a data set with more variables or factors than 
 we want to analyse, or else, having done some initial analyses, we decide that
 certain factors are not important, and so should be excluded from graphic displays
@@ -574,11 +577,11 @@ Many of these operations can be performed using the `**ply()` functions
 in the `plyr` package.
 For example, with the data in a frequency form data frame, use `ddply()`
 to collapse over unmentioned factors, and `plyr::summarise()`%
-\footnote{
-Ugh. This `plyr` function clashes with a function of the same name in `vcdExtra`.
-In this document I will use the explicit double-colon notation to keep them
-separate.
-}
+<!-- \footnote{ -->
+<!-- Ugh. This `plyr` function clashes with a function of the same name in `vcdExtra`. -->
+<!-- In this document I will use the explicit double-colon notation to keep them -->
+<!-- separate. -->
+<!-- } -->
 as the function to be applied to each piece.
 ```{r, dayton5, eval=FALSE}=
 Dayton.ACM.df <- ddply(DaytonSurvey, .(cigarette, alcohol, marijuana), 
@@ -598,7 +601,7 @@ in `vcdExtra` was designed for this purpose.
 Create a 3-way table, and collapse Age from 10-year to 20-year intervals. 
 First, we generate a $2 \times 6 \times 3$ table of random counts from a 
 Poisson distribution with mean of 100.
-```{r, collapse1,results=verbatim}
+```{r, collapse1}
 # create some sample data in frequency form
 sex <- c("Male", "Female")
 age <- c("10-19", "20-29",  "30-39", "40-49", "50-59", "60-69")
@@ -659,7 +662,7 @@ the `responseName` argument, defaulting to `Freq`. This is the inverse of `xtabs
 
 ***Example***: 
 Convert the `GSStab` in table form to a data.frame in frequency form.
-```{r, convert-ex1,results=verbatim}
+```{r, convert-ex1}
 as.data.frame(GSStab)
 ```
 
@@ -674,7 +677,7 @@ but `attach()` leaves the variables in the global environment,
 while `with()` just evaluates the `table()` expression in a
 temporary environment of the data.
 }
-```{r, convert-ex2,results=verbatim}
+```{r, convert-ex2}
 Art.tab <-with(Arthritis, table(Treatment, Sex, Improved))
 str(Art.tab)
 ftable(Art.tab)
@@ -693,7 +696,7 @@ This function is included in `vcdExtra`.
 ***Example***: Convert the `Arthritis` data in table form (`Art.tab`) back to a `data.frame`
 in case form, with factors
 `Treatment`, `Sex` and `Improved`.
-```{r, convert-ex3,results=verbatim}
+```{r, convert-ex3}
 Art.df <- expand.dft(Art.tab)
 str(Art.df)
 ```
@@ -706,7 +709,7 @@ $5 \times 11 \times 5 \times 3$ where the table variables (unnamed in the file)
 are read as `V1` -- `V4`, and the cell frequency is read
 as `V5`.  The file, stored in the `doc/extdata` directory
 of `vcdExtra`, can be read as follows:
-```{r, tv1,results=verbatim}
+```{r, tv1}
 tv.data<-read.table(system.file("extdata","tv.dat", package="vcdExtra"))
 head(tv.data,5)
 ```
@@ -770,7 +773,7 @@ using the argument `drop=TRUE`;
 the result is coerced to the lowest possible dimension.
 }
 
-```{r, tv3,results=verbatim}
+```{r, tv3}
 TV <- TV[,,1:3,]     # keep only ABC, CBS, NBC
 TV <- TV[,,,3]       # keep only Persist -- now a 3 way table
 structable(TV)
@@ -781,7 +784,7 @@ Here, we use `as.data.frame.table()` to convert the table back to a data frame,
  `levels()` to re-assign the values of `Time`,
  and finally, `xtabs()` to give a new, collapsed frequency table.
 
-```{r, tv4,results=verbatim}
+```{r, tv4}
 TV.df <- as.data.frame.table(TV)
 levels(TV.df$Time) <- c(rep("8:00-8:59",4),rep("9:00-9:59",4), rep("10:00-10:44",3))
 TV2 <- xtabs(Freq ~ Day + Time + Network, TV.df)
