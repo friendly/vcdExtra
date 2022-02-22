@@ -212,9 +212,15 @@ a mosaic display of `Treatment` and `Improved` (\figref{fig:arthritis}) shows a 
 interpretable pattern.
 
 The original version of `mosaic` in the `vcd` package required the input to be 
-a contingency table in array form.
+a contingency table in array form, so we convert using `xtabs()`.
 
-```{r Arthritis, height=6, width=7, fig.cap="Mosaic plot for the `Arthritis` data ..."}
+<!-- ```{r Arthritis, height=6, width=7, fig.cap="Mosaic plot for the `Arthritis` data ..."} -->
+
+```{r}
+#| Arthritis,
+#| fig.height = 6,
+#| fig.width = 6,
+#| fig.cap = "Mosaic plot for the `Arthritis` data, showing the marginal model of independence for Treatment and Improved.  Age, a covariate, and Sex are ignored here."
 data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
@@ -317,6 +323,7 @@ the terms on the right side of the formula.
 mytable <- xtabs(~A+B+C, data=mydata)
 
 ftable(mytable)    # print table
+
 summary(mytable)   # chi-square test of indepedence
 ```
 
@@ -325,6 +332,7 @@ vector  of  frequencies  (useful if the data have already been tabulated in freq
 
 ```{r, xtabs-ex2}
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
+
 summary(GSStab)
 ```
 
@@ -483,15 +491,15 @@ The table below shows some handy tools for converting from one form to another.
 <!-- 	Table form     &  `expand.dft(X)`  & `as.data.frame(X)`   &  noop \\ -->
 <!-- 	\hline -->
    
-| **From this**  |                     | **To this**          |                   |
-|:---------------|:--------------------|:---------------------|-------------------|
-|	               |     Case form       | Frequency form       |  Table form       |
-|	Case form      |   noop              | `xtabs(~A+B)`        |  `table(A,B)`     |
-|	Frequency form |  `expand.dft(X)`    | noop                 | `xtabs(count~A+B)`|
-|	Table form     |  `expand.dft(X)`    | `as.data.frame(X)`   |  noop             |
+| **From this**    |                     | **To this**          |                   |
+|:-----------------|:--------------------|:---------------------|-------------------|
+|	                 |    _Case form_      | _Frequency form_     | _Table form_      |
+|	_Case form_      |   noop              | `xtabs(~A+B)`        |  `table(A,B)`     |
+|	_Frequency form_ |  `expand.dft(X)`    | noop                 | `xtabs(count~A+B)`|
+|	_Table form_     |  `expand.dft(X)`    | `as.data.frame(X)`   |  noop             |
 
 
-A contingency table in table form (an object of `class(table)`) can be converted
+For example, a contingency table in table form (an object of `class(table)`) can be converted
 to a data.frame with `as.data.frame()`.
 ^[Because R is object-oriented, this is actually a short-hand for the function `as.data.frame.table()`.] 
 The resulting
@@ -595,6 +603,27 @@ dimnames(TV) <- list(Day=c("Monday","Tuesday","Wednesday","Thursday","Friday"),
                        "9:45","10:00","10:15","10:30"),                            
                 Network=c("ABC","CBS","NBC","Fox","Other"), 
                 State=c("Off","Switch","Persist"))
+
+# table dimensions
+dim(TV)
+```
+
+The table is too large to display conveniently, but we can show a subtable
+by selecting the indices.  This call to `ftable()` subsets the first three
+levels of each factor.
+
+```{r tv4}
+ftable(TV[1:3,1:3,1:3,1:3], col.vars = 3:4)
+```
+
+We've come this far, so we might as well show a mosaic display. This is analogous to that used by
+@vcd:Hartigan+Kleiner:1984. The result is too complex to see very much.  It would be useful to simplify
+the table by collapsing one or more of the table dimensions, e.g., `Time`.
+
+```{r tv-mosaic, fig.height=7, fig.width=7}
+mosaic(TV[,,1:4,], shade=TRUE, 
+       labeling_args = list(abbreviate_labs = c(8,5,1,1)))
+
 ```
 
 
