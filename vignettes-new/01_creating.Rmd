@@ -243,10 +243,10 @@ This is easy when the data are in table form: `aperm()` permutes
 the dimensions, and assigning to `names` and `dimnames`
 changes variable names and level labels respectively.
 We will use the following version of `UCBAdmissions` in
-\secref{sec:mantel} below.
+\@(sec:mantel) below.
 ^[Changing `Admit` to `Admit?` might be useful for display purposes, but is
 dangerous--- because it is then difficult to use that variable name in a model formula.
-See \secref{sec:tips} for options `labeling_args` and `set_labels`to change variable and level names for displays in the `strucplot` framework.]
+See \@(sec:tips) for options `labeling_args` and `set_labels`to change variable and level names for displays in the `strucplot` framework.]
 
 ```{r, reorder3}
 UCB <- aperm(UCBAdmissions, c(2, 1, 3))
@@ -526,7 +526,7 @@ as.data.frame(GSStab)
 ***Example***: Convert the `Arthritis` data in case form to a 3-way table of
 `Treatment` $\times$ `Sex` $\times$ `Improved`.
 Note the use of `with()` to avoid having to use `Arthritis\$Treatment` etc. within the call to `table()`.%
-^[`table()` does not allow a `data` argument to provide an environment in which the table variables are to be found.  In the examples in \secref{sec:table} I used `attach(mydata)` for this purpose,
+^[`table()` does not allow a `data` argument to provide an environment in which the table variables are to be found.  In the examples in \@(sec:table) I used `attach(mydata)` for this purpose,
 but `attach()` leaves the variables in the global environment, while `with()` just evaluates the `table()` expression in a temporary environment of the data.]
 
 ```{r, convert-ex2}
