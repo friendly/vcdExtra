@@ -1390,6 +1390,7 @@ an R vignette via `vignette("strucplot", package="vcd")`.
 \figref{fig:arthritis}, showing the association between
 `Treatment` and `Improved` was produced with the following
 call to `mosaic()`.
+
 ```{r, Arthritis1,echo=TRUE,eval=FALSE}
 mosaic(art, gp = shading_max, split_vertical = TRUE, 
        main="Arthritis: [Treatment] [Improved]")
