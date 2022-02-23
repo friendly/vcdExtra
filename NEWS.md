@@ -1,3 +1,6 @@
+
+- Fixed warning from `expand.dft()` re type.convert
+
 ## Version 0.7-6 (2022-02-12)
 
 - Fix some issues with `CMHtest()` `types` argument #PR11 [Thx: ShuguangSun, Matt Kumar]

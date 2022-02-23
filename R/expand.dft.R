@@ -1,5 +1,7 @@
-# Author: Marc Schwarz
+# Originally from Marc Schwarz
 # Ref: http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html
+
+# 23 Feb 22: Fix warning from type.convert
 
 expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
 {
@@ -19,8 +21,8 @@ expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
 
   for (i in 1:ncol(DF))
   {
-    DF[[i]] <- type.convert(as.character(DF[[i]]), ...)
-## FIXME ##: Generates warning: 
+    DF[[i]] <- type.convert(as.character(DF[[i]]), as.is=TRUE, ...)
+## DONE ##: Generates warning: 
 ##    1: In type.convert.default(as.character(DF[[i]]), ...) :
 ##      'as.is' should be specified by the caller; using TRUE
   }
