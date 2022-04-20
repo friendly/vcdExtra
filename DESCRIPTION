@@ -1,8 +1,8 @@
 Package: vcdExtra
 Type: Package
 Title: 'vcd' Extensions and Additions
-Version: 0.7-6
-Date: 2022-02-12
+Version: 0.7-7
+Date: 2022-04-20
 Language: en-US
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
             person(given = "Heather", family = "Turner", role="ctb"),
@@ -15,7 +15,22 @@ Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre")
 Author: Michael Friendly [aut, cre], Heather Turner [ctb], Achim Zeileis [ctb], Duncan Murdoch [ctb], David Firth [ctb], Matt Kumar [ctb], Shuguang Sun [ctb]
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.10), vcd, gnm (>= 1.0-3), grid
-Suggests: gmodels, Fahrmeir, effects, VGAM, plyr, lmtest, nnet, ggplot2, Sleuth2, car, lattice, stats4, rgl, AER, knitr, rmarkdown
+Suggests: gmodels, 
+  Fahrmeir, 
+  effects, 
+  VGAM, 
+  plyr, 
+  lmtest, 
+  nnet, 
+  ggplot2, 
+  Sleuth2, 
+  car, 
+  lattice, 
+  stats4, 
+  rgl, 
+  AER, 
+  knitr, 
+  rmarkdown
 Imports: MASS, grDevices, stats, utils, ca
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data
     and the 'gnm' package for Generalized Nonlinear Models.

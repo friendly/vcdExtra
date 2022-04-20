@@ -25,8 +25,8 @@ The web site for the book is \url{http://ddar.datavis.ca}.
 \tabular{ll}{
 Package:  \tab vcdExtra\cr
 Type:     \tab Package\cr
-Version:  \tab 0.7-6\cr
-Date:     \tab 2021-02-12\cr
+Version:  \tab 0.7-7\cr
+Date:     \tab 2022-04-20\cr
 License:  \tab GPL version 2 or newer\cr
 LazyLoad: \tab yes\cr
 }

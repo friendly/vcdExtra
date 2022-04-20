@@ -1,3 +1,4 @@
+## Version 0.7-7 (2022-04-20)
 
 - Fixed warning from `expand.dft()` re type.convert
 
