@@ -1,4 +1,4 @@
-## Version 0.7-7 (2022-04-20)
+## Version 0.8-0 (2022-04-20)
 
 - Fixed warning from `expand.dft()` re type.convert
 - Old `.Rnw` vignettes converted to `.Rmd`

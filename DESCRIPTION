@@ -1,7 +1,7 @@
 Package: vcdExtra
 Type: Package
 Title: 'vcd' Extensions and Additions
-Version: 0.7-7
+Version: 0.8-0
 Date: 2022-04-20
 Language: en-US
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),

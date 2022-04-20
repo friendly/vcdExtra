@@ -1,15 +1,16 @@
 ## Test environments
 * local Windows 7 install, R version 4.1.2 
-* win-builder R Under development (unstable) (2022-02-11 r81718 ucrt)
-* Rhub Ubuntu Linux, 16.04 LTS, R-release, GCC
+* win-builder 4.2.0 RC (2022-04-19 r82220 ucrt)
+* Rhub Ubuntu Linux 20.04.1 LTS, R-release, GCC
 * Rhub Fedora Linux, R-devel, clang, gfortran
 
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs 
 
-## Version 0.7-6
+## Version 0.8-0
 
-This is a minor release, fixing a problem related to the CMHtest function
+This is a modest release, replacing the old Sweave .Rnw vignette with
+new .Rmd vignettes using knitr
 
 # reverse dependencies
 
