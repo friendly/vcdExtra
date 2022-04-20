@@ -6,6 +6,7 @@
 [![](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 <!-- badges: end -->
 
@@ -13,7 +14,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.7-6
+Version 0.8-0
 
 This package provides additional data sets, documentation, and a few
 functions designed to extend the
@@ -235,9 +236,10 @@ compact comparison of model goodness of fit for a collection of models
 fit to the same data.
 
 `LRstats()` provides a brief summary for one or more models fit to the
-same dataset. The likelihood ratio *χ*<sup>2</sup> values
-(`LR Chisq`)test lack of fit. By these tests, none of the ordinal models
-show significant lack of fit. By the AIC and BIC statistics, the
+same dataset. The likelihood ratio
+![\\chi^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cchi%5E2 "\chi^2")
+values (`LR Chisq`)test lack of fit. By these tests, none of the ordinal
+models show significant lack of fit. By the AIC and BIC statistics, the
 `linlin` model is the best, combining parsimony and goodness of fit.
 
 ``` r

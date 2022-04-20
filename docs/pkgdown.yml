@@ -1,8 +1,13 @@
 pandoc: 2.14.0.3
 pkgdown: 2.0.2
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-02-22T17:24Z
+articles:
+  A_creating: A_creating.html
+  B_tests: B_tests.html
+  C_loglinear: C_loglinear.html
+  D_mosaics: D_mosaics.html
+  E_continuous: E_continuous.html
+last_built: 2022-04-20T22:11Z
 urls:
   reference: http://friendly.github.io/vcdExtra/reference
   article: http://friendly.github.io/vcdExtra/articles

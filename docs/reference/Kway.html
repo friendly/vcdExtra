@@ -30,7 +30,7 @@ summary and plotting of model components, etc., perhaps using lapply or similar.
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7-6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,16 @@ summary and plotting of model components, etc., perhaps using lapply or similar.
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/A_creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/B_tests.html">Tests of Independence</a>
+    <a class="dropdown-item" href="../articles/C_loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/D_mosaics.html">Mosaic plots</a>
+    <a class="dropdown-item" href="../articles/E_continuous.html">Continuous predictors</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -147,24 +157,20 @@ models up to degree <code>order</code>.</p>
 <span class="r-in"><span class="va">mods3</span> <span class="op">&lt;-</span> <span class="fu">Kway</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span>, data<span class="op">=</span><span class="va">df</span>, family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 244.78 246.37   46.287 35    0.09607 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 249.62 259.12   41.123 30    0.08488 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 252.53 274.69   28.031 22    0.17464  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 250.23 278.73   17.737 18    0.47313  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 240.09 241.67   39.097 35     0.2909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 242.97 252.47   31.978 30     0.3686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 241.60 263.77   14.613 22     0.8783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 246.37 274.87   11.377 18     0.8777</span>
 <span class="r-in"><span class="va">mods4</span> <span class="op">&lt;-</span> <span class="fu">Kway</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span> <span class="op">+</span> <span class="va">D</span>, data<span class="op">=</span><span class="va">df</span>, family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 244.78 246.36   46.287 35    0.09607 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 249.85 260.94   39.358 29    0.09499 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 258.30 289.97   21.801 16    0.14974  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 262.35 313.02    1.856  4    0.76222  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 268.49 325.50    0.000  0    1.00000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 240.09 241.67   39.097 35     0.2909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 243.51 254.60   30.522 29     0.3883</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 248.01 279.68    9.019 16     0.9126</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 264.64 315.31    1.649  4     0.8000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 270.99 328.00    0.000  0     1.0000</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># JobSatisfaction data</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">JobSatisfaction</span>, package<span class="op">=</span><span class="st">"vcd"</span><span class="op">)</span></span>

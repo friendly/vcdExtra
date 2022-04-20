@@ -42,6 +42,7 @@ reference:
       - CMHtest
       - GKgamma
       - print.GKgamma
+      - print.Kappa
       - HLtest
       - HosmerLemeshow
       - logLik.loglm

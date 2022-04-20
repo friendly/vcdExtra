@@ -12,7 +12,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7-6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,16 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/A_creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/B_tests.html">Tests of Independence</a>
+    <a class="dropdown-item" href="../articles/C_loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/D_mosaics.html">Mosaic plots</a>
+    <a class="dropdown-item" href="../articles/E_continuous.html">Continuous predictors</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -109,8 +119,6 @@ Boca Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Placebo   29    7      7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Treated   13    7     21</span>
 <span class="r-in"><span class="va">artdf</span> <span class="op">&lt;-</span> <span class="fu">expand.dft</span><span class="op">(</span><span class="va">art</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">artdf</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	84 obs. of  2 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ Treatment: chr  "Placebo" "Placebo" "Placebo" "Placebo" ...</span>
@@ -119,10 +127,9 @@ Boca Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="
 <span class="r-in"><span class="co"># 1D case</span></span>
 <span class="r-in"><span class="op">(</span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, <span class="fl">20</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a b c d e f </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2 1 5 4 3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a b c d e </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 3 2 4 6 </span>
 <span class="r-in"><span class="fu">expand.table</span><span class="op">(</span><span class="va">tab</span>, var.names<span class="op">=</span><span class="st">"letter"</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'as.is' should be specified by the caller; using TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    letter</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1       a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2       a</span>
@@ -131,19 +138,19 @@ Boca Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5       a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6       b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7       b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8       c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10      d</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10      c</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11      d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12      d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13      d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14      e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14      d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15      e</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16      e</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17      e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18      f</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19      f</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20      f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18      e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19      e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20      e</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

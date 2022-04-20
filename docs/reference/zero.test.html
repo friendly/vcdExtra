@@ -14,7 +14,7 @@ statistic on one degree of freedom."><meta property="og:image" content="http://f
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7-6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +24,16 @@ statistic on one degree of freedom."><meta property="og:image" content="http://f
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/A_creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/B_tests.html">Tests of Independence</a>
+    <a class="dropdown-item" href="../articles/C_loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/D_mosaics.html">Mosaic plots</a>
+    <a class="dropdown-item" href="../articles/E_continuous.html">Continuous predictors</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -110,20 +120,20 @@ doi: <a href="https://doi.org/10.1080/03610920902948228" class="external-link">1
 <span class="r-in"><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 4.20867 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.29431 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.040218 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.58747 </span>
 <span class="r-in"><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.45567 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.84642 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.49966 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.35757 </span>
 <span class="r-in"><span class="co"># add some extra zeros</span></span>
 <span class="r-in"><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 170.36561 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 220.13433 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: &lt; 2.22e-16 </span>
 <span class="r-in"></span>

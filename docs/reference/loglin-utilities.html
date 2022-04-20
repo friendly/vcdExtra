@@ -30,7 +30,7 @@ graphics functions, but can also be used directly."><meta property="og:image" co
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7-6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,16 @@ graphics functions, but can also be used directly."><meta property="og:image" co
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/A_creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/B_tests.html">Tests of Independence</a>
+    <a class="dropdown-item" href="../articles/C_loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/D_mosaics.html">Mosaic plots</a>
+    <a class="dropdown-item" href="../articles/E_continuous.html">Continuous predictors</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
@@ -197,7 +207,7 @@ mosaic displays, described in the <em>User's Guide</em>,
 <span class="r-in"><span class="co"># as a formula or string</span></span>
 <span class="r-in"><span class="fu">loglin2formula</span><span class="op">(</span><span class="fu">joint</span><span class="op">(</span><span class="fl">3</span>, table<span class="op">=</span><span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ~Hair:Eye + Sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x0000000039058680&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000000004c7acf48&gt;</span>
 <span class="r-in"><span class="fu">loglin2string</span><span class="op">(</span><span class="fu">joint</span><span class="op">(</span><span class="fl">3</span>, table<span class="op">=</span><span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[Hair,Eye] [Sex]"</span>
 <span class="r-in"></span>
@@ -275,7 +285,7 @@ mosaic displays, described in the <em>User's Guide</em>,
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="fu">loglin2formula</span><span class="op">(</span><span class="fu">saturated</span><span class="op">(</span><span class="fl">3</span>, <span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ~Hair:Eye:Sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x0000000039058680&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000000004c7acf48&gt;</span>
 <span class="r-in"><span class="fu">loglin2string</span><span class="op">(</span><span class="fu">saturated</span><span class="op">(</span><span class="fl">3</span>, <span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[Hair,Eye,Sex]"</span>
 <span class="r-in"><span class="fu">loglin2string</span><span class="op">(</span><span class="fu">saturated</span><span class="op">(</span><span class="fl">3</span>, <span class="va">HairEyeColor</span><span class="op">)</span>, brackets<span class="op">=</span><span class="st">'{}'</span>, sep<span class="op">=</span><span class="st">', '</span><span class="op">)</span></span>

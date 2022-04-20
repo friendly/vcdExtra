@@ -23,13 +23,15 @@ library(vcdExtra)
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html) 
+
 
 <!-- badges: end -->
 
 # vcdExtra <img src="man/figures/logo.png" style="float:right; height:200px;" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
-Version 0.7-6
+Version 0.8-0
 
 This package provides additional data sets, documentation, and
 a few functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*
