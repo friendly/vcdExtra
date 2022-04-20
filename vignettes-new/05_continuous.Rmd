@@ -1,0 +1,228 @@
+---
+title: "Continuous predictors"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+package: vcdExtra
+output: 
+  rmarkdown::html_vignette:
+  fig_caption: yes
+bibliography: ["vcd.bib", "vcdExtra.bib"]
+csl: apa.csl
+vignette: >
+  %\VignetteIndexEntry{Continuous predictors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 7,
+  fig.path = "fig/tut05-",
+  fig.align = "center",
+  dev = "png",
+  comment = "##"
+)
+
+# save some typing
+knitr::set_alias(w = "fig.width",
+                 h = "fig.height",
+                 cap = "fig.cap")
+
+# Old Sweave options
+# \SweaveOpts{engine=R,eps=TRUE,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
+# \SweaveOpts{engine=R,height=6,width=7,results=hide,fig=FALSE,echo=TRUE}
+# \SweaveOpts{prefix.string=fig/vcd-tut,eps=FALSE}
+# \SweaveOpts{keep.source=TRUE}
+
+
+# preload datasets ???
+set.seed(1071)
+library(vcd)
+library(vcdExtra)
+library(ggplot2)
+data(Arthritis, package="vcd")
+art <- xtabs(~Treatment + Improved, data = Arthritis)
+if(!file.exists("fig")) dir.create("fig")
+
+```
+
+
+
+When continuous predictors are available---and potentially important---in explaining a
+categorical outcome, models for that outcome include:
+logistic regression (binary response), 
+the proportional odds model (ordered polytomous response),
+multinomial (generalized) logistic regression.
+Many of these are special cases of the generalized linear model using the
+`"poisson"` or `"binomial"` family and their relatives.
+
+## Spine and conditional density plots {#sec:spine}
+I don't go into fitting such models here, but I would be remiss not to illustrate some
+visualizations in `vcd` that are helpful here.
+The first of these is the spine plot or spinogram [@vcd:Hummel:1996], produced with `spine()`.
+These are special cases of mosaic plots with 
+specific spacing and shading to show how a categorical response varies with
+a continuous or categorical predictor.
+
+They are also a generalization of stacked bar plots where not the heights  but
+the *widths* of the bars corresponds to the relative frequencies of `x`. The heights
+of the  bars then  correspond to  the conditional  relative frequencies  of `y` in
+every `x` group.
+
+***Example***:
+For the `Arthritis` data, we can see how `Improved` varies with `Age`
+as follows.  `spine()` takes a formula of the form 
+`y ~ x` with a single dependent factor and a single explanatory variable `x`
+(a numeric variable or a factor).
+The range of a numeric variable`x` is divided into intervals based on the
+`breaks` argument, and stacked bars are drawn to show the distribution of
+`y` as `x` varies.  As shown below, the discrete table that is visualized
+is returned by the function.
+
+```{r, spine1}
+#| spine1,
+#| fig.height = 6,
+#| fig.width = 6,
+#| fig.show = "hold",
+#| out.width = "46%",
+#| fig.align = "center",
+#| cap = "Spine plots for the `Arthritis` data"
+(spine(Improved ~ Age, data = Arthritis, breaks = 3))
+(spine(Improved ~ Age, data = Arthritis, breaks = "Scott"))
+```
+
+
+The conditional density plot [@vcd:Hofmann+Theus] is a further generalization.
+This visualization technique is similar to spinograms, but uses a smoothing approach
+rather than discretizing the explanatory variable.  As well, it uses 
+the original `x` axis and not a distorted one.
+
+
+```{r}
+#| cdplot,
+#| fig.height = 5,
+#| fig.width = 5,
+#| cap = "Conditional density plot for the `Arthritis` data showing the variation of Improved with Age."
+cdplot(Improved ~ Age, data = Arthritis)
+```
+
+
+
+In such plots, it is useful to also see the distribution of the observations
+across the horizontal axis, e.g., with a `rug()` plot.
+\@ref{fig:cd-plot} uses `cdplot()` from the `graphics` package
+rather than `cd_plot()` from `vcd`, and is produced with
+
+```{r}
+#| cdplot1,
+#| fig.height = 5,
+#| fig.width = 5,
+cdplot(Improved ~ Age, data = Arthritis)
+with(Arthritis, rug(jitter(Age), col="white", quiet=TRUE))
+```
+
+From this figure it can be easily seen that the proportion
+of patients reporting Some or Marked improvement increases with Age,
+but there are some peculiar bumps in the distribution.
+These may be real or artifactual, but they would be hard to see
+with most other visualization methods.
+When we switch from non-parametric data exploration to parametric
+statistical models, such effects are easily missed.
+
+## Model-based plots: effect plots and `ggplot2 plots` {#sec:modelplots}
+
+The nonparametric conditional density plot uses smoothing methods
+to convey the distributions of the response variable,
+but displays that are simpler to interpret can often be obtained by plotting
+the predicted response from a parametric model.
+
+For complex `glm()` models with interaction effects, the `effects`
+package  provides the most useful displays,
+plotting  the predicted values for a given term, averaging over other
+predictors not included in that term.  I don't illustrate this here, but
+see @effects:1,@effects:2 and `help(package="effects")`.
+
+Here I just briefly illustrate the capabilities of the `ggplot2` package
+for model-smoothed plots of categorical responses in `glm()` models.
+
+***Example***:
+The `Donner` data frame in `vcdExtra` gives details on the survival
+of 90 members of the Donner party,
+a group of people who attempted to migrate to California in 1846.
+They were trapped by an early blizzard on the eastern side of the
+Sierra Nevada mountains, and before they could be rescued, 
+nearly half of the party had died.
+What factors affected who lived and who died?
+
+```{r, donner1}
+data(Donner, package="vcdExtra")
+str(Donner)
+```
+
+A potential model of interest
+is the logistic regression model for $Pr(survived)$, allowing separate
+fits for males and females as a function of `age`.
+The key to this is the `stat_smooth()` function, using
+`method = "glm", method.args = list(family = binomial)`. The `formula = y ~ x`
+specifies a linear fit on the logit scale (\@ref{fig:donner3}, left)
+
+```{r, donner2a, fig=FALSE, eval=FALSE}
+# separate linear fits on age for M/F
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", 
+              method.args = list(family = binomial), 
+              formula = y ~ x,
+              alpha = 0.2, size=2, aes(fill = sex))
+```
+
+Alternatively, we can allow a quadratic relation with `age`
+by specifying `formula = y ~ poly(x,2)` (\figref{fig:donner3}, right).
+
+```{r, donner2b, fig=FALSE, eval=FALSE}
+# separate quadratics
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", 
+              method.args = list(family = binomial), 
+              formula = y ~ poly(x,2), 
+              alpha = 0.2, size=2, aes(fill = sex))
+```
+
+
+```{r}
+#| donner3a,
+#| echo = FALSE,
+#| fig.height = 6,
+#| fig.width = 6,
+#| fig.show = "hold",
+#| out.width = "46%",
+#| cap = "Logistic regression plots for the  `Donner` data	showing survival vs. age, by sex. Left: linear logistic model; right: quadratic model {#fig:donner3}"
+# separate linear fits on age for M/F
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", 
+              method.args = list(family = binomial), 
+              formula = y ~ x,
+              alpha = 0.2, size=2, aes(fill = sex))
+
+# separate quadratics
+ggplot(Donner, aes(age, survived, color = sex)) +
+  geom_point(position = position_jitter(height = 0.02, width = 0)) +
+  stat_smooth(method = "glm", 
+              method.args = list(family = binomial), 
+              formula = y ~ poly(x,2),
+              alpha = 0.2, size=2, aes(fill = sex))
+```
+
+
+These plots very nicely show (a) the fitted $Pr(survived)$ for males and females;
+(b) confidence bands around the smoothed model fits and (c) the individual
+observations by jittered points at 0 and 1 for those who died and survived, respectively.
+
+# References
+
+
