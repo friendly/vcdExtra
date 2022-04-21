@@ -6,6 +6,15 @@ Sys.setenv(RGL_USE_NULL = TRUE)
 #Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.21/bin/gswin64c.exe")
 Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.53.3/bin/gswin64c.exe")
 
+# Build the pkgdown site
+pkgdown::build_site()
+
+# Check package
+devtools::check()
+devtools::check_win_release()
+devtools::check_win_devel()
+devtools::check_rhub()
+
 args = c('--resave-data','--compact-vignettes=both')
 devtools::build(args = args)
 

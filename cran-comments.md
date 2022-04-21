@@ -10,7 +10,8 @@ There are no ERRORs or WARNINGs or NOTEs
 ## Version 0.8-0
 
 This is a modest release, replacing the old Sweave .Rnw vignette with
-new .Rmd vignettes using knitr
+new .Rmd vignettes using knitr.
+I also corrected two problems detected in the initial submission of this release.
 
 # reverse dependencies
 
