@@ -29,6 +29,8 @@ Suggests: gmodels,
   stats4, 
   rgl, 
   AER, 
+  coin,
+  Hmisc,
   knitr, 
   rmarkdown
 Imports: MASS, grDevices, stats, utils, ca
