@@ -1,5 +1,5 @@
 ---
-title: "2-Tests of Independence"
+title: "Tests of Independence"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 output: 

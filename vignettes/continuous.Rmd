@@ -1,5 +1,5 @@
 ---
-title: "5-Continuous predictors"
+title: "Continuous predictors"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 package: vcdExtra

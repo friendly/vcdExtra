@@ -1,5 +1,5 @@
 ---
-title: "1-Creating and manipulating frequency tables"
+title: "Creating and manipulating frequency tables"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 package: vcdExtra
