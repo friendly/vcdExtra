@@ -1,3 +1,8 @@
+## Version 0.8-1 (2022-04-22)
+
+- rename vignettes to be in order
+
+
 ## Version 0.8-0 (2022-04-20)
 
 - Fixed warning from `expand.dft()` re type.convert
