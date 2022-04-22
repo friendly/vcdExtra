@@ -1,5 +1,5 @@
 ---
-title: "Loglinear Models"
+title: "3-Loglinear Models"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 package: vcdExtra
