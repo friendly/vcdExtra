@@ -31,11 +31,11 @@
 #' @seealso \code{\link{plot.mjca}}
 #' @examples
 #' data(Titanic)
-#' titanic.mca <- mjca(Titanic)
+#' titanic.mca <- ca::mjca(Titanic)
 #' mcaplot(titanic.mca, legend=TRUE, legend.pos="topleft")
 #'
 #' data(HairEyeColor)
-#' haireye.mca <- mjca(HairEyeColor)
+#' haireye.mca <- ca::mjca(HairEyeColor)
 #' mcaplot(haireye.mca, legend=TRUE, cex.lab=1.3)
 
 
