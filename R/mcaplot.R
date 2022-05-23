@@ -31,7 +31,7 @@
 #' @seealso \code{\link{plot.mjca}}
 #' @examples
 #' data(Titanic)
-#' titanic.mca <- mjca(Titanic)
+#' titanic.mca <- ca::mjca(Titanic)
 #' mcaplot(titanic.mca, legend=TRUE, legend.pos="topleft")
 #'
 #' data(HairEyeColor)
