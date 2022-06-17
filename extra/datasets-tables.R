@@ -2,6 +2,7 @@
 
 library(dplyr)
 library(tidyr)
+library(glue)
 
 ds <- vcdExtra::datasets("vcdExtra")
 
@@ -38,4 +39,9 @@ writeLines(paste0("      - ",dsn))
 fns <- sort(getNamespaceExports("vcdExtra"))
 writeLines(paste0("      - ",fns))
 
+# make a data vignette with links to the help files
+
+dfs %>%
+  mutate(name = glue("[{name}](help({name}))")) %>%
+  knitr::kable()
 

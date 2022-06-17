@@ -3,7 +3,7 @@
 \alias{mosaic.loglmlist}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Mosaic Displays for \code{glmlist} and \code{logllmlist} Objects
+Mosaic Displays for \code{glmlist} and \code{loglmlist} Objects
 }
 \description{
 This function provides a convenient interface for viewing mosaic displays

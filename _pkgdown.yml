@@ -8,7 +8,7 @@ template:
 reference:
 
   - title: Mosaics
-    desc: Extensions of mosaic and related displays
+    desc: Extensions of `vcd::mosaic()` and related displays to `glm` and `gnm` objects and 3D displays
     contents:
       - assoc.glm
       - mosaic.glm
@@ -53,7 +53,7 @@ reference:
       - zero.test
 
   - title: Distributions
-    desc: Statistical distributions
+    desc: Statistical distributions: logseries distributions
     contents:
       - dlogseries
       - plogseries
@@ -80,7 +80,7 @@ reference:
       - vcdExtra-package
   
   - title: Data
-    desc: Some small data sets used in examples or in DDAR
+    desc: Some small data sets used in examples or in [DDAR](http://ddar.datavis.ca/)
     contents:
       - Abortion
       - Accident
