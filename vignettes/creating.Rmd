@@ -346,7 +346,7 @@ vector  of  frequencies  (useful if the data have already been tabulated in freq
 summary(GSStab)
 ```
 
-## Collapsing over table factors: `aggregate()`, `margin.table()` and `apply()`}
+## Collapsing over table factors: `aggregate()`, `margin.table()` and `apply()`
 
 It sometimes happens that we have a data set with more variables or factors than 
 we want to analyse, or else, having done some initial analyses, we decide that
@@ -434,7 +434,7 @@ as the function to be applied to each piece.
 <!-- separate. -->
 <!-- } -->
 
-```{r, dayton5, eval=FALSE}
+```{r, dayton5}
 library(plyr)
 Dayton.ACM.df <- plyr::ddply(DaytonSurvey, 
                              .(cigarette, alcohol, marijuana), 
@@ -653,7 +653,7 @@ structable(Day ~ Time+Network, TV3)
 
 We've come this far, so we might as well show a mosaic display. This is analogous to that used by
 @vcd:Hartigan+Kleiner:1984. 
-```{r tv-mosaic1, fig.height=6, fig.width=6}
+```{r tv-mosaic1, fig.height=6, fig.width=7}
 mosaic(TV3, shade = TRUE,
        labeling = labeling_border(rot_labels = c(0, 0, 0, 90)))
 ```
