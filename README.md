@@ -12,7 +12,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 # vcdExtra <img src="man/figures/logo.png" style="float:right; height:200px;" />
 
-## Extensions and additions to vcd: Visualizing Categorical Data
+## Extensions and additions to `vcd`: Visualizing Categorical Data
 
 Version 0.8-0
 
