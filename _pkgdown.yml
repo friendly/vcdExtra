@@ -53,7 +53,7 @@ reference:
       - zero.test
 
   - title: Distributions
-    desc: Statistical distributions: logseries distributions
+    desc: Logseries distributions
     contents:
       - dlogseries
       - plogseries

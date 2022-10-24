@@ -9,7 +9,7 @@ LRstats provides a brief summary for one or more models
 fit to the same dataset
 for which logLik and nobs methods exist
 (e.g., glm and loglm models).
-"><title>Brief Summary of Model Fit for glm and loglm Models — LRstats • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Brief Summary of Model Fit for glm and loglm Models — LRstats"><meta property="og:description" content="For glm objects, the print and summary methods give
+"><title>Brief Summary of Model Fit for glm and loglm Models — LRstats • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Brief Summary of Model Fit for glm and loglm Models — LRstats"><meta property="og:description" content="For glm objects, the print and summary methods give
 too much information if all one wants to see is a brief summary of model
 goodness of fit, and there is no easy way to display a compact comparison of
 model goodness of fit for a collection of models fit to the same data.
@@ -30,7 +30,7 @@ for which logLik and nobs methods exist
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,11 +44,11 @@ for which logLik and nobs methods exist
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/A_creating.html">Creating and manipulating frequency tables</a>
-    <a class="dropdown-item" href="../articles/B_tests.html">Tests of Independence</a>
-    <a class="dropdown-item" href="../articles/C_loglinear.html">Loglinear Models</a>
-    <a class="dropdown-item" href="../articles/D_mosaics.html">Mosaic plots</a>
-    <a class="dropdown-item" href="../articles/E_continuous.html">Continuous predictors</a>
+    <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
+    <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
+    <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
   </div>
 </li>
 <li class="nav-item">
@@ -91,27 +91,31 @@ for which <code>logLik</code> and <code>nobs</code> methods exist
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for glmlist</span>
-<span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, saturated <span class="op">=</span> <span class="cn">NULL</span>, sortby <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-<span class="co"># S3 method for loglmlist</span>
-<span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, saturated <span class="op">=</span> <span class="cn">NULL</span>, sortby <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-<span class="co"># S3 method for default</span>
-<span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, saturated <span class="op">=</span> <span class="cn">NULL</span>, sortby <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for glmlist</span></span>
+<span><span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, saturated <span class="op">=</span> <span class="cn">NULL</span>, sortby <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for loglmlist</span></span>
+<span><span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, saturated <span class="op">=</span> <span class="cn">NULL</span>, sortby <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">LRstats</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span>, saturated <span class="op">=</span> <span class="cn">NULL</span>, sortby <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>object</dt>
 <dd><p>a fitted model object for which there exists a logLik method to extract the corresponding log-likelihood</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>optionally more fitted model objects</p></dd>
-<dt>saturated</dt>
+
+  <dt>saturated</dt>
 <dd><p>saturated model log likelihood reference value (use 0 if deviance is not available)</p></dd>
-<dt>sortby</dt>
+
+  <dt>sortby</dt>
 <dd><p>either a numeric or character string specifying
 the column in the result by which the rows are sorted (in decreasing order)</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -122,7 +126,9 @@ and <code>negbin</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data frame (also of class <code>anova</code>) with columns 
+    
+
+<p>A data frame (also of class <code>anova</code>) with columns 
 <code>c("AIC", "BIC", "LR Chisq", "Df", "Pr(&gt;Chisq)")</code>.
 Row names are taken from the names of the model object(s).</p>
     </div>
@@ -138,27 +144,27 @@ Row names are taken from the names of the model object(s).</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">indep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span><span class="op">+</span><span class="va">ses</span>,</span>
-<span class="r-in">                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">LRstats</span><span class="op">(</span><span class="va">indep</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">indep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span><span class="op">+</span><span class="va">ses</span>,</span></span>
+<span class="r-in"><span>                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">LRstats</span><span class="op">(</span><span class="va">indep</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> indep 209.59 220.19   47.418 15  3.155e-05 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="r-in"><span class="va">Cscore</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">$</span><span class="va">ses</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">Rscore</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">$</span><span class="va">mental</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">coleff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">ses</span>,</span>
-<span class="r-in">                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">roweff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span><span class="op">:</span><span class="va">Cscore</span>,</span>
-<span class="r-in">                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">linlin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">Cscore</span>,</span>
-<span class="r-in">                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span>
-<span class="r-in">                </span>
-<span class="r-in"><span class="co"># compare models</span></span>
-<span class="r-in"><span class="fu">LRstats</span><span class="op">(</span><span class="va">indep</span>, <span class="va">coleff</span>, <span class="va">roweff</span>, <span class="va">linlin</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">Cscore</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">$</span><span class="va">ses</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">Rscore</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">$</span><span class="va">mental</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">coleff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">ses</span>,</span></span>
+<span class="r-in"><span>                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">roweff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span><span class="op">:</span><span class="va">Cscore</span>,</span></span>
+<span class="r-in"><span>                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">linlin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">Cscore</span>,</span></span>
+<span class="r-in"><span>                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                </span></span>
+<span class="r-in"><span><span class="co"># compare models</span></span></span>
+<span class="r-in"><span><span class="fu">LRstats</span><span class="op">(</span><span class="va">indep</span>, <span class="va">coleff</span>, <span class="va">roweff</span>, <span class="va">linlin</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> indep  209.59 220.19   47.418 15  3.155e-05 ***</span>
@@ -167,7 +173,7 @@ Row names are taken from the names of the model object(s).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> linlin 174.07 185.85    9.895 14     0.7698    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -179,7 +185,7 @@ Row names are taken from the names of the model object(s).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

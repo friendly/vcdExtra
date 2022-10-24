@@ -6,7 +6,7 @@ model population. The Hosmer-Lemeshow test specifically identifies subgroups as 
 or other quantiles as determined by the g argument.
 Given these subgroups, a simple chisquare test on g-2 df is used.
 In addition to print and summary methods, a plot method is
-supplied to visualize the discrepancies between observed and fitted frequencies."><title>Hosmer-Lemeshow Goodness of Fit Test — HLtest • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Hosmer-Lemeshow Goodness of Fit Test — HLtest"><meta property="og:description" content="The HLtest function computes the classical Hosmer-Lemeshow (1980) goodness of fit test
+supplied to visualize the discrepancies between observed and fitted frequencies."><title>Hosmer-Lemeshow Goodness of Fit Test — HLtest • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Hosmer-Lemeshow Goodness of Fit Test — HLtest"><meta property="og:description" content="The HLtest function computes the classical Hosmer-Lemeshow (1980) goodness of fit test
 for a binomial glm object in logistic regression
 The general idea is to assesses whether or not the observed event rates match expected event rates in subgroups of the 
 model population. The Hosmer-Lemeshow test specifically identifies subgroups as the deciles of fitted event values,
@@ -24,7 +24,7 @@ supplied to visualize the discrepancies between observed and fitted frequencies.
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,11 +38,11 @@ supplied to visualize the discrepancies between observed and fitted frequencies.
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/A_creating.html">Creating and manipulating frequency tables</a>
-    <a class="dropdown-item" href="../articles/B_tests.html">Tests of Independence</a>
-    <a class="dropdown-item" href="../articles/C_loglinear.html">Loglinear Models</a>
-    <a class="dropdown-item" href="../articles/D_mosaics.html">Mosaic plots</a>
-    <a class="dropdown-item" href="../articles/E_continuous.html">Continuous predictors</a>
+    <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
+    <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
+    <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
   </div>
 </li>
 <li class="nav-item">
@@ -82,50 +82,68 @@ supplied to visualize the discrepancies between observed and fitted frequencies.
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">HosmerLemeshow</span><span class="op">(</span><span class="va">model</span>, g <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-
-<span class="fu">HLtest</span><span class="op">(</span><span class="va">model</span>, g <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-
-<span class="co"># S3 method for HLtest</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for HLtest</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for HLtest</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for HLtest</span>
-<span class="fu"><a href="https://rdrr.io/pkg/vcd/man/rootogram.html" class="external-link">rootogram</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">HosmerLemeshow</span><span class="op">(</span><span class="va">model</span>, g <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">HLtest</span><span class="op">(</span><span class="va">model</span>, g <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for HLtest</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for HLtest</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for HLtest</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for HLtest</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/rootogram.html" class="external-link">rootogram</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>model</dt>
 <dd><p>A <code>glm</code> model object in the <code>binomial</code> family</p></dd>
-<dt>g</dt>
+
+  <dt>g</dt>
 <dd><p>Number of groups used to partition the fitted values for the
 GOF test.</p></dd>
-<dt>x, object</dt>
+
+
+
+  <dt>x, object</dt>
 <dd><p>A <code>HLtest</code> object</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>Other arguments passed down to methods</p></dd>
+
+
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A class <code>HLtest</code> object  with the following components:
+    
+
+<p>A class <code>HLtest</code> object  with the following components:
 <!-- %%  If it is a LIST, use --></p>
 <dl><dt>table</dt>
 <dd><p>A data.frame describing the results of partitioning the data into <code>g</code>
   	groups with the following columns: <code>cut</code>, <code>total</code>, <code>obs</code>, <code>exp</code>, <code>chi</code></p></dd>
-<dt>chisq</dt>
+
+  <dt>chisq</dt>
 <dd><p>The chisquare statistics</p></dd>
-<dt>df</dt>
+
+  <dt>df</dt>
 <dd><p>Degrees of freedom</p></dd>
-<dt>p.value</dt>
+
+  <dt>p.value</dt>
 <dd><p>p value</p></dd>
-<dt>groups</dt>
+
+  <dt>groups</dt>
 <dd><p>Number of groups</p></dd>
-<dt>call</dt>
+
+  <dt>call</dt>
 <dd><p><code>model</code> call</p></dd>
+
 </dl><p><!-- %% ... --></p>
+
+
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -151,31 +169,31 @@ A review of goodness of fit statistics for use in the development of logistic re
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">birthwt</span>, package<span class="op">=</span><span class="st">"MASS"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># how to do this without attach?</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/attach.html" class="external-link">attach</a></span><span class="op">(</span><span class="va">birthwt</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">birthwt</span>, package<span class="op">=</span><span class="st">"MASS"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># how to do this without attach?</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/attach.html" class="external-link">attach</a></span><span class="op">(</span><span class="va">birthwt</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from package:ca:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     smoke</span>
-<span class="r-in">  <span class="va">race</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">race</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span>, <span class="st">"other"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ptd</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ptl</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">ftv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ftv</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ftv</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="st">"2+"</span></span>
-<span class="r-in">  <span class="va">bwt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>low <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">low</span><span class="op">)</span>, <span class="va">age</span>, <span class="va">lwt</span>, <span class="va">race</span>,</span>
-<span class="r-in">      smoke <span class="op">=</span> <span class="op">(</span><span class="va">smoke</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="va">ptd</span>, ht <span class="op">=</span> <span class="op">(</span><span class="va">ht</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, ui <span class="op">=</span> <span class="op">(</span><span class="va">ui</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="va">ftv</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="va">birthwt</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"contr.treatment"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">BWmod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">low</span> <span class="op">~</span> <span class="va">.</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">bwt</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">(</span><span class="va">hlt</span> <span class="op">&lt;-</span> <span class="fu">HLtest</span><span class="op">(</span><span class="va">BWmod</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="va">race</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">race</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span>, <span class="st">"other"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ptd</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ptl</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">ftv</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">ftv</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">ftv</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="st">"2+"</span></span></span>
+<span class="r-in"><span>  <span class="va">bwt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>low <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">low</span><span class="op">)</span>, <span class="va">age</span>, <span class="va">lwt</span>, <span class="va">race</span>,</span></span>
+<span class="r-in"><span>      smoke <span class="op">=</span> <span class="op">(</span><span class="va">smoke</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="va">ptd</span>, ht <span class="op">=</span> <span class="op">(</span><span class="va">ht</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, ui <span class="op">=</span> <span class="op">(</span><span class="va">ui</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="va">ftv</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach</a></span><span class="op">(</span><span class="va">birthwt</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>contrasts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"contr.treatment"</span>, <span class="st">"contr.poly"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">BWmod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">low</span> <span class="op">~</span> <span class="va">.</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">bwt</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">hlt</span> <span class="op">&lt;-</span> <span class="fu">HLtest</span><span class="op">(</span><span class="va">BWmod</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Hosmer and Lemeshow Goodness-of-Fit Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> glm(formula = low ~ ., family = binomial, data = bwt)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ChiSquare df   P_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   5.981786  8 0.6492722</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">hlt</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">hlt</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ table  :'data.frame':	10 obs. of  5 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ cut  : chr [1:10] "[0.0161,0.0788]" "(0.0788,0.119]" "(0.119,0.189]" "(0.189,0.229]" ...</span>
@@ -189,7 +207,7 @@ A review of goodness of fit statistics for use in the development of logistic re
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ groups : num 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ call   : language glm(formula = low ~ ., family = binomial, data = bwt)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "HLtest"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">hlt</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">hlt</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Partition for Hosmer and Lemeshow Goodness-of-Fit Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                cut total obs       exp         chi</span>
@@ -209,19 +227,19 @@ A review of goodness of fit statistics for use in the development of logistic re
 <span class="r-out co"><span class="r-pr">#&gt;</span> glm(formula = low ~ ., family = binomial, data = bwt)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ChiSquare df   P_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   5.981786  8 0.6492722</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hlt</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hlt</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="HLtest-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># basic model</span></span>
-<span class="r-in"><span class="va">BWmod0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">low</span> <span class="op">~</span> <span class="va">age</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">bwt</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">(</span><span class="va">hlt0</span> <span class="op">&lt;-</span> <span class="fu">HLtest</span><span class="op">(</span><span class="va">BWmod0</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># basic model</span></span></span>
+<span class="r-in"><span><span class="va">BWmod0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">low</span> <span class="op">~</span> <span class="va">age</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">bwt</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">hlt0</span> <span class="op">&lt;-</span> <span class="fu">HLtest</span><span class="op">(</span><span class="va">BWmod0</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Hosmer and Lemeshow Goodness-of-Fit Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> glm(formula = low ~ age, family = binomial, data = bwt)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ChiSquare df   P_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   9.307311  8 0.3170385</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">hlt0</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">hlt0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ table  :'data.frame':	10 obs. of  5 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ cut  : chr [1:10] "[0.128,0.231]" "(0.231,0.26]" "(0.26,0.29]" "(0.29,0.301]" ...</span>
@@ -235,7 +253,7 @@ A review of goodness of fit statistics for use in the development of logistic re
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ groups : num 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ call   : language glm(formula = low ~ age, family = binomial, data = bwt)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "HLtest"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">hlt0</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">hlt0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Partition for Hosmer and Lemeshow Goodness-of-Fit Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              cut total obs       exp         chi</span>
@@ -255,10 +273,10 @@ A review of goodness of fit statistics for use in the development of logistic re
 <span class="r-out co"><span class="r-pr">#&gt;</span> glm(formula = low ~ age, family = binomial, data = bwt)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ChiSquare df   P_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   9.307311  8 0.3170385</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hlt0</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hlt0</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="HLtest-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -270,7 +288,7 @@ A review of goodness of fit statistics for use in the development of logistic re
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

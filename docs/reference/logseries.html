@@ -6,7 +6,7 @@ in connection with data on the abundance of individuals
 classified by species.
 These functions provide the density, distribution function, quantile function and 
 random generation for the 
-logarithmic series distribution with parameter prob."><title>The Logarithmic Series Distribution — logseries • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Logarithmic Series Distribution — logseries"><meta property="og:description" content="The logarithmic series distribution is a long-tailed distribution
+logarithmic series distribution with parameter prob."><title>The Logarithmic Series Distribution — logseries • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Logarithmic Series Distribution — logseries"><meta property="og:description" content="The logarithmic series distribution is a long-tailed distribution
 introduced by
 Fisher etal. (1943)
 in connection with data on the abundance of individuals
@@ -24,7 +24,7 @@ logarithmic series distribution with parameter prob."><meta property="og:image" 
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,11 +38,11 @@ logarithmic series distribution with parameter prob."><meta property="og:image" 
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/A_creating.html">Creating and manipulating frequency tables</a>
-    <a class="dropdown-item" href="../articles/B_tests.html">Tests of Independence</a>
-    <a class="dropdown-item" href="../articles/C_loglinear.html">Loglinear Models</a>
-    <a class="dropdown-item" href="../articles/D_mosaics.html">Mosaic plots</a>
-    <a class="dropdown-item" href="../articles/E_continuous.html">Continuous predictors</a>
+    <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
+    <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
+    <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
   </div>
 </li>
 <li class="nav-item">
@@ -82,32 +82,42 @@ logarithmic series distribution with parameter <code>prob</code>.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dlogseries</span><span class="op">(</span><span class="va">x</span>, prob <span class="op">=</span> <span class="fl">0.5</span>, log <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">plogseries</span><span class="op">(</span><span class="va">q</span>, prob <span class="op">=</span> <span class="fl">0.5</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="fu">qlogseries</span><span class="op">(</span><span class="va">p</span>, prob <span class="op">=</span> <span class="fl">0.5</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span>, max.value <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span>
-
-<span class="fu">rlogseries</span><span class="op">(</span><span class="va">n</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dlogseries</span><span class="op">(</span><span class="va">x</span>, prob <span class="op">=</span> <span class="fl">0.5</span>, log <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plogseries</span><span class="op">(</span><span class="va">q</span>, prob <span class="op">=</span> <span class="fl">0.5</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qlogseries</span><span class="op">(</span><span class="va">p</span>, prob <span class="op">=</span> <span class="fl">0.5</span>, lower.tail <span class="op">=</span> <span class="cn">TRUE</span>, log.p <span class="op">=</span> <span class="cn">FALSE</span>, max.value <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">rlogseries</span><span class="op">(</span><span class="va">n</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x, q</dt>
 <dd><p>vector of quantiles representing the number of events.</p></dd>
-<dt>prob</dt>
+
+  <dt>prob</dt>
 <dd><p>parameter for the distribution, <code>0 &lt; prob &lt; 1</code></p></dd>
-<dt>log, log.p</dt>
+
+  <dt>log, log.p</dt>
 <dd><p>logical; if TRUE, probabilities <code>p</code> are given as <code>log(p)</code></p></dd>
-<dt>lower.tail</dt>
+
+
+  <dt>lower.tail</dt>
 <dd><p>logical; if TRUE (default), probabilities are \(P[X \le x]\), 
 otherwise, \(P[X &gt; x]\).</p></dd>
-<dt>p</dt>
+
+
+  <dt>p</dt>
 <dd><p>vector of probabilities</p></dd>
-<dt>max.value</dt>
+
+  <dt>max.value</dt>
 <dd><p>maximum value returned by <code>qlogseries</code></p></dd>
-<dt>n</dt>
+
+
+  <dt>n</dt>
 <dd><p>number of observations for <code>rlogseries</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -120,11 +130,30 @@ and \(0 &lt; p &lt;1\).  Note that counts <code>x==2</code> cannot occur.</p>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>dlogseries</code> gives the density, 
+    
+
+<p><code>dlogseries</code> gives the density, 
 <code>plogseries</code> gives the distribution function, 
 <code>qlogseries</code> gives the quantile function, and 
-<code>rlogseries</code> generates random deviates.
-<!-- %%  ~Describe the value returned --><!-- %%  If it is a LIST, use --><!-- %%  \item{comp1 }{Description of 'comp1'} --><!-- %%  \item{comp2 }{Description of 'comp2'} --><!-- %% ... --></p>
+<code>rlogseries</code> generates random deviates.</p>
+
+
+
+<p><!-- %%  ~Describe the value returned --></p>
+
+
+<p><!-- %%  If it is a LIST, use --></p>
+
+
+<p><!-- %%  \item{comp1 }{Description of 'comp1'} --></p>
+
+
+<p><!-- %%  \item{comp2 }{Description of 'comp2'} --></p>
+
+
+<p><!-- %% ... --></p>
+
+
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -146,44 +175,44 @@ by Mikis Stasinopoulos.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">XL</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">0.99</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lgs.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">XL</span>, prob<span class="op">=</span><span class="fu">dlogseries</span><span class="op">(</span><span class="va">XL</span><span class="op">[</span>,<span class="st">"x"</span><span class="op">]</span>, <span class="va">XL</span><span class="op">[</span>,<span class="st">"p"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lgs.df</span><span class="op">$</span><span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">lgs.df</span><span class="op">$</span><span class="va">p</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">lgs.df</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">XL</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, p<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.33</span>, <span class="fl">0.66</span>, <span class="fl">0.99</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lgs.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">XL</span>, prob<span class="op">=</span><span class="fu">dlogseries</span><span class="op">(</span><span class="va">XL</span><span class="op">[</span>,<span class="st">"x"</span><span class="op">]</span>, <span class="va">XL</span><span class="op">[</span>,<span class="st">"p"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lgs.df</span><span class="op">$</span><span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">lgs.df</span><span class="op">$</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">lgs.df</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	15 obs. of  3 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ x   : int  1 2 3 4 5 1 2 3 4 5 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ p   : Factor w/ 3 levels "0.33","0.66",..: 1 1 1 1 1 2 2 2 2 2 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ prob: num  0.82402 0.13596 0.02991 0.0074 0.00195 ...</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://lattice.r-forge.r-project.org/" class="external-link">lattice</a></span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://lattice.r-forge.r-project.org/" class="external-link">lattice</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: lattice</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: 'lattice'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from 'package:gnm':</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     barley</span>
-<span class="r-in"><span class="va">mycol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html" class="external-link">xyplot</a></span><span class="op">(</span> <span class="va">prob</span> <span class="op">~</span> <span class="va">x</span>, data<span class="op">=</span><span class="va">lgs.df</span>, groups<span class="op">=</span><span class="va">p</span>,</span>
-<span class="r-in">  xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'Number of events (k)'</span>, cex<span class="op">=</span><span class="fl">1.25</span><span class="op">)</span>,</span>
-<span class="r-in">  ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'Probability'</span>,  cex<span class="op">=</span><span class="fl">1.25</span><span class="op">)</span>,</span>
-<span class="r-in">  type<span class="op">=</span><span class="st">'b'</span>, pch<span class="op">=</span><span class="fl">15</span><span class="op">:</span><span class="fl">17</span>, lwd<span class="op">=</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">1.25</span>, col<span class="op">=</span><span class="va">mycol</span>,</span>
-<span class="r-in">  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">          title <span class="op">=</span> <span class="st">'p'</span>,</span>
-<span class="r-in">          points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">15</span><span class="op">:</span><span class="fl">17</span>, col<span class="op">=</span><span class="va">mycol</span>, cex<span class="op">=</span><span class="fl">1.25</span><span class="op">)</span>,</span>
-<span class="r-in">          lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lwd<span class="op">=</span><span class="fl">2</span>, col<span class="op">=</span><span class="va">mycol</span><span class="op">)</span>,</span>
-<span class="r-in">          text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">lgs.df</span><span class="op">$</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">          x<span class="op">=</span><span class="fl">0.9</span>, y<span class="op">=</span><span class="fl">0.98</span>, corner<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">1</span>, y<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in">          <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span><span class="va">mycol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html" class="external-link">xyplot</a></span><span class="op">(</span> <span class="va">prob</span> <span class="op">~</span> <span class="va">x</span>, data<span class="op">=</span><span class="va">lgs.df</span>, groups<span class="op">=</span><span class="va">p</span>,</span></span>
+<span class="r-in"><span>  xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'Number of events (k)'</span>, cex<span class="op">=</span><span class="fl">1.25</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'Probability'</span>,  cex<span class="op">=</span><span class="fl">1.25</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type<span class="op">=</span><span class="st">'b'</span>, pch<span class="op">=</span><span class="fl">15</span><span class="op">:</span><span class="fl">17</span>, lwd<span class="op">=</span><span class="fl">2</span>, cex<span class="op">=</span><span class="fl">1.25</span>, col<span class="op">=</span><span class="va">mycol</span>,</span></span>
+<span class="r-in"><span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>          title <span class="op">=</span> <span class="st">'p'</span>,</span></span>
+<span class="r-in"><span>          points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>pch<span class="op">=</span><span class="fl">15</span><span class="op">:</span><span class="fl">17</span>, col<span class="op">=</span><span class="va">mycol</span>, cex<span class="op">=</span><span class="fl">1.25</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          lines <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lwd<span class="op">=</span><span class="fl">2</span>, col<span class="op">=</span><span class="va">mycol</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">lgs.df</span><span class="op">$</span><span class="va">p</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          x<span class="op">=</span><span class="fl">0.9</span>, y<span class="op">=</span><span class="fl">0.98</span>, corner<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">1</span>, y<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>          <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-plt img"><img src="logseries-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># random numbers</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">rlogseries</span><span class="op">(</span><span class="fl">200</span>, prob<span class="op">=</span><span class="fl">.4</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">'x'</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># random numbers</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">rlogseries</span><span class="op">(</span><span class="fl">200</span>, prob<span class="op">=</span><span class="fl">.4</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">'x'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="logseries-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">rlogseries</span><span class="op">(</span><span class="fl">200</span>, prob<span class="op">=</span><span class="fl">.8</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">'x'</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="fu">rlogseries</span><span class="op">(</span><span class="fl">200</span>, prob<span class="op">=</span><span class="fl">.8</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">'x'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="logseries-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -195,7 +224,7 @@ by Mikis Stasinopoulos.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>
