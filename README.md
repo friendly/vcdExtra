@@ -85,6 +85,17 @@ vcdExtra::datasets("vcdExtra")[,1]
   vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/).
   In the installed package, they can be viewed using
   `browseVignettes(package = "vcdExtra")`;
+
+``` r
+tools::getVignetteInfo("vcdExtra")[,c("File", "Title")]
+##      File               Title                                       
+## [1,] "E_continuous.Rmd" "Continuous predictors"                     
+## [2,] "A_creating.Rmd"   "Creating and manipulating frequency tables"
+## [3,] "C_loglinear.Rmd"  "Loglinear Models"                          
+## [4,] "D_mosaics.Rmd"    "Mosaic plots"                              
+## [5,] "B_tests.Rmd"      "Tests of Independence"
+```
+
 - a few useful utility functions for manipulating categorical data sets
   and working with models for categorical data.
 
