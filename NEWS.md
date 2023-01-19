@@ -2,6 +2,7 @@
 
 - add HouseTasks data set
 - this package now depends on R (>= 3.5.0)
+- add Suggests: seriation to illustrate CA re-ordering of rows/cols based on correspondence analysis seriation
 
 ## Version 0.8-1 (2022-04-22)
 

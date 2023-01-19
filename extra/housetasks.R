@@ -32,9 +32,13 @@ mosaic(HouseTasks, shade = TRUE,
 library(seriation)
 order <- seriate(HouseTasks, method = "CA")
 order
-ht_perm <- permute(HouseTasks, order, margin=1)
 
-mosaic(permute(HouseTasks, method = "CA"), shade = TRUE,
+rownames(HouseTasks)[order[[1]]]
+colnames(HouseTasks)[order[[2]]]
+
+HT_perm <- permute(HouseTasks, order, margin=1)
+
+mosaic(HT_perm, shade = TRUE,
        labeling = labeling_border(rot_labels = c(45,0, 0, 0), 
                                   offset_label =c(.5,5,0, 0),
                                   varnames = c(FALSE, TRUE),

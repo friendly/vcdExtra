@@ -6,7 +6,7 @@ Household Tasks Performed by Husbands and Wives
 }
 \description{
 A 13 x 4 table of frequencies of household tasks performed by couples,
-either `Husband`, `Wife`, `Alternating` or `Jointly`.
+either by the `Husband`, `Wife`, `Alternating` or `Jointly`.
 }
 \usage{data("HouseTasks")}
 \format{
@@ -23,7 +23,7 @@ either `Husband`, `Wife`, `Alternating` or `Jointly`.
 This data set was taken from \code{\link[factoextra]{housetasks}}, a 
 13 x 4 data.frame.
 In this table version, the rows and columns were sorted alphabetically
-and a typo was corrected.
+(and a typo was corrected).
 }
 %\references{
 %%  ~~ possibly secondary sources and usages ~~
@@ -34,7 +34,33 @@ data(HouseTasks)
 
 chisq.test(HouseTasks)
 
-library(vcd)
+# mosaic plot, illustrating some tweaks to handle overlapping labels
+require(vcd)
+mosaic(HouseTasks, shade = TRUE,
+       labeling = labeling_border(rot_labels = c(45,0, 0, 0), 
+                                  offset_label =c(.5,5,0, 0),
+                                  varnames = c(FALSE, TRUE),
+                                  just_labels=c("center","right"),
+                                  tl_varnames = FALSE),
+       legend = FALSE)
 
+# use seriation package to permute rows & cols using correspondence analysis
+if(require(seriation)) {
+order <- seriate(HouseTasks, method = "CA")
+# the permuted row and column labels
+rownames(HouseTasks)[order[[1]]]
+colnames(HouseTasks)[order[[2]]]
+
+# do the permutation
+HT_perm <- permute(HouseTasks, order, margin=1)
+
+mosaic(HT_perm, shade = TRUE,
+       labeling = labeling_border(rot_labels = c(45,0, 0, 0), 
+                                  offset_label =c(.5,5,0, 0),
+                                  varnames = c(FALSE, TRUE),
+                                  just_labels=c("center","right"),
+                                  tl_varnames = FALSE),
+       legend = FALSE)
+}
 }
 \keyword{datasets}

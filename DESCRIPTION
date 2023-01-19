@@ -38,7 +38,8 @@ Suggests:
   coin,
   Hmisc,
   knitr, 
-  rmarkdown
+  rmarkdown,
+  seriation
 Imports: MASS, grDevices, stats, utils, ca
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data
     and the 'gnm' package for Generalized Nonlinear Models.
