@@ -1,7 +1,11 @@
+## Version 0.8-2 (2023-01-19)
+
+- add HouseTasks data set
+- this package now depends on R (>= 3.5.0)
+
 ## Version 0.8-1 (2022-04-22)
 
 - rename vignettes to be in order
-- add HouseTasks data set
 
 
 ## Version 0.8-0 (2022-04-20)
