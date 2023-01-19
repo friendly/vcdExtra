@@ -22,10 +22,13 @@ CMHtest(x, ...)
 
 \method{CMHtest}{formula}(formula, data = NULL, subset = NULL, na.action = NULL, ...)
 
-\method{CMHtest}{default}(x, strata = NULL, 
-   rscores = 1:R, cscores = 1:C, 
+\method{CMHtest}{default}(x, 
+   strata = NULL, 
+   rscores = 1:R, 
+   cscores = 1:C, 
    types = c("cor", "rmeans", "cmeans", "general"), 
-   overall=FALSE, details=overall, ...)
+   overall=FALSE, 
+   details=overall, ...)
 
 \method{print}{CMHtest}(x, digits = max(getOption("digits") - 2, 3), ...)
 }
@@ -195,32 +198,35 @@ CMHtest(MSPatients)
 
 
 # also calculate overall tests, controlling for Patient
-CMHtest(MSPatients, overall=TRUE)
+CMHtest(MSPatients, overall = TRUE)
 # compare with mantelhaen.test
 mantelhaen.test(MSPatients)
 
 # formula interface
-CMHtest(~ ., data=MSPatients, overall=TRUE)
+CMHtest(~ ., data = MSPatients, overall = TRUE)
 
 # using a frequency data.frame
-CMHtest(xtabs(Freq~ses+mental, data=Mental))
+CMHtest(xtabs(Freq~ses + mental, data = Mental))
 # or, more simply
-CMHtest(Freq~ses+mental, data=Mental)
+CMHtest(Freq~ses + mental, data = Mental)
 
 # conditioning formulae
-CMHtest(Freq~right+left|gender, data=VisualAcuity)
+CMHtest(Freq~right + left | gender, data = VisualAcuity)
  
-CMHtest(Freq ~ attitude+memory|education+age, data=Punishment)
+CMHtest(Freq ~ attitude + memory | education + age, data = Punishment)
 
 
 # Stokes etal, Table 5.1, p 92: two unordered factors
 parties <- matrix(
 	c(221, 160, 360, 140,
 	  200, 291, 160, 311,
-	  208, 106, 316, 97), nrow=3, ncol=4, byrow=TRUE)
+	  208, 106, 316, 97), 
+	nrow=3, ncol=4, 
+	byrow=TRUE)
 dimnames(parties) <- list(party=c("Dem", "Indep", "Rep"),
              neighborhood=c("Bayside", "Highland", "Longview", "Sheffield"))
 CMHtest(parties, rscores=NULL, cscores=NULL)
+
 # compare with Pearson chisquare
 chisq.test(parties)
 }

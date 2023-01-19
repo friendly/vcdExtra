@@ -16,25 +16,20 @@ and dimension information (\code{dim} or code{length}) of each item,
 and formats these to provide additional descriptors.
 }
 \usage{
-datasets(package, allClass=FALSE, 
-    incPackage=length(package) > 1,
-    maxTitle=NULL)
+datasets(package, 
+        allClass=FALSE, 
+        incPackage=length(package) > 1,
+        maxTitle=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{package}{
-a character vector giving the package(s) to look in
+  \item{package}{a character vector giving the package(s) to look in}
+  \item{allClass}{include all classes of the item (\code{TRUE}) or just the last class   
+       (\code{FALSE})?}
+  \item{incPackage}{include the package name in result?}
+  \item{maxTitle}{maximum length of data set Title}
 }
-  \item{allClass}{
-include all classes of the item (\code{TRUE}) or just the last class (\code{FALSE})?
-}
-  \item{incPackage}{
-include the package name in result?
-}
-  \item{maxTitle}{
-maximum length of data set Title
-}
-}
+
 \details{
 The requested packages must be installed, and are silently loaded in order
 to extract \code{class} and size information.
@@ -66,6 +61,8 @@ Michael Friendly, with R-help from Curt Seeliger
 datasets("vcdExtra")
 datasets(c("vcd", "vcdExtra"))
 datasets("datasets", maxTitle=50)
+
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

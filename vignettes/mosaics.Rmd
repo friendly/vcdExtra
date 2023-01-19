@@ -45,7 +45,7 @@ if(!file.exists("fig")) dir.create("fig")
 ```
 
 Mosaic plots provide an ideal method both for visualizing contingency tables and for 
-visualizing the fit--- or more importantly--- lack of fit of a loglinear model.
+visualizing the fit--- or more importantly--- **lack of fit** of a loglinear model.
 For a two-way table, `mosaic()` fits a model of independence, $[A][B]$
 or `~A+B` as an R formula.
 For $n$-way tables, `mosaic()` can fit any loglinear model, and can also be

@@ -28,7 +28,14 @@ Using code from
 %}
 \examples{
 data(Depends)
-plot(Depends, xlab="Number of Dependencies", ylab="Number of R Packages", lwd=8)
+plot(Depends, 
+     xlab="Number of Dependencies", 
+     ylab="Number of R Packages", 
+     lwd=8)
+
+# what type of distribution?
+# Ord_plot can't classify this!
+Ord_plot(Depends)
 
 \dontrun{
 # The code below, from Joseph Rickert, downloads and tabulates the data

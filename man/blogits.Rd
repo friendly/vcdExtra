@@ -62,9 +62,6 @@ Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 \author{
 Michael Friendly
 }
-%\note{
-%%%  ~~further notes~~
-%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
@@ -82,7 +79,10 @@ rowlabs <- expand.grid(smoke=c("0", "1-19", "20+"), class=factor(1:5))
 toxaemia <- cbind(toxaemia, rowlabs)
 
 # logits for H and U
-logitsTox <- blogits(toxaemia[,4:1], add=0.5, colnames=c("logitH", "logitW"), row.vars=rowlabs)
+logitsTox <- blogits(toxaemia[,4:1], 
+                     add=0.5, 
+                     colnames=c("logitH", "logitW"), 
+                     row.vars=rowlabs)
 logitsTox
 
 }
