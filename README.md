@@ -12,9 +12,9 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 # vcdExtra <img src="man/figures/logo.png" style="float:right; height:200px;" />
 
-## Extensions and additions to `vcd`: Visualizing Categorical Data
+## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.8-0
+Version 0.8-2
 
 This package provides additional data sets, documentation, and a few
 functions designed to extend the
@@ -42,34 +42,50 @@ is to fill in some holes in the analysis of categorical data in R, not
 provided in base R, [vcd](https://CRAN.R-project.org/package=vcd), or
 other commonly used packages.
 
--   The method `mosaic.glm()` extends the `mosaic.loglm()` method in the
-    vcd package to this wider class of models. This method also works
-    for the generalized nonlinear models fit with the gnm package,
-    including models for square tables and models with multiplicative
-    associations.
+- The method `mosaic.glm()` extends the `mosaic.loglm()` method in the
+  vcd package to this wider class of models. This method also works for
+  the generalized nonlinear models fit with the gnm package, including
+  models for square tables and models with multiplicative associations.
 
--   `mosaic3d()` introduces a 3D generalization of mosaic displays using
-    the [rgl](https://CRAN.R-project.org/package=rgl) package.
+- `mosaic3d()` introduces a 3D generalization of mosaic displays using
+  the [rgl](https://CRAN.R-project.org/package=rgl) package.
 
--   A new class, `glmlist`, is introduced for working with collections
-    of glm objects, e.g., `Kway()` for fitting all K-way models from a
-    basic marginal model, and `LRstats()` for brief statistical
-    summaries of goodness-of-fit for a collection of models.
+- A new class, `glmlist`, is introduced for working with collections of
+  glm objects, e.g., `Kway()` for fitting all K-way models from a basic
+  marginal model, and `LRstats()` for brief statistical summaries of
+  goodness-of-fit for a collection of models.
 
--   For **square tables** with ordered factors, `Crossings()`
-    supplements the specification of terms in model formulas using
-    `Symm()`, `Diag()`, `Topo(),` etc. in the
-    [gnm](https://CRAN.R-project.org/package=gnm) package.
+- For **square tables** with ordered factors, `Crossings()` supplements
+  the specification of terms in model formulas using `Symm()`, `Diag()`,
+  `Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm)
+  package.
 
--   In addition, there are
+- In addition, there are:
 
-    -   many new data sets; use `datasets("vcdExtra")` to see a list;
-    -   a [tutorial
-        vignette](https://cran.r-project.org/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf).
-        In the installed package, it can be viewed using
-        `vignette("vcd-tutorial", package = "vcdExtra")`;
-    -   a few useful utility functions for manipulating categorical data
-        sets and working with models for categorical data.
+  - many new data sets; use `datasets("vcdExtra")` to see a list with
+    titles and descriptions
+
+``` r
+vcdExtra::datasets("vcdExtra")[,1]
+##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     
+##  [5] "Bartlett"       "Burt"           "Caesar"         "Cancer"        
+##  [9] "Cormorants"     "CyclingDeaths"  "DaytonSurvey"   "Depends"       
+## [13] "Detergent"      "Donner"         "Draft1970"      "Draft1970table"
+## [17] "Dyke"           "Fungicide"      "GSS"            "Geissler"      
+## [21] "Gilby"          "Glass"          "HairEyePlace"   "Hauser79"      
+## [25] "Heart"          "Heckman"        "HospVisits"     "Hoyt"          
+## [29] "ICU"            "JobSat"         "Mammograms"     "Mental"        
+## [33] "Mice"           "Mobility"       "PhdPubs"        "ShakeWords"    
+## [37] "TV"             "Titanicp"       "Toxaemia"       "Vietnam"       
+## [41] "Vote1980"       "WorkerSat"      "Yamaguchi87"
+```
+
+- a [collection of tutorial
+  vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/).
+  In the installed package, they can be viewed using
+  `browseVignettes(package = "vcdExtra")`;
+- a few useful utility functions for manipulating categorical data sets
+  and working with models for categorical data.
 
 ## Installation
 
@@ -236,11 +252,10 @@ compact comparison of model goodness of fit for a collection of models
 fit to the same data.
 
 `LRstats()` provides a brief summary for one or more models fit to the
-same dataset. The likelihood ratio
-![\\chi^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cchi%5E2 "\chi^2")
-values (`LR Chisq`)test lack of fit. By these tests, none of the ordinal
-models show significant lack of fit. By the AIC and BIC statistics, the
-`linlin` model is the best, combining parsimony and goodness of fit.
+same dataset. The likelihood ratio $\chi^2$ values (`LR Chisq`)test lack
+of fit. By these tests, none of the ordinal models show significant lack
+of fit. By the AIC and BIC statistics, the `linlin` model is the best,
+combining parsimony and goodness of fit.
 
 ``` r
 LRstats(indep, linlin, roweff, coleff, rowcol)

@@ -77,9 +77,14 @@ specification of terms in model formulas using
 `Diag()`, 
 `Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-* In addition, there are 
-  + many new data sets; use `datasets("vcdExtra")` to see a list;
-  + a [tutorial vignette](https://cran.r-project.org/web/packages/vcdExtra/vignettes/vcd-tutorial.pdf). In the installed package, it can be viewed using `vignette("vcd-tutorial", package = "vcdExtra")`;
+* In addition, there are: 
+  + many new data sets; use `datasets("vcdExtra")` to see a list with titles and descriptions
+
+```{r vcdExtra-datasets}
+vcdExtra::datasets("vcdExtra")[,1]
+```
+
+  + a [collection of tutorial vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/). In the installed package, they can be viewed using `browseVignettes(package = "vcdExtra")`;
   + a few useful utility functions for manipulating categorical data sets and working with models for
 categorical data. 
 
