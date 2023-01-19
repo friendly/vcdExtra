@@ -1,6 +1,7 @@
 ## Version 0.8-1 (2022-04-22)
 
 - rename vignettes to be in order
+- add HouseTasks data set
 
 
 ## Version 0.8-0 (2022-04-20)

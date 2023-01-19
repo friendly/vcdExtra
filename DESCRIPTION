@@ -20,7 +20,8 @@ Authors@R: c(
             )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 2.10), vcd, gnm (>= 1.0-3), grid
-Suggests: gmodels, 
+Suggests: 
+  gmodels, 
   Fahrmeir, 
   effects, 
   VGAM, 
@@ -37,7 +38,8 @@ Suggests: gmodels,
   coin,
   Hmisc,
   knitr, 
-  rmarkdown
+  rmarkdown,
+  ca
 Imports: MASS, grDevices, stats, utils, ca
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data
     and the 'gnm' package for Generalized Nonlinear Models.
