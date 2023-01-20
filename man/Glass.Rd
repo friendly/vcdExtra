@@ -1,9 +1,8 @@
 \name{Glass}
 \alias{Glass}
 \docType{data}
-\title{
-British Social Mobility from Glass(1954)
-}
+
+\title{British Social Mobility from Glass(1954)}
 \description{
 Glass(1954) gave this 5 x 5 table on the occupations of 3500 British fathers and their sons.
 }
@@ -42,16 +41,28 @@ Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 data(Glass)
 glass.tab <- xtabs(Freq ~ father + son, data=Glass)
 
-largs <- list(set_varnames=list(father="Father's Occupation", son="Son's Occupation"),
+largs <- list(set_varnames=list(father="Father's Occupation", 
+                                son="Son's Occupation"),
               abbreviate=10)
 gargs <- list(interpolate=c(1,2,4,8))
-mosaic(glass.tab, shade=TRUE, labeling_args=largs, gp_args=gargs,
-  main="Alphabetic order", legend=FALSE, rot_labels=c(20,90,0,70))
+
+mosaic(glass.tab, 
+  shade=TRUE, 
+  labeling_args=largs, 
+  gp_args=gargs,
+  main="Alphabetic order", 
+  legend=FALSE, 
+  rot_labels=c(20,90,0,70))
 
 # reorder by status
 ord <- c(2, 1, 4, 3, 5) 
-mosaic(glass.tab[ord, ord], shade=TRUE, labeling_args=largs,  gp_args=gargs,
-  main="Effect order", legend=FALSE, rot_labels=c(20,90,0,70))
+mosaic(glass.tab[ord, ord], 
+  shade=TRUE, 
+  labeling_args=largs,  
+  gp_args=gargs,
+  main="Effect order", 
+  legend=FALSE, 
+  rot_labels=c(20,90,0,70))
 
 }
 \keyword{datasets}

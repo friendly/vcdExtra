@@ -36,20 +36,15 @@ whereas \code{cutfac} uses \code{\link[stats]{quantile}} to choose breaks of rou
 }
 \value{
 A \code{\link[base]{factor}} corresponding to \code{x} is returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 }
+
 \references{
 Friendly, M. and Meyer, D. (2016). 
 \emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
 Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 
 }
-\author{
-Achim Zeileis
-}
+\author{Achim Zeileis}
 %\note{
 %%%  ~~further notes~~
 %}
@@ -65,11 +60,13 @@ if (require(AER)) {
 data("NMES1988", package="AER")
 nmes <- NMES1988[, c(1, 6:8, 13, 15, 18)]
 
-plot(log(visits+1) ~ cutfac(chronic), data = nmes,
+plot(log(visits+1) ~ cutfac(chronic), 
+  data = nmes,
   ylab = "Physician office visits (log scale)", 
   xlab = "Number of chronic conditions", main = "chronic")
 
-plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)), data = nmes,
+plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)), 
+  data = nmes,
   ylab = "Physician office visits (log scale)", 
   xlab = "Number of hospital stays", main = "hospital")
 }

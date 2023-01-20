@@ -2,14 +2,13 @@
 \Rdversion{1.1}
 \alias{Dyke}
 \docType{data}
+
 \title{Sources of Knowledge of Cancer}
 \description{Observational data on a sample of 1729 individuals, cross-classified in a 2^5 table according to their sources of 
 information (read newspapers, listen to the radio, do 'solid' reading, attend lectures) and whether they have
 good or poor knowledge regarding cancer.  Knowledge of cancer is often treated as the response.}
 
-\usage{
-data(Dyke)
-}
+\usage{data(Dyke)}
 \format{
   A 5-dimensional array resulting from cross-tabulating 5 variables for  1729 observations. The variable names and their levels are:
 
@@ -25,12 +24,9 @@ data(Dyke)
 
 %\details{ }
 \source{
-
-%  \cite{Fienberg:80 [Table 5-6]}
 Fienberg, S. E. (1980).
 \emph{The Analysis of Cross-Classified Categorical Data}
 Cambridge, MA: MIT Press, p. 85, Table 5-6.
-
 }
 
 \references{
@@ -60,19 +56,23 @@ mosaic(dyke.mod0)
 # view as doubledecker plot
 Dyke <- Dyke[2:1,,,,]    # make Good the highlighted value of Knowledge
 doubledecker(Knowledge ~ ., data=Dyke)
+
 # better version, with some options
-doubledecker(Knowledge ~ Lectures + Reading + Newspaper + Radio, data=Dyke,
+doubledecker(Knowledge ~ Lectures + Reading + Newspaper + Radio, 
+  data=Dyke,
 	margins = c(1,6, length(dim(Dyke)) + 1, 1), 
 	fill_boxes=list(rep(c("white", gray(.90)),4))
 	)
 
 # separate (conditional) plots for those who attend lectures and those who do not
-doubledecker(Knowledge ~ Reading + Newspaper + Radio, data=Dyke[,,,1,],
+doubledecker(Knowledge ~ Reading + Newspaper + Radio, 
+  data=Dyke[,,,1,],
 	main="Do not attend lectures",
 	margins = c(1,6, length(dim(Dyke)) + 1, 1), 
 	fill_boxes=list(rep(c("white", gray(.90)),3))
 	)
-doubledecker(Knowledge ~ Reading + Newspaper + Radio, data=Dyke[,,,2,],
+doubledecker(Knowledge ~ Reading + Newspaper + Radio, 
+  data=Dyke[,,,2,],
 	main="Attend lectures",
 	margins = c(1,6, length(dim(Dyke)) + 1, 1), 
 	fill_boxes=list(rep(c("white", gray(.90)),3))

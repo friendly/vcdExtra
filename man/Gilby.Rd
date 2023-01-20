@@ -2,14 +2,16 @@
 \Rdversion{1.1}
 \alias{Gilby}
 \docType{data}
+
 \title{Clothing and Intelligence Rating of Children}
+
 \description{Schoolboys were classified according to their clothing and to their teachers rating of "dullness"
 (lack of intelligence), in a 5 x 7 table originally from 
 Gilby (1911).
 Anscombe (1981) presents a slightly collapsed 4 x 6 table, used here, where 
 the last two categories of clothing were pooled as were the first two categories of dullness due to small counts.
 
-Both \code{Dullnes} and \code{Clothing} are ordered categories, so models and methods
+Both \code{Dullness} and \code{Clothing} are ordered categories, so models and methods
 that examine their association in terms of ordinal categories are profitable.
 }
 
@@ -17,7 +19,7 @@ that examine their association in terms of ordinal categories are profitable.
 data(Gilby)
 }
 \format{
-  A     2-dimensional array resulting from cross-tabulating    2 variables for  1725 observations. The variable names and their levels are:
+  A 2-dimensional array resulting from cross-tabulating 2 variables for  1725 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr

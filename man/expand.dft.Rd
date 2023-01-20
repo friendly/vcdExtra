@@ -2,6 +2,7 @@
 \alias{expand.dft}
 \alias{expand.table}
 %- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{ Expand a frequency table to case form}
 \description{
  Converts a frequency table, given either as a table object or a data frame in frequency form
@@ -13,6 +14,7 @@ expand.dft(x, var.names = NULL, freq = "Freq", ...)
 expand.table(x, var.names = NULL, freq = "Freq", ...)
 }
 %- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{x}{A table object, or a data frame in frequency form containing factors and one numeric variable
   representing the cell frequency for that combination of factors. }

@@ -1,9 +1,9 @@
 \name{Geissler}
 \alias{Geissler}
 \docType{data}
-\title{
-Geissler's Data on the Human Sex Ratio
-}
+
+\title{Geissler's Data on the Human Sex Ratio}
+
 \description{
 Geissler (1889) published data on the distributions of boys and girls in families in 
 Saxony, collected for the period 1876-1885. The \code{Geissler} data tabulates 
@@ -53,7 +53,7 @@ Analysis of the human sex ratio by using overdispersion models.
 }
 \examples{
 data(Geissler)
-## maybe str(Geissler) ; plot(Geissler) ...
+str(Geissler)
 
 # reproduce Saxony data, families of size 12
 Saxony12<-subset(Geissler, size==12, select=c(boys, Freq))
