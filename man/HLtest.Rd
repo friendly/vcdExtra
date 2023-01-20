@@ -36,21 +36,10 @@ HLtest(model, g = 10)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 
-  \item{model}{
-A \code{glm} model object in the \code{binomial} family
-}
-  \item{g}{
-Number of groups used to partition the fitted values for the
-GOF test.
-}
-
-
-  \item{x, object}{
-A \code{HLtest} object
-}
-  \item{\dots}{
-Other arguments passed down to methods
-}
+  \item{model}{A \code{glm} model object in the \code{binomial} family}
+  \item{g}{Number of groups used to partition the fitted values for the GOF test.}
+  \item{x, object}{A \code{HLtest} object}
+  \item{\dots}{Other arguments passed down to methods}
 
 
 }
@@ -59,7 +48,6 @@ Other arguments passed down to methods
 %}
 \value{
 A class \code{HLtest} object  with the following components:
-%%  If it is a LIST, use
   \item{table}{A data.frame describing the results of partitioning the data into \code{g}
   	groups with the following columns: \code{cut}, \code{total}, \code{obs}, \code{exp}, \code{chi}}
   \item{chisq}{The chisquare statistics}
@@ -107,6 +95,7 @@ attach(birthwt)
 	bwt <- data.frame(low = factor(low), age, lwt, race,
     	smoke = (smoke > 0), ptd, ht = (ht > 0), ui = (ui > 0), ftv)
 detach(birthwt)
+
 options(contrasts = c("contr.treatment", "contr.poly"))
 BWmod <- glm(low ~ ., family=binomial, data=bwt)
 

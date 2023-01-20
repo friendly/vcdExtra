@@ -63,12 +63,25 @@ Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 \examples{
 # conditional density plots
 op <- par(mfrow=c(1,2), cex.lab=1.5)
-cdplot(factor(survived) ~ age, subset=sex=='Male', data=Donner, 
-    main="Donner party: Males", ylevels=2:1, ylab="Survived", yaxlabels=c("yes", "no"))
-with(Donner, rug(jitter(age[sex=="Male"]), col="white", quiet=TRUE))
-cdplot(factor(survived) ~ age, subset=sex=='Female', data=Donner, 
-    main="Donner party: Females", ylevels=2:1, ylab="Survived", yaxlabels=c("yes", "no"))
-with(Donner, rug(jitter(age[sex=="Female"]), col="white", quiet=TRUE))
+cdplot(factor(survived) ~ age, 
+       subset=sex=='Male', 
+       data=Donner, 
+       main="Donner party: Males", 
+       ylevels=2:1, 
+       ylab="Survived", 
+       yaxlabels=c("yes", "no"))
+with(Donner, rug(jitter(age[sex=="Male"]), 
+                 col="white", quiet=TRUE))
+
+cdplot(factor(survived) ~ age, 
+       subset=sex=='Female', 
+       data=Donner, 
+       main="Donner party: Females", 
+       ylevels=2:1, 
+       ylab="Survived", 
+       yaxlabels=c("yes", "no"))
+with(Donner, rug(jitter(age[sex=="Female"]), 
+                 col="white", quiet=TRUE))
 par(op)
 
 
@@ -88,14 +101,22 @@ library(ggplot2)
 # separate linear fits on age for M/F
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ x,
-           alpha = 0.2, size=2, aes(fill = sex))
+  stat_smooth(method = "glm", 
+              method.args = list(family = binomial), 
+              formula = y ~ x,
+              alpha = 0.2, 
+              size=2, 
+              aes(fill = sex))
 
 # separate quadratics
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
-  stat_smooth(method = "glm", method.args = list(family = binomial), formula = y ~ poly(x,2),
-           alpha = 0.2, size=2, aes(fill = sex))
+  stat_smooth(method = "glm", 
+              method.args = list(family = binomial), 
+              formula = y ~ poly(x,2),
+              alpha = 0.2, 
+              size=2, 
+              aes(fill = sex))
 
 
 }

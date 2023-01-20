@@ -44,18 +44,15 @@ Breslow, N. (1976), Regression analysis of the log odds ratio:
 data(Fungicide)
 # loddsratio was moved to vcd; requires vcd_1.3-3+
 \dontrun{
-if (require(vcd)) {
 fung.lor <- loddsratio(Fungicide, correct=TRUE)
 fung.lor
 confint(fung.lor)
-}
 }
 
 # visualize odds ratios in fourfold plots
 cotabplot(Fungicide, panel=cotab_fourfold)
 #  -- fourfold() requires vcd >= 1.2-10
 fourfold(Fungicide, p_adjust_method="none")
-
 
 
 }

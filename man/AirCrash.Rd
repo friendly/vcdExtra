@@ -45,7 +45,8 @@ mosaic(aircrash.tab, shade=TRUE,
 # reorder by Phase
 phase.ord <- rev(c(3,4,1,2,5))
 mosaic(aircrash.tab[phase.ord,], shade=TRUE, 
-       labeling_args=list(rot_labels=c(30, 30, 30, 30)), offset_varnames=0.5)
+       labeling_args=list(rot_labels=c(30, 30, 30, 30)), 
+       offset_varnames=0.5)
 
 # reorder by frequency
 phase.ord <- order(rowSums(aircrash.tab), decreasing=TRUE)

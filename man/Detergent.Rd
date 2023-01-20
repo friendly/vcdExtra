@@ -10,7 +10,7 @@
 data(Detergent)
 }
 \format{
-  A     4-dimensional array resulting from cross-tabulating    4 variables for  1008 observations. The variable names and their levels are:
+  A 4-dimensional array resulting from cross-tabulating 4 variables for  1008 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr
@@ -44,16 +44,18 @@ The use of chi-square for preference testing in multidimensional problems.
 \examples{
 data(Detergent)
 
-# example goes here
+# basic mosaic plot
 mosaic(Detergent, shade=TRUE)
 
 require(MASS)
-(det.mod0 <- loglm(~ Preference + Temperature + M_User + Water_softness, data=Detergent))
+(det.mod0 <- loglm(~ Preference + Temperature + M_User + Water_softness, 
+                   data=Detergent))
 # examine addition of two-way terms
 add1(det.mod0, ~ .^2, test="Chisq")
 
 # model for Preference as a response
-(det.mod1 <- loglm(~ Preference + (Temperature * M_User * Water_softness), data=Detergent))
+(det.mod1 <- loglm(~ Preference + (Temperature * M_User * Water_softness), 
+                   data=Detergent))
 mosaic(det.mod0)
 
 

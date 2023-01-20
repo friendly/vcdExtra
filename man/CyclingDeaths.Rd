@@ -38,9 +38,15 @@ Have London's roads become more dangerous for cyclists?
 \examples{
 data(CyclingDeaths)
 
-plot(deaths ~ date, data=CyclingDeaths, type="h", 
-	lwd=3, ylab="Number of deaths", axes=FALSE)
-axis(1, at=seq(as.Date('2005-01-01'), by='years', length.out=9), labels=2005:2013)
+plot(deaths ~ date, data=CyclingDeaths, 
+  type="h", 
+	lwd=3, 
+	ylab="Number of deaths", 
+	axes=FALSE)
+axis(1, at=seq(as.Date('2005-01-01'), 
+               by='years', 
+               length.out=9), 
+     labels=2005:2013)
 axis(2, at=0:3)
 
 # make a one-way frequency table

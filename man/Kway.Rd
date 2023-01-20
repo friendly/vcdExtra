@@ -44,17 +44,11 @@ an  optional  data   frame,  list  or   environment  (or  object   coercible  by
 found in data, the variables are taken from \code{environment(formula)}, typically  the
 environment from which \code{glm} is called.
 }
-  \item{\dots}{
-Other arguments passed to \code{glm}
+  \item{\dots}{Other arguments passed to \code{glm}}
+  \item{order}{Highest order interaction of the models generated. Defaults to the number of terms in the model formula.}
+  \item{prefix}{Prefix used to label the models fit in the \code{glmlist} object.}
 }
-  \item{order}{
-Highest order interaction of the models generated. Defaults to the number
-of terms in the model formula.
-}
-  \item{prefix}{
-Prefix used to label the models fit in the \code{glmlist} object.
-}
-}
+
 \details{
 With \code{y} as the response in the \code{formula}, the 0-way (null) model
 is \code{y ~ 1}.  
