@@ -9,7 +9,7 @@
 data(Abortion)
 }
 \format{
-  A     3-dimensional array resulting from cross-tabulating    3 variables for  1100 observations. The variable names and their levels are:
+  A 3-dimensional array resulting from cross-tabulating 3 variables for  1100 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr
@@ -44,7 +44,7 @@ Christensen, R. (1997).
 \examples{
 data(Abortion)
 
-# example goes here
+
 ftable(Abortion)
 mosaic(Abortion, shade=TRUE)
 

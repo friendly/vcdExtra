@@ -78,7 +78,6 @@ phd.tab <- table(PhdPubs$articles)
 zero.test(phd.tab)
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{htest}% use one of  RShowDoc("KEYWORDS")
+
+\keyword{htest}
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

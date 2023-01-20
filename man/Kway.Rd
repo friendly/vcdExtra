@@ -86,7 +86,10 @@ Michael Friendly and Heather Turner
 }
 \examples{
 ## artificial data
-factors <- expand.grid(A=factor(1:3), B=factor(1:2), C=factor(1:3), D=factor(1:2))
+factors <- expand.grid(A=factor(1:3), 
+                       B=factor(1:2), 
+                       C=factor(1:3), 
+                       D=factor(1:2))
 Freq <- rpois(nrow(factors), lambda=40)
 df <- cbind(factors, Freq)
 
@@ -97,7 +100,8 @@ LRstats(mods4)
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
-modSat <- Kway(Freq ~ management+supervisor+own, data=JobSatisfaction, 
+modSat <- Kway(Freq ~ management+supervisor+own, 
+               data=JobSatisfaction, 
                family=poisson, prefix="JobSat")
 LRstats(modSat)
 anova(modSat, test="Chisq")

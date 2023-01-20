@@ -43,11 +43,13 @@ Stata Press.
 \examples{
 data(PhdPubs)
 # very uninformative
-hist(PhdPubs$articles, breaks=0:19, col="pink", xlim=c(0,20),
+hist(PhdPubs$articles, 
+     breaks=0:19, col="pink", xlim=c(0,20),
      xlab="Number of Articles")
 
 library(vcd)
 rootogram(goodfit(PhdPubs$articles), xlab="Number of Articles")
+
 # compare with negative binomial
 rootogram(goodfit(PhdPubs$articles, type="nbinomial"), 
 	xlab="Number of Articles", main="Negative binomial")

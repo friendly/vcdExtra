@@ -17,39 +17,24 @@ seq_mosaic(x, panel = mosaic,
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-a contingency table in array form, with optional category labels specified in the 
-dimnames(x) attribute,
-or else a data.frame in frequency form, with the frequency variable named \code{"Freq"}.
-}
+  \item{x}{a contingency table in array form, with optional category labels specified in the dimnames(x) attribute, or else a data.frame in frequency form, with the frequency variable named \code{"Freq"}.}
 
-  \item{panel}{
-a \code{\link[vcd]{strucplot}} panel function, 
+  \item{panel}{a \code{\link[vcd]{strucplot}} panel function, 
 typically \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}. NOT yet implemented.}
 }
 
-  \item{type}{
-type of sequential model to fit, a character string.
-One of \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"},
-or  \code{"saturated"}.
-}
-  \item{plots}{
-which marginal sub-tables to plot? A vector of a (sub)set of the integers, \code{1:nf}
-where \code{nf} is the number of factors in the full n-way table.
+  \item{type}{type of sequential model to fit, a character string.
+One of \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"}, or  \code{"saturated"}.}
 
+  \item{plots}{which marginal sub-tables to plot? A vector of a (sub)set of the integers, \code{1:nf} where \code{nf} is the number of factors in the full n-way table.}
+
+  \item{vorder}{order of variables, a permutation of the integers \code{1:nf}, used to reorder the variables in the original table for the purpose
+of fitting sequential marginal models. }
+
+  \item{k}{conditioning variable(s) for \code{type} = \code{"joint"}, \code{"conditional"} or Markov chain order for \code{type} = \code{"markov"}
 }
-  \item{vorder}{
-order of variables, a permutation of the integers \code{1:nf},
-used to reorder the variables in the original table for the purpose
-of fitting sequential marginal models. 
-}
-  \item{k}{
-conditioning variable(s) for \code{type} = \code{"joint"}, \code{"conditional"} 
-or Markov chain order for \code{type} = \code{"markov"}
-}
-  \item{\dots}{
-other arguments passed to \code{\link[vcd]{mosaic}}. 
-}
+
+  \item{\dots}{other arguments passed to \code{\link[vcd]{mosaic}}. }
 
 }
 

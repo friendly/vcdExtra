@@ -43,6 +43,8 @@ Vol. 63, No. 3, pp. 435-447,
 %}
 \examples{
 data(ShakeWords)
-## maybe str(ShakeWords) ; plot(ShakeWords) ...
+str(ShakeWords)
+
+plot(sqrt(Freq) ~ count, data=ShakeWords)
 }
 \keyword{datasets}

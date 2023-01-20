@@ -27,82 +27,78 @@ This is a developing implementation.  The arguments and details are subject to c
 \usage{
 mosaic3d(x, ...)
 
-\method{mosaic3d}{loglm}(x, type = c("observed", "expected"), 
-    residuals_type = c("pearson", "deviance"), ...)
+\method{mosaic3d}{loglm}(
+  x, 
+  type = c("observed", "expected"), 
+  residuals_type = c("pearson", "deviance"), 
+  ...)
 
-\method{mosaic3d}{default}(x, expected = NULL, residuals = NULL,  
-	type = c("observed", "expected"), residuals_type = NULL, 
-	shape = rgl::cube3d(alpha = alpha), alpha = 0.5, 
-	spacing = 0.1, split_dir = 1:3, shading = shading_basic, interpolate=c(2,4), 
+\method{mosaic3d}{default}(
+  x, expected = NULL, 
+  residuals = NULL,  
+	type = c("observed", "expected"), 
+	residuals_type = NULL, 
+	shape = rgl::cube3d(alpha = alpha), 
+	alpha = 0.5, 
+	spacing = 0.1, 
+	split_dir = 1:3, 
+	shading = shading_basic, 
+	interpolate=c(2,4), 
 	zero_size=.05,
 	label_edge,
-	labeling_args = list(), newpage = TRUE, box=FALSE, ...)
+	labeling_args = list(), 
+	newpage = TRUE, 
+	box=FALSE, 
+	...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-A \code{link[MASS]{loglm}} model object. Alternatively,
-a multidimensional \code{array} or \code{table} or \code{\link[vcd]{structable}} 
-of frequencies in a contingency table. 
-In the present implementation, the dimensions are taken in sequential order.
-Use \code{link[base]{aperm}} or \code{\link[vcd]{structable}} to change this.
+  \item{x}{A \code{link[MASS]{loglm}} model object. Alternatively,
+   a multidimensional \code{array} or \code{table}   
+   or\code{\link[vcd]{structable}} of frequencies in a contingency table. 
+In the present implementation, the dimensions are taken in sequential order. Use \code{link[base]{aperm}} or \code{\link[vcd]{structable}} to change this.
 }
-  \item{expected}{
-optionally, for contingency tables,
-an array of expected frequencies of the same dimension as \code{x}, or alternatively 
-the corresponding loglinear model specification as used by \code{link[stats]{loglin}}
+  \item{expected}{optionally, for contingency tables,
+an array of expected frequencies of the same dimension as \code{x}, or alternatively the corresponding loglinear model specification as used by \code{link[stats]{loglin}}
 or \code{link[MASS]{loglm}} (see \code{\link[vcd]{structable}} for details).}
-  \item{residuals}{
-optionally, an array of residuals of the same dimension as \code{x} (see details).
-}
-  \item{type}{
-a character string indicating whether the \code{"observed"} or the \code{"expected"} 
+  \item{residuals}{optionally, an array of residuals of the same dimension as \code{x} (see details).}
+  \item{type}{a character string indicating whether the \code{"observed"} or the \code{"expected"} 
 frequencies in the table should be visualized by the volume of the 3D tiles.
 }
-  \item{residuals_type}{
-a character string indicating the type of residuals to be computed when none are
+  \item{residuals_type}{a character string indicating the type of residuals to be computed when none are
 supplied.  If  residuals  is  \code{NULL},  \code{residuals_type}  must  be  one  of 
 \code{"pearson"} (default;  giving  components  of  Pearson's  chi-squared),  
 \code{"deviance"}  (giving components of the likelihood ratio  chi-squared), 
 or \code{"FT"} for the  Freeman-Tukey residuals.  
 The value  of this  argument can  be abbreviated.  
 }
-  \item{shape}{
-The initial 3D shape on which the mosaic is based.  Typically this is a
-call to an rgl function, and must produce a \code{shape3d} object.
+  \item{shape}{The initial 3D shape on which the mosaic is based.  Typically this is a call to an rgl function, and must produce a \code{shape3d} object.
 The default is a "unit cube" on (-1, +1), with transparency specified by
-\code{alpha}.
-}
-  \item{alpha}{
-Specifies the transparency of the 3D tiles used to compose the 3D mosaic.
-}
-  \item{spacing}{
-A number or vector giving the total amount of space used to separate the
+\code{alpha}.}
+
+  \item{alpha}{Specifies the transparency of the 3D tiles used to compose the 3D mosaic.}
+  
+  \item{spacing}{A number or vector giving the total amount of space used to separate the
 3D tiles along each of the dimensions of the table. The values specified
-are re-cycled to the number of table dimensions.
-}
-  \item{split_dir}{
-A numeric vector composed of the integers \code{1:3} or a character vector
+are re-cycled to the number of table dimensions.}
+
+  \item{split_dir}{A numeric vector composed of the integers \code{1:3} or a character vector
 composed of \code{c("x", "y", "z")}, where \code{split_dir[i]} specifies the
 axis along which the tiles should be split for dimension \code{i} of the
-table. The values specified are re-cycled to the number of table dimensions.
-}
-  \item{shading}{
-A function, taking an array or vector of residuals for the given model,
+table. The values specified are re-cycled to the number of table dimensions.}
+
+  \item{shading}{A function, taking an array or vector of residuals for the given model,
 returning a vector of colors.  At present, only the default
 \code{shading=shading_basic} is provided.  This is roughly equivalent
 to the use of the \code{shade} argument in \code{\link[graphics]{mosaicplot}}
 or to the use of \code{gp=shading_Friendly} in \code{\link[vcd]{mosaic}}.
 }
-  \item{interpolate}{a vector of interpolation values for the \code{shading}
-  function.
-}
+  \item{interpolate}{a vector of interpolation values for the \code{shading} function.}
 
   \item{zero_size}{
  The radius of a small sphere used to mark zero cells in the display.
  }
-  \item{label_edge}{
-A character vector composed of \code{c("-", "+")} indicating whether the
+  \item{label_edge}{A character vector composed of \code{c("-", "+")} indicating whether the
 labels for a given table dimension are to be written at the minima (\code{"-"})
 or maxima (\code{"+"}) of the \emph{other} dimensions in the plot.
 The default is \code{rep( c('-', '+'), each=3, length=ndim)}, meaning
@@ -114,16 +110,14 @@ and successive ones at the maxima.
 This argument is intended to be used to specify details of the rendering
 of labels for the table dimensions, but at present has no effect.
 }
-  \item{newpage}{
-logical indicating whether a new page should be created for the plot or not.
-}
+  \item{newpage}{logical indicating whether a new page should be created for the plot or not.}
+
   \item{box}{
 logical indicating whether a bounding box should be drawn around the plot.
 }
-  \item{\dots}{
-Other arguments passed down to \code{mosaic.default} or  3D functions.
+  \item{\dots}{Other arguments passed down to \code{mosaic.default} or  3D functions.}
 }
-}
+
 \details{
 Friendly (1995), Friendly [Sect. 4.5](2000) and Theus and Lauer (1999)
 have all used the idea of 3D mosaic displays to explain various aspects
@@ -140,11 +134,10 @@ loglinear model given by the \code{expected} argument.
 For the loglm method, residuals and observed frequencies are calculated from the model
 object.
 }
-\value{
-Invisibly, the list of \code{shape3d} objects used to draw the 3D mosaic,
-with names corresponding to the concatenation of the level labels, separated
-by ":".
-}
+
+\value{Invisibly, the list of \code{shape3d} objects used to draw the 3D mosaic,
+with names corresponding to the concatenation of the level labels, separated by ":".}
+
 \references{
 Friendly, M. (1995).
 Conceptual and Visual Models for Categorical Data, 
@@ -158,9 +151,8 @@ Visualizing Loglinear Models.
 \emph{Journal of Computational and Graphical Statistics}, \bold{8}, 396-412.
 
 }
-\author{
-Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
-}
+\author{Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis}
+
 %\note{
 %%%  ~~further notes~~
 %}
