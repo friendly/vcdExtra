@@ -5,8 +5,7 @@
 USA 1970 Draft Lottery Data
 }
 \description{
-This data set gives the results of the 1970 US draft lottery, in the form of
-a data frame.
+This data set gives the results of the 1970 US draft lottery, in the form of a data frame.
 
 }
 \usage{data(Draft1970)}
@@ -52,6 +51,7 @@ Fienberg, S. E. (1971),
 }
 \examples{
 data(Draft1970)
+
 # scatterplot
 plot(Rank ~ Day, data=Draft1970)
 with(Draft1970, lines(lowess(Day, Rank), col="red", lwd=2))

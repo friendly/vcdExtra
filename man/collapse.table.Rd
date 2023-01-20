@@ -1,7 +1,9 @@
 \name{collapse.table}
 \alias{collapse.table}
 %- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{Collapse Levels of a Table}
+
 \description{
 Collapse (or re-label) variables in a
 a contingency table, array or \code{ftable} object by re-assigning levels of the table variables.
@@ -15,6 +17,7 @@ collapse.table(table, ...)
   \item{\dots}{ A collection of one or more assignments of factors of the table to
   a list of levels }
 }
+
 \details{
 Each of the \code{\dots} arguments must be of the form 
 \code{variable = levels}, where \code{variable} is the name of one of the table

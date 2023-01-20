@@ -1,7 +1,9 @@
 \name{Caesar}
 \alias{Caesar}
 \docType{data}
+
 \title{Risk Factors for Infection in Caesarian Births}
+
 \description{Data from infection from birth by Caesarian section, classified by \code{Risk} (two levels), 
 whether \code{Antibiotics} were used (two levels) and whether the Caesarian section was \code{Planned} or not.  
 The outcome is \code{Infection} (three levels).}
@@ -10,7 +12,7 @@ The outcome is \code{Infection} (three levels).}
 data(Caesar)
 }
 \format{
-  A     4-dimensional array resulting from cross-tabulating    4 variables for   251 observations. The variable names and their levels are:
+  A 4-dimensional array resulting from cross-tabulating 4 variables for   251 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr
@@ -48,7 +50,9 @@ structable(Caesar)
 require(MASS)
 
 # baseline model, Infection as response
-Caesar.mod0 <- loglm(~Infection + (Risk*Antibiotics*Planned), data=Caesar)
+Caesar.mod0 <- loglm(~Infection + (Risk*Antibiotics*Planned), 
+                     data=Caesar)
+
 # NB: Pearson chisq cannot be computed due to the 0 cells
 Caesar.mod0
 
@@ -60,8 +64,9 @@ zeros[1,,1,1] <- 1
 structable(zeros)
 
 # fit model excluding possible structural zeros
-Caesar.mod0s <- loglm(~Infection + (Risk*Antibiotics*Planned), data=Caesar, 
-	start=zeros)
+Caesar.mod0s <- loglm(~Infection + (Risk*Antibiotics*Planned), 
+                      data=Caesar, 
+	                    start=zeros)
 Caesar.mod0s
 
 anova(Caesar.mod0, Caesar.mod0s, test="Chisq")
@@ -72,10 +77,12 @@ mosaic (Caesar.mod0s)
 add1(Caesar.mod0, ~.^2, test="Chisq")
 
 # add Association of Infection:Antibiotics
-Caesar.mod1 <- update(Caesar.mod0, ~.+Infection:Antibiotics)
+Caesar.mod1 <- update(Caesar.mod0, ~ . + Infection:Antibiotics)
 anova(Caesar.mod0, Caesar.mod1, test="Chisq")
 
-mosaic(Caesar.mod1, gp=shading_Friendly, main="Adding Infection:Antibiotics")
+mosaic(Caesar.mod1, 
+       gp=shading_Friendly, 
+       main="Adding Infection:Antibiotics")
 
 
 

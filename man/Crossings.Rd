@@ -1,9 +1,9 @@
 \name{Crossings}
 \alias{Crossings}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Crossings Interaction of Factors
-}
+
+\title{Crossings Interaction of Factors}
+
 \description{
 Given two ordered factors in a square, n x n frequency table, \code{Crossings}
 creates an n-1 column matrix corresponding to different degrees of difficulty
@@ -32,14 +32,12 @@ In: \emph{Proceedings of the Sixth Berkeley Symposium on Mathematical Statistics
 Berkeley, CA: University of California Press, pp. 649-696.
 
 }
-\author{
-Michael Friendly and Heather Turner
-}
+\author{Michael Friendly and Heather Turner}
+
 %\note{
 %%  ~~further notes~~
 %}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 \code{\link[stats]{glm}}, 
@@ -51,20 +49,25 @@ Michael Friendly and Heather Turner
 \code{\link[gnm]{Topo}} 
 for similar extensions to terms in model formulas.
 }
+
 \examples{
 data(Hauser79)
 # display table
-structable(~Father+Son, data=Hauser79)
+structable(~Father + Son, data=Hauser79)
 
-hauser.indep <- gnm(Freq ~ Father + Son, data=Hauser79, family=poisson)
-hauser.CR <- update(hauser.indep, ~ . + Crossings(Father,Son))
+hauser.indep <- gnm(Freq ~ Father + Son, 
+                    data=Hauser79, 
+                    family=poisson)
+
+hauser.CR <- update(hauser.indep, 
+                    ~ . + Crossings(Father,Son))
 LRstats(hauser.CR)
 
-hauser.CRdiag <- update(hauser.indep, ~ . + Crossings(Father,Son) + Diag(Father,Son))
+hauser.CRdiag <- update(hauser.indep, 
+                        ~ . + Crossings(Father,Son) + Diag(Father,Son))
 LRstats(hauser.CRdiag)
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+
 \keyword{models}
-\keyword{manip}% __ONLY ONE__ keyword per line
+\keyword{manip}

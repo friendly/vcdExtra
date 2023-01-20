@@ -9,7 +9,7 @@
 data(Cancer)
 }
 \format{
-  A     3-dimensional array resulting from cross-tabulating    3 variables for   474 observations. The variable names and their levels are:
+  A 3-dimensional array resulting from cross-tabulating 3 variables for   474 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr
@@ -43,7 +43,9 @@ New York: John Wiley and Sons, p. 220.
 \examples{
 data(Cancer)
 
-# example goes here
+MASS::loglm(~Survival + Grade + Center, data = Cancer)
+
+vcd::mosaic(Cancer, shade=TRUE)
 }
 
 \keyword{datasets}
