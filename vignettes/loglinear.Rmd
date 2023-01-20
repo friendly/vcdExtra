@@ -48,6 +48,7 @@ models.  Equivalent models can also be fit (from a different perspective) as gen
 linear models with the `glm()`  function using the `family='poisson'` argument,
 and the `gnm` package provides a wider range of generalized *nonlinear* models,
 particularly for testing structured associations.
+
 The visualization methods for these models were originally developed for models fit using `loglm()`,
 so this approach is emphasized here.  Some extensions of these methods for models
 fit using `glm()` and `gnm()` are contained in the `vcdExtra` package
@@ -149,7 +150,7 @@ both of these variables are ordered factors.
 
 ```{r, mental1}
 str(Mental)
-xtabs(Freq ~ mental+ses, data=Mental)   # display the frequency table
+xtabs(Freq ~ mental + ses, data=Mental)   # display the frequency table
 ```
 Simple ways of handling ordinal variables involve assigning scores to the table
 categories, and the simplest cases are to use integer scores, either for the row variable (``column
@@ -169,7 +170,8 @@ Rscore <- as.numeric(Mental$mental)
 ```
 
 Then, the row effects model, the column effects model, and the uniform association
-model can be fit as follows:
+model can be fit as follows. The essential idea is to replace a factor variable
+with its numeric equivalent in the model formula for the association term.
 
 ```{r, mental4}
 # column effects model (ses)

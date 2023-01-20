@@ -30,13 +30,11 @@ loglmlist(...)
 } 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{\dots}{
-One or more model objects, as appropriate to the function,
-optionally assigned names as in \code{list}.
-	}
+  \item{\dots}{One or more model objects, as appropriate to the function, optionally assigned names as in \code{list}.}
   \item{object}{a \code{glmlist} object}
   \item{result}{type of the result to be returned}
 }
+
 \details{
 The arguments to \code{glmlist}  or \code{loglmlist} are of the form \code{value} or \code{name=value}.
 
@@ -45,14 +43,11 @@ Any objects which do not inherit the appropriate class \code{glm} or \code{loglm
 In the \code{coef} method, coefficients from the different models are matched by name in the list of
 unique names across all models.
 }
+
 \value{
 An object of class \code{glmlist} \code{loglmlist}, just like a \code{list},
-except that each model is given a \code{name} attribute.
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
+except that each model is given a \code{name} attribute.}
+
 %\references{
 %%% ~put references to the literature/web site here ~
 %}
@@ -74,6 +69,7 @@ The function \code{\link[stats]{anova.glm}} also handles \code{glmlist objects}
 
 \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist} object.
 }
+
 \examples{
 data(Mental)
 indep <- glm(Freq ~ mental+ses,

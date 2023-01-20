@@ -15,7 +15,7 @@ models for dependence over time.
 data(Heckman)
 }
 \format{
-  A     5-dimensional array resulting from cross-tabulating    5 variables for  1583 observations. The variable names and their levels are:
+  A 5-dimensional \eqn{2^5} array resulting from cross-tabulating 5 binary variables for 1583 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr

@@ -27,10 +27,14 @@ Table 3.11, p. 106.
 %}
 \examples{
 data(GSS)
-## maybe str(GSS) ; plot(GSS) ...
+str(GSS)
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
 
-mod.glm <- glm(count ~ sex + party, family = poisson, data = GSS)
+(mod.glm <- glm(count ~ sex + party, family = poisson, data = GSS))
 
+mosaic(mod.glm, 
+  formula = ~ sex+party, 
+  labeling = labeling_residuals, 
+  suppress=0)
 }
 \keyword{datasets}

@@ -8,6 +8,10 @@ Hauser (1979) Data on Social Mobility
 Hauser (1979) presented this two-way frequency table,
 cross-classifying occupational categories of sons and fathers
 in the United States.
+
+It is a good example for exploring a variety of models for square tables:
+quasi-independence, quasi-symmetry, row/column effects, uniform association, etc.,
+using the facilities of the \pkg{gnm}.
 }
 \usage{data(Hauser79)}
 \format{
@@ -19,9 +23,10 @@ in the United States.
     \item{\code{Freq}}{a numeric vector}
   }
 }
-%\details{
-%%%  ~~ If necessary, more details than the __description__ above ~~
-%}
+\details{
+The table levels for \code{Son} and \code{Father} have been arranged in order of decreasing status
+as is common for mobility tables.
+}
 \source{
 R.M. Hauser (1979), Some exploratory methods for modeling mobility tables and other cross-classified data. 
 In: K.F. Schuessler (Ed.), \emph{Sociological Methodology}, 1980, Jossey-Bass, San Francisco, pp. 413-458.
@@ -41,9 +46,13 @@ structable(~Father+Son, data=Hauser79)
 # independence model
 mosaic(Freq ~ Father + Son, data=Hauser79, shade=TRUE)
 
-hauser.indep <- gnm(Freq ~ Father + Son, data=Hauser79, family=poisson)
+hauser.indep <- gnm(Freq ~ Father + Son, 
+  data=Hauser79, 
+  family=poisson)
+
 mosaic(hauser.indep, ~Father+Son, main="Independence model", gp=shading_Friendly)
 
+# Quasi-symmetry
 hauser.quasi <-  update(hauser.indep, ~ . + Diag(Father,Son))
 mosaic(hauser.quasi, ~Father+Son, main="Quasi-independence model", gp=shading_Friendly)
 

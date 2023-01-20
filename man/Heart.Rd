@@ -2,14 +2,14 @@
 \Rdversion{1.1}
 \alias{Heart}
 \docType{data}
+
 \title{Sex, Occupation and Heart Disease}
 \description{Classification of individuals by gender, occupational category and occurrence of heart disease}
 
-\usage{
-data(Heart)
-}
+\usage{data(Heart)}
+
 \format{
-  A     3-dimensional array resulting from cross-tabulating    3 variables for 21522 observations. The variable names and their levels are:
+  A 3-dimensional array resulting from cross-tabulating 3 variables for 21522 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr
@@ -32,8 +32,14 @@ Karger, (1980).
 %\seealso{ }
 \examples{
 data(Heart)
+str(Heart)
 
-# example goes here
+# Display the frequencies for occupational categories.
+# Each row is a 2 x 2 table
+vcd::structable(Disease + Gender ~ Occup, data=Heart)
+
+# display as fourfold plots
+vcd::cotabplot(~ Disease + Gender | Occup, data=Heart, panel = cotab_fourfold)
 }
 
 \keyword{datasets}
