@@ -48,13 +48,16 @@ Gilby, W. H. (1911).
 \examples{
 data(Gilby)
 
+# CMH tests treating row/column variables as ordinal
+CMHtest(Gilby)
+
 mosaic(Gilby, shade=TRUE)
 
 # correspondence analysis to see relations among categories
 if(require(ca)){
 	ca(Gilby)
-	plot(ca(Gilby))
-	title(xlab="Dimension 1", ylab="Dimension 2")
+	plot(ca(Gilby), lines=TRUE)
+
 }
 
 

@@ -1,9 +1,9 @@
 \name{seq_loglm}
 \alias{seq_loglm}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Sequential Loglinear Models for an N-way Table
-}
+
+\title{Sequential Loglinear Models for an N-way Table}
+
 \description{
 This function takes an n-way contingency table and fits a series of sequential
 models to the 1-, 2-, ... n-way marginal tables, corresponding to a variety of
@@ -13,46 +13,39 @@ types of loglinear models.
 \usage{
 seq_loglm(x, 
    type = c("joint", "conditional", "mutual", "markov", "saturated"), 
-   marginals = 1:nf, vorder = 1:nf, 
-   k = NULL, prefix = "model", fitted = TRUE, ...)
+   marginals = 1:nf, 
+   vorder = 1:nf, 
+   k = NULL, 
+   prefix = "model", 
+   fitted = TRUE,
+   ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-a contingency table in array form, with optional category labels specified in the 
-dimnames(x) attribute,
-or else a data.frame in frequency form, with the frequency variable named \code{"Freq"}.
 
+  \item{x}{a contingency table in array form, with optional category labels specified in the dimnames(x) attribute, or else a data.frame in frequency form, with the frequency variable named \code{"Freq"}.
 }
-  \item{type}{
-type of sequential model to fit, a character string.
+  \item{type}{type of sequential model to fit, a character string.
 One of \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"},
 or  \code{"saturated"}.
 }
-  \item{marginals}{
-which marginal sub-tables to fit? A vector of a (sub)set of the integers, \code{1:nf}
+  \item{marginals}{which marginal sub-tables to fit? A vector of a (sub)set of the integers, \code{1:nf}
 where \code{nf} is the number of factors in the full n-way table.
 }
-  \item{vorder}{
-order of variables, a permutation of the integers \code{1:nf},
+  \item{vorder}{order of variables, a permutation of the integers \code{1:nf},
 used to reorder the variables in the original table for the purpose
 of fitting sequential marginal models. 
 }
-  \item{k}{
-conditioning variable(s) for \code{type} = \code{"joint"}, \code{"conditional"} 
+  \item{k}{conditioning variable(s) for \code{type} = \code{"joint"}, \code{"conditional"} 
 or Markov chain order for \code{type} = \code{"markov"}
 }
-  \item{prefix}{
-prefix used to give names to the sequential models
+  \item{prefix}{prefix used to give names to the sequential models}
+
+  \item{fitted}{argument passed to \code{loglm} to store the fitted values in the model objects}
+
+  \item{\dots}{other arguments, passed down}
 }
-  \item{fitted}{
-argument passed to \code{loglm} to store the fitted values in the 
-model objects
-}
-  \item{\dots}{
-other arguments, passed down
-}
-}
+
 \details{
 Sequential marginal models for an n-way tables begin with the
 model of equal-probability for the one-way margin

@@ -1,8 +1,9 @@
 ## Version 0.8-2 (2023-01-19)
 
 - add HouseTasks data set
-- this package now depends on R (>= 3.5.0)
+- package now depends on R (>= 3.5.0) per CRAN nit
 - add Suggests: seriation to illustrate CA re-ordering of rows/cols based on correspondence analysis seriation
+- all .Rd files reformatted and examples extended.
 
 ## Version 0.8-1 (2022-04-22)
 

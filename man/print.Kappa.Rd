@@ -1,14 +1,20 @@
 \name{print.Kappa}
 \alias{print.Kappa}
 %- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{ Print Kappa }
+
 \description{
   This is a replacement for the \code{print.Kappa} method in \code{vcd},
   adding display of \code{z} values to the \code{vcd} version and
   optional confidence intervals.
 }
 \usage{
-\method{print}{Kappa}(x, digits=max(getOption("digits") - 3, 3), CI=FALSE, level=0.95,  ...)
+\method{print}{Kappa}(
+  x, 
+  digits=max(getOption("digits") - 3, 3), 
+  CI=FALSE, 
+  level=0.95,  ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +30,6 @@
 \value{
   Returns the Kappa object, invisibly.
 }
-%\references{ ~put references to the literature/web site here ~ }
 \author{ Michael Friendly}
 
 \seealso{ 

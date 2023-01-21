@@ -1,9 +1,9 @@
 \name{DaytonSurvey}
 \alias{DaytonSurvey}
 \docType{data}
-\title{
-Dayton Student Survey on Substance Use
-}
+
+\title{Dayton Student Survey on Substance Use}
+
 \description{
 This data, from Agresti (2002), Table 9.1, gives the result of a 1992
 survey in Dayton Ohio of  2276 high school seniors on

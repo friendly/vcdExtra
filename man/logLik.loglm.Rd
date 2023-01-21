@@ -1,9 +1,9 @@
 \name{logLik.loglm}
 \alias{logLik.loglm}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Log-Likelihood of a loglm Object
-}
+
+\title{Log-Likelihood of a loglm Object}
+
 \description{
 Calculates the log-likelihood value of the \code{loglm} model represented by \code{object} 
 evaluated at the estimated coefficients.
@@ -17,12 +17,8 @@ model.
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{object}{
-A \code{loglm} object
-}
-  \item{\dots}{
-For compatibility with the S3 generic; not used here
-}
+  \item{object}{A \code{loglm} object}
+  \item{\dots}{For compatibility with the S3 generic; not used here}
   \item{zero}{value used to replace zero frequencies in calculating the log-likelihood}
 }
 
@@ -49,12 +45,7 @@ giving the number of (estimated) parameters in the model. }
 %\references{
 %%% ~put references to the literature/web site here ~
 %}
-\author{
-Achim Zeileis
-}
-%\note{
-%%%  ~~further notes~~
-%}
+\author{Achim Zeileis}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

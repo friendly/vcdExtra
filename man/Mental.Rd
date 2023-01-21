@@ -2,7 +2,9 @@
 \Rdversion{1.1}
 \alias{Mental}
 \docType{data}
-\title{ Mental impairment and parents SES}
+
+\title{Mental Impairment and Parents SES}
+
 \description{
 A 6 x 4 contingency table representing the cross-classification of
 mental health status (\code{mental}) of 1660 young New York residents by
@@ -36,15 +38,15 @@ Friendly, M. \emph{Visualizing Categorical Data}, Cary, NC: SAS Institute, 2000,
 \examples{
 data(Mental)
 str(Mental)
-(Mental.tab <- xtabs(Freq ~ ses+mental, data=Mental))
+(Mental.tab <- xtabs(Freq ~ ses + mental, data=Mental))
 
 # mosaic and sieve plots
 mosaic(Mental.tab, gp=shading_Friendly)
 sieve(Mental.tab, gp=shading_Friendly)
 
-library(ca)
-plot(ca(Mental.tab), main="Mental impairment & SES")
-title(xlab="Dim 1", ylab="Dim 2")
+if(require(ca)){
+  plot(ca(Mental.tab), main="Mental impairment & SES")
+}
 
 }
 \keyword{datasets}

@@ -41,7 +41,7 @@ Fienberg, S. E. (1971),
 Starr, N. (1997).
 Nonrandom Risk: The 1970 Draft Lottery,
 \emph{Journal of Statistics Education}, v.5, n.2
-\url{http://jse.amstat.org/v5n2/datasets.starr.html}
+\url{https://jse.amstat.org/v5n2/datasets.starr.html}
 }
 
 \seealso{\code{\link{Draft1970}}

@@ -1,9 +1,9 @@
 \name{ICU}
 \alias{ICU}
 \docType{data}
-\title{
-ICU data set
-}
+
+\title{ICU data set}
+
 \description{
 The ICU data set consists of a sample of 200 subjects who were part of
 a much larger study on survival of patients following admission to an adult
@@ -80,11 +80,15 @@ icu.full <- glm(died ~ ., data=ICU1, family=binomial)
 summary(icu.full)
 
 # simpler model (found from a "best" subsets procedure)
-icu.mod1 <- glm(died ~ age + sex + cancer + systolic + admit + uncons, data=ICU1, family=binomial)
+icu.mod1 <- glm(died ~ age + sex + cancer + systolic + admit + uncons, 
+  data=ICU1, 
+  family=binomial)
 summary(icu.mod1)
 
 # even simpler model
-icu.mod2 <- glm(died ~ age + cancer  + admit + uncons, data=ICU1, family=binomial)
+icu.mod2 <- glm(died ~ age + cancer  + admit + uncons, 
+  data=ICU1, 
+  family=binomial)
 summary(icu.mod2)
 
 anova(icu.mod2, icu.mod1, icu.full, test="Chisq")

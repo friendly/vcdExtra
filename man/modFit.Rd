@@ -4,9 +4,9 @@
 \alias{modFit.loglm}
 \alias{modFit.glm}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Brief Summary of Model Fit for a glm or loglm Object
-}
+
+\title{Brief Summary of Model Fit for a glm or loglm Object}
+
 \description{
 Formats a brief summary of model fit for a \code{glm} or \code{loglm} object, showing
 the likelihood ratio Chisq (df) value and or AIC.  Useful for inclusion in a plot
@@ -19,18 +19,10 @@ modFit(x, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-A \code{glm} or \code{loglm} object
-}
-  \item{\dots}{
-Arguments passed down
-}
-  \item{stats}{
-One or more of \code{chisq} or \code{aic}, determining the statistics displayed.
-}
-  \item{digits}{
-Number of digits after the decimal point in displayed statistics.
-}
+  \item{x}{A \code{glm} or \code{loglm} object}
+  \item{\dots}{Arguments passed down}
+  \item{stats}{One or more of \code{chisq} or \code{aic}, determining the statistics displayed.}
+  \item{digits}{Number of digits after the decimal point in displayed statistics.}
 
 }
 %\details{
@@ -38,18 +30,12 @@ Number of digits after the decimal point in displayed statistics.
 %}
 \value{
 	A character string containing the formatted values of the chosen statistics.
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 }
 %\references{
 %%% ~put references to the literature/web site here ~
 %}
-\author{
-Michael Friendly
-}
+\author{Michael Friendly}
+
 %\note{
 %%%  ~~further notes~~
 %}
@@ -63,8 +49,8 @@ Michael Friendly
 \examples{
 data(Mental)
 require(MASS)
-(Mental.tab <- xtabs(Freq ~ ses+mental, data=Mental))
-(Mental.mod <- loglm(~ses+mental, Mental.tab))
+(Mental.tab <- xtabs(Freq ~ ses + mental, data=Mental))
+(Mental.mod <- loglm(~ses + mental, Mental.tab))
 Mental.mod
 modFit(Mental.mod)
 

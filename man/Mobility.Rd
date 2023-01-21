@@ -5,11 +5,10 @@
 \title{Social Mobility data}
 \description{Data on social mobility, recording the occupational category of fathers and their sons. }
 
-\usage{
-data(Mobility)
-}
+\usage{data(Mobility)}
+
 \format{
-  A     2-dimensional array resulting from cross-tabulating    2 variables for 19912 observations. The variable names and their levels are:
+  A 2-dimensional array resulting from cross-tabulating 2 variables for 19912 observations. The variable names and their levels are:
 
   \tabular{rll}{
     No \tab Name \tab Levels \cr
@@ -35,11 +34,21 @@ Fiche 62. Copenhagen: Sociological Institute.
 %\references{
 %}
 
-%\seealso{ }
+\seealso{
+  \code{\link{Glass}}, 
+  \code{\link{Hauser79}},
+  \code{\link{Yamaguchi87}} for other examples of mobility data.
+}
 \examples{
 data(Mobility)
+Mobility
 
-# example goes here
+# independence model
+MASS::loglm(~Father_Occupation + Son_Occupation, data = Mobility)
+
+vcd::mosaic(Mobility, shade=TRUE, legend = FALSE)
+
+
 }
 
 \keyword{datasets}

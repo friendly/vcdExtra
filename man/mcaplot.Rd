@@ -1,9 +1,9 @@
 \name{mcaplot}
 \alias{mcaplot}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Simple and enhanced plot of MCA solutions
-}
+
+\title{Simple and enhanced plot of MCA solutions}
+
 \description{
 This function is intended as an alternative to \code{\link[ca]{plot.mjca}}
 for plotting multiple correspondence analysis solutions.
@@ -12,20 +12,27 @@ them with lines. It does not support some features of
 \code{plot.mjca} (centroids, supplementary points, arrows, etc.) 
 }
 \usage{
-mcaplot(obj, map = "symmetric", dim = 1:2, 
-        col = c("blue", "red", "brown", "black", "green3", "purple"), 
-        pch = 15:20, cex = 1.2, pos = 3, lines = TRUE, lwd = 2, 
-        legend = FALSE, legend.pos = "topright", 
-        xlab = "_auto_", ylab = "_auto_", 
-        rev.axes  = c(FALSE, FALSE),
-        ...)
+mcaplot(obj, 
+  map = "symmetric", 
+  dim = 1:2, 
+  col = c("blue", "red", "brown", "black", "green3", "purple"), 
+  pch = 15:20, 
+  cex = 1.2, 
+  pos = 3, 
+  lines = TRUE, 
+  lwd = 2, 
+  legend = FALSE, 
+  legend.pos = "topright", 
+  xlab = "_auto_", 
+  ylab = "_auto_", 
+  rev.axes  = c(FALSE, FALSE),
+  ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{obj}{An \code{"mjca"} object}
 
-  \item{map}{
-Character string specifying the map type, i.e., the scaling applied to coordinates
+  \item{map}{Character string specifying the map type, i.e., the scaling applied to coordinates
 for different types of MCA representations.
 Allowed options include:
         \code{"symmetric"} (default),
@@ -42,8 +49,7 @@ Allowed options include:
 
   \item{cex}{Character size for points and level labels}
 
-  \item{pos}{Position of level labels relative to the category points; either a single number
-             or a vector of length equal to the number of category points.}
+  \item{pos}{Position of level labels relative to the category points; either a single number or a vector of length equal to the number of category points.}
 
   \item{lines}{A logical or an integer vector indicating which factors are to be
              joined with lines using \code{\link{multilines}}}
