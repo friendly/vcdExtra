@@ -1,9 +1,9 @@
 \name{Vietnam}
 \alias{Vietnam}
 \docType{data}
-\title{
-Student Opinion about the Vietnam War
-}
+
+\title{Student Opinion about the Vietnam War}
+
 \description{
 A survey of student opinion on the Vietnam War was taken at the
 University of North Carolina at Chapel Hill in May 1967 and published

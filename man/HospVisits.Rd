@@ -34,14 +34,16 @@ Goodman, L. A. (1983) The analysis of dependence in cross-classifications having
 Wing, J. K. (1962). Institutionalism in Mental Hospitals,
 \emph{British Journal of Social and Clinical Psychology}, 1 (1), 38-51.
 }
+\seealso{\code{\link[ca]{ca}}}
+
 \examples{
 data(HospVisits)
 mosaic(HospVisits, gp=shading_Friendly)
 
-library(ca)
-ca(HospVisits)
-# surprisingly 1D !
-plot(ca(HospVisits))
-
+if(require(ca)){
+  ca(HospVisits)
+  # surprisingly 1D !
+  plot(ca(HospVisits))
+  }
 }
 \keyword{datasets}

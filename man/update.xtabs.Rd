@@ -30,9 +30,8 @@ If \code{evaluate == TRUE}, the new \code{"xtabs"} object, otherwise the updated
 %\references{
 %%% ~put references to the literature/web site here ~
 %}
-\author{
-Michael Friendly
-}
+\author{Michael Friendly}
+
 %\note{
 %%%  ~~further notes~~
 %}
@@ -46,6 +45,7 @@ Michael Friendly
 \code{\link{collapse.table}} collapses category levels
 
 }
+
 \examples{
 vietnam.tab <- xtabs(Freq ~ sex + year + response, data=Vietnam)
 

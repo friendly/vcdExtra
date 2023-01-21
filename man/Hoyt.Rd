@@ -59,7 +59,7 @@ Analysis of complex contingency tables,
 data(Hoyt)
 
 # display the table
-structable(Status+Sex ~ Rank+Occupation, data=Hoyt)
+structable(Status + Sex ~ Rank + Occupation, data=Hoyt)
 
 # mosaic for independence model
 plot(Hoyt, shade=TRUE)
@@ -77,14 +77,22 @@ plot(Hoyt1, shade=TRUE)
 
 # fit baseline log-linear model for Status as response
 require(MASS)
-hoyt.mod0 <- loglm(~ Status + (Sex*Rank*Occupation), data=Hoyt1)
+hoyt.mod0 <- loglm(~ Status + (Sex*Rank*Occupation), 
+  data=Hoyt1)
 hoyt.mod0
-mosaic(hoyt.mod0, gp=shading_Friendly, main="Baseline model: Status + (Sex*Rank*Occ)")
+
+mosaic(hoyt.mod0, 
+  gp=shading_Friendly, 
+  main="Baseline model: Status + (Sex*Rank*Occ)")
 
 # add one-way association of Status with factors
-hoyt.mod1 <- loglm(~ Status * (Sex + Rank + Occupation) + (Sex*Rank*Occupation), data=Hoyt1)
+hoyt.mod1 <- loglm(~ Status * (Sex + Rank + Occupation) + (Sex*Rank*Occupation), 
+  data=Hoyt1)
 hoyt.mod1
-mosaic(hoyt.mod1, gp=shading_Friendly, main="Status * (Sex + Rank + Occ)")
+
+mosaic(hoyt.mod1, 
+  gp=shading_Friendly, 
+  main="Status * (Sex + Rank + Occ)")
 
 # can we drop any terms?
 drop1(hoyt.mod1, test="Chisq")
@@ -96,14 +104,20 @@ anova(hoyt.mod0, hoyt.mod1)
 add1(hoyt.mod1, ~.^2, test="Chisq")
 
 # add interaction of Sex:Occupation on Status
-hoyt.mod2 <- update(hoyt.mod1, ~.+Status:Sex:Occupation)
-mosaic(hoyt.mod2, gp=shading_Friendly, main="Adding Status:Sex:Occupation")
+hoyt.mod2 <- update(hoyt.mod1, ~ . + Status:Sex:Occupation)
+
+mosaic(hoyt.mod2, 
+  gp=shading_Friendly, 
+  main="Adding Status:Sex:Occupation")
 
 # compare model fits
 anova(hoyt.mod0, hoyt.mod1, hoyt.mod2)
 
 # Alternatively, try stepwise analysis, heading toward the saturated model
-steps <- step(hoyt.mod0, direction="forward", scope=~Status*Sex*Rank*Occupation)
+steps <- step(hoyt.mod0, 
+  direction="forward", 
+  scope=~Status*Sex*Rank*Occupation)
+
 # display anova
 steps$anova
 

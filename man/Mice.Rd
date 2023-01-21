@@ -1,9 +1,9 @@
 \name{Mice}
 \alias{Mice}
 \docType{data}
-\title{
-Mice Depletion Data
-}
+
+\title{Mice Depletion Data}
+
 \description{
 Data from Kastenbaum and Lamphiear (1959).
 The table gives the number of depletions (deaths) in 657 litters of mice, classified by
@@ -40,8 +40,8 @@ data(Mice)
 # make a table
 ftable(mice.tab <- xtabs(Freq ~ litter + treatment + deaths, data=Mice))
 
-library(vcd)
-mosaic(mice.tab, shade=TRUE)
+#library(vcd)
+vcd::mosaic(mice.tab, shade=TRUE)
 
 }
 \keyword{datasets}

@@ -1,9 +1,8 @@
 \name{Yamaguchi87}
 \alias{Yamaguchi87}
 \docType{data}
-\title{
-Occupational Mobility in Three Countries
-}
+
+\title{Occupational Mobility in Three Countries}
 \description{
 Yamaguchi (1987) presented this three-way frequency table,
 cross-classifying occupational categories of sons and fathers
@@ -44,11 +43,13 @@ are farmers and farm laborers.
 
 Some of the models from Xie (1992), Table 1, are fit in \code{demo(yamaguchi-xie)}.
 }
+
 \source{
 Yamaguchi, K. (1987). 
 Models for comparing mobility tables: toward parsimony and substance, 
 \emph{American Sociological Review}, vol. 52 (Aug.), 482-494, Table 1
 }
+
 \references{
 Goodman, L. A. and Hout, M. (1998).
 Statistical Methods and Graphical Displays for Analyzing How the Association Between Two Qualitative Variables Differs Among Countries, Among Groups, Or Over Time: 
@@ -59,6 +60,7 @@ Xie, Yu (1992).
 The log-multiplicative layer effect model for comparing mobility tables.
 \emph{American Sociological Review}, 57 (June), 380-395.
 }
+
 \examples{
 data(Yamaguchi87)
 # reproduce Table 1
@@ -76,18 +78,24 @@ largs <- list(rot_labels=c(right=0), offset_varnames = c(right = 0.6),
 # Fit some models & display mosaics
   
 # Mutual independence
-yama.indep <- glm(Freq ~ Son + Father + Country, data=Yamaguchi87, family=poisson)
+yama.indep <- glm(Freq ~ Son + Father + Country, 
+  data=Yamaguchi87, 
+  family=poisson)
 anova(yama.indep)
 
 mosaic(yama.indep, ~Son+Father, main="[S][F] ignoring country")
+
 mosaic(yama.indep, ~Country + Son + Father, condvars="Country",
        labeling_args=largs, 
        main='[S][F][C] Mutual independence') 
 
 # no association between S and F given country ('perfect mobility')
 # asserts same associations for all countries
-yama.noRC <- glm(Freq ~ (Son + Father) * Country, data=Yamaguchi87, family=poisson)
+yama.noRC <- glm(Freq ~ (Son + Father) * Country, 
+  data=Yamaguchi87, 
+  family=poisson)
 anova(yama.noRC)
+
 mosaic(yama.noRC, ~~Country + Son + Father, condvars="Country", 
        labeling_args=largs, 
        main="[SC][FC] No [SF] (perfect mobility)")
@@ -95,7 +103,8 @@ mosaic(yama.noRC, ~~Country + Son + Father, condvars="Country",
 # ignore diagonal cells
 yama.quasi <- update(yama.noRC, ~ . + Diag(Son,Father):Country)
 anova(yama.quasi)
-mosaic(yama.quasi, ~Son+Father, main="Quasi [S][F]")
+
+mosaic(yama.quasi, ~Son + Father, main="Quasi [S][F]")
 
 ## see also:
 # demo(yamaguchi-xie)

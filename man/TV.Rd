@@ -4,8 +4,7 @@
 
 \title{TV Viewing Data}
 
-\description{
-  This data set \code{TV} comprises a 5 x 11 x 3 contingency table based on
+\description{This data set \code{TV} comprises a 5 x 11 x 3 contingency table based on
   audience viewing data from Neilsen Media Research for the week starting
   November 6, 1995.
 }
@@ -57,16 +56,27 @@ doubledecker(TV)
 
 # reduce number of levels of Time
 TV.df <- as.data.frame.table(TV)
-levels(TV.df$Time) <- rep(c("8:00-8:59", "9:00-9:59", "10:00-10:44"), c(4, 4, 3))
+levels(TV.df$Time) <- rep(c("8:00-8:59", "9:00-9:59", "10:00-10:44"), 
+                          c(4, 4, 3))
+
 TV2 <- xtabs(Freq ~ Day + Time + Network, TV.df)
 
 # re-label for mosaic display
 levels(TV.df$Time) <- c("8", "9", "10")
 # fit mode of joint independence, showing association of Network with Day*Time
-mosaic(~ Day + Network + Time, data = TV.df, expected = ~ Day:Time + Network, legend = FALSE)
+mosaic(~ Day + Network + Time, 
+  data = TV.df, 
+  expected = ~ Day:Time + Network, 
+  legend = FALSE)
+
+
 # with doubledecker arrangement
-mosaic(~ Day + Network + Time, data = TV.df, expected = ~ Day:Time + Network,
-  split = c(TRUE, TRUE, FALSE), spacing = spacing_highlighting, legend = FALSE)
+mosaic(~ Day + Network + Time, 
+  data = TV.df, 
+  expected = ~ Day:Time + Network,
+  split = c(TRUE, TRUE, FALSE), 
+  spacing = spacing_highlighting, 
+  legend = FALSE)
 }
 
 \keyword{datasets}

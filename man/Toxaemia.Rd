@@ -1,9 +1,9 @@
 \name{Toxaemia}
 \alias{Toxaemia}
 \docType{data}
-\title{
-Toxaemia Symptoms in Pregnancy
-}
+
+\title{Toxaemia Symptoms in Pregnancy}
+
 \description{
 Brown et al (1983) gave these data on two signs of toxaemia,
 an abnormal condition during pregnancy characterized by
@@ -42,27 +42,27 @@ Example 7.15.
 
 Friendly, M. and Meyer, D. (2016). 
 \emph{Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data}. 
-Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
-Example 10.10.
+Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}. Example 10.10.
 }
+
 \examples{
 data(Toxaemia)
 
-tox.tab <- xtabs(Freq~class+smoke+hyper+urea,Toxaemia)
+tox.tab <- xtabs(Freq ~ class + smoke + hyper + urea, Toxaemia)
 ftable(tox.tab, row.vars=1)
 
 
 # symptoms by smoking
-mosaic(~smoke+hyper+urea, data=tox.tab, shade=TRUE)
+mosaic(~smoke + hyper + urea, data=tox.tab, shade=TRUE)
 
 # symptoms by social class
-mosaic(~class+hyper+urea, data=tox.tab, shade=TRUE)
+mosaic(~class + hyper + urea, data=tox.tab, shade=TRUE)
 
 # predictors
-mosaic(~smoke+class, data=tox.tab, shade=TRUE)
+mosaic(~smoke + class, data=tox.tab, shade=TRUE)
 
 # responses
-mosaic(~hyper+urea, data=tox.tab, shade=TRUE)
+mosaic(~hyper + urea, data=tox.tab, shade=TRUE)
 
 # log odds ratios for urea and hypertension, by class and smoke
 \dontrun{

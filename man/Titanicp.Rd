@@ -1,13 +1,14 @@
 \name{Titanicp}
 \alias{Titanicp}
 \docType{data}
-\title{
-Passengers on the Titanic
-}
+
+\title{Passengers on the Titanic}
+
 \description{
 Data on passengers on the RMS Titanic, excluding the Crew and some
 individual identifier variables. 
 }
+
 \usage{data(Titanicp)}
 \format{
   A data frame with 1309 observations on the following 6 variables.

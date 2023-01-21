@@ -33,6 +33,7 @@ Multivariate Analysis of Discrete Data,
 \emph{Handbook of Multivariate Experimental Psychology}, 
 New York: Plenum Press.
 }
+
 \references{
 Agresti, A. (1990)
 \emph{Categorical Data Analysis}, Table 4.12
@@ -42,9 +43,12 @@ Friendly, M. (2000)
 \emph{Visualizing Categorical Data}, Example 7.5
 Cary, NC: SAS Institute.
 }
+
 \examples{
 data(Vote1980)
-fourfold(xtabs(Freq ~ race + votefor + conservatism, data=Vote1980), mfrow=c(2,4))
+fourfold(xtabs(Freq ~ race + votefor + conservatism, 
+  data=Vote1980), 
+  mfrow=c(2,4))
 
 }
 \keyword{datasets}
