@@ -46,18 +46,36 @@ if(!file.exists("fig")) dir.create("fig")
 
 Mosaic plots provide an ideal method both for visualizing contingency tables and for 
 visualizing the fit--- or more importantly--- **lack of fit** of a loglinear model.
-For a two-way table, `mosaic()` fits a model of independence, $[A][B]$
-or `~A+B` as an R formula.
-For $n$-way tables, `mosaic()` can fit any loglinear model, and can also be
-used to plot a model fit with `loglm()`.
-See @vcd:Friendly:1994,vcd:Friendly:1999 for the statistical ideas behind these
-uses of mosaic displays in connection with loglinear models.
 
-The essential idea is to recursively sub-divide a unit square into rectangular "tiles" for the
-cells of the table, such
-that the are area of each tile is proportional to the cell frequency.
-For a given loglinear model, the tiles can then be shaded in various ways to reflect
-the residuals (lack of fit) for a given model.  The pattern of residuals can then
+For a two-way table, `mosaic()`, by default, fits a model of independence, $[A][B]$
+or `~A + B` as an R formula. The `vcdExtra` package extends this to models fit 
+using `glm(..., family=poisson)`, which can include specialized models for
+ordered factors, or square tables that are intermediate between the saturated model,
+$[A B]$ = `A * B`, and the independence model $[A][B]$.
+
+For $n$-way tables, `vcd::mosaic()` can fit any loglinear model, and can also be
+used to plot a model fit with `MASS:loglm()`. The `vcdExtra` package extends this
+to models fit using `stats::glm()` and, by extension, to non-linear models fit
+using the [gnm package](https://cran.r-project.org/package=gnm).
+
+See @vcd:Friendly:1994, @vcd:Friendly:1999 for the statistical ideas behind these
+uses of mosaic displays in connection with loglinear models. Our book @FriendlyMeyer:2016:DDAR
+gives a detailed discussion of mosaic plots and many more examples.
+
+The essential ideas are to: 
+
+* recursively sub-divide a unit square into rectangular "tiles" for the
+cells of the table, such that the area of each tile is proportional to the cell frequency. Tiles are split in a sequential order: 
+
+  + First according to the **marginal** proportions of a first variable, V1
+  + Next according to the **conditional** proportions of a 2nd variable, V2 | V1
+  + Next according to the **conditional** proportions of a 3rd variable, V3 | {V1, V2}
+  + ...
+
+* For a given loglinear model, the tiles can then be shaded in various ways to reflect
+the residuals (lack of fit) for a given model.  
+
+* The pattern of residuals can then
 be used to suggest a better model or understand *where* a given model fits or
 does not fit.
 
@@ -66,22 +84,29 @@ the specification of shading, labeling, spacing, legend and many other details.
 It is actually implemented as a special case of a more general
 class of displays for $n$-way tables called `strucplot`, including
 sieve diagrams, association plots, double-decker plots as well as mosaic
-plots.  For details, see `help(strucplot)` and the "See also" links,
+plots.  
+
+For details, see `help(strucplot)` and the "See also" links therein,
 and also @vcd:Meyer+Zeileis+Hornik:2006b, which is available as
 an R vignette via `vignette("strucplot", package="vcd")`.
 
 ***Example***:
 A mosaic plot for the Arthritis treatment data fits the model of independence,
 `~ Treatment + Improved` and displays the association in the pattern of
-residual shading.
+residual shading. The goal is to visualize the difference in the proportions
+of `Improved` for the two levels of `Treatment` : "Placebo" and "Treated".
+
 The plot below is produced with the following call to `mosaic()`.
+With the first split by `Treatment` and the shading used, it is easy to see
+that more people given the placebo experienced no improvement, while more
+people given the active treatment reported marked improvement.
 
 
 ```{r}
 #| Arthritis1,
 #| fig.height = 6,
 #| fig.width = 7,
-#| fig.cap = "Mosaic plot for the `Arthritis` data."
+#| fig.cap = "Mosaic plot for the `Arthritis` data, using `shading_max`"
 data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 mosaic(art, gp = shading_max, 
@@ -104,10 +129,106 @@ In contrast, one of the other shading schemes, from @vcd:Friendly:1994
 uses fixed cutoffs of $\pm 2, \pm 4$,
 to shade cells which are *individually* significant
 at approximately $\alpha = 0.05$ and $\alpha = 0.001$ levels, respectively.
-The right panel below uses `gp = shading_Friendly`.
+The plot below uses `gp = shading_Friendly`.
 
-```{r Arthritis2, h=6, w=7}
+```{r}
+#| Arthritis2,
+#| fig.height = 6,
+#| fig.width = 7,
+#| fig.cap = "Mosaic plot for the `Arthritis` data, using `shading_Friendly`"
 mosaic(art, gp = shading_Friendly, 
             split_vertical = TRUE, 
             main="Arthritis: gp = shading_Friendly")
 ```
+
+## Permuting variable levels
+
+Mosaic plots using tables or frequency data frames as input typically take the levels of the
+table variables in the order presented in the dataset.  For character variables, this is often
+alphabetical order. That might be helpful for looking up a value, but is unhelpful for seeing
+and understanding the pattern of association.
+
+It is usually much better to order the levels of the row and column variables to help reveal
+the nature of their association. This is an example of **effect ordering for data display**
+[@FriendlyKwan:02:effect].
+
+A general ideas are that:
+
+* Correspondence analysis assigns scores to the row and column variables to best account for the association in 1, 2, ... dimensions
+
+* The first CA dimension accounts for largest proportion of the Pearson $\chi^2$
+
+* Therefore, permuting the levels of the row and column variables by the CA Dim1 scores gives a more coherent mosaic plot, more clearly showing the nature of the association.
+
+* The [seriation package](https://cran.r-project.org/package=seriation) now has a method to order variables in frequency tables using CA.
+
+As an example, consider the `HouseTasks` dataset, a 13 x 4 table of frequencies of household tasks performed by couples, either by the `Husband`, `Wife`, `Alternating` or `Jointly`.
+You can see from the table that some tasks (Repairs) are done largely by the husband; some (laundry, main meal)
+are largely done by the wife, while others are done jointly or alternating between husband and
+wife. But the `Task` and `Who` levels are both in alphabetical order.
+
+```{r housetasks}
+data("HouseTasks", package = "vcdExtra")
+HouseTasks
+```
+
+The naive mosaic plot for this dataset is shown below, splitting first by `Task` and then by `Who`. Due to the length of the factor labels, some features of `labeling` were used to make the display more readable.
+
+```{r housetasks-mos1}
+require(vcd)
+mosaic(HouseTasks, shade = TRUE,
+       labeling = labeling_border(rot_labels = c(45,0, 0, 0), 
+                                  offset_label =c(.5,5,0, 0),
+                                  varnames = c(FALSE, TRUE),
+                                  just_labels=c("center","right"),
+                                  tl_varnames = FALSE),
+       legend = FALSE)
+
+```
+
+Correspondence analysis, using the [ca package](https://cran.r-project.org/package=ca),
+shows that nearly 89% of the $\chi^2$ can be accounted for in two dimensions.
+
+```{r housetasks-ca}
+require(ca)
+HT.ca <- ca(HouseTasks)
+summary(HT.ca, rows=FALSE, columns=FALSE)
+```
+
+The CA plot has a fairly simple interpretation: Dim1 is largely the distinction between
+tasks primarily done by the wife vs. the husband. Dim2 distinguishes tasks that are done
+singly vs. those that are done jointly.
+```{r}
+plot(HT.ca, lines = TRUE)
+```
+
+So, we can use the `CA` method of `seriation::seriate()` to find the order of permutations of
+`Task` and `Who` along the CA dimensions.
+```{r}
+require(seriation)
+order <- seriate(HouseTasks, method = "CA")
+# the permuted row and column labels
+rownames(HouseTasks)[order[[1]]]
+colnames(HouseTasks)[order[[2]]]
+```
+
+Now, use `seriation::permute()` to use `order` for the permutations of `Task` and `Who`,
+and plot the resulting mosaic:
+
+```{r}
+# do the permutation
+HT_perm <- permute(HouseTasks, order, margin=1)
+
+mosaic(HT_perm, shade = TRUE,
+       labeling = labeling_border(rot_labels = c(45,0, 0, 0), 
+                                  offset_label =c(.5,5,0, 0),
+                                  varnames = c(FALSE, TRUE),
+                                  just_labels=c("center","right"),
+                                  tl_varnames = FALSE),
+       legend = FALSE)
+```
+
+It is now easy to see the cluster of tasks (laundry and cooking) done largely by the wife
+at the top, and those (repairs, driving) done largely by the husband at the bottom.
+
+## References
