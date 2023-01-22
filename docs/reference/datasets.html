@@ -94,7 +94,7 @@ and formats these to provide additional descriptors.</p>
 <dd><p>a character vector giving the package(s) to look in</p></dd>
 
   <dt>allClass</dt>
-<dd><p>include all classes of the item (<code>TRUE</code>) or just the last class   
+<dd><p>a logical variable. Include all classes of the item (<code>TRUE</code>) or just the last class   
        (<code>FALSE</code>)?</p></dd>
 
   <dt>incPackage</dt>
@@ -113,16 +113,18 @@ to extract <code>class</code> and size information.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <code>data.frame</code> whose rows correspond to data sets found in <code>package</code>.
-The columns (for a single package) are:</p>
+<p>A <code>data.frame</code> whose rows correspond to data sets found in <code>package</code>.</p>
+
+
+<p>The columns (for a single package) are:</p>
 <dl><dt>Item</dt>
-<dd><p>data set name</p></dd>
+<dd><p>data set name, a character variable</p></dd>
 
   <dt>class</dt>
-<dd><p>class</p></dd>
+<dd><p>class, the object class of the data set, typically one of <code>"data.frame"</code>, <code>"table"</code>, <code>"array"</code> ...</p></dd>
 
   <dt>dim</dt>
-<dd><p>an abbreviation of the dimensions of the data set</p></dd>
+<dd><p>an abbreviation of the dimensions of the data set, in a form like <code>"36x3"</code> for a data.frame or matrix with 36 rows and 3 columns.</p></dd>
 
   <dt>Title</dt>
 <dd><p>data set title</p></dd>
@@ -133,8 +135,13 @@ The columns (for a single package) are:</p>
     <p>Michael Friendly, with R-help from Curt Seeliger</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>In Rmd documents, `datasets("package") |&gt; knitr::kable()` can be used to create
+a more pleasing display.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></code>,</p></div>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></code>, <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -598,6 +605,20 @@ The columns (for a single package) are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 102 Topographic Information on Auckland's Maunga Whau </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 103        The Number of Breaks in Yarn during Weaving</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 104     Average Heights and Weights for American Women</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># just list dataset names in a package</span></span></span>
+<span class="r-in"><span><span class="fu">vcdExtra</span><span class="fu">::</span><span class="fu">datasets</span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Item"</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Bartlett"       "Burt"           "Caesar"         "Cancer"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Cormorants"     "CyclingDeaths"  "DaytonSurvey"   "Depends"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "Detergent"      "Donner"         "Draft1970"      "Draft1970table"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "Dyke"           "Fungicide"      "GSS"            "Geissler"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "Gilby"          "Glass"          "HairEyePlace"   "Hauser79"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "Heart"          "Heckman"        "HospVisits"     "HouseTasks"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [29] "Hoyt"           "ICU"            "JobSat"         "Mammograms"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [33] "Mental"         "Mice"           "Mobility"       "PhdPubs"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "ShakeWords"     "TV"             "Titanicp"       "Toxaemia"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41] "Vietnam"        "Vote1980"       "WorkerSat"      "Yamaguchi87"   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
