@@ -24,7 +24,7 @@ datasets(package,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{package}{a character vector giving the package(s) to look in}
-  \item{allClass}{include all classes of the item (\code{TRUE}) or just the last class   
+  \item{allClass}{a logical variable. Include all classes of the item (\code{TRUE}) or just the last class   
        (\code{FALSE})?}
   \item{incPackage}{include the package name in result?}
   \item{maxTitle}{maximum length of data set Title}
@@ -36,10 +36,11 @@ to extract \code{class} and size information.
 }
 \value{
 A \code{data.frame} whose rows correspond to data sets found in \code{package}.
+
 The columns (for a single package) are:
-  \item{Item}{data set name}
-  \item{class}{class}
-  \item{dim}{an abbreviation of the dimensions of the data set}
+  \item{Item}{data set name, a character variable}
+  \item{class}{class, the object class of the data set, typically one of \code{"data.frame"}, \code{"table"}, \code{"array"} ...}
+  \item{dim}{an abbreviation of the dimensions of the data set, in a form like \code{"36x3"} for a data.frame or matrix with 36 rows and 3 columns.}
   \item{Title}{data set title}
 }
 %\references{
@@ -48,19 +49,23 @@ The columns (for a single package) are:
 \author{
 Michael Friendly, with R-help from Curt Seeliger 
 }
-%\note{
-%%%  ~~further notes~~
-%}
+\note{
+In Rmd documents, `datasets("package") |> knitr::kable()` can be used to create
+a more pleasing display.
+}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link[utils]{data}},
+\code{\link[utils]{data}}, \code{\link[knitr]{kable}}
 }
 \examples{
 datasets("vcdExtra")
 datasets(c("vcd", "vcdExtra"))
 datasets("datasets", maxTitle=50)
+
+# just list dataset names in a package
+vcdExtra::datasets("vcdExtra")[,"Item"]
 
 
 }
