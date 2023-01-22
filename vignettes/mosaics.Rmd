@@ -152,7 +152,210 @@ It is usually much better to order the levels of the row and column variables to
 the nature of their association. This is an example of **effect ordering for data display**
 [@FriendlyKwan:02:effect].
 
-A general ideas are that:
+***Example***:
+
+Data from @Glass:54 gave this 5 x 5 table on the occupations of 3500 British fathers and their sons, where the occupational categories are listed in alphabetic order.
+
+```{r glass}
+data(Glass)
+(glass.tab <- xtabs(Freq ~ father + son, data=Glass))
+```
+
+The mosaic display shows very strong association, but aside from the 
+diagonal cells, the pattern is unclear. Note the use of
+`set_varnames` to give more descriptive labels for the variables
+and abbreviate the occupational category labels.
+and `interpolate` to set the shading levels for the mosaic.
+```{r glass-mosaic1}
+largs <- list(set_varnames=list(father="Father's Occupation", 
+                                son="Son's Occupation"),
+              abbreviate=10)
+gargs <- list(interpolate=c(1,2,4,8))
+
+mosaic(glass.tab, 
+  shade=TRUE, 
+  labeling_args=largs, 
+  gp_args=gargs,
+  main="Alphabetic order", 
+  legend=FALSE, 
+  rot_labels=c(20,90,0,70))
+```
+
+The occupational categories differ in **status**, and can be reordered correctly as follows,
+from `Professional` down to `Unskilled`.
+```{r glass-order}
+# reorder by status
+ord <- c(2, 1, 4, 3, 5) 
+row.names(glass.tab)[ord]
+```
+The revised mosaic plot can be produced by indexing the rows and columns of
+the table using `ord`.
+```{r glass-mosaic2}
+mosaic(glass.tab[ord, ord], 
+  shade=TRUE, 
+  labeling_args=largs,  
+  gp_args=gargs,
+  main="Effect order", 
+  legend=FALSE, 
+  rot_labels=c(20,90,0,70))
+```
+
+From this, and for the examples in the next section, it is useful to re-define
+`father` and `son` as **ordered** factors in the original `Glass` frequency data.frame.
+
+```{r glass-ord}
+Glass.ord <- Glass
+Glass.ord$father <- ordered(Glass.ord$father, levels=levels(Glass$father)[ord])
+Glass.ord$son    <- ordered(Glass.ord$son,    levels=levels(Glass$son)[ord])
+str(Glass.ord)
+```
+
+## Square tables
+
+For mobility tables such as this, where the rows and columns refer to the same
+occupational categories it comes as no surprise that there is a strong association
+in the diagonal cells: most often, sons remain in the same occupational categories
+as their fathers.
+
+However, the re-ordered mosaic display also reveals something subtler:
+when a son differs in occupation from the father, it is more likely that
+he will appear in a category one-step removed than more steps removed.
+The residuals seem to decrease with the number of steps from the diagonal.
+
+For such tables, specialized loglinear models provide interesting cases
+intermediate between the independence model, [A] [B],
+and the saturated model, [A B]. These can be fit using `glm()`, with the data
+in frequency form,
+
+```
+glm(Freq ~ A + B + assoc, data = ..., family = poisson)
+```
+
+where `assoc` is a special term to handle a restricted form of association, different from
+`A:B` which specifies the saturated model in this notation.
+
+* **Quasi-independence**: Asserts independence, but ignores the diagonal cells by
+fitting them exactly.  The loglinear model is:
+$\log m_{ij} = \mu + \lambda^A_i + \lambda^B_j + \delta_i I(i = j)$,
+where $I()$ is the indicator function. 
+
+* **Symmetry**: This model asserts that the joint distribution of the row and column variables
+is symmetric, that is $\pi_{ij} = \pi_{ji}$: 
+A son is equally likely to move from their father's occupational category $i$ to another
+category, $j$, as the reverse, moving from $j$ to $i$.
+Symmetry is quite strong, because it also implies
+**marginal homogeneity**, that the marginal probabilities of the row and column variables
+are equal,
+$\pi{i+} = \sum_j \pi_{ij} = \sum_j \pi_{ji} = \pi_{+i}$ for all $i$.
+
+* **Quasi-symmetry**: This model uses the standard main-effect terms in the loglinear
+model, but asserts that the association parameters are symmetric,
+$\log m_{ij} = \mu + \lambda^A_i + \lambda^B_j + \lambda^{AB}_{ij}$,
+where $\lambda^{AB}_{ij} = \lambda^{AB}_{ji}$.
+
+The [gnm package](https://cran.r-project.org/package=gnm) provides a variety of these functions:
+`gnm::Diag()`, `gnm::Symm()` and `gnm::Topo()` for an  interaction factor as specified by an array of levels, which may be arbitrarily structured.
+
+For example, the following generates a term for a diagonal factor in a $4 \times 4$
+table. The diagonal values reflect parameters fitted for each diagonal cell. Off-diagonal
+values, "." are ignored.
+
+```{r diag}
+rowfac <- gl(4, 4, 16)
+colfac <- gl(4, 1, 16)
+diag4by4 <- Diag(rowfac, colfac)
+matrix(Diag(rowfac, colfac, binary = FALSE), 4, 4)
+```
+
+`Symm()` constructs parameters for symmetric cells. The particular values don't matter.
+All that does matter is that the same value, e.g., `1:2` appears in both the (1,2) and
+(2,1) cells. 
+```{r symm}
+symm4by4 <- Symm(rowfac, colfac)
+matrix(symm4by4, 4, 4)
+```
+
+
+
+***Example***:
+To illustrate, we fit the four models below, starting with the independence model
+`Freq ~ father + son` and then adding terms to reflect the restricted
+forms of association, e.g., `Diag(father, son)` for diagonal terms and
+`Symm(father, son)` for symmetry.
+
+```{r glass-models}
+library(gnm)
+glass.indep <- glm(Freq ~ father + son, 
+                   data = Glass.ord, family=poisson)
+glass.quasi <- glm(Freq ~ father + son + Diag(father, son),  
+                   data = Glass.ord, family=poisson)
+glass.symm  <- glm(Freq ~ Symm(father, son),  
+                   data = Glass.ord, family=poisson)
+glass.qsymm <- glm(Freq ~ father + son + Symm(father, son),  
+                   data = Glass.ord, family=poisson)
+```
+
+We can visualize these using the `vcdExtra::mosaic.glm()` method, which extends
+mosaic displays to handle fitted `glm` objects. *Technical note*: for
+models fitted using `glm()`, standardized residuals, `residuals_type="rstandard"`
+have better statistical properties than the default Pearson residuals in mosaic
+plots and analysis.
+
+```{r glass-quasi}
+mosaic(glass.quasi, 
+  residuals_type="rstandard", 
+  shade=TRUE, 
+  labeling_args=largs,  
+  gp_args=gargs,
+  main="Quasi-Independence",
+  legend=FALSE, 
+  rot_labels=c(20,90,0,70)
+  )
+```
+
+Mosaic plots for the other models would give further visual assessment of these models,
+however we can also test differences among them. For nested models, `anova()` gives tests
+of how much better a more complex model is compared to the previous one.
+
+```{r glass-anova}
+# model comparisons: for *nested* models
+anova(glass.indep, glass.quasi, glass.qsymm, test="Chisq")
+```
+
+Alternatively, `vcdExtra::LRstats()` gives model summaries for a collection of
+models, not necessarily nested, with AIC and BIC statistics reflecting
+model parsimony.
+
+```{r glass-lrstats}
+models <- glmlist(glass.indep, glass.quasi, glass.symm, glass.qsymm)
+LRstats(models)
+```
+
+By all criteria, the model of quasi symmetry fits best. The residual deviance $G^2
+is not significant. The mosaic is largely unshaded, indicating a good fit, but there
+are a few shaded cells that indicate the remaining positive and negative residuals.
+For comparative mosaic displays, it is sometimes useful to show the $G^2$ statistic
+in the main title, using `vcdExtra::modFit()` for this purpose.
+
+```{r glass-qsymm}
+mosaic(glass.qsymm, 
+  residuals_type="rstandard", 
+  shade=TRUE, 
+  labeling_args=largs,  
+  gp_args=gargs,
+  main = paste("Quasi-Symmetry", modFit(glass.qsymm)),
+  legend=FALSE, 
+  rot_labels=c(20,90,0,70)
+  )
+```
+
+
+
+## Correspondence analysis ordering
+When natural orders for row and column levels are not given a priori, we can find
+orderings that make more sense using correspondence analysis.
+
+The general ideas are that:
 
 * Correspondence analysis assigns scores to the row and column variables to best account for the association in 1, 2, ... dimensions
 
@@ -162,6 +365,7 @@ A general ideas are that:
 
 * The [seriation package](https://cran.r-project.org/package=seriation) now has a method to order variables in frequency tables using CA.
 
+***Example***:
 As an example, consider the `HouseTasks` dataset, a 13 x 4 table of frequencies of household tasks performed by couples, either by the `Husband`, `Wife`, `Alternating` or `Jointly`.
 You can see from the table that some tasks (Repairs) are done largely by the husband; some (laundry, main meal)
 are largely done by the wife, while others are done jointly or alternating between husband and
@@ -198,13 +402,13 @@ summary(HT.ca, rows=FALSE, columns=FALSE)
 The CA plot has a fairly simple interpretation: Dim1 is largely the distinction between
 tasks primarily done by the wife vs. the husband. Dim2 distinguishes tasks that are done
 singly vs. those that are done jointly.
-```{r}
+```{r housetasks-ca-plot}
 plot(HT.ca, lines = TRUE)
 ```
 
 So, we can use the `CA` method of `seriation::seriate()` to find the order of permutations of
 `Task` and `Who` along the CA dimensions.
-```{r}
+```{r housetasks-seriation}
 require(seriation)
 order <- seriate(HouseTasks, method = "CA")
 # the permuted row and column labels
@@ -215,7 +419,7 @@ colnames(HouseTasks)[order[[2]]]
 Now, use `seriation::permute()` to use `order` for the permutations of `Task` and `Who`,
 and plot the resulting mosaic:
 
-```{r}
+```{r housetasks-mos2}
 # do the permutation
 HT_perm <- permute(HouseTasks, order, margin=1)
 

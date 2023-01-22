@@ -14,12 +14,15 @@ and the \code{gnm} package for Generalized Nonlinear Models.
 In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and
 adds a 3D version in \code{\link{mosaic3d}}.
 
-This package is now a support package for the book, \emph{Discrete Data Analysis with R} by
+This package is also a support package for the book, \emph{Discrete Data Analysis with R} by
 Michael Friendly and David Meyer, Chapman & Hall/CRC, 2016, 
-\url{https://www.crcpress.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/9781498725835}
+\url{https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/9781498725835}
 with a number of additional data sets,
 and functions.
 The web site for the book is \url{http://ddar.datavis.ca}.
+
+In addition, I teach a course, \emph{Psy 6136: Categorical Data Analysis},
+\url{https://friendly.github.io/psy6136/} using this package.
 }
 \details{
 \tabular{ll}{

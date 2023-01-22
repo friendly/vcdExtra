@@ -17,11 +17,11 @@ Glass(1954) gave this 5 x 5 table on the occupations of 3500 British fathers and
 }
 \details{
 The occupational categories in order of status are:
-(1) Professional \& High Administrative
-(2) Managerial, Executive \& High Supervisory
-(3) Low Inspectional \& Supervisory
-(4) Routine Nonmanual \& Skilled Manual
-(5) Semi- \& Unskilled Manual
+(1) Professional & High Administrative
+(2) Managerial, Executive & High Supervisory
+(3) Low Inspectional & Supervisory
+(4) Routine Nonmanual & Skilled Manual
+(5) Semi- & Unskilled Manual
 
 However, to make the point that factors are ordered alphabetically by default,
 Friendly \& Meyer (2016) introduce this data set in the form given here. 
