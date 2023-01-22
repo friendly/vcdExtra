@@ -6,7 +6,7 @@ information about the nature of data sets in packages.
 The datasets() function is designed to produce a more useful summary
 display of data sets in one or more packages.  It extracts the class
 and dimension information (dim or codelength) of each item,
-and formats these to provide additional descriptors."><title>Information on Data Sets in Packages — datasets • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Information on Data Sets in Packages — datasets"><meta property="og:description" content="The data function is used both to load data sets from packages, 
+and formats these to provide additional descriptors."><title>Information on Data Sets in Packages — datasets • vcdExtra</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Information on Data Sets in Packages — datasets"><meta property="og:description" content="The data function is used both to load data sets from packages, 
 and give a display of the names and titles of data sets in one or more packages,
 however it does not return a result that can be easily used to get additional
 information about the nature of data sets in packages.
@@ -24,7 +24,7 @@ and formats these to provide additional descriptors."><meta property="og:image" 
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,9 +82,10 @@ and formats these to provide additional descriptors.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">datasets</span><span class="op">(</span><span class="va">package</span>, allClass<span class="op">=</span><span class="cn">FALSE</span>, </span>
-<span>    incPackage<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">package</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span>,</span>
-<span>    maxTitle<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">datasets</span><span class="op">(</span><span class="va">package</span>, </span>
+<span>        allClass<span class="op">=</span><span class="cn">FALSE</span>, </span>
+<span>        incPackage<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">package</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span>,</span>
+<span>        maxTitle<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -93,7 +94,8 @@ and formats these to provide additional descriptors.</p>
 <dd><p>a character vector giving the package(s) to look in</p></dd>
 
   <dt>allClass</dt>
-<dd><p>include all classes of the item (<code>TRUE</code>) or just the last class (<code>FALSE</code>)?</p></dd>
+<dd><p>include all classes of the item (<code>TRUE</code>) or just the last class   
+       (<code>FALSE</code>)?</p></dd>
 
   <dt>incPackage</dt>
 <dd><p>include the package name in result?</p></dd>
@@ -166,22 +168,23 @@ The columns (for a single package) are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 25          Heart      table     2x2x3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 26        Heckman      table 2x2x2x2x2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 27     HospVisits      table       3x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28           Hoyt      table   4x3x7x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29            ICU data.frame    200x22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30         JobSat      table       4x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31     Mammograms      array       4x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32         Mental data.frame      24x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33           Mice data.frame      30x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34       Mobility      table       5x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35        PhdPubs data.frame     915x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36     ShakeWords data.frame     100x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37             TV      array    5x11x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38       Titanicp data.frame    1309x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39       Toxaemia data.frame      60x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40        Vietnam data.frame      40x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41       Vote1980 data.frame      28x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42      WorkerSat data.frame       8x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43    Yamaguchi87 data.frame      75x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28     HouseTasks      table      13x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29           Hoyt      table   4x3x7x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30            ICU data.frame    200x22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31         JobSat      table       4x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32     Mammograms      array       4x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33         Mental data.frame      24x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34           Mice data.frame      30x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35       Mobility      table       5x5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36        PhdPubs data.frame     915x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37     ShakeWords data.frame     100x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38             TV      array    5x11x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39       Titanicp data.frame    1309x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40       Toxaemia data.frame      60x5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41        Vietnam data.frame      40x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42       Vote1980 data.frame      28x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43      WorkerSat data.frame       8x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44    Yamaguchi87 data.frame      75x4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                    Title</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                                  Abortion Opinion Data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             Traffic Accident Victims in France in 1958</span>
@@ -210,22 +213,23 @@ The columns (for a single package) are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 25                     Sex, Occupation and Heart Disease</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 26 Labour Force Participation of Married Women 1967-1971</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 27                                  Hospital Visits Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28                       Minnesota High School Graduates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29                                          ICU data set</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30    Cross-classification of job satisfaction by income</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31                                     Mammogram Ratings</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32                     Mental impairment and parents SES</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33                                   Mice Depletion Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34                                  Social Mobility data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35                        Publications of PhD Candidates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36                   Shakespeare's Word Type Frequencies</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37                                       TV Viewing Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38                             Passengers on the Titanic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39                        Toxaemia Symptoms in Pregnancy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40                 Student Opinion about the Vietnam War</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41       Race and Politics in the 1980 Presidential Vote</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42                              Worker Satisfaction Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43              Occupational Mobility in Three Countries</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28       Household Tasks Performed by Husbands and Wives</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29                       Minnesota High School Graduates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30                                          ICU data set</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31    Cross-classification of job satisfaction by income</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32                                     Mammogram Ratings</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                     Mental Impairment and Parents SES</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                                   Mice Depletion Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                                  Social Mobility data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                        Publications of PhD Candidates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                   Shakespeare's Word Type Frequencies</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                                       TV Viewing Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                             Passengers on the Titanic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40                        Toxaemia Symptoms in Pregnancy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41                 Student Opinion about the Vietnam War</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42       Race and Politics in the 1980 Presidential Vote</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43                              Worker Satisfaction Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44              Occupational Mobility in Three Countries</span>
 <span class="r-in"><span><span class="fu">datasets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"vcd"</span>, <span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Package            Item      class             dim</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1       vcd       Arthritis data.frame            84x5</span>
@@ -288,22 +292,23 @@ The columns (for a single package) are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 58 vcdExtra           Heart      table           2x2x3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 59 vcdExtra         Heckman      table       2x2x2x2x2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 60 vcdExtra      HospVisits      table             3x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61 vcdExtra            Hoyt      table         4x3x7x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62 vcdExtra             ICU data.frame          200x22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63 vcdExtra          JobSat      table             4x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64 vcdExtra      Mammograms      array             4x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65 vcdExtra          Mental data.frame            24x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66 vcdExtra            Mice data.frame            30x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67 vcdExtra        Mobility      table             5x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68 vcdExtra         PhdPubs data.frame           915x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69 vcdExtra      ShakeWords data.frame           100x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70 vcdExtra              TV      array          5x11x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71 vcdExtra        Titanicp data.frame          1309x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72 vcdExtra        Toxaemia data.frame            60x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73 vcdExtra         Vietnam data.frame            40x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74 vcdExtra        Vote1980 data.frame            28x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75 vcdExtra       WorkerSat data.frame             8x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76 vcdExtra     Yamaguchi87 data.frame            75x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61 vcdExtra      HouseTasks      table            13x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62 vcdExtra            Hoyt      table         4x3x7x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63 vcdExtra             ICU data.frame          200x22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64 vcdExtra          JobSat      table             4x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65 vcdExtra      Mammograms      array             4x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66 vcdExtra          Mental data.frame            24x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67 vcdExtra            Mice data.frame            30x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68 vcdExtra        Mobility      table             5x5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69 vcdExtra         PhdPubs data.frame           915x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70 vcdExtra      ShakeWords data.frame           100x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71 vcdExtra              TV      array          5x11x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72 vcdExtra        Titanicp data.frame          1309x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73 vcdExtra        Toxaemia data.frame            60x5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74 vcdExtra         Vietnam data.frame            40x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75 vcdExtra        Vote1980 data.frame            28x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76 vcdExtra       WorkerSat data.frame             8x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77 vcdExtra     Yamaguchi87 data.frame            75x4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                    Title</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                               Arthritis Treatment Data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                                          Baseball Data</span>
@@ -365,22 +370,23 @@ The columns (for a single package) are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 58                     Sex, Occupation and Heart Disease</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 59 Labour Force Participation of Married Women 1967-1971</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 60                                  Hospital Visits Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61                       Minnesota High School Graduates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62                                          ICU data set</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63    Cross-classification of job satisfaction by income</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64                                     Mammogram Ratings</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65                     Mental impairment and parents SES</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66                                   Mice Depletion Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67                                  Social Mobility data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68                        Publications of PhD Candidates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69                   Shakespeare's Word Type Frequencies</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70                                       TV Viewing Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71                             Passengers on the Titanic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72                        Toxaemia Symptoms in Pregnancy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73                 Student Opinion about the Vietnam War</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74       Race and Politics in the 1980 Presidential Vote</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75                              Worker Satisfaction Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76              Occupational Mobility in Three Countries</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61       Household Tasks Performed by Husbands and Wives</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62                       Minnesota High School Graduates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63                                          ICU data set</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64    Cross-classification of job satisfaction by income</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65                                     Mammogram Ratings</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66                     Mental Impairment and Parents SES</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67                                   Mice Depletion Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68                                  Social Mobility data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69                        Publications of PhD Candidates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70                   Shakespeare's Word Type Frequencies</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71                                       TV Viewing Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72                             Passengers on the Titanic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73                        Toxaemia Symptoms in Pregnancy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74                 Student Opinion about the Vietnam War</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75       Race and Politics in the 1980 Presidential Vote</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76                              Worker Satisfaction Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77              Occupational Mobility in Three Countries</span>
 <span class="r-in"><span><span class="fu">datasets</span><span class="op">(</span><span class="st">"datasets"</span>, maxTitle<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Item      class     dim</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1            AirPassengers         ts     144</span>
@@ -592,6 +598,8 @@ The columns (for a single package) are:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 102 Topographic Information on Auckland's Maunga Whau </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 103        The Number of Breaks in Yarn during Weaving</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 104     Average Heights and Weights for American Women</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -603,7 +611,7 @@ The columns (for a single package) are:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer></div>

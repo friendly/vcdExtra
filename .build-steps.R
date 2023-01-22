@@ -30,10 +30,9 @@ devtools::revdep()
 if (!require("revdepcheck")) remotes::install_github("r-lib/revdepcheck")
 revdepcheck::revdep_check(num_workers = 4)
 
+# build the pkgdown site
+pkgdown::build_site()
+
 # submit to cran
 devtools::release(args=args)
 
-# Warning: 'inst/doc' file
-# 'vcd-tutorial.pdf'
-# ignored as vignettes have been rebuilt.
-# Run R CMD build with --no-build-vignettes to prevent rebuilding.
