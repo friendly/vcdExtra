@@ -61,12 +61,12 @@ a more pleasing display.
 }
 \examples{
 datasets("vcdExtra")
-datasets(c("vcd", "vcdExtra"))
+# datasets(c("vcd", "vcdExtra"))
 datasets("datasets", maxTitle=50)
 
 # just list dataset names in a package
-vcdExtra::datasets("vcdExtra")[,"Item"]
-
+datasets("vcdExtra")[,"Item"]
+datasets("vcd")[,"Item"]
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

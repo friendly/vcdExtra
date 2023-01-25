@@ -2,7 +2,7 @@
 \Rdversion{1.1}
 \alias{Bartlett}
 \docType{data}
-\title{Bartlett data on plum root cuttings}
+\title{Bartlett Data on Plum Root Cuttings}
 
 \description{In an experiment to investigate the effect of cutting length (two levels) and planting time (two levels) 
 on the survival of plum root cuttings, 240 cuttings were planted for each of the 2 x 2 combinations of these factors, 
@@ -17,10 +17,10 @@ data(Bartlett)
   A 3-dimensional array resulting from cross-tabulating 3 variables for   960 observations. The variable names and their levels are:
 
   \tabular{rll}{
-    No \tab Name \tab Levels \cr
-    1\tab \code{Alive}\tab \code{"Alive", "Dead"}\cr
-    2\tab \code{Time}\tab \code{"Now", "Spring"}\cr
-    3\tab \code{Length}\tab \code{"Long", "Short"}\cr
+    No \tab Name          \tab Levels                \cr
+    1  \tab \code{Alive}  \tab \code{"Alive", "Dead"}\cr
+    2  \tab \code{Time}   \tab \code{"Now", "Spring"}\cr
+    3  \tab \code{Length} \tab \code{"Long", "Short"}\cr
   }
 }
 
@@ -45,6 +45,23 @@ Hand, D. and Daly, F. and Lunn, A. D.and McConway, K. J. and Ostrowski, E. (1994
 \examples{
 data(Bartlett)
 
+# measures of association
+assocstats(Bartlett)
+oddsratio(Bartlett)
+
+# Test models
+
+## Independence
+MASS::loglm(formula = ~Alive + Time + Length, data = Bartlett)
+
+## No three-way association
+MASS::loglm(formula = ~(Alive + Time + Length)^2, data = Bartlett)
+
+# Use woolf_test() for a formal test of homogeneity of odds ratios
+vcd::woolf_test(Bartlett)
+
+
+# Plots
 fourfold(Bartlett, mfrow=c(1,2))
 
 mosaic(Bartlett, shade=TRUE)

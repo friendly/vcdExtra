@@ -12,18 +12,21 @@ data(Abortion)
   A 3-dimensional array resulting from cross-tabulating 3 variables for  1100 observations. The variable names and their levels are:
 
   \tabular{rll}{
-    No \tab Name \tab Levels \cr
-    1\tab \code{Sex}\tab \code{"Female", "Male"}\cr
-    2\tab \code{Status}\tab \code{"Lo", "Hi"}\cr
-    3\tab \code{Support_Abortion}\tab \code{"Yes", "No"}\cr
+    No \tab Name                    \tab Levels \cr
+    1  \tab \code{Sex}              \tab \code{"Female", "Male"}\cr
+    2  \tab \code{Status}           \tab \code{"Lo", "Hi"}\cr
+    3  \tab \code{Support_Abortion} \tab \code{"Yes", "No"}\cr
   }
 }
 
 \details{
+\code{Support_Abortion} is a natural response variable. 
 The combinations of \code{Sex} and \code{Status} represent four independent samples, having
 fixed \code{Sex}-\code{Status} marginal totals. 
-Thus the \code{Sex:Status} association must be included in any loglinear model.
-\code{Support_Abortion} is a natural response variable. }
+
+Thus the \code{Sex:Status} association must be included in any loglinear model
+where the goal is to determine how attitude toward abortion depends on the others.
+}
 \source{
 
 %  \cite{Christensen:90 [p. 92]}
