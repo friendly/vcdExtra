@@ -4,8 +4,9 @@
 - package now depends on R (>= 3.5.0) per CRAN nit
 - add `Suggests: seriation` to illustrate CA re-ordering of rows/cols based on correspondence analysis
 - all .Rd files reformatted and examples extended.
-- the vignette on mosaic displays has been extensively revised with examples for square tables and permutation of row / column variables.
+- the vignette `mosaic.Rmd` on mosaic displays has been extensively revised with examples for square tables and permutation of row / column variables.
 - begin to classify datasets with content tags
+- Added `demo-housing.Rmd` vignette, using content from `demo/housing.R`.
 
 ## Version 0.8-1 (2022-04-22)
 

@@ -2,9 +2,9 @@
 Sys.setenv(RGL_USE_NULL = TRUE)
 
 #it is no longer necessary to build manually, using --compact-vignettes=both
-
+# no longer necessary to use gs to compact pdf vignettes
 #Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.21/bin/gswin64c.exe")
-Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.53.3/bin/gswin64c.exe")
+#Sys.setenv(R_GSCMD="C:/Program Files/gs/gs9.53.3/bin/gswin64c.exe")
 
 # Build the pkgdown site
 pkgdown::build_site()

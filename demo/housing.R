@@ -9,6 +9,7 @@
 
 
 library(vcdExtra)
+library(MASS)
 data(housing, package="MASS")
 
 
@@ -23,33 +24,43 @@ house.glm0 <- glm(Freq ~ Infl*Type*Cont + Sat, family = poisson,
 modFit(house.glm0)
 
 # labeling_args for mosaic()
-largs <- list(set_varnames = c(Infl="Influence on management", 
-			Cont="Contact among residents", Type="Type of dwelling", Sat="Satisfaction"),
+largs <- list(set_varnames = c(
+  Infl="Influence on management", 
+	Cont="Contact among residents", 
+  Type="Type of dwelling", 
+  Sat="Satisfaction"),
 	abbreviate=c(Type=3))
 
 mosaic(house.glm0, labeling_args=largs, main='Baseline model: [ITC][Sat]')
+
 # reorder variables in the mosaic, putting Sat last
 mosaic(house.glm0, ~ Type+Infl+Cont+Sat, labeling_args=largs, main='Baseline model: [ITC][Sat]')
 
-# what terms need to be added?
-addterm(house.glm0, ~. + Sat:(Infl+Type+Cont), test = "Chisq")
+# what terms need to be added? Consider main effects, interactions of Sat with each other
+MASS::addterm(house.glm0, ~. + Sat:(Infl+Type+Cont), test = "Chisq")
 
 # add all two way terms with Satisfaction
 house.glm1 <- update(house.glm0, . ~ . + Sat*(Infl+Type+Cont))
 
 # did it get better?
 anova(house.glm0, house.glm1, test="Chisq")
+# plot it
 mosaic(house.glm1, labeling_args=largs, main='Model [IS][TS][CS]', gp=shading_Friendly)
 
 # Same model, fit by iterative proportional scaling
-(house.loglm <- loglm(Freq ~ Infl*Type*Cont + Sat*(Infl+Type+Cont), data = housing))
+(house.loglm <- MASS::loglm(Freq ~ Infl*Type*Cont + Sat*(Infl+Type+Cont), data = housing))
 
 # Can we drop any terms?
-dropterm(house.glm1, test = "Chisq")
+MASS::dropterm(house.glm1, test = "Chisq")
 
 # Need to add any terms?
-addterm(house.glm1, ~. + Sat:(Infl+Type+Cont)^2, test  =  "Chisq")
+MASS::addterm(house.glm1, ~. + Sat:(Infl+Type+Cont)^2, test  =  "Chisq")
 
+# add an interaction
+house.glm2 <- update(house.glm1,
+                     . ~ . + Sat:Infl:Type)
+
+LRstats(house.glm0, house.glm1, house.glm2)
 
 ##########################
 # Effect plots, for glm1 model
@@ -59,6 +70,10 @@ house.eff <-allEffects(house.glm1)
 
 # show the interactions of Infl, Cont and Type with Sat
 plot(house.eff, 'Infl:Sat', x.var='Sat', xlab="Satisfaction")
+
+plot(house.eff, 'Infl:Sat', x.var='Infl', xlab="Influence")
+
+
 # same plot in one panel, no std errors shown
 plot(house.eff, 'Infl:Sat', x.var='Sat', xlab="Satisfaction", multiline=TRUE)
 
