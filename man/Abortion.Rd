@@ -26,6 +26,9 @@ fixed \code{Sex}-\code{Status} marginal totals.
 
 Thus the \code{Sex:Status} association must be included in any loglinear model
 where the goal is to determine how attitude toward abortion depends on the others.
+
+Alternatively, a logit model for abortion support may provide a simpler analysis.
+
 }
 \source{
 
@@ -59,3 +62,6 @@ fourfold(aperm(Abortion, c(3,1,2)))
 }
 
 \keyword{datasets}
+\concept{loglinear}
+\concept{logit}
+\concept{2x2}

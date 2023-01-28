@@ -1,3 +1,4 @@
+
 \name{Donner}
 \alias{Donner}
 \docType{data}
@@ -35,7 +36,9 @@ those of Fosdick and Wolfinger are coded as \code{'FosdWolf'}, and
 all others as \code{'Other'}.
 }
 
-
+\notes{
+\code{survived} is the response variable. What kind of models should be used here?
+}
 \source{
 D. K. Grayson, 1990, "Donner party deaths: A demographic
 assessment", \emph{J. Anthropological Research}, \bold{46}, 223-242.

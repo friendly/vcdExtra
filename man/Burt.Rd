@@ -16,7 +16,7 @@ giving the univariate and bivariate frequencies for an n-way frequency table.
 }
 \usage{data("Burt")}
 \format{
-  A frequency data frame (representing a 3 x 3 x 2 x 2 frequency table) with 36 observations on the following 5 variables.
+  A frequency data frame (representing a 3 x 3 x 2 x 2 frequency table) with 36 cells on the following 5 variables.
   \describe{
     \item{\code{Hair}}{hair color, a factor with levels \code{Fair} \code{Red} \code{Dark}}
     \item{\code{Eyes}}{eye color, a factor with levels \code{Light} \code{Mixed} \code{Dark}}
@@ -35,7 +35,7 @@ according to whether they are below or above the average for the population.
 }
 \source{
 Burt, C. (1950). The factorial analysis of qualitative data, 
-\emph{British Journal of Statistical Psychology}, 3(3), 166-185.
+\emph{British Journal of Statistical Psychology}, \bold{3}(3), 166-185.
 Table IX.
 }
 %\references{
@@ -50,3 +50,4 @@ burt.tab <- xtabs(Freq ~ Hair + Eyes + Head + Stature, data=Burt)
 mosaic(burt.tab, shade=TRUE)
 }
 \keyword{datasets}
+\concept{ca}

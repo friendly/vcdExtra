@@ -60,3 +60,7 @@ aircrash.ca <- ca(aircrash.tab)
 plot(aircrash.ca)
 }
 \keyword{datasets}
+\concept{reorder}
+\concept{ca}
+
+

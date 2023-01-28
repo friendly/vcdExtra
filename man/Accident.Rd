@@ -114,3 +114,6 @@ plot(allEffects(acc.bin2), ylab='Pr (Died)')
 #}
 
 \keyword{datasets}
+\concept{loglinear}
+\concept{glm}
+\concept{logistic}
