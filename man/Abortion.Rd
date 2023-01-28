@@ -21,10 +21,15 @@ data(Abortion)
 
 \details{
 \code{Support_Abortion} is a natural response variable. 
+
 The combinations of \code{Sex} and \code{Status} represent four independent samples, having
 fixed \code{Sex}-\code{Status} marginal totals. 
+There were 500 females and 600 males. Within the female group, 250 of low status and 250
+of high status were sampled. Similarly for the males, with 300 in each of the low and hgh
+status sub-groups.
 
-Thus the \code{Sex:Status} association must be included in any loglinear model
+This is an example of a product-multinomial sampling scheme.
+the \code{Sex:Status} association must be included in any loglinear model
 where the goal is to determine how attitude toward abortion depends on the others.
 
 Alternatively, a logit model for abortion support may provide a simpler analysis.

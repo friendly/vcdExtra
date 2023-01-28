@@ -19,7 +19,7 @@ sex and party affiliation.
 %  ~~ If necessary, more details than the __description__ above ~~
 %}
 \source{
-Agresti, A. Categorical Data Analysis John Wiley & Sons, 2002,
+Agresti, A. \emph{Categorical Data Analysis}, 2nd E., John Wiley & Sons, 2002,
 Table 3.11, p. 106.
 }
 %\references{
@@ -28,12 +28,16 @@ Table 3.11, p. 106.
 \examples{
 data(GSS)
 str(GSS)
+
+# use xtabs to show the table in a compact form
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
 
+# fit the independence model
 (mod.glm <- glm(count ~ sex + party, family = poisson, data = GSS))
 
+# display all the residuals in a mosaic plot
 mosaic(mod.glm, 
-  formula = ~ sex+party, 
+  formula = ~ sex + party, 
   labeling = labeling_residuals, 
   suppress=0)
 }
