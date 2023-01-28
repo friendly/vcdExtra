@@ -1,12 +1,14 @@
 ## Version 0.8-2 (2023-01-19)
 
-- add HouseTasks data set, illustrating permutation of row / col variables
+This is a major enhancement release of the `vcdExtra` package, focusing on documentation and examples.
+
+- added `HouseTasks` data set, illustrating permutation of row / col variables
 - package now depends on R (>= 3.5.0) per CRAN nit
 - add `Suggests: seriation` to illustrate CA re-ordering of rows/cols based on correspondence analysis
-- all .Rd files reformatted and examples extended.
+- all .Rd files reformatted and many examples extended.
 - the vignette `mosaic.Rmd` on mosaic displays has been extensively revised with examples for square tables and permutation of row / column variables.
-- begin to classify datasets with content tags
-- Added `demo-housing.Rmd` vignette, using content from `demo/housing.R`.
+- begin to classify datasets with `\concept{}` tags
+- Added a new `demo-housing.Rmd` vignette, using content from `demo/housing.R`.
 
 ## Version 0.8-1 (2022-04-22)
 
