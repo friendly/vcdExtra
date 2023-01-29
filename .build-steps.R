@@ -23,6 +23,11 @@ devtools::check_win_devel()
 
 devtools::check_rhub()
 
+# spellcheck
+(words <- devtools::spell_check())
+words$word
+
+
 # reverse dependencies
 devtools::revdep()
 # [1] "aplore3" "catdata" "gnm"     "iarm"    "jmv" 

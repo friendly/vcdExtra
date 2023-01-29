@@ -52,7 +52,7 @@ None. Used for its side-effect of producing plots
 }
 \references{
 These functions were inspired by the original SAS implementation of
-mosaic displays, described in the \emph{User's Guide},
+mosaic displays, described in the \emph{User's Guide for Mosaics},
 \url{http://www.datavis.ca/mosaics/mosaics.pdf}
 }
 \author{

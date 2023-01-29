@@ -26,3 +26,11 @@ This is a major enhancement release of the `vcdExtra` package, focusing on docum
 > revdepcheck::revdep_check(num_workers = 4)
 
 *Wow, no problems at all. :)*
+
+## revdepcheck results
+
+We checked 5 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
+

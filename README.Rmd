@@ -33,8 +33,8 @@ library(vcdExtra)
 
 Version 0.8-2
 
-This package provides additional data sets, documentation, and
-a few functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*
+This package provides additional data sets, documentation, and many
+functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*
 and the [gnm](https://CRAN.R-project.org/package=gnm) package for *Generalized Nonlinear Models*. 
 In particular, `vcdExtra` extends mosaic, assoc and sieve plots from vcd to handle `glm()` and 
 `gnm()` models and
@@ -42,25 +42,41 @@ adds a 3D version in `mosaic3d()`.
 
 `vcdExtra` is a support package for the book [*Discrete Data Analysis with R*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835) (DDAR) by Michael Friendly and David Meyer. There is also a
 [web site for DDAR](http://ddar.datavis.ca) with all figures and code samples from the book.
-It is also used in my graduate course, [Psy 6136: Catgegorical Data Analysis](https://friendly.github.io/psy6136/).
+It is also used in my graduate course, [Psy 6136: Categorical Data Analysis](https://friendly.github.io/psy6136/).
 
-### Details
+## Installation
 
-The main purpose of this package is to serve as a sandbox for
+Get the released version from CRAN:
+
+     install.packages("vcdExtra")
+
+The development version can be installed to your R library directly from the [GitHub repo](https://github.com/friendly/vcdExtra) via:
+
+     if (!require(remotes)) install.packages("remotes")
+     remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
+
+
+### Overview
+
+The original purpose of this package was to serve as a sandbox for
 introducing extensions of
 mosaic plots and related graphical methods
-that apply to loglinear models fitted using
-`glm()` and related, generalized nonlinear models fitted
+that apply to loglinear models fitted using `MASS::loglm()`,
+generalized linear models using
+`stats::glm()` and the related, generalized _nonlinear_ models fitted
 with `gnm()` in the [gnm](https://CRAN.R-project.org/package=gnm) package.
+
 A related purpose is to fill in some holes in the analysis of
 categorical data in R, not provided in base R, [vcd](https://CRAN.R-project.org/package=vcd), 
 or other commonly used packages.
 
 * The method `mosaic.glm()` 
 extends the `mosaic.loglm()` method in the vcd
-package to this wider class of models.  This method also works for
-the generalized nonlinear models fit with the gnm package,
-including models for square tables and models with multiplicative associations.
+package to this wider class of models, e.g., models for ordinal factors, which can't
+be handled with `MASS::loglm()`.
+This method also works for
+the generalized _nonlinear_ models fit with the [gnm](https://CRAN.R-project.org/package=gnm) package,
+including models for square tables and models with multiplicative associations (RC models).
 
 * `mosaic3d()`
 introduces a 3D generalization of mosaic displays using the
@@ -72,39 +88,35 @@ all K-way models from a basic marginal model, and `LRstats()`
 for brief statistical summaries of goodness-of-fit for a collection of
 models.
 
+* Similarly, for loglinear models fit using `MASS::loglm()`, the function `seq_loglm()`
+ fits a series of sequential models to the 1-, 2-, ... _n_-way marginal tables, corresponding to a variety of types of models for joint, conditional, mutual, ... independence. It
+ returns an object of class `loglmlist`, each of which is a class `loglm` object.
+ The function `seq_mosaic()` generates the mosaic plots and other plots in the
+ `vcd::strucplot()` framework. 
+
 * For **square tables** with ordered factors, `Crossings()` supplements the 
 specification of terms in model formulas using
-`Symm()`,
-`Diag()`, 
-`Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm) package.
+`gnm::Symm()`,
+`gnm::Diag()`, 
+`gnm::Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-* In addition, there are: 
-  + many new data sets; use `datasets("vcdExtra")` to see a list with titles and descriptions
+In addition, there are: 
+
+* many new data sets; use `datasets("vcdExtra")` to see a list with titles and descriptions
 
 ```{r vcdExtra-datasets}
 vcdExtra::datasets("vcdExtra")[,1]
 ```
 
-  + a [collection of tutorial vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/). In the installed package, they can be viewed using `browseVignettes(package = "vcdExtra")`;
+* a [collection of tutorial vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/). In the installed package, they can be viewed using `browseVignettes(package = "vcdExtra")`;
 
 ```{r vignettes}
 tools::getVignetteInfo("vcdExtra")[,c("File", "Title")]
 ```
 
-  + a few useful utility functions for manipulating categorical data sets and working with models for
+* a few useful utility functions for manipulating categorical data sets and working with models for
 categorical data. 
 
-
-## Installation
-
-Get the released version from CRAN:
-
-     install.packages("vcdExtra")
-
-The development version can be installed to your R library directly from the GitHub repo via:
-
-     if (!require(remotes)) install.packages("remotes")
-     remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
 
 ## Examples
 
@@ -125,9 +137,11 @@ ordinality into account.
 
 
 #### Independence model
-Fit the independence model, `Freq ~ mental+ses`. This does not take ordinality into account.
+Fit the independence model, `Freq ~ mental + ses`, using `glm(..., family = poisson)`
+This model is equivalent to the `chisq.test(Mental)` for general association; it
+does not take ordinality into account.
 ```{r ex-mental2}
-indep <- glm(Freq ~ mental+ses,
+indep <- glm(Freq ~ mental + ses,
              family = poisson, data = Mental)
 LRstats(indep)
 ```
@@ -138,11 +152,12 @@ The default mosaic display for these data:
 mosaic(indep)
 ```
 
-It is usually better to use standardized residuals in mosaic displays.
-Here we also add longer labels for the table factors and display the
-values of residuals in the cells. 
+It is usually better to use _standardized residuals_ (`residuals_type="rstandard"`) in mosaic displays, rather than the default Pearson residuals.
+Here we also add longer labels for the table factors (`set_varnames`)
+and display the
+values of residuals (`labeling=labeling_residuals`) in the cells. 
 
-The formula, `~ ses + mental`
+The strucplot `formula` argument, `~ ses + mental`
 here gives the order of the factors in the mosaic display,
 not the statistical model for independence. That is, the
 unit square is first split by `ses`, then by `mental` within
@@ -152,22 +167,40 @@ each level of `ses`.
 long.labels <- list(set_varnames = c(mental="Mental Health Status", 
                                      ses="Parent SES"))
 
-mosaic(indep, ~ ses + mental,
+mosaic(indep, formula = ~ ses + mental,
        residuals_type="rstandard",
        labeling_args = long.labels, 
        labeling=labeling_residuals)
 ```
 
-the opposite-corner pattern of the residuals clearly shows that association
-between Parent SES and mental health depends on the ordered levels of the factors.
+The **opposite-corner** pattern of the residuals clearly shows that association
+between Parent SES and mental health depends on the _ordered_ levels of the factors:
+higher Parent SES is associated with better mental health status. A principal virtue
+of mosaic plots is to show the pattern of association that remains
+after a model has been fit, and thus help suggest a better model.
 
 #### Ordinal models
-Ordinal models use numeric scores for the row and/or column variables.
-The simplest models use equally spaced integer scores.
+Ordinal models use **numeric** scores for the row and/or column variables.
+These models typically use equally spaced _integer_ scores.
+The test for association here is analogous to a test of the correlation
+between the frequency-weighted scores, carried out using `CMHtest()`.
+
+In the data, `ses` and `mental` were declared to be ordered factors,
+so using `as.numeric(Mental$ses)` is sufficient to create a new `Cscore`
+variable. Similarly for the numeric version of `mental`, giving `Rscore`.
+
+```{r mental-scores}
+Cscore <- as.numeric(Mental$ses)
+Rscore <- as.numeric(Mental$mental)
+```
+
 
 Using these, the term `Rscore:Cscore` represents an association
-constrained to be **linear x linear**; that is, the slopes for
-mental health status is assumed to vary linearly with Parent SES.
+constrained to be **linear x linear**; that is, the slopes for profiles of
+mental health status are assumed to vary linearly with those for Parent SES.
+(This model asserts that only one parameter (a local odds ratio)
+is sufficient to account for all association, and is also called the model of "uniform association".)
+
 
 ```{r mental3}
 # fit linear x linear (uniform) association.  Use integer scores for rows/cols 

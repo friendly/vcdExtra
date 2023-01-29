@@ -69,7 +69,7 @@ GSS <- data.frame(
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
 ```
 
-Generate a crosstable showing cell frequency and the cell contribution to $\chi^2$.
+Generate a cross-table showing cell frequency and the cell contribution to $\chi^2$.
 ```{r, xtabs-ex2}
 # 2-Way Cross Tabulation
 library(gmodels)
@@ -243,7 +243,7 @@ The standard $\chi^2$ tests for association in a two-way table
 treat both table factors as nominal (unordered) categories.
 When one or both factors of a two-way table are
 quantitative or ordinal, more powerful tests of association
-may be obtaianed by taking ordinality into account, using
+may be obtained by taking ordinality into account, using
 row and or column scores to test for linear trends or differences
 in row or column means.
 
@@ -364,7 +364,7 @@ different frequency of use of categories by the two raters-- lack of
 ## Correspondence analysis
 
 Correspondence analysis is a technique for visually exploring relationships
-between rows and columns in contingency tables. The `ca` package gives one implmentation.
+between rows and columns in contingency tables. The `ca` package gives one implementation.
 For an $r \times c$ table,
 the method provides a breakdown of the Pearson $\chi^2$ for association in up to $M = \min(r-1, c-1)$
 dimensions, and finds scores for the row ($x_{im}$) and column ($y_{jm}$) categories

@@ -32,7 +32,7 @@ This is a major enhancement release of the `vcdExtra` package, focusing on docum
 
 ## Version 0.7-4 (2019-09-25)
 
-- Fix `datasets()` to work with packages not using LazyData #PR7 [Thx: Duncan Murdock]
+- Fix `datasets()` to work with packages not using LazyData #PR7 [Thx: Duncan Murdoch]
 - Bump package Version
 
 ## Version 0.7-3 (2018-06-04)

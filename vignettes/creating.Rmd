@@ -574,7 +574,7 @@ mosaic displays in R by Jay Emerson.
 In turn, they came from the initial development of mosaic displays 
 [@vcd:Hartigan+Kleiner:1984]
 that illustrated the method with data on a large sample of TV viewers
-whose behavior had been recorded for the Neilson ratings.
+whose behavior had been recorded for the Neilsen ratings.
 This data set contains sample television audience data from Neilsen
 Media Research for the week starting November 6, 1995.
 
