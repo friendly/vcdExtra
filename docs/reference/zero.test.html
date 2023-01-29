@@ -30,6 +30,7 @@ statistic on one degree of freedom."><meta property="og:image" content="http://f
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
     <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
     <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
@@ -126,20 +127,20 @@ Score Tests for Zero-Inflation in Overdispersed Count Data.
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.00912 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.02204 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.92394 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.88199 </span>
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.23876 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.85527 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.6251 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.35506 </span>
 <span class="r-in"><span><span class="co"># add some extra zeros</span></span></span>
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 161.83853 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 220.13433 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: &lt; 2.22e-16 </span>
 <span class="r-in"><span></span></span>

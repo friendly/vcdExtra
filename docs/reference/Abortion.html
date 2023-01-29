@@ -26,6 +26,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
     <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
     <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
@@ -70,10 +71,16 @@
 <p></p><table class="table table"><tr><td>No</td><td>Name</td><td>Levels</td></tr><tr><td>1</td><td><code>Sex</code></td><td><code>"Female", "Male"</code></td></tr><tr><td>2</td><td><code>Status</code></td><td><code>"Lo", "Hi"</code></td></tr><tr><td>3</td><td><code>Support_Abortion</code></td><td><code>"Yes", "No"</code></td></tr></table></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The combinations of <code>Sex</code> and <code>Status</code> represent four independent samples, having
+    <p><code>Support_Abortion</code> is a natural response variable.</p>
+<p>The combinations of <code>Sex</code> and <code>Status</code> represent four independent samples, having
 fixed <code>Sex</code>-<code>Status</code> marginal totals. 
-Thus the <code>Sex:Status</code> association must be included in any loglinear model.
-<code>Support_Abortion</code> is a natural response variable.</p>
+There were 500 females and 600 males. Within the female group, 250 of low status and 250
+of high status were sampled. Similarly for the males, with 300 in each of the low and hgh
+status sub-groups.</p>
+<p>This is an example of a product-multinomial sampling scheme.
+the <code>Sex:Status</code> association must be included in any loglinear model
+where the goal is to determine how attitude toward abortion depends on the others.</p>
+<p>Alternatively, a logit model for abortion support may provide a simpler analysis.</p>
     </div>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
