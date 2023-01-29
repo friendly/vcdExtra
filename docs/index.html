@@ -101,8 +101,17 @@
 <p>Version 0.8-2</p>
 <p>This package provides additional data sets, documentation, and many functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>.</p>
 <p><code>vcdExtra</code> is a support package for the book <a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835" class="external-link"><em>Discrete Data Analysis with R</em></a> (DDAR) by Michael Friendly and David Meyer. There is also a <a href="http://ddar.datavis.ca" class="external-link">web site for DDAR</a> with all figures and code samples from the book. It is also used in my graduate course, <a href="https://friendly.github.io/psy6136/" class="external-link">Psy 6136: Categorical Data Analysis</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>Get the released version from CRAN:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
+<p>The development version can be installed to your R library directly from the <a href="https://github.com/friendly/vcdExtra" class="external-link">GitHub repo</a> via:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"friendly/vcdExtra"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="section level3">
-<h3 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
+<h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
 <p>The original purpose of this package was to serve as a sandbox for introducing extensions of mosaic plots and related graphical methods that apply to loglinear models fitted using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, generalized linear models using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code> and the related, generalized <em>nonlinear</em> models fitted with <code>gnm()</code> in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package.</p>
 <p>A related purpose is to fill in some holes in the analysis of categorical data in R, not provided in base R, <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>, or other commonly used packages.</p>
@@ -110,14 +119,14 @@
 <li><p>The method <code><a href="reference/mosaic.glm.html">mosaic.glm()</a></code> extends the <code>mosaic.loglm()</code> method in the vcd package to this wider class of models, e.g., models for ordinal factors, which can’t be handled with <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>. This method also works for the generalized <em>nonlinear</em> models fit with the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package, including models for square tables and models with multiplicative associations (RC models).</p></li>
 <li><p><code><a href="reference/mosaic3d.html">mosaic3d()</a></code> introduces a 3D generalization of mosaic displays using the <a href="https://CRAN.R-project.org/package=rgl" class="external-link">rgl</a> package.</p></li>
 <li><p>A new class, <code>glmlist</code>, is introduced for working with collections of glm objects, e.g., <code><a href="reference/Kway.html">Kway()</a></code> for fitting all K-way models from a basic marginal model, and <code><a href="reference/LRstats.html">LRstats()</a></code> for brief statistical summaries of goodness-of-fit for a collection of models.</p></li>
-<li><p>Similarly, for loglinear models fit using <code>MASS::</code>loglm()<code>, the function</code>seq_loglm()<code>fits a series of sequential models to the 1-, 2-, ... _n_-way marginal tables, corresponding to a variety of types of models for joint, conditional, mutual, ... independence. It  returns an object of class</code>loglmlist<code>, each of which is a class</code>loglm<code>object.  The function</code>seq_mosaic()<code>generates the mosaic plots and other plots in the</code>vcd::strucplot()` framework.</p></li>
+<li><p>Similarly, for loglinear models fit using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, the function <code><a href="reference/seq_loglm.html">seq_loglm()</a></code> fits a series of sequential models to the 1-, 2-, … <em>n</em>-way marginal tables, corresponding to a variety of types of models for joint, conditional, mutual, … independence. It returns an object of class <code>loglmlist</code>, each of which is a class <code>loglm</code> object. The function <code><a href="reference/seq_mosaic.html">seq_mosaic()</a></code> generates the mosaic plots and other plots in the <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">vcd::strucplot()</a></code> framework.</p></li>
 <li><p>For <strong>square tables</strong> with ordered factors, <code><a href="reference/Crossings.html">Crossings()</a></code> supplements the specification of terms in model formulas using <code><a href="https://rdrr.io/pkg/gnm/man/Symm.html" class="external-link">gnm::Symm()</a></code>, <code><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">gnm::Diag()</a></code>, <code>gnm::Topo(),</code> etc. in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package.</p></li>
 </ul>
 <p>In addition, there are:</p>
 <ul>
 <li>many new data sets; use <code>datasets("vcdExtra")</code> to see a list with titles and descriptions</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vcdExtra</span><span class="fu">::</span><span class="fu"><a href="reference/datasets.html">datasets</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
 <span><span class="co">##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     </span></span>
 <span><span class="co">##  [5] "Bartlett"       "Burt"           "Caesar"         "Cancer"        </span></span>
@@ -133,22 +142,13 @@
 <ul>
 <li>a <a href="https://cran.r-project.org/web/packages/vcdExtra/vignettes/" class="external-link">collection of tutorial vignettes</a>. In the installed package, they can be viewed using <code>browseVignettes(package = "vcdExtra")</code>;</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/getVignetteInfo.html" class="external-link">getVignetteInfo</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"File"</span>, <span class="st">"Title"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">##      File Title</span></span></code></pre></div>
 <ul>
 <li>a few useful utility functions for manipulating categorical data sets and working with models for categorical data.</li>
 </ul>
 </div>
-</div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>Get the released version from CRAN:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
-<p>The development version can be installed to your R library directly from the <a href="https://github.com/friendly/vcdExtra" class="external-link">GitHub repo</a> via:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"friendly/vcdExtra"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>

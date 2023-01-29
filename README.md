@@ -32,7 +32,19 @@ for DDAR](http://ddar.datavis.ca) with all figures and code samples from
 the book. It is also used in my graduate course, [Psy 6136: Categorical
 Data Analysis](https://friendly.github.io/psy6136/).
 
-### Details
+## Installation
+
+Get the released version from CRAN:
+
+     install.packages("vcdExtra")
+
+The development version can be installed to your R library directly from
+the [GitHub repo](https://github.com/friendly/vcdExtra) via:
+
+     if (!require(remotes)) install.packages("remotes")
+     remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
+
+### Overview
 
 The original purpose of this package was to serve as a sandbox for
 introducing extensions of mosaic plots and related graphical methods
@@ -62,9 +74,13 @@ packages.
   marginal model, and `LRstats()` for brief statistical summaries of
   goodness-of-fit for a collection of models.
 
-- Similarly, for loglinear models fit using
-  `MASS::`loglm()`, the function`seq_loglm()`fits a series of sequential models to the 1-, 2-, ... _n_-way marginal tables, corresponding to a variety of types of models for joint, conditional, mutual, ... independence. It  returns an object of class`loglmlist`, each of which is a class`loglm`object.  The function`seq_mosaic()`generates the mosaic plots and other plots in the`vcd::strucplot()\`
-  framework.
+- Similarly, for loglinear models fit using `MASS::loglm()`, the
+  function `seq_loglm()` fits a series of sequential models to the 1-,
+  2-, … *n*-way marginal tables, corresponding to a variety of types of
+  models for joint, conditional, mutual, … independence. It returns an
+  object of class `loglmlist`, each of which is a class `loglm` object.
+  The function `seq_mosaic()` generates the mosaic plots and other plots
+  in the `vcd::strucplot()` framework.
 
 - For **square tables** with ordered factors, `Crossings()` supplements
   the specification of terms in model formulas using `gnm::Symm()`,
@@ -103,18 +119,6 @@ tools::getVignetteInfo("vcdExtra")[,c("File", "Title")]
 
 - a few useful utility functions for manipulating categorical data sets
   and working with models for categorical data.
-
-## Installation
-
-Get the released version from CRAN:
-
-     install.packages("vcdExtra")
-
-The development version can be installed to your R library directly from
-the [GitHub repo](https://github.com/friendly/vcdExtra) via:
-
-     if (!require(remotes)) install.packages("remotes")
-     remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
 
 ## Examples
 
