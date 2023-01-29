@@ -39,5 +39,5 @@ revdepcheck::revdep_check(num_workers = 4)
 pkgdown::build_site()
 
 # submit to cran
-devtools::release(args=args)
+devtools::release()
 
