@@ -58,3 +58,6 @@ if (require(nnet)) {
 
 }
 \keyword{datasets}
+\concept{loglinear}
+\concept{multinomial}
+\concept{zeros}

@@ -9,6 +9,7 @@ A three-way frequency table crossing eye color and hair color in two places, Cai
 Scotland.
 These data were of interest to Fisher (1940) and others because
 there are mixtures of people of Nordic, Celtic and Anglo-Saxon origin.
+
 One or both tables have been widely analyzed in conjunction with
 RC and canonical correlation models for categorical data, e.g.,
 Becker and Clogg (1989).

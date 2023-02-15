@@ -69,3 +69,8 @@ pairs(Bartlett, gp=shading_Friendly)
 }
 
 \keyword{datasets}
+\concept{loglinear}
+\concept{homogeneity}
+\concept{2x2}
+\concept{odds ratio}
+
