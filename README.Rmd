@@ -31,7 +31,7 @@ library(vcdExtra)
 # vcdExtra <img src="man/figures/logo.png" style="float:right; height:200px;" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
-Version 0.8-2
+Version 0.8-3
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*

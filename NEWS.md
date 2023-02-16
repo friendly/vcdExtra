@@ -1,3 +1,8 @@
+## Version 0.8-3 (2023-02-16)
+
+- Begin to classify datasets with concept/method tags
+
+
 ## Version 0.8-2 (2023-01-19)
 
 This is a major enhancement release of the `vcdExtra` package, focusing on documentation and examples.
