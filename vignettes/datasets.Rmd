@@ -1,0 +1,38 @@
+---
+title: "Datasets for categorical data analysis"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+package: vcdExtra
+output: 
+  rmarkdown::html_vignette:
+  fig_caption: yes
+bibliography: ["vcd.bib", "vcdExtra.bib"]
+csl: apa.csl
+vignette: >
+  %\VignetteIndexEntry{Datasets for categorical data analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 7,
+  fig.path = "fig/datasets-",
+  dev = "png",
+  comment = "##"
+)
+
+# save some typing
+knitr::set_alias(w = "fig.width",
+                 h = "fig.height",
+                 cap = "fig.cap")
+
+The `vcdExtra` package contains `r nrow(vcdExtra::datasets("vcdExtra"))` datasets, taken
+from the literature on categorical data analysis, and selected to illustrate various
+methods of analysis and data display. These are in addition to the 
+`r nrow(vcdExtra::datasets("vcd"))` datasets in the [vcd package](https://cran.r-project.org/package=vcd).
+
+
