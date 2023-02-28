@@ -32,7 +32,7 @@ importFrom("stats",      "update.formula")
 
 # for datasets vignette
 importFrom("here",    "here")
-importFrom("readxl",  "readxl")
+importFrom("readxl",  "read_excel")
 importFrom("glue",    "glue", "glue_collapse")
 importFrom("purrr",   "map")
 importFrom("stringr", "str_split_1")
