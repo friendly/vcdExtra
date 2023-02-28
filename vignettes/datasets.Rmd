@@ -17,6 +17,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = FALSE,
   warning = FALSE,
   fig.height = 6,
   fig.width = 7,
@@ -29,10 +30,107 @@ knitr::opts_chunk$set(
 knitr::set_alias(w = "fig.width",
                  h = "fig.height",
                  cap = "fig.cap")
+```
 
 The `vcdExtra` package contains `r nrow(vcdExtra::datasets("vcdExtra"))` datasets, taken
 from the literature on categorical data analysis, and selected to illustrate various
 methods of analysis and data display. These are in addition to the 
 `r nrow(vcdExtra::datasets("vcd"))` datasets in the [vcd package](https://cran.r-project.org/package=vcd).
 
+To make it easier to find those which illustrate a particular method, the datasets in `vcdExtra` have been classified
+using method tags. This vignette creates an "inverse table", listing the datasets that apply to each method.
+It also illustrates a general method for classifying datasets in R packages.
+
+```{r load}
+library(dplyr)
+library(tidyr)
+library(readxl)
+#library(here)
+```
+
+## Processing tags
+
+```{r read-datasets}
+dsets_tagged <- read_excel(here::here("extra", "vcdExtra-datasets.xlsx"), 
+                           sheet="vcdExtra-datasets")
+
+dsets_tagged <- dsets_tagged |>
+  dplyr::select(-Title, -dim) |>
+  dplyr::rename(dataset = Item)
+```
+
+
+To invert the table, need to split tags into separate observations, then collapse the rows for the same tag.
+
+```{r split-tags}
+dset_split <- dsets_tagged |>
+  tidyr::separate_longer_delim(tags, delim = ";") |>
+  dplyr::mutate(tag = stringr::str_trim(tags)) |>
+  dplyr::select(-tags)
+
+#' ## collapse the rows for the same tag
+tag_dset <- dset_split |>
+  arrange(tag) |>
+  dplyr::group_by(tag) |>
+  dplyr::summarise(datasets = paste(dataset, collapse = "; ")) |> ungroup()
+
+# get a list of the unique tags
+cat(paste(unique(tag_dset$tag), collapse ="\t"))
+
+```
+
+## Make this into a nice table
+
+Another sheet in the spreadsheet gives a more descriptive `topic` for corresponding to each tag.
+
+```{r read-tags}
+tags <- read_excel(here::here("extra", "vcdExtra-datasets.xlsx"), 
+                   sheet="tags")
+head(tags)
+```
+
+Now, join this with the `tag_dset` created above.
+
+```{r join-tags}
+tag_dset <- tag_dset |>
+  left_join(tags, by = "tag") |>
+  dplyr::relocate(topic, .after = tag)
+
+tag_dset |>
+  dplyr::select(-tag) |>
+  head()
+```
+
+### Add links to `help()`
+
+We're almost there. It would be nice if the dataset names could be linked to their documentation.
+This function is designed to work with the `pkgdown` site.
+It turns each `dataset` name into a link to `help(dataset)`.
+
+```{r add-links}
+add_links <- function(dsets, 
+                      sep = "; ") {
+
+  names <- stringr::str_split_1(dsets, sep)
+  names <- glue::glue("[{names}](help({names}))")
+  glue::glue_collapse(names, sep = sep)
+}
+
+# try it out
+add_links("Bartlett; Fungicide")
+```
+
+### Make the table
+
+Use `purrr::map()` to apply `add_links()` to all the datasets for each tag.
+(`mutate(datasets = add_links(datasets))` by itself doesn't work.)
+
+```{r kable}
+tag_dset |>
+  dplyr::select(-tag) |>
+  dplyr::mutate(datasets = purrr::map(datasets, add_links)) |>
+  knitr::kable()
+```
+
+Voila!
 
