@@ -56,6 +56,7 @@ tag_dset |>
 #' This function is designed to work with the `pkgdown` site, 
 #' but it isn't clear what the link should be.
 #' style = "reference" will work with `pkgdown` but not in a vignette
+#' style = "rdrr.io" ??
 add_links <- function(dsets, 
                       style = c("reference", "help", "rdrr.io"),
                       sep = "; ") {
@@ -77,6 +78,7 @@ add_links <- function(dsets,
 
 add_links("Bartlett; Fungicide")
 add_links("Bartlett; Fungicide", style="ref")
+add_links("Bartlett; Fungicide", style="rdrr")
 
 purrr::map(tag_dset$datasets, add_links)
 
