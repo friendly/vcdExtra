@@ -40,7 +40,7 @@ Suggests:
   knitr, 
   rmarkdown,
   seriation,
-  'dplyr', 'glue', 'here', 'purrr', 'readxl', 'stringr', 'tidy'
+  dplyr, glue, here, purrr, readxl, stringr, tidy
 Imports: MASS, grDevices, stats, utils, ca
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data
     and the 'gnm' package for Generalized Nonlinear Models.
