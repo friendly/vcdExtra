@@ -45,18 +45,21 @@ It also illustrates a general method for classifying datasets in R packages.
 library(dplyr)
 library(tidyr)
 library(readxl)
-#library(here)
 ```
 
 ## Processing tags
 
+Using the result of `vcdExtra::datasets(package="vcdExtra")` I created a spreadsheet, `vcdExtra-datasets.xlsx`,
+and then added method tags.
 ```{r read-datasets}
-dsets_tagged <- read_excel(here::here("inst", "vcdExtra-datasets.xlsx"), 
+dsets_tagged <- read_excel(here::here("inst", "extdata", "vcdExtra-datasets.xlsx"), 
                            sheet="vcdExtra-datasets")
 
 dsets_tagged <- dsets_tagged |>
   dplyr::select(-Title, -dim) |>
   dplyr::rename(dataset = Item)
+
+head(dsets_tagged)
 ```
 
 
@@ -75,7 +78,7 @@ tag_dset <- dset_split |>
   dplyr::summarise(datasets = paste(dataset, collapse = "; ")) |> ungroup()
 
 # get a list of the unique tags
-cat(paste(unique(tag_dset$tag), collapse ="\t"))
+unique(tag_dset$tag)
 ```
 
 ## Make this into a nice table
@@ -83,7 +86,7 @@ cat(paste(unique(tag_dset$tag), collapse ="\t"))
 Another sheet in the spreadsheet gives a more descriptive `topic` for corresponding to each tag.
 
 ```{r read-tags}
-tags <- read_excel(here::here("inst", "vcdExtra-datasets.xlsx"), 
+tags <- read_excel(here::here("inst", "extdata", "vcdExtra-datasets.xlsx"), 
                    sheet="tags")
 head(tags)
 ```
@@ -119,7 +122,7 @@ add_links <- function(dsets,
 add_links("Bartlett; Fungicide")
 ```
 
-### Make the table
+## Make the table {#table}
 
 Use `purrr::map()` to apply `add_links()` to all the datasets for each tag.
 (`mutate(datasets = add_links(datasets))` by itself doesn't work.)
