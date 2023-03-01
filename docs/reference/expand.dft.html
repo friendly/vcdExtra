@@ -12,7 +12,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
     <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
@@ -135,25 +136,25 @@ Boca Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="
 <span class="r-in"><span><span class="op">(</span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, <span class="fl">20</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a b c d e f </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 3 4 3 4 5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 8 3 1 2 4 </span>
 <span class="r-in"><span><span class="fu">expand.table</span><span class="op">(</span><span class="va">tab</span>, var.names<span class="op">=</span><span class="st">"letter"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    letter</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1       a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3       b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4       b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7       c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8       c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9       d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10      d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11      d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12      e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13      e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14      e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10      b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11      c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12      c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13      c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14      d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15      e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16      f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16      e</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17      f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18      f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19      f</span>

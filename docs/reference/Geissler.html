@@ -16,7 +16,7 @@ listed in the table supplied by Edwards (1958, Table 1)."><meta property="og:ima
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,7 @@ listed in the table supplied by Edwards (1958, Table 1)."><meta property="og:ima
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
     <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
@@ -135,7 +136,7 @@ Analysis of the human sex ratio by using overdispersion models.
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ Freq : int  108719 42860 17395 7004 2839 1096 436 161 66 30 ...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># reproduce Saxony data, families of size 12</span></span></span>
-<span class="r-in"><span><span class="va">Saxony12</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Geissler</span>, <span class="va">size</span><span class="op">==</span><span class="fl">12</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">boys</span>, <span class="va">Freq</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">Saxony12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Geissler</span>, <span class="va">size</span><span class="op">==</span><span class="fl">12</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">boys</span>, <span class="va">Freq</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">Saxony12</span><span class="op">)</span><span class="op">&lt;-</span><span class="cn">NULL</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make a 1-way table</span></span></span>
@@ -145,9 +146,10 @@ Analysis of the human sex ratio by using overdispersion models.
 <span class="r-out co"><span class="r-pr">#&gt;</span>    3   24  104  286  670 1033 1343 1112  829  478  181   45    7 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># extract data for other family sizes</span></span></span>
-<span class="r-in"><span><span class="va">Saxony11</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Geissler</span>, <span class="va">size</span><span class="op">==</span><span class="fl">11</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">boys</span>, <span class="va">Freq</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">Saxony11</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Geissler</span>, <span class="va">size</span><span class="op">==</span><span class="fl">11</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">boys</span>, <span class="va">Freq</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">Saxony11</span><span class="op">)</span><span class="op">&lt;-</span><span class="cn">NULL</span></span></span>
-<span class="r-in"><span><span class="va">Saxony10</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Geissler</span>, <span class="va">size</span><span class="op">==</span><span class="fl">10</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">boys</span>, <span class="va">Freq</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">Saxony10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Geissler</span>, <span class="va">size</span><span class="op">==</span><span class="fl">10</span>, select<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">boys</span>, <span class="va">Freq</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">Saxony10</span><span class="op">)</span><span class="op">&lt;-</span><span class="cn">NULL</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
