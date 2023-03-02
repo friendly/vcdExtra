@@ -17,7 +17,7 @@ write.csv(dsets, file = "extra/vcdExtra-datasets.csv")
 
 #' ## classify them in the equivalent xlsx file ...
 
-dsets_tagged <- read_excel("extra/vcdExtra-datasets.xlsx", 
+dsets_tagged <- read_excel("inst/extdata/vcdExtra-datasets.xlsx", 
                            sheet="vcdExtra-datasets")
 
 dsets_tagged <- dsets_tagged |>
@@ -41,7 +41,7 @@ cat(paste(unique(tag_dset$tag), collapse ="\n"))
 
 #' ## make this into a nice table
 #' The `tags` sheet contain the `tag` and a `topic` description
-tags <- read_excel("extra/vcdExtra-datasets.xlsx", 
+tags <- read_excel("inst/extdata/vcdExtra-datasets.xlsx", 
                    sheet="tags")
 
 tag_dset <- tag_dset |>
