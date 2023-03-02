@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
     <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
@@ -87,7 +88,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2023-01-29</h4>
+            <h4 data-toc-skip class="date">2023-03-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/mosaics.Rmd" class="external-link"><code>vignettes/mosaics.Rmd</code></a></small>
       <div class="d-none name"><code>mosaics.Rmd</code></div>
@@ -518,7 +519,6 @@ jointly.</p>
 <code>Task</code> and <code>Who</code> along the CA dimensions.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mhahsler/seriation" class="external-link">seriation</a></span><span class="op">)</span></span>
-<span><span class="co">## Loading required package: seriation</span></span>
 <span><span class="va">order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/seriation/man/seriate.html" class="external-link">seriate</a></span><span class="op">(</span><span class="va">HouseTasks</span>, method <span class="op">=</span> <span class="st">"CA"</span><span class="op">)</span></span>
 <span><span class="co"># the permuted row and column labels</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">HouseTasks</span><span class="op">)</span><span class="op">[</span><span class="va">order</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">]</span></span>

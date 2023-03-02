@@ -4,11 +4,12 @@ pkgdown_sha: ~
 articles:
   continuous: continuous.html
   creating: creating.html
+  datasets: datasets.html
   demo-housing: demo-housing.html
   loglinear: loglinear.html
   mosaics: mosaics.html
   tests: tests.html
-last_built: 2023-01-29T22:43Z
+last_built: 2023-03-01T20:15Z
 urls:
   reference: http://friendly.github.io/vcdExtra/reference
   article: http://friendly.github.io/vcdExtra/articles

@@ -54,16 +54,31 @@ tag_dset |>
 
 #' ## add links to the names of datasets
 #' This function is designed to work with the `pkgdown` site, 
-#' Turn each dataset into a link to `help(dataset)`
+#' but it isn't clear what the link should be.
+#' style = "reference" will work with `pkgdown` but not in a vignette
+#' style = "rdrr.io" ??
 add_links <- function(dsets, 
+                      style = c("reference", "help", "rdrr.io"),
                       sep = "; ") {
 
+  style <- match.arg(style)
   names <- stringr::str_split_1(dsets, sep)
-  names <- glue::glue("[{names}](help({names}))")
+  # if(style == "help")
+  #   names <- glue::glue("[{names}](help({names}))")
+  # else
+  #   names <- glue::glue("[{names}](reference/{names}.html))")
+
+  names <- dplyr::case_when(
+    style == "help"      ~ glue::glue("[{names}](help({names}))"),
+    style == "reference" ~ glue::glue("[{names}](reference/{names}.html))"),
+    style == "rdrr.io"   ~ glue::glue("[{names}](https://rdrr.io/cran/vcdExtra/man/{names}.html)")
+  )  
   glue::glue_collapse(names, sep = sep)
 }
 
 add_links("Bartlett; Fungicide")
+add_links("Bartlett; Fungicide", style="ref")
+add_links("Bartlett; Fungicide", style="rdrr")
 
 purrr::map(tag_dset$datasets, add_links)
 

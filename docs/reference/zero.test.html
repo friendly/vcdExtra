@@ -14,7 +14,7 @@ statistic on one degree of freedom."><meta property="og:image" content="http://f
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,7 @@ statistic on one degree of freedom."><meta property="og:image" content="http://f
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/continuous.html">Continuous predictors</a>
     <a class="dropdown-item" href="../articles/creating.html">Creating and manipulating frequency tables</a>
+    <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
@@ -114,7 +115,7 @@ A Score Test for Zero Inflation in a Poisson Distribution.
 <p>Yang, Zhao, James W. Hardin, and Cheryl L. Addy (2010). 
 Score Tests for Zero-Inflation in Overdispersed Count Data. 
 <em>Communications in Statistics - Theory and Methods</em> <b>39</b> (11) 2008-2030. 
-<a href="https://doi.org/10.1080/03610920902948228" class="external-link">doi:10.1080/03610920902948228</a></p>
+doi: <a href="https://doi.org/10.1080/03610920902948228" class="external-link">10.1080/03610920902948228</a></p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -127,20 +128,20 @@ Score Tests for Zero-Inflation in Overdispersed Count Data.
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.09498 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.17178 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.75794 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.67853 </span>
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.66679 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.59522 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.41417 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.44041 </span>
 <span class="r-in"><span><span class="co"># add some extra zeros</span></span></span>
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 295.37465 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 168.72581 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: &lt; 2.22e-16 </span>
 <span class="r-in"><span></span></span>
