@@ -12,7 +12,7 @@
 #' @param formula      The model formula for the polytomous response
 #' @param dichotomies  A list of lists describing the nested dichotomies. see Details
 #' @param data         The data
-#' @param ...          Other arguments, unused here
+#' @param ...          Other arguments, passed to \code{glm}
 #'
 #' @return   An object of class \code{nested}. It is a list of the glm() models fit to the
 #'           nested dichotomies.
