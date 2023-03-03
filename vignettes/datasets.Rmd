@@ -107,7 +107,7 @@ tag_dset |>
 
 We're almost there. It would be nice if the dataset names could be linked to their documentation.
 This function is designed to work with the `pkgdown` site. There are different ways this can be
-done, but what seems to work is a link to `reference/{dataset}.html`
+done, but what seems to work is a link to `../reference/{dataset}.html`
 Unfortunately, this won't work in the actual vignette.
 
 ```{r add-links}
@@ -120,7 +120,7 @@ add_links <- function(dsets,
 
   names <- dplyr::case_when(
     style == "help"      ~ glue::glue("[{names}](help({names}))"),
-    style == "reference" ~ glue::glue("[{names}](reference/{names}.html)"),
+    style == "reference" ~ glue::glue("[{names}](../reference/{names}.html)"),
     style == "rdrr.io"   ~ glue::glue("[{names}](https://rdrr.io/cran/vcdExtra/man/{names}.html)")
   )  
   glue::glue_collapse(names, sep = sep)

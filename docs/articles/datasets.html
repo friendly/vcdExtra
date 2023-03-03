@@ -198,8 +198,8 @@ then collapse the rows for the same tag.</p>
 linked to their documentation. This function is designed to work with
 the <code>pkgdown</code> site. There are different ways this can be
 done, but what seems to work is a link to
-<code>reference/{dataset}.html</code> Unfortunately, this won’t work in
-the actual vignette.</p>
+<code>../reference/{dataset}.html</code> Unfortunately, this won’t work
+in the actual vignette.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">add_links</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dsets</span>, </span>
 <span>                      <span class="va">style</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"reference"</span>, <span class="st">"help"</span>, <span class="st">"rdrr.io"</span><span class="op">)</span>,</span>
@@ -210,7 +210,7 @@ the actual vignette.</p>
 <span></span>
 <span>  <span class="va">names</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
 <span>    <span class="va">style</span> <span class="op">==</span> <span class="st">"help"</span>      <span class="op">~</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"[{names}](help({names}))"</span><span class="op">)</span>,</span>
-<span>    <span class="va">style</span> <span class="op">==</span> <span class="st">"reference"</span> <span class="op">~</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"[{names}](reference/{names}.html)"</span><span class="op">)</span>,</span>
+<span>    <span class="va">style</span> <span class="op">==</span> <span class="st">"reference"</span> <span class="op">~</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"[{names}](../reference/{names}.html)"</span><span class="op">)</span>,</span>
 <span>    <span class="va">style</span> <span class="op">==</span> <span class="st">"rdrr.io"</span>   <span class="op">~</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"[{names}](https://rdrr.io/cran/vcdExtra/man/{names}.html)"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>  </span>
 <span>  <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue_collapse.html" class="external-link">glue_collapse</a></span><span class="op">(</span><span class="va">names</span>, sep <span class="op">=</span> <span class="va">sep</span><span class="op">)</span></span>
@@ -242,107 +242,106 @@ work.)</p>
 <tr class="odd">
 <td align="left">2 by 2 tables</td>
 <td align="left">
-<a href="reference/Abortion.html">Abortion</a>; <a href="reference/Bartlett.html">Bartlett</a>; <a href="reference/Heart.html">Heart</a>
+<a href="../reference/Abortion.html">Abortion</a>; <a href="../reference/Bartlett.html">Bartlett</a>; <a href="../reference/Heart.html">Heart</a>
 </td>
 </tr>
 <tr class="even">
 <td align="left">observer agreement</td>
-<td align="left"><a href="reference/Mammograms.html">Mammograms</a></td>
+<td align="left"><a href="../reference/Mammograms.html">Mammograms</a></td>
 </tr>
 <tr class="odd">
 <td align="left">binomial distributions</td>
-<td align="left"><a href="reference/Geissler.html">Geissler</a></td>
+<td align="left"><a href="../reference/Geissler.html">Geissler</a></td>
 </tr>
 <tr class="even">
 <td align="left">correspondence analysis</td>
 <td align="left">
-<a href="reference/AirCrash.html">AirCrash</a>; <a href="reference/Burt.html">Burt</a>; <a href="reference/Draft1970table.html">Draft1970table</a>; <a href="reference/Gilby.html">Gilby</a>; <a href="reference/HospVisits.html">HospVisits</a>; <a href="reference/HouseTasks.html">HouseTasks</a>; <a href="reference/Mental.html">Mental</a>
+<a href="../reference/AirCrash.html">AirCrash</a>; <a href="../reference/Burt.html">Burt</a>; <a href="../reference/Draft1970table.html">Draft1970table</a>; <a href="../reference/Gilby.html">Gilby</a>; <a href="../reference/HospVisits.html">HospVisits</a>; <a href="../reference/HouseTasks.html">HouseTasks</a>; <a href="../reference/Mental.html">Mental</a>
 </td>
 </tr>
 <tr class="odd">
 <td align="left">generalized linear models</td>
 <td align="left">
-<a href="reference/Accident.html">Accident</a>; <a href="reference/Cormorants.html">Cormorants</a>; <a href="reference/DaytonSurvey.html">DaytonSurvey</a>; <a href="reference/Donner.html">Donner</a>; <a href="reference/Draft1970table.html">Draft1970table</a>; <a href="reference/GSS.html">GSS</a>; <a href="reference/ICU.html">ICU</a>;
-<a href="reference/PhdPubs.html">PhdPubs</a>
+<a href="../reference/Accident.html">Accident</a>; <a href="../reference/Cormorants.html">Cormorants</a>; <a href="../reference/DaytonSurvey.html">DaytonSurvey</a>; <a href="../reference/Donner.html">Donner</a>; <a href="../reference/Draft1970table.html">Draft1970table</a>; <a href="../reference/GSS.html">GSS</a>; <a href="../reference/ICU.html">ICU</a>; <a href="../reference/PhdPubs.html">PhdPubs</a>
 </td>
 </tr>
 <tr class="even">
 <td align="left">homogeneity of association</td>
-<td align="left"><a href="reference/Bartlett.html">Bartlett</a></td>
+<td align="left"><a href="../reference/Bartlett.html">Bartlett</a></td>
 </tr>
 <tr class="odd">
 <td align="left">linear models</td>
-<td align="left"><a href="reference/Draft1970.html">Draft1970</a></td>
+<td align="left"><a href="../reference/Draft1970.html">Draft1970</a></td>
 </tr>
 <tr class="even">
 <td align="left">logistic regression</td>
 <td align="left">
-<a href="reference/Accident.html">Accident</a>; <a href="reference/Donner.html">Donner</a>; <a href="reference/ICU.html">ICU</a>; <a href="reference/Titanicp.html">Titanicp</a>
+<a href="../reference/Accident.html">Accident</a>; <a href="../reference/Donner.html">Donner</a>; <a href="../reference/ICU.html">ICU</a>; <a href="../reference/Titanicp.html">Titanicp</a>
 </td>
 </tr>
 <tr class="odd">
 <td align="left">logit models</td>
 <td align="left">
-<a href="reference/Abortion.html">Abortion</a>; <a href="reference/Cancer.html">Cancer</a>
+<a href="../reference/Abortion.html">Abortion</a>; <a href="../reference/Cancer.html">Cancer</a>
 </td>
 </tr>
 <tr class="even">
 <td align="left">loglinear models</td>
 <td align="left">
-<a href="reference/Abortion.html">Abortion</a>; <a href="reference/Accident.html">Accident</a>; <a href="reference/Alligator.html">Alligator</a>; <a href="reference/Bartlett.html">Bartlett</a>; <a href="reference/Caesar.html">Caesar</a>; <a href="reference/Cancer.html">Cancer</a>; <a href="reference/Detergent.html">Detergent</a>; <a href="reference/Dyke.html">Dyke</a>; <a href="reference/Heckman.html">Heckman</a>; <a href="reference/Hoyt.html">Hoyt</a>; <a href="reference/JobSat.html">JobSat</a>; <a href="reference/Mice.html">Mice</a>; <a href="reference/TV.html">TV</a>;
-<a href="reference/Titanicp.html">Titanicp</a>; <a href="reference/Toxaemia.html">Toxaemia</a>; <a href="reference/Vietnam.html">Vietnam</a>; <a href="reference/Vote1980.html">Vote1980</a>; <a href="reference/WorkerSat.html">WorkerSat</a>
+<a href="../reference/Abortion.html">Abortion</a>; <a href="../reference/Accident.html">Accident</a>; <a href="../reference/Alligator.html">Alligator</a>; <a href="../reference/Bartlett.html">Bartlett</a>; <a href="../reference/Caesar.html">Caesar</a>; <a href="../reference/Cancer.html">Cancer</a>; <a href="../reference/Detergent.html">Detergent</a>; <a href="../reference/Dyke.html">Dyke</a>; <a href="../reference/Heckman.html">Heckman</a>; <a href="../reference/Hoyt.html">Hoyt</a>; <a href="../reference/JobSat.html">JobSat</a>; <a href="../reference/Mice.html">Mice</a>; <a href="../reference/TV.html">TV</a>; <a href="../reference/Titanicp.html">Titanicp</a>; <a href="../reference/Toxaemia.html">Toxaemia</a>; <a href="../reference/Vietnam.html">Vietnam</a>; <a href="../reference/Vote1980.html">Vote1980</a>; <a href="../reference/WorkerSat.html">WorkerSat</a>
 </td>
 </tr>
 <tr class="odd">
 <td align="left">mobility tables</td>
 <td align="left">
-<a href="reference/Glass.html">Glass</a>; <a href="reference/Hauser79.html">Hauser79</a>; <a href="reference/Mobility.html">Mobility</a>; <a href="reference/Yamaguchi87.html">Yamaguchi87</a>
+<a href="../reference/Glass.html">Glass</a>; <a href="../reference/Hauser79.html">Hauser79</a>; <a href="../reference/Mobility.html">Mobility</a>; <a href="../reference/Yamaguchi87.html">Yamaguchi87</a>
 </td>
 </tr>
 <tr class="even">
 <td align="left">multinomial models</td>
-<td align="left"><a href="reference/Alligator.html">Alligator</a></td>
+<td align="left"><a href="../reference/Alligator.html">Alligator</a></td>
 </tr>
 <tr class="odd">
 <td align="left">odds ratios</td>
 <td align="left">
-<a href="reference/Bartlett.html">Bartlett</a>; <a href="reference/Fungicide.html">Fungicide</a>
+<a href="../reference/Bartlett.html">Bartlett</a>; <a href="../reference/Fungicide.html">Fungicide</a>
 </td>
 </tr>
 <tr class="even">
 <td align="left">one-way tables</td>
 <td align="left">
-<a href="reference/CyclingDeaths.html">CyclingDeaths</a>; <a href="reference/Depends.html">Depends</a>; <a href="reference/ShakeWords.html">ShakeWords</a>
+<a href="../reference/CyclingDeaths.html">CyclingDeaths</a>; <a href="../reference/Depends.html">Depends</a>; <a href="../reference/ShakeWords.html">ShakeWords</a>
 </td>
 </tr>
 <tr class="odd">
 <td align="left">ordinal variables</td>
 <td align="left">
-<a href="reference/Draft1970table.html">Draft1970table</a>; <a href="reference/Gilby.html">Gilby</a>; <a href="reference/HairEyePlace.html">HairEyePlace</a>; <a href="reference/Hauser79.html">Hauser79</a>; <a href="reference/HospVisits.html">HospVisits</a>; <a href="reference/JobSat.html">JobSat</a>; <a href="reference/Mammograms.html">Mammograms</a>; <a href="reference/Mental.html">Mental</a>; <a href="reference/Mice.html">Mice</a>; <a href="reference/Mobility.html">Mobility</a>; <a href="reference/Yamaguchi87.html">Yamaguchi87</a>
+<a href="../reference/Draft1970table.html">Draft1970table</a>; <a href="../reference/Gilby.html">Gilby</a>; <a href="../reference/HairEyePlace.html">HairEyePlace</a>; <a href="../reference/Hauser79.html">Hauser79</a>; <a href="../reference/HospVisits.html">HospVisits</a>; <a href="../reference/JobSat.html">JobSat</a>; <a href="../reference/Mammograms.html">Mammograms</a>; <a href="../reference/Mental.html">Mental</a>; <a href="../reference/Mice.html">Mice</a>; <a href="../reference/Mobility.html">Mobility</a>; <a href="../reference/Yamaguchi87.html">Yamaguchi87</a>
 </td>
 </tr>
 <tr class="even">
 <td align="left">Poisson distributions</td>
 <td align="left">
-<a href="reference/Cormorants.html">Cormorants</a>; <a href="reference/PhdPubs.html">PhdPubs</a>
+<a href="../reference/Cormorants.html">Cormorants</a>;
+<a href="../reference/PhdPubs.html">PhdPubs</a>
 </td>
 </tr>
 <tr class="odd">
 <td align="left">reordering values</td>
 <td align="left">
-<a href="reference/AirCrash.html">AirCrash</a>; <a href="reference/Glass.html">Glass</a>; <a href="reference/HouseTasks.html">HouseTasks</a>
+<a href="../reference/AirCrash.html">AirCrash</a>; <a href="../reference/Glass.html">Glass</a>; <a href="../reference/HouseTasks.html">HouseTasks</a>
 </td>
 </tr>
 <tr class="even">
 <td align="left">square tables</td>
 <td align="left">
-<a href="reference/Glass.html">Glass</a>; <a href="reference/Hauser79.html">Hauser79</a>; <a href="reference/Mobility.html">Mobility</a>; <a href="reference/Yamaguchi87.html">Yamaguchi87</a>
+<a href="../reference/Glass.html">Glass</a>; <a href="../reference/Hauser79.html">Hauser79</a>; <a href="../reference/Mobility.html">Mobility</a>; <a href="../reference/Yamaguchi87.html">Yamaguchi87</a>
 </td>
 </tr>
 <tr class="odd">
 <td align="left">zero counts</td>
 <td align="left">
-<a href="reference/Alligator.html">Alligator</a>; <a href="reference/Caesar.html">Caesar</a>; <a href="reference/PhdPubs.html">PhdPubs</a>; <a href="reference/Vote1980.html">Vote1980</a>
+<a href="../reference/Alligator.html">Alligator</a>; <a href="../reference/Caesar.html">Caesar</a>; <a href="../reference/PhdPubs.html">PhdPubs</a>; <a href="../reference/Vote1980.html">Vote1980</a>
 </td>
 </tr>
 </tbody>

@@ -9,6 +9,8 @@ Sys.setenv(RGL_USE_NULL = TRUE)
 # Build the pkgdown site
 pkgdown::build_site()
 
+devtools::build_vignettes()
+
 # Check package
 devtools::check()
 devtools::check_win_release()
