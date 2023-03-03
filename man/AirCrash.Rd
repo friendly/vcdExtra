@@ -62,5 +62,3 @@ plot(aircrash.ca)
 \keyword{datasets}
 \concept{reorder}
 \concept{ca}
-
-

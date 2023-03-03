@@ -84,8 +84,6 @@ mosaic(Caesar.mod1,
        gp=shading_Friendly, 
        main="Adding Infection:Antibiotics")
 
-
-
 }
 
 \keyword{datasets}

@@ -21,10 +21,26 @@ dset_split <- dsets_tagged |>
 
 head(dset_split)
 
-add_concepts <- function(dset_name, topics){
+# join with concepts
+
+dset_split <- dset_split |>
+  left_join(tags, by = "tag") |> 
+  rename(concept = topic) 
+  
+
+
+dset_split <- dset_split |>
+  group_by(dataset) |>
+  summarise(concept = paste(concept, collapse = ";"))  
+
+# read in the man file, append concept lines
+add_concepts <- function(dset_name, concepts){
   fname <- glue::glue("man/{dset_name}.Rd")
   lines <- readLines(fname)
-  topics <- glue::glue("\concept{[topics]}", open="[", close="]")
+  topics <- stringr::str_split(concepts, "; ?") |> unlist()
+  topics <- glue::glue("\\concept{{{topics}}}")
   lines <- c(lines, topics)
-  
+  cat(tail(lines), sep="\n")
 }
+
+add_concepts("Cormorants", c("glm; poisson"))

@@ -1,6 +1,8 @@
 ## Version 0.8-3 (2023-02-16)
 
 - Begin to classify datasets with concept/method tags
+- Added a vignette, `datasets.Rmd` showing all datasets classified by method tags. Links only work in the `pkgdown` site.
+
 
 
 ## Version 0.8-2 (2023-01-19)
