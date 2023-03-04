@@ -1,5 +1,34 @@
 # Nested logit models
 # 2023-03-01 J. Fox
+# MF: add some documentation, add coef() method
+
+#' Nested Dichotomies Logit Models for Polytomous Response
+#' 
+#' This function constructs and fits the set of models for nested dichotomies
+#' among the categories of a polytomous response. For a response variable with
+#' \code{m} categories, a set of \code{m-1} logit models for these categories
+#' fully describes the polytomous response.
+#'
+#' @param formula      The model formula for the polytomous response
+#' @param dichotomies  A list of lists describing the nested dichotomies. see Details
+#' @param data         The data
+#' @param ...          Other arguments, passed to \code{glm}
+#'
+#' @return   An object of class \code{c("nested", "glmlist")}. It is a list of the glm() models fit to the
+#'           nested dichotomies.
+#' @export
+#'
+#' @examples
+#' data(Womenlf, package = "carData")
+#' m <- nestedLogit(partic ~ hincome + children, 
+#'                  list(work=list(c("fulltime", "parttime"), "not.work"),
+#'                       full=list("fulltime", "parttime")),
+#'            
+#'                  data=Womenlf)
+#'
+#' m
+#' summary(m)
+#' Anova(m)
 
 nestedLogit <- function(formula, dichotomies, data, ...){
   
@@ -33,7 +62,7 @@ nestedLogit <- function(formula, dichotomies, data, ...){
     call$data <- data.name
     models[[i]]$call <- call
   }
-  class (models) <- "nested"
+  class (models) <- c("nested", "glmlist")
   attr(models, "formula") <- nested.formula
   models
 }
@@ -91,6 +120,28 @@ print.Anova.nested <- function(x, ...){
   cat("\n\n")
   print(table)
   invisible(x)
+}
+
+#' Coefficient method for nested objects
+#' 
+coef.nested <- function(object, as.matrix=TRUE, ...) {
+  result <- if(as.matrix) sapply(object, coef, ...)
+  else lapply(object, coef, ...)
+  result
+}
+
+#' Predict method
+#' It won't work to simply use lapply here, because predict.glm() will ignore the NA cases
+#' in the various dichotomies. 
+#' 
+predict.nested <- function(object, 
+                           # newdata = NULL, 
+                           # type = c("link", "response", "terms"),
+                           # se.fit = FALSE, dispersion = NULL, terms = NULL,
+                           # na.action = na.pass, 
+                           ...) {
+  result <- lapply(object, predict, ...)
+  result  
 }
 
 # example:
