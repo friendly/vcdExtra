@@ -67,6 +67,6 @@ fourfold(aperm(Abortion, c(3,1,2)))
 }
 
 \keyword{datasets}
-\concept{loglinear}
-\concept{logit}
-\concept{2x2}
+\concept{loglinear models}
+\concept{logit models}
+\concept{2 by 2 tables}

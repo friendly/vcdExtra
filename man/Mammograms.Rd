@@ -41,3 +41,5 @@ labeling_cells(text = Mammograms,
   gp_text = gpar(fontface = 2, cex=1.75))(as.table(Mammograms))
 }
 \keyword{datasets}
+\concept{observer agreement}
+\concept{ordinal variables}

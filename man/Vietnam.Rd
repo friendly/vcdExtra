@@ -49,3 +49,4 @@ data(Vietnam)
 ## maybe str(Vietnam) ; plot(Vietnam) ...
 }
 \keyword{datasets}
+\concept{loglinear models}

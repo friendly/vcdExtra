@@ -111,3 +111,6 @@ mosaic(yama.quasi, ~Son + Father, main="Quasi [S][F]")
 ##
 }
 \keyword{datasets}
+\concept{square tables}
+\concept{mobility tables}
+\concept{ordinal variables}

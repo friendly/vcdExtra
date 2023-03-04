@@ -70,3 +70,6 @@ mosaic(glass.tab[ord, ord],
 \concept{mobility}
 \concept{reorder}
 
+\concept{square tables}
+\concept{mobility tables}
+\concept{reordering values}

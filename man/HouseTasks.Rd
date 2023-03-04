@@ -64,3 +64,5 @@ mosaic(HT_perm, shade = TRUE,
 }
 }
 \keyword{datasets}
+\concept{correspondence analysis}
+\concept{reordering values}

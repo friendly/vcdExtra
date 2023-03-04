@@ -124,3 +124,4 @@ steps$anova
 }
 
 \keyword{datasets}
+\concept{loglinear models}

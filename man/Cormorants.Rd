@@ -77,3 +77,5 @@ if (requireNamespace("effects"))
 
 }
 \keyword{datasets}
+\concept{generalized linear models}
+\concept{Poisson distributions}

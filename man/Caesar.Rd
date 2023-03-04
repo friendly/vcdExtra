@@ -87,3 +87,5 @@ mosaic(Caesar.mod1,
 }
 
 \keyword{datasets}
+\concept{loglinear models}
+\concept{zero counts}

@@ -52,3 +52,6 @@ vcd::mosaic(Mobility, shade=TRUE, legend = FALSE)
 }
 
 \keyword{datasets}
+\concept{square tables}
+\concept{mobility tables}
+\concept{ordinal variables}

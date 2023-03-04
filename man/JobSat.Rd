@@ -36,3 +36,5 @@ assocstats(JobSat)
 GKgamma(JobSat)
 }
 \keyword{datasets}
+\concept{loglinear models}
+\concept{ordinal variables}

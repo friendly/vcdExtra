@@ -114,3 +114,5 @@ ggplot(icu.fit, aes(x=age, y=prob, color=risks)) +
 
 }
 \keyword{datasets}
+\concept{logistic regression}
+\concept{generalized linear models}

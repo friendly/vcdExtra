@@ -42,3 +42,4 @@ mosaic(mod.glm,
   suppress=0)
 }
 \keyword{datasets}
+\concept{generalized linear models}

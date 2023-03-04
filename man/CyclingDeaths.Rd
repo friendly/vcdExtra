@@ -64,3 +64,4 @@ lambda <- gf$par$lambda
 ppois(5, lambda, lower.tail=FALSE)
 }
 \keyword{datasets}
+\concept{one-way tables}

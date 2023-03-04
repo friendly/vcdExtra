@@ -124,3 +124,5 @@ ggplot(Donner, aes(age, survived, color = sex)) +
 
 }
 \keyword{datasets}
+\concept{generalized linear models}
+\concept{logistic regression}

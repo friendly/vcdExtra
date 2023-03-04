@@ -38,3 +38,4 @@ mosaic(worker.tab, shade=TRUE)
 
 }
 \keyword{datasets}
+\concept{loglinear models}

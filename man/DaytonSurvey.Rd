@@ -75,3 +75,4 @@ Dayton.ACM <- aggregate(Freq ~ cigarette+alcohol+marijuana,
 Dayton.ACM
 }
 \keyword{datasets}
+\concept{generalized linear models}

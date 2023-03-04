@@ -43,3 +43,4 @@ vcd::cotabplot(~ Disease + Gender | Occup, data=Heart, panel = cotab_fourfold)
 }
 
 \keyword{datasets}
+\concept{2 by 2 tables}

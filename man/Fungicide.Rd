@@ -57,3 +57,4 @@ fourfold(Fungicide, p_adjust_method="none")
 
 }
 \keyword{datasets}
+\concept{odds ratios}

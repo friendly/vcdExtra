@@ -63,10 +63,6 @@ add_links <- function(dsets,
 
   style <- match.arg(style)
   names <- stringr::str_split_1(dsets, sep)
-  # if(style == "help")
-  #   names <- glue::glue("[{names}](help({names}))")
-  # else
-  #   names <- glue::glue("[{names}](reference/{names}.html))")
 
   names <- dplyr::case_when(
     style == "help"      ~ glue::glue("[{names}](help({names}))"),

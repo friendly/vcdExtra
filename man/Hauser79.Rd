@@ -120,3 +120,6 @@ with(sumry,
 
 }
 \keyword{datasets}
+\concept{square tables}
+\concept{mobility tables}
+\concept{ordinal variables}

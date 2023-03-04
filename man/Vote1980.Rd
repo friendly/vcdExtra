@@ -52,3 +52,5 @@ fourfold(xtabs(Freq ~ race + votefor + conservatism,
 
 }
 \keyword{datasets}
+\concept{loglinear models}
+\concept{zero counts}

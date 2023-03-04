@@ -48,3 +48,4 @@ str(ShakeWords)
 plot(sqrt(Freq) ~ count, data=ShakeWords)
 }
 \keyword{datasets}
+\concept{one-way tables}

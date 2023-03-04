@@ -50,4 +50,4 @@ burt.tab <- xtabs(Freq ~ Hair + Eyes + Head + Stature, data=Burt)
 mosaic(burt.tab, shade=TRUE)
 }
 \keyword{datasets}
-\concept{ca}
+\concept{correspondence analysis}

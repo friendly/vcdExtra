@@ -71,3 +71,4 @@ rownames(Saxony10)<-NULL
 
 }
 \keyword{datasets}
+\concept{binomial distributions}

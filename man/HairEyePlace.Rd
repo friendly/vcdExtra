@@ -52,3 +52,4 @@ mosaic(~Hair + Eye |Place, data=HairEyePlace, shade=TRUE, legend=FALSE)
 cotabplot(~Hair+Eye|Place, data=HairEyePlace, shade=TRUE, legend=FALSE)
 }
 \keyword{datasets}
+\concept{ordinal variables}

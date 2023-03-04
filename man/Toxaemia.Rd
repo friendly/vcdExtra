@@ -72,3 +72,4 @@ LOR
 
 }
 \keyword{datasets}
+\concept{loglinear models}

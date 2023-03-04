@@ -45,3 +45,5 @@ vcd::mosaic(mice.tab, shade=TRUE)
 
 }
 \keyword{datasets}
+\concept{loglinear models}
+\concept{ordinal variables}

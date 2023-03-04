@@ -57,3 +57,6 @@ rootogram(goodfit(PhdPubs$articles, type="nbinomial"),
 
 }
 \keyword{datasets}
+\concept{generalized linear models}
+\concept{zero counts}
+\concept{Poisson distributions}

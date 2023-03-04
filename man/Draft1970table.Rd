@@ -89,3 +89,6 @@ mosaic(linlin, residuals_type="rstandard", gp=shading_Friendly)
 
 }
 \keyword{datasets}
+\concept{correspondence analysis}
+\concept{generalized linear models}
+\concept{ordinal variables}

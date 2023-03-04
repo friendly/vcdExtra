@@ -60,5 +60,5 @@ aircrash.ca <- ca(aircrash.tab)
 plot(aircrash.ca)
 }
 \keyword{datasets}
-\concept{reorder}
-\concept{ca}
+\concept{reordering values}
+\concept{correspondence analysis}

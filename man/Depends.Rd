@@ -56,3 +56,4 @@ Depends <- table(Deps)
 }
 }
 \keyword{datasets}
+\concept{one-way tables}

@@ -62,3 +62,4 @@ mosaic(det.mod0)
 }
 
 \keyword{datasets}
+\concept{loglinear models}

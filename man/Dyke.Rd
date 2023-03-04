@@ -84,3 +84,4 @@ drop1(dyke.mod0, test="Chisq")
 }
 
 \keyword{datasets}
+\concept{loglinear models}

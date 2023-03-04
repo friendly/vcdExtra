@@ -50,3 +50,5 @@ if(require(ca)){
 
 }
 \keyword{datasets}
+\concept{correspondence analysis}
+\concept{ordinal variables}

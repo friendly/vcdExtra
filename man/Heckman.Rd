@@ -79,3 +79,4 @@ mosaic(heckman.mod2, main="3rd order markov chain model")
 }
 
 \keyword{datasets}
+\concept{loglinear models}

@@ -68,3 +68,4 @@ Draft1970$Risk <- cut(Draft1970$Rank, breaks=3, labels=c("High", "Med", "Low"))
 with(Draft1970, table(Month, Risk))
 }
 \keyword{datasets}
+\concept{linear models}

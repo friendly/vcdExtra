@@ -26,12 +26,13 @@ head(dset_split)
 dset_split <- dset_split |>
   left_join(tags, by = "tag") |> 
   rename(concept = topic) 
-  
 
 
 dset_split <- dset_split |>
   group_by(dataset) |>
   summarise(concept = paste(concept, collapse = ";"))  
+
+head(dset_split)
 
 # read in the man file, append concept lines
 add_concepts <- function(dset_name, concepts){
@@ -40,8 +41,8 @@ add_concepts <- function(dset_name, concepts){
   topics <- stringr::str_split(concepts, "; ?") |> unlist()
   topics <- glue::glue("\\concept{{{topics}}}")
   lines <- c(lines, topics)
-  cat(dset_name, ":\n")
-  cat(tail(lines), sep="\n")
+  cat(dset_name, ":", topics, "\n")
+#  cat(tail(lines), sep="\n")
   writeLines(lines, fname)
 }
 
@@ -49,6 +50,6 @@ add_concepts("Cormorants", c("glm; poisson"))
 
 head(dset_split)
 
-for(i in 1:1) {
+for(i in 31:44) {
   add_concepts(dset_split$dataset[i], dset_split$concept[i])
 }

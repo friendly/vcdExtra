@@ -58,3 +58,5 @@ data(Titanicp)
 ## maybe str(Titanicp) ; plot(Titanicp) ...
 }
 \keyword{datasets}
+\concept{loglinear models}
+\concept{logistic regression}

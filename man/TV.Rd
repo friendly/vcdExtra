@@ -80,3 +80,4 @@ mosaic(~ Day + Network + Time,
 }
 
 \keyword{datasets}
+\concept{loglinear models}

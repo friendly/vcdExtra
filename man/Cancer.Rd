@@ -49,3 +49,5 @@ vcd::mosaic(Cancer, shade=TRUE)
 }
 
 \keyword{datasets}
+\concept{loglinear models}
+\concept{logit models}
