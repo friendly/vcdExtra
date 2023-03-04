@@ -1,6 +1,7 @@
 ## Test environments
 * local Windows 10, R version 4.2.2 (2022-10-31 ucrt)
 * win-builder R version 4.2.2 (2022-10-31 ucrt)
+* R Under development (unstable) (2023-03-03 r83933 ucrt)
 * Rhub Ubuntu Linux 20.04.1 LTS, R-release, GCC
 * Rhub Fedora Linux, R-devel, clang, gfortran
 
@@ -17,7 +18,7 @@ This is a modest enhancement release of the `vcdExtra` package, focusing on docu
 
 # reverse dependencies
 
-> revdep()
+> devtools::revdep()
 [1] "aplore3" "catdata" "gnm"     "iarm"    "jmv" 
 > revdepcheck::revdep_check(num_workers = 4)
 
