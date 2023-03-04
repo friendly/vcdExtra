@@ -15,13 +15,18 @@ comes fromthe original data collected and published by Selikoff
 (1981) who examined the link between asbestos exposure and
 asbestosis severity in 1963.
 
-Eric J. Beh & Rosaria Lombardo (2022) Features of the Polynomial Biplot for
+Beh, E. J. & Lombardo, R. (2022) Features of the Polynomial Biplot for
 Ordered Contingency Tables, Journal of Computational and Graphical Statistics, 31:2, 403-412,
 DOI: 10.1080/10618600.2021.1990773
 
-Beh, E. J., and D. R. Smith (2011a), ?Real World Occupational Epidemiology,
-Part 1: Odds Ratios, Relative Risk, and Asbestosis,? Archives of
+Beh, E. J., and D. R. Smith (2011a), Real World Occupational Epidemiology,
+Part 1: Odds Ratios, Relative Risk, and Asbestosis, Archives of
 Environmental & Occupational Health, 66, 119?123.
+
+Beh, E. J., and D. R. Smith (2011b), “Real World Occupational Epidemiology, Part 2: A Visual
+Interpretation of Statistical Significance,” Archives of Environmental &
+Occupational Health, 66, 245–248.
+
 
 Selikoff, I. J. (1981), ?Household Risks With Inorganic Fibers,? Bulletin of
 the New York Academy of Medicine, 57, 947?961. [
@@ -45,6 +50,12 @@ dimnames(Asbestos) <- list(exposure = c("0-9", "10-19", "20-29", "30-39", "40+")
                            grade = paste(c("None", "Grade 1", "Grade 2", "Grade 3")))
 
 Asbestos
+
+save(Asbestos, file = "data/Asbestos.RData")
+
+prompt(Asbestos, filename = "man/Asbestos.Rd")
+
+# --------------------------
 
 # examples
 
