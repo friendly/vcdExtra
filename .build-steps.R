@@ -10,6 +10,12 @@ Sys.setenv(RGL_USE_NULL = TRUE)
 pkgdown::build_site()
 
 devtools::build_vignettes()
+remotes::install_local(".", build_vignettes = TRUE, force=TRUE)
+
+# to copy the vignettes to `inst/doc`:
+tools::buildVignettes(dir = ".", tangle=TRUE)
+dir.create("inst/doc")
+file.copy(dir("vignettes", full.names=TRUE), "inst/doc", overwrite=TRUE)
 
 # Check package
 devtools::check()

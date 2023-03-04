@@ -42,11 +42,10 @@ add_concepts <- function(dset_name, concepts){
   topics <- glue::glue("\\concept{{{topics}}}")
   lines <- c(lines, topics)
   cat(dset_name, ":", topics, "\n")
-#  cat(tail(lines), sep="\n")
   writeLines(lines, fname)
 }
 
-add_concepts("Cormorants", c("glm; poisson"))
+#add_concepts("Cormorants", c("glm; poisson"))
 
 head(dset_split)
 

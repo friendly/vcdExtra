@@ -1,6 +1,6 @@
 ## Version 0.8-3 (2023-02-16)
 
-- Begin to classify datasets with concept/method tags
+- All datasets now Classified datasets with concept/method tags. These can be found using `help.search(pattern, field="concept")`
 - Added a vignette, `datasets.Rmd` showing all datasets classified by method tags. Links only work in the `pkgdown` site.
 - Added `Asbestos` data
 
