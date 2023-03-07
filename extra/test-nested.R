@@ -51,3 +51,4 @@ toTree <- function(x) {
 
 dt <- FromListSimple(toTree(dichot_list))
 plot(dt)
+
