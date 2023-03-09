@@ -1,6 +1,7 @@
 # Nested logit models
 # 2023-03-01 J. Fox
 # MF: add some documentation, add coef() method
+# MF: set na.action=na.exclude & add predict() method
 
 #' Nested Dichotomies Logit Models for Polytomous Response
 #' 
@@ -50,10 +51,13 @@ nestedLogit <- function(formula, dichotomies, data, ...){
   models <- vector(n.dichot, mode="list")
   resp.names <- names(dichotomies)
   names(models) <- resp.names
-  formula[[2]] <- quote(..y)
+  formula[[2]] <- quote(..y)      # is it possible to use the resp.names instead of ..y?
   for (i in 1L:n.dichot){
     data$..y <- ys[, i]
-    models[[i]] <- glm(formula, family=binomial, data=data, ...)
+    models[[i]] <- glm(formula, family=binomial, 
+                       data=data, 
+                       na.action = na.exclude,   # pad with NAs
+                       ...)
     form <- models[[i]]$formula
     form[[2]] <- as.symbol(resp.names[i])
     models[[i]]$formula <- form
@@ -131,20 +135,26 @@ coef.nested <- function(object, as.matrix=TRUE, ...) {
 }
 
 #' Predict method
-#' It won't work to simply use lapply here, because predict.glm() will ignore the NA cases
-#' in the various dichotomies. 
+#' When na.action=na.exclude, predict.glm() will ignore the NA cases
+#' in the various dichotomies, but not remove them. 
+#' It should be possible to have predict generate predicted values for these
+#' cases, but this does not work.
 #' 
 predict.nested <- function(object, 
-                           # newdata = NULL, 
-                           # type = c("link", "response", "terms"),
+                           newdata = NULL,
+                           type = c("link", "response", "terms"),
                            # se.fit = FALSE, dispersion = NULL, terms = NULL,
                            # na.action = na.pass, 
                            ...) {
-  result <- lapply(object, predict, ...)
+  if (is.null(newdata)) {
+    newdata <- object$data
+#    newdata <- newdata[, !names(newdata) %in% "..y"]
+  }
+  result <- lapply(object, predict, newdata=newdata, type=type, ...)
   result  
 }
 
-# example:
+# examples:
 
 library(car)
 
@@ -163,3 +173,8 @@ m2 <- nestedLogit(partic ~ log(hincome)*children,
 m2
 summary(m2)
 Anova(m2)
+
+# test fitted values
+m.fit <- predict(m)
+sapply(m.fit, length)
+str(as.data.frame(m.fit))

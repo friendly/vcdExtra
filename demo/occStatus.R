@@ -5,15 +5,16 @@
 
 library(gnm)
 library(vcdExtra)
-data(occupationalStatus)
+data(occupationalStatus, package="datasets")
+str(occupationalStatus)
 occupationalStatus
 
 # graphics::mosaicplot is the default plot method for a table
 plot(occupationalStatus, shade=TRUE)
 
 # define long labels for use in mosaics
-long.labels <- list(set_varnames = c(origin="origin: Father's status", 
-                                     destination="destination: Son's status"))
+long.labels <- list(set_varnames = c(origin="origin: Son's status", 
+                                     destination="destination: Father's status"))
 
 mosaic(occupationalStatus, shade=TRUE, 
        main="Occupational status: Independence model", 
@@ -22,7 +23,7 @@ mosaic(occupationalStatus, shade=TRUE,
 
 # the standard model of independence
 indep.glm <- glm(Freq ~ origin + destination, 
-                 family=poisson, 
+                 family = poisson, 
                  data=occupationalStatus)
 
 # the same mosaic, using the fitted model

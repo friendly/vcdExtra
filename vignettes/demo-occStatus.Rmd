@@ -1,0 +1,169 @@
+---
+title: "Demo - Occupational Status"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+package: vcdExtra
+output: 
+  rmarkdown::html_vignette:
+  fig_caption: yes
+bibliography: ["vcd.bib", "vcdExtra.bib", "vignettes.bib"]
+csl: apa.csl
+vignette: >
+  %\VignetteIndexEntry{Demo - Occupational Status}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 7,
+  fig.path = "fig/demo-occStatus-",
+  dev = "png",
+  comment = "##"
+)
+
+# save some typing
+knitr::set_alias(w = "fig.width",
+                 h = "fig.height",
+                 cap = "fig.cap")
+
+# colorize text
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color,
+      x)
+  } else x
+}
+```
+
+This vignette was one of a series of `demo()` files in the package. It is still there
+as `demo("occStatus")`, but is now presented here with additional commentary and analysis,
+designed to highlight some aspects of analysis of categorical data and graphical display.
+
+## Social mobility
+
+Social mobility is an important concept in sociology, and its' study has led to
+a wide range of developments in categorical data analysis in what are often called
+_mobility tables_. 
+
+The idea is to study the movement of individuals, families, households or other categories of people within or between social strata in a society, across time or space. It refers to
+a change in social status relative to one's current social location within a given society.
+Using survey data, the most frequent examples relate to changes in income or wealth, but most often this is studied via classification in occupational categories ("professional, "managerial", "skilled manual", ...). Most often this is studied _intergenerationaly_ using the occupational
+categories of fathers and sons.
+
+Mobility tables are nearly always _square_ tables, with the same categories for the row
+and column variables. As such, they nearly always exhibit positive associations
+along the diagonal cells.  What is of interest are specialized models, intermediate
+between the null model of independence and the saturated model.
+
+
+The `vcdExtra` package contains a number of datasets on the topic of "mobility".
+`help.search("mobility", fields="concept")` gives the datasets:
+`vcdExtra::Glass`,
+`vcdExtra::Hauser79`,
+`vcdExtra::Mobility`,
+`vcdExtra::Yamaguchi87`,
+with similar characteristics.
+
+### `occupationalStatus` dataset
+
+Here, I focus on a more classic dataset, `datasets::occupationalStatus`,
+a cross-classification of `r sum(occupationalStatus)` British males
+according to a person's occupational category and that of his father.
+
+This dataset is often attributed to @Goodman:79 (Table 3), but it derives
+from a classic study _Social Mobility in Britain_ by @Glass:54.
+
+This dataset is an 8 x 8 table of `r sum(occupationalStatus)` cases.
+`origin` refers to the son's occupational
+category; `destination` to the father's. @Glass:54 lists these in order
+from highest status (1) to lowest (8), corresponding to 
+professional, managerial, upper non-man, lower non-man, ... unskilled.
+
+```{r data}
+data(occupationalStatus, package="datasets")
+str(occupationalStatus)
+occupationalStatus
+```
+
+### Load packages
+
+```{r load}
+library(vcdExtra)
+library(gnm)
+```
+
+### Mosaic plots
+
+`occupationalStatus` is a `table` object, and the
+simplest plot for the frequencies is the default `plot()` method, giving a `graphics::mosaicplot()`.
+
+```{r mosaicplot}
+plot(occupationalStatus, shade=TRUE)
+```
+
+The total frequencies in the table are first classified by son's occupational category
+(`origin`). It is easy to see that category 6 of son's status is most common and the diagonal
+cells, where father's status is the same as son's are much more frequent than other combinations. `mosaicplot()`, using `shade=TRUE` colors the tiles according to the 
+sign and magnitude of the residuals from an independence model: shades of blue for
+positive residuals and red for negative residuals. 
+
+`vcd::mosaic()` gives a similar display, but is much more flexible in the labeling of
+the row and column variable, labels for the categories, and the scheme used for shading
+the tiles. Here, I simply assign longer labels for the row and column variables,
+using the `labeling_args` argument to `mosaic()`.
+
+```{r}
+long.labels <- list(set_varnames = c(origin="origin: Son's status", 
+                                     destination="destination: Father's status"))
+
+mosaic(occupationalStatus, shade=TRUE, 
+       main="Occupational status: Independence model", 
+       labeling_args = long.labels, 
+       legend=FALSE)
+```
+
+### Fitting and graphing models
+
+The call to `vcd::mosaic()` above takes the `occupationalStatus` table as input.
+Internally, it fits the model of independence and displays the result,
+but for more complex tables, control of the fitted model is limited.
+
+`vcdExtra::mosaic.glm()` is a `mosaic` method for `glm` objects.  
+This means you can fit any model, and supply the model object to `mosaic()`.
+
+```{r indep}
+indep.glm <- glm(Freq ~ origin + destination, 
+                 family = poisson, 
+                 data=occupationalStatus)
+
+# the same mosaic, using the fitted model
+mosaic(indep.glm, 
+       main="Independence model",
+       labeling_args = long.labels, 
+       legend=FALSE, 
+       gp=shading_Friendly)
+
+```
+
+### Quasi-independence
+
+Among the most important advances from the social mobility literature is the idea that
+associations between row and column variables in square tables can be explored in greater
+depth if we ignore the obvious association in the diagonal cells.
+
+```{r quasi}
+quasi <- gnm(Freq ~ origin + destination + Diag(origin,destination), 
+             family=poisson, data=occupationalStatus)
+
+```
+
+
+## References
