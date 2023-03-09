@@ -1,5 +1,7 @@
 # Occupational status data from Goodman (1979) and Duncan (1979)
 # Fit a variety of models.  Compare mosaic using expected= to mosaic.glm
+# Occ status (1:8)-- professional, managerial, upper non-man, lower non-man,
+#        ... unskilled
 
 library(gnm)
 library(vcdExtra)
