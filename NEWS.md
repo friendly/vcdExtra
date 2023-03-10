@@ -1,3 +1,9 @@
+## Version 0.8-4 (2023-03-10)
+
+- Imports: tidyr must depend on (>= 1.3.0) for one use in a vignette.
+- Enhanced the vignette, "Creating and manipulating frequency tables", `vignettes/creating.Rmd`
+
+
 ## Version 0.8-3 (2023-02-16)
 
 - All datasets now classified with \concept{} tags by method of analysis. These can be found using `help.search(pattern, field="concept")`

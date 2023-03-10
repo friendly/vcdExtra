@@ -22,12 +22,12 @@ mosaic(occupationalStatus, shade=TRUE,
        legend=FALSE)
 
 # the standard model of independence
-indep.glm <- glm(Freq ~ origin + destination, 
-                 family = poisson, 
-                 data=occupationalStatus)
+indep <- glm(Freq ~ origin + destination, 
+             family = poisson, 
+             data=occupationalStatus)
 
 # the same mosaic, using the fitted model
-mosaic(indep.glm, 
+mosaic(indep, 
        main="Independence model",
        labeling_args = long.labels, 
        legend=FALSE, 
@@ -35,30 +35,32 @@ mosaic(indep.glm,
 
 
 # fit the model of quasi-independence, ignoring the diagonal cells
-quasi.independence <-  gnm(Freq ~ origin + destination + Diag(origin,destination), 
+quasi <-  gnm(Freq ~ origin + destination + Diag(origin,destination), 
                            family=poisson, data=occupationalStatus)
-str(quasi.independence$data)
-anova(quasi.independence)
+#str(quasi$data)
+anova(quasi, test="Chisq")
 
 ## BUGLET (vcd): the diagonal cells should be considered 0 here--- outlined in black
 mosaic(occupationalStatus, 
-       expected=fitted(quasi.independence), 
+       expected=fitted(quasi), 
        main="Quasi-independence model", 
        labeling_args = long.labels, 
        legend=FALSE, gp=shading_Friendly)
 
 
 ## using mosaic.gnm
- mosaic(quasi.independence, main="Quasi-independence model",
-  labeling_args = long.labels, legend=FALSE, gp=shading_Friendly, labeling=labeling_residuals)
+mosaic(quasi, main="Quasi-independence model",
+  labeling_args = long.labels, 
+  legend=FALSE, gp=shading_Friendly, 
+  labeling=labeling_residuals)
 
 
 # symmetry model
 symmetry <- glm(Freq ~ Symm(origin, destination), 
                 family=poisson, 
                 data=occupationalStatus)
-mosaic(occupationalStatus, expected=fitted(symmetry), main="Symmetry model",
-	gp=shading_Friendly, labeling=labeling_residuals, labeling_args = long.labels )
+# mosaic(occupationalStatus, expected=fitted(symmetry), main="Symmetry model",
+# 	gp=shading_Friendly, labeling=labeling_residuals, labeling_args = long.labels )
 
 # using mosaic.glm --- OK
 mosaic(symmetry, 
@@ -76,7 +78,7 @@ mosaic(occupationalStatus,
        main="Quasi-symmetry model")
 
 # model comparisons
-anova(independence, quasi.independence, quasi.symm, test="Chisq")
+anova(independence, quasi, quasi.symm, test="Chisq")
 
 # compare symmetry to quasi summetry
 anova(symmetry, quasi.symm, test="Chisq")

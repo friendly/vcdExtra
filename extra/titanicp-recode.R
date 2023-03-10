@@ -15,3 +15,17 @@ Titanicp <- Titanicp |>
 table(Titanicp$sibsp, Titanicp$parch)
 # after
 table(Titanicp$sibspF, Titanicp$parchF)
+
+# how to do this with fct_collapse?
+Titanicp$sibsp |> 
+  as.character() |> 
+  forcats::fct_count() |>
+  forcats::fct_collapse(
+    '0' = '0',
+    '1' = '1',
+    other = '2+'  
+  )
+
+Titanicp |>
+  select(sibsp, parch) |>
+  xtabs()

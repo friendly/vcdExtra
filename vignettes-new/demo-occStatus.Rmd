@@ -140,12 +140,12 @@ but for more complex tables, control of the fitted model is limited.
 This means you can fit any model, and supply the model object to `mosaic()`.
 
 ```{r indep}
-indep.glm <- glm(Freq ~ origin + destination, 
-                 family = poisson, 
-                 data=occupationalStatus)
+indep<- glm(Freq ~ origin + destination, 
+            family = poisson, 
+            data=occupationalStatus)
 
 # the same mosaic, using the fitted model
-mosaic(indep.glm, 
+mosaic(indep, 
        main="Independence model",
        labeling_args = long.labels, 
        legend=FALSE, 
@@ -159,9 +159,14 @@ Among the most important advances from the social mobility literature is the ide
 associations between row and column variables in square tables can be explored in greater
 depth if we ignore the obvious association in the diagonal cells.
 
+The result is a model of _quasi-independence_, asserting that fathers' and sons' occupations
+are independent, ignoring the diagonal cells. In the [`gnm`]( https://CRAN.R-project.org/package=gnm) package,
+`gnm::Diag()` creates the appropriate term in the model formula
+
 ```{r quasi}
-quasi <- gnm(Freq ~ origin + destination + Diag(origin,destination), 
-             family=poisson, data=occupationalStatus)
+quasi <- gnm(Freq ~ origin + destination + Diag(origin, destination), 
+             family=poisson, 
+             data=occupationalStatus)
 
 ```
 
