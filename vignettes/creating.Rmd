@@ -17,6 +17,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = FALSE,
   warning = FALSE,
   fig.height = 6,
   fig.width = 7,
@@ -167,7 +168,7 @@ Thus in the `JobSat` data, both `income` and `satisfaction` represent ordered
 factors, and the *positions* of the values in the rows and columns reflects their
 ordered nature.
 
-Yet, for analysis, there are time when you need *numeric* values for the levels
+Yet, for analysis, there are times when you need *numeric* values for the levels
 of ordered factors in a table, e.g., to treat a factor as a quantitative variable.
 In such cases, you can simply re-assign the `dimnames` attribute of the table
 variables.  For example, here, we assign numeric values to `income` as the middle of their
@@ -235,6 +236,18 @@ art <- xtabs(~Treatment + Improved, data = Arthritis)
 mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
 ```
 
+Several data sets in the package illustrate the salutary effects of reordering factor levels
+in mosaic displays and other analyses. See:
+
+* `help(AirCrash)`
+* `help(Glass)`
+* `help(HouseTasks)`
+
+The [seriate](https://CRAN.R-project.org/package=seriation) package now contains a general method
+to permute the row and column variables in a table according to the result of a correspondence
+analysis, using scores on the first CA dimension.
+
+### Re-ordering dimensions
 
 Finally, there are situations where, particularly for display purposes, you
 want to re-order the *dimensions* of an $n$-way table, or change the
@@ -424,7 +437,7 @@ structable(cigarette+alcohol ~ marijuana, data=Dayton.ACM.tab)
 
 
 Many of these operations can be performed using the `**ply()` functions
-in the `plyr` package.
+in the [`plyr`]( https://CRAN.R-project.org/package=plyr) package.
 For example, with the data in a frequency form data frame, use `ddply()`
 to collapse over unmentioned factors, and `plyr::summarise()`
 as the function to be applied to each piece.
@@ -479,6 +492,55 @@ t2 <- collapse.table(t1,
          education=c("<high", "<high", "high"))
 structable(t2)
 ```
+
+## Collapsing table levels: `dplyr`
+
+For data sets in frequency form or case form, factor levels can be collapsed by recoding the levels
+to some grouping. One handy function for this is `dplyr::case_match()`
+
+***Example***:
+
+The `vcdExtra::Titanicp` data set contains information on 1309 passengers on the _RMS Titanic_,
+including `sibsp`, the number of (0:8) siblings or spouses aboard, and `parch` (0:6), the
+number of parents or children aboard, but the table is quite sparse.
+
+```{r titanicp1}
+table(Titanicp$sibsp, Titanicp$parch)
+```
+
+For purposes of analysis, we might want to collapse both of these to the levels `0, 1, 2+`.
+Here's how:
+
+```{r titanicp2}
+library(dplyr)
+Titanicp <- Titanicp |>
+  mutate(sibspF = case_match(sibsp,
+                            0 ~ "0",
+                            1 ~ "1",
+                            2:max(sibsp) ~ "2+")) |>
+  mutate(sibspF = ordered(sibspF)) |>
+  mutate(parchF = case_match(parch,
+                             0 ~ "0",
+                             1 ~ "1",
+                             2:max(parch) ~ "2+")) |>
+  mutate(parchF = ordered(parchF)) 
+
+table(Titanicp$sibspF, Titanicp$parchF)
+```
+
+`car::recode()` is a similar function, but with a less convenient interface.
+
+The [`forcats`]( https://CRAN.R-project.org/package=forcats) package provides a collection of functions for reordering the levels of a factor
+or grouping categories acording to their frequency:
+
+
+*    `forcats::fct_reorder()`: Reorder a factor by another variable.
+*    `forcats::fct_infreq()`: Reorder a factor by the frequency of values.
+*    `forcats::fct_relevel()`: Change the order of a factor by hand.
+*    `forcats::fct_lump()`: Collapse the least/most frequent values of a factor into “other”.
+*    `forcats::fct_collapse()`: Collapse factor levels into manually defined groups.
+*    `forcats::fct_recode()`: Change factor levels by hand.
+
 
 ## Converting among frequency tables and data frames
 
@@ -706,22 +768,6 @@ From the residual shading of the tiles:
 
 
 
-<!-- ## Styles -->
-
-<!-- The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows: -->
-
-<!--     output:  -->
-<!--       rmarkdown::html_vignette: -->
-<!--         css: mystyles.css -->
-
-<!-- ## Figures -->
-
-<!-- The figure sizes have been customised so that you can easily put two images side-by-side.  -->
-
-<!-- ```{r, fig.show='hold'} -->
-<!-- plot(1:10) -->
-<!-- plot(10:1) -->
-<!-- ``` -->
 
 
 # References
