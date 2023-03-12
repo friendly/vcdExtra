@@ -24,12 +24,20 @@ using the facilities of the \pkg{gnm}.
   }
 }
 \details{
+Hauser's data was first presented in 1979, and then published in 1980. The name of the
+dataset reflects the earliest use.
+
+It reflects the "frequencies in a classification of son's first full-time civilian occupation by father's (or other family head's) occupation at son's sixteenth birthday among American men who were aged 20 to 64 in 1973 and were not currently enrolled in school".
+
+As noted in Hauser's Table 1,
+"Counts are based on observations weighted to estimate population counts and compensate for departures of the sampling design from simple random sampling. Broad occupation groups are upper nonmanual: professional and kindred workers, managers and officials, and non-retail sales workers; lower nonmanual: proprietors, clerical and kindred workers, and retail sales workers; upper manual: craftsmen, foremen, and kindred workers; lower manual: service workers, operatives and kindred workers, and laborers (except farm); farm: farmers and farm managers, farm laborers, and foremen. density of mobility or immobility in the cells to which they refer."
+
 The table levels for \code{Son} and \code{Father} have been arranged in order of decreasing status
 as is common for mobility tables.
 }
 \source{
 R.M. Hauser (1979), Some exploratory methods for modeling mobility tables and other cross-classified data. 
-In: K.F. Schuessler (Ed.), \emph{Sociological Methodology}, 1980, Jossey-Bass, San Francisco, pp. 413-458.
+In: K.F. Schuessler (Ed.), \emph{Sociological Methodology}, 1980, Jossey-Bass, San Francisco, pp. 413-458. Table 1.
 }
 \references{
 Powers, D.A. and Xie, Y. (2008). \emph{Statistical Methods for Categorical Data Analysis}, 

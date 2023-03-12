@@ -1,0 +1,99 @@
+---
+title: "Mobility tables"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+package: vcdExtra
+output: 
+  rmarkdown::html_vignette:
+  fig_caption: yes
+bibliography: ["vcd.bib", "vcdExtra.bib", "vignettes.bib"]
+csl: apa.csl
+vignette: >
+  %\VignetteIndexEntry{Demo - Occupational Status}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 7,
+  fig.path = "fig/mobility-",
+  dev = "png",
+  comment = "##"
+)
+
+# save some typing
+knitr::set_alias(w = "fig.width",
+                 h = "fig.height",
+                 cap = "fig.cap")
+
+# colorize text
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color,
+      x)
+  } else x
+}
+```
+
+## Social mobility
+
+Social mobility is an important concept in sociology, and its' study has led to
+a wide range of developments in categorical data analysis in what are often called
+_mobility tables_. 
+
+The idea is to study the movement of individuals, families, households or other categories of people within or between social strata in a society, across time or space. This refers to
+a change in social status relative to one's current social location within a given society.
+
+Using survey data, the most frequent examples relate to changes in income or wealth, but most often this is studied via classification in occupational categories ("professional, "managerial", "skilled manual", ...). Most often this is studied _intergenerationaly_ using the occupational
+categories of fathers and sons.
+
+Mobility tables are nearly always _square_ tables, with the same categories for the row
+and column variables. As such, they nearly always exhibit positive associations
+along the diagonal cells.  What is of interest are specialized models, intermediate
+between the null model of independence and the saturated model.
+
+### Models
+
+These models include important special cases:
+
+- **quasi-independence**: Ignoring diagonal cells, are the row and column variables independent?
+- **symmetry**: Are associations above the diagonal equal to those below the diagonal?
+- **row effects, col effects, linear x linear**: Typically, the factors in such tables are ordinal. To what extent can the models be simplified by assigning integer scores to the
+row, column categories or both?
+- **multiplicative RC**: RC models attempt to estimate the scores for the row and column categories. 
+- **topographical models**: It is possible that the associations among occupational categories
+exhibit consistent patterns according to their nature. These models allow specifying a
+theoretically interersting pattern.
+
+While standard loglinear models can be fit using `MASS::loglm`, these models require
+use of ``stats::glm()` or `gnm::gnm()`, as I illustrate below.
+
+## Hauser data
+
+This vignette uses the `vcdExtra::Hauser79` dataset, a cross-classification of 19,912 individuals by father's occupation and son's first occupation for U.S. men aged 20-64 in 1973.
+
+```{r hauser-data}
+data("Hauser79", package="vcdExtra")
+str(Hauser79)
+vcd::structable(~Father + Son, data=Hauser79)
+```
+
+As can be seen, `Hauser79` is a data.frame in frequency form.
+The factor levels in this table are a coarse grouping of occupational categories, so:
+
+- `UpNM` = professional and kindred workers, managers and officials, and non-retail sales workers;
+- `LoNM` = proprietors, clerical and kindred workers, and retail sales workers; 
+
+- `UpM` = craftsmen, foremen, and kindred workers;
+
+- `LoM` =  service workers, operatives and kindred workers, and laborers (except farm); 
+
+- `Farm` = farmers and farm managers, farm laborers, and foremen.
