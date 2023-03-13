@@ -120,10 +120,15 @@ the row and column variable, labels for the categories, and the scheme used for 
 the tiles. Here, I simply assign longer labels for the row and column variables,
 using the `labeling_args` argument to `mosaic()`.
 
+
+
 ```{r}
 long.labels <- list(set_varnames = c(origin="origin: Son's status", 
                                      destination="destination: Father's status"))
+```
 
+
+```{r}
 mosaic(occupationalStatus, shade=TRUE, 
        main="Occupational status: Independence model", 
        labeling_args = long.labels, 

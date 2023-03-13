@@ -58,15 +58,24 @@ hauser.indep <- gnm(Freq ~ Father + Son,
   data=Hauser79, 
   family=poisson)
 
-mosaic(hauser.indep, ~Father+Son, main="Independence model", gp=shading_Friendly)
+mosaic(hauser.indep, ~Father+Son, 
+       main="Independence model", 
+       gp=shading_Friendly)
+
+# Quasi-independence
+hauser.quasi <-  update(hauser.indep, 
+                        ~ . + Diag(Father,Son))
+mosaic(hauser.quasi, ~Father+Son, 
+       main="Quasi-independence model", 
+       gp=shading_Friendly)
 
 # Quasi-symmetry
-hauser.quasi <-  update(hauser.indep, ~ . + Diag(Father,Son))
-mosaic(hauser.quasi, ~Father+Son, main="Quasi-independence model", gp=shading_Friendly)
+hauser.qsymm <-  update(hauser.indep, 
+                        ~ . + Diag(Father,Son) + Symm(Father,Son))
 
-hauser.qsymm <-  update(hauser.indep, ~ . + Diag(Father,Son) + Symm(Father,Son))
-mosaic(hauser.qsymm, ~Father+Son, main="Quasi-symmetry model", gp=shading_Friendly)
-#mosaic(hauser.qsymm, ~Father+Son, main="Quasi-symmetry model")
+mosaic(hauser.qsymm, ~Father+Son, 
+       main="Quasi-symmetry model", 
+       gp=shading_Friendly)
 
 
 # numeric scores for row/column effects
@@ -94,9 +103,13 @@ levels <- matrix(c(
   5,  5,  5,  4,  1
   ), 5, 5, byrow=TRUE)
 
-hauser.topo <- update(hauser.indep, ~ . + Topo(Father, Son, spec=levels))
-mosaic(hauser.topo, ~Father+Son, main="Topological model", gp=shading_Friendly)
+hauser.topo <- update(hauser.indep, 
+                      ~ . + Topo(Father, Son, spec=levels))
 
+mosaic(hauser.topo, ~Father+Son, 
+       main="Topological model", gp=shading_Friendly)
+
+# RC model
 hauser.RC <- update(hauser.indep, ~ . + Mult(Father, Son), verbose=FALSE)
 mosaic(hauser.RC, ~Father+Son, main="RC model", gp=shading_Friendly)
 LRstats(hauser.RC)
