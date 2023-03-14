@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,7 @@
     <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/mobility.html">Mobility tables</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
     <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
   </div>
@@ -88,7 +89,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2023-03-03</h4>
+            <h4 data-toc-skip class="date">2023-03-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/creating.Rmd" class="external-link"><code>vignettes/creating.Rmd</code></a></small>
       <div class="d-none name"><code>creating.Rmd</code></div>
@@ -262,7 +263,7 @@ position in the table. Thus in the <code>JobSat</code> data, both
 <code>income</code> and <code>satisfaction</code> represent ordered
 factors, and the <em>positions</em> of the values in the rows and
 columns reflects their ordered nature.</p>
-<p>Yet, for analysis, there are time when you need <em>numeric</em>
+<p>Yet, for analysis, there are times when you need <em>numeric</em>
 values for the levels of ordered factors in a table, e.g., to treat a
 factor as a quantitative variable. In such cases, you can simply
 re-assign the <code>dimnames</code> attribute of the table variables.
@@ -327,6 +328,20 @@ model of independence for Treatment and Improved. Age, a covariate, and
 Sex are ignored here.
 </p>
 </div>
+<p>Several data sets in the package illustrate the salutary effects of
+reordering factor levels in mosaic displays and other analyses. See:</p>
+<ul>
+<li><code><a href="../reference/AirCrash.html">help(AirCrash)</a></code></li>
+<li><code><a href="../reference/Glass.html">help(Glass)</a></code></li>
+<li><code><a href="../reference/HouseTasks.html">help(HouseTasks)</a></code></li>
+</ul>
+<p>The <a href="https://CRAN.R-project.org/package=seriation" class="external-link">seriate</a> package
+now contains a general method to permute the row and column variables in
+a table according to the result of a correspondence analysis, using
+scores on the first CA dimension.</p>
+<div class="section level4">
+<h4 id="re-ordering-dimensions">Re-ordering dimensions<a class="anchor" aria-label="anchor" href="#re-ordering-dimensions"></a>
+</h4>
 <p>Finally, there are situations where, particularly for display
 purposes, you want to re-order the <em>dimensions</em> of an <span class="math inline">\(n\)</span>-way table, or change the labels for the
 variables or levels. This is easy when the data are in table form:
@@ -352,6 +367,7 @@ change variable and level names for displays in the
 <span><span class="co">##        No                313 207 205 279 138 351</span></span>
 <span><span class="co">## Female Yes                89  17 202 131  94  24</span></span>
 <span><span class="co">##        No                 19   8 391 244 299 317</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="sec:structable">
@@ -407,9 +423,6 @@ may be plotted with <code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" clas
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 2-Way Frequency Table</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/attach.html" class="external-link">attach</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span></span>
-<span><span class="co">## The following objects are masked _by_ .GlobalEnv:</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##     A, B, C</span></span>
 <span><span class="va">mytable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">A</span>,<span class="va">B</span><span class="op">)</span>   <span class="co"># A will be rows, B will be columns</span></span>
 <span><span class="va">mytable</span>                 <span class="co"># print table</span></span>
 <span><span class="co">##     B</span></span>
@@ -606,8 +619,8 @@ above.</p>
 <span><span class="co">## Yes                 911   3  44   2</span></span>
 <span><span class="co">## No                  538  43 456 279</span></span></code></pre></div>
 <p>Many of these operations can be performed using the
-<code>**ply()</code> functions in the <code>plyr</code> package. For
-example, with the data in a frequency form data frame, use
+<code>**ply()</code> functions in the <a href="https://CRAN.R-project.org/package=plyr" class="external-link"><code>plyr</code></a>
+package. For example, with the data in a frequency form data frame, use
 <code><a href="https://rdrr.io/pkg/plyr/man/ddply.html" class="external-link">ddply()</a></code> to collapse over unmentioned factors, and
 <code><a href="https://rdrr.io/pkg/plyr/man/summarise.html" class="external-link">plyr::summarise()</a></code> as the function to be applied to each
 piece. <!-- \footnote{ -->
@@ -616,11 +629,6 @@ piece. <!-- \footnote{ -->
 <!-- separate. --> <!-- } --></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr" class="external-link">plyr</a></span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Attaching package: 'plyr'</span></span>
-<span><span class="co">## The following object is masked from 'package:vcdExtra':</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##     summarise</span></span>
 <span><span class="va">Dayton.ACM.df</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ddply.html" class="external-link">ddply</a></span><span class="op">(</span><span class="va">DaytonSurvey</span>, </span>
 <span>                             <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/quoted.html" class="external-link">.</a></span><span class="op">(</span><span class="va">cigarette</span>, <span class="va">alcohol</span>, <span class="va">marijuana</span><span class="op">)</span>, </span>
 <span>                             <span class="fu">plyr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/plyr/man/summarise.html" class="external-link">summarise</a></span>, Freq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Freq</span><span class="op">)</span><span class="op">)</span></span>
@@ -685,6 +693,77 @@ summed in the resulting smaller table.</p>
 <span><span class="co">##        high            200   197   195</span></span>
 <span><span class="co">## Female &lt;high           409   414   379</span></span>
 <span><span class="co">##        high            202   212   209</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="collapsing-table-levels-dplyr">Collapsing table levels: <code>dplyr</code><a class="anchor" aria-label="anchor" href="#collapsing-table-levels-dplyr"></a>
+</h3>
+<p>For data sets in frequency form or case form, factor levels can be
+collapsed by recoding the levels to some grouping. One handy function
+for this is <code><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">dplyr::case_match()</a></code></p>
+<p><strong><em>Example</em></strong>:</p>
+<p>The <code><a href="../reference/Titanicp.html">vcdExtra::Titanicp</a></code> data set contains information on
+1309 passengers on the <em>RMS Titanic</em>, including
+<code>sibsp</code>, the number of (0:8) siblings or spouses aboard, and
+<code>parch</code> (0:6), the number of parents or children aboard, but
+the table is quite sparse.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Titanicp</span><span class="op">$</span><span class="va">sibsp</span>, <span class="va">Titanicp</span><span class="op">$</span><span class="va">parch</span><span class="op">)</span></span>
+<span><span class="co">##    </span></span>
+<span><span class="co">##       0   1   2   3   4   5   6   9</span></span>
+<span><span class="co">##   0 790  52  43   2   2   2   0   0</span></span>
+<span><span class="co">##   1 183  90  29   5   4   4   2   2</span></span>
+<span><span class="co">##   2  26   9   6   1   0   0   0   0</span></span>
+<span><span class="co">##   3   3   9   8   0   0   0   0   0</span></span>
+<span><span class="co">##   4   0  10  12   0   0   0   0   0</span></span>
+<span><span class="co">##   5   0   0   6   0   0   0   0   0</span></span>
+<span><span class="co">##   8   0   0   9   0   0   0   0   0</span></span></code></pre></div>
+<p>For purposes of analysis, we might want to collapse both of these to
+the levels <code>0, 1, 2+</code>. Here’s how:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">Titanicp</span> <span class="op">&lt;-</span> <span class="va">Titanicp</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sibspF <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">case_match</a></span><span class="op">(</span><span class="va">sibsp</span>,</span>
+<span>                            <span class="fl">0</span> <span class="op">~</span> <span class="st">"0"</span>,</span>
+<span>                            <span class="fl">1</span> <span class="op">~</span> <span class="st">"1"</span>,</span>
+<span>                            <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">sibsp</span><span class="op">)</span> <span class="op">~</span> <span class="st">"2+"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sibspF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">ordered</a></span><span class="op">(</span><span class="va">sibspF</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>parchF <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">case_match</a></span><span class="op">(</span><span class="va">parch</span>,</span>
+<span>                             <span class="fl">0</span> <span class="op">~</span> <span class="st">"0"</span>,</span>
+<span>                             <span class="fl">1</span> <span class="op">~</span> <span class="st">"1"</span>,</span>
+<span>                             <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">parch</span><span class="op">)</span> <span class="op">~</span> <span class="st">"2+"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>parchF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">ordered</a></span><span class="op">(</span><span class="va">parchF</span><span class="op">)</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Titanicp</span><span class="op">$</span><span class="va">sibspF</span>, <span class="va">Titanicp</span><span class="op">$</span><span class="va">parchF</span><span class="op">)</span></span>
+<span><span class="co">##     </span></span>
+<span><span class="co">##        0   1  2+</span></span>
+<span><span class="co">##   0  790  52  49</span></span>
+<span><span class="co">##   1  183  90  46</span></span>
+<span><span class="co">##   2+  29  28  42</span></span></code></pre></div>
+<p><code><a href="https://rdrr.io/pkg/car/man/recode.html" class="external-link">car::recode()</a></code> is a similar function, but with a less
+convenient interface.</p>
+<p>The <a href="https://CRAN.R-project.org/package=forcats" class="external-link"><code>forcats</code></a>
+package provides a collection of functions for reordering the levels of
+a factor or grouping categories acording to their frequency:</p>
+<ul>
+<li>
+<code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code>: Reorder a factor by another
+variable.</li>
+<li>
+<code><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">forcats::fct_infreq()</a></code>: Reorder a factor by the
+frequency of values.</li>
+<li>
+<code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html" class="external-link">forcats::fct_relevel()</a></code>: Change the order of a factor by
+hand.</li>
+<li>
+<code><a href="https://forcats.tidyverse.org/reference/fct_lump.html" class="external-link">forcats::fct_lump()</a></code>: Collapse the least/most frequent
+values of a factor into “other”.</li>
+<li>
+<code><a href="https://forcats.tidyverse.org/reference/fct_collapse.html" class="external-link">forcats::fct_collapse()</a></code>: Collapse factor levels into
+manually defined groups.</li>
+<li>
+<code><a href="https://forcats.tidyverse.org/reference/fct_recode.html" class="external-link">forcats::fct_recode()</a></code>: Change factor levels by
+hand.</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="converting-among-frequency-tables-and-data-frames">Converting among frequency tables and data frames<a class="anchor" aria-label="anchor" href="#converting-among-frequency-tables-and-data-frames"></a>
@@ -755,7 +834,7 @@ defaulting to <code>Freq</code>. This is the inverse of
 <code><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs()</a></code>.</p>
 <p><strong><em>Example</em></strong>: Convert the <code>GSStab</code> in
 table form to a data.frame in frequency form.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">GSStab</span><span class="op">)</span></span>
 <span><span class="co">##      sex party Freq</span></span>
 <span><span class="co">## 1 female   dem  279</span></span>
@@ -775,7 +854,7 @@ be found. In the examples in @(sec:table) I used
 leaves the variables in the global environment, while
 &lt;code&gt;&lt;a href="https://rdrr.io/r/base/with.html" class="external-link"&gt;with()&lt;/a&gt;&lt;/code&gt; just evaluates the &lt;code&gt;&lt;a href="https://rdrr.io/r/base/table.html" class="external-link"&gt;table()&lt;/a&gt;&lt;/code&gt; expression
 in a temporary environment of the data.&lt;/p&gt;'><sup>3</sup></a></p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Art.tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Arthritis</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">Treatment</span>, <span class="va">Sex</span>, <span class="va">Improved</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">Art.tab</span><span class="op">)</span></span>
 <span><span class="co">##  'table' int [1:2, 1:2, 1:3] 19 6 10 7 7 5 0 2 6 16 ...</span></span>
@@ -803,7 +882,7 @@ included in <code>vcdExtra</code>.</p>
 data in table form (<code>Art.tab</code>) back to a
 <code>data.frame</code> in case form, with factors
 <code>Treatment</code>, <code>Sex</code> and <code>Improved</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Art.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand.dft.html">expand.dft</a></span><span class="op">(</span><span class="va">Art.tab</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">Art.df</span><span class="op">)</span></span>
 <span><span class="co">## 'data.frame':    84 obs. of  3 variables:</span></span>
@@ -821,7 +900,7 @@ where the table variables (unnamed in the file) are read as
 <code>V1</code> – <code>V4</code>, and the cell frequency is read as
 <code>V5</code>. The file, stored in the <code>doc/extdata</code>
 directory of <code>vcdExtra</code>, can be read as follows:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tv.data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"tv.dat"</span>, package<span class="op">=</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tv.data</span>,<span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">##   V1 V2 V3 V4 V5</span></span>
@@ -832,7 +911,7 @@ directory of <code>vcdExtra</code>, can be read as follows:</p>
 <span><span class="co">## 5  5  1  1  1 11</span></span></code></pre></div>
 <p>For a local file, just use <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code> in this
 form:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tv.data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="st">"C:/R/data/tv.dat"</span><span class="op">)</span></span></code></pre></div>
 <p>The data <code>tv.dat</code> came from the initial implementation of
 mosaic displays in R by Jay Emerson. In turn, they came from the initial
@@ -867,7 +946,7 @@ rapidly and <code>V4</code> most slowly. From this, we can just extract
 the frequency column and reshape it into an array. [That would be
 dangerous if any observations were out of order.]</li>
 </ol>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="va">tv.data</span><span class="op">[</span>,<span class="fl">5</span><span class="op">]</span>, dim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">11</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>                                        </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">TV</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Monday"</span>,<span class="st">"Tuesday"</span>,<span class="st">"Wednesday"</span>,<span class="st">"Thursday"</span>,<span class="st">"Friday"</span><span class="op">)</span>, </span>
 <span>                     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"8:00"</span>,<span class="st">"8:15"</span>,<span class="st">"8:30"</span>,<span class="st">"8:45"</span>,<span class="st">"9:00"</span>,<span class="st">"9:15"</span>,<span class="st">"9:30"</span>,         </span>
@@ -880,7 +959,7 @@ dangerous if any observations were out of order.]</li>
 <code><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs()</a></code> (or <code><a href="https://rdrr.io/pkg/plyr/man/daply.html" class="external-link">plyr::daply()</a></code>) to do the
 cross-tabulation, using <code>V5</code> as the frequency variable.
 Here’s how to do this same operation with <code><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs()</a></code>:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs</a></span><span class="op">(</span><span class="va">V5</span> <span class="op">~</span> <span class="va">.</span>, data<span class="op">=</span><span class="va">tv.data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">TV</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Day <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Monday"</span>,<span class="st">"Tuesday"</span>,<span class="st">"Wednesday"</span>,<span class="st">"Thursday"</span>,<span class="st">"Friday"</span><span class="op">)</span>, </span>
 <span>                     Time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"8:00"</span>,<span class="st">"8:15"</span>,<span class="st">"8:30"</span>,<span class="st">"8:45"</span>,<span class="st">"9:00"</span>,<span class="st">"9:15"</span>,<span class="st">"9:30"</span>,         </span>
@@ -897,7 +976,7 @@ station. <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-c
 drops dimensions of length 1 by default, using the argument
 &lt;code&gt;drop=TRUE&lt;/code&gt;; the result is coerced to the lowest possible
 dimension.&lt;/p&gt;"><sup>4</sup></a></p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TV2</span> <span class="op">&lt;-</span> <span class="va">TV</span><span class="op">[</span>,,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="op">]</span>      <span class="co"># keep only ABC, CBS, NBC</span></span>
 <span><span class="va">TV2</span> <span class="op">&lt;-</span> <span class="va">TV2</span><span class="op">[</span>,,,<span class="fl">3</span><span class="op">]</span>       <span class="co"># keep only Persist -- now a 3 way table</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">structable</a></span><span class="op">(</span><span class="va">TV2</span><span class="op">)</span></span>
@@ -924,7 +1003,7 @@ use <code><a href="https://rdrr.io/r/base/table.html" class="external-link">as.d
 data frame, <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> to re-assign the values of
 <code>Time</code>, and finally, <code><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs()</a></code> to give a new,
 collapsed frequency table.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TV.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">as.data.frame.table</a></span><span class="op">(</span><span class="va">TV2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">TV.df</span><span class="op">$</span><span class="va">Time</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"8:00"</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>                        <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"8:30"</span>, <span class="fl">2</span><span class="op">)</span>,</span>
@@ -960,7 +1039,7 @@ collapsed frequency table.</p>
 <p>We’ve come this far, so we might as well show a mosaic display. This
 is analogous to that used by <span class="citation">Hartigan &amp;
 Kleiner (1984)</span>.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">TV3</span>, shade <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>       labeling <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/vcd/man/labeling_border.html" class="external-link">labeling_border</a></span><span class="op">(</span>rot_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">90</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fig/tut01-tv-mosaic1-1.png" width="672"></p>
@@ -980,7 +1059,7 @@ with slightly more on Thursday.</li>
 <li>Thursday: is a largely NBC day</li>
 <li>Friday: ABC dominates in the early evening</li>
 </ul>
-<!-- ```{r, tv4} --><!-- TV.df <- as.data.frame.table(TV) --><!-- levels(TV.df$Time) <- c(rep("8:00-8:59",4), --><!--                         rep("9:00-9:59",4),  --><!--                         rep("10:00-10:44",3)) --><!-- TV3 <- xtabs(Freq ~ Day + Time + Network, TV.df) --><!-- structable(Day ~ Time+Network, TV3) --><!-- ``` --><!-- Whew! See \figref{fig:TV-mosaic} for a mosaic plot of the `TV3` data. --><!-- The table is too large to display conveniently, but we can show a subtable --><!-- by selecting the indices.  This call to `ftable()` subsets the first three --><!-- levels of each factor. --><!-- ```{r tv4} --><!-- ftable(TV[1:3,1:3,1:3,1:3], col.vars = 3:4) --><!-- ``` --><!-- We've come this far, so we might as well show a mosaic display. This is analogous to that used by --><!-- @vcd:Hartigan+Kleiner:1984. The result is too complex to see very much.  It would be useful to simplify --><!-- the table by collapsing one or more of the table dimensions, e.g., `Time`. --><!-- ```{r tv-mosaic2, fig.height=7, fig.width=7} --><!-- mosaic(TV[,,1:4,], shade=TRUE,  --><!--        labeling_args = list(abbreviate_labs = c(8,5,1,1))) --><!-- ``` --><!-- ## Styles --><!-- The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows: --><!--     output:  --><!--       rmarkdown::html_vignette: --><!--         css: mystyles.css --><!-- ## Figures --><!-- The figure sizes have been customised so that you can easily put two images side-by-side.  --><!-- ```{r, fig.show='hold'} --><!-- plot(1:10) --><!-- plot(10:1) --><!-- ``` -->
+<!-- ```{r, tv4} --><!-- TV.df <- as.data.frame.table(TV) --><!-- levels(TV.df$Time) <- c(rep("8:00-8:59",4), --><!--                         rep("9:00-9:59",4),  --><!--                         rep("10:00-10:44",3)) --><!-- TV3 <- xtabs(Freq ~ Day + Time + Network, TV.df) --><!-- structable(Day ~ Time+Network, TV3) --><!-- ``` --><!-- Whew! See \figref{fig:TV-mosaic} for a mosaic plot of the `TV3` data. --><!-- The table is too large to display conveniently, but we can show a subtable --><!-- by selecting the indices.  This call to `ftable()` subsets the first three --><!-- levels of each factor. --><!-- ```{r tv4} --><!-- ftable(TV[1:3,1:3,1:3,1:3], col.vars = 3:4) --><!-- ``` --><!-- We've come this far, so we might as well show a mosaic display. This is analogous to that used by --><!-- @vcd:Hartigan+Kleiner:1984. The result is too complex to see very much.  It would be useful to simplify --><!-- the table by collapsing one or more of the table dimensions, e.g., `Time`. --><!-- ```{r tv-mosaic2, fig.height=7, fig.width=7} --><!-- mosaic(TV[,,1:4,], shade=TRUE,  --><!--        labeling_args = list(abbreviate_labs = c(8,5,1,1))) --><!-- ``` -->
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

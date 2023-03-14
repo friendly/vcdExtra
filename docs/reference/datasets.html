@@ -24,7 +24,7 @@ and formats these to provide additional descriptors."><meta property="og:image" 
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,7 @@ and formats these to provide additional descriptors."><meta property="og:image" 
     <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/mobility.html">Mobility tables</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
     <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
   </div>
@@ -154,91 +155,93 @@ a more pleasing display.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2        Accident data.frame      80x5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3        AirCrash data.frame     439x5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4       Alligator data.frame      80x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        Bartlett      table     2x2x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6            Burt data.frame      27x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7          Caesar      table   3x2x2x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8          Cancer      table     2x2x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9      Cormorants data.frame     343x8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  CyclingDeaths data.frame     208x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   DaytonSurvey data.frame      32x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12        Depends      table        15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13      Detergent      table   2x2x2x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14         Donner data.frame      90x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15      Draft1970 data.frame     366x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 Draft1970table      table      12x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17           Dyke      table 2x2x2x2x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18      Fungicide      array   2x2x2x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19            GSS data.frame       6x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20       Geissler data.frame      90x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21          Gilby      table       6x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22          Glass data.frame      25x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   HairEyePlace      array     4x5x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24       Hauser79 data.frame      25x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25          Heart      table     2x2x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26        Heckman      table 2x2x2x2x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27     HospVisits      table       3x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28     HouseTasks      table      13x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29           Hoyt      table   4x3x7x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30            ICU data.frame    200x22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31         JobSat      table       4x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32     Mammograms      array       4x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33         Mental data.frame      24x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34           Mice data.frame      30x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35       Mobility      table       5x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36        PhdPubs data.frame     915x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37     ShakeWords data.frame     100x2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38             TV      array    5x11x3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39       Titanicp data.frame    1309x6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40       Toxaemia data.frame      60x5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41        Vietnam data.frame      40x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42       Vote1980 data.frame      28x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43      WorkerSat data.frame       8x4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44    Yamaguchi87 data.frame      75x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        Asbestos      array       5x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        Bartlett      table     2x2x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7            Burt data.frame      27x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8          Caesar      table   3x2x2x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9          Cancer      table     2x2x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     Cormorants data.frame     343x8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  CyclingDeaths data.frame     208x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   DaytonSurvey data.frame      32x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13        Depends      table        15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14      Detergent      table   2x2x2x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15         Donner data.frame      90x5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16      Draft1970 data.frame     366x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17 Draft1970table      table      12x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18           Dyke      table 2x2x2x2x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19      Fungicide      array   2x2x2x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20            GSS data.frame       6x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21       Geissler data.frame      90x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22          Gilby      table       6x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23          Glass data.frame      25x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   HairEyePlace      array     4x5x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25       Hauser79 data.frame      25x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26          Heart      table     2x2x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27        Heckman      table 2x2x2x2x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28     HospVisits      table       3x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29     HouseTasks      table      13x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30           Hoyt      table   4x3x7x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31            ICU data.frame    200x22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32         JobSat      table       4x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33     Mammograms      array       4x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34         Mental data.frame      24x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35           Mice data.frame      30x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36       Mobility      table       5x5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37        PhdPubs data.frame     915x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38     ShakeWords data.frame     100x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39             TV      array    5x11x3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40       Titanicp data.frame    1309x6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41       Toxaemia data.frame      60x5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42        Vietnam data.frame      40x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43       Vote1980 data.frame      28x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44      WorkerSat data.frame       8x4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45    Yamaguchi87 data.frame      75x4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                    Title</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                                  Abortion Opinion Data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             Traffic Accident Victims in France in 1958</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3                                         Air Crash Data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4                                  Alligator Food Choice</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                    Bartlett Data on Plum Root Cuttings</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       Burt (1950) Data on Hair, Eyes, Head and Stature</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7         Risk Factors for Infection in Caesarian Births</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                     Survival of Breast Cancer Patients</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9               Advertising Behavior by Males Cormorants</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10                                 London Cycling Deaths</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11                Dayton Student Survey on Substance Use</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                            Dependencies of R Packages</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13                             Detergent preference data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14                          Survival in the Donner Party</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15                           USA 1970 Draft Lottery Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16                          USA 1970 Draft Lottery Table</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17                        Sources of Knowledge of Cancer</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18                   Carcinogenic Effects of a Fungicide</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19      General Social Survey- Sex and Party affiliation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20                Geissler's Data on the Human Sex Ratio</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21          Clothing and Intelligence Rating of Children</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22              British Social Mobility from Glass(1954)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23    Hair Color and Eye Color in Caithness and Aberdeen</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24                 Hauser (1979) Data on Social Mobility</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25                     Sex, Occupation and Heart Disease</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26 Labour Force Participation of Married Women 1967-1971</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27                                  Hospital Visits Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28       Household Tasks Performed by Husbands and Wives</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29                       Minnesota High School Graduates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30                                          ICU data set</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31    Cross-classification of job satisfaction by income</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32                                     Mammogram Ratings</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33                     Mental Impairment and Parents SES</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34                                   Mice Depletion Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35                                  Social Mobility data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36                        Publications of PhD Candidates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37                   Shakespeare's Word Type Frequencies</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38                                       TV Viewing Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39                             Passengers on the Titanic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40                        Toxaemia Symptoms in Pregnancy</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41                 Student Opinion about the Vietnam War</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42       Race and Politics in the 1980 Presidential Vote</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43                              Worker Satisfaction Data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44              Occupational Mobility in Three Countries</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                          Effect of Expoure to Asbestos</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                    Bartlett Data on Plum Root Cuttings</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7       Burt (1950) Data on Hair, Eyes, Head and Stature</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8         Risk Factors for Infection in Caesarian Births</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                     Survival of Breast Cancer Patients</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10              Advertising Behavior by Males Cormorants</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                                 London Cycling Deaths</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                Dayton Student Survey on Substance Use</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                            Dependencies of R Packages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                             Detergent preference data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                          Survival in the Donner Party</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                           USA 1970 Draft Lottery Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                          USA 1970 Draft Lottery Table</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                        Sources of Knowledge of Cancer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                   Carcinogenic Effects of a Fungicide</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20      General Social Survey- Sex and Party affiliation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                Geissler's Data on the Human Sex Ratio</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22          Clothing and Intelligence Rating of Children</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23              British Social Mobility from Glass(1954)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24    Hair Color and Eye Color in Caithness and Aberdeen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                 Hauser (1979) Data on Social Mobility</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                     Sex, Occupation and Heart Disease</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27 Labour Force Participation of Married Women 1967-1971</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                                  Hospital Visits Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29       Household Tasks Performed by Husbands and Wives</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30                       Minnesota High School Graduates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31                                          ICU data set</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32    Cross-classification of job satisfaction by income</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                                     Mammogram Ratings</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                     Mental Impairment and Parents SES</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                                   Mice Depletion Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                                  Social Mobility data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                        Publications of PhD Candidates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                   Shakespeare's Word Type Frequencies</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                                       TV Viewing Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40                             Passengers on the Titanic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41                        Toxaemia Symptoms in Pregnancy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42                 Student Opinion about the Vietnam War</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43       Race and Politics in the 1980 Presidential Vote</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44                              Worker Satisfaction Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45              Occupational Mobility in Three Countries</span>
 <span class="r-in"><span><span class="co"># datasets(c("vcd", "vcdExtra"))</span></span></span>
 <span class="r-in"><span><span class="fu">datasets</span><span class="op">(</span><span class="st">"datasets"</span>, maxTitle<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Item      class     dim</span>
@@ -455,16 +458,17 @@ a more pleasing display.</p>
 <span class="r-in"><span><span class="co"># just list dataset names in a package</span></span></span>
 <span class="r-in"><span><span class="fu">datasets</span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Item"</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Bartlett"       "Burt"           "Caesar"         "Cancer"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Cormorants"     "CyclingDeaths"  "DaytonSurvey"   "Depends"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "Detergent"      "Donner"         "Draft1970"      "Draft1970table"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "Dyke"           "Fungicide"      "GSS"            "Geissler"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "Gilby"          "Glass"          "HairEyePlace"   "Hauser79"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "Heart"          "Heckman"        "HospVisits"     "HouseTasks"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [29] "Hoyt"           "ICU"            "JobSat"         "Mammograms"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [33] "Mental"         "Mice"           "Mobility"       "PhdPubs"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "ShakeWords"     "TV"             "Titanicp"       "Toxaemia"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] "Vietnam"        "Vote1980"       "WorkerSat"      "Yamaguchi87"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Asbestos"       "Bartlett"       "Burt"           "Caesar"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Cancer"         "Cormorants"     "CyclingDeaths"  "DaytonSurvey"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "Depends"        "Detergent"      "Donner"         "Draft1970"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17] "Draft1970table" "Dyke"           "Fungicide"      "GSS"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "Geissler"       "Gilby"          "Glass"          "HairEyePlace"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "Hauser79"       "Heart"          "Heckman"        "HospVisits"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [29] "HouseTasks"     "Hoyt"           "ICU"            "JobSat"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [33] "Mammograms"     "Mental"         "Mice"           "Mobility"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "PhdPubs"        "ShakeWords"     "TV"             "Titanicp"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41] "Toxaemia"       "Vietnam"        "Vote1980"       "WorkerSat"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [45] "Yamaguchi87"   </span>
 <span class="r-in"><span><span class="fu">datasets</span><span class="op">(</span><span class="st">"vcd"</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Item"</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Arthritis"       "Baseball"        "BrokenMarriage"  "Bundesliga"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Bundestag2005"   "Butterfly"       "CoalMiners"      "DanishWelfare"  </span>

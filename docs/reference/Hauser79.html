@@ -20,7 +20,7 @@ using the facilities of the gnm."><meta property="og:image" content="http://frie
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,7 @@ using the facilities of the gnm."><meta property="og:image" content="http://frie
     <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/mobility.html">Mobility tables</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
     <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
   </div>
@@ -97,13 +98,18 @@ using the facilities of the <span class="pkg">gnm</span>.</p>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The table levels for <code>Son</code> and <code>Father</code> have been arranged in order of decreasing status
+    <p>Hauser's data was first presented in 1979, and then published in 1980. The name of the
+dataset reflects the earliest use.</p>
+<p>It reflects the "frequencies in a classification of son's first full-time civilian occupation by father's (or other family head's) occupation at son's sixteenth birthday among American men who were aged 20 to 64 in 1973 and were not currently enrolled in school".</p>
+<p>As noted in Hauser's Table 1,
+"Counts are based on observations weighted to estimate population counts and compensate for departures of the sampling design from simple random sampling. Broad occupation groups are upper nonmanual: professional and kindred workers, managers and officials, and non-retail sales workers; lower nonmanual: proprietors, clerical and kindred workers, and retail sales workers; upper manual: craftsmen, foremen, and kindred workers; lower manual: service workers, operatives and kindred workers, and laborers (except farm); farm: farmers and farm managers, farm laborers, and foremen. density of mobility or immobility in the cells to which they refer."</p>
+<p>The table levels for <code>Son</code> and <code>Father</code> have been arranged in order of decreasing status
 as is common for mobility tables.</p>
     </div>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
     <p>R.M. Hauser (1979), Some exploratory methods for modeling mobility tables and other cross-classified data. 
-In: K.F. Schuessler (Ed.), <em>Sociological Methodology</em>, 1980, Jossey-Bass, San Francisco, pp. 413-458.</p>
+In: K.F. Schuessler (Ed.), <em>Sociological Methodology</em>, 1980, Jossey-Bass, San Francisco, pp. 413-458. Table 1.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -139,18 +145,27 @@ Bingley, UK: Emerald.</p>
 <span class="r-in"><span>  data<span class="op">=</span><span class="va">Hauser79</span>, </span></span>
 <span class="r-in"><span>  family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.indep</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, main<span class="op">=</span><span class="st">"Independence model"</span>, gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.indep</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, </span></span>
+<span class="r-in"><span>       main<span class="op">=</span><span class="st">"Independence model"</span>, </span></span>
+<span class="r-in"><span>       gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Hauser79-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Quasi-symmetry</span></span></span>
-<span class="r-in"><span><span class="va">hauser.quasi</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.quasi</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, main<span class="op">=</span><span class="st">"Quasi-independence model"</span>, gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Quasi-independence</span></span></span>
+<span class="r-in"><span><span class="va">hauser.quasi</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>, </span></span>
+<span class="r-in"><span>                        <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.quasi</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, </span></span>
+<span class="r-in"><span>       main<span class="op">=</span><span class="st">"Quasi-independence model"</span>, </span></span>
+<span class="r-in"><span>       gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Hauser79-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hauser.qsymm</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span> <span class="op">+</span> <span class="fu">Symm</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.qsymm</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, main<span class="op">=</span><span class="st">"Quasi-symmetry model"</span>, gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Quasi-symmetry</span></span></span>
+<span class="r-in"><span><span class="va">hauser.qsymm</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>, </span></span>
+<span class="r-in"><span>                        <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span> <span class="op">+</span> <span class="fu">Symm</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.qsymm</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, </span></span>
+<span class="r-in"><span>       main<span class="op">=</span><span class="st">"Quasi-symmetry model"</span>, </span></span>
+<span class="r-in"><span>       gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Hauser79-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="co">#mosaic(hauser.qsymm, ~Father+Son, main="Quasi-symmetry model")</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># numeric scores for row/column effects</span></span></span>
@@ -193,10 +208,14 @@ Bingley, UK: Emerald.</p>
 <span class="r-in"><span>  <span class="fl">5</span>,  <span class="fl">5</span>,  <span class="fl">5</span>,  <span class="fl">4</span>,  <span class="fl">1</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span>, <span class="fl">5</span>, <span class="fl">5</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hauser.topo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Topo</span><span class="op">(</span><span class="va">Father</span>, <span class="va">Son</span>, spec<span class="op">=</span><span class="va">levels</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.topo</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, main<span class="op">=</span><span class="st">"Topological model"</span>, gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hauser.topo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>, </span></span>
+<span class="r-in"><span>                      <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Topo</span><span class="op">(</span><span class="va">Father</span>, <span class="va">Son</span>, spec<span class="op">=</span><span class="va">levels</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.topo</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, </span></span>
+<span class="r-in"><span>       main<span class="op">=</span><span class="st">"Topological model"</span>, gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Hauser79-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># RC model</span></span></span>
 <span class="r-in"><span><span class="va">hauser.RC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Mult</span><span class="op">(</span><span class="va">Father</span>, <span class="va">Son</span><span class="op">)</span>, verbose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">hauser.RC</span>, <span class="op">~</span><span class="va">Father</span><span class="op">+</span><span class="va">Son</span>, main<span class="op">=</span><span class="st">"RC model"</span>, gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Hauser79-6.png" alt="" width="700" height="433"></span>

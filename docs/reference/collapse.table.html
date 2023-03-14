@@ -12,7 +12,7 @@ a contingency table, array or ftable object by re-assigning levels of the table 
     
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,7 @@ a contingency table, array or ftable object by re-assigning levels of the table 
     <a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a>
     <a class="dropdown-item" href="../articles/demo-housing.html">Demo - Housing Data</a>
     <a class="dropdown-item" href="../articles/loglinear.html">Loglinear Models</a>
+    <a class="dropdown-item" href="../articles/mobility.html">Mobility tables</a>
     <a class="dropdown-item" href="../articles/mosaics.html">Mosaic plots</a>
     <a class="dropdown-item" href="../articles/tests.html">Tests of Independence</a>
   </div>
@@ -117,12 +118,12 @@ summing over table dimensions.</p></div>
 <span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="va">t1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  age   a   b   c   d   e   f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex    education                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Male   low            98 115 105 100 110  98</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        med           103 102 101 109 111 100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        high          104  92  93  87 104 110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Female low            96  84  95 108  93 105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        med            99  75 106  81 120  83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        high          101  98 107 112 103 103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Male   low           110 110  74 111  99 109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        med            98  87 116 106 101 101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        high           97  99 113 101 103 104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Female low           101  98 105  99 118  96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        med           114 113 100  83  95  83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        high          103 100  81 117  93 101</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##                  age   a   b   c   d   e   f</span></span></span>
 <span class="r-in"><span><span class="co">## sex    education                            </span></span></span>
@@ -139,12 +140,12 @@ summing over table dimensions.</p></div>
 <span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="va">t2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  age   A   B   C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex    education                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Male   low           213 205 208</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        med           205 210 211</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        high          196 180 214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Female low           180 203 198</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        med           174 187 203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        high          199 219 206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Male   low           220 185 208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        med           185 222 202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        high          196 214 207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Female low           199 204 214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        med           227 183 178</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        high          203 198 194</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##                  age   A   B   C</span></span></span>
 <span class="r-in"><span><span class="co">## sex    education                </span></span></span>
@@ -162,10 +163,10 @@ summing over table dimensions.</p></div>
 <span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="va">t3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  age   A   B   C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex    education                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Male   low           418 415 419</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        high          196 180 214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Female low           354 390 401</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        high          199 219 206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Male   low           405 407 410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        high          196 214 207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Female low           426 387 392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        high          203 198 194</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##                  age   A   B   C</span></span></span>
 <span class="r-in"><span><span class="co">## sex    education                </span></span></span>
@@ -181,22 +182,22 @@ summing over table dimensions.</p></div>
 <span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="va">t4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  age   a   b   c   d   e   f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex    education                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Male   1              98 115 105 100 110  98</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2             103 102 101 109 111 100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        3             104  92  93  87 104 110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Female 1              96  84  95 108  93 105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2              99  75 106  81 120  83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        3             101  98 107 112 103 103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Male   1             110 110  74 111  99 109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2              98  87 116 106 101 101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        3              97  99 113 101 103 104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Female 1             101  98 105  99 118  96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2             114 113 100  83  95  83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        3             103 100  81 117  93 101</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="va">t4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  age   a   b   c   d   e   f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex    education                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Male   1              98 115 105 100 110  98</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2             103 102 101 109 111 100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        3             104  92  93  87 104 110</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Female 1              96  84  95 108  93 105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        2              99  75 106  81 120  83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        3             101  98 107 112 103 103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Male   1             110 110  74 111  99 109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2              98  87 116 106 101 101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        3              97  99 113 101 103 104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Female 1             101  98 105  99 118  96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        2             114 113 100  83  95  83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        3             103 100  81 117  93 101</span>
 <span class="r-in"><span><span class="co">##                  age   a   b   c   d   e   f</span></span></span>
 <span class="r-in"><span><span class="co">## sex    education                            </span></span></span>
 <span class="r-in"><span><span class="co">## Male   1             119 101 109  85  99  93</span></span></span>
