@@ -19,7 +19,7 @@ HealthInsurance <- read.csv(url)
 
 #' Make a new variable with 4 levels
 HealthInsurance$product4 <- HealthInsurance$product
-change <- runif(nrow(HealthInsurance)) > .75
+change <- which(runif(nrow(HealthInsurance)) > .75)
 HealthInsurance[change, "product4"] <- "D"
 
 # remove gender = non-binary
@@ -69,3 +69,8 @@ gg <- ggplot(plotdat, aes(x = age, y = Probability, colour= Level)) +
   facet_grid(~ gender, labeller= label_both)
 
 direct.label(gg, list("top.bumptwice", dl.trans(y = y + 0.2)))
+
+#' ## Fit nested logit model 
+#' 
+
+health.nested <- nestedLogit()
