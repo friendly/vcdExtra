@@ -8,13 +8,11 @@
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs 
 
-## Version 0.8-3 (2023-01-19)
+## Version 0.8-4 (2023-04-12)
 
-This is a modest enhancement release of the `vcdExtra` package, focusing on documentation and examples.
-
-- All datasets now Classified datasets with concept/method tags. These can be found using `help.search(pattern, field="concept")`
-- Added a vignette, `datasets.Rmd` showing all datasets classified by method tags. Links only work in the `pkgdown` site.
-- Added `Asbestos` data
+- Imports: tidyr must depend on (>= 1.3.0) for one use in a vignette.
+- Enhanced the vignette, "Creating and manipulating frequency tables", `vignettes/creating.Rmd`
+- Created a new vignete, "Mobility tables"
 
 # reverse dependencies
 
