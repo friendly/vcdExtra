@@ -2,6 +2,7 @@
 * local Windows 10, R version 4.2.2 (2022-10-31 ucrt)
 * win-builder R 4.3.0 beta (2023-04-12 r84240 ucrt)
 * R Under development (unstable) (2023-03-03 r83933 ucrt)
+* Rhub Windows Server 2022, R-devel, 64 bit
 * Rhub Ubuntu Linux 20.04.1 LTS, R-release, GCC
 * Rhub Fedora Linux, R-devel, clang, gfortran
 
