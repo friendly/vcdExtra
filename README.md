@@ -53,10 +53,14 @@ linear models using `stats::glm()` and the related, generalized
 *nonlinear* models fitted with `gnm()` in the
 [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-A related purpose is to fill in some holes in the analysis of
+A related purpose was to fill in some holes in the analysis of
 categorical data in R, not provided in base R,
 [vcd](https://CRAN.R-project.org/package=vcd), or other commonly used
 packages.
+
+#### Highlights
+
+##### mosaic plot extensions
 
 - The method `mosaic.glm()` extends the `mosaic.loglm()` method in the
   vcd package to this wider class of models, e.g., models for ordinal
@@ -68,6 +72,8 @@ packages.
 
 - `mosaic3d()` introduces a 3D generalization of mosaic displays using
   the [rgl](https://CRAN.R-project.org/package=rgl) package.
+
+##### model extensions
 
 - A new class, `glmlist`, is introduced for working with collections of
   glm objects, e.g., `Kway()` for fitting all K-way models from a basic
@@ -87,24 +93,27 @@ packages.
   `gnm::Diag()`, `gnm::Topo(),` etc. in the
   [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-In addition, there are:
+#### Other additions
 
 - many new data sets; use `datasets("vcdExtra")` to see a list with
-  titles and descriptions
+  titles and descriptions. The vignette,
+  `vignette("datasets", package="vcdExtra")` provides a classification
+  of these according to methods of analysis.
 
 ``` r
 vcdExtra::datasets("vcdExtra")[,1]
 ##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     
-##  [5] "Bartlett"       "Burt"           "Caesar"         "Cancer"        
-##  [9] "Cormorants"     "CyclingDeaths"  "DaytonSurvey"   "Depends"       
-## [13] "Detergent"      "Donner"         "Draft1970"      "Draft1970table"
-## [17] "Dyke"           "Fungicide"      "GSS"            "Geissler"      
-## [21] "Gilby"          "Glass"          "HairEyePlace"   "Hauser79"      
-## [25] "Heart"          "Heckman"        "HospVisits"     "HouseTasks"    
-## [29] "Hoyt"           "ICU"            "JobSat"         "Mammograms"    
-## [33] "Mental"         "Mice"           "Mobility"       "PhdPubs"       
-## [37] "ShakeWords"     "TV"             "Titanicp"       "Toxaemia"      
-## [41] "Vietnam"        "Vote1980"       "WorkerSat"      "Yamaguchi87"
+##  [5] "Asbestos"       "Bartlett"       "Burt"           "Caesar"        
+##  [9] "Cancer"         "Cormorants"     "CyclingDeaths"  "DaytonSurvey"  
+## [13] "Depends"        "Detergent"      "Donner"         "Draft1970"     
+## [17] "Draft1970table" "Dyke"           "Fungicide"      "GSS"           
+## [21] "Geissler"       "Gilby"          "Glass"          "HairEyePlace"  
+## [25] "Hauser79"       "Heart"          "Heckman"        "HospVisits"    
+## [29] "HouseTasks"     "Hoyt"           "ICU"            "JobSat"        
+## [33] "Mammograms"     "Mental"         "Mice"           "Mobility"      
+## [37] "PhdPubs"        "ShakeWords"     "TV"             "Titanicp"      
+## [41] "Toxaemia"       "Vietnam"        "Vote1980"       "WorkerSat"     
+## [45] "Yamaguchi87"
 ```
 
 - a [collection of tutorial
@@ -113,14 +122,28 @@ vcdExtra::datasets("vcdExtra")[,1]
   `browseVignettes(package = "vcdExtra")`;
 
 ``` r
-tools::getVignetteInfo("vcdExtra")[,c("File", "Title")]
-##      File Title
+tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
 ```
+
+| File             | Title                                      |
+|:-----------------|:-------------------------------------------|
+| continuous.Rmd   | Continuous predictors                      |
+| creating.Rmd     | Creating and manipulating frequency tables |
+| datasets.Rmd     | Datasets for categorical data analysis     |
+| demo-housing.Rmd | Demo - Housing Data                        |
+| loglinear.Rmd    | Loglinear Models                           |
+| mosaics.Rmd      | Mosaic plots                               |
+| tests.Rmd        | Tests of Independence                      |
 
 - a few useful utility functions for manipulating categorical data sets
   and working with models for categorical data.
 
 ## Examples
+
+These `README` examples simply provide illustrations of using some of
+the package functions in the context of loglinear models for frequency
+tables fit using `glm()`, including models for *structured associations*
+taking ordinality into account.
 
 The dataset `Mental` is a data frame frequency table representing the
 cross-classification of mental health status (`mental`) of 1660 young
@@ -147,15 +170,13 @@ str(Mental)
 ##   6   21   71       54       71
 ```
 
-These examples illustrate fitting loglinear models using `glm()` and
-models for *structured associations* taking ordinality into account.
-
 #### Independence model
 
 Fit the independence model, `Freq ~ mental + ses`, using
 `glm(..., family = poisson)` This model is equivalent to the
 `chisq.test(Mental)` for general association; it does not take
-ordinality into account.
+ordinality into account. `LRstats()` provides a compact summary of fit
+statistics for one or more models.
 
 ``` r
 indep <- glm(Freq ~ mental + ses,

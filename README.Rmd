@@ -31,7 +31,7 @@ library(vcdExtra)
 # vcdExtra <img src="man/figures/logo.png" style="float:right; height:200px;" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
-Version 0.8-3
+Version 0.8-4
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the [vcd](https://CRAN.R-project.org/package=vcd) package for *Visualizing Categorical Data*
@@ -66,10 +66,13 @@ generalized linear models using
 `stats::glm()` and the related, generalized _nonlinear_ models fitted
 with `gnm()` in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-A related purpose is to fill in some holes in the analysis of
+A related purpose was to fill in some holes in the analysis of
 categorical data in R, not provided in base R, [vcd](https://CRAN.R-project.org/package=vcd), 
 or other commonly used packages.
 
+#### Highlights
+
+##### mosaic plot extensions
 * The method `mosaic.glm()` 
 extends the `mosaic.loglm()` method in the vcd
 package to this wider class of models, e.g., models for ordinal factors, which can't
@@ -82,6 +85,7 @@ including models for square tables and models with multiplicative associations (
 introduces a 3D generalization of mosaic displays using the
 [rgl](https://CRAN.R-project.org/package=rgl) package.
 
+##### model extensions
 * A new class, `glmlist`, is introduced for working with
 collections of glm objects, e.g., `Kway()` for fitting
 all K-way models from a basic marginal model, and `LRstats()`
@@ -100,9 +104,11 @@ specification of terms in model formulas using
 `gnm::Diag()`, 
 `gnm::Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-In addition, there are: 
+#### Other additions
 
-* many new data sets; use `datasets("vcdExtra")` to see a list with titles and descriptions
+* many new data sets; use `datasets("vcdExtra")` to see a list with titles and descriptions.
+The vignette, `vignette("datasets", package="vcdExtra")` provides a classification of these
+according to methods of analysis.
 
 ```{r vcdExtra-datasets}
 vcdExtra::datasets("vcdExtra")[,1]
@@ -111,7 +117,7 @@ vcdExtra::datasets("vcdExtra")[,1]
 * a [collection of tutorial vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/). In the installed package, they can be viewed using `browseVignettes(package = "vcdExtra")`;
 
 ```{r vignettes}
-tools::getVignetteInfo("vcdExtra")[,c("File", "Title")]
+tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
 ```
 
 * a few useful utility functions for manipulating categorical data sets and working with models for
@@ -119,6 +125,10 @@ categorical data.
 
 
 ## Examples
+
+These `README` examples simply provide illustrations of using some of the package functions in the
+context of loglinear models for frequency tables fit using `glm()`, including
+models for _structured associations_ taking ordinality into account.
 
 The dataset `Mental` is a data frame frequency table representing the cross-classification of mental health status (`mental`) of 1660 young New York residents by their parents' socioeconomic status (`ses`).
 Both are _ordered_ factors.
@@ -132,14 +142,11 @@ str(Mental)
 ```
 
 
-These examples illustrate fitting loglinear models using `glm()` and models for _structured associations_ taking
-ordinality into account.
-
-
 #### Independence model
 Fit the independence model, `Freq ~ mental + ses`, using `glm(..., family = poisson)`
 This model is equivalent to the `chisq.test(Mental)` for general association; it
-does not take ordinality into account.
+does not take ordinality into account. `LRstats()` provides a compact summary of
+fit statistics for one or more models.
 ```{r ex-mental2}
 indep <- glm(Freq ~ mental + ses,
              family = poisson, data = Mental)
