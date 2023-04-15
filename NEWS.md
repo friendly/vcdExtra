@@ -2,7 +2,7 @@
 
 - Imports: tidyr must depend on (>= 1.3.0) for one use in a vignette.
 - Enhanced the vignette, "Creating and manipulating frequency tables", `vignettes/creating.Rmd`
-- Created a new vignette, "Mobility tables"
+- Created a new vignette, "Mobility tables", with extensive examples of models and graphs for square mobility tables.
 
 
 ## Version 0.8-3 (2023-02-16)
