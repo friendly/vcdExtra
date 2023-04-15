@@ -356,13 +356,13 @@ association and add `Diag(Father, Son)` to fit the diagonal cells
 exactly.
 ```{r hauser-UAdiag}
 hauser.UAdiag <- update(hauser.indep,
-                        . ~ . + Fscore * Sscore + Diag(Father, Son))
+                        . ~ . + Fscore : Sscore + Diag(Father, Son))
 
 LRstats(hauser.UAdiag)
 ```
 
 In this model, the estimated common local log odds ratio---the
-coefficient for the linear-by-linear term
+coefficient $\gamma$ for the linear-by-linear term
 `Fscore:Sscore`, is given by:
 ```{r}
 coef(hauser.UAdiag)[["Fscore:Sscore"]]
@@ -391,10 +391,10 @@ mosaic(hauser.UAdiag, ~ Father+Son,
 Finally, for comparing a largish collection of models, a model comparison plot
 can show the trade-off between goodness-of-fit and parsimony by plotting
 measures like $G^2/df$, AIC, or BIC against
-degrees of freedom. The plot below uses a log scale for BIc to emphasize differences among better fitting models. (The code for this plot is shown
+degrees of freedom. The plot below, including quite a few more models, uses a log scale for BIC to emphasize differences among better fitting models. (The code for this plot is shown
 on p. 399 of @FriendlyMeyer:2016:DDAR).
 
-![](fig/hauser-model-plot.png){width=60%}
+![](fig/hauser-model-plot.png){width=80%}
 
 
 

@@ -2,7 +2,7 @@ Package: vcdExtra
 Type: Package
 Title: 'vcd' Extensions and Additions
 Version: 0.8-4
-Date: 2023-03-10
+Date: 2023-04-12
 Language: en-US
 Authors@R: c(
             person(given = "Michael", 
