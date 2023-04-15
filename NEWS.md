@@ -2,7 +2,7 @@
 
 - Imports: tidyr must depend on (>= 1.3.0) for one use in a vignette.
 - Enhanced the vignette, "Creating and manipulating frequency tables", `vignettes/creating.Rmd`
-- Created a new vignete, "Mobility tables"
+- Created a new vignette, "Mobility tables"
 
 
 ## Version 0.8-3 (2023-02-16)
@@ -164,7 +164,7 @@ This is a major enhancement release of the `vcdExtra` package, focusing on docum
 ## Version 0.5-11 (2013-07-01)
 
 - Added mosaic.glmlist to plot mosaics (or other strucplots) for some or all models in a glmlist (rev 169)
-- Added loglim-utilities.R, containing a suite of functions to provide a more conceptual way to specify
+- Added loglin-utilities.R, containing a suite of functions to provide a more conceptual way to specify
   loglinear models by type ('joint', 'conditional', 'mutual', 'markov', 'saturated') (rev 171)
 - Added mosaic.loglmlist, similar to mosaic.glmlist for models fit using MASS::loglm (rev 173)
 - Both mosaic.glmlist and mosaic.glmlist get an explicit panel=argument; both get some more sensible default

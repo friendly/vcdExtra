@@ -2,7 +2,7 @@
 \alias{Asbestos}
 \docType{data}
 \title{
-Effect of Expoure to Asbestos
+Effect of Exposure to Asbestos
 }
 \description{
 A two-way
