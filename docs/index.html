@@ -116,45 +116,99 @@
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
 <p>The original purpose of this package was to serve as a sandbox for introducing extensions of mosaic plots and related graphical methods that apply to loglinear models fitted using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, generalized linear models using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code> and the related, generalized <em>nonlinear</em> models fitted with <code>gnm()</code> in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package.</p>
-<p>A related purpose is to fill in some holes in the analysis of categorical data in R, not provided in base R, <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>, or other commonly used packages.</p>
+<p>A related purpose was to fill in some holes in the analysis of categorical data in R, not provided in base R, <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>, or other commonly used packages.</p>
+<div class="section level4">
+<h4 id="highlights">Highlights<a class="anchor" aria-label="anchor" href="#highlights"></a>
+</h4>
+<div class="section level5">
+<h5 id="mosaic-plot-extensions">mosaic plot extensions<a class="anchor" aria-label="anchor" href="#mosaic-plot-extensions"></a>
+</h5>
 <ul>
 <li><p>The method <code><a href="reference/mosaic.glm.html">mosaic.glm()</a></code> extends the <code>mosaic.loglm()</code> method in the vcd package to this wider class of models, e.g., models for ordinal factors, which can’t be handled with <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>. This method also works for the generalized <em>nonlinear</em> models fit with the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package, including models for square tables and models with multiplicative associations (RC models).</p></li>
 <li><p><code><a href="reference/mosaic3d.html">mosaic3d()</a></code> introduces a 3D generalization of mosaic displays using the <a href="https://CRAN.R-project.org/package=rgl" class="external-link">rgl</a> package.</p></li>
+</ul>
+</div>
+<div class="section level5">
+<h5 id="model-extensions">model extensions<a class="anchor" aria-label="anchor" href="#model-extensions"></a>
+</h5>
+<ul>
 <li><p>A new class, <code>glmlist</code>, is introduced for working with collections of glm objects, e.g., <code><a href="reference/Kway.html">Kway()</a></code> for fitting all K-way models from a basic marginal model, and <code><a href="reference/LRstats.html">LRstats()</a></code> for brief statistical summaries of goodness-of-fit for a collection of models.</p></li>
 <li><p>Similarly, for loglinear models fit using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, the function <code><a href="reference/seq_loglm.html">seq_loglm()</a></code> fits a series of sequential models to the 1-, 2-, … <em>n</em>-way marginal tables, corresponding to a variety of types of models for joint, conditional, mutual, … independence. It returns an object of class <code>loglmlist</code>, each of which is a class <code>loglm</code> object. The function <code><a href="reference/seq_mosaic.html">seq_mosaic()</a></code> generates the mosaic plots and other plots in the <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">vcd::strucplot()</a></code> framework.</p></li>
 <li><p>For <strong>square tables</strong> with ordered factors, <code><a href="reference/Crossings.html">Crossings()</a></code> supplements the specification of terms in model formulas using <code><a href="https://rdrr.io/pkg/gnm/man/Symm.html" class="external-link">gnm::Symm()</a></code>, <code><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">gnm::Diag()</a></code>, <code>gnm::Topo(),</code> etc. in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package.</p></li>
 </ul>
-<p>In addition, there are:</p>
+</div>
+</div>
+<div class="section level4">
+<h4 id="other-additions">Other additions<a class="anchor" aria-label="anchor" href="#other-additions"></a>
+</h4>
 <ul>
-<li>many new data sets; use <code>datasets("vcdExtra")</code> to see a list with titles and descriptions</li>
+<li>many new data sets; use <code>datasets("vcdExtra")</code> to see a list with titles and descriptions. The vignette, <code><a href="articles/datasets.html">vignette("datasets", package="vcdExtra")</a></code> provides a classification of these according to methods of analysis.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vcdExtra</span><span class="fu">::</span><span class="fu"><a href="reference/datasets.html">datasets</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
 <span><span class="co">##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     </span></span>
-<span><span class="co">##  [5] "Bartlett"       "Burt"           "Caesar"         "Cancer"        </span></span>
-<span><span class="co">##  [9] "Cormorants"     "CyclingDeaths"  "DaytonSurvey"   "Depends"       </span></span>
-<span><span class="co">## [13] "Detergent"      "Donner"         "Draft1970"      "Draft1970table"</span></span>
-<span><span class="co">## [17] "Dyke"           "Fungicide"      "GSS"            "Geissler"      </span></span>
-<span><span class="co">## [21] "Gilby"          "Glass"          "HairEyePlace"   "Hauser79"      </span></span>
-<span><span class="co">## [25] "Heart"          "Heckman"        "HospVisits"     "HouseTasks"    </span></span>
-<span><span class="co">## [29] "Hoyt"           "ICU"            "JobSat"         "Mammograms"    </span></span>
-<span><span class="co">## [33] "Mental"         "Mice"           "Mobility"       "PhdPubs"       </span></span>
-<span><span class="co">## [37] "ShakeWords"     "TV"             "Titanicp"       "Toxaemia"      </span></span>
-<span><span class="co">## [41] "Vietnam"        "Vote1980"       "WorkerSat"      "Yamaguchi87"</span></span></code></pre></div>
+<span><span class="co">##  [5] "Asbestos"       "Bartlett"       "Burt"           "Caesar"        </span></span>
+<span><span class="co">##  [9] "Cancer"         "Cormorants"     "CyclingDeaths"  "DaytonSurvey"  </span></span>
+<span><span class="co">## [13] "Depends"        "Detergent"      "Donner"         "Draft1970"     </span></span>
+<span><span class="co">## [17] "Draft1970table" "Dyke"           "Fungicide"      "GSS"           </span></span>
+<span><span class="co">## [21] "Geissler"       "Gilby"          "Glass"          "HairEyePlace"  </span></span>
+<span><span class="co">## [25] "Hauser79"       "Heart"          "Heckman"        "HospVisits"    </span></span>
+<span><span class="co">## [29] "HouseTasks"     "Hoyt"           "ICU"            "JobSat"        </span></span>
+<span><span class="co">## [33] "Mammograms"     "Mental"         "Mice"           "Mobility"      </span></span>
+<span><span class="co">## [37] "PhdPubs"        "ShakeWords"     "TV"             "Titanicp"      </span></span>
+<span><span class="co">## [41] "Toxaemia"       "Vietnam"        "Vote1980"       "WorkerSat"     </span></span>
+<span><span class="co">## [45] "Yamaguchi87"</span></span></code></pre></div>
 <ul>
 <li>a <a href="https://cran.r-project.org/web/packages/vcdExtra/vignettes/" class="external-link">collection of tutorial vignettes</a>. In the installed package, they can be viewed using <code>browseVignettes(package = "vcdExtra")</code>;</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/getVignetteInfo.html" class="external-link">getVignetteInfo</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"File"</span>, <span class="st">"Title"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">##      File Title</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/getVignetteInfo.html" class="external-link">getVignetteInfo</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"File"</span>, <span class="st">"Title"</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">File</th>
+<th align="left">Title</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">continuous.Rmd</td>
+<td align="left">Continuous predictors</td>
+</tr>
+<tr class="even">
+<td align="left">creating.Rmd</td>
+<td align="left">Creating and manipulating frequency tables</td>
+</tr>
+<tr class="odd">
+<td align="left">datasets.Rmd</td>
+<td align="left">Datasets for categorical data analysis</td>
+</tr>
+<tr class="even">
+<td align="left">demo-housing.Rmd</td>
+<td align="left">Demo - Housing Data</td>
+</tr>
+<tr class="odd">
+<td align="left">loglinear.Rmd</td>
+<td align="left">Loglinear Models</td>
+</tr>
+<tr class="even">
+<td align="left">mosaics.Rmd</td>
+<td align="left">Mosaic plots</td>
+</tr>
+<tr class="odd">
+<td align="left">tests.Rmd</td>
+<td align="left">Tests of Independence</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>a few useful utility functions for manipulating categorical data sets and working with models for categorical data.</li>
 </ul>
 </div>
 </div>
+</div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
+<p>These <code>README</code> examples simply provide illustrations of using some of the package functions in the context of loglinear models for frequency tables fit using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>, including models for <em>structured associations</em> taking ordinality into account.</p>
 <p>The dataset <code>Mental</code> is a data frame frequency table representing the cross-classification of mental health status (<code>mental</code>) of 1660 young New York residents by their parents’ socioeconomic status (<code>ses</code>). Both are <em>ordered</em> factors.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Mental</span><span class="op">)</span></span>
@@ -174,11 +228,10 @@
 <span><span class="co">##   4   72  141       77       94</span></span>
 <span><span class="co">##   5   36   97       54       78</span></span>
 <span><span class="co">##   6   21   71       54       71</span></span></code></pre></div>
-<p>These examples illustrate fitting loglinear models using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and models for <em>structured associations</em> taking ordinality into account.</p>
 <div class="section level4">
 <h4 id="independence-model">Independence model<a class="anchor" aria-label="anchor" href="#independence-model"></a>
 </h4>
-<p>Fit the independence model, <code>Freq ~ mental + ses</code>, using <code>glm(..., family = poisson)</code> This model is equivalent to the <code>chisq.test(Mental)</code> for general association; it does not take ordinality into account.</p>
+<p>Fit the independence model, <code>Freq ~ mental + ses</code>, using <code>glm(..., family = poisson)</code> This model is equivalent to the <code>chisq.test(Mental)</code> for general association; it does not take ordinality into account. <code><a href="reference/LRstats.html">LRstats()</a></code> provides a compact summary of fit statistics for one or more models.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">indep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span> <span class="op">+</span> <span class="va">ses</span>,</span>
 <span>             family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span>

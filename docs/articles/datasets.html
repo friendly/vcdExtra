@@ -89,7 +89,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2023-03-14</h4>
+            <h4 data-toc-skip class="date">2023-04-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/datasets.Rmd" class="external-link"><code>vignettes/datasets.Rmd</code></a></small>
       <div class="d-none name"><code>datasets.Rmd</code></div>
@@ -126,7 +126,7 @@ tags.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="va">Item</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dsets_tagged</span><span class="op">)</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 6 x 3</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">##   dataset   class      tags                                </span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span> Abortion  table      loglinear;logit;2x2                 </span></span>
@@ -165,7 +165,7 @@ then collapse the rows for the same tag.</p>
 <code class="sourceCode R"><span><span class="va">tags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"inst"</span>, <span class="st">"extdata"</span>, <span class="st">"vcdExtra-datasets.xlsx"</span><span class="op">)</span>, </span>
 <span>                   sheet<span class="op">=</span><span class="st">"tags"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tags</span><span class="op">)</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 6 x 2</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">##   tag         topic                     </span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span> 2x2         2 by 2 tables             </span></span>
@@ -183,14 +183,14 @@ then collapse the rows for the same tag.</p>
 <span><span class="va">tag_dset</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">tag</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 6 x 2</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
 <span><span class="co">##   topic                      datasets                                           </span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span> 2 by 2 tables              Abortion; Bartlett; Heart                          </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span> observer agreement         Mammograms                                         </span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">3</span> binomial distributions     Geissler                                           </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> correspondence analysis    AirCrash; Burt; Draft1970table; Gilby; HospVisits;~</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> generalized linear models  Accident; Cormorants; DaytonSurvey; Donner; Draft1~</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> correspondence analysis    AirCrash; Burt; Draft1970table; Gilby; HospVisits;…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> generalized linear models  Accident; Cormorants; DaytonSurvey; Donner; Draft1…</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">6</span> homogeneity of association Bartlett</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="add-links-to-help">Add links to <code>help()</code><a class="anchor" aria-label="anchor" href="#add-links-to-help"></a>

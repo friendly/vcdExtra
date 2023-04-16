@@ -89,7 +89,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2023-03-14</h4>
+            <h4 data-toc-skip class="date">2023-04-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/mobility.Rmd" class="external-link"><code>vignettes/mobility.Rmd</code></a></small>
       <div class="d-none name"><code>mobility.Rmd</code></div>
@@ -469,7 +469,7 @@ x linear association and add <code>Diag(Father, Son)</code> to fit the
 diagonal cells exactly.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hauser.UAdiag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>,</span>
-<span>                        <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Fscore</span> <span class="op">*</span> <span class="va">Sscore</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">Diag</a></span><span class="op">(</span><span class="va">Father</span>, <span class="va">Son</span><span class="op">)</span><span class="op">)</span></span>
+<span>                        <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Fscore</span> <span class="op">:</span> <span class="va">Sscore</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">Diag</a></span><span class="op">(</span><span class="va">Father</span>, <span class="va">Son</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">hauser.UAdiag</span><span class="op">)</span></span>
 <span><span class="co">## Likelihood summary table:</span></span>
@@ -478,8 +478,8 @@ diagonal cells exactly.</p>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>In this model, the estimated common local log odds ratio—the
-coefficient for the linear-by-linear term <code>Fscore:Sscore</code>, is
-given by:</p>
+coefficient <span class="math inline">\(\gamma\)</span> for the
+linear-by-linear term <code>Fscore:Sscore</code>, is given by:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">hauser.UAdiag</span><span class="op">)</span><span class="op">[[</span><span class="st">"Fscore:Sscore"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">## [1] 0.1584003</span></span></code></pre></div>
@@ -507,11 +507,11 @@ father.</p>
 <p>Finally, for comparing a largish collection of models, a model
 comparison plot can show the trade-off between goodness-of-fit and
 parsimony by plotting measures like <span class="math inline">\(G^2/df\)</span>, AIC, or BIC against degrees of
-freedom. The plot below uses a log scale for BIc to emphasize
-differences among better fitting models. (The code for this plot is
-shown on p. 399 of <span class="citation">Friendly &amp; Meyer
-(2016)</span>).</p>
-<p><img src="fig/hauser-model-plot.png" style="width:60.0%"></p>
+freedom. The plot below, including quite a few more models, uses a log
+scale for BIC to emphasize differences among better fitting models. (The
+code for this plot is shown on p. 399 of <span class="citation">Friendly
+&amp; Meyer (2016)</span>).</p>
+<p><img src="fig/hauser-model-plot.png" style="width:80.0%"></p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
