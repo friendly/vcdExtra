@@ -149,6 +149,7 @@ their mental health status and parents' socioeconomic status (SES), where
 both of these variables are ordered factors.
 
 ```{r, mental1}
+data(Mental, package = "vcdExtra")
 str(Mental)
 xtabs(Freq ~ mental + ses, data=Mental)   # display the frequency table
 ```

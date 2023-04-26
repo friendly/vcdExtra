@@ -385,6 +385,7 @@ alcohol, cigarettes and marijuana in a sample of high school seniors,
 also classified by sex and race.  
 
 ```{r, dayton1}
+data("DaytonSurvey", package="vcdExtra")
 str(DaytonSurvey)
 head(DaytonSurvey)
 ```

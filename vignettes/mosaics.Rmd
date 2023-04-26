@@ -159,7 +159,7 @@ the nature of their association. This is an example of **effect ordering for dat
 Data from @Glass:54 gave this 5 x 5 table on the occupations of 3500 British fathers and their sons, where the occupational categories are listed in alphabetic order.
 
 ```{r glass}
-data(Glass)
+data(Glass, package="vcdExtra")
 (glass.tab <- xtabs(Freq ~ father + son, data=Glass))
 ```
 
