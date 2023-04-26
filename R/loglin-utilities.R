@@ -12,9 +12,13 @@
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when \code{table} is not specified
 #' @param with    indices of the factors against which others are considered jointly independent
-#' @export 
+#' @rdname loglin-utilities
+#' @export
 
-joint <- function(nf, table=NULL, factors=1:nf, with=nf) {
+joint <- function(nf,
+                  table=NULL,
+                  factors=1:nf,
+                  with=nf) {
     if (!is.null(table)) factors <- names(dimnames(table))
     if (nf == 1) return (list(term1=factors[1]))
     if (nf == 2) return (list(term1=factors[1], term2=factors[2]))
@@ -30,9 +34,13 @@ joint <- function(nf, table=NULL, factors=1:nf, with=nf) {
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when \code{table} is not specified
 #' @param with    indices of the factors against which others are considered conditionally independent
-#' @export 
+#' @rdname loglin-utilities
+#' @export
 
-conditional <- function(nf, table=NULL, factors=1:nf, with=nf) {
+conditional <- function(nf,
+                        table=NULL,
+                        factors=1:nf,
+                        with=nf) {
     if (!is.null(table)) factors <- names(dimnames(table))
     if (nf == 1) return (list(term1=factors[1]))
     if (nf == 2) return (list(term1=factors[1], term2=factors[2]))
@@ -49,13 +57,16 @@ conditional <- function(nf, table=NULL, factors=1:nf, with=nf) {
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when \code{table} is not specified
-#' @export 
+#' @rdname loglin-utilities
+#' @export
 
-mutual <- function(nf, table=NULL, factors=1:nf) {
+mutual <- function(nf,
+                   table=NULL,
+                   factors=1:nf) {
    if (!is.null(table)) factors <- names(dimnames(table))
    result <- sapply(factors[1:nf], list)
    names(result) <- paste('term', 1:length(result), sep='')
-   result  
+   result
   }
 
 
@@ -64,9 +75,12 @@ mutual <- function(nf, table=NULL, factors=1:nf) {
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when \code{table} is not specified
-#' @export 
+#' @rdname loglin-utilities
+#' @export
 
-saturated <- function(nf, table=NULL, factors=1:nf) {
+saturated <- function(nf,
+                      table=NULL,
+                      factors=1:nf) {
 	if (!is.null(table)) factors <- names(dimnames(table))
 	list(term1=factors[1:nf])
 }
@@ -90,9 +104,12 @@ saturated <- function(nf, table=NULL, factors=1:nf) {
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when \code{table} is not specified
 #' @param order   order of the markov chain
-#' @export 
+#' @rdname loglin-utilities
+#' @export
 
-markov <- function(nf, factors=1:nf, order=1) {
+markov <- function(nf,
+                   factors=1:nf,
+                   order=1) {
     if (nf == 1) return (list(term1=factors[1]))
     if (nf == 2) return (list(term1=factors[1], term2=factors[2]))
     if (length(factors) < order+2) {
@@ -104,7 +121,7 @@ markov <- function(nf, factors=1:nf, order=1) {
       if (nf <= order+1) result <- factors[1:nf]
       else {
         result <- NULL
-        for (i in 1:(order+1)) 
+        for (i in 1:(order+1))
           result <- rbind(result, factors[i:(nf-order+i-1)])
       }
     }
@@ -119,8 +136,11 @@ markov <- function(nf, factors=1:nf, order=1) {
 #' @param  x a list of terms in a loglinear model, such as returned by \code{joint}, \code{conditional}, \dots
 #' @param  env environment in which to evaluate the formula
 #' @source Code from Henrique Dallazuanna, <wwwhsd@gmail.com>, R-help 7-4-2013
+#' @rdname loglin-utilities
+#' @export
 
-loglin2formula <- function(x, env = parent.frame()) {
+loglin2formula <- function(x,
+                           env = parent.frame()) {
 	terms <- lapply(x, paste, collapse = ":")
 	formula(sprintf(" ~ %s", do.call(paste, c(terms, sep = "+"))), env=env)
 }
@@ -133,12 +153,18 @@ loglin2formula <- function(x, env = parent.frame()) {
 #' @param sep characters used to separate factor names within a term
 #' @param collapse  characters used to separate terms
 #' @param abbrev
+#' @rdname loglin-utilities
+#' @export
 
-loglin2string <- function(x, brackets = c('[', ']'), sep=',', collapse=' ', abbrev) {
+loglin2string <- function(x,
+                          brackets = c('[', ']'),
+                          sep=',',
+                          collapse=' ',
+                          abbrev) {
 	if (length(brackets)==1 && (nchar(brackets)>1)) brackets <- unlist(strsplit(brackets, ""))
 	terms <- lapply(x, paste, collapse=sep)
 	terms <- paste(brackets[1], terms, brackets[2], sep='')
-	paste(terms, collapse= ' ')  
+	paste(terms, collapse= ' ')
 }
 
 
