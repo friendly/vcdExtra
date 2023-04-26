@@ -799,11 +799,16 @@ NULL
 #' @format The format is a one-way frequency table of counts of packages with
 #' 0, 1, 2, ... dependencies.
 #'
+<<<<<<< HEAD
 #' \preformatted{
 #'  table' int [1:15(1d)] 986 1347 993 685 375 298 155 65 32 19 ...
 #'  - attr(*, "dimnames")=List of 1
 #'  ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
 #' }
+=======
+#' 'table' int [1:15(1d)] 986 1347 993 685 375 298 155 65 32 19 ...  - attr(*,
+#' "dimnames")=List of 1 ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
+>>>>>>> 8a07cc99cf9c8a36e4f0a462df51f766e6188e90
 #' @source Using code from
 #' \url{https://blog.revolutionanalytics.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies.html}
 #' @keywords datasets
