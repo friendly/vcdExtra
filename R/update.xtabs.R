@@ -1,3 +1,33 @@
+#' Update method for a \code{xtabs} object
+#' 
+#' Provides an \code{update} method for \code{"xtabs"} objects, typically by
+#' removing terms from the formula to collapse over them.
+#' 
+#' 
+#' @param object An existing \code{"xtabs"} object
+#' @param formula. Changes to the formula ? see
+#' \code{\link[stats]{update.formula}} for details
+#' @param \dots Additional arguments to the call, or arguments with changed
+#' values.
+#' @param evaluate If \code{TRUE}, evaluate the new call else return the call
+#' @return If \code{evaluate == TRUE}, the new \code{"xtabs"} object, otherwise
+#' the updated call
+#' @author Michael Friendly
+#' @seealso \code{\link[stats]{update.formula}} for details on updates to model
+#' formulae
+#' 
+#' \code{\link[base]{margin.table}} does something similar,
+#' \code{\link{collapse.table}} collapses category levels
+#' @keywords models
+#' @examples
+#' 
+#' vietnam.tab <- xtabs(Freq ~ sex + year + response, data=Vietnam)
+#' 
+#' update(vietnam.tab, formula = ~ . -year)
+#' 
+#' 
+#' 
+#' @export update.xtabs
 update.xtabs <-
 function (object, formula., ..., evaluate = TRUE) 
 {

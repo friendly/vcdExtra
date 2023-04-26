@@ -1,6 +1,33 @@
 # Print method for Kappa: Add a column showing z values 
 ## DONE: now set digits
 ## DONE: now include CI  
+
+
+#' Print Kappa
+#' 
+#' This is a replacement for the \code{print.Kappa} method in \code{vcd},
+#' adding display of \code{z} values to the \code{vcd} version and optional
+#' confidence intervals.
+#' 
+#' 
+#' @param x A Kappa object
+#' @param digits number of digits to print
+#' @param CI Include confidence intervals in the display?
+#' @param level confidence level
+#' @param \dots Other arguments
+#' @return Returns the Kappa object, invisibly.
+#' @author Michael Friendly
+#' @seealso \code{\link[vcd]{confint.Kappa}}
+#' @keywords htest category
+#' @examples
+#' 
+#' data("SexualFun")
+#' Kappa(SexualFun)
+#' print(Kappa(SexualFun), CI=TRUE)
+#' 
+#' # stratified 3-way table
+#' apply(MSPatients, 3, Kappa)
+#' 
 print.Kappa <-
 		function (x, digits=max(getOption("digits") - 3, 3), CI=FALSE, level=0.95, ...) 
 {

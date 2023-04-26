@@ -1,6 +1,83 @@
 # glmlist - make a glmlist object containing a list of fitted glm objects with their names
 
 # borrowing code from Hmisc::llist
+
+
+#' Create a Model List Object
+#' 
+#' \code{glmlist} creates a \code{glmlist} object containing a list of fitted
+#' \code{glm} objects with their names. \code{loglmlist} does the same for
+#' \code{loglm} objects.
+#' 
+#' The intention is to provide object classes to facilitate model comparison,
+#' extraction, summary and plotting of model components, etc., perhaps using
+#' \code{\link[base]{lapply}} or similar.
+#' 
+#' There exists a \code{\link[stats]{anova.glm}} method for \code{glmlist}
+#' objects.  Here, a \code{coef} method is also defined, collecting the
+#' coefficients from all models in a single object of type determined by
+#' \code{result}.
+#' 
+#' The arguments to \code{glmlist} or \code{loglmlist} are of the form
+#' \code{value} or \code{name=value}.
+#' 
+#' Any objects which do not inherit the appropriate class \code{glm} or
+#' \code{loglm} are excluded, with a warning.
+#' 
+#' In the \code{coef} method, coefficients from the different models are
+#' matched by name in the list of unique names across all models.
+#' 
+#' @aliases glmlist loglmlist coef.glmlist
+#' @param \dots One or more model objects, as appropriate to the function,
+#' optionally assigned names as in \code{list}.
+#' @param object a \code{glmlist} object
+#' @param result type of the result to be returned
+#' @return An object of class \code{glmlist} \code{loglmlist}, just like a
+#' \code{list}, except that each model is given a \code{name} attribute.
+#' @author Michael Friendly; \code{coef} method by John Fox
+#' @seealso The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is
+#' similar, but perplexingly more general.
+#' 
+#' The function \code{\link[stats]{anova.glm}} also handles \code{glmlist
+#' objects}
+#' 
+#' \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
+#' object.
+#' @keywords utilities models
+#' @examples
+#' 
+#' data(Mental)
+#' indep <- glm(Freq ~ mental+ses,
+#'                 family = poisson, data = Mental)
+#' Cscore <- as.numeric(Mental$ses)
+#' Rscore <- as.numeric(Mental$mental)
+#' 
+#' coleff <- glm(Freq ~ mental + ses + Rscore:ses,
+#'                 family = poisson, data = Mental)
+#' roweff <- glm(Freq ~ mental + ses + mental:Cscore,
+#'                 family = poisson, data = Mental)
+#' linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
+#'                 family = poisson, data = Mental)
+#'                 
+#' # use object names
+#' mods <- glmlist(indep, coleff, roweff, linlin)
+#' names(mods)
+#' 
+#' # assign new names
+#' mods <- glmlist(Indep=indep, Col=coleff, Row=roweff, LinxLin=linlin)
+#' names(mods)
+#' 
+#' LRstats(mods)
+#' 
+#' coef(mods, result='data.frame')
+#' 
+#' #extract model components
+#' unlist(lapply(mods, deviance))
+#' 
+#' res <- lapply(mods, residuals)
+#' boxplot(as.data.frame(res), main="Residuals from various models")
+#' 
+#' @export glmlist
 glmlist <- function(...) {
     args  <- list(...);
     lname <- names(args)

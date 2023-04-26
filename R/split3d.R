@@ -1,6 +1,67 @@
 # split a 3D object along dimension dim, according to the proportions or
 # frequencies specified in vector p
 
+
+
+#' Subdivide a 3D Object
+#' 
+#' Subdivides a \code{shape3d} object or a list of \code{shape3d} objects into
+#' objects of the same shape along a given dimension according to the
+#' proportions or frequencies specified in vector(s).
+#' 
+#' \code{split3d} is the basic workhorse used in \code{\link{mosaic3d}}, but
+#' may be useful in other contexts.
+#' 
+#' \code{range3d} and \code{center3d} are utility functions, also useful in
+#' other contexts.
+#' 
+#' The resulting list of \code{shape3d} objects is actually composed of
+#' \emph{copies} of the input object(s), scaled according to the proportions in
+#' \code{p} and then translated to make their range along the splitting
+#' dimension equal to that of the input object(s).
+#' 
+#' @aliases split3d split3d.shape3d split3d.list range3d center3d
+#' @param obj A \code{shape3d} object, or a list composed of them
+#' @param \dots Other arguments for split3d methods
+#' @param p For a single \code{shade3d} object, a vector of proportions (or a
+#' vector of non-negative numbers which will be normed to proportions)
+#' indicating the number of subdivisions and their scaling along dimension
+#' \code{dim}. For a list of \code{shade3d} objects, a matrix whose columns
+#' indicate the subdivisions of each object.
+#' @param dim The dimension along which the object is to be subdivided. Either
+#' an integer: 1, 2, or 3, or a character: "x", "y", or "z".
+#' @param space The total space used to separate the copies of the object along
+#' dimension \code{dim}. The unit inter-object space is therefore
+#' \code{space/(length(p)-1)}.
+#' @return \code{split3d} returns a list of \code{shape3d} objects.
+#' 
+#' \code{range3d} returns a 2 x 3 matrix, whose first row contains the minima
+#' on dimensions x, y, z, and whose second row contains the maxima.
+#' 
+#' \code{center3d} returns a numeric vector containing the means of the minima
+#' and maxima on dimensions x, y, z.
+#' @author Duncan Murdoch, with refinements by Michael Friendly
+#' @seealso \code{\link{mosaic3d}}
+#' 
+#' \code{\link[rgl]{shapelist3d}} for the plotting of lists of \code{shape3d}
+#' objects.
+#' @keywords dplot
+#' @examples
+#' 
+#' if (require(rgl)) {
+#'   open3d()
+#'   cube <- cube3d(alpha=0.4)
+#'   sl1 <- split3d(cube, c(.2, .3, .5), 1)
+#'   col <- c("#FF000080", "#E5E5E580", "#0000FF80")
+#'   shapelist3d(sl1, col=col)
+#' 	
+#'   open3d()
+#'   p <- matrix(c(.6, .4, .5, .5, .2, .8), nrow=2)
+#'   sl2 <- split3d(sl1, p, 2)
+#'   shapelist3d(sl2, col=col)	
+#'   }
+#' 
+#' @export split3d
 split3d <- function(obj, ...) {
 	UseMethod("split3d")
 }
