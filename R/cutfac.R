@@ -15,14 +15,15 @@
 #'
 #' @param x a numeric vector which is to be converted to a factor by cutting
 #' @param breaks either a numeric vector of two or more unique cut points or a
-#' single number (greater than or equal to 2) giving the number of intervals
-#' into which \code{x} is to be cut.
+#'          single number (greater than or equal to 2) giving the number of intervals
+#'          into which \code{x} is to be cut.
 #' @param q the number of quantile groups used to define \code{breaks}, if that
-#' has not been specified.
+#'        has not been specified.
 #' @return A \code{\link[base]{factor}} corresponding to \code{x} is returned
 #' @author Achim Zeileis
 #' @seealso \code{\link[base]{cut}}, \code{\link[stats]{quantile}}
-#' @references Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
+#' @references
+#' Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
 #' with R: Visualization and Modeling Techniques for Categorical and Count
 #' Data}.  Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 #' @keywords manip
@@ -43,21 +44,22 @@
 #'   xlab = "Number of hospital stays", main = "hospital")
 #' }
 #'
-#' %\donttest{
-#' %# countreg not yet on CRAN
-#' %if (require(countreg)) {
-#' %data("CrabSatellites", package = "countreg")
-#' %
-#' %# jittered scatterplot
-#' %plot(jitter(satellites) ~ width, data=CrabSatellites,
-#' %  ylab="Number of satellites (jittered)", xlab="Carapace width",
-#' %  cex.lab=1.25)
-#' %with(CrabSatellites, lines(lowess(width, satellites), col="red", lwd=2))
-#' %
-#' %# boxplot, using deciles
-#' %plot(satellites ~ cutfac(width), data=CrabSatellites,
-#' %     ylab="Number of satellites", xlab="Carapace width (deciles)")
-#' %}
+#' \donttest{
+#' # countreg not yet on CRAN
+#' if (require(countreg)) {
+#' data("CrabSatellites", package = "countreg")
+#'
+#' # jittered scatterplot
+#' plot(jitter(satellites) ~ width, data=CrabSatellites,
+#'   ylab="Number of satellites (jittered)", xlab="Carapace width",
+#'   cex.lab=1.25)
+#' with(CrabSatellites, lines(lowess(width, satellites), col="red", lwd=2))
+#'
+#' # boxplot, using deciles
+#' plot(satellites ~ cutfac(width), data=CrabSatellites,
+#'      ylab="Number of satellites", xlab="Carapace width (deciles)")
+#' }
+#' }
 #'
 #'
 #'

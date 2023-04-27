@@ -75,3 +75,5 @@ VignetteBuilder: knitr, rmarkdown
 LazyLoad: yes
 LazyData: yes
 RoxygenNote: 7.2.3
+Encoding: UTF-8
+
