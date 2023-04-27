@@ -1,13 +1,82 @@
 #' Loglinear Model Utilities
-
-#' These functions generate lists of terms to specify a loglinear model
-#' in a form compatible with loglin and provide for conversion to an
-#' equivalent loglm specification.  They allow for a more conceptual
-#' way to specify such models.
-
-
+#'
+#' @description
+#' These functions generate lists of terms to specify a loglinear model in a
+#' form compatible with \code{\link[stats]{loglin}} and also provide for
+#' conversion to an equivalent \code{\link[MASS]{loglm}} specification or a
+#' shorthand character string representation.
+#'
+#' They allow for a more conceptual way to specify such models by a function
+#' for their type, as opposed to just an uninterpreted list of model terms and
+#' also allow easy specification of marginal models for a given contingency
+#' table.
+#' They are intended to be used as tools in higher-level modeling and graphics
+#' functions, but can also be used directly.
+#'
+#' @details
+#' The main model specification functions, \code{conditional}, \code{joint},
+#' \code{markov}, \dots{}, \code{saturated}, return a list of vectors
+#' indicating the marginal totals to be fit, via the \code{margin} argument to
+#' \code{\link[stats]{loglin}}.
+#' Each element of this list corresponds to a
+#' high-order term in a hierarchical loglinear model, where, e.g., a term like
+#' \code{c("A", "B")} is equivalent to the \code{\link[MASS]{loglm}} term
+#' \code{"A:B"} and hence automatically includes all low-order terms.
+#'
+#' Note that these can be used to supply the \code{expected} argument for the
+#' default \code{\link[vcd]{mosaic}} function, when the data is supplied as a
+#' contingency table.
+#'
+#' The table below shows some typical results in terms of the standard
+#' shorthand notation for loglinear models, with factors A, B, C, \dots{},
+#' where brackets are used to delimit the high-order terms in the loglinear
+#' model.
+#' \tabular{llll}{
+#'   \strong{function} \tab \strong{3-way} \tab \strong{4-way} \tab \strong{5-way} \cr
+#'   \code{mutual} \tab  [A]  [B]  [C]  \tab
+#'   [A]  [B]  [C]  [D]  \tab
+#'   [A]  [B]  [C]  [D]  [E] \cr
+#'   \code{joint}  \tab  [AB]  [C]  \tab
+#'   [ABC]  [D]  \tab
+#'   [ABCE]  [E]  \cr
+#'   \code{joint (with=1)} \tab
+#'   [A]  [BC]  \tab
+#'   [A]  [BCD]  \tab
+#'   [A]  [BCDE]  \cr
+#'   \code{conditional}  \tab
+#'   [AC]  [BC]  \tab
+#'   [AD]  [BD]  [CD]  \tab
+#'   [AE]  [BE]  [CE]  [DE] \cr
+#'   \code{condit (with=1)}  \tab
+#'   [AB]  [AC]  \tab
+#'   [AB]  [AC]  [AD]  \tab
+#'   [AB]  [AC]  [AD]  [AE] \cr
+#'   \code{markov (order=1)}  \tab
+#'   [AB]  [BC]  \tab
+#'   [AB]  [BC]  [CD]  \tab
+#'   [AB]  [BC]  [CD]  [DE] \cr
+#'   \code{markov (order=2)}  \tab
+#'   [A]  [B]  [C]  \tab
+#'   [ABC]  [BCD]  \tab
+#'   [ABC]  [BCD]  [CDE]  \cr
+#'   \code{saturated}  \tab
+#'   [ABC] \tab [ABCD] \tab [ABCDE] \cr
+#' }
+#'
+#'
+#' \code{loglin2formula} converts the output of one of these to a model formula
+#' suitable as the \code{formula} for of \code{\link[MASS]{loglm}}.
+#'
+#' \code{loglin2string} converts the output of one of these to a string
+#' describing the loglinear model in the shorthand bracket notation,
+#' e.g., \code{"[A,B] [A,C]"}.
+#'
+#' @aliases loglin-utilities conditional joint loglin2formula loglin2string
+#'          markov mutual saturated
+#'
+#'
 #' models of joint independence, of some factors wrt one or more other factors
-
+#'
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when \code{table} is not specified
