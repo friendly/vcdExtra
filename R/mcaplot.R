@@ -20,13 +20,13 @@
 #' @param lwd  Line width(s) for the lines
 #' @param legend Logical; draw a legend for the factor names?
 #' @param legend.pos Position of the legend in the plot
-#' @param xlab,ylab Labels for horizontal and vertical axes. The default, \code{"_auto_" }
+#' @param xlab,ylab Labels for horizontal and vertical axes. The default, \code{"_auto_"}
 #'             means that the function auto-generates a label of the form \code{Dimension X (xx.x %)}
 #' @param rev.axes  A logical vector of length 2, where TRUE reverses the direction of the
 #'             corresponding axis.
 #' @param ...  Arguments passed down to \code{plot}
 #' @return Returns the coordinates of the category points invisibly
-#' 
+#'
 #' @author Michael Friendly
 #' @seealso \code{\link{plot.mjca}}
 #' @examples
@@ -42,14 +42,14 @@
 
 
 #' Simple and enhanced plot of MCA solutions
-#' 
+#'
 #' This function is intended as an alternative to \code{\link[ca]{plot.mjca}}
 #' for plotting multiple correspondence analysis solutions. It provides more
 #' flexibility for labeling factor levels and connecting them with lines. It
 #' does not support some features of \code{plot.mjca} (centroids, supplementary
 #' points, arrows, etc.)
-#' 
-#' 
+#'
+#'
 #' @param obj An \code{"mjca"} object
 #' @param map Character string specifying the map type, i.e., the scaling
 #' applied to coordinates for different types of MCA representations. Allowed
@@ -77,31 +77,30 @@
 #' @param rev.axes A logical vector of length 2, where TRUE reverses the
 #' direction of the corresponding axis
 #' @param \dots Arguments passed down to \code{plot}
-#' @return Returns the coordinates of the category points invisibly %%
-#' ~Describe the value returned %% If it is a LIST, use %% \item{comp1
-#' }{Description of 'comp1'} %% \item{comp2 }{Description of 'comp2'} %% ...
+#' @return Returns the coordinates of the category points invisibly
+#'
 #' @author Michael Friendly
 #' @seealso \code{\link[ca]{mjca}}, \code{\link[ca]{plot.mjca}}
-#' 
+#'
 #' \code{\link[ca]{cacoord}} returns CA and MCA coordinates,
 #' \code{\link[ca]{multilines}} draw multiple lines according to a factor,
 #' @keywords hplot
 #' @examples
-#' 
+#'
 #' require(ca)
 #' data(Titanic)
 #' titanic.mca <- mjca(Titanic)
 #' mcaplot(titanic.mca, legend=TRUE, legend.pos="topleft")
-#' 
+#'
 #' data(HairEyeColor)
 #' haireye.mca <- mjca(HairEyeColor)
 #' mcaplot(haireye.mca, legend=TRUE, cex.lab=1.3)
-#' 
-#' 
-#' 
+#'
+#'
+#'
 #' @export mcaplot
-mcaplot <- function(obj, map="symmetric", dim=1:2, 
-	col=c("blue", "red", "brown", "black", "green3", "purple"), 
+mcaplot <- function(obj, map="symmetric", dim=1:2,
+	col=c("blue", "red", "brown", "black", "green3", "purple"),
 	pch=15:20, cex=1.2, pos=3,
 	lines=TRUE, lwd=2,
 	legend=FALSE, legend.pos="topright",
@@ -111,9 +110,9 @@ mcaplot <- function(obj, map="symmetric", dim=1:2,
 	...) {
 
   if(!requireNamespace("ca", quietly=TRUE)) stop("The ca package is required")
-	if(!inherits(obj, "mjca")) stop("Only defined for mjca objects")	
+	if(!inherits(obj, "mjca")) stop("Only defined for mjca objects")
 	coords <- cacoord(obj, type=map, rows=FALSE)
-	coords <- data.frame(coords, obj$factors)     # extract factor names & levels 
+	coords <- data.frame(coords, obj$factors)     # extract factor names & levels
 	nlev <- obj$levels.n
 	nfac <- length(nlev)
 	pch <- rep_len(pch, nfac)
@@ -126,7 +125,7 @@ mcaplot <- function(obj, map="symmetric", dim=1:2,
 	labs <- pctlab(obj)
 	if (xlab == "_auto_") xlab <- labs[dim[1]]
 	if (ylab == "_auto_") ylab <- labs[dim[2]]
-	
+
   if(isTRUE(rev.axes[1])) coords[, dim[1]] <- -coords[, dim[1]]
   if(isTRUE(rev.axes[2])) coords[, dim[2]] <- -coords[, dim[2]]
 
@@ -145,7 +144,7 @@ mcaplot <- function(obj, map="symmetric", dim=1:2,
 			title="Factor", title.col="black",
 			col=col, text.col=col, pch=pch,
 			bg=rgb(.95, .95, .95, .3), cex=cex)
-	}		
+	}
 	invisible(coords)
 }
 

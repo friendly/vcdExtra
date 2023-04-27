@@ -221,7 +221,7 @@ loglin2formula <- function(x,
 #'        or a character vector of length two.
 #' @param sep characters used to separate factor names within a term
 #' @param collapse  characters used to separate terms
-#' @param abbrev
+#' @param abbrev   Unused as yet
 #' @rdname loglin-utilities
 #' @export
 

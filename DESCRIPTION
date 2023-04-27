@@ -74,4 +74,4 @@ BugReports: https://github.com/friendly/vcdExtra
 VignetteBuilder: knitr, rmarkdown
 LazyLoad: yes
 LazyData: yes
-
+RoxygenNote: 7.2.3

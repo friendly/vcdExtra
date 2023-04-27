@@ -1,43 +1,24 @@
-#' Sequential loglinear models for an n-way table
-
-#' This function takes an n-way contingency table and fits a series of sequential
-#' models to the 1-, 2-, ... n-way marginal tables, corresponding to a variety of
-#' types of loglinear models.
-
-
-#' @param x 	a contingency table in array form, with optional category labels specified in the dimnames(x) attribute,
-#'            or else a data.frame in frequency form, with the frequency variable names "Freq".
-#' @param type type of sequential model to fit
-#' @param marginals which marginals to fit?
-#' @param vorder  order of variables
-#' @param k    indices of conditioning variable(s) for "joint", "conditional" or order for "markov"
-#' @param prefix
-#' @param fitted keep fitted values?
-
-
-
-
 #' Sequential Loglinear Models for an N-way Table
-#' 
+#'
 #' This function takes an n-way contingency table and fits a series of
 #' sequential models to the 1-, 2-, ... n-way marginal tables, corresponding to
 #' a variety of types of loglinear models.
-#' 
+#'
 #' Sequential marginal models for an n-way tables begin with the model of
 #' equal-probability for the one-way margin (equivalent to a
 #' \code{\link[stats]{chisq.test}}) and add successive variables one at a time
 #' in the order specified by \code{vorder}.
-#' 
+#'
 #' All model types give the same result for the two-way margin, namely the test
 #' of independence for the first two factors.
-#' 
+#'
 #' Sequential models of \emph{joint independence} (\code{type="joint"}) have a
 #' particularly simple interpretation, because they decompose the likelihood
 #' ratio test for the model of mutual independence in the full n-way table, and
 #' hence account for "total" association in terms of portions attributable to
 #' the conditional probabilities of each new variable, given all prior
 #' variables.
-#' 
+#'
 #' @param x a contingency table in array form, with optional category labels
 #' specified in the dimnames(x) attribute, or else a data.frame in frequency
 #' form, with the frequency variable named \code{"Freq"}.
@@ -57,8 +38,8 @@
 #' the model objects
 #' @param \dots other arguments, passed down
 #' @return An object of class \code{"loglmlist"}, each of which is a class
-#' \code{"loglm"} object %% If it is a LIST, use %% \item{comp1 }{Description
-#' of 'comp1'} %% \item{comp2 }{Description of 'comp2'} %% ...
+#' \code{"loglm"} object
+#'
 #' @note One-way marginal tables are a bit of a problem here, because they
 #' cannot be fit directly using \code{\link[MASS]{loglm}}. The present version
 #' uses \code{\link[stats]{loglin}}, and repairs the result to look like a
@@ -67,20 +48,20 @@
 #' @seealso \code{\link{loglin-utilities}} for descriptions of sequential
 #' models, \code{\link{conditional}}, \code{\link{joint}},
 #' \code{\link{mutual}}, \dots{}
-#' 
+#'
 #' \code{\link{loglmlist}},
 #' @references These functions were inspired by the original SAS implementation
 #' of mosaic displays, described in the \emph{User's Guide},
 #' \url{http://www.datavis.ca/mosaics/mosaics.pdf}
 #' @keywords models
 #' @examples
-#' 
+#'
 #' data(Titanic, package="datasets")
 #' # variables are in the order Class, Sex, Age, Survived
 #' tt <- seq_loglm(Titanic)
-#' 
-#' 
-#' 
+#'
+#'
+#'
 #' @export seq_loglm
 seq_loglm <- function(
 	x,
@@ -97,14 +78,14 @@ seq_loglm <- function(
     x <- xtabs(Freq ~ ., data=x)
   }
   if (!inherits(x, c("table", "array"))) stop("not an xtabs, table, array or data.frame with a 'Freq' variable")
-  
+
 	nf <- length(dim(x))
 	x <- aperm(x, vorder)
 	factors <- names(dimnames(x))
 	indices <- 1:nf
 
   type = match.arg(type)
-#  models <- as.list(rep(NULL, length(marginals))) 
+#  models <- as.list(rep(NULL, length(marginals)))
   models <- list()
   for (i in marginals) {
 		mtab <- margin.table(x, 1:i)
@@ -138,7 +119,7 @@ seq_loglm <- function(
 #  		mod <- loglm(formula=form, data=mtab, fitted=TRUE)
       mod <- eval(bquote(MASS::loglm(.(form), data=mtab, fitted=fitted)))
   		mod$model.string <- loglin2string(expected, brackets=if (i<nf) '()' else '[]')
-  		
+
 		}
 #  	cat(i, "  model.string: ", mod$model.string, "\n")
 #  	cat("model:\n"); print(mod)

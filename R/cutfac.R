@@ -1,22 +1,18 @@
-# Cut a variable to a factor
-
-
-
 #' Cut a Numeric Variable to a Factor
-#' 
+#'
 #' \code{cutfac} acts like \code{\link[base]{cut}}, dividing the range of
 #' \code{x} into intervals and coding the values in \code{x} according in which
 #' interval they fall. However, it gives nicer labels for the factor levels and
 #' by default chooses convenient breaks among the values based on deciles.
-#' 
+#'
 #' It is particularly useful for plots in which one wants to make a numeric
 #' variable discrete for the purpose of getting boxplots, spinograms or mosaic
 #' plots.
-#' 
+#'
 #' By default, \code{\link[base]{cut}} chooses breaks by equal lengths of the
 #' range of \code{x}, whereas \code{cutfac} uses \code{\link[stats]{quantile}}
 #' to choose breaks of roughly equal count.
-#' 
+#'
 #' @param x a numeric vector which is to be converted to a factor by cutting
 #' @param breaks either a numeric vector of two or more unique cut points or a
 #' single number (greater than or equal to 2) giving the number of intervals
@@ -31,22 +27,22 @@
 #' Data}.  Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 #' @keywords manip
 #' @examples
-#' 
+#'
 #' if (require(AER)) {
 #' data("NMES1988", package="AER")
 #' nmes <- NMES1988[, c(1, 6:8, 13, 15, 18)]
-#' 
-#' plot(log(visits+1) ~ cutfac(chronic), 
+#'
+#' plot(log(visits+1) ~ cutfac(chronic),
 #'   data = nmes,
-#'   ylab = "Physician office visits (log scale)", 
+#'   ylab = "Physician office visits (log scale)",
 #'   xlab = "Number of chronic conditions", main = "chronic")
-#' 
-#' plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)), 
+#'
+#' plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)),
 #'   data = nmes,
-#'   ylab = "Physician office visits (log scale)", 
+#'   ylab = "Physician office visits (log scale)",
 #'   xlab = "Number of hospital stays", main = "hospital")
 #' }
-#' 
+#'
 #' %\donttest{
 #' %# countreg not yet on CRAN
 #' %if (require(countreg)) {
@@ -62,9 +58,9 @@
 #' %plot(satellites ~ cutfac(width), data=CrabSatellites,
 #' %     ylab="Number of satellites", xlab="Carapace width (deciles)")
 #' %}
-#' 
-#' 
-#' 
+#'
+#'
+#'
 #' @export cutfac
 cutfac <- function(x, breaks = NULL, q=10) {
   if(is.null(breaks)) breaks <- unique(quantile(x, 0:q/q))
