@@ -2865,6 +2865,8 @@ NULL
 #' (turn the television Off, Switch channels, or Persist in viewing the current
 #' channel). The \code{TV} data here includes only the Persist observations.
 #'
+#' @name TV
+#' @docType data
 #' @format A 5 x 11 x 3 array of cell frequencies with the following structure:
 #' \preformatted{
 #'   int [1:5, 1:11, 1:3] 146 244 233 174 294 151 181 161 183 281 ...
@@ -2921,25 +2923,6 @@ NULL
 #'   legend = FALSE)
 #'
 NULL
-
-
-
-
-
-#' Deprecated Functions in vcdExtra Package
-#'
-#' These functions are provided for compatibility with older versions of the
-#' \pkg{vcdExtra} package only.  They are replaced by \code{\link{LRstats}}.
-#'
-#' \code{summarise.*} have been replaced by \code{\link{LRstats}} functions.
-#'
-#' @aliases vcdExtra-deprecated summarise
-#' @param \dots pass arguments down.
-NULL
-
-
-
-
 
 
 

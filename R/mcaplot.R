@@ -42,6 +42,7 @@
 #'          \code{\link[ca]{cacoord}} returns CA and MCA coordinates,
 #'          \code{\link[ca]{multilines}} draw multiple lines according to a factor,
 #' @keywords hplot
+#' @importFrom ca cacoord multilines
 #' @examples
 #'
 #' require(ca)
