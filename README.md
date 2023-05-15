@@ -58,7 +58,26 @@ categorical data in R, not provided in base R,
 [vcd](https://CRAN.R-project.org/package=vcd), or other commonly used
 packages.
 
-#### Highlights
+##### See also:
+
+<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="http://ddar.datavis.ca/images/ddar-cover.png" style="height:70px;"/></a> 
+   
+<a href="https://friendly.github.io/psy6136/"><img src="https://friendly.github.io/psy6136/icons/psy6136-highres.png" style="height:70px;" /></a> 
+   
+<a href="https://friendly.github.io/nestedLogit/"><img src="https://friendly.github.io/nestedLogit/logo.png" style="height:70px;" /></a>
+
+- My book, [*Discrete Data Analysis with R: Visualization and Modeling
+  Techniques for Categorical and Count
+  Data*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835)
+
+- My graduate course, [Psy 6136: Categorical Data
+  Analysis](https://friendly.github.io/psy6136/)
+
+- A companion package,
+  [`nestedLogit`](https://friendly.github.io/nestedLogit/), for fitting
+  nested dichotomy logistic regression models for a polytomous response.
+
+#### vcdExtra Highlights
 
 ##### mosaic plot extensions
 
@@ -132,6 +151,7 @@ tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
 | datasets.Rmd     | Datasets for categorical data analysis     |
 | demo-housing.Rmd | Demo - Housing Data                        |
 | loglinear.Rmd    | Loglinear Models                           |
+| mobility.Rmd     | Mobility tables                            |
 | mosaics.Rmd      | Mosaic plots                               |
 | tests.Rmd        | Tests of Independence                      |
 
