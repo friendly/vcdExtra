@@ -25,8 +25,8 @@ extends mosaic, assoc and sieve plots from vcd to handle `glm()` and
 `gnm()` models and adds a 3D version in `mosaic3d()`.
 
 `vcdExtra` is a support package for the book [*Discrete Data Analysis
-with
-R*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835)
+with R: Visualization and Modeling Techniques for Categorical and Count
+Data*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835)
 (DDAR) by Michael Friendly and David Meyer. There is also a [web site
 for DDAR](http://ddar.datavis.ca) with all figures and code samples from
 the book. It is also used in my graduate course, [Psy 6136: Categorical
@@ -57,6 +57,25 @@ A related purpose was to fill in some holes in the analysis of
 categorical data in R, not provided in base R,
 [vcd](https://CRAN.R-project.org/package=vcd), or other commonly used
 packages.
+
+##### See also:
+
+<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="http://ddar.datavis.ca/images/ddar-cover.png" style="height:70px;"/></a> 
+   
+<a href="https://friendly.github.io/psy6136/"><img src="https://friendly.github.io/psy6136/icons/psy6136-highres.png" style="height:70px;" /></a> 
+   
+<a href="https://friendly.github.io/nestedLogit/"><img src="https://friendly.github.io/nestedLogit/logo.png" style="height:70px;" /></a>
+
+- My book, [*Discrete Data Analysis with R: Visualization and Modeling
+  Techniques for Categorical and Count
+  Data*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835)
+
+- My Categorical Data Analysis course, [Psy
+  6136](https://friendly.github.io/psy6136/)
+
+- A companion package,
+  [`nestedLogit`](https://friendly.github.io/nestedLogit/), for fitting
+  nested dichotomy logistic regression models for a polytomous response.
 
 #### Highlights
 
@@ -132,6 +151,7 @@ tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
 | datasets.Rmd     | Datasets for categorical data analysis     |
 | demo-housing.Rmd | Demo - Housing Data                        |
 | loglinear.Rmd    | Loglinear Models                           |
+| mobility.Rmd     | Mobility tables                            |
 | mosaics.Rmd      | Mosaic plots                               |
 | tests.Rmd        | Tests of Independence                      |
 
