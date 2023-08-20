@@ -25,6 +25,7 @@ In addition, I teach a course, \emph{Psy 6136: Categorical Data Analysis},
 \url{https://friendly.github.io/psy6136/} using this package.
 }
 
+\details{
 The main purpose of this package is to serve as a sandbox for
 introducing extensions of
 mosaic plots and related graphical methods
@@ -114,8 +115,6 @@ Turner, H. and Firth, D. \emph{Generalized nonlinear models in R: An overview of
 \code{\link[gnm]{gnm-package}}, for an extended range of models for contingency tables
 
 \code{\link[vcd]{mosaic}} for details on mosaic displays within the strucplot framework.
-%~~ Optional links to other man pages, e.g. ~~
-%~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
 example(mosaic.glm)
