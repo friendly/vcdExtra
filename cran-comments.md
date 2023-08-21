@@ -1,34 +1,29 @@
 ## Test environments
-* local Windows 10, R version 4.2.2 (2022-10-31 ucrt)
-* win-builder R 4.3.0 beta (2023-04-12 r84240 ucrt)
+* local Windows 10, 4.2.3 (2023-03-15 ucrt)
+* win-builder R Under development (unstable) (2023-08-19 r84989 ucrt)
 * R Under development (unstable) (2023-03-03 r83933 ucrt)
 * Rhub Windows Server 2022, R-devel, 64 bit
-* Rhub Ubuntu Linux 20.04.1 LTS, R-release, GCC
-* Rhub Fedora Linux, R-devel, clang, gfortran
 
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs 
 
-## Version 0.8-4 (2023-04-12)
+## Version 0.8-5 (2023-08-19)
+Very minor update:
 
-This is first a maintenance release to correct an error users encounter to load
-the package.  It also extends/expands on vignettes
-
-- Imports: tidyr must depend on (>= 1.3.0) for one use in a vignette.
-- Enhanced the vignette, "Creating and manipulating frequency tables", `vignettes/creating.Rmd`
-- Created a new vignete, "Mobility tables"
+- Fix CRAN nit re vcdExtra-package.Rd
+- Fix moved URL - http: -> https:
+- Fix xrefs in vignettes
+- More spellcheck
 
 # reverse dependencies
 
 > devtools::revdep()
-[1] "aplore3"     "catdata"     "gnm"         "iarm"        "jmv"         "reappraised"
+[1] "aplore3"     "catdata"     "genridge"    "gnm"         "iarm"        "jmv"         "reappraised"
 > revdepcheck::revdep_check(num_workers = 4)
-
-*Wow, no problems at all. :)*
 
 ## revdepcheck results
 
-We checked 6 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 7 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
  * We failed to check 0 packages

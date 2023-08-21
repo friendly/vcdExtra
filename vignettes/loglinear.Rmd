@@ -52,7 +52,7 @@ particularly for testing structured associations.
 The visualization methods for these models were originally developed for models fit using `loglm()`,
 so this approach is emphasized here.  Some extensions of these methods for models
 fit using `glm()` and `gnm()` are contained in the `vcdExtra` package
-and illustrated in \secref{sec:glm}.
+and illustrated in @ref(sec:glm).
 
 Assume we  have a 3-way  contingency table based  on
 variables A, B, and C.
@@ -140,7 +140,7 @@ much wider class of models for frequency data to be fit than can be handled by
 square tables, where we can test more structured hypotheses about the patterns
 of association than are provided in the tests of general association under
 `loglm()`. These are similar in spirit to the 
-non-parametric CMH tests described in \secref{sec:CMH}.
+non-parametric CMH tests described in \@ref(sec:CMH).
 
 ***Example***:
 The data `Mental` in the `vcdExtra` package gives a two-way table in frequency form
