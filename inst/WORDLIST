@@ -5,6 +5,7 @@ Aberdein
 ACM
 Addy
 AE
+agreementplot
 Agresti's
 Agresti
 AirCrash
@@ -22,6 +23,7 @@ Bangdiwala
 BCD
 BCDE
 BD
+Beh
 Beitrage
 Bertin
 Bingley
@@ -29,6 +31,7 @@ Biometrics
 Biometrika
 birthdate
 birthdates
+blogits
 Boca
 Breen
 Breslow
@@ -56,6 +59,7 @@ Creatinine
 CyclingDeaths
 Daly
 Darlington
+DaytonSurvey
 DDAR
 de
 deciles
@@ -64,6 +68,8 @@ De
 der
 des
 df
+DOI
+donner
 doubledecker
 Doubledecker
 Duxbury
@@ -110,6 +116,8 @@ HospVisits
 Hout
 Hoyt
 http
+ij
+ijk
 Inspectional
 Institutionalism
 interpretable
@@ -135,7 +143,9 @@ Lemeshow
 Lifecycle
 loddsratio
 logLik
+loglin
 loglm
+loglmlist
 logseries
 Lombardo
 LRstats
@@ -153,14 +163,18 @@ Mikis
 Ministere
 NMES
 Modelling
+modFit
+mosdata
 multinom
 Murdock
 nd
 Neilsen
 Nesselroade
 newcastle
+noop
 nonfarm
 Nonmanual
+nonmanual
 nonmanuals
 NonWhites
 normed
@@ -189,6 +203,7 @@ Raton
 recoding
 Rennie
 rgl
+Rhelp
 Ries
 RMS
 rootogram
@@ -221,6 +236,7 @@ subtable
 Teres
 Theus
 Thisted
+tibbles
 tidyr
 Titanicp
 tolstoy
@@ -233,15 +249,17 @@ UCBAdmissions
 Unidiff
 unidiff
 unshaded
+VGAM
 vcd
 verhaltnisses
 Verlag
 VisualAcuity
-WhittakerS
+Whittaker
 Wicklin
 Winbuilder
 Wolfinger
 WorkerSat
+www
 Xie
 xlevelsS
 Yaish

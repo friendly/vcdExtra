@@ -1,6 +1,9 @@
 ## Version 0.8-5 (2023-08-19)
 
 - Fix CRAN nit re vcdExtra-package.Rd
+- Fix moved URL - http: -> https:
+- Fix xrefs in vignettes
+- More spellcheck
 
 ## Version 0.8-4 (2023-04-12)
 

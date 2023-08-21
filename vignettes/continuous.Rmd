@@ -180,7 +180,7 @@ ggplot(Donner, aes(age, survived, color = sex)) +
 ```
 
 Alternatively, we can allow a quadratic relation with `age`
-by specifying `formula = y ~ poly(x,2)` (\figref{fig:donner3}, right).
+by specifying `formula = y ~ poly(x,2)` (@ref(fig:donner3), right).
 
 ```{r, donner2b, fig=FALSE, eval=FALSE}
 # separate quadratics

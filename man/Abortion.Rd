@@ -20,12 +20,12 @@ data(Abortion)
 }
 
 \details{
-\code{Support_Abortion} is a natural response variable. 
+\code{Support_Abortion} is a natural response variable.
 
 The combinations of \code{Sex} and \code{Status} represent four independent samples, having
-fixed \code{Sex}-\code{Status} marginal totals. 
+fixed \code{Sex}-\code{Status} marginal totals.
 There were 500 females and 600 males. Within the female group, 250 of low status and 250
-of high status were sampled. Similarly for the males, with 300 in each of the low and hgh
+of high status were sampled. Similarly for the males, with 300 in each of the low and high
 status sub-groups.
 
 This is an example of a product-multinomial sampling scheme.
@@ -43,7 +43,7 @@ Christensen, R. (1990).
  New York, NY: Springer-Verlag, p. 92, Example 3.5.2.
 
 Christensen, R. (1997).
- \emph{Log-Linear Models and Logistic Regression},  
+ \emph{Log-Linear Models and Logistic Regression},
  New York, NY: Springer, p. 100, Example 3.5.2.
 
 }
