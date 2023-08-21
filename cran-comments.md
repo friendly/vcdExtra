@@ -8,12 +8,14 @@
 There are no ERRORs or WARNINGs or NOTEs 
 
 ## Version 0.8-5 (2023-08-19)
+
 Very minor update:
 
 - Fix CRAN nit re vcdExtra-package.Rd
 - Fix moved URL - http: -> https:
 - Fix xrefs in vignettes
 - More spellcheck
+- Fixed one more NOTE re: AirCrash.Rd for a URL
 
 # reverse dependencies
 
