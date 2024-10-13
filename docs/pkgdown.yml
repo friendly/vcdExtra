@@ -1,17 +1,16 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  continuous: continuous.html
-  creating: creating.html
+  a1-creating: a1-creating.html
+  a2-tests: a2-tests.html
+  a3-loglinear: a3-loglinear.html
+  a4-mosaics: a4-mosaics.html
+  a5-demo-housing: a5-demo-housing.html
+  a6-mobility: a6-mobility.html
+  a7-continuous: a7-continuous.html
   datasets: datasets.html
-  demo-housing: demo-housing.html
-  loglinear: loglinear.html
-  mobility: mobility.html
-  mosaics: mosaics.html
-  tests: tests.html
-last_built: 2023-05-15T16:51Z
+last_built: 2024-10-13T16:12Z
 urls:
   reference: http://friendly.github.io/vcdExtra/reference
   article: http://friendly.github.io/vcdExtra/articles
-

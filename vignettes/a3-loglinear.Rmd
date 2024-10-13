@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   fig.height = 6,
   fig.width = 7,
-  fig.path = "fig/tut03-",
+#  fig.path = "fig/tut03-",
   dev = "png",
   comment = "##"
 )
@@ -39,7 +39,7 @@ data(HairEyeColor)
 data(PreSex)
 data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
-if(!file.exists("fig")) dir.create("fig")
+#if(!file.exists("fig")) dir.create("fig")
 
 ```
 

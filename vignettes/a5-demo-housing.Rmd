@@ -9,7 +9,7 @@ output:
 bibliography: ["vcd.bib", "vcdExtra.bib"]
 csl: apa.csl
 vignette: >
-  %\VignetteIndexEntry{6. Demo - Housing Data}
+  %\VignetteIndexEntry{5. Demo - Housing Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   fig.height = 6,
   fig.width = 7,
-  fig.path = "fig/demo-housing-",
+#  fig.path = "fig/demo-housing-",
   dev = "png",
   comment = "##"
 )

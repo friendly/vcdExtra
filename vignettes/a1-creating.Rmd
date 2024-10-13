@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   fig.height = 6,
   fig.width = 7,
-  fig.path = "fig/tut01-",
+#  fig.path = "fig/tut01-",
   dev = "png",
   comment = "##"
 )
@@ -47,7 +47,7 @@ data(HairEyeColor)
 data(PreSex)
 data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
-if(!file.exists("fig")) dir.create("fig")
+#if(!file.exists("fig")) dir.create("fig")
 
 ```
 
@@ -231,6 +231,7 @@ a contingency table in array form, so we convert using `xtabs()`.
 #| fig.height = 6,
 #| fig.width = 6,
 #| fig.cap = "Mosaic plot for the `Arthritis` data, showing the marginal model of independence for Treatment and Improved.  Age, a covariate, and Sex are ignored here."
+#| 
 data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")

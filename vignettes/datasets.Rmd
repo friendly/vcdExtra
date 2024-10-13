@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   fig.height = 6,
   fig.width = 7,
-  fig.path = "fig/datasets-",
+#  fig.path = "fig/datasets-",
   dev = "png",
   comment = "##"
 )
