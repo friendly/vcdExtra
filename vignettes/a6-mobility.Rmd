@@ -1,5 +1,5 @@
 ---
-title: "Mobility tables"
+title: "6. Mobility tables"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 package: vcdExtra
@@ -9,7 +9,7 @@ output:
 bibliography: ["vcd.bib", "vcdExtra.bib", "vignettes.bib"]
 csl: apa.csl
 vignette: >
-  %\VignetteIndexEntry{Mobility tables}
+  %\VignetteIndexEntry{6. Mobility tables}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

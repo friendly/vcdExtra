@@ -1,8 +1,8 @@
 Package: vcdExtra
 Type: Package
 Title: 'vcd' Extensions and Additions
-Version: 0.8-5
-Date: 2023-08-19
+Version: 0.8-6
+Date: 2024-10-13
 Language: en-US
 Authors@R: c(
             person(given = "Michael", 

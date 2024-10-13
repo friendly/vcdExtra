@@ -1,5 +1,5 @@
 ---
-title: "Mosaic plots"
+title: "4. Mosaic plots"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 package: vcdExtra
@@ -9,7 +9,7 @@ output:
 bibliography: ["vcd.bib", "vcdExtra.bib"]
 csl: apa.csl
 vignette: >
-  %\VignetteIndexEntry{Mosaic plots}
+  %\VignetteIndexEntry{4. Mosaic plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

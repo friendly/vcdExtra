@@ -1,5 +1,5 @@
 ---
-title: "Continuous predictors"
+title: "7. Continuous predictors"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 package: vcdExtra
@@ -9,7 +9,7 @@ output:
 bibliography: ["vcd.bib", "vcdExtra.bib"]
 csl: apa.csl
 vignette: >
-  %\VignetteIndexEntry{Continuous predictors}
+  %\VignetteIndexEntry{7. Continuous predictors}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Tests of Independence"
+title: "2. Tests of Independence"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 output: 
@@ -7,7 +7,7 @@ output:
   fig_caption: yes
 bibliography: ["vcd.bib", "vcdExtra.bib"]
 vignette: >
-  %\VignetteIndexEntry{Tests of Independence}
+  %\VignetteIndexEntry{2. Tests of Independence}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
