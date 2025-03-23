@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Michael Friendly" />
+
+<meta name="date" content="2025-03-23" />
+
+<title>tidyCat: Tidy Methods For Categorical Data Analysis</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">tidyCat: Tidy Methods For Categorical Data
+Analysis</h1>
+<h4 class="author">Michael Friendly</h4>
+<h4 class="date">2025-03-23</h4>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(vcdExtra)</span></code></pre></div>
+<p>Tidy methods for quantitative data &amp; models have advanced
+considerably, but there hasn’t been much development of similar ideas
+for “categorical data”, by which I mean data that is often compactly
+represented as <span class="math inline">\(n\)</span>-way frequency
+tables, cross classified by one or more discrete factors.</p>
+<p>What would it take to implement a tidy framework for such data? These
+notes are, in effect, a call for participation in developing a
+<code>tidyCat</code> package for this purpose.</p>
+<p>I see three areas that could be developed here:</p>
+<div id="constructing-categorical-data-sets" class="section level2">
+<h2>Constructing categorical data sets</h2>
+<p>Current non-tidy data forms and operations, following <span class="citation">(Friendly &amp; Meyer, 2016)</span> are described in
+the vignette <a href="a1-creating.html">Creating and manipulating
+frequency tables</a></p>
+<p>It seems clear that the most flexible and general form, and one that
+most closely matches a tidy data frame is <strong>case form</strong>,
+because this allows for numeric variables as well. Thus:</p>
+<blockquote>
+<p>Tidy categorical data should best be represented as a
+<code>tibble</code> in case form**. A tibble is convenient for its’
+printing.</p>
+</blockquote>
+<div id="manipulating-categorical-data-sets" class="section level3">
+<h3>Manipulating categorical data sets</h3>
+<p>The methods <code>xtabs()</code>, <code>table()</code> and
+<code>expand.dft()</code> described in that vignette allow conversion
+from one form to another. Tidy equivalents might be:</p>
+<ul>
+<li><p><code>as_table()</code>, <code>as_matrix()</code>,
+<code>as_array()</code> to convert from any form to table/array
+form</p></li>
+<li><p><code>vcd::structable()</code> produces a ‘flat’ representation
+of a high-dimensional contingency table constructed by recursive splits
+(similar to the construction of mosaic displays). One can be constructed
+from a table or from a data frame with a formula method,</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">structable</span>(Titanic)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="do">##             Sex      Male     Female    </span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="do">##             Survived   No Yes     No Yes</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="do">## Class Age                               </span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="do">## 1st   Child             0   5      0   1</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="do">##       Adult           118  57      4 140</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="do">## 2nd   Child             0  11      0  13</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="do">##       Adult           154  14     13  80</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="do">## 3rd   Child            35  13     17  14</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="do">##       Adult           387  75     89  76</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="do">## Crew  Child             0   0      0   0</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="do">##       Adult           670 192      3  20</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">structable</span>(Sex <span class="sc">+</span> Class <span class="sc">~</span> Survived <span class="sc">+</span> Age, <span class="at">data =</span> Titanic)</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="do">##                Sex   Male              Female             </span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="do">##                Class  1st 2nd 3rd Crew    1st 2nd 3rd Crew</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="do">## Survived Age                                              </span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="do">## No       Child          0   0  35    0      0   0  17    0</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="do">##          Adult        118 154 387  670      4  13  89    3</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="do">## Yes      Child          5  11  13    0      1  13  14    0</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="do">##          Adult         57  14  75  192    140  80  76   20</span></span></code></pre></div>
+<p>and there are a suite of methods for indexing and selecting parts of
+an <span class="math inline">\(n\)</span>-way table.</p>
+</div>
+</div>
+<div id="manipulating-factor-levels" class="section level2">
+<h2>Manipulating factor levels</h2>
+<p>Also needed:</p>
+<ul>
+<li><p>methods for recoding and collapsing the levels of a factor:
+<code>forcats::fct_recode()</code>,
+<code>forcats::fct_collapse()</code>,
+<code>forcats::fct_lump_min()</code> are useful here.</p></li>
+<li><p>methods for reordering the levels of a factor, either manually or
+for some analysis purpose. For example, Data from <span class="citation">Glass (1954)</span> gave this 5 x 5 table on the
+occupations of 3500 British fathers and their sons, where the
+occupational categories are listed in alphabetic order.</p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">data</span>(Glass, <span class="at">package=</span><span class="st">&quot;vcdExtra&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>(glass.tab <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(Freq <span class="sc">~</span> father <span class="sc">+</span> son, <span class="at">data=</span>Glass))</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="do">##               son</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="do">## father         Managerial Professional Skilled Supervisory Unskilled</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="do">##   Managerial          174           28     154          84        55</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="do">##   Professional         45           50      18           8         8</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="do">##   Skilled             150           14     714         185       447</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="do">##   Supervisory          78           11     223         110        96</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="do">##   Unskilled            42            3     320          72       411</span></span></code></pre></div>
+<p>This can be reordered manually by indexing, to arrange the categories
+by <strong>status</strong>, giving an order <code>Professional</code>
+down to <code>Unskilled</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># reorder by status</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>) </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>glass.tab[ord, ord]</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="do">##               son</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">## father         Professional Managerial Supervisory Skilled Unskilled</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="do">##   Professional           50         45           8      18         8</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="do">##   Managerial             28        174          84     154        55</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="do">##   Supervisory            11         78         110     223        96</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="do">##   Skilled                14        150         185     714       447</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="do">##   Unskilled               3         42          72     320       411</span></span></code></pre></div>
+<p>A more general method is to permute the row and column categories in
+the order implied by correspondence analysis dimensions. This is
+implemented in the <a href="https://cran.r-project.org/package=seriation"><code>seriation</code>
+package</a> using the <code>CA</code> method of
+<code>seriation::seriate()</code> and applying <code>permute()</code> to
+the result.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(seriation)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>order <span class="ot">&lt;-</span> <span class="fu">seriate</span>(glass.tab, <span class="at">method =</span> <span class="st">&quot;CA&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># the permuted row and column labels</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">rownames</span>(glass.tab)[order[[<span class="dv">1</span>]]]</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">## [1] &quot;Professional&quot; &quot;Managerial&quot;   &quot;Supervisory&quot;  &quot;Skilled&quot;      &quot;Unskilled&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># reorder rows and columns</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">permute</span>(glass.tab, order)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">##               son</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="do">## father         Professional Managerial Supervisory Skilled Unskilled</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="do">##   Professional           50         45           8      18         8</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="do">##   Managerial             28        174          84     154        55</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="do">##   Supervisory            11         78         110     223        96</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="do">##   Skilled                14        150         185     714       447</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="do">##   Unskilled               3         42          72     320       411</span></span></code></pre></div>
+<p>What are tidy ways to do these things?</p>
+</div>
+<div id="models" class="section level2">
+<h2>Models</h2>
+<p>The standard analysis of frequency data is in the form of loglinear
+models fit by <code>MASS::loglm()</code> or with more flexible versions
+fit with <code>glm()</code> or <code>gnm::gnm()</code>. These are
+essentially linear models for the log of frequency. In
+<code>vcdExtra</code>, there are several methods for a list of such
+models, of class <code>&quot;glmlist&quot;</code> and <code>&quot;loglmlist&quot;</code>,
+and these should be accommodated in tidy methods.</p>
+<p>What is needed are <code>broom</code> methods for <code>loglm</code>
+models. The information is accessible from standard functions, but not
+in a tidy form.</p>
+<ul>
+<li><code>glance.loglm()</code> – model level statistics. These are
+given by There are also related <code>LRstats()</code> functions in
+<code>vcdExtra</code>.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>hec.indep <span class="ot">&lt;-</span> <span class="fu">loglm</span>(<span class="sc">~</span>Hair<span class="sc">+</span>Eye<span class="sc">+</span>Sex, <span class="at">data=</span>HairEyeColor)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>hec.indep</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">## loglm(formula = ~Hair + Eye + Sex, data = HairEyeColor)</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="do">## Statistics:</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="do">##                       X^2 df P(&gt; X^2)</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="do">## Likelihood Ratio 166.3001 24        0</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="do">## Pearson          164.9247 24        0</span></span></code></pre></div>
+<ul>
+<li><code>tidy.loglm()</code> — coefficient level statistics. These are
+available from <code>coef.loglm()</code></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">coef</span>(hec.indep)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="do">## $`(Intercept)`</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="do">## [1] 2.646879</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="do">## $Hair</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="do">##       Black       Brown         Red       Blond </span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="do">## -0.17911627  0.79474431 -0.59856762 -0.01706041 </span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="do">## $Eye</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="do">##      Brown       Blue      Hazel      Green </span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="do">##  0.5296905  0.5067010 -0.3313375 -0.7050540 </span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="do">## $Sex</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="do">##       Male     Female </span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="do">## -0.0574957  0.0574957</span></span></code></pre></div>
+<ul>
+<li><code>augment.loglm()</code> — should give case level statistics:
+fitted values, residuals, …</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">fitted</span>(hec.indep)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">## Re-fitting to get fitted values</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">## , , Sex = Male</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">##        Eye</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">## Hair       Brown     Blue     Hazel     Green</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="do">##   Black 18.91504 18.48515  7.995903  5.502557</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">##   Brown 50.08982 48.95142 21.174335 14.571585</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="do">##   Red   12.43489 12.15228  5.256566  3.617421</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="do">##   Blond 22.24268 21.73717  9.402589  6.470599</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="do">## , , Sex = Female</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="do">##        Eye</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="do">## Hair       Brown     Blue     Hazel     Green</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="do">##   Black 21.22010 20.73782  8.970314  6.173119</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="do">##   Brown 56.19396 54.91682 23.754719 16.347334</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="do">##   Red   13.95025 13.63320  5.897151  4.058254</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="do">##   Blond 24.95326 24.38614 10.548424  7.259131</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="fu">residuals</span>(hec.indep)</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="do">## Re-fitting to get frequencies and fitted values</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="do">## , , Sex = Male</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="do">##        Eye</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="do">## Hair         Brown       Blue      Hazel      Green</span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="do">##   Black  2.7349421 -1.8843321  0.6818522 -1.1685504</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a><span class="do">##   Brown  0.4073036  0.1493413  0.8080654  0.1116873</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="do">##   Red   -0.7150915 -0.6371217  0.7233138  1.5738248</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="do">##   Blond -5.1444108  1.6747424 -1.5778804  0.5796238</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="do">## , , Sex = Female</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="do">##        Eye</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="do">## Hair         Brown       Blue      Hazel      Green</span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="do">##   Black  2.9150045 -2.9069608 -1.4476878 -1.9590840</span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="do">##   Brown  1.2726041 -3.0381608  1.0398490 -0.5953638</span></span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="do">##   Red    0.5361173 -1.9834384  0.4409912  1.3223880</span></span>
+<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a><span class="do">##   Blond -5.2211917  6.6539759 -1.9056398  0.2704898</span></span></code></pre></div>
+<p>What about <code>hatvalues</code>? Not implemented, but shouldn’t be
+too hard.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">hatvalues</span>(hec.indep)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="do">## Error in UseMethod(&quot;hatvalues&quot;): no applicable method for &#39;hatvalues&#39; applied to an object of class &quot;loglm&quot;</span></span></code></pre></div>
+</div>
+<div id="graphical-methods" class="section level2">
+<h2>Graphical methods</h2>
+<p>The most common graphical methods are those implemented in
+<code>vcd</code>: <code>mosaic()</code> association plots
+(<code>assoc()</code>), …, which rely on <code>vcd::strucplot()</code>
+described in <span class="citation">(Meyer, Zeileis, &amp; Hornik,
+2006)</span>.</p>
+<p>Is there a tidy analog that might work with <code>ggplot2</code>? The
+<a href="https://github.com/haleyjeppson/ggmosaic"><code>ggmosaic</code>
+package</a> implements basic marimeko-style mosaic plots. They are not
+very general, in that they cannot do residual-based shading to show the
+patterns of association</p>
+<p>However, they are based on a <a href="https://github.com/hadley/productplots">productplots</a> package
+by Hadley, which seems to provide some basic structure for constructing
+such displays of nested rectangles.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0" line-spacing="2">
+<div id="ref-FriendlyMeyer:2016:DDAR" class="csl-entry">
+Friendly, M., &amp; Meyer, D. (2016). <em>Discrete data analysis with
+<span>R</span>: Visualization and modeling techniques for categorical
+and count data</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.
+</div>
+<div id="ref-Glass:54" class="csl-entry">
+Glass, D. V. (1954). <em>Social mobility in britain</em>. Glencoe, IL:
+The Free Press.
+</div>
+<div id="ref-vcd:Meyer+Zeileis+Hornik:2006b" class="csl-entry">
+Meyer, D., Zeileis, A., &amp; Hornik, K. (2006). The strucplot
+framework: Visualizing multi-way contingency tables with. <em>Journal of
+Statistical Software</em>, <em>17</em>(3), 1–48. Retrieved from <a href="https://www.jstatsoft.org/v17/i03/">https://www.jstatsoft.org/v17/i03/</a>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
