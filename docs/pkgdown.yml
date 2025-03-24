@@ -10,7 +10,8 @@ articles:
   a6-mobility: a6-mobility.html
   a7-continuous: a7-continuous.html
   datasets: datasets.html
-last_built: 2025-03-24T18:13Z
+  tidyCats: tidyCats.html
+last_built: 2025-03-24T18:23Z
 urls:
   reference: http://friendly.github.io/vcdExtra/reference
   article: http://friendly.github.io/vcdExtra/articles

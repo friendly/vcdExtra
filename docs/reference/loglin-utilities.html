@@ -46,6 +46,7 @@ graphics functions, but can also be used directly."><meta property="og:image" co
     <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
     <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
     <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -213,7 +214,7 @@ mosaic displays, described in the <em>User's Guide</em>,
 <span class="r-in"><span><span class="co"># as a formula or string</span></span></span>
 <span class="r-in"><span><span class="fu">loglin2formula</span><span class="op">(</span><span class="fu">joint</span><span class="op">(</span><span class="fl">3</span>, table<span class="op">=</span><span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ~Hair:Eye + Sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x00000228f19b5c68&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000001d1ecabd900&gt;</span>
 <span class="r-in"><span><span class="fu">loglin2string</span><span class="op">(</span><span class="fu">joint</span><span class="op">(</span><span class="fl">3</span>, table<span class="op">=</span><span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[Hair,Eye] [Sex]"</span>
 <span class="r-in"><span></span></span>
@@ -291,7 +292,7 @@ mosaic displays, described in the <em>User's Guide</em>,
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">loglin2formula</span><span class="op">(</span><span class="fu">saturated</span><span class="op">(</span><span class="fl">3</span>, <span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ~Hair:Eye:Sex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x00000228f19b5c68&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x000001d1ecabd900&gt;</span>
 <span class="r-in"><span><span class="fu">loglin2string</span><span class="op">(</span><span class="fu">saturated</span><span class="op">(</span><span class="fl">3</span>, <span class="va">HairEyeColor</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[Hair,Eye,Sex]"</span>
 <span class="r-in"><span><span class="fu">loglin2string</span><span class="op">(</span><span class="fu">saturated</span><span class="op">(</span><span class="fl">3</span>, <span class="va">HairEyeColor</span><span class="op">)</span>, brackets<span class="op">=</span><span class="st">'{}'</span>, sep<span class="op">=</span><span class="st">', '</span><span class="op">)</span></span></span>
