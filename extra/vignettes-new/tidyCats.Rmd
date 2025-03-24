@@ -32,12 +32,16 @@ library(MASS)
 library(vcdExtra)
 ```
 
+> Frequency tables need some Tidy Love ❤️
+
 Tidy methods for quantitative data & models have advanced considerably, but there hasn't been much
 development of similar ideas for "categorical data", by which I mean data that is often compactly represented
 as $n$-way frequency tables, cross classified by one or more discrete factors. 
 
 What would it take to implement a tidy framework for such data? These notes are, in effect, a call for 
-participation in developing a `tidyCat` package for this purpose.
+participation in developing a `tidyCat` package for this purpose. Other possible names for this:
+`tidyCDA`, `tidyfreq` ...
+
 
 I see three areas that could be developed here:
 
@@ -48,7 +52,7 @@ the vignette [Creating and manipulating frequency tables](a1-creating.html)
 It seems clear that the most flexible and general form, and one that most closely matches a tidy
 data frame is **case form**, because this allows for numeric variables as well. Thus:
 
-> Tidy categorical data should best be represented as a `tibble` in case form**. A tibble is convenient for its' printing.
+> Among these, tidy categorical data should best be represented as a `tibble` in **case form**. A tibble is convenient for its' printing.
 
 ### Manipulating categorical data sets
 
@@ -56,6 +60,17 @@ The methods `xtabs()`, `table()` and `expand.dft()` described in that vignette a
 Tidy equivalents might be:
 
 * `as_table()`, `as_matrix()`, `as_array()` to convert from any form to table/array form
+
+* Similarly, perhaps `as_caseform()`, `as_freqform()` to convert to those. There is already `as.data.frame(table)` to convert to frequency form, and `expand.dft()` converts that to case form
+
+```{r}
+data("HairEyeColor")
+hec.df <- as.data.frame(HairEyeColor)
+head(hec.df)
+# expand to case form
+expand.dft(hec.df) |> head()
+```
+
 
 * `vcd::structable()` produces a ‘flat’ representation of a high-dimensional contingency table constructed by recursive splits (similar to the construction of mosaic displays). One can be constructed from a table or from a data frame with
 a formula method,
@@ -67,16 +82,24 @@ structable(Sex + Class ~ Survived + Age, data = Titanic)
 
 and there are a suite of methods for indexing and selecting parts of an $n$-way table.
 
+* The methods in the `plyr` package (now retired) provided a coherent set of tools for a split-apply-combine
+strategy that works nicely with multidimensional arrays. Perhaps there are some useful ideas for frequency tables
+that could be resurrected here.
+
+* There is also a role for `purrr` methods and thinking here: $n$-way tables as nested lists/arrays?
+The ideas of mapping over these?
+
 ## Manipulating factor levels 
 
 Also needed: 
 
-* methods for recoding and collapsing the levels of a factor: `forcats::fct_recode()`, `forcats::fct_collapse()`,  `forcats::fct_lump_min()` are useful here.
+* methods for **recoding and collapsing** the levels of a factor: `forcats::fct_recode()`, `forcats::fct_collapse()`,  `forcats::fct_lump_min()` are useful here.
 
-* methods for reordering the levels of a factor, either manually or for some analysis purpose. For example, Data from @Glass:54 gave this 5 x 5 table on the occupations of 3500 British fathers and their sons, where the occupational categories are listed in alphabetic order.
+* methods for **reordering the levels** of a factor, either manually or for some analysis purpose. For example, Data from @Glass:54 gave this 5 x 5 table on the occupations of 3500 British fathers and their sons, where the occupational categories are listed in alphabetic order.
   
 ```{r glass}
 data(Glass, package="vcdExtra")
+str(Glass)
 (glass.tab <- xtabs(Freq ~ father + son, data=Glass))
 ```
 
@@ -109,23 +132,25 @@ or with more flexible versions fit with `glm()` or `gnm::gnm()`. These are essen
 of frequency. In `vcdExtra`, there are several methods for a list of such models, of class `"glmlist"` and `"loglmlist"`,
 and these should be accommodated in tidy methods. 
 
-What is needed are `broom` methods for `loglm` models. The information is accessible from standard functions, but
-not in a tidy form.
+What is needed are `broom` methods for `loglm` models. The information required is accessible from standard functions, but not in a tidy form.
 
-* `glance.loglm()` -- model level statistics. These are given by There are also related `LRstats()` functions in `vcdExtra`.
+* `glance.loglm()` -- **model level** statistics. These are given in the output of the `print()` method, and available from the `print()` method. A complication is both LR and Pearson $\chi^2$ are reported, so these would need to be made to appear in separate columns. There are also related `LRstats()` functions in `vcdExtra`, which report `AIC` and `BIC`.
 
 ```{r}
 hec.indep <- loglm(~Hair+Eye+Sex, data=HairEyeColor)
 hec.indep
+# extract test statistics
+summary(hec.indep)$tests
+LRstats(hec.indep)
 ```
 
-* `tidy.loglm()` --- coefficient level statistics. These are available from `coef.loglm()`
+* `tidy.loglm()` --- **coefficient level** statistics. These are available from `coef.loglm()`. They would need to assembled into a long format. Standard errors & p-values might be a problem.
 
 ```{r}
 coef(hec.indep)
 ```
 
-* `augment.loglm()` --- should give case level statistics: fitted values, residuals, ...
+* `augment.loglm()` --- should give **case level** statistics: fitted values, residuals, ...
 
 ```{r}
 fitted(hec.indep)
@@ -144,7 +169,7 @@ hatvalues(hec.indep)
 The most common graphical methods are those implemented in `vcd`: `mosaic()` association plots (`assoc()`), ..., which
 rely on `vcd::strucplot()` described in [@vcd:Meyer+Zeileis+Hornik:2006b].
 
-Is there a tidy analog that might work with `ggplot2`? The [`ggmosaic` package](https://github.com/haleyjeppson/ggmosaic) implements basic marimeko-style mosaic plots. They are not very general, in that they cannot do residual-based shading to show the patterns of association
+Is there a tidy analog that might work with `ggplot2`? The [`ggmosaic` package](https://github.com/haleyjeppson/ggmosaic) implements basic marimeko-style mosaic plots. They are not very general, in that they cannot do residual-based shading to show the patterns of association.
 
 However, they are based on a [productplots](https://github.com/hadley/productplots) package by Hadley, which seems to
 provide some basic structure for constructing such displays of nested rectangles.
