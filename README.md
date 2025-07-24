@@ -15,7 +15,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.8-5
+Version 0.8-6
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the

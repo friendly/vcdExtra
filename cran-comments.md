@@ -1,5 +1,5 @@
 ## Test environments
-* local Windows 10, 4.2.3 (2023-03-15 ucrt)
+* local Windows 10, R version 4.5.1 (2025-06-13 ucrt)
 * win-builder R Under development (unstable) (2023-08-19 r84989 ucrt)
 * R Under development (unstable) (2023-03-03 r83933 ucrt)
 * Rhub Windows Server 2022, R-devel, 64 bit
@@ -7,15 +7,13 @@
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs 
 
-## Version 0.8-5 (2023-08-19)
+## Version 0.8-6 (2025-07-23)
 
-Very minor update:
+This is a minor release to satisfy the CRAN gods who like all crossref links to be correct.
 
-- Fix CRAN nit re vcdExtra-package.Rd
-- Fix moved URL - http: -> https:
-- Fix xrefs in vignettes
-- More spellcheck
-- Fixed one more NOTE re: AirCrash.Rd for a URL
+o Fixed CRAN nits re crossrefs
+o Update issues link
+o Update README
 
 # reverse dependencies
 
