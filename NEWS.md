@@ -1,3 +1,9 @@
+## Version 0.8-5 (2025-07-23)
+
+o Fixed CRAN nits re crossrefs
+o Update issues link
+
+
 ## Version 0.8-5 (2023-08-19)
 
 - Fix CRAN nit re vcdExtra-package.Rd

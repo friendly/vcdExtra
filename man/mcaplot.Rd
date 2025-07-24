@@ -9,22 +9,22 @@ This function is intended as an alternative to \code{\link[ca]{plot.mjca}}
 for plotting multiple correspondence analysis solutions.
 It provides more flexibility for labeling factor levels and connecting
 them with lines. It does not support some features of
-\code{plot.mjca} (centroids, supplementary points, arrows, etc.) 
+\code{plot.mjca} (centroids, supplementary points, arrows, etc.)
 }
 \usage{
-mcaplot(obj, 
-  map = "symmetric", 
-  dim = 1:2, 
-  col = c("blue", "red", "brown", "black", "green3", "purple"), 
-  pch = 15:20, 
-  cex = 1.2, 
-  pos = 3, 
-  lines = TRUE, 
-  lwd = 2, 
-  legend = FALSE, 
-  legend.pos = "topright", 
-  xlab = "_auto_", 
-  ylab = "_auto_", 
+mcaplot(obj,
+  map = "symmetric",
+  dim = 1:2,
+  col = c("blue", "red", "brown", "black", "green3", "purple"),
+  pch = 15:20,
+  cex = 1.2,
+  pos = 3,
+  lines = TRUE,
+  lwd = 2,
+  legend = FALSE,
+  legend.pos = "topright",
+  xlab = "_auto_",
+  ylab = "_auto_",
   rev.axes  = c(FALSE, FALSE),
   ...)
 }
@@ -52,16 +52,16 @@ Allowed options include:
   \item{pos}{Position of level labels relative to the category points; either a single number or a vector of length equal to the number of category points.}
 
   \item{lines}{A logical or an integer vector indicating which factors are to be
-             joined with lines using \code{\link{multilines}}}
+             joined with lines using \code{\link[ca]{multilines}}}
 
   \item{lwd}{Line width(s) for the lines}
-  
+
   \item{legend}{Logical; draw a legend for the factor names?}
-  
+
   \item{legend.pos}{Position of the legend in the plot, as in \code{\link[graphics]{legend}}}
-  
-  \item{xlab,ylab}{Labels for horizontal and vertical axes. 
-The default, \code{"_auto_"} means that the function auto-generates a label of 
+
+  \item{xlab,ylab}{Labels for horizontal and vertical axes.
+The default, \code{"_auto_"} means that the function auto-generates a label of
 the form \code{"Dimension X (xx.x \%)"}
 }
 
@@ -69,7 +69,7 @@ the form \code{"Dimension X (xx.x \%)"}
              corresponding axis}
 
   \item{\dots}{Arguments passed down to \code{plot}}
-  
+
 }
 %\details{
 %%  ~~ If necessary, more details than the description above ~~

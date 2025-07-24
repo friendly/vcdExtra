@@ -3,6 +3,7 @@
 <!-- badges: start -->
 
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
+[![R_Universe](https://friendly.r-universe.dev/badges/vcdExtra)](https://friendly.r-universe.dev/vcdExtra)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -14,7 +15,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.8-4
+Version 0.8-5
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -38,10 +39,14 @@ Get the released version from CRAN:
 
      install.packages("vcdExtra")
 
-The development version can be installed to your R library directly from
+The development version can be installed to your R library from
+[R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
      if (!require(remotes)) install.packages("remotes")
+     
+     install.packages("mvinfluence", repos = c('https://friendly.r-universe.dev')
+     # or
      remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
 
 ### Overview

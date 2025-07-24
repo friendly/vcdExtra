@@ -5,26 +5,26 @@
 Information on Data Sets in Packages
 }
 \description{
-The \code{\link[utils]{data}} function is used both to load data sets from packages, 
+The \code{\link[utils]{data}} function is used both to load data sets from packages,
 and give a display of the names and titles of data sets in one or more packages,
 however it does not return a result that can be easily used to get additional
 information about the nature of data sets in packages.
 
 The \code{datasets()} function is designed to produce a more useful summary
 display of data sets in one or more packages.  It extracts the \code{class}
-and dimension information (\code{dim} or code{length}) of each item,
+and dimension information (\code{dim} or \code{length}) of each item,
 and formats these to provide additional descriptors.
 }
 \usage{
-datasets(package, 
-        allClass=FALSE, 
+datasets(package,
+        allClass=FALSE,
         incPackage=length(package) > 1,
         maxTitle=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{package}{a character vector giving the package(s) to look in}
-  \item{allClass}{a logical variable. Include all classes of the item (\code{TRUE}) or just the last class   
+  \item{allClass}{a logical variable. Include all classes of the item (\code{TRUE}) or just the last class
        (\code{FALSE})?}
   \item{incPackage}{include the package name in result?}
   \item{maxTitle}{maximum length of data set Title}
@@ -47,7 +47,7 @@ The columns (for a single package) are:
 %%% ~put references to the literature/web site here ~
 %}
 \author{
-Michael Friendly, with R-help from Curt Seeliger 
+Michael Friendly, with R-help from Curt Seeliger
 }
 \note{
 In Rmd documents, `datasets("package") |> knitr::kable()` can be used to create
