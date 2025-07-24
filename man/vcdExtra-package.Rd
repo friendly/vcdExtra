@@ -16,7 +16,7 @@ adds a 3D version in \code{\link{mosaic3d}}.
 
 This package is also a support package for the book, \emph{Discrete Data Analysis with R} by
 Michael Friendly and David Meyer, Chapman & Hall/CRC, 2016,
-\url{https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/9781498725835}
+\url{https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for-Categorical-and-Count-Data/Friendly-Meyer/p/book/9781498725835}
 with a number of additional data sets,
 and functions.
 The web site for the book is \url{http://ddar.datavis.ca}.

@@ -315,9 +315,9 @@ and discordant pairs of observations in the case-form equivalent of a two-way ta
 GKgamma(JobSat)
 ```
 
-A web article by Richard Darlington,
-[http://node101.psych.cornell.edu/Darlington/crosstab/TABLE0.HTM]
-gives further description of these and other measures of association.
+<!-- A web article by Richard Darlington, -->
+<!-- [http://node101.psych.cornell.edu/Darlington/crosstab/TABLE0.HTM] -->
+<!-- gives further description of these and other measures of association. -->
 
 ## Measures of Agreement
 The

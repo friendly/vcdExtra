@@ -6,7 +6,7 @@
 
 \description{
 Data on passengers on the RMS Titanic, excluding the Crew and some
-individual identifier variables. 
+individual identifier variables.
 }
 
 \usage{data(Titanicp)}
@@ -33,20 +33,18 @@ Other versions:
 
 \code{\link[datasets]{Titanic}} is the 4-way frequency table of all 2201 people
 aboard the Titanic, including passengers and crew.
- 
+
 
 
 }
 \source{
 
 The original R source for this
-dataset was compiled by Frank Harrell and Robert Dawson:
-\url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic.html},
-described in more detail in
-\url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic3info.txt}
+dataset was compiled by Frank Harrell and Robert Dawson
+\url{https://hbiostat.org/data/repo/titanic.html}.
 
-For this version of the Titanic data, passenger details were deleted, 
-survived was cast as a factor, and the name changed to \code{Titanicp} to minimize confusion 
+For this version of the Titanic data, passenger details were deleted,
+survived was cast as a factor, and the name changed to \code{Titanicp} to minimize confusion
 with other versions.
 
 }
