@@ -127,6 +127,9 @@ the \code{strata} variables.
 These overall tests implicitly assume no interactions  between the 
 primary variables and the strata and they will have low power in the
 presence of interactions.
+
+Note that strata combinations with insufficient data (less than 2 observations)
+are automatically omitted from the analysis.
 }
 
 \value{

@@ -1,3 +1,45 @@
+# CMHtest ----
+
+test_that("CMHtest automatically filters out strata with single observations", {
+  data <- data.frame(
+    A = c("a", "a", "b", "b", "b", "c"),
+    Y = c(1, 2, 3, 4, 5, 6),
+    B = c("s1", "s1", "s2", "s2", "s2", "s3"),
+    C = c(10, 20, 30, 40, 50, 60)
+  )
+  result <- expect_silent(CMHtest(
+    C ~ A | B,
+    data = data,
+    overall = TRUE
+  ))
+  expect_type(result, "list")
+  # B:s3 has been removed automatically.
+  expect_identical(names(result), c("B:s1", "B:s2", "ALL"))
+})
+
+test_that("CMHtest works with multiple and sparse strata variables", {
+  data <- data.frame(
+    A = c("a", "a", "b", "b", "b", "c", "c", "c"),
+    Y = c(1, 2, 3, 4, 5, 6, 7, 8),
+    B1 = c("s1", "s1", "s2", "s2", "s2", "s1", "s1", "s1"),
+    B2 = c("t1", "t1", "t1", "t1", "t1", "t2", "t2", "t2"),
+    C = c(10, 20, 30, 40, 50, 60, 70, 80)
+  )
+  result <- expect_silent(CMHtest(
+    C ~ A | B1 + B2,
+    data = data,
+    overall = TRUE
+  ))
+  expect_type(result, "list")
+  # B1:s2 & B2:t2 combination has been removed automatically.
+  expect_identical(
+    names(result),
+    c("B1:s1|B2:t1", "B1:s2|B2:t1", "B1:s1|B2:t2", "ALL")
+  )
+})
+
+# integration tests vs. SAS results ----
+
 # The test cases have been published first in the CAMIS project
 # (https://psiaims.github.io/CAMIS/)
 # The CAMIS test code has been written by
@@ -85,14 +127,11 @@ test_that("3x2x3 schema, rather balanced groups", {
   expect_equal(result, expected, tolerance = 1e-3)
 })
 
-test_that("3x2x3 schema, one stratum with a single observation to be omitted", {
+test_that("3x2x3 schema, one stratum with a single observation automatically omitted", {
   stopifnot(any(table(data$RACE) == 1))
-  data_subset <- data %>%
-    dplyr::filter(RACE != "AMERICAN INDIAN OR ALASKA NATIVE")
-  # Question: Could this be done automatically in CMHtest()?
   result <- convert_to_tibble(vcdExtra::CMHtest(
     Freq ~ TRTP + SEX | RACE,
-    data = data_subset,
+    data = data,
     overall = TRUE
   ))
   expected <- get_sas_results(3L)
@@ -111,11 +150,9 @@ test_that("2x5x2 schema, ordinal variable", {
 
 test_that("3x5x17 schema, sparse groups, ordinal variable", {
   stopifnot(any(table(data$SITEID) == 1))
-  subset_data <- data %>%
-    dplyr::filter(SITEID != "702") # only one observation in this stratum
   result <- convert_to_tibble(vcdExtra::CMHtest(
     Freq ~ TRTP + AVAL | SITEID,
-    data = subset_data,
+    data = data,
     overall = TRUE
   ))
   expected <- get_sas_results(5L)

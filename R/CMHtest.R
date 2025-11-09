@@ -157,6 +157,10 @@ CMHtest.default <- function(
       details = details,
       ...
     ))
+    # Drop results for strata with insufficient data (NULL result)
+    strata_gives_null <- sapply(res, is.null)
+    res <- res[!strata_gives_null]
+    sn <- sn[!strata_gives_null]
     # DONE: fix names if there are 2+ strata
     names(res) <- sn
     for (i in seq_along(res)) {
@@ -223,6 +227,13 @@ CMHtest2 <- function(
   }
 
   nt <- sum(x)
+
+  # If there are not at least 2 observations in this stratum,
+  # the below computations won't work, therefore return early NULL here.
+  if (nt <= 1) {
+    return(NULL)
+  }
+
   pr <- rowSums(x) / nt
   pc <- colSums(x) / nt
 
@@ -320,7 +331,7 @@ CMHtest3 <- function(object, types = c("cor", "rmeans", "cmeans", "general")) {
       AVA <- AVA + A %*% V %*% t(A)
       Anm <- Anm + A %*% (n - m)
     }
-    Q <- t(Anm) %*% solve(AVA) %*% Anm
+    Q <- t(Anm) %*% MASS::ginv(AVA) %*% Anm
     df <- Df[type]
     pvalue <- pchisq(Q, df, lower.tail = FALSE)
     table <- rbind(table, c(Q, df, pvalue))
