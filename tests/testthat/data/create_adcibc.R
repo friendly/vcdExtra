@@ -8,9 +8,7 @@ adcbic <- haven::read_xpt(url) %>%
     EFFFL == "Y",
     ITTFL == "Y",
     AVISIT == "Week 8",
-    ANL01FL == "Y",
-    TRTPN != "54",
-    AGEGR1 != ">80"
+    ANL01FL == "Y"
   )
 write.csv(
   adcbic,
