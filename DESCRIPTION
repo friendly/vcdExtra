@@ -1,8 +1,8 @@
 Package: vcdExtra
 Type: Package
 Title: 'vcd' Extensions and Additions
-Version: 0.8-6
-Date: 2025-07-23
+Version: 0.8-7
+Date: 2025-11-18
 Language: en-US
 Authors@R: c(
             person(given = "Michael", 
@@ -25,7 +25,8 @@ Authors@R: c(
                    family = "Firth", 
                    role="ctb"),
             person(given = "Matt", family = "Kumar", role="ctb"),
-            person(given = "Shuguang", family = "Sun", role="ctb")
+            person(given = "Shuguang", family = "Sun", role="ctb"),
+            person(given = "Daniel Sabanes", family = "Bove", role="ctb")
             )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 3.5.0), vcd, gnm (>= 1.0-3), grid

@@ -1,4 +1,6 @@
-o Added tests for CMHtest()
+## Version 0.8.7 (2025-11-18)
+
+o Added tests for CMHtest() PR #13 [Thx: Daniel Sabanes Bove] 
 o Automatically omit strata with a single observation in CMHtest() because they do not contribute to the test statistics
 o Use the generalized Moore-Penrose inverse from MASS in CMHtest() such that it can work when the variance
   matrix is singular.
