@@ -19,3 +19,5 @@ Rplots.pdf
 README.*
 ^doc$
 ^Meta$
+^\.vscode$
+^[.]?air[.]toml$
