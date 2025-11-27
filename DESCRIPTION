@@ -26,7 +26,7 @@ Authors@R: c(
                    role="ctb"),
             person(given = "Matt", family = "Kumar", role="ctb"),
             person(given = "Shuguang", family = "Sun", role="ctb"),
-            person(given = "Daniel Sabanes", family = "Bove", role="ctb")
+            person(given = "Daniel", family = "Sabanes Bove", role="ctb")
             )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 3.5.0), vcd, gnm (>= 1.0-3), grid
