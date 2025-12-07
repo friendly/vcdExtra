@@ -6,20 +6,21 @@
 # made generic, adding a glmlist method
 
 Summarise <- function(object, ...) {
+  .Deprecated("LRstats")
 	UseMethod("Summarise")
 }
 
 Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 {
     ns <- sapply(object, function(x) length(x$residuals))
-    if (any(ns != ns[1L])) 
+    if (any(ns != ns[1L]))
         stop("models were not all fitted to the same size of dataset")
     nmodels <- length(object)
-    if (nmodels == 1) 
+    if (nmodels == 1)
         return(Summarise.default(object[[1L]], saturated=saturated))
-    
+
     rval <- lapply(object, Summarise.default, saturated=saturated)
-    rval <- do.call(rbind, rval)    
+    rval <- do.call(rbind, rval)
 		if (!is.null(sortby)) {
 			rval <- rval[order(rval[,sortby], decreasing=TRUE),]
 			}
@@ -30,14 +31,14 @@ Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 Summarise.loglmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 {
 	ns <- sapply(object, function(x) length(x$residuals))
-	if (any(ns != ns[1L])) 
+	if (any(ns != ns[1L]))
 		stop("models were not all fitted to the same size of dataset")
 	nmodels <- length(object)
-	if (nmodels == 1) 
+	if (nmodels == 1)
 		return(Summarise.default(object[[1L]], saturated=saturated))
-	
+
 	rval <- lapply(object, Summarise.default, saturated=saturated)
-	rval <- do.call(rbind, rval)    
+	rval <- do.call(rbind, rval)
 	if (!is.null(sortby)) {
 		rval <- rval[order(rval[,sortby], decreasing=TRUE),]
 	}
@@ -59,7 +60,7 @@ Summarise.default <- function(object, ..., saturated = NULL, sortby=NULL)
   }
   dof <- function(x) {
   	if (inherits(x, "loglm")) {
-  		rval <- x$df 
+  		rval <- x$df
   		} else {
   		rval <- try(x$df.residual, silent=TRUE)
   		}
@@ -70,7 +71,7 @@ Summarise.default <- function(object, ..., saturated = NULL, sortby=NULL)
   ## collect all objects
   objects <- list(object, ...)
   nmodels <- length(objects)
-  
+
   ## check sample sizes
   ns <- sapply(objects, nobs0)
   if(any(ns != ns[1L])) stop("models were not all fitted to the same size of dataset")
@@ -80,7 +81,7 @@ Summarise.default <- function(object, ..., saturated = NULL, sortby=NULL)
   par <- as.numeric(sapply(ll, function(x) attr(x, "df")))
 	df <- as.numeric(sapply(objects, function(x) dof(x)))
   ll <- sapply(ll, as.numeric)
-  
+
   ## compute saturated reference value (use 0 if deviance is not available)
   if(is.null(saturated)) {
     dev <- try(sapply(objects, deviance), silent = TRUE)

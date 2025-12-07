@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
@@ -15,7 +16,9 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.8-6
+<!-- Version 0.8-6 -->
+
+Version 0.8-7; documentation built for `pkgdown` 2025-12-07
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -149,16 +152,17 @@ vcdExtra::datasets("vcdExtra")[,1]
 tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
 ```
 
-| File             | Title                                      |
-|:-----------------|:-------------------------------------------|
-| continuous.Rmd   | Continuous predictors                      |
-| creating.Rmd     | Creating and manipulating frequency tables |
-| datasets.Rmd     | Datasets for categorical data analysis     |
-| demo-housing.Rmd | Demo - Housing Data                        |
-| loglinear.Rmd    | Loglinear Models                           |
-| mobility.Rmd     | Mobility tables                            |
-| mosaics.Rmd      | Mosaic plots                               |
-| tests.Rmd        | Tests of Independence                      |
+| File                | Title                                               |
+|:--------------------|:----------------------------------------------------|
+| a1-creating.Rmd     | 1\. Creating and manipulating frequency tables      |
+| a2-tests.Rmd        | 2\. Tests of Independence                           |
+| a3-loglinear.Rmd    | 3\. Loglinear Models                                |
+| a4-mosaics.Rmd      | 4\. Mosaic plots                                    |
+| a5-demo-housing.Rmd | 5\. Demo - Housing Data                             |
+| a6-mobility.Rmd     | 6\. Mobility tables                                 |
+| a7-continuous.Rmd   | 7\. Continuous predictors                           |
+| datasets.Rmd        | Datasets for categorical data analysis              |
+| tidyCats.Rmd        | tidyCat: Tidy Methods For Categorical Data Analysis |
 
 - a few useful utility functions for manipulating categorical data sets
   and working with models for categorical data.

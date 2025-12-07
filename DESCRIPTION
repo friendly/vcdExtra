@@ -78,3 +78,4 @@ VignetteBuilder: knitr, rmarkdown
 LazyLoad: yes
 LazyData: yes
 Config/testthat/edition: 3
+RoxygenNote: 7.3.3

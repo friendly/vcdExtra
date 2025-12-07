@@ -8,12 +8,12 @@
 
 ## 1. Documentation & Consistency Issues
 
-### Version Mismatch
+### Version Mismatch [FIXED ✔️]
 - **Issue:** README.md shows Version 0.8-6 while DESCRIPTION shows 0.8-7
 - **Action:** Update README.md to reflect current version
 - **Files:** `README.md` line 18
 
-### Deprecated Function Cleanup
+### Deprecated Function Cleanup [DONE ✔️]
 - **Issue:** The `Summarise.R` file contains duplicated code identical to `LRstats.R`
 - **Action:** Consider one of:
   - Formally deprecating `Summarise()` in favor of `LRstats()` (add `.Deprecated()` call)
