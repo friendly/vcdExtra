@@ -1,31 +1,15 @@
-#' Sequential Mosaics and Strucplots for an N-way Table
-
-
-#' This function takes an n-way contingency table and plots mosaics for series of sequential
-#' models to the 1-, 2-, ... n-way marginal tables, corresponding to a variety of
-#' types of loglinear models.
-
-#' @param x 	a contingency table in array form, with optional category labels specified in the dimnames(x) attribute,
-#'            or else a data.frame in frequency form, with the frequency variable names "Freq".
-#' @param panel  panel function
-#' @param type type of sequential model to fit
-#' @param plots which marginals to plot?
-#' @param vorder  order of variables
-#' @param k    indices of conditioning variable(s) for "joint", "conditional" or order for "markov"
-#' @export
-
 
 
 #' Sequential Mosaics and Strucplots for an N-way Table
-#' 
+#'
 #' This function takes an n-way contingency table and plots mosaics for series
 #' of sequential models to the 1-, 2-, ... n-way marginal tables, corresponding
 #' to a variety of types of loglinear models.
-#' 
+#'
 #' This function produces similar plots to the use of
 #' \code{\link{mosaic.loglmlist}}, called with the result of
 #' \code{\link{seq_loglm}}.
-#' 
+#'
 #' @param x a contingency table in array form, with optional category labels
 #' specified in the dimnames(x) attribute, or else a data.frame in frequency
 #' form, with the frequency variable named \code{"Freq"}.
@@ -50,10 +34,10 @@
 #' @seealso \code{\link{loglin-utilities}} for descriptions of sequential
 #' models, \code{\link{conditional}}, \code{\link{joint}},
 #' \code{\link{mutual}}, \dots
-#' 
+#'
 #' \code{\link{loglmlist}}, \code{\link{mosaic.loglmlist}},
 #' \code{\link{seq_loglm}}
-#' 
+#'
 #' \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
 #' \code{\link[vcd]{strucplot}}, for the many parameters that control the
 #' details of mosaic plots.
@@ -62,24 +46,24 @@
 #' \url{http://www.datavis.ca/mosaics/mosaics.pdf}
 #' @keywords hplots
 #' @examples
-#' 
-#' 
+#'
+#'
 #' data(Titanic, package="datasets")
-#' 
+#'
 #' seq_mosaic(Titanic)  # models of joint independence, Survived last
 #' seq_mosaic(Titanic, type="condit")
 #' seq_mosaic(Titanic, type="mutual")
-#' 
+#'
 #' # other panel functions and options: presently BUGGED
 #' \dontrun{
-#' seq_mosaic(Titanic, type="mutual", panel=sieve, 
+#' seq_mosaic(Titanic, type="mutual", panel=sieve,
 #'    gp=shading_Friendly, labeling=labeling_values)
 #' }
-#' 
-#' 
+#'
+#'
 seq_mosaic <- function(
 	x,
-	panel = mosaic, 
+	panel = mosaic,
 	type = c("joint", "conditional", "mutual", "markov", "saturated"),
 	plots = 1:nf,      # which plots to produce?
 	vorder = 1:nf,      # order of variables in the sequential plots
@@ -92,12 +76,12 @@ seq_mosaic <- function(
     x <- xtabs(Freq ~ ., data=x)
   }
   if (!inherits(x, c("table", "array"))) stop("not an xtabs, table, array or data.frame with a 'Freq' variable")
-  
+
 	nf <- length(dim(x))
 	x <- aperm(x, vorder)
 	factors <- names(dimnames(x))
 	indices <- 1:nf
-	
+
   type = match.arg(type)
 	for (i in plots) {
 		mtab <- margin.table(x, 1:i)

@@ -77,5 +77,6 @@ BugReports: https://github.com/friendly/vcdExtra/issues
 VignetteBuilder: knitr, rmarkdown
 LazyLoad: yes
 LazyData: yes
+Encoding: UTF-8
 Config/testthat/edition: 3
 RoxygenNote: 7.3.3
