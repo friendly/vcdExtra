@@ -6,14 +6,16 @@
 \title{Advertising Behavior by Males Cormorants}
 \format{
 A data frame with 343 observations on the following 8 variables.
+
 \describe{
-\item{list("category")}{Time of season, divided into 3 categories based on breeding chronology, an ordered factor with levels \code{Pre} < \code{Incubation} < \code{Chicks Present}}
-\item{list("week")}{Week of the season} \item{list("station")}{Station of observations on two different peninsulas in a park, a factor with levels \code{B1} \code{B2} \code{C1} \code{C2} \code{C3} \code{C4}}
-\item{list("nest")}{Type of nest, an ordered factor with levels \code{no} < \code{partial} < \code{full}}
-\item{list("height")}{Relative height of bird in the tree, an ordered factor with levels \code{low} < \code{mid} < \code{high}}
-\item{list("density")}{Number of other nests in the tree, an ordered factor with levels \code{zero} < \code{few} < \code{moderate} < \code{high}}
-\item{list("tree_health")}{Health of the tree the bird is advertising in, a factor with levels \code{dead} \code{healthy}}
-\item{list("count")}{Number of birds advertising, a numeric vector}
+  \item{\code{category}}{Time of season, divided into 3 categories based on breeding chronology, an ordered factor with levels \code{Pre} < \code{Incubation} < \code{Chicks Present}}
+  \item{\code{week}}{Week of the season}
+  \item{\code{station}}{Station of observations on two different peninsulas in a park, a factor with levels \code{B1} \code{B2} \code{C1} \code{C2} \code{C3} \code{C4}}
+  \item{\code{nest}}{Type of nest, an ordered factor with levels \code{no} < \code{partial} < \code{full}}
+  \item{\code{height}}{Relative height of bird in the tree, an ordered factor with levels \code{low} < \code{mid} < \code{high}}
+  \item{\code{density}}{Number of other nests in the tree, an ordered factor with levels \code{zero} < \code{few} < \code{moderate} < \code{high}}
+  \item{\code{tree_health}}{Health of the tree the bird is advertising in, a factor with levels \code{dead} \code{healthy}}
+  \item{\code{count}}{Number of birds advertising, a numeric vector}
 }
 }
 \source{

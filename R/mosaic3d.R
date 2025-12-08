@@ -144,6 +144,7 @@
 #' }
 #' 
 #' 
+#' @export mosaic3d
 mosaic3d <- function(x, ...) {
 	UseMethod("mosaic3d")
 }

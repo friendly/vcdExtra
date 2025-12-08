@@ -34,6 +34,43 @@ By default, \code{\link[base]{cut}} chooses breaks by equal lengths of the
 range of \code{x}, whereas \code{cutfac} uses \code{\link[stats]{quantile}}
 to choose breaks of roughly equal count.
 }
+\examples{
+
+if (require(AER)) {
+data("NMES1988", package="AER")
+nmes <- NMES1988[, c(1, 6:8, 13, 15, 18)]
+
+plot(log(visits+1) ~ cutfac(chronic),
+  data = nmes,
+  ylab = "Physician office visits (log scale)",
+  xlab = "Number of chronic conditions", main = "chronic")
+
+plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)),
+  data = nmes,
+  ylab = "Physician office visits (log scale)",
+  xlab = "Number of hospital stays", main = "hospital")
+}
+
+\donttest{
+# countreg not yet on CRAN
+if (require(countreg)) {
+data("CrabSatellites", package = "countreg")
+
+# jittered scatterplot
+plot(jitter(satellites) ~ width, data=CrabSatellites,
+  ylab="Number of satellites (jittered)", xlab="Carapace width",
+  cex.lab=1.25)
+with(CrabSatellites, lines(lowess(width, satellites), col="red", lwd=2))
+
+# boxplot, using deciles
+plot(satellites ~ cutfac(width), data=CrabSatellites,
+     ylab="Number of satellites", xlab="Carapace width (deciles)")
+}
+}
+
+
+
+}
 \references{
 Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
 with R: Visualization and Modeling Techniques for Categorical and Count

@@ -5,10 +5,13 @@
 \alias{HouseTasks}
 \title{Household Tasks Performed by Husbands and Wives}
 \format{
-The format is: 'table' int [1:13, 1:4] 36 11 24 51 13 1 1 14 20 46
-...  - attr(*, "dimnames")=List of 2 ..$ Task: chr [1:13] "Breakfast"
-"Dinner" "Dishes" "Driving" ...  ..$ Who : chr [1:4] "Alternating" "Husband"
-"Jointly" "Wife"
+The format is:
+\preformatted{
+  'table' int [1:13, 1:4] 36 11 24 51 13 1 1 14 20 46 ...
+- attr(*, "dimnames")=List of 2
+..$ Task: chr [1:13] "Breakfast" "Dinner" "Dishes" "Driving" ...
+..$ Who : chr [1:4] "Alternating" "Husband" "Jointly" "Wife"
+}
 }
 \source{
 This data set was taken from \code{\link[factoextra]{housetasks}}, a
@@ -17,12 +20,12 @@ alphabetically (and a typo was corrected).
 }
 \description{
 A 13 x 4 table of frequencies of household tasks performed by couples,
-either by the `Husband`, `Wife`, `Alternating` or `Jointly`.
+either by the \code{Husband}, \code{Wife}, \code{Alternating} or \code{Jointly}.
 }
 \examples{
 
 data(HouseTasks)
-## maybe str(HouseTasks)
+str(HouseTasks)
 
 chisq.test(HouseTasks)
 

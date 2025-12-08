@@ -6,18 +6,21 @@
 \title{Passengers on the Titanic}
 \format{
 A data frame with 1309 observations on the following 6 variables.
-\describe{ \item{list("pclass")}{a factor with levels \code{1st} \code{2nd}
-\code{3rd}} \item{list("survived")}{a factor with levels \code{died}
-\code{survived}} \item{list("sex")}{a factor with levels \code{female}
-\code{male}} \item{list("age")}{passenger age in years (or fractions of a
-year, for children), a numeric vector; age is missing for 263 of the
-passengers} \item{list("sibsp")}{number of siblings or spouses aboard,
-integer: \code{0:8}} \item{list("parch")}{number of parents or children
-aboard, integer: \code{0:6}} }
+\describe{
+  \item{\code{pclass}}{a factor with levels \code{1st} \code{2nd} \code{3rd}}
+  \item{\code{survived}}{a factor with levels \code{died} \code{survived}}
+  \item{\code{sex}}{a factor with levels \code{female} \code{male}}
+  \item{\code{age}}{passenger age in years (or fractions of a year, for children), a numeric vector; age is missing for 263 of the passengers}
+  \item{\code{sibsp}}{number of siblings or spouses aboard, integer: \code{0:8}}
+  \item{\code{parch}}{number of parents or children aboard, integer: \code{0:6}}
+}
 }
 \source{
 The original R source for this dataset was compiled by Frank Harrell and
-Robert Dawson \url{https://hbiostat.org/data/repo/titanic.html}.
+Robert Dawson:
+\url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic.html},
+described in more detail in
+\url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic3info.txt}
 
 For this version of the Titanic data, passenger details were deleted,
 survived was cast as a factor, and the name changed to \code{Titanicp} to

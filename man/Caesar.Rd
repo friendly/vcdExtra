@@ -8,16 +8,17 @@
 A 4-dimensional array resulting from cross-tabulating 4 variables
 for 251 observations. The variable names and their levels are:
 
-\tabular{rll}{
- No \tab Name \tab Levels \cr
-  1 \tab \code{Infection}\tab \code{"Type 1", "Type 2", "None"}\cr
-  2 \tab \code{Risk}\tab \code{"Yes", "No"} (presence of risk factors)\cr
-  3 \tab \code{Antibiotics}\tab \code{"Yes", "No"} (were antibiotics given?)\cr
-  4 \tab \code{Planned}\tab \code{"Yes", "No"} (was the C section planned?)\cr
- }
+  \tabular{rll}{
+  dim \tab Name \tab Levels \cr
+    1 \tab \code{Infection}\tab \code{"Type 1", "Type 2", "None"}\cr
+    2 \tab \code{Risk}\tab \code{"Yes", "No"} (presence of risk factors)\cr
+    3 \tab \code{Antibiotics}\tab \code{"Yes", "No"} (were antibiotics given?)\cr
+    4 \tab \code{Planned}\tab \code{"Yes", "No"} (was the C section planned?)\cr
+}
 }
 \source{
-\cite{Fahrmeir:94} Fahrmeir, L. & Tutz, G. (1994). Multivariate
+% \cite{Fahrmeir:94}
+Fahrmeir, L. & Tutz, G. (1994). Multivariate
 Statistical Modelling Based on Generalized Linear Models New York: Springer
 Verlag, Table 1.1.
 }

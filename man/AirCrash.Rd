@@ -7,16 +7,19 @@
 \format{
 A data frame with 439 observations on the following 5 variables.
 \describe{
-\item{list("Phase")}{phase of the flight, a factor with levels \code{en route} \code{landing} \code{standing} \code{take-off} \code{unknown}}
-\item{list("Cause")}{a factor with levels \code{criminal} \code{human error} \code{mechanical} \code{unknown} \code{weather}}
-\item{list("date")}{date of crash, a Date}
-\item{list("Fatalities")}{number of fatalities, a numeric vector}
-\item{list("Year")}{year, a numeric vector}
+  \item{list("Phase")}{phase of the flight, a factor with levels \code{en route} \code{landing}
+        \code{standing} \code{take-off}
+\code{unknown}}
+  \item{list("Cause")}{a factor with levels \code{criminal} \code{human error} \code{mechanical}
+        \code{unknown} \code{weather}}
+  \item{list("date")}{date of crash, a Date}
+  \item{list("Fatalities")}{number of fatalities, a numeric vector}
+  \item{list("Year")}{year, a numeric vector}
 }
 }
 \source{
 Originally from David McCandless,
-\url{https://informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/},
+\url{http://www.informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/},
 with the data at
 \url{https://docs.google.com/spreadsheets/d/1OvDq4_BtbR6nSnnHnjD5hVC3HQ-ulZPGbo0RDGbzM3Q/edit?usp=drive_web},
 downloaded April 14, 2015.

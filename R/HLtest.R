@@ -84,6 +84,7 @@
 #' 
 #' 
 #' 
+#' @export HLtest
 HLtest <- HosmerLemeshow <- function(model, g=10) {
 	if (!inherits(model, "glm")) stop("requires a binomial family glm")
 	if (!family(model)$family == 'binomial') stop("requires a binomial family glm")
@@ -112,6 +113,8 @@ HLtest <- HosmerLemeshow <- function(model, g=10) {
   return(result)
 }
 
+#' @rdname HLtest
+#' @exportS3Method 
 print.HLtest <- function(x, ...) {
 	heading <- "Hosmer and Lemeshow Goodness-of-Fit Test"
 	df <- data.frame("ChiSquare"=x$chisq, df=x$df, "P_value"= x$p.value)
@@ -123,6 +126,8 @@ print.HLtest <- function(x, ...) {
 }
 
 # Q: how to print **s next to larg chisq components?
+#' @rdname HLtest
+#' @exportS3Method 
 summary.HLtest <- function(object, ...) {
 	heading <- "Partition for Hosmer and Lemeshow Goodness-of-Fit Test"
 	cat(heading,"\n\n")
@@ -131,11 +136,15 @@ summary.HLtest <- function(object, ...) {
 }
 
 ## Q: how to display any large chi residuals on the bars??
+#' @rdname HLtest
+#' @exportS3Method 
 rootogram.HLtest <- function(x, ...) {
 	rootogram(as.numeric(x$table$obs), as.numeric(x$table$exp), 
 		xlab="Fitted value group", names=1:x$groups, ...) 
 }
 
+#' @rdname HLtest
+#' @exportS3Method 
 plot.HLtest <- function(x, ...) {
 	rootogram.HLtest(x, ...)
 }

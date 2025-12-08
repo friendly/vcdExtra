@@ -61,14 +61,14 @@ As presently written, the function requires a two-sided formula with an
 explicit response on the LHS. For frequency data in table form (e.g.,
 produced by \code{xtabs}) you the \code{data} argument is coerced to a
 data.frame, so you should supply the \code{formula} in the form \code{Freq ~
-} \dots.
+} \dots{}.
 }
 \examples{
 
 ## artificial data
-factors <- expand.grid(A=factor(1:3), 
-                       B=factor(1:2), 
-                       C=factor(1:3), 
+factors <- expand.grid(A=factor(1:3),
+                       B=factor(1:2),
+                       C=factor(1:3),
                        D=factor(1:2))
 Freq <- rpois(nrow(factors), lambda=40)
 df <- cbind(factors, Freq)
@@ -80,8 +80,8 @@ LRstats(mods4)
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
-modSat <- Kway(Freq ~ management+supervisor+own, 
-               data=JobSatisfaction, 
+modSat <- Kway(Freq ~ management+supervisor+own,
+               data=JobSatisfaction,
                family=poisson, prefix="JobSat")
 LRstats(modSat)
 anova(modSat, test="Chisq")
@@ -89,7 +89,7 @@ anova(modSat, test="Chisq")
 # Rochdale data: very sparse, in table form
 data(Rochdale, package="vcd")
 \dontrun{
-modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child + 
+modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child +
                      Education + HusbandEducation + Asian + HouseholdWorking,
                 data=Rochdale, family=poisson)
 LRstats(modRoch)

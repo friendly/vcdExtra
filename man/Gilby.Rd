@@ -8,11 +8,11 @@
 A 2-dimensional array resulting from cross-tabulating 2 variables
 for 1725 observations. The variable names and their levels are:
 
-  \tabular{rll}{
-    No \tab Name \tab Levels \cr
-    1\tab \code{Dullness}\tab \code{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
-    2\tab \code{Clothing}\tab \code{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
-  }
+\tabular{rll}{
+  No \tab Name \tab Levels \cr
+  1\tab \code{Dullness}\tab \code{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
+  2\tab \code{Clothing}\tab \code{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
+}
 }
 \source{
 Anscombe, F. J. (1981). \emph{Computing in Statistical Science
@@ -50,8 +50,9 @@ if(require(ca)){
 
 }
 \references{
-\cite{Gilby & Pearson 1911, from Anscombe 1981, p 302} Gilby,
-W. H. (1911).  On the significance of the teacher's appreciation of general
+% \cite{Gilby & Pearson 1911, from Anscombe 1981, p 302}
+Gilby, W. H. (1911).
+On the significance of the teacher's appreciation of general
 intelligence.  \emph{Biometrika}, 8, 93-108 (esp. p. 94).  [Quoted by
 Kendall (1943,..., 1953) Table 13.1, p 320.]
 }

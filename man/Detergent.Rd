@@ -3,21 +3,21 @@
 \docType{data}
 \name{Detergent}
 \alias{Detergent}
-\title{Detergent preference data}
+\title{Detergent Preference Data}
 \format{
 A 4-dimensional array resulting from cross-tabulating 4 variables
 for 1008 observations. The variable names and their levels are:
 
-\tabular{rll}{
- No \tab Name \tab Levels \cr
-  1\tab \code{Temperature}\tab \code{"High", "Low"}\cr
- 2\tab \code{M_User}\tab \code{"Yes", "No"}\cr
- 3\tab \code{Preference}\tab \code{"Brand X", "Brand M"}\cr
- 4\tab \code{Water_softness}\tab \code{"Soft", "Medium", "Hard"}\cr
- }
+  \tabular{rll}{
+dim \tab Name \tab Levels \cr
+1\tab \code{Temperature}\tab \code{"High", "Low"}\cr
+2\tab \code{M_User}\tab \code{"Yes", "No"}\cr
+3\tab \code{Preference}\tab \code{"Brand X", "Brand M"}\cr
+4\tab \code{Water_softness}\tab \code{"Soft", "Medium", "Hard"}\cr
+}
 }
 \source{
-\cite{Fienberg:80 [p. 71]} Fienberg, S. E. (1980). \emph{The Analysis of
+Fienberg, S. E. (1980). \emph{The Analysis of
 Cross-Classified Categorical Data} Cambridge, MA: MIT Press, p. 71.
 }
 \description{
@@ -48,7 +48,7 @@ mosaic(det.mod0)
 
 }
 \references{
-\cite{RiesSmith:63} Ries, P. N. & Smith, H. (1963). The use of
+Ries, P. N. & Smith, H. (1963). The use of
 chi-square for preference testing in multidimensional problems.
 \emph{Chemical Engineering Progress}, 59, 39-43.
 }

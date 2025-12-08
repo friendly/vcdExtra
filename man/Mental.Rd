@@ -6,11 +6,12 @@
 \title{Mental Impairment and Parents SES}
 \format{
 A data frame frequency table with 24 observations on the following 3
-variables.  \describe{ \item{list("ses")}{an ordered factor with levels
-\code{1} < \code{2} < \code{3} < \code{4} < \code{5} < \code{6}}
-\item{list("mental")}{an ordered factor with levels \code{Well} <
-\code{Mild} < \code{Moderate} < \code{Impaired}} \item{list("Freq")}{cell
-frequency: a numeric vector} }
+variables.
+\describe{
+  \item{\code{ses}}{an ordered factor with levels \code{1} < \code{2} < \code{3} < \code{4} < \code{5} < \code{6}}
+  \item{\code{mental}}{an ordered factor with levels \code{Well} < \code{Mild} < \code{Moderate} < \code{Impaired}}
+  \item{\code{Freq}}{cell frequency: a numeric vector}
+}
 }
 \source{
 Haberman, S. J.  \emph{The Analysis of Qualitative Data: New
@@ -40,7 +41,7 @@ mosaic(Mental.tab, gp=shading_Friendly)
 sieve(Mental.tab, gp=shading_Friendly)
 
 if(require(ca)){
-  plot(ca(Mental.tab), main="Mental impairment & SES")
+  plot(ca(Mental.tab), main="Mental impairment & SES", lines=TRUE)
 }
 
 

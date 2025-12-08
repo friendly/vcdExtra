@@ -8,14 +8,14 @@
 A 5-dimensional array resulting from cross-tabulating 5 variables
 for 1729 observations. The variable names and their levels are:
 
-  \tabular{rll}{
-    No \tab Name \tab Levels \cr
-    1\tab \code{Knowledge}\tab \code{"Good", "Poor"}\cr
-    2\tab \code{Reading}\tab \code{"No", "Yes"}\cr
-    3\tab \code{Radio}\tab \code{"No", "Yes"}\cr
-    4\tab \code{Lectures}\tab \code{"No", "Yes"}\cr
-    5\tab \code{Newspaper}\tab \code{"No", "Yes"}\cr
-  }
+\tabular{rll}{
+ dim \tab Name \tab Levels \cr
+  1\tab \code{Knowledge}\tab \code{"Good", "Poor"}\cr
+  2\tab \code{Reading}\tab \code{"No", "Yes"}\cr
+  3\tab \code{Radio}\tab \code{"No", "Yes"}\cr
+  4\tab \code{Lectures}\tab \code{"No", "Yes"}\cr
+  5\tab \code{Newspaper}\tab \code{"No", "Yes"}\cr
+}
 }
 \source{
 Fienberg, S. E. (1980). \emph{The Analysis of Cross-Classified

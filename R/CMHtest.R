@@ -20,58 +20,58 @@
 
 
 #' Generalized Cochran-Mantel-Haenszel Tests
-#' 
+#'
 #' Provides generalized Cochran-Mantel-Haenszel tests of association of two
 #' possibly ordered factors, optionally stratified other factor(s).  With
 #' strata, \code{CMHtest} calculates these tests for each level of the
 #' stratifying variables and also provides overall tests controlling for the
 #' strata.
-#' 
+#'
 #' For ordinal factors, more powerful tests than the test for general
 #' association (independence) are obtained by assigning scores to the row and
 #' column categories.
-#' 
+#'
 #' The standard \eqn{\chi^2} tests for association in a two-way table treat
 #' both table factors as nominal (unordered) categories. When one or both
 #' factors of a two-way table are quantitative or ordinal, more powerful tests
 #' of association may be obtained by taking ordinality into account using row
 #' and or column scores to test for linear trends or differences in row or
 #' column means.
-#' 
+#'
 #' The CMH analysis for a two-way table produces generalized
 #' Cochran-Mantel-Haenszel statistics (Landis etal., 1978).
-#' 
+#'
 #' These include the CMH \bold{correlation} statistic (\code{"cor"}), treating
 #' both factors as ordered. For a given statum, with equally spaced row and
 #' column scores, this CMH statistic reduces to \eqn{(n-1) r^2}, where \eqn{r}
 #' is the Pearson correlation between X and Y. With \code{"midrank"} scores,
 #' this CMH statistic is analogous to \eqn{(n-1) r_S^2}, using the Spearman
 #' rank correlation.
-#' 
+#'
 #' The \bold{ANOVA} (row mean scores and column mean scores) statistics, treat
 #' the columns and rows respectively as ordinal, and are sensitive to mean
 #' shifts over columns or rows. These are transforms of the \eqn{F} statistics
 #' from one-way ANOVAs with equally spaced scores and to Kruskal-Wallis tests
 #' with \code{"midrank"} scores.
-#' 
+#'
 #' The CMH \bold{general} association statistic treat both factors as
 #' unordered, and give a test closely related to the Pearson \eqn{\chi^2} test.
 #' When there is more than one stratum, the overall general CMH statistic gives
 #' a stratum-adjusted Pearson \eqn{\chi^2}, equivalent to what is calculated by
 #' \code{\link[stats]{mantelhaen.test}}.
-#' 
+#'
 #' For a 3+ way table, one table of CMH tests is produced for each combination
 #' of the factors identified as \code{strata}. If \code{overall=TRUE}, an
 #' additional table is calculated for the same two primary variables,
 #' controlling for (pooling over) the \code{strata} variables.
-#' 
+#'
 #' These overall tests implicitly assume no interactions between the primary
 #' variables and the strata and they will have low power in the presence of
 #' interactions.
-#' 
+#'
 #' Note that strata combinations with insufficient data (less than 2
 #' observations) are automatically omitted from the analysis.
-#' 
+#'
 #' @aliases CMHtest CMHtest.formula CMHtest.default Cochran Mantel Haenszel
 #' test print.CMHtest
 #' @param x A 2+ way contingency table in array form, or a class \code{"table"}
@@ -109,9 +109,9 @@
 #' columns \code{Chisq}, \code{Df} and \code{Prob} } \item{names}{The names of
 #' the table row and column variables} \item{rscore}{Row scores}
 #' \item{cscore}{Column scores}
-#' 
+#'
 #' If \code{details==TRUE}, additional components are included.
-#' 
+#'
 #' If there are strata, the result is a list of \code{"CMHtest"} objects. If
 #' \code{overall=TRUE} another component, labeled \code{ALL} is appended to the
 #' list.
@@ -119,7 +119,7 @@
 #' @seealso \code{\link[coin]{cmh_test}} provides the CMH test of general
 #' association; \code{\link[coin]{lbl_test}} provides the CMH correlation test
 #' of linear by linear association.
-#' 
+#'
 #' \code{\link[stats]{mantelhaen.test}} provides the overall general
 #' Cochran-Mantel-Haenszel chi-squared test of the null that two nominal
 #' variables are conditionally independent in each stratum, assuming that there
@@ -130,70 +130,72 @@
 #' given at:
 #' \url{http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm
 #' }
-#' 
+#'
 #' Cochran, W. G. (1954), Some Methods for Strengthening the Common
 #' \eqn{\chi^2} Tests, \emph{Biometrics}, 10, 417-451.
-#' 
+#'
 #' Landis, R. J., Heyman, E. R., and Koch, G. G. (1978).  Average Partial
 #' Association in Three-way Contingency Tables: A Review and Discussion of
 #' Alternative Tests, \emph{International Statistical Review}, \bold{46},
 #' 237-254.
-#' 
+#'
 #' Mantel, N. (1963), Chi-square Tests with One Degree of Freedom: Extensions
 #' of the Mantel-Haenszel Procedure," \emph{Journal of the American Statistical
 #' Association}, 58, 690-700.
 #' @keywords htest
+#' @export
 #' @examples
-#' 
+#'
 #' data(JobSat, package="vcdExtra")
 #' CMHtest(JobSat)
 #' CMHtest(JobSat, rscores="midrank", cscores="midrank")
-#' 
+#'
 #' # formula interface
 #' CMHtest(~ ., data=JobSat)
-#' 
+#'
 #' # A 3-way table (both factors ordinal)
 #' data(MSPatients, package="vcd")
 #' CMHtest(MSPatients)
-#' 
-#' 
+#'
+#'
 #' # also calculate overall tests, controlling for Patient
 #' CMHtest(MSPatients, overall = TRUE)
 #' # compare with mantelhaen.test
 #' mantelhaen.test(MSPatients)
-#' 
+#'
 #' # formula interface
 #' CMHtest(~ ., data = MSPatients, overall = TRUE)
-#' 
+#'
 #' # using a frequency data.frame
 #' CMHtest(xtabs(Freq~ses + mental, data = Mental))
 #' # or, more simply
 #' CMHtest(Freq~ses + mental, data = Mental)
-#' 
+#'
 #' # conditioning formulae
 #' CMHtest(Freq~right + left | gender, data = VisualAcuity)
-#'  
+#'
 #' CMHtest(Freq ~ attitude + memory | education + age, data = Punishment)
-#' 
-#' 
+#'
+#'
 #' # Stokes etal, Table 5.1, p 92: two unordered factors
 #' parties <- matrix(
 #' 	c(221, 160, 360, 140,
 #' 	  200, 291, 160, 311,
-#' 	  208, 106, 316, 97), 
-#' 	nrow=3, ncol=4, 
+#' 	  208, 106, 316, 97),
+#' 	nrow=3, ncol=4,
 #' 	byrow=TRUE)
 #' dimnames(parties) <- list(party=c("Dem", "Indep", "Rep"),
 #'              neighborhood=c("Bayside", "Highland", "Longview", "Sheffield"))
 #' CMHtest(parties, rscores=NULL, cscores=NULL)
-#' 
+#'
 #' # compare with Pearson chisquare
 #' chisq.test(parties)
-#' 
+#'
 CMHtest <- function(x, ...) {
   UseMethod("CMHtest")
 }
 
+#' @export
 CMHtest.formula <-
   function(formula, data = NULL, subset = NULL, na.action = NULL, ...) {
     m <- match.call(expand.dots = FALSE)
@@ -277,6 +279,7 @@ CMHtest.formula <-
     }
   }
 
+#' @export
 CMHtest.default <- function(
   x,
   strata = NULL,
@@ -529,6 +532,7 @@ cmh <- function(n, m, A, V, df) {
 # DONE: incorporate stratum name in the heading
 # TODO: handle the printing of pvalues better
 
+#' @export
 print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
   heading <- "Cochran-Mantel-Haenszel Statistics"
   if (!is.null(x$names)) {

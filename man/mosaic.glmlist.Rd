@@ -3,7 +3,7 @@
 \name{mosaic.glmlist}
 \alias{mosaic.glmlist}
 \alias{mosaic.loglmlist}
-\title{Mosaic Displays for \code{glmlist} and \code{loglmlist} Objects}
+\title{Mosaic Displays for glmlist and loglmlist Objects}
 \usage{
 \method{mosaic}{glmlist}(
   x,
@@ -59,7 +59,7 @@ which to plot the mosaics.}
 ultimately to \code{\link[vcd]{mosaic}}.}
 }
 \value{
-
+Returns the result of \code{\link{mosaic.glm}}.
 }
 \description{
 This function provides a convenient interface for viewing mosaic displays
@@ -69,9 +69,10 @@ either selected models individually, or mosaics for all models in an array
 of viewports.
 }
 \details{
-Most details of the plots produced can be controlled via \dots arguments as
-shown in some of the examples below.  In particular, with \code{panel=sieve}
-you need to also pass \code{gp=shading_Friendly} to get a color version.
+Most details of the plots produced can be controlled via \dots{} arguments
+as shown in some of the examples below.  In particular, with
+\code{panel=sieve} you need to also pass \code{gp=shading_Friendly} to get a
+color version.
 }
 \examples{
 
@@ -124,8 +125,6 @@ David Meyer, Achim Zeileis, and Kurt Hornik (2006). The
 Strucplot Framework: Visualizing Multi-Way Contingency Tables with vcd.
 \emph{Journal of Statistical Software}, 17(3), 1-48.  %
 \url{https://www.jstatsoft.org/v17/i03/},
-c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-"10.18637/jss.v017.i03")\Sexpr{tools:::Rd_expr_doi("10.18637/jss.v017.i03")},
 available as \code{vignette("strucplot", package="vcd")}.
 }
 \seealso{

@@ -7,14 +7,13 @@
 \format{
 A data frame in frequency form representing a 5 x 3 x 2 x 2
 contingency table, with 60 observations on the following 5 variables.
-\describe{ \item{list("class")}{Social class of mother, a factor with levels
-\code{1} \code{2} \code{3} \code{4} \code{5}}
-\item{list("smoke")}{Cigarettes smoked per day during pregnancy, a factor
-with levels \code{0} \code{1-19} \code{20+}}
-\item{list("hyper")}{Hypertension level, a factor with levels \code{Low}
-\code{High}} \item{list("urea")}{Protein urea level, a factor with levels
-\code{Low} \code{High}} \item{list("Freq")}{frequency in each cell, a
-numeric vector} }
+\describe{
+  \item{\code{class}}{Social class of mother, a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5}}
+  \item{\code{smoke}}{Cigarettes smoked per day during pregnancy, a factor with levels \code{0} \code{1-19} \code{20+}}
+  \item{\code{hyper}}{Hypertension level, a factor with levels \code{Low} \code{High}}
+  \item{\code{urea}}{Protein urea level, a factor with levels \code{Low} \code{High}}
+  \item{\code{Freq}}{frequency in each cell, a numeric vector}
+}
 }
 \source{
 Brown, P. J., Stone, J. and Ord-Smith, C. (1983), Toxaemic signs

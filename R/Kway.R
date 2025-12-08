@@ -1,36 +1,33 @@
-# Generate and fit all 1-way, 2-way, ... k-way terms in a glm
-
-
 
 #' Fit All K-way Models in a GLM
-#' 
+#'
 #' Generate and fit all 0-way, 1-way, 2-way, ... k-way terms in a glm.
-#' 
+#'
 #' This function is designed mainly for hierarchical loglinear models (or
 #' \code{glm}s in the poisson family), where it is desired to find the
 #' highest-order terms necessary to achieve a satisfactory fit.
-#' 
+#'
 #' Using \code{\link[stats]{anova}} on the resulting \code{\link{glmlist}}
 #' object will then give sequential tests of the pooled contributions of all
 #' terms of degree \eqn{k+1} over and above those of degree \eqn{k}.
-#' 
+#'
 #' This function is also intended as an example of a generating function for
 #' \code{\link{glmlist}} objects, to facilitate model comparison, extraction,
 #' summary and plotting of model components, etc., perhaps using \code{lapply}
 #' or similar.
-#' 
+#'
 #' With \code{y} as the response in the \code{formula}, the 0-way (null) model
 #' is \code{y ~ 1}.  The 1-way ("main effects") model is that specified in the
 #' \code{formula} argument.  The k-way model is generated using the formula
 #' \code{. ~ .^k}. With the default \code{order = nt}, the final model is the
 #' saturated model.
-#' 
+#'
 #' As presently written, the function requires a two-sided formula with an
 #' explicit response on the LHS. For frequency data in table form (e.g.,
 #' produced by \code{xtabs}) you the \code{data} argument is coerced to a
 #' data.frame, so you should supply the \code{formula} in the form \code{Freq ~
-#' } \dots.
-#' 
+#' } \dots{}.
+#'
 #' @param formula a two-sided formula for the 1-way effects in the model. The
 #' LHS should be the response, and the RHS should be the first-order terms
 #' connected by \code{+} signs.
@@ -55,48 +52,49 @@
 #' deprecated), \code{\link{LRstats}}
 #' @keywords models
 #' @examples
-#' 
+#'
 #' ## artificial data
-#' factors <- expand.grid(A=factor(1:3), 
-#'                        B=factor(1:2), 
-#'                        C=factor(1:3), 
+#' factors <- expand.grid(A=factor(1:3),
+#'                        B=factor(1:2),
+#'                        C=factor(1:3),
 #'                        D=factor(1:2))
 #' Freq <- rpois(nrow(factors), lambda=40)
 #' df <- cbind(factors, Freq)
-#' 
+#'
 #' mods3 <- Kway(Freq ~ A + B + C, data=df, family=poisson)
 #' LRstats(mods3)
 #' mods4 <- Kway(Freq ~ A + B + C + D, data=df, family=poisson)
 #' LRstats(mods4)
-#' 
+#'
 #' # JobSatisfaction data
 #' data(JobSatisfaction, package="vcd")
-#' modSat <- Kway(Freq ~ management+supervisor+own, 
-#'                data=JobSatisfaction, 
+#' modSat <- Kway(Freq ~ management+supervisor+own,
+#'                data=JobSatisfaction,
 #'                family=poisson, prefix="JobSat")
 #' LRstats(modSat)
 #' anova(modSat, test="Chisq")
-#' 
+#'
 #' # Rochdale data: very sparse, in table form
 #' data(Rochdale, package="vcd")
 #' \dontrun{
-#' modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child + 
+#' modRoch <- Kway(Freq~EconActive + Age + HusbandEmployed + Child +
 #'                      Education + HusbandEducation + Asian + HouseholdWorking,
 #'                 data=Rochdale, family=poisson)
 #' LRstats(modRoch)
 #' }
-#' 
+#'
+#' @export Kway
 Kway <- function(formula, family=poisson, data, ..., order=nt, prefix="kway") {
 
-   if (is.character(family)) 
+   if (is.character(family))
        family <- get(family, mode = "function", envir = parent.frame())
-   if (is.function(family)) 
+   if (is.function(family))
        family <- family()
    if (is.null(family$family)) {
        print(family)
        stop("'family' not recognized")
    }
-   if (missing(data)) 
+   if (missing(data))
         data <- environment(formula)
 
    models <- list()

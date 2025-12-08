@@ -52,6 +52,7 @@
 #' logitsTox
 #' 
 #' 
+#' @export blogits
 blogits <- function(Y, add, colnames, row.vars, rev=FALSE) {
 
   if (ncol(Y) != 4) stop("Y must have 4 columns")

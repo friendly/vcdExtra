@@ -10,6 +10,14 @@
 \title{Hosmer-Lemeshow Goodness of Fit Test}
 \usage{
 HLtest(model, g = 10)
+
+\method{print}{HLtest}(x, ...)
+
+\method{summary}{HLtest}(object, ...)
+
+\method{rootogram}{HLtest}(x, ...)
+
+\method{plot}{HLtest}(x, ...)
 }
 \arguments{
 \item{model}{A \code{glm} model object in the \code{binomial} family}

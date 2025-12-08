@@ -23,7 +23,7 @@ Collapse (or re-label) variables in a a contingency table, array or
 \code{ftable} object by re-assigning levels of the table variables.
 }
 \details{
-Each of the \code{\dots} arguments must be of the form \code{variable =
+Each of the \code{\dots{}} arguments must be of the form \code{variable =
 levels}, where \code{variable} is the name of one of the table dimensions,
 and \code{levels} is a character or numeric vector of length equal to the
 corresponding dimension of the table.

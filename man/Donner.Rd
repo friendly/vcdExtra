@@ -6,12 +6,13 @@
 \title{Survival in the Donner Party}
 \format{
 A data frame with 90 observations on the following 5 variables.
+
 \describe{
-\item{list("family")}{family name, a factor with 10 levels }
-\item{list("age")}{age of person, a numeric vector}
-\item{list("sex")}{a factor with levels \code{Female} \code{Male}}
-\item{list("survived")}{a numeric vector, 0 or 1}
-\item{list("death")}{date of death for those who died before rescue, a POSIXct}
+  \item{\code{family}}{family name, a factor with 10 levels }
+  \item{\code{age}}{age of person, a numeric vector}
+  \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
+  \item{\code{survived}}{a numeric vector, 0 or 1}
+  \item{\code{death}}{date of death for those who died before rescue, a POSIXct}
 }
 }
 \source{

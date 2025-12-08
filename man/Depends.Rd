@@ -8,9 +8,11 @@
 The format is a one-way frequency table of counts of packages with
 0, 1, 2, ... dependencies.
 
-'table' int [1:15(1d)] 986 1347 993 685 375 298 155 65 32 19 ...
-- attr(*,
-"dimnames")=List of 1 ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
+\preformatted{
+ table' int [1:15(1d)] 986 1347 993 685 375 298 155 65 32 19 ...
+ - attr(*, "dimnames")=List of 1
+ ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
+}
 }
 \source{
 Using code from

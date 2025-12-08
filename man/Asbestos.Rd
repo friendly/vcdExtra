@@ -5,8 +5,7 @@
 \alias{Asbestos}
 \title{Effect of Exposure to Asbestos}
 \format{
-The format is:
-num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
+The format is: num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
 - attr(*, "dimnames")=List of 2 ..$ exposure: chr [1:5] "0-9" "10-19"
 "20-29" "30-39" ...  ..$ grade : chr [1:4] "None" "Grade 1" "Grade 2" "Grade
 3"

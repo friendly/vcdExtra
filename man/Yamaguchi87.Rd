@@ -5,13 +5,7 @@
 \alias{Yamaguchi87}
 \title{Occupational Mobility in Three Countries}
 \format{
-A frequency data frame with 75 observations on the following 4
-variables. The total sample size is 28887.  \describe{ \item{list("Son")}{a
-factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM}
-\code{Farm}} \item{list("Father")}{a factor with levels \code{UpNM}
-\code{LoNM} \code{UpM} \code{LoM} \code{Farm}} \item{list("Country")}{a
-factor with levels \code{US} \code{UK} \code{Japan}} \item{list("Freq")}{a
-numeric vector} }
+
 }
 \source{
 Yamaguchi, K. (1987).  Models for comparing mobility tables: toward

@@ -67,6 +67,7 @@
 #' BIC(titanic.glm1, titanic.glm2, titanic.glm3)
 #' 
 #' 
+#' @export logLik.loglm
 logLik.loglm <- function(object, ..., zero=1E-10) {
 	fr <- if(!is.null(object$frequencies)) unclass(object$frequencies) else {
 				unclass(update(object, keep.frequencies = TRUE)$frequencies)

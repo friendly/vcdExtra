@@ -8,13 +8,14 @@
 A frequency data frame with 25 observations on the following 3
 variables representing a 5 x 5 table with 3500 cases.
 \describe{
-\item{list("father")}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
-\item{list("son")}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
-\item{list("Freq")}{a numeric vector}
+  \item{\code{father}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
+  \item{\code{son}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
+  \item{\code{Freq}}{a numeric vector}
 }
 }
 \source{
-Glass, D. V. (1954), \emph{Social Mobility in Britain}. The Free Press.
+Glass, D. V. (1954), \emph{Social Mobility in Britain}. The Free
+Press.
 }
 \description{
 Glass(1954) gave this 5 x 5 table on the occupations of 3500 British fathers

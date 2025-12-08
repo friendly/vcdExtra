@@ -6,12 +6,14 @@
 \title{Student Opinion about the Vietnam War}
 \format{
 A frequency data frame with 40 observations representing a 2 x 5 x 4
-contingency table on the following 4 variables.  \describe{
-\item{list("sex")}{a factor with levels \code{Female} \code{Male}}
-\item{list("year")}{year of study, an ordered factor with levels
-\code{Freshmen}, \code{Sophomore}, \code{Junior}, \code{Senior}, \code{Grad
-student}} \item{list("response")}{a factor with levels \code{A} \code{B}
-\code{C} \code{D}} \item{list("Freq")}{cell frequency, a numeric vector} }
+contingency table on the following 4 variables.
+\describe{
+  \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
+  \item{\code{year}}{year of study, an ordered factor with levels
+    \code{Freshmen}, \code{Sophomore}, \code{Junior}, \code{Senior}, \code{Grad student}}
+  \item{\code{response}}{a factor with levels \code{A} \code{B} \code{C} \code{D}}
+  \item{\code{Freq}}{cell frequency, a numeric vector}
+}
 }
 \source{
 Aitken, M. etal, 1989, \emph{Statistical Modelling in GLIM}
@@ -24,11 +26,14 @@ out of A,B,C or D they supported. Responses were cross-classified by
 gender/year.
 }
 \details{
-The response categories were: \describe{ \item{list("A")}{Defeat North
-Vietnam by widespread bombing and land invasion} \item{list("B")}{Maintain
-the present policy} \item{list("C")}{De-escalate military activity, stop
-bombing and begin negotiations} \item{list("D")}{Withdraw military forces
-Immediately} }
+The response categories were:
+\describe{
+  \item{\code{A}}{Defeat North Vietnam by widespread bombing and land invasion}
+  \item{\code{B}}{Maintain the present policy}
+  \item{\code{C}}{De-escalate military activity, stop bombing and begin negotiations}
+  \item{\code{D}}{Withdraw military forces Immediately}
+}
+
 
 For some analyses, it is useful to treat \code{year} as numeric, and
 possibly assign grad students a value \code{year=7}.

@@ -8,12 +8,12 @@
 A frequency data frame with 32 observations on the following 6
 variables.
 \describe{
-\item{list("cigarette")}{a factor with levels \code{Yes} \code{No}}
-\item{list("alcohol")}{a factor with levels \code{Yes} \code{No}}
-\item{list("marijuana")}{a factor with levels \code{Yes} \code{No}}
-\item{list("sex")}{a factor with levels \code{female} \code{male}}
-\item{list("race")}{a factor with levels \code{white} \code{other}}
-\item{list("Freq")}{a numeric vector}
+  \item{\code{cigarette}}{a factor with levels \code{Yes} \code{No}}
+  \item{\code{alcohol}}{a factor with levels \code{Yes} \code{No}}
+  \item{\code{marijuana}}{a factor with levels \code{Yes} \code{No}}
+  \item{\code{sex}}{a factor with levels \code{female} \code{male}}
+  \item{\code{race}}{a factor with levels \code{white} \code{other}}
+  \item{\code{Freq}}{a numeric vector}
 }
 }
 \source{

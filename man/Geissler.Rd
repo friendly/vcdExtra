@@ -8,10 +8,10 @@
 A data frame with 90 observations on the following 4 variables.  The
 rows represent the non-NA entries in Edwards' table.
 \describe{
-\item{list("boys")}{number of boys in the family, \code{0:12}}
-\item{list("girls")}{number of girls in the family, \code{0:12}}
-\item{list("size")}{family size: \code{boys+girls}}
-\item{list("Freq")}{number of families with this sex composition}
+  \item{\code{boys}}{number of boys in the family, \code{0:12}}
+  \item{\code{girls}}{number of girls in the family, \code{0:12}}
+  \item{\code{size}}{family size: \code{boys+girls}}
+  \item{\code{Freq}}{number of families with this sex composition}
 }
 }
 \source{
@@ -65,6 +65,7 @@ by using overdispersion models. \emph{Journal of the Royal Statistical
 Society: Series C (Applied Statistics)}, 47, 149-157.
 }
 \seealso{
-\code{\link[vcd]{Saxony}}, containing the data for families of size 12.
+\code{\link[vcd]{Saxony}}, containing the data for families of size
+12.
 }
 \keyword{datasets}

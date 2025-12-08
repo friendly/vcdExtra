@@ -9,11 +9,11 @@ A 3-dimensional array resulting from cross-tabulating 3 variables
 for 474 observations. The variable names and their levels are:
 
 \tabular{rll}{
- No \tab Name \tab Levels \cr
-  1\tab \code{Survival}\tab \code{"Died", "Surv"}\cr
- 2\tab \code{Grade}\tab \code{"Malignant", "Benign"}\cr
- 3\tab \code{Center}\tab \code{"Boston", "Glamorgan"}\cr
-}
+  dim \tab Name \tab Levels \cr
+    1\tab \code{Survival}\tab  \code{"Died", "Surv"}\cr
+    2\tab \code{Grade}\tab \code{"Malignant", "Benign"}\cr
+    3\tab \code{Center}\tab \code{"Boston", "Glamorgan"}\cr
+    }
 }
 \source{
 Lindsey, J. K. (1995).

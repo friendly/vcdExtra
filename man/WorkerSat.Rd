@@ -7,11 +7,12 @@
 \format{
 A frequency data frame with 8 observations on the following 4
 variables, representing the 2 x 2 x 2 classification of 715 cases.
-\describe{ \item{list("Manage")}{Quality of management, an ordered factor
-with levels \code{bad} < \code{good}} \item{list("Super")}{Supervisor
-satisfaction, an ordered factor with levels \code{low} < \code{high}}
-\item{list("Worker")}{Worker job satisfaction, an ordered factor with levels
-\code{low} < \code{high}} \item{list("Freq")}{a numeric vector} }
+\describe{
+  \item{\code{Manage}}{Quality of management, an ordered factor with levels \code{bad} < \code{good}}
+  \item{\code{Super}}{Supervisor satisfaction, an ordered factor with levels \code{low} < \code{high}}
+  \item{\code{Worker}}{Worker job satisfaction, an ordered factor with levels \code{low} < \code{high}}
+  \item{\code{Freq}}{a numeric vector}
+}
 }
 \source{
 Originally from \url{https://online.stat.psu.edu/stat504/lesson/10/}

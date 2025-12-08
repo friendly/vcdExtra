@@ -152,7 +152,7 @@ CMHtest(Freq~ses + mental, data = Mental)
 
 # conditioning formulae
 CMHtest(Freq~right + left | gender, data = VisualAcuity)
- 
+
 CMHtest(Freq ~ attitude + memory | education + age, data = Punishment)
 
 
@@ -160,8 +160,8 @@ CMHtest(Freq ~ attitude + memory | education + age, data = Punishment)
 parties <- matrix(
 	c(221, 160, 360, 140,
 	  200, 291, 160, 311,
-	  208, 106, 316, 97), 
-	nrow=3, ncol=4, 
+	  208, 106, 316, 97),
+	nrow=3, ncol=4,
 	byrow=TRUE)
 dimnames(parties) <- list(party=c("Dem", "Indep", "Rep"),
              neighborhood=c("Bayside", "Highland", "Longview", "Sheffield"))

@@ -7,13 +7,14 @@
 \format{
 A data frame with 208 observations on the following 2 variables.
 \describe{
-\item{list("date")}{a Date}
-\item{list("deaths")}{number of deaths, a numeric vector}
-}
+  \item{list("date")}{a Date}
+  \item{list("deaths")}{number of deaths, a numeric vector}
+  }
 }
 \source{
-Road Safety Data from GOV.UK, but 2005-2012. Similar data is
-available in the \pkg{stats19}, \url{https://docs.ropensci.org/stats19/}.
+\url{https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-data},
+STATS 19 data, 2005-2012, using the files \code{Casualty0512.csv} and
+\code{Accidents0512.csv}
 }
 \description{
 A data frame containing the number of deaths of cyclists in London from 2005
@@ -27,9 +28,9 @@ data(CyclingDeaths)
 
 plot(deaths ~ date, data=CyclingDeaths,
   type="h",
-	 lwd=3,
-	 ylab="Number of deaths",
-	 axes=FALSE)
+	lwd=3,
+	ylab="Number of deaths",
+	axes=FALSE)
 axis(1, at=seq(as.Date('2005-01-01'),
                by='years',
                length.out=9),

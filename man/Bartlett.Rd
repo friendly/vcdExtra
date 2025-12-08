@@ -9,14 +9,15 @@ A 3-dimensional array resulting from cross-tabulating 3 variables
 for 960 observations. The variable names and their levels are:
 
 \tabular{rll}{
-No \tab Name \tab Levels \cr
- 1 \tab \code{Alive} \tab \code{"Alive", "Dead"}\cr
- 2 \tab \code{Time} \tab \code{"Now", "Spring"}\cr
- 3 \tab \code{Length} \tab \code{"Long", "Short"}\cr
- }
+ dim \tab Name          \tab Levels                \cr
+   1  \tab \code{Alive}  \tab \code{"Alive", "Dead"}\cr
+   2  \tab \code{Time}   \tab \code{"Now", "Spring"}\cr
+   3  \tab \code{Length} \tab \code{"Long", "Short"}\cr
+}
 }
 \source{
-\cite{Hand-etal:94 [p.15 #19]} Hand, D. and Daly, F. and Lunn, A. D.and
+% \cite{Hand-etal:94 [p.15 #19]}
+Hand, D. and Daly, F. and Lunn, A. D.and
 McConway, K. J. and Ostrowski, E. (1994). \emph{A Handbook of Small Data
 Sets}.  London: Chapman & Hall, p. 15, # 19.
 }

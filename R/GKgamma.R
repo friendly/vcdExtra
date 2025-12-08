@@ -39,6 +39,7 @@
 #' data(JobSat)
 #' GKgamma(JobSat)
 #' 
+#' @export GKgamma
 GKgamma<-function(x, level=0.95)
 {
     # x is a matrix of counts.  You can use output of crosstabs or xtabs in R.    

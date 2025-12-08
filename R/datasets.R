@@ -15,7 +15,7 @@
 #' 
 #' The \code{datasets()} function is designed to produce a more useful summary
 #' display of data sets in one or more packages.  It extracts the \code{class}
-#' and dimension information (\code{dim} or \code{length}) of each item, and
+#' and dimension information (\code{dim} or codelength) of each item, and
 #' formats these to provide additional descriptors.
 #' 
 #' The requested packages must be installed, and are silently loaded in order
@@ -51,6 +51,7 @@
 #' datasets("vcd")[,"Item"]
 #' 
 #' 
+#' @export datasets
 datasets <- function(package, allClass=FALSE, 
 		incPackage=length(package) > 1,
 		maxTitle=NULL) 

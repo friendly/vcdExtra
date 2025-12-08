@@ -77,6 +77,7 @@
 #' res <- lapply(mods, residuals)
 #' boxplot(as.data.frame(res), main="Residuals from various models")
 #' 
+#' @export glmlist
 glmlist <- function(...) {
     args  <- list(...);
     lname <- names(args)

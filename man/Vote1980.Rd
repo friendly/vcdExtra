@@ -6,13 +6,14 @@
 \title{Race and Politics in the 1980 Presidential Vote}
 \format{
 A frequency data frame representing a 2 x 7 x 2 table, with 28
-observations on the following 4 variables.  \describe{ \item{list("race")}{a
-factor with levels \code{NonWhite} \code{White}}
-\item{list("conservatism")}{ a factor with levels \code{1} \code{2} \code{3}
-\code{4} \code{5} \code{6} \code{7}, \code{1}=most liberal, \code{7}=most
-conservative} \item{list("votefor")}{a factor with levels \code{Carter}
-\code{Reagan}; \code{Carter} represents Jimmy Carter or other.}
-\item{list("Freq")}{a numeric vector} }
+observations on the following 4 variables.
+\describe{
+  \item{\code{race}}{a factor with levels \code{NonWhite} \code{White}}
+  \item{\code{conservatism}}{a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5} \code{6} \code{7},
+       \code{1}=most liberal, \code{7}=most conservative}
+  \item{\code{votefor}}{a factor with levels \code{Carter} \code{Reagan}; \code{Carter}represents Jimmy Carter or other.}
+  \item{\code{Freq}}{a numeric vector}
+}
 }
 \source{
 Clogg, C. & Shockey, J. W. (1988). In Nesselroade, J. R. & Cattell,

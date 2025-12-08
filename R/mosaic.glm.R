@@ -211,6 +211,7 @@
 #' anova(berk.glm1, berk.glm3, test="Chisq")
 #'  
 #' 
+#' @export mosaic.glm
 `mosaic.glm` <-	function(x, formula = NULL,
                          panel=mosaic, type=c("observed", "expected"),
                          residuals=NULL,

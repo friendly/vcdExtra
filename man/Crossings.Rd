@@ -25,15 +25,15 @@ data(Hauser79)
 # display table
 structable(~Father + Son, data=Hauser79)
 
-hauser.indep <- gnm(Freq ~ Father + Son, 
-                    data=Hauser79, 
+hauser.indep <- gnm(Freq ~ Father + Son,
+                    data=Hauser79,
                     family=poisson)
 
-hauser.CR <- update(hauser.indep, 
+hauser.CR <- update(hauser.indep,
                     ~ . + Crossings(Father,Son))
 LRstats(hauser.CR)
 
-hauser.CRdiag <- update(hauser.indep, 
+hauser.CRdiag <- update(hauser.indep,
                         ~ . + Crossings(Father,Son) + Diag(Father,Son))
 LRstats(hauser.CRdiag)
 
@@ -47,8 +47,7 @@ University of California Press, pp. 649-696.
 }
 \seealso{
 \code{\link[stats]{glm}}, \code{\link[gnm]{gnm}} for model fitting
-functions for frequency tables
-
+     functions for frequency tables;
 \code{\link[gnm]{Diag}}, \code{\link[gnm]{Mult}}, \code{\link[gnm]{Symm}},
 \code{\link[gnm]{Topo}} for similar extensions to terms in model formulas.
 }

@@ -6,11 +6,13 @@
 \title{Mice Depletion Data}
 \format{
 A frequency data frame with 30 observations on the following 4
-variables, representing a 5 x 2 x 3 contingency table.  \describe{
-\item{list("litter")}{litter size, a numeric vector}
-\item{list("treatment")}{treatment, a factor with levels \code{A} \code{B}}
-\item{list("deaths")}{number of depletions, a factor with levels \code{0}
-\code{1} \code{2+}} \item{list("Freq")}{cell frequency, a numeric vector} }
+variables, representing a 5 x 2 x 3 contingency table.
+\describe{
+  \item{\code{litter}}{litter size, a numeric vector}
+  \item{\code{treatment}}{treatment, a factor with levels \code{A} \code{B}}
+  \item{\code{deaths}}{number of depletions, a factor with levels \code{0} \code{1} \code{2+}}
+  \item{\code{Freq}}{cell frequency, a numeric vector}
+}
 }
 \source{
 Goodman, L. A. (1983) The analysis of dependence in

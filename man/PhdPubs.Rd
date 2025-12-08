@@ -6,14 +6,14 @@
 \title{Publications of PhD Candidates}
 \format{
 A data frame with 915 observations on the following 6 variables.
-\describe{ \item{list("articles")}{number of articles published in the final
-three years of PhD studies} \item{list("female")}{dummy variable for gender,
-coded \code{1} for female} \item{list("married")}{dummy variable for marital
-status, coded \code{1} for married} \item{list("kid5")}{number of young
-children, age 5 and under} \item{list("phdprestige")}{prestige of the PhD
-department.  The higher the number the more prestigious the program. }
-\item{list("mentor")}{number of publications by the mentor in the preceeding
-three years} }
+\describe{
+  \item{\code{articles}}{number of articles published in the final three years of PhD studies}
+  \item{\code{female}}{dummy variable for gender, coded \code{1} for female}
+  \item{\code{married}}{dummy variable for marital status, coded \code{1} for married}
+  \item{\code{kid5}}{number of young children, age 5 and under}
+  \item{\code{phdprestige}}{prestige of the PhD department.  The higher the number the more prestigious the program.}
+  \item{\code{mentor}}{number of publications by the mentor in the preceeding three years}
+}
 }
 \source{
 Long, J. S. (1997). \emph{Regression Models for Categorical and

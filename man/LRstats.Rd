@@ -8,6 +8,12 @@
 \title{Brief Summary of Model Fit for glm and loglm Models}
 \usage{
 LRstats(object, ...)
+
+\method{LRstats}{glmlist}(object, ..., saturated = NULL, sortby = NULL)
+
+\method{LRstats}{loglmlist}(object, ..., saturated = NULL, sortby = NULL)
+
+\method{LRstats}{default}(object, ..., saturated = NULL, sortby = NULL)
 }
 \arguments{
 \item{object}{a fitted model object for which there exists a logLik method
@@ -59,7 +65,7 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore,
                 family = poisson, data = Mental)
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
-                
+
 # compare models
 LRstats(indep, coleff, roweff, linlin)
 

@@ -1,5 +1,4 @@
-
-#' Mosaic Displays for \code{glmlist} and \code{loglmlist} Objects
+#' Mosaic Displays for glmlist and loglmlist Objects
 #'
 #' This function provides a convenient interface for viewing mosaic displays
 #' associated with a collection of glm models for frequency tables that have
@@ -7,52 +6,51 @@
 #' either selected models individually, or mosaics for all models in an array
 #' of viewports.
 #'
-#' Most details of the plots produced can be controlled via \dots arguments as
-#' shown in some of the examples below.  In particular, with \code{panel=sieve}
-#' you need to also pass \code{gp=shading_Friendly} to get a color version.
+#' Most details of the plots produced can be controlled via \dots{} arguments
+#' as shown in some of the examples below.  In particular, with
+#' \code{panel=sieve} you need to also pass \code{gp=shading_Friendly} to get a
+#' color version.
 #'
 #' @aliases mosaic.glmlist mosaic.loglmlist
-#' @param x a \code{glmlist} or \code{loglmlist} object
+#' @param x         a \code{glmlist} or \code{loglmlist} object
 #' @param selection the index or name of one \code{glm} or \code{loglm} object
-#' in \code{x}.  If no selection is specified, a menu of models is presented or
-#' all models are plotted.
-#' @param panel a \code{\link[vcd]{strucplot}} panel function, typically
-#' \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}}
-#' @param type a character string indicating whether the \code{"observed"} or
-#' the \code{"expected"} values of the table should be visualized
-#' @param legend logical: show a legend for residuals in the mosaic display(s)?
-#' The default behavior is to include a legend when only a single plot is
-#' shown, i.e., if \code{ask} is \code{TRUE} or a \code{selection} has been
-#' specified.
+#'        in \code{x}.  If no selection is specified, a menu of models is presented or
+#'        all models are plotted.
+#' @param panel     a \code{\link[vcd]{strucplot}} panel function, typically
+#'        \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}}
+#' @param type      a character string indicating whether the \code{"observed"} or
+#'        the \code{"expected"} values of the table should be visualized
+#' @param legend    logical: show a legend for residuals in the mosaic display(s)?
+#'        The default behavior is to include a legend when only a single plot is
+#'        shown, i.e., if \code{ask} is \code{TRUE} or a \code{selection} has been
+#'        specified.
 #' @param main either a logical, or a vector of character strings used for
-#' plotting the main title.  If main is a logical and \code{TRUE}, the name of
-#' the selected glm object is used.
+#'        plotting the main title.  If main is a logical and \code{TRUE}, the name of
+#'        the selected glm object is used.
 #' @param ask logical: should the function display a menu of models, when one
-#' is not specified in \code{selection}? If \code{selection} is not supplied
-#' and \code{ask} is \code{TRUE} (the default), a menu of model names is
-#' presented; if \code{ask} is \code{FALSE}, mosaics for all models are plotted
-#' in an array.
+#'        is not specified in \code{selection}? If \code{selection} is not supplied
+#'        and \code{ask} is \code{TRUE} (the default), a menu of model names is
+#'        presented; if \code{ask} is \code{FALSE}, mosaics for all models are plotted
+#'        in an array.
 #' @param graphics logical: use a graphic dialog box when \code{ask=TRUE}?
 #' @param rows,cols when \code{ask=FALSE}, the number of rows and columns in
-#' which to plot the mosaics.
+#'        which to plot the mosaics.
 #' @param newpage start a new page? (only applies to \code{ask=FALSE})
 #' @param \dots other arguments passed to \code{\link{mosaic.glm}} and
-#' ultimately to \code{\link[vcd]{mosaic}}.
-#' @return Returns the result of \code{\link{mosaic.glm}}. %% ~Describe the
-#' value returned %% If it is a LIST, use %% \item{comp1 }{Description of
-#' 'comp1'} %% \item{comp2 }{Description of 'comp2'} %% ...
+#'        ultimately to \code{\link[vcd]{mosaic}}.
+#' @return Returns the result of \code{\link{mosaic.glm}}.
+#'
 #' @author Michael Friendly
 #' @seealso \code{\link{glmlist}}, \code{\link{loglmlist}}, \code{\link{Kway}}
 #'
 #' \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
 #' \code{\link[vcd]{strucplot}}, for the many parameters that control the
 #' details of mosaic plots.
-#' @references David Meyer, Achim Zeileis, and Kurt Hornik (2006). The
+#' @references
+#' David Meyer, Achim Zeileis, and Kurt Hornik (2006). The
 #' Strucplot Framework: Visualizing Multi-Way Contingency Tables with vcd.
 #' \emph{Journal of Statistical Software}, 17(3), 1-48.  %
 #' \url{https://www.jstatsoft.org/v17/i03/},
-#' c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-#' "10.18637/jss.v017.i03")\Sexpr{tools:::Rd_expr_doi("10.18637/jss.v017.i03")},
 #' available as \code{vignette("strucplot", package="vcd")}.
 #' @keywords hplot
 #' @examples
