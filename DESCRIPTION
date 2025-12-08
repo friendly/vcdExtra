@@ -64,7 +64,8 @@ Imports:
     purrr, 
     readxl, 
     stringr, 
-    tidyr (>= 1.3.0)
+    tidyr (>= 1.3.0),
+    rgl
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data
     and the 'gnm' package for Generalized Nonlinear Models.
 	In particular, 'vcdExtra' extends mosaic, assoc and sieve plots from 'vcd' to handle 'glm()' and 'gnm()' models and

@@ -21,3 +21,4 @@ README.*
 ^Meta$
 ^\.vscode$
 ^[.]?air[.]toml$
+^NAMESPACE-old$
