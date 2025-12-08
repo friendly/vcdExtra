@@ -43,7 +43,7 @@ fit using \code{\link[stats]{glm}}, whereas \code{\link[stats]{glm}} returns
 }
 \examples{
 
-data(Titanic, package="datasets")  
+data(Titanic, package="datasets")
 
 require(MASS)
 titanic.mod1 <- loglm(~ (Class * Age * Sex) + Survived, data=Titanic)
@@ -56,11 +56,11 @@ BIC(titanic.mod1, titanic.mod2, titanic.mod3)
 
 # compare with models fit using glm()
 titanic <- as.data.frame(Titanic)
-titanic.glm1 <- glm(Freq ~ (Class * Age * Sex) + Survived, 
+titanic.glm1 <- glm(Freq ~ (Class * Age * Sex) + Survived,
                     data=titanic, family=poisson)
-titanic.glm2 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age + Sex), 
+titanic.glm2 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age + Sex),
                     data=titanic, family=poisson)
-titanic.glm3 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age * Sex), 
+titanic.glm3 <- glm(Freq ~ (Class * Age * Sex) + Survived*(Class + Age * Sex),
                     data=titanic, family=poisson)
 
 logLik(titanic.glm1)

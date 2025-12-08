@@ -102,6 +102,7 @@
 #' overview of the gnm package}, 2007, \url{http://eprints.ncrm.ac.uk/472/}.
 #' Available in R via \code{vignette("gnmOverview", package = "gnm")}.
 #' @keywords package
+#'
 #' @examples
 #'
 #' example(mosaic.glm)
