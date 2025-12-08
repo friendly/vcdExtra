@@ -32,7 +32,14 @@ was counted and these observations were classified by characteristics of the
 trees and nests.
 }
 \details{
+The goal is to determine how this behavior varies temporally over the season
+and spatially, as well as with characteristics of nesting sites.
 
+Observations were made on only 2 days in weeks 3 and 4, but 3 days in all
+other weeks. One should use log(days) as an offset, so that the response
+measures rate.
+
+\code{Cormorants$days <- ifelse(Cormorants$week \%in\% 3:4, 2, 3)}
 }
 \examples{
 

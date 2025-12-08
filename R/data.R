@@ -604,7 +604,7 @@ NULL
 #' other weeks. One should use log(days) as an offset, so that the response
 #' measures rate.
 #'
-#' \code{Cormorants$days <- ifelse(Cormorants$week %in% 3:4, 2, 3)}
+#' \code{Cormorants$days <- ifelse(Cormorants$week \%in\% 3:4, 2, 3)}
 #'
 #' @name Cormorants
 #' @docType data
@@ -933,8 +933,8 @@ NULL
 #'   \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
 #'   \item{\code{survived}}{a numeric vector, 0 or 1}
 #'   \item{\code{death}}{date of death for those who died before rescue, a POSIXct}
-# }
-
+#' }
+#'
 #' @seealso \code{donner} in \pkg{alr3}, \code{\link[Sleuth2]{case2001}} in
 #' \pkg{Sleuth2}(adults only) provide similar data sets.
 #'
@@ -1103,8 +1103,8 @@ NULL
 #' - attr(*, "dimnames")=List of 2
 #' ..$ Month: chr [1:12] "Jan" "Feb" "Mar" "Apr" ...
 #' ..$ Risk : chr [1:3] "High" "Med" "Low"
-# }
-
+#' }
+#'
 #' @seealso \code{\link{Draft1970}}
 #' @references Fienberg, S. E. (1971), "Randomization and Social Affairs: The
 #' 1970 Draft Lottery," \emph{Science}, 171, 255-261.
@@ -1265,13 +1265,14 @@ NULL
 #' The four groups represent the combinations of sex and strain of mice.
 #'
 #' The format is:
-#'
+#' \preformatted{
 #' num [1:2, 1:2, 1:2, 1:2] 5 4 74 12 3 2 84 14 10 4 ...
 #' - attr(*, "dimnames")=List of 4
 #' ..$ group  : chr [1:2] "Control" "Treated"
 #' ..$ outcome: chr [1:2] "Tumor" "NoTumor"
 #' ..$ sex    : chr [1:2] "M" "F"
 #' ..$ strain : chr [1:2] "1" "2"
+#' }
 #
 #' @references Breslow, N. (1976), Regression analysis of the log odds ratio: A
 #' method for retrospective studies, \emph{Biometrics}, 32(3), 409-416.
@@ -1562,11 +1563,13 @@ NULL
 #' @docType data
 #' @format
 #' The format is:
+#' \preformatted{
 #'   num [1:4, 1:5, 1:2] 326 688 343 98 38 116 84 48 241 584 ...
 #' - attr(*, "dimnames")=List of 3
 #' ..$ Eye  : chr [1:4] "Blue" "Light" "Medium" "Dark"
 #' ..$ Hair : chr [1:5] "Fair" "Red" "Medium" "Dark" ...
 #' ..$ Place: chr [1:2] "Caithness" "Aberdeen"
+#' }
 #'
 #' @references Becker, M. P., and Clogg, C. C. (1989).  Analysis of Sets of
 #' Two-Way Contingency Tables Using Association Models.  \emph{Journal of the
@@ -1831,7 +1834,6 @@ NULL
 #' 27-58
 #' @source
 #'
-#' % \cite{Lindsey:93 [p. 185]}
 #' Lindsey, J. K. (1993).  \emph{Models for
 #' Repeated Measurements} Oxford, UK: Oxford University Press, p. 185.
 #' @keywords datasets
@@ -1879,10 +1881,12 @@ NULL
 #' @name HospVisits
 #' @docType data
 #' @format A 3 by 3 frequency table, with format:
+#' \preformatted{
 #' table [1:3, 1:3] 43 6 9 16 11 18 3 10 16
 #' - attr(*, "dimnames")=List of 2
 #' ..$ visit: chr [1:3] "Regular" "Infrequent" "Never"
 #' ..$ stay : chr [1:3] "2-9" "10-19" "20+"
+#' }
 #
 #' @seealso \code{\link[ca]{ca}}
 #' @references
@@ -1921,10 +1925,12 @@ NULL
 #' @name HouseTasks
 #' @docType data
 #' @format The format is:
+#' \preformatted{
 #'   'table' int [1:13, 1:4] 36 11 24 51 13 1 1 14 20 46 ...
 #' - attr(*, "dimnames")=List of 2
 #' ..$ Task: chr [1:13] "Breakfast" "Dinner" "Dishes" "Driving" ...
 #' ..$ Who : chr [1:4] "Alternating" "Husband" "Jointly" "Wife"
+#' }
 #'
 #' @source This data set was taken from \code{\link[factoextra]{housetasks}}, a
 #' 13 x 4 data.frame. In this table version, the rows and columns were sorted
@@ -2115,7 +2121,7 @@ NULL
 #' @docType data
 #' @format A data frame with 200 observations on the following 22 variables.
 #' \describe{
-#'   %    \item{\code{id}}{Patient id code, a numeric vector}
+#'   \item{\code{id}}{Patient id code, a numeric vector}
 #'   \item{\code{died}}{Died before discharge?, a factor with levels \code{No} \code{Yes}}
 #'   \item{\code{age}}{Patient age, a numeric vector}
 #'   \item{\code{sex}}{Patient sex, a factor with levels \code{Female} \code{Male}}
@@ -2240,56 +2246,6 @@ NULL
 
 # Loglinear Model Utilities
 #
-# @description
-# These functions generate lists of terms to specify a loglinear model in a
-# form compatible with \code{\link[stats]{loglin}} and also provide for
-# conversion to an equivalent \code{\link[MASS]{loglm}} specification or a
-# shorthand character string representation.
-#
-# They allow for a more conceptual way to specify such models by a function
-# for their type, as opposed to just an uninterpreted list of model terms and
-# also allow easy specification of marginal models for a given contingency
-# table.
-# They are intended to be used as tools in higher-level modeling and graphics
-# functions, but can also be used directly.
-#
-# @details
-# The main model specification functions, \code{conditional}, \code{joint},
-# \code{markov}, \dots{}, \code{saturated}, return a list of vectors
-# indicating the marginal totals to be fit, via the \code{margin} argument to
-# \code{\link[stats]{loglin}}.
-# Each element of this list corresponds to a
-# high-order term in a hierarchical loglinear model, where, e.g., a term like
-# \code{c("A", "B")} is equivalent to the \code{\link[MASS]{loglm}} term
-# \code{"A:B"} and hence automatically includes all low-order terms.
-#
-# Note that these can be used to supply the \code{expected} argument for the
-# default \code{\link[vcd]{mosaic}} function, when the data is supplied as a
-# contingency table.
-#
-# The table below shows some typical results in terms of the standard
-# shorthand notation for loglinear models, with factors A, B, C, \dots{},
-# where brackets are used to delimit the high-order terms in the loglinear
-# model.
-#
-# \tabular{llll}{
-#  \strong{function} \tab \strong{3-way} \tab \strong{4-way}
-# \tab \strong{5-way} \cr \code{mutual} \tab [A] [B] [C] \tab [A] [B] [C] [D]
-# \tab [A] [B] [C] [D] [E] \cr \code{joint} \tab [AB] [C] \tab [ABC] [D] \tab
-# [ABCE] [E] \cr \code{joint (with=1)} \tab [A] [BC] \tab [A] [BCD] \tab [A]
-# [BCDE] \cr \code{conditional} \tab [AC] [BC] \tab [AD] [BD] [CD] \tab [AE]
-# [BE] [CE] [DE] \cr \code{condit (with=1)} \tab [AB] [AC] \tab [AB] [AC] [AD]
-# \tab [AB] [AC] [AD] [AE] \cr \code{markov (order=1)} \tab [AB] [BC] \tab
-# [AB] [BC] [CD] \tab [AB] [BC] [CD] [DE] \cr \code{markov (order=2)} \tab [A]
-# [B] [C] \tab [ABC] [BCD] \tab [ABC] [BCD] [CDE] \cr \code{saturated} \tab
-# [ABC] \tab [ABCD] \tab [ABCDE] \cr }
-#
-# \code{loglin2formula} converts the output of one of these to a model formula
-# suitable as the \code{formula} for of \code{\link[MASS]{loglm}}.
-#
-# \code{loglin2string} converts the output of one of these to a string
-# describing the loglinear model in the shorthand bracket notation, e.g.,
-# \code{"[A,B] [A,C]"}.
 #
 # @aliases loglin-utilities conditional joint loglin2formula loglin2string
 #          markov mutual saturated
@@ -2329,6 +2285,7 @@ NULL
 # of mosaic displays, described in the \emph{User's Guide},
 # \url{http://www.datavis.ca/mosaics/mosaics.pdf}
 # @keywords models
+# EXAMPLES NOT COPIED
 # @examples
 #
 # joint(3, table=HairEyeColor)
@@ -2452,10 +2409,12 @@ NULL
 #' @docType data
 #' @format
 #' A frequency table in matrix form.  The format is:
+#' \preformatted{
 #'   num [1:4, 1:4] 34 6 2 0 10 8 5 1 2 8 ...
 #' - attr(*, "dimnames")=List of 2
 #' ..$ Reader2: chr [1:4] "Absent" "Minimal" "Moderate" "Severe"
 #' ..$ Reader1: chr [1:4] "Absent" "Minimal" "Moderate" "Severe"
+#' }
 #'
 #' @source
 #' Kundel, H. L. & Polansky, M. (2003), "Measurement of Observer
@@ -2794,14 +2753,6 @@ NULL
 #' @docType data
 #' @format A data frame in frequency form representing a 5 x 3 x 2 x 2
 #' contingency table, with 60 observations on the following 5 variables.
-#' \describe{ \item{list("class")}{Social class of mother, a factor with levels
-#' \code{1} \code{2} \code{3} \code{4} \code{5}}
-#' \item{list("smoke")}{Cigarettes smoked per day during pregnancy, a factor
-#' with levels \code{0} \code{1-19} \code{20+}}
-#' \item{list("hyper")}{Hypertension level, a factor with levels \code{Low}
-#' \code{High}} \item{list("urea")}{Protein urea level, a factor with levels
-#' \code{Low} \code{High}} \item{list("Freq")}{frequency in each cell, a
-#' numeric vector} }
 #' \describe{
 #'   \item{\code{class}}{Social class of mother, a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5}}
 #'   \item{\code{smoke}}{Cigarettes smoked per day during pregnancy, a factor with levels \code{0} \code{1-19} \code{20+}}
@@ -2987,11 +2938,9 @@ NULL
 #' observations on the following 4 variables.
 #' \describe{
 #'   \item{\code{race}}{a factor with levels \code{NonWhite} \code{White}}
-#'   \item{\code{conservatism}}{
-#'     a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5} \code{6} \code{7},
-#'     \code{1}=most liberal, \code{7}=most conservative}
-#'   \item{\code{votefor}}{a factor with levels \code{Carter} \code{Reagan}; \code{Carter}
-#'     represents Jimmy Carter or other.}
+#'   \item{\code{conservatism}}{a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5} \code{6} \code{7},
+#'        \code{1}=most liberal, \code{7}=most conservative}
+#'   \item{\code{votefor}}{a factor with levels \code{Carter} \code{Reagan}; \code{Carter}represents Jimmy Carter or other.}
 #'   \item{\code{Freq}}{a numeric vector}
 #' }
 #'

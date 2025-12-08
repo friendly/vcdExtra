@@ -19,7 +19,6 @@ are:
 }
 }
 \source{
-% \cite{Lindsey:93 [p. 185]}
 Lindsey, J. K. (1993).  \emph{Models for
 Repeated Measurements} Oxford, UK: Oxford University Press, p. 185.
 }

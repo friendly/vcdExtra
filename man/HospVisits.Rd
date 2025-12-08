@@ -6,10 +6,12 @@
 \title{Hospital Visits Data}
 \format{
 A 3 by 3 frequency table, with format:
+\preformatted{
 table [1:3, 1:3] 43 6 9 16 11 18 3 10 16
 - attr(*, "dimnames")=List of 2
 ..$ visit: chr [1:3] "Regular" "Infrequent" "Never"
 ..$ stay : chr [1:3] "2-9" "10-19" "20+"
+}
 }
 \source{
 Goodman, L. A. (1983) The analysis of dependence in

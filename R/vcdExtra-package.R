@@ -1,6 +1,6 @@
 #' Extensions and additions to vcd: Visualizing Categorical Data
 #'
-#' % \if{html}{\figure{man/figures/logo.png}{options: align='right' alt='logo' width='100'}}
+#' \if{html}{\figure{man/figures/logo.png}{options: align='right' alt='logo' width='100'}}
 #'
 #' This package provides additional data sets, documentation, and a few
 #' functions designed to extend the \code{vcd} package for Visualizing
@@ -76,9 +76,8 @@
 #' one showing the \code{class} and \code{dim} for each data set.
 #'
 #' @name vcdExtra-package
-#' @aliases vcdExtra-package vcdExtra
+#' @aliases vcdExtra-package vcdExtra _PACKAGE
 #' @docType package
-#' @author Michael Friendly
 #'
 #' Maintainer: Michael Friendly <friendly AT yorku.ca>
 #'

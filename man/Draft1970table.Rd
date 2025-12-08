@@ -5,7 +5,14 @@
 \alias{Draft1970table}
 \title{USA 1970 Draft Lottery Table}
 \format{
+The format is:
 
+\preformatted{
+'table' int [1:12, 1:3] 9 7 5 8 9 11 12 13 10 9 ...
+- attr(*, "dimnames")=List of 2
+..$ Month: chr [1:12] "Jan" "Feb" "Mar" "Apr" ...
+..$ Risk : chr [1:3] "High" "Med" "Low"
+}
 }
 \source{
 This data is available in several forms, but the table version was

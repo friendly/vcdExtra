@@ -6,10 +6,12 @@
 \title{Household Tasks Performed by Husbands and Wives}
 \format{
 The format is:
+\preformatted{
   'table' int [1:13, 1:4] 36 11 24 51 13 1 1 14 20 46 ...
 - attr(*, "dimnames")=List of 2
 ..$ Task: chr [1:13] "Breakfast" "Dinner" "Dishes" "Driving" ...
 ..$ Who : chr [1:4] "Alternating" "Husband" "Jointly" "Wife"
+}
 }
 \source{
 This data set was taken from \code{\link[factoextra]{housetasks}}, a

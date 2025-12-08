@@ -10,13 +10,14 @@ either Control or Treated and whether or not a tumor was later observed.
 The four groups represent the combinations of sex and strain of mice.
 
 The format is:
-
+\preformatted{
 num [1:2, 1:2, 1:2, 1:2] 5 4 74 12 3 2 84 14 10 4 ...
 - attr(*, "dimnames")=List of 4
 ..$ group  : chr [1:2] "Control" "Treated"
 ..$ outcome: chr [1:2] "Tumor" "NoTumor"
 ..$ sex    : chr [1:2] "M" "F"
 ..$ strain : chr [1:2] "1" "2"
+}
 }
 \source{
 Gart, J. J. (1971). The comparison of proportions: a review of
