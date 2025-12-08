@@ -19,6 +19,21 @@
   newpage = TRUE,
   ...
 )
+
+\method{mosaic}{loglmlist}(
+  x,
+  selection,
+  panel = mosaic,
+  type = c("observed", "expected"),
+  legend = ask | !missing(selection),
+  main = NULL,
+  ask = TRUE,
+  graphics = TRUE,
+  rows,
+  cols,
+  newpage = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{a \code{glmlist} or \code{loglmlist} object}

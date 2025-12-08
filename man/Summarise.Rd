@@ -59,7 +59,7 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore,
                 family = poisson, data = Mental)
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
-                
+
 # compare models
 Summarise(indep, coleff, roweff, linlin)
 

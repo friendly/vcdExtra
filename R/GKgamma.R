@@ -5,12 +5,12 @@
 
 
 #' Calculate Goodman-Kruskal Gamma for ordered tables
-#' 
+#'
 #' The Goodman-Kruskal \eqn{\gamma}{gamma} statistic is a measure of
 #' association for ordinal factors in a two-way table proposed by Goodman and
 #' Kruskal (1954).
-#' 
-#' 
+#'
+#'
 #' @aliases GKgamma print.GKgamma
 #' @param x A two-way frequency table, in matrix or table form.  The rows and
 #' columns are considered to be ordinal factors
@@ -25,38 +25,38 @@
 #' @seealso \code{\link[vcd]{assocstats}}, \link[vcd]{Kappa}
 #' @references Agresti, A. \emph{Categorical Data Analysis}. John Wiley & Sons,
 #' 2002, pp. 57--59.
-#' 
+#'
 #' Goodman, L. A., & Kruskal, W. H. (1954). Measures of association for cross
 #' classifications. \emph{Journal of the American Statistical Association}, 49,
 #' 732-764.
-#' 
+#'
 #' Goodman, L. A., & Kruskal, W. H. (1963). Measures of association for cross
 #' classifications III: Approximate sampling theory. \emph{Journal of the
 #' American Statistical Association}, 58, 310-364.
 #' @keywords htest category
 #' @examples
-#' 
+#'
 #' data(JobSat)
 #' GKgamma(JobSat)
-#' 
-#' @export GKgamma
+#'
+#' @export
 GKgamma<-function(x, level=0.95)
 {
-    # x is a matrix of counts.  You can use output of crosstabs or xtabs in R.    
+    # x is a matrix of counts.  You can use output of crosstabs or xtabs in R.
     # Confidence interval calculation and output from Greg Rodd
-    
+
     # Check for using S-PLUS and output is from crosstabs (needs >= S-PLUS 6.0)
     if(is.null(version$language) && inherits(x, "crosstabs")) { oldClass(x)<-NULL; attr(x, "marginals")<-NULL}
-        
+
 	## TODO: add tests for matrix or table
-	
+
     n <- nrow(x)
     m <- ncol(x)
     pi.c<-pi.d<-matrix(0, nrow=n, ncol=m)
-        
+
     row.x<-row(x)
     col.x<-col(x)
-    
+
     for(i in 1:(n)){
         for(j in 1:(m)){
             pi.c[i, j]<-sum(x[row.x<i & col.x<j]) + sum(x[row.x>i & col.x>j])
@@ -66,30 +66,32 @@ GKgamma<-function(x, level=0.95)
 
     C <- sum(pi.c*x)/2
     D <- sum(pi.d*x)/2
-    
+
     psi<-2*(D*pi.c-C*pi.d)/(C+D)^2
     sigma2<-sum(x*psi^2)-sum(x*psi)^2
-    
+
     gamma <- (C - D)/(C + D)
     pr2 <- 1 - (1 - level)/2
     CI <- qnorm(pr2) * sqrt(sigma2) * c(-1, 1) + gamma
 
-    result <- list(gamma = gamma, C = C, D = D, sigma = sqrt(sigma2), 
-        CIlevel = level, 
+    result <- list(gamma = gamma, C = C, D = D, sigma = sqrt(sigma2),
+        CIlevel = level,
         CI = c(max(CI[1], -1), min(CI[2], 1))
-        )  
+        )
     class(result) <- "GKgamma"
-    result   
+    result
 }
 
+#' @rdname GKgamma
+#' @export
 print.GKgamma <-
-function (x, digits = 3, ...) 
+function (x, digits = 3, ...)
 {
-	cat("gamma        :", round(x$gamma, digits = digits), 
+	cat("gamma        :", round(x$gamma, digits = digits),
 			"\n")
-	cat("std. error   :", round(x$sigma, digits = digits), 
+	cat("std. error   :", round(x$sigma, digits = digits),
 			"\n")
-	cat("CI           :", round(x$CI, digits = digits), 
+	cat("CI           :", round(x$CI, digits = digits),
 			"\n")
 	invisible(x)
 }

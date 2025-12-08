@@ -46,6 +46,7 @@
 #' \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
 #' \code{\link[vcd]{strucplot}}, for the many parameters that control the
 #' details of mosaic plots.
+#'
 #' @references
 #' David Meyer, Achim Zeileis, and Kurt Hornik (2006). The
 #' Strucplot Framework: Visualizing Multi-Way Contingency Tables with vcd.
@@ -98,6 +99,7 @@
 #'
 #'
 #'
+#' @export
 mosaic.glmlist <- function(x, selection,
 		panel=mosaic,
 		type=c("observed", "expected"),
@@ -149,6 +151,8 @@ mosaic.glmlist <- function(x, selection,
 	}
 }
 
+#' @rdname mosaic.glmlist
+#' @export
 mosaic.loglmlist <- function(x, selection,
 		panel=mosaic,
 		type=c("observed", "expected"),

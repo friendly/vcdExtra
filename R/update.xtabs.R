@@ -1,9 +1,9 @@
 #' Update method for a \code{xtabs} object
-#' 
+#'
 #' Provides an \code{update} method for \code{"xtabs"} objects, typically by
 #' removing terms from the formula to collapse over them.
-#' 
-#' 
+#'
+#'
 #' @param object An existing \code{"xtabs"} object
 #' @param formula. Changes to the formula ? see
 #' \code{\link[stats]{update.formula}} for details
@@ -15,25 +15,27 @@
 #' @author Michael Friendly
 #' @seealso \code{\link[stats]{update.formula}} for details on updates to model
 #' formulae
-#' 
+#'
 #' \code{\link[base]{margin.table}} does something similar,
 #' \code{\link{collapse.table}} collapses category levels
 #' @keywords models
+#' @exportS3Method
 #' @examples
-#' 
+#'
 #' vietnam.tab <- xtabs(Freq ~ sex + year + response, data=Vietnam)
-#' 
+#'
 #' update(vietnam.tab, formula = ~ . -year)
-#' 
-#' 
-#' 
+#'
+#'
+#'
+#' @export update.xtabs
 update.xtabs <-
-function (object, formula., ..., evaluate = TRUE) 
+function (object, formula., ..., evaluate = TRUE)
 {
-    if (is.null(call<-attr(object, "call"))) 
+    if (is.null(call<-attr(object, "call")))
         stop("need an object with call component")
     extras <- match.call(expand.dots = FALSE)$...
-    if (!missing(formula.)) 
+    if (!missing(formula.))
         call$formula <- update.formula(call$formula, formula.)
     if (length(extras)) {
         existing <- !is.na(match(names(extras), names(call)))
@@ -43,7 +45,7 @@ function (object, formula., ..., evaluate = TRUE)
             call <- as.call(call)
         }
     }
-    if (evaluate) 
+    if (evaluate)
         eval(call, parent.frame())
     else call
 }

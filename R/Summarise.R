@@ -8,23 +8,23 @@
 
 
 #' Brief Summary of Model Fit for glm and loglm Models
-#' 
+#'
 #' For \code{glm} objects, the \code{print} and \code{summary} methods give too
 #' much information if all one wants to see is a brief summary of model
 #' goodness of fit, and there is no easy way to display a compact comparison of
 #' model goodness of fit for a collection of models fit to the same data. All
 #' \code{loglm} models have equivalent glm forms, but the \code{print} and
 #' \code{summary} methods give quite different results.
-#' 
+#'
 #' \code{Summarise} provides a brief summary for one or more models fit to the
 #' same dataset for which \code{logLik} and \code{nobs} methods exist (e.g.,
 #' \code{glm} and \code{loglm} models). %This implementation is experimental,
 #' and is subject to change.
-#' 
+#'
 #' The function relies on residual degrees of freedom for the LR chisq test
 #' being available in the model object.  This is true for objects inheriting
 #' from \code{lm}, \code{glm}, \code{loglm}, \code{polr} and \code{negbin}.
-#' 
+#'
 #' @aliases Summarise Summarise.glmlist Summarise.loglmlist Summarise.default
 #' @param object a fitted model object for which there exists a logLik method
 #' to extract the corresponding log-likelihood
@@ -39,34 +39,37 @@
 #' @author Achim Zeileis
 #' @seealso \code{\link[stats]{logLik}}, \code{\link[stats]{glm}},
 #' \code{\link[MASS]{loglm}},
-#' 
+#'
 #' \code{\link{logLik.loglm}}, \code{\link{modFit}}
 #' @keywords models
 #' @examples
-#' 
+#'
 #' data(Mental)
 #' indep <- glm(Freq ~ mental+ses,
 #'                 family = poisson, data = Mental)
 #' Summarise(indep)
 #' Cscore <- as.numeric(Mental$ses)
 #' Rscore <- as.numeric(Mental$mental)
-#' 
+#'
 #' coleff <- glm(Freq ~ mental + ses + Rscore:ses,
 #'                 family = poisson, data = Mental)
 #' roweff <- glm(Freq ~ mental + ses + mental:Cscore,
 #'                 family = poisson, data = Mental)
 #' linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
 #'                 family = poisson, data = Mental)
-#'                 
+#'
 #' # compare models
 #' Summarise(indep, coleff, roweff, linlin)
-#' 
-#' 
+#'
+#'
+#' @export
+
 Summarise <- function(object, ...) {
   .Deprecated("LRstats")
 	UseMethod("Summarise")
 }
 
+#' @export
 Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 {
     ns <- sapply(object, function(x) length(x$residuals))
@@ -85,6 +88,7 @@ Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 }
 
 # could just do Summarise.loglmlist <- Summarise.glmlist
+#' @export
 Summarise.loglmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 {
 	ns <- sapply(object, function(x) length(x$residuals))

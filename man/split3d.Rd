@@ -9,6 +9,14 @@
 \title{Subdivide a 3D Object}
 \usage{
 split3d(obj, ...)
+
+\method{split3d}{shape3d}(obj, p, dim, space = 0.1, ...)
+
+\method{split3d}{list}(obj, p, dim, space = 0.1, ...)
+
+range3d(obj)
+
+center3d(obj)
 }
 \arguments{
 \item{obj}{A \code{shape3d} object, or a list composed of them}

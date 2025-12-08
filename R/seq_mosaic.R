@@ -1,5 +1,3 @@
-
-
 #' Sequential Mosaics and Strucplots for an N-way Table
 #'
 #' This function takes an n-way contingency table and plots mosaics for series
@@ -11,37 +9,35 @@
 #' \code{\link{seq_loglm}}.
 #'
 #' @param x a contingency table in array form, with optional category labels
-#' specified in the dimnames(x) attribute, or else a data.frame in frequency
-#' form, with the frequency variable named \code{"Freq"}.
+#'        specified in the \code{dimnames(x)} attribute, or else a data.frame in frequency
+#'        form, with the frequency variable named \code{"Freq"}.
 #' @param panel a \code{\link[vcd]{strucplot}} panel function, typically
-#' \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}. NOT yet implemented.}
+#'        \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}. NOT yet implemented.}
 #' @param type type of sequential model to fit, a character string. One of
-#' \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"}, or
-#' \code{"saturated"}.
+#'        \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"}, or
+#'         \code{"saturated"}.
 #' @param plots which marginal sub-tables to plot? A vector of a (sub)set of
-#' the integers, \code{1:nf} where \code{nf} is the number of factors in the
-#' full n-way table.
+#'        the integers, \code{1:nf} where \code{nf} is the number of factors in the
+#'        full n-way table.
 #' @param vorder order of variables, a permutation of the integers \code{1:nf},
-#' used to reorder the variables in the original table for the purpose of
-#' fitting sequential marginal models.
+#'        used to reorder the variables in the original table for the purpose of
+#'        fitting sequential marginal models.
 #' @param k conditioning variable(s) for \code{type} = \code{"joint"},
-#' \code{"conditional"} or Markov chain order for \code{type} = \code{"markov"}
+#'        \code{"conditional"} or Markov chain order for \code{type} = \code{"markov"}
 #' @param \dots other arguments passed to \code{\link[vcd]{mosaic}}.
-#' @return None. Used for its side-effect of producing plots %% If it is a
-#' LIST, use %% \item{comp1 }{Description of 'comp1'} %% \item{comp2
-#' }{Description of 'comp2'} %% ...
+#'
+#' @return None. Used for its side-effect of producing plots
+#'
 #' @author Michael Friendly
 #' @seealso \code{\link{loglin-utilities}} for descriptions of sequential
-#' models, \code{\link{conditional}}, \code{\link{joint}},
-#' \code{\link{mutual}}, \dots
+#'         models, \code{\link{conditional}}, \code{\link{joint}}, \code{\link{mutual}}, \dots{}
+#'         \code{\link{loglmlist}}, \code{\link{mosaic.loglmlist}},
+#'         \code{\link{seq_loglm}}
 #'
-#' \code{\link{loglmlist}}, \code{\link{mosaic.loglmlist}},
-#' \code{\link{seq_loglm}}
-#'
-#' \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
-#' \code{\link[vcd]{strucplot}}, for the many parameters that control the
-#' details of mosaic plots.
-#' @references These functions were inspired by the original SAS implementation
+#'         \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
+#'         \code{\link[vcd]{strucplot}}, for the many parameters that control the details of mosaic plots.
+#' @references
+#' These functions were inspired by the original SAS implementation
 #' of mosaic displays, described in the \emph{User's Guide for Mosaics},
 #' \url{http://www.datavis.ca/mosaics/mosaics.pdf}
 #' @keywords hplots
@@ -61,6 +57,7 @@
 #' }
 #'
 #'
+#' @export seq_mosaic
 seq_mosaic <- function(
 	x,
 	panel = mosaic,

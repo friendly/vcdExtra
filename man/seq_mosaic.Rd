@@ -16,7 +16,7 @@ seq_mosaic(
 }
 \arguments{
 \item{x}{a contingency table in array form, with optional category labels
-specified in the dimnames(x) attribute, or else a data.frame in frequency
+specified in the \code{dimnames(x)} attribute, or else a data.frame in frequency
 form, with the frequency variable named \code{"Freq"}.}
 
 \item{panel}{a \code{\link[vcd]{strucplot}} panel function, typically
@@ -24,7 +24,7 @@ form, with the frequency variable named \code{"Freq"}.}
 
 \item{type}{type of sequential model to fit, a character string. One of
 \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"}, or
-\code{"saturated"}.}
+ \code{"saturated"}.}
 
 \item{plots}{which marginal sub-tables to plot? A vector of a (sub)set of
 the integers, \code{1:nf} where \code{nf} is the number of factors in the
@@ -40,7 +40,7 @@ fitting sequential marginal models.}
 \item{\dots}{other arguments passed to \code{\link[vcd]{mosaic}}.}
 }
 \value{
-
+None. Used for its side-effect of producing plots
 }
 \description{
 This function takes an n-way contingency table and plots mosaics for series
@@ -76,15 +76,12 @@ of mosaic displays, described in the \emph{User's Guide for Mosaics},
 }
 \seealso{
 \code{\link{loglin-utilities}} for descriptions of sequential
-models, \code{\link{conditional}}, \code{\link{joint}},
-\code{\link{mutual}}, \dots
+        models, \code{\link{conditional}}, \code{\link{joint}}, \code{\link{mutual}}, \dots{}
+        \code{\link{loglmlist}}, \code{\link{mosaic.loglmlist}},
+        \code{\link{seq_loglm}}
 
-\code{\link{loglmlist}}, \code{\link{mosaic.loglmlist}},
-\code{\link{seq_loglm}}
-
-\code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
-\code{\link[vcd]{strucplot}}, for the many parameters that control the
-details of mosaic plots.
+        \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
+        \code{\link[vcd]{strucplot}}, for the many parameters that control the details of mosaic plots.
 }
 \author{
 Michael Friendly

@@ -45,6 +45,7 @@
 #' 
 #' \code{\link[rgl]{shapelist3d}} for the plotting of lists of \code{shape3d}
 #' objects.
+#' @importFrom rgl translate3d
 #' @keywords dplot
 #' @examples
 #' 
@@ -61,10 +62,12 @@
 #'   shapelist3d(sl2, col=col)	
 #'   }
 #' 
+#' @export split3d
 split3d <- function(obj, ...) {
 	UseMethod("split3d")
 }
 
+#' @rdname split3d
 split3d.shape3d <- function(obj, p, dim, space=.10, ...) {
 	range <-range3d(obj)
 	min <- range[1,]
@@ -98,6 +101,7 @@ split3d.shape3d <- function(obj, p, dim, space=.10, ...) {
 # split a list of 3D objects, according to the proportions specified in
 # the columns of p.
 
+#' @rdname split3d
 split3d.list <- function(obj, p, dim, space=.10, ...) {
 	nl <- length(obj)
 	if (!is.matrix(p) || ncol(p) != nl) stop(gettextf("p must be a matrix with %i columns", nl))
@@ -112,6 +116,8 @@ split3d.list <- function(obj, p, dim, space=.10, ...) {
 #	UseMethod("range3d")
 #}
 
+#' @rdname split3d
+#' @export
 range3d <- function(obj) {
 	if (!"vb" %in% names(obj)) stop("Not a mesh3d or shape3d object")
   x <- with(obj, range(vb[1,]/vb[4,]))
@@ -122,6 +128,8 @@ range3d <- function(obj) {
   result
 }
 
+#' @rdname split3d
+#' @export
 center3d <- function(obj) {
 	range <-range3d(obj)
 	colMeans(range)

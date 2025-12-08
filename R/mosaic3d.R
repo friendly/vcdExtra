@@ -4,7 +4,7 @@
 
 # TODO: provide formula interface
 # TODO: handle zero margins (causes display to be erased in shapelist3d)
-# DONE: handle zero cells 
+# DONE: handle zero cells
 # DONE: generalize the calculation of residuals
 # DONE: allow display of type=c("observed", "expected")
 # DONE: if ndim>3, provide for labels at max or min
@@ -16,33 +16,33 @@
 
 
 #' 3D Mosaic Plots
-#' 
+#'
 #' Produces a 3D mosaic plot for a contingency table (or a
 #' \code{link[MASS]{loglm}} model) using the \code{\link[rgl]{rgl-package}}.
-#' 
+#'
 #' Generalizing the 2D mosaic plot, this begins with a given 3D shape (a unit
 #' cube), and successively sub-divides it along the X, Y, Z dimensions
 #' according to the table margins, generating a nested set of 3D tiles. The
 #' volume of the resulting tiles is therefore proportional to the frequency
 #' represented in the table cells. Residuals from a given loglinear model are
 #' then used to color or shade each of the tiles.
-#' 
+#'
 #' This is a developing implementation.  The arguments and details are subject
 #' to change.
-#' 
+#'
 #' Friendly (1995), Friendly [Sect. 4.5](2000) and Theus and Lauer (1999) have
 #' all used the idea of 3D mosaic displays to explain various aspects of
 #' loglinear models (the iterative proportional fitting algorithm, the
 #' structure of various models for 3-way and n-way tables, etc.), but no
 #' implementation of 3D mosaics was previously available.
-#' 
+#'
 #' For the default method, residuals, used to color and shade the 3D tiles, can
 #' be passed explicitly, or, more typically, are computed as needed from
 #' observed and expected frequencies. In this case, the expected frequencies
 #' are optionally computed for a specified loglinear model given by the
 #' \code{expected} argument. For the loglm method, residuals and observed
 #' frequencies are calculated from the model object.
-#' 
+#'
 #' @aliases mosaic3d mosaic3d.default mosaic3d.loglm
 #' @param x A \code{link[MASS]{loglm}} model object. Alternatively, a
 #' multidimensional \code{array} or \code{table}
@@ -110,84 +110,86 @@
 #' @author Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 #' @seealso \code{\link[vcd]{strucplot}}, \code{\link[vcd]{mosaic}},
 #' \code{\link[graphics]{mosaicplot}}
-#' 
+#'
 #' \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}} for details on
 #' fitting loglinear models
 #' @references Friendly, M. (1995). Conceptual and Visual Models for
 #' Categorical Data, \emph{The American Statistician}, \bold{49}, 153-160.
-#' 
+#'
 #' Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Institute,
 #' 2000. Web materials: \url{http://www.datavis.ca/books/vcd/}.
-#' 
+#'
 #' Theus, M. & Lauer, S. R. W. (1999) Visualizing Loglinear Models.
 #' \emph{Journal of Computational and Graphical Statistics}, \bold{8}, 396-412.
 #' @keywords hplot
 #' @examples
-#' 
+#'
 #' # 2 x 2 x 2
 #' if(requireNamespace("rgl")){
 #' mosaic3d(Bartlett, box=TRUE)
 #' # compare with expected frequencies under model of mutual independence
 #' mosaic3d(Bartlett, type="expected", box=TRUE)
-#' 	
+#'
 #' # 2 x 2 x 3
 #' mosaic3d(Heart, box=TRUE)
 #' }
-#' 
+#'
 #' \dontrun{
 #' # 2 x 2 x 2 x 3
 #' # illustrates a 4D table
 #' mosaic3d(Detergent)
-#' 
+#'
 #' # compare 2D and 3D mosaics
 #' demo("mosaic-hec")
 #' }
-#' 
-#' 
-#' @export mosaic3d
+#'
+#'
+#' @export
 mosaic3d <- function(x, ...) {
 	UseMethod("mosaic3d")
 }
 
+#' @export
 mosaic3d.loglm <-
-function (x, type = c("observed", "expected"), 
-    residuals_type = c("pearson", "deviance"), 
-#    gp = shading_hcl, gp_args = list(), 
-    ...) 
+function (x, type = c("observed", "expected"),
+    residuals_type = c("pearson", "deviance"),
+#    gp = shading_hcl, gp_args = list(),
+    ...)
 {
     residuals_type <- match.arg(tolower(residuals_type), c("pearson", "deviance"))
-    if (is.null(x$fitted)) 
+    if (is.null(x$fitted))
         x <- update(x, fitted = TRUE)
     expected <- fitted(x)
     residuals <- residuals(x, type = "pearson")
     observed <- residuals * sqrt(expected) + expected
-    if (residuals_type == "deviance") 
+    if (residuals_type == "deviance")
         residuals <- residuals(x, type = "deviance")
-#    gp <- if (inherits(gp, "grapcon_generator")) 
-#        do.call("gp", c(list(observed, residuals, expected, x$df), 
+#    gp <- if (inherits(gp, "grapcon_generator"))
+#        do.call("gp", c(list(observed, residuals, expected, x$df),
 #            as.list(gp_args)))
 #    else gp
-    mosaic3d.default(observed, residuals = residuals, expected = expected, 
-        type = type, residuals_type = residuals_type, 
-#        gp = gp, 
+    mosaic3d.default(observed, residuals = residuals, expected = expected,
+        type = type, residuals_type = residuals_type,
+#        gp = gp,
         ...)
 }
 
-mosaic3d.default <- function(x, expected=NULL, residuals=NULL, 
+#' @export
+mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 		type = c("observed", "expected"), residuals_type = NULL,
 		shape=rgl::cube3d(alpha=alpha), alpha=0.5,
-		spacing=0.1, split_dir=1:3, 
+		spacing=0.1, split_dir=1:3,
 		shading=shading_basic, interpolate=c(2,4), zero_size=.05,
 		label_edge,
 		labeling_args=list(), newpage=TRUE, box=FALSE, ...) {
-	
+
   if (!requireNamespace("rgl")) stop("rgl is required")
 
   type <- match.arg(type)
   if (is.null(residuals)) {
-      residuals_type <- if (is.null(residuals_type)) 
+      residuals_type <- if (is.null(residuals_type))
           "pearson"
-      else match.arg(tolower(residuals_type), c("pearson", 
+      else match.arg(tolower(residuals_type), c("pearson",
           "deviance", "ft"))
   }
 
@@ -196,7 +198,7 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
     x <- as.table(x)
   }
 
-  ## table characteristics	
+  ## table characteristics
   levels <- dim(x)
   ndim <- length(levels)
   dn <- dimnames(x)
@@ -244,19 +246,19 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
   observed <- if (type == "observed") x else expected
   expected <- if (type == "observed") expected else x
 
-	
+
 	# replicate arguments to number of dimensions
 	spacing <- rep(spacing, length=ndim)
 	split_dir <- rep(split_dir, length=ndim)
-	if(missing(label_edge)) 
+	if(missing(label_edge))
 		label_edge <- rep( c('-', '+'), each=3, length=ndim)
-	
+
 	zeros <- observed <= .Machine$double.eps
-	
+
 	shapelist <- shape
 	# sanity check
 	if (!inherits(shapelist, "shape3d")) stop("shape must be a shape3d object")
-	
+
 	if (newpage) rgl::open3d()
 	for (k in 1:ndim) {
 		marg <- margin.table(observed, k:1)
@@ -269,7 +271,7 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 			shapelist <- split3d(shapelist, marg, split_dir[k], space=spacing[k])
 			names(shapelist) <- apply(as.matrix(expand.grid(dn[1:k])), 1, paste, collapse=":")
 			L <- length(shapelist)
-			label_cells <- if (label_edge[k]=='-') 1:levels[k] 
+			label_cells <- if (label_edge[k]=='-') 1:levels[k]
 											else (L-levels[k]+1):L
 			label3d(shapelist[label_cells], split_dir[k], dn[[k]], vnames[k], edge=label_edge[k], ...)
 		}
@@ -290,21 +292,21 @@ mosaic3d.default <- function(x, expected=NULL, residuals=NULL,
 
 #	invisible(structable(observed))
 	invisible(shapelist)
-	
+
 }
 
 
 # basic shading_Friendly, adapting the simple code used in mosaicplot()
 
 shading_basic <- function(residuals, interpolate=TRUE) {
-	if (is.logical(interpolate)) 
+	if (is.logical(interpolate))
 		interpolate <- c(2, 4)
-	else if (any(interpolate <= 0) || length(interpolate) > 5) 
+	else if (any(interpolate <= 0) || length(interpolate) > 5)
 		stop("invalid 'interpolate' specification")
 	shade <- sort(interpolate)
 	breaks <- c(-Inf, -rev(shade), 0, shade, Inf)
-	colors <- c(hsv(0, s = seq.int(1, to = 0, length.out = length(shade) + 
-									1)), hsv(4/6, s = seq.int(0, to = 1, length.out = length(shade) + 
+	colors <- c(hsv(0, s = seq.int(1, to = 0, length.out = length(shade) +
+									1)), hsv(4/6, s = seq.int(0, to = 1, length.out = length(shade) +
 									1)))
 	colors[as.numeric(cut(residuals, breaks))]
 }
@@ -327,7 +329,7 @@ label3d <- function(objlist, dim, text, varname, offset=.05, adj, edge="-", gap=
 	xyz[,dim] <- loc[,dim]
 	if(!missing(varname)) {
 		loclab <- colMeans(loc)               # NB: doesn't take space into acct
-		xyzlab <- if (edge == '-') 
+		xyzlab <- if (edge == '-')
 			min[1,] - offset - gap
 			else max[1,] + offset + gap
 		xyzlab[dim] <- loclab[dim]

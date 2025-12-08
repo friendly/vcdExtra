@@ -6,6 +6,8 @@
 \title{Calculate Goodman-Kruskal Gamma for ordered tables}
 \usage{
 GKgamma(x, level = 0.95)
+
+\method{print}{GKgamma}(x, digits = 3, ...)
 }
 \arguments{
 \item{x}{A two-way frequency table, in matrix or table form.  The rows and

@@ -7,6 +7,10 @@
 \title{Create a Model List Object}
 \usage{
 glmlist(...)
+
+loglmlist(...)
+
+\method{coef}{glmlist}(object, result = c("list", "matrix", "data.frame"), ...)
 }
 \arguments{
 \item{\dots}{One or more model objects, as appropriate to the function,
@@ -58,7 +62,7 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore,
                 family = poisson, data = Mental)
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
-                
+
 # use object names
 mods <- glmlist(indep, coleff, roweff, linlin)
 names(mods)

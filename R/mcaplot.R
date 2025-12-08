@@ -31,7 +31,7 @@
 #' @param legend.pos Position of the legend in the plot, as in \code{\link[graphics]{legend}}
 #' @param xlab,ylab Labels for horizontal and vertical axes.  The default,
 #'        \code{"_auto_"} means that the function auto-generates a label of the form
-#'        \code{"Dimension X (xx.x %)"}
+#'        \code{"Dimension X (xx.x \%)"}
 #' @param rev.axes A logical vector of length 2, where TRUE reverses the
 #'        direction of the corresponding axis
 #' @param \dots Arguments passed down to \code{plot}
