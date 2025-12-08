@@ -7,10 +7,10 @@
 #' \code{Support_Abortion} is a natural response variable.
 #'
 #' The combinations of \code{Sex} and \code{Status} represent four independent
-#' samples, having fixed \code{Sex}-\code{Status} marginal totals. There were
+#' samples, having fixed \code{Sex}-\code{Status} marginal totals.  There were
 #' 500 females and 600 males. Within the female group, 250 of low status and
 #' 250 of high status were sampled. Similarly for the males, with 300 in each
-#' of the low and high status sub-groups.
+#' of the low and hgh status sub-groups.
 #'
 #' This is an example of a product-multinomial sampling scheme. the
 #' \code{Sex:Status} association must be included in any loglinear model where
@@ -25,14 +25,16 @@
 #' for 1100 observations. The variable names and their levels are:
 #'
 #' \tabular{rll}{
-#'  No \tab Name \tab Levels \cr
-#'  1 \tab \code{Sex} \tab \code{"Female", "Male"}\cr
-#'  2 \tab \code{Status} \tab \code{"Lo", "Hi"}\cr
-#'  3 \tab \code{Support_Abortion} \tab \code{"Yes", "No"}\cr
+#'   No \tab Name                    \tab Levels \cr
+#'   1  \tab \code{Sex}              \tab \code{"Female", "Male"}\cr
+#'   2  \tab \code{Status}           \tab \code{"Lo", "Hi"}\cr
+#'   3  \tab \code{Support_Abortion} \tab \code{"Yes", "No"}\cr
 #' }
+#'
 #' @source
 #'
-#' \cite{Christensen:90 [p. 92]} Christensen, R. (1990).  \emph{Log-Linear
+#' % \cite{Christensen:90 [p. 92]}
+#' Christensen, R. (1990).  \emph{Log-Linear
 #' Models}, New York, NY: Springer-Verlag, p. 92, Example 3.5.2.
 #'
 #' Christensen, R. (1997).  \emph{Log-Linear Models and Logistic Regression},
@@ -79,12 +81,15 @@ NULL
 #' @format A data frame in frequency form (comprising a 5 x 2 x 4 x 2 table)
 #' with 80 observations on the following 5 variables.
 #' \describe{
-#' \item{list("age")}{an ordered factor with levels \code{0-9} < \code{10-19} < \code{20-29} < \code{30-49} < \code{50+}}
-#' \item{list("result")}{a factor with levels \code{Died} \code{Injured}}
-#' \item{list("mode")}{mode of transportation, a factor with levels \code{4-Wheeled} \code{Bicycle} \code{Motorcycle} \code{Pedestrian}}
-#' \item{list("gender")}{a factor with levels \code{Female} \code{Male}}
-#' \item{list("Freq")}{a numeric vector}
+#'   \item{list("age")}{an ordered factor with levels \code{0-9} < \code{10-19} <\code{20-29}
+#'         < \code{30-49} < \code{50+}}
+#'   \item{list("result")}{a factor with levels \code{Died} \code{Injured}}
+#'   \item{list("mode")}{mode of transportation, a factor with levels \code{4-Wheeled} \code{Bicycle}
+#'         \code{Motorcycle} \code{Pedestrian}}
+#'   \item{list("gender")}{a factor with levels \code{Female} \code{Male}}
+#'   \item{list("Freq")}{a numeric vector}
 #' }
+#'
 #' @references Bertin, J. (1983), \emph{Semiology of Graphics}, University of
 #' Wisconsin Press.
 #' @source Bertin (1983), p. 30; original data from the Ministere des Travaux
@@ -182,22 +187,22 @@ NULL
 #' @docType data
 #' @format A data frame with 439 observations on the following 5 variables.
 #' \describe{
-#' \item{list("Phase")}{phase of the flight, a factor with levels \code{en route} \code{landing} \code{standing} \code{take-off} \code{unknown}}
-#' \item{list("Cause")}{a factor with levels \code{criminal} \code{human error} \code{mechanical} \code{unknown} \code{weather}}
-#' \item{list("date")}{date of crash, a Date}
-#' \item{list("Fatalities")}{number of fatalities, a numeric vector}
-#' \item{list("Year")}{year, a numeric vector}
+#'   \item{list("Phase")}{phase of the flight, a factor with levels \code{en route} \code{landing}
+#'         \code{standing} \code{take-off}
+#' \code{unknown}}
+#'   \item{list("Cause")}{a factor with levels \code{criminal} \code{human error} \code{mechanical}
+#'         \code{unknown} \code{weather}}
+#'   \item{list("date")}{date of crash, a Date}
+#'   \item{list("Fatalities")}{number of fatalities, a numeric vector}
+#'   \item{list("Year")}{year, a numeric vector}
 #' }
-#'
 #' @references Rick Wicklin,
 #' \url{http://blogs.sas.com/content/iml/2015/03/30/visualizing-airline-crashes.html}
-#'
 #' @source Originally from David McCandless,
-#' \url{https://informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/},
+#' \url{http://www.informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/},
 #' with the data at
 #' \url{https://docs.google.com/spreadsheets/d/1OvDq4_BtbR6nSnnHnjD5hVC3HQ-ulZPGbo0RDGbzM3Q/edit?usp=drive_web},
 #' downloaded April 14, 2015.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -252,12 +257,12 @@ NULL
 #' @format A frequency data frame with 80 observations on the following 5
 #' variables.
 #' \describe{
-#' \item{list("lake")}{a factor with levels \code{George} \code{Hancock} \code{Oklawaha} \code{Trafford}}
-#' \item{list("sex")}{a factor with levels \code{female} \code{male}}
-#' \item{list("size")}{alligator size, a factor with levels \code{large} (>2.3m) \code{small} (<=2.3m)}
-#' \item{list("food")}{primary food choice, a factor with levels \code{bird} \code{fish} \code{invert} \code{other} \code{reptile}}
-#' \item{list("count")}{cell frequency, a numeric vector}
-#' }
+#'   \item{list("lake")}{a factor with levels \code{George} \code{Hancock} \code{Oklawaha} \code{Trafford}}
+#'   \item{list("sex")}{a factor with levels \code{female} \code{male}}
+#'   \item{list("size")}{alligator size, a factor with levels \code{large} (>2.3m) \code{small} (<=2.3m)}
+#'   \item{list("food")}{primary food choice, a factor with levels \code{bird} \code{fish}
+#'         \code{invert} \code{other} \code{reptile}}
+#'   \item{list("count")}{cell frequency, a numeric vector} }
 #' @source Agresti, A. (2002). \emph{Categorical Data Analysis}, New York:
 #' Wiley, 2nd Ed., Table 7.1
 #' @keywords datasets
@@ -310,24 +315,19 @@ NULL
 #'
 #' @name Asbestos
 #' @docType data
-#' @format The format is:
-#' num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
+#' @format The format is: num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
 #' - attr(*, "dimnames")=List of 2 ..$ exposure: chr [1:5] "0-9" "10-19"
 #' "20-29" "30-39" ...  ..$ grade : chr [1:4] "None" "Grade 1" "Grade 2" "Grade
 #' 3"
-#'
-#' @references
-#' Beh, E. J., and D. R. Smith (2011b), Real World Occupational
+#' @references Beh, E. J., and D. R. Smith (2011b), Real World Occupational
 #' Epidemiology, Part 2: A Visual Interpretation of Statistical Significance,
 #' \emph{Archives of Environmental & Occupational Health}, \bold{66}, 245-248.
 #'
 #' Selikoff, I. J. (1981), Household Risks With Inorganic Fibers,
 #' \emph{Bulletin of the New York Academy of Medicine}, \bold{57}, 947-961.
-#'
 #' @source Beh, E. J. & Lombardo, R. (2022). Features of the Polynomial Biplot
 #' for Ordered Contingency Tables, \emph{Journal of Computational and Graphical
 #' Statistics}, 31:2, 403-412, DOI: 10.1080/10618600.2021.1990773, Table 1.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -365,18 +365,20 @@ NULL
 #' for 960 observations. The variable names and their levels are:
 #'
 #' \tabular{rll}{
-#' No \tab Name \tab Levels \cr
-#'  1 \tab \code{Alive} \tab \code{"Alive", "Dead"}\cr
-#'  2 \tab \code{Time} \tab \code{"Now", "Spring"}\cr
-#'  3 \tab \code{Length} \tab \code{"Long", "Short"}\cr
-#'  }
+#'  dim \tab Name          \tab Levels                \cr
+#'    1  \tab \code{Alive}  \tab \code{"Alive", "Dead"}\cr
+#'    2  \tab \code{Time}   \tab \code{"Now", "Spring"}\cr
+#'    3  \tab \code{Length} \tab \code{"Long", "Short"}\cr
+#' }
+
 #'
 #' @references % \cite{Bartlett:35} Bartlett, M. S. (1935).  Contingency Table
 #' Interactions \emph{Journal of the Royal Statistical Society}, Supplement,
 #' 1935, 2, 248-252.
 #' @source
 #'
-#' \cite{Hand-etal:94 [p.15 #19]} Hand, D. and Daly, F. and Lunn, A. D.and
+#' % \cite{Hand-etal:94 [p.15 #19]}
+#' Hand, D. and Daly, F. and Lunn, A. D.and
 #' McConway, K. J. and Ostrowski, E. (1994). \emph{A Handbook of Small Data
 #' Sets}.  London: Chapman & Hall, p. 15, # 19.
 #' @keywords datasets
@@ -436,18 +438,16 @@ NULL
 #' @format A frequency data frame (representing a 3 x 3 x 2 x 2 frequency
 #' table) with 36 cells on the following 5 variables.
 #' \describe{
-#' \item{list("Hair")}{hair color, a factor with levels \code{Fair} \code{Red} \code{Dark}}
-#' \item{list("Eyes")}{eye color, a factor with levels \code{Light} \code{Mixed} \code{Dark}}
-#' \item{list("Head")}{head shape, a factor with levels \code{Narrow} \code{Wide}}
-#' \item{list("Stature")}{height, a factor with levels \code{Tall} \code{Short}}
-#' \item{list("Freq")}{a numeric vector}
+#'   \item{list("Hair")}{hair color, a factor with levels \code{Fair} \code{Red} \code{Dark}}
+#'   \item{list("Eyes")}{eye color, a factor with levels \code{Light} \code{Mixed} \code{Dark}}
+#'   \item{list("Head")}{head shape, a factor with levels \code{Narrow} \code{Wide}}
+#'   \item{list("Stature")}{height, a factor with levels \code{Tall} \code{Short}}
+#'   \item{list("Freq")}{a numeric vector}
 #' }
 #'
-#' @source
-#' Burt, C. (1950). The factorial analysis of qualitative data,
+#' @source Burt, C. (1950). The factorial analysis of qualitative data,
 #' \emph{British Journal of Statistical Psychology}, \bold{3}(3), 166-185.
 #' Table IX.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -471,7 +471,7 @@ NULL
 #' and whether the Caesarian section was \code{Planned} or not.  The outcome is
 #' \code{Infection} (three levels).
 #'
-#' \code{Infection} is regarded as the response variable here.  There are quite
+#' @details \code{Infection} is regarded as the response variable here.  There are quite
 #' a few 0 cells here, particularly when \code{Risk} is absent and the
 #' Caesarian section was unplanned. Should these be treated as structural or
 #' sampling zeros?
@@ -481,19 +481,21 @@ NULL
 #' @format A 4-dimensional array resulting from cross-tabulating 4 variables
 #' for 251 observations. The variable names and their levels are:
 #'
-#' \tabular{rll}{
-#'  No \tab Name \tab Levels \cr
-#'   1 \tab \code{Infection}\tab \code{"Type 1", "Type 2", "None"}\cr
-#'   2 \tab \code{Risk}\tab \code{"Yes", "No"} (presence of risk factors)\cr
-#'   3 \tab \code{Antibiotics}\tab \code{"Yes", "No"} (were antibiotics given?)\cr
-#'   4 \tab \code{Planned}\tab \code{"Yes", "No"} (was the C section planned?)\cr
-#'  }
+#'   \tabular{rll}{
+#'   dim \tab Name \tab Levels \cr
+#'     1 \tab \code{Infection}\tab \code{"Type 1", "Type 2", "None"}\cr
+#'     2 \tab \code{Risk}\tab \code{"Yes", "No"} (presence of risk factors)\cr
+#'     3 \tab \code{Antibiotics}\tab \code{"Yes", "No"} (were antibiotics given?)\cr
+#'     4 \tab \code{Planned}\tab \code{"Yes", "No"} (was the C section planned?)\cr
+#'}
+#'
 #'
 #' @seealso \code{\link[Fahrmeir]{caesar}} for the same data recorded as a
 #' frequency data frame with other variables.
 #' @source
 #'
-#' \cite{Fahrmeir:94} Fahrmeir, L. & Tutz, G. (1994). Multivariate
+#' % \cite{Fahrmeir:94}
+#' Fahrmeir, L. & Tutz, G. (1994). Multivariate
 #' Statistical Modelling Based on Generalized Linear Models New York: Springer
 #' Verlag, Table 1.1.
 #' @keywords datasets
@@ -558,11 +560,11 @@ NULL
 #' for 474 observations. The variable names and their levels are:
 #'
 #' \tabular{rll}{
-#'  No \tab Name \tab Levels \cr
-#'   1\tab \code{Survival}\tab \code{"Died", "Surv"}\cr
-#'  2\tab \code{Grade}\tab \code{"Malignant", "Benign"}\cr
-#'  3\tab \code{Center}\tab \code{"Boston", "Glamorgan"}\cr
-#' }
+#'   dim \tab Name \tab Levels \cr
+#'     1\tab \code{Survival}\tab  \code{"Died", "Surv"}\cr
+#'     2\tab \code{Grade}\tab \code{"Malignant", "Benign"}\cr
+#'     3\tab \code{Center}\tab \code{"Boston", "Glamorgan"}\cr
+#'     }
 #' @source
 #'
 #' Lindsey, J. K. (1995).
@@ -607,17 +609,19 @@ NULL
 #' @name Cormorants
 #' @docType data
 #' @format A data frame with 343 observations on the following 8 variables.
+#'
 #' \describe{
-#' \item{list("category")}{Time of season, divided into 3 categories based on breeding chronology, an ordered factor with levels \code{Pre} < \code{Incubation} < \code{Chicks Present}}
-#' \item{list("week")}{Week of the season} \item{list("station")}{Station of observations on two different peninsulas in a park, a factor with levels \code{B1} \code{B2} \code{C1} \code{C2} \code{C3} \code{C4}}
-#' \item{list("nest")}{Type of nest, an ordered factor with levels \code{no} < \code{partial} < \code{full}}
-#' \item{list("height")}{Relative height of bird in the tree, an ordered factor with levels \code{low} < \code{mid} < \code{high}}
-#' \item{list("density")}{Number of other nests in the tree, an ordered factor with levels \code{zero} < \code{few} < \code{moderate} < \code{high}}
-#' \item{list("tree_health")}{Health of the tree the bird is advertising in, a factor with levels \code{dead} \code{healthy}}
-#' \item{list("count")}{Number of birds advertising, a numeric vector}
+#'   \item{\code{category}}{Time of season, divided into 3 categories based on breeding chronology, an ordered factor with levels \code{Pre} < \code{Incubation} < \code{Chicks Present}}
+#'   \item{\code{week}}{Week of the season}
+#'   \item{\code{station}}{Station of observations on two different peninsulas in a park, a factor with levels \code{B1} \code{B2} \code{C1} \code{C2} \code{C3} \code{C4}}
+#'   \item{\code{nest}}{Type of nest, an ordered factor with levels \code{no} < \code{partial} < \code{full}}
+#'   \item{\code{height}}{Relative height of bird in the tree, an ordered factor with levels \code{low} < \code{mid} < \code{high}}
+#'   \item{\code{density}}{Number of other nests in the tree, an ordered factor with levels \code{zero} < \code{few} < \code{moderate} < \code{high}}
+#'   \item{\code{tree_health}}{Health of the tree the bird is advertising in, a factor with levels \code{dead} \code{healthy}}
+#'   \item{\code{count}}{Number of birds advertising, a numeric vector}
 #' }
-#' @source
-#' McRae, M. (2015). Spatial, Habitat and Frequency Changes in
+
+#' @source McRae, M. (2015). Spatial, Habitat and Frequency Changes in
 #' Double-crested Cormorant Advertising Display in a Tree-nesting Colony.
 #' Unpublished MA project, Environmental Studies, York University.
 #' @keywords datasets
@@ -672,18 +676,16 @@ NULL
 #' @docType data
 #' @format A data frame with 208 observations on the following 2 variables.
 #' \describe{
-#' \item{list("date")}{a Date}
-#' \item{list("deaths")}{number of deaths, a numeric vector}
-#' }
-#'
-#' @references
-#' Aberdein, Jody and Spiegelhalter, David (2013). Have London's
+#'   \item{list("date")}{a Date}
+#'   \item{list("deaths")}{number of deaths, a numeric vector}
+#'   }
+#' @references Aberdein, Jody and Spiegelhalter, David (2013). Have London's
 #' roads become more dangerous for cyclists? \emph{Significance}, 10(6),
 #' 46--48.
-#'
 #' @source
-#' Road Safety Data from GOV.UK, but 2005-2012. Similar data is
-#' available in the \pkg{stats19}, \url{https://docs.ropensci.org/stats19/}.
+#' \url{https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-data},
+#' STATS 19 data, 2005-2012, using the files \code{Casualty0512.csv} and
+#' \code{Accidents0512.csv}
 #' @keywords datasets
 #' @examples
 #'
@@ -691,9 +693,9 @@ NULL
 #'
 #' plot(deaths ~ date, data=CyclingDeaths,
 #'   type="h",
-#' 	 lwd=3,
-#' 	 ylab="Number of deaths",
-#' 	 axes=FALSE)
+#' 	lwd=3,
+#' 	ylab="Number of deaths",
+#' 	axes=FALSE)
 #' axis(1, at=seq(as.Date('2005-01-01'),
 #'                by='years',
 #'                length.out=9),
@@ -747,19 +749,17 @@ NULL
 #' @format A frequency data frame with 32 observations on the following 6
 #' variables.
 #' \describe{
-#' \item{list("cigarette")}{a factor with levels \code{Yes} \code{No}}
-#' \item{list("alcohol")}{a factor with levels \code{Yes} \code{No}}
-#' \item{list("marijuana")}{a factor with levels \code{Yes} \code{No}}
-#' \item{list("sex")}{a factor with levels \code{female} \code{male}}
-#' \item{list("race")}{a factor with levels \code{white} \code{other}}
-#' \item{list("Freq")}{a numeric vector}
+#'   \item{\code{cigarette}}{a factor with levels \code{Yes} \code{No}}
+#'   \item{\code{alcohol}}{a factor with levels \code{Yes} \code{No}}
+#'   \item{\code{marijuana}}{a factor with levels \code{Yes} \code{No}}
+#'   \item{\code{sex}}{a factor with levels \code{female} \code{male}}
+#'   \item{\code{race}}{a factor with levels \code{white} \code{other}}
+#'   \item{\code{Freq}}{a numeric vector}
 #' }
-#'
-#' @references
-#' Thompson, L. (2009). \emph{R (and S-PLUS) Manual to Accompany
+
+#' @references Thompson, L. (2009). \emph{R (and S-PLUS) Manual to Accompany
 #' Agresti's Categorical Data},
 #' http://www.stat.ufl.edu/~aa/cda/Thompson_manual.pdf
-#'
 #' @source Agresti, A. (2002). \emph{Categorical Data Analysis}, 2nd Ed., New
 #' York: Wiley-Interscience, Table 9.1, p. 362.
 #' @keywords datasets
@@ -804,10 +804,11 @@ NULL
 #' @format The format is a one-way frequency table of counts of packages with
 #' 0, 1, 2, ... dependencies.
 #'
-#' 'table' int [1:15(1d)] 986 1347 993 685 375 298 155 65 32 19 ...
-#' - attr(*,
-#' "dimnames")=List of 1 ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
-#'
+#' \preformatted{
+#'  table' int [1:15(1d)] 986 1347 993 685 375 298 155 65 32 19 ...
+#'  - attr(*, "dimnames")=List of 1
+#'  ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
+#' }
 #' @source Using code from
 #' \url{https://blog.revolutionanalytics.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies.html}
 #' @keywords datasets
@@ -846,7 +847,7 @@ NULL
 
 
 
-#' Detergent preference data
+#' Detergent Preference Data
 #'
 #' Cross-classification of a sample of 1008 consumers according to (a) the
 #' softness of the laundry water used, (b) previous use of detergent Brand M,
@@ -859,23 +860,22 @@ NULL
 #' @format A 4-dimensional array resulting from cross-tabulating 4 variables
 #' for 1008 observations. The variable names and their levels are:
 #'
-#' \tabular{rll}{
-#'  No \tab Name \tab Levels \cr
-#'   1\tab \code{Temperature}\tab \code{"High", "Low"}\cr
-#'  2\tab \code{M_User}\tab \code{"Yes", "No"}\cr
-#'  3\tab \code{Preference}\tab \code{"Brand X", "Brand M"}\cr
-#'  4\tab \code{Water_softness}\tab \code{"Soft", "Medium", "Hard"}\cr
-#'  }
-#'
+#'   \tabular{rll}{
+#' dim \tab Name \tab Levels \cr
+#' 1\tab \code{Temperature}\tab \code{"High", "Low"}\cr
+#' 2\tab \code{M_User}\tab \code{"Yes", "No"}\cr
+#' 3\tab \code{Preference}\tab \code{"Brand X", "Brand M"}\cr
+#' 4\tab \code{Water_softness}\tab \code{"Soft", "Medium", "Hard"}\cr
+#' }
+
 #' @references
-#' \cite{RiesSmith:63} Ries, P. N. & Smith, H. (1963). The use of
+#' Ries, P. N. & Smith, H. (1963). The use of
 #' chi-square for preference testing in multidimensional problems.
 #' \emph{Chemical Engineering Progress}, 59, 39-43.
-#'
 #' @source
-#' \cite{Fienberg:80 [p. 71]} Fienberg, S. E. (1980). \emph{The Analysis of
-#' Cross-Classified Categorical Data} Cambridge, MA: MIT Press, p. 71.
 #'
+#' Fienberg, S. E. (1980). \emph{The Analysis of
+#' Cross-Classified Categorical Data} Cambridge, MA: MIT Press, p. 71.
 #' @keywords datasets
 #' @examples
 #'
@@ -926,25 +926,24 @@ NULL
 #' @name Donner
 #' @docType data
 #' @format A data frame with 90 observations on the following 5 variables.
+#'
 #' \describe{
-#' \item{list("family")}{family name, a factor with 10 levels }
-#' \item{list("age")}{age of person, a numeric vector}
-#' \item{list("sex")}{a factor with levels \code{Female} \code{Male}}
-#' \item{list("survived")}{a numeric vector, 0 or 1}
-#' \item{list("death")}{date of death for those who died before rescue, a POSIXct}
+#'   \item{\code{family}}{family name, a factor with 10 levels }
+#'   \item{\code{age}}{age of person, a numeric vector}
+#'   \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
+#'   \item{\code{survived}}{a numeric vector, 0 or 1}
+#'   \item{\code{death}}{date of death for those who died before rescue, a POSIXct}
 #' }
-#' @seealso
-#' \code{donner} in \pkg{alr3}, \code{\link[Sleuth2]{case2001}} in
+#'
+#' @seealso \code{donner} in \pkg{alr3}, \code{\link[Sleuth2]{case2001}} in
 #' \pkg{Sleuth2}(adults only) provide similar data sets.
 #'
-#' @references
-#' Ramsey, F.L. and Schafer, D.W. (2002).  \emph{The Statistical
+#' @references Ramsey, F.L. and Schafer, D.W. (2002).  \emph{The Statistical
 #' Sleuth: A Course in Methods of Data Analysis}, (2nd ed), Duxbury.
 #'
 #' Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis with R:
 #' Visualization and Modeling Techniques for Categorical and Count Data}.  Boca
 #' Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
-#'
 #' @source D. K. Grayson, 1990, "Donner party deaths: A demographic
 #' assessment", \emph{J. Anthropological Research}, \bold{46}, 223-242.
 #'
@@ -952,7 +951,6 @@ NULL
 #' Party}.  Logan, UT: Utah State University Press.  Additions, and dates of
 #' death from \url{http://user.xmission.com/~octa/DonnerParty/Roster.htm}.
 #' @keywords datasets
-#'
 #' @examples
 #'
 #' # conditional density plots
@@ -1043,13 +1041,12 @@ NULL
 #' @docType data
 #' @format A data frame with 366 observations on the following 3 variables.
 #' \describe{
-#' \item{list("Day")}{day of the year, 1:366}
-#' \item{list("Rank")}{draft priority rank of people born on that day} \item{list("Month")}{an ordered factor with levels \code{Jan} < \code{Feb}
-#' \dots < \code{Dec}}
+#'   \item{\code{Day}}{day of the year, 1:366}
+#'   \item{\code{Rank}}{draft priority rank of people born on that day}
+#'   \item{\code{Month}}{an ordered factor with levels \code{Jan} < \code{Feb} \dots < \code{Dec}}
 #' }
 #'
 #' @seealso \code{\link{Draft1970table}}
-#'
 #' @references Fienberg, S. E. (1971), "Randomization and Social Affairs: The
 #' 1970 Draft Lottery," \emph{Science}, 171, 255-261.
 #'
@@ -1100,12 +1097,13 @@ NULL
 #' @name Draft1970table
 #' @docType data
 #' @format The format is:
+#'
 #' \preformatted{
-#'  'table' int [1:12, 1:3] 9 7 5 8 9 11 12 13 10 9 ...
-#'  - attr(*, "dimnames")=List of 2
-#'   ..$ Month: chr [1:12] "Jan" "Feb" "Mar" "Apr" ...
-#'   ..$ Risk : chr [1:3] "High" "Med" "Low"
-#'   }
+#' 'table' int [1:12, 1:3] 9 7 5 8 9 11 12 13 10 9 ...
+#' - attr(*, "dimnames")=List of 2
+#' ..$ Month: chr [1:12] "Jan" "Feb" "Mar" "Apr" ...
+#' ..$ Risk : chr [1:3] "High" "Med" "Low"
+#' }
 #'
 #' @seealso \code{\link{Draft1970}}
 #' @references Fienberg, S. E. (1971), "Randomization and Social Affairs: The
@@ -1181,18 +1179,17 @@ NULL
 #' @format A 5-dimensional array resulting from cross-tabulating 5 variables
 #' for 1729 observations. The variable names and their levels are:
 #'
-#'   \tabular{rll}{
-#'     No \tab Name \tab Levels \cr
-#'     1\tab \code{Knowledge}\tab \code{"Good", "Poor"}\cr
-#'     2\tab \code{Reading}\tab \code{"No", "Yes"}\cr
-#'     3\tab \code{Radio}\tab \code{"No", "Yes"}\cr
-#'     4\tab \code{Lectures}\tab \code{"No", "Yes"}\cr
-#'     5\tab \code{Newspaper}\tab \code{"No", "Yes"}\cr
-#'   }
-#'
-#'
-#'
-#' @references Dyke, G. V. and Patterson, H. D. (1952). Analysis of factorial
+#' \tabular{rll}{
+#'  dim \tab Name \tab Levels \cr
+#'   1\tab \code{Knowledge}\tab \code{"Good", "Poor"}\cr
+#'   2\tab \code{Reading}\tab \code{"No", "Yes"}\cr
+#'   3\tab \code{Radio}\tab \code{"No", "Yes"}\cr
+#'   4\tab \code{Lectures}\tab \code{"No", "Yes"}\cr
+#'   5\tab \code{Newspaper}\tab \code{"No", "Yes"}\cr
+#' }
+
+#' @references
+#' Dyke, G. V. and Patterson, H. D. (1952). Analysis of factorial
 #' arrangements when the data are proportions. \emph{Biometrics}, 8, 1-12.
 #'
 #' Lindsey, J. K. (1993).  \emph{Models for Repeated Measurements} Oxford, UK:
@@ -1200,7 +1197,6 @@ NULL
 #'
 #' @source Fienberg, S. E. (1980). \emph{The Analysis of Cross-Classified
 #' Categorical Data} Cambridge, MA: MIT Press, p. 85, Table 5-6.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1268,25 +1264,20 @@ NULL
 #' either Control or Treated and whether or not a tumor was later observed.
 #' The four groups represent the combinations of sex and strain of mice.
 #'
-#' The
-#' format is: num [1:2, 1:2, 1:2, 1:2] 5 4 74 12 3 2 84 14 10 4 ...  - attr(*,
-#' "dimnames")=List of 4 ..$ group : chr [1:2] "Control" "Treated" ..$ outcome:
-#' chr [1:2] "Tumor" "NoTumor" ..$ sex : chr [1:2] "M" "F" ..$ strain : chr
-#' [1:2] "1" "2"
+#' The format is:
 #' \preformatted{
-#'  num [1:2, 1:2, 1:2, 1:2] 5 4 74 12 3 2 84 14 10 4 ...
-#'  - attr(*, "dimnames")=List of 4
-#'   ..$ group  : chr [1:2] "Control" "Treated"
-#'   ..$ outcome: chr [1:2] "Tumor" "NoTumor"
-#'   ..$ sex    : chr [1:2] "M" "F"
-#'   ..$ strain : chr [1:2] "1" "2"
+#' num [1:2, 1:2, 1:2, 1:2] 5 4 74 12 3 2 84 14 10 4 ...
+#' - attr(*, "dimnames")=List of 4
+#' ..$ group  : chr [1:2] "Control" "Treated"
+#' ..$ outcome: chr [1:2] "Tumor" "NoTumor"
+#' ..$ sex    : chr [1:2] "M" "F"
+#' ..$ strain : chr [1:2] "1" "2"
 #' }
-#' @references
-#' Breslow, N. (1976), Regression analysis of the log odds ratio: A
+#
+#' @references Breslow, N. (1976), Regression analysis of the log odds ratio: A
 #' method for retrospective studies, \emph{Biometrics}, 32(3), 409-416.
 #'
-#' @source
-#' Gart, J. J. (1971). The comparison of proportions: a review of
+#' @source Gart, J. J. (1971). The comparison of proportions: a review of
 #' significance tests, confidence intervals and adjustments for stratification.
 #' \emph{International Statistical Review}, 39, 148-169.
 #'
@@ -1332,14 +1323,14 @@ NULL
 #' @format A data frame with 90 observations on the following 4 variables.  The
 #' rows represent the non-NA entries in Edwards' table.
 #' \describe{
-#' \item{list("boys")}{number of boys in the family, \code{0:12}}
-#' \item{list("girls")}{number of girls in the family, \code{0:12}}
-#' \item{list("size")}{family size: \code{boys+girls}}
-#' \item{list("Freq")}{number of families with this sex composition}
+#'   \item{\code{boys}}{number of boys in the family, \code{0:12}}
+#'   \item{\code{girls}}{number of girls in the family, \code{0:12}}
+#'   \item{\code{size}}{family size: \code{boys+girls}}
+#'   \item{\code{Freq}}{number of families with this sex composition}
 #' }
-#'
-#' @seealso \code{\link[vcd]{Saxony}}, containing the data for families of size 12.
-#'
+
+#' @seealso \code{\link[vcd]{Saxony}}, containing the data for families of size
+#' 12.
 #' @references
 #' Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
 #' with R: Visualization and Modeling Techniques for Categorical and Count
@@ -1352,9 +1343,9 @@ NULL
 #' by using overdispersion models. \emph{Journal of the Royal Statistical
 #' Society: Series C (Applied Statistics)}, 47, 149-157.
 #'
-#' @source Edwards, A. W. F. (1958). An Analysis Of Geissler's Data On The
+#' @source
+#' Edwards, A. W. F. (1958). An Analysis Of Geissler's Data On The
 #' Human Sex Ratio. \emph{Annals of Human Genetics}, 23, 6-15.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1400,22 +1391,21 @@ NULL
 #' @format A 2-dimensional array resulting from cross-tabulating 2 variables
 #' for 1725 observations. The variable names and their levels are:
 #'
-#'   \tabular{rll}{
-#'     No \tab Name \tab Levels \cr
-#'     1\tab \code{Dullness}\tab \code{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
-#'     2\tab \code{Clothing}\tab \code{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
-#'   }
-#'
-#'
+#' \tabular{rll}{
+#'   No \tab Name \tab Levels \cr
+#'   1\tab \code{Dullness}\tab \code{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
+#'   2\tab \code{Clothing}\tab \code{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
+#' }
+
 #' @references
-#' \cite{Gilby & Pearson 1911, from Anscombe 1981, p 302} Gilby,
-#' W. H. (1911).  On the significance of the teacher's appreciation of general
+#' % \cite{Gilby & Pearson 1911, from Anscombe 1981, p 302}
+#' Gilby, W. H. (1911).
+#' On the significance of the teacher's appreciation of general
 #' intelligence.  \emph{Biometrika}, 8, 93-108 (esp. p. 94).  [Quoted by
 #' Kendall (1943,..., 1953) Table 13.1, p 320.]
 #'
 #' @source Anscombe, F. J. (1981). \emph{Computing in Statistical Science
 #' Through APL}. New York: Springer-Verlag, p. 302
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1460,10 +1450,11 @@ NULL
 #' @format A frequency data frame with 25 observations on the following 3
 #' variables representing a 5 x 5 table with 3500 cases.
 #' \describe{
-#' \item{list("father")}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
-#' \item{list("son")}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
-#' \item{list("Freq")}{a numeric vector}
+#'   \item{\code{father}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
+#'   \item{\code{son}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
+#'   \item{\code{Freq}}{a numeric vector}
 #' }
+#'
 #' @references
 #' Bishop, Y. M. M. and Fienberg, S. E. and Holland, P. W. (1975).
 #' \emph{Discrete Multivariate Analysis: Theory and Practice}, MIT Press.
@@ -1472,7 +1463,8 @@ NULL
 #' Visualization and Modeling Techniques for Categorical and Count Data}.  Boca
 #' Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 #'
-#' @source Glass, D. V. (1954), \emph{Social Mobility in Britain}. The Free Press.
+#' @source Glass, D. V. (1954), \emph{Social Mobility in Britain}. The Free
+#' Press.
 #' @keywords datasets
 #' @examples
 #'
@@ -1519,15 +1511,15 @@ NULL
 #' @docType data
 #' @format A data frame in frequency form with 6 observations on the following
 #' 3 variables.
-#' \describe{
-#' \item{list("sex")}{a factor with levels \code{female} \code{male}}
-#' \item{list("party")}{a factor with levels \code{dem} \code{indep} \code{rep}}
-#' \item{list("count")}{a numeric vector}
-#' }
 #'
+#' \describe{
+#'   \item{\code{sex}}{a factor with levels \code{female} \code{male}}
+#'   \item{\code{party}}{a factor with levels \code{dem} \code{indep} \code{rep}}
+#'   \item{\code{count}}{a numeric vector}
+#' }
+
 #' @source Agresti, A. \emph{Categorical Data Analysis}, 2nd E., John Wiley &
 #' Sons, 2002, Table 3.11, p. 106.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1563,31 +1555,29 @@ NULL
 #' canonical correlation models for categorical data, e.g., Becker and Clogg
 #' (1989).
 #'
+#' @details
 #' The hair and eye colors are ordered as in the original source, suggesting
 #' that they form ordered categories.
 #'
 #' @name HairEyePlace
 #' @docType data
-#' @format The format is:
-#' preformatted{
-#'  num [1:4, 1:5, 1:2] 326 688 343 98 38 116 84 48 241 584 ...
-#'  - attr(*, "dimnames")=List of 3
-#'   ..$ Eye  : chr [1:4] "Blue" "Light" "Medium" "Dark"
-#'   ..$ Hair : chr [1:5] "Fair" "Red" "Medium" "Dark" ...
-#'   ..$ Place: chr [1:2] "Caithness" "Aberdeen"
+#' @format
+#' The format is:
+#' \preformatted{
+#'   num [1:4, 1:5, 1:2] 326 688 343 98 38 116 84 48 241 584 ...
+#' - attr(*, "dimnames")=List of 3
+#' ..$ Eye  : chr [1:4] "Blue" "Light" "Medium" "Dark"
+#' ..$ Hair : chr [1:5] "Fair" "Red" "Medium" "Dark" ...
+#' ..$ Place: chr [1:2] "Caithness" "Aberdeen"
 #' }
 #'
-#'
-#' @references
-#' Becker, M. P., and Clogg, C. C. (1989).  Analysis of Sets of
+#' @references Becker, M. P., and Clogg, C. C. (1989).  Analysis of Sets of
 #' Two-Way Contingency Tables Using Association Models.  \emph{Journal of the
 #' American Statistical Association}, 84(405), 142-151.
 #'
 #' Fisher, R.A. (1940) The precision of discriminant functions.  \emph{Annals
 #' of Eugenics}, 10, 422-429.
-#'
 #' @source This data was taken from the \code{colors} data in \pkg{logmult}.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1645,21 +1635,19 @@ NULL
 #' variables, representing the cross-classification of 19912 individuals by
 #' father's occupation and son's first occupation.
 #' \describe{
-#' \item{list("Son")}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
-#' \item{list("Father")}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
-#' \item{list("Freq")}{a numeric vector}
+#'   \item{\code{Son}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+#'   \item{\code{Father}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+#'   \item{\code{Freq}}{a numeric vector}
 #' }
 #'
 #' @references
 #' Powers, D.A. and Xie, Y. (2008). \emph{Statistical Methods for
 #' Categorical Data Analysis}, Bingley, UK: Emerald.
-#'
 #' @source
 #' R.M. Hauser (1979), Some exploratory methods for modeling mobility
 #' tables and other cross-classified data.  In: K.F. Schuessler (Ed.),
 #' \emph{Sociological Methodology}, 1980, Jossey-Bass, San Francisco, pp.
 #' 413-458. Table 1.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1777,14 +1765,16 @@ NULL
 #' for 21522 observations. The variable names and their levels are:
 #'
 #' \tabular{rll}{
-#'  No \tab Name \tab Levels \cr
-#'   1 \tab \code{Disease}\tab \code{"Disease", "None"}\cr
-#'   2 \tab \code{Gender}\tab \code{"Male", "Female"}\cr
-#'   3 \tab \code{Occup}\tab \code{"Unempl", "WhiteCol", "BlueCol"}\cr
-#'  }
+#'   No \tab Name \tab Levels \cr
+#'   1\tab \code{Disease}\tab \code{"Disease", "None"}\cr
+#'   2\tab \code{Gender}\tab \code{"Male", "Female"}\cr
+#'   3\tab \code{Occup}\tab \code{"Unempl", "WhiteCol", "BlueCol"}\cr
+#' }
+
 #' @source
 #'
-#' % \cite{Karger, 1980} Karger, (1980).
+#' % \cite{Karger, 1980}
+#' Karger, (1980).
 #' @keywords datasets
 #' @examples
 #'
@@ -1815,7 +1805,7 @@ NULL
 #'
 #' Lindsey (1993) fits an initial set of logistic regression models examining
 #' the dependence of employment in 1971 (\code{e1971}) on successive subsets of
-#' the previous years, \code{e1970}, \code{e1969}, \dots \code{e1967}.
+#' the previous years, \code{e1970}, \code{e1969}, \dots{} \code{e1967}.
 #'
 #' Alternatively, one can examine markov chain models of first-order
 #' (dependence on previous year), second-order (dependence on previous two
@@ -1828,24 +1818,24 @@ NULL
 #' are:
 #'
 #' \tabular{rll}{
-#'  No \tab Name \tab Levels \cr
+#'   No \tab Name \tab Levels \cr
 #'   1\tab \code{e1971}\tab \code{"71Yes", "No"}\cr
-#'  2\tab \code{e1970}\tab \code{"70Yes", "No"}\cr
-#'  3\tab \code{e1969}\tab \code{"69Yes", "No"}\cr
-#'  4\tab \code{e1968}\tab \code{"68Yes", "No"}\cr
-#'  5\tab \code{e1967}\tab \code{"67Yes", "No"}\cr
-#'  }
-#'
+#'   2\tab \code{e1970}\tab \code{"70Yes", "No"}\cr
+#'   3\tab \code{e1969}\tab \code{"69Yes", "No"}\cr
+#'   4\tab \code{e1968}\tab \code{"68Yes", "No"}\cr
+#'   5\tab \code{e1967}\tab \code{"67Yes", "No"}\cr
+#' }
+
 #' @references
-#' \cite{HeckmanWillis:77} Heckman, J.J. & Willis, R.J. (1977).
+#' % \cite{HeckmanWillis:77}
+#' Heckman, J.J. & Willis, R.J. (1977).
 #' "A beta-logistic model for the analysis of sequential labor force
 #' participation by married women."  \emph{Journal of Political Economy}, 85:
 #' 27-58
 #' @source
 #'
-#' \cite{Lindsey:93 [p. 185]} Lindsey, J. K. (1993).  \emph{Models for
+#' Lindsey, J. K. (1993).  \emph{Models for
 #' Repeated Measurements} Oxford, UK: Oxford University Press, p. 185.
-#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1890,20 +1880,24 @@ NULL
 #'
 #' @name HospVisits
 #' @docType data
-#' @format
-#'   A 3 by 3 frequency table, with format:
+#' @format A 3 by 3 frequency table, with format:
 #' \preformatted{
-#'  table [1:3, 1:3] 43 6 9 16 11 18 3 10 16
-#'  - attr(*, "dimnames")=List of 2
-#'   ..$ visit: chr [1:3] "Regular" "Infrequent" "Never"
-#'   ..$ stay : chr [1:3] "2-9" "10-19" "20+"
-#'   }
+#' table [1:3, 1:3] 43 6 9 16 11 18 3 10 16
+#' - attr(*, "dimnames")=List of 2
+#' ..$ visit: chr [1:3] "Regular" "Infrequent" "Never"
+#' ..$ stay : chr [1:3] "2-9" "10-19" "20+"
+#' }
+#
 #' @seealso \code{\link[ca]{ca}}
-#' @references Wing, J. K. (1962). Institutionalism in Mental Hospitals,
+#' @references
+#' Wing, J. K. (1962). Institutionalism in Mental Hospitals,
 #' \emph{British Journal of Social and Clinical Psychology}, 1 (1), 38-51.
-#' @source Goodman, L. A. (1983) The analysis of dependence in
+#'
+#' @source
+#' Goodman, L. A. (1983) The analysis of dependence in
 #' cross-classifications having ordered categories, using log-linear models for
 #' frequencies and log-linear models for odds.  \emph{Biometrics}, 39, 149-160.
+#'
 #' @keywords datasets
 #' @examples
 #'
@@ -1925,15 +1919,19 @@ NULL
 #' Household Tasks Performed by Husbands and Wives
 #'
 #' A 13 x 4 table of frequencies of household tasks performed by couples,
-#' either by the `Husband`, `Wife`, `Alternating` or `Jointly`.
+#' either by the \code{Husband}, \code{Wife}, \code{Alternating} or \code{Jointly}.
 #'
 #'
 #' @name HouseTasks
 #' @docType data
-#' @format The format is: 'table' int [1:13, 1:4] 36 11 24 51 13 1 1 14 20 46
-#' ...  - attr(*, "dimnames")=List of 2 ..$ Task: chr [1:13] "Breakfast"
-#' "Dinner" "Dishes" "Driving" ...  ..$ Who : chr [1:4] "Alternating" "Husband"
-#' "Jointly" "Wife"
+#' @format The format is:
+#' \preformatted{
+#'   'table' int [1:13, 1:4] 36 11 24 51 13 1 1 14 20 46 ...
+#' - attr(*, "dimnames")=List of 2
+#' ..$ Task: chr [1:13] "Breakfast" "Dinner" "Dishes" "Driving" ...
+#' ..$ Who : chr [1:4] "Alternating" "Husband" "Jointly" "Wife"
+#' }
+#'
 #' @source This data set was taken from \code{\link[factoextra]{housetasks}}, a
 #' 13 x 4 data.frame. In this table version, the rows and columns were sorted
 #' alphabetically (and a typo was corrected).
@@ -1941,7 +1939,7 @@ NULL
 #' @examples
 #'
 #' data(HouseTasks)
-#' ## maybe str(HouseTasks)
+#' str(HouseTasks)
 #'
 #' chisq.test(HouseTasks)
 #'
@@ -1999,21 +1997,24 @@ NULL
 #' for 13968 observations. The variable names and their levels are:
 #'
 #' \tabular{rll}{
-#'  No \tab Name \tab Levels \cr
+#'   No \tab Name \tab Levels \cr
 #'   1\tab \code{Status}\tab \code{"College", "School", "Job", "Other"}\cr
-#'  2\tab \code{Rank}\tab \code{"Low", "Middle", "High"}\cr
-#'  3\tab \code{Occupation}\tab \code{"1", "2", "3", "4", "5", "6", "7"}\cr
-#'  4\tab \code{Sex}\tab \code{"Male", "Female"}\cr
-#'  }
+#'   2\tab \code{Rank}\tab \code{"Low", "Middle", "High"}\cr
+#'   3\tab \code{Occupation}\tab \code{"1", "2", "3", "4", "5", "6", "7"}\cr
+#'   4\tab \code{Sex}\tab \code{"Male", "Female"}\cr
+#' }
+#
 #' @seealso \code{\link[MASS]{minn38}} provides the same data as a data frame.
-#'
-#' @references Hoyt, C. J., Krishnaiah, P. R. and Torrance, E. P. (1959)
+#' @references
+#' Hoyt, C. J., Krishnaiah, P. R. and Torrance, E. P. (1959)
 #' Analysis of complex contingency tables, \emph{Journal of Experimental
 #' Education} 27, 187-194.
 #' @source
 #'
-#' % \cite{Hoyt-etal:59} % \cite{Fienberg:80 [pp.91-92]} % \cite{Plackett:74} %
-#' \cite{minn38{MASS}}
+#' % \cite{Hoyt-etal:59}
+#' % \cite{Fienberg:80 [pp.91-92]}
+#' % \cite{Plackett:74}
+#' % \cite{minn38{MASS}}
 #'
 #' Fienberg, S. E. (1980). \emph{The Analysis of Cross-Classified Categorical
 #' Data}. Cambridge, MA: MIT Press, p. 91-92.
@@ -2120,35 +2121,32 @@ NULL
 #' @docType data
 #' @format A data frame with 200 observations on the following 22 variables.
 #' \describe{
-#' \item{\code{id}}{Patient id code, a numeric vector}
-#' \item{list("died")}{Died before discharge?, a factor with levels \code{No} \code{Yes}}
-#' \item{list("age")}{Patient age, a numeric vector}
-#' \item{list("sex")}{Patient sex, a factor with levels \code{Female} \code{Male}}
-#' \item{list("race")}{Patient race, a factor with levels \code{Black} \code{Other} \code{White}.  Also represented here as \code{white}.}
-#' \item{list("service")}{Service at ICU Admission, a factor with levels \code{Medical} \code{Surgical}}
-#' \item{list("cancer")}{Cancer part of present problem?, a factor with levels \code{No} \code{Yes}}
-#' \item{list("renal")}{History of chronic renal failure?, a factor with levels \code{No} \code{Yes}}
-#' \item{list("infect")}{Infection probable at ICU admission?, a factor with levels \code{No} \code{Yes}}
-#' \item{list("cpr")}{Patient received CPR prior to ICU admission?, a factor with levels \code{No} \code{Yes}}
-#' \item{list("systolic")}{Systolic blood pressure at admission (mm Hg), a numeric vector}
-#' \item{list("hrtrate")}{Heart rate at ICU Admission (beats/min), a numeric vector}
-#' \item{list("previcu")}{Previous admission to an ICU within 6 Months?, a factor with levels \code{No} \code{Yes}}
-#' \item{list("admit")}{Type of admission, a factor with levels \code{Elective} \code{Emergency}}
-#' \item{list("fracture")}{Admission with a long bone, multiple, neck, single area, or hip fracture?  a factor with levels
-#' \code{No} \code{Yes}}
-#' \item{list("po2")}{PO2 from initial blood gases, a factor with levels \code{>60} \code{<=60}}
-#' \item{list("ph")}{pH from initial blood gases, a factor with levels \code{>=7.25} \code{<7.25}}
-#' \item{list("pco")}{PCO2 from initial blood gases, a factor with levels \code{<=45} \code{>45}}
-#' \item{list("bic")}{Bicarbonate (HCO3) level from
-#' initial blood gases, a factor with levels \code{>=18} \code{<18}}
-#' \item{list("creatin")}{Creatinine, from initial blood gases, a factor with
-#' levels \code{<=2} \code{>2}}
-#' \item{list("coma")}{Level of unconsciousness at
-#' admission to ICU, a factor with levels \code{None} \code{Stupor}
-#' \code{Coma}} \item{list("white")}{a recoding of \code{race}, a factor with
-#' levels \code{White} \code{Non-white}}
-#' \item{list("uncons")}{a recoding of
-#' \code{coma} a factor with levels \code{No} \code{Yes}} }
+#'   \item{\code{id}}{Patient id code, a numeric vector}
+#'   \item{\code{died}}{Died before discharge?, a factor with levels \code{No} \code{Yes}}
+#'   \item{\code{age}}{Patient age, a numeric vector}
+#'   \item{\code{sex}}{Patient sex, a factor with levels \code{Female} \code{Male}}
+#'   \item{\code{race}}{Patient race, a factor with levels \code{Black} \code{Other} \code{White}.  Also represented here as \code{white}.}
+#'   \item{\code{service}}{Service at ICU Admission, a factor with levels \code{Medical} \code{Surgical}}
+#'   \item{\code{cancer}}{Cancer part of present problem?, a factor with levels \code{No} \code{Yes}}
+#'   \item{\code{renal}}{History of chronic renal failure?, a factor with levels \code{No} \code{Yes}}
+#'   \item{\code{infect}}{Infection probable at ICU admission?, a factor with levels \code{No} \code{Yes}}
+#'   \item{\code{cpr}}{Patient received CPR prior to ICU admission?, a factor with levels \code{No} \code{Yes}}
+#'   \item{\code{systolic}}{Systolic blood pressure at admission (mm Hg), a numeric vector}
+#'   \item{\code{hrtrate}}{Heart rate at ICU Admission (beats/min), a numeric vector}
+#'   \item{\code{previcu}}{Previous admission to an ICU within 6 Months?, a factor with levels \code{No} \code{Yes}}
+#'   \item{\code{admit}}{Type of admission, a factor with levels \code{Elective} \code{Emergency}}
+#'   \item{\code{fracture}}{Admission with a long bone, multiple, neck, single area, or hip fracture?
+#'         a factor with levels \code{No} \code{Yes}}
+#'   \item{\code{po2}}{PO2 from initial blood gases, a factor with levels \code{>60} \code{<=60}}
+#'   \item{\code{ph}}{pH from initial blood gases, a factor with levels \code{>=7.25} \code{<7.25}}
+#'   \item{\code{pco}}{PCO2 from initial blood gases, a factor with levels \code{<=45} \code{>45}}
+#'   \item{\code{bic}}{Bicarbonate (HCO3) level from initial blood gases, a factor with levels \code{>=18} \code{<18}}
+#'   \item{\code{creatin}}{Creatinine, from initial blood gases, a factor with levels \code{<=2} \code{>2}}
+#'   \item{\code{coma}}{Level of unconsciousness at admission to ICU,	a factor with levels \code{None} \code{Stupor} \code{Coma}}
+#'   \item{\code{white}}{a recoding of \code{race},  a factor with levels \code{White} \code{Non-white}}
+#'   \item{\code{uncons}}{a recoding of \code{coma} a factor with levels \code{No} \code{Yes}}
+#' }
+#'
 #' @references
 #'
 #' Lemeshow, S., Teres, D., Avrunin, J. S., Pastides, H. (1988). Predicting the
@@ -2223,10 +2221,14 @@ NULL
 #' @name JobSat
 #' @docType data
 #' @format A 4 x 4 contingency table of \code{income} by \code{satisfaction},
-#' with the following structure: \preformatted{ table [1:4, 1:4] 1 2 1 0 3 3 6
-#' 1 10 10 ...  - attr(*, "dimnames")=List of 2 ..$ income : chr [1:4] "< 15k"
-#' "15-25k" "25-40k" "> 40k" ..$ satisfaction: chr [1:4] "VeryD" "LittleD"
-#' "ModerateS" "VeryS" }
+#' with the following structure:
+#' \preformatted{
+#'   table [1:4, 1:4] 1 2 1 0 3 3 6 1 10 10 ...
+#'   - attr(*, "dimnames")=List of 2
+#'   ..$ income      : chr [1:4] "< 15k" "15-25k" "25-40k" "> 40k"
+#'   ..$ satisfaction: chr [1:4] "VeryD" "LittleD" "ModerateS" "VeryS"
+#' }
+#'
 #' @source Agresti, A. Categorical Data Analysis John Wiley & Sons, 2002, Table
 #' 2.8, p. 57.
 #' @keywords datasets
@@ -2242,200 +2244,156 @@ NULL
 
 
 
-#' Loglinear Model Utilities
-#'
-#' These functions generate lists of terms to specify a loglinear model in a
-#' form compatible with \code{\link[stats]{loglin}} and also provide for
-#' conversion to an equivalent \code{\link[MASS]{loglm}} specification or a
-#' shorthand character string representation.
-#'
-#' They allow for a more conceptual way to specify such models by a function
-#' for their type, as opposed to just an uninterpreted list of model terms and
-#' also allow easy specification of marginal models for a given contingency
-#' table.
-#'
-#' They are intended to be used as tools in higher-level modeling and graphics
-#' functions, but can also be used directly.
-#'
-#' The main model specification functions, \code{conditional}, \code{joint},
-#' \code{markov}, \dots, \code{saturated}, return a list of vectors indicating
-#' the marginal totals to be fit, via the \code{margin} argument to
-#' \code{\link[stats]{loglin}}.  Each element of this list corresponds to a
-#' high-order term in a hierarchical loglinear model, where, e.g., a term like
-#' \code{c("A", "B")} is equivalent to the \code{\link[MASS]{loglm}} term
-#' \code{"A:B"} and hence automatically includes all low-order terms.
-#'
-#' Note that these can be used to supply the \code{expected} argument for the
-#' default \code{\link[vcd]{mosaic}} function, when the data is supplied as a
-#' contingency table.
-#'
-#' The table below shows some typical results in terms of the standard
-#' shorthand notation for loglinear models, with factors A, B, C, \dots, where
-#' brackets are used to delimit the high-order terms in the loglinear model.
-#'
-#' \tabular{llll}{ \strong{function} \tab \strong{3-way} \tab \strong{4-way}
-#' \tab \strong{5-way} \cr \code{mutual} \tab [A] [B] [C] \tab [A] [B] [C] [D]
-#' \tab [A] [B] [C] [D] [E] \cr \code{joint} \tab [AB] [C] \tab [ABC] [D] \tab
-#' [ABCE] [E] \cr \code{joint (with=1)} \tab [A] [BC] \tab [A] [BCD] \tab [A]
-#' [BCDE] \cr \code{conditional} \tab [AC] [BC] \tab [AD] [BD] [CD] \tab [AE]
-#' [BE] [CE] [DE] \cr \code{condit (with=1)} \tab [AB] [AC] \tab [AB] [AC] [AD]
-#' \tab [AB] [AC] [AD] [AE] \cr \code{markov (order=1)} \tab [AB] [BC] \tab
-#' [AB] [BC] [CD] \tab [AB] [BC] [CD] [DE] \cr \code{markov (order=2)} \tab [A]
-#' [B] [C] \tab [ABC] [BCD] \tab [ABC] [BCD] [CDE] \cr \code{saturated} \tab
-#' [ABC] \tab [ABCD] \tab [ABCDE] \cr }
-#'
-#' \code{loglin2formula} converts the output of one of these to a model formula
-#' suitable as the \code{formula} for of \code{\link[MASS]{loglm}}.
-#'
-#' \code{loglin2string} converts the output of one of these to a string
-#' describing the loglinear model in the shorthand bracket notation, e.g.,
-#' \code{"[A,B] [A,C]"}.
-#'
-#' @aliases loglin-utilities conditional joint loglin2formula loglin2string
-#' markov mutual saturated
-#' @param nf number of factors for which to generate the model
-#' @param table a contingency table used only for factor names in the model,
-#' typically the output from \code{\link[base]{table}} and possibly permuted
-#' with \code{aperm}
-#' @param factors names of factors used in the model formula when \code{table}
-#' is not specified
-#' @param with For \code{joint} and \code{conditional} models, \code{with}
-#' gives the indices of the factors against which all others are considered
-#' jointly or conditionally independent
-#' @param order For \code{markov}, this gives the order of the Markov chain
-#' model for the factors.  An \code{order=1} Markov chain allows associations
-#' among sequential pairs of factors, e.g., \code{[A,B], [B,C], [C,D]} \dots.
-#' An \code{order=2} Markov chain allows associations among sequential triples.
-#' @param x For the \code{loglin2*} functions, a list of terms in a loglinear
-#' model, such as returned by \code{conditional}, \code{joint}, \dots
-#' @param env For \code{loglin2formula}, environment in which to evaluate the
-#' formula
-#' @param brackets For \code{loglin2string}, characters to use to surround
-#' model terms.  Either a single character string containing two characters
-#' (e.g., \code{'[]'} or a character vector of length two.
-#' @param sep For \code{loglin2string}, the separator character string used for
-#' factor names within a given model term
-#' @param collapse For \code{loglin2string}, the character string used between
-#' terms in the the model string
-#' @param abbrev For \code{loglin2string}, whether and how to abbreviate the
-#' terms in the string representation. This has not yet been implemented.
-#' @return For the main model specification functions, \code{conditional},
-#' \code{joint}, \code{markov}, \dots, the result is a list of vectors (terms),
-#' where the elements in each vector are the names of the factors. The elements
-#' of the list are given names \code{term1, term2, \dots}.
-#' @author Michael Friendly
-#' @seealso \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}}
-#' @references These functions were inspired by the original SAS implementation
-#' of mosaic displays, described in the \emph{User's Guide},
-#' \url{http://www.datavis.ca/mosaics/mosaics.pdf}
-#' @keywords models
-#' @examples
-#'
-#' joint(3, table=HairEyeColor)
-#' # as a formula or string
-#' loglin2formula(joint(3, table=HairEyeColor))
-#' loglin2string(joint(3, table=HairEyeColor))
-#'
-#' joint(2, HairEyeColor)  # marginal model for [Hair] [Eye]
-#'
-#' # other possibilities
-#' joint(4, factors=letters, with=1)
-#' joint(5, factors=LETTERS)
-#' joint(5, factors=LETTERS, with=4:5)
-#'
-#' conditional(4)
-#' conditional(4, with=3:4)
-#'
-#' # use in mosaic displays or other strucplots
-#' mosaic(HairEyeColor, expected=joint(3))
-#' mosaic(HairEyeColor, expected=conditional(3))
-#'
-#' # use with MASS::loglm
-#' cond3 <- loglin2formula(conditional(3, table=HairEyeColor))
-#' cond3 <- loglin2formula(conditional(3))  # same, with factors 1,2,3
-#' require(MASS)
-#' loglm(cond3, data=HairEyeColor)
-#'
-#' saturated(3, HairEyeColor)
-#' loglin2formula(saturated(3, HairEyeColor))
-#' loglin2string(saturated(3, HairEyeColor))
-#' loglin2string(saturated(3, HairEyeColor), brackets='{}', sep=', ')
-#'
-#'
-NULL
+# Loglinear Model Utilities
+#
+#
+# @aliases loglin-utilities conditional joint loglin2formula loglin2string
+#          markov mutual saturated
+# @param nf number of factors for which to generate the model
+# @param table a contingency table used only for factor names in the model,
+# typically the output from \code{\link[base]{table}} and possibly permuted
+# with \code{aperm}
+# @param factors names of factors used in the model formula when \code{table}
+# is not specified
+# @param with For \code{joint} and \code{conditional} models, \code{with}
+# gives the indices of the factors against which all others are considered
+# jointly or conditionally independent
+# @param order For \code{markov}, this gives the order of the Markov chain
+# model for the factors.  An \code{order=1} Markov chain allows associations
+# among sequential pairs of factors, e.g., \code{[A,B], [B,C], [C,D]} \dots{}.
+# An \code{order=2} Markov chain allows associations among sequential triples.
+# @param x For the \code{loglin2*} functions, a list of terms in a loglinear
+# model, such as returned by \code{conditional}, \code{joint}, \dots{}
+# @param env For \code{loglin2formula}, environment in which to evaluate the
+# formula
+# @param brackets For \code{loglin2string}, characters to use to surround
+# model terms.  Either a single character string containing two characters
+# (e.g., \code{'[]'} or a character vector of length two.
+# @param sep For \code{loglin2string}, the separator character string used for
+# factor names within a given model term
+# @param collapse For \code{loglin2string}, the character string used between
+# terms in the the model string
+# @param abbrev For \code{loglin2string}, whether and how to abbreviate the
+# terms in the string representation. This has not yet been implemented.
+# @return For the main model specification functions, \code{conditional},
+# \code{joint}, \code{markov}, \dots{}, the result is a list of vectors
+# (terms), where the elements in each vector are the names of the factors. The
+# elements of the list are given names \code{term1, term2, \dots{}}.
+# @author Michael Friendly
+# @seealso \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}}
+# @references These functions were inspired by the original SAS implementation
+# of mosaic displays, described in the \emph{User's Guide},
+# \url{http://www.datavis.ca/mosaics/mosaics.pdf}
+# @keywords models
+# EXAMPLES NOT COPIED
+# @examples
+#
+# joint(3, table=HairEyeColor)
+# # as a formula or string
+# loglin2formula(joint(3, table=HairEyeColor))
+# loglin2string(joint(3, table=HairEyeColor))
+#
+# joint(2, HairEyeColor)  # marginal model for [Hair] [Eye]
+#
+# # other possibilities
+# joint(4, factors=letters, with=1)
+# joint(5, factors=LETTERS)
+# joint(5, factors=LETTERS, with=4:5)
+#
+# conditional(4)
+# conditional(4, with=3:4)
+#
+# # use in mosaic displays or other strucplots
+# mosaic(HairEyeColor, expected=joint(3))
+# mosaic(HairEyeColor, expected=conditional(3))
+#
+# # use with MASS::loglm
+# cond3 <- loglin2formula(conditional(3, table=HairEyeColor))
+# cond3 <- loglin2formula(conditional(3))  # same, with factors 1,2,3
+# require(MASS)
+# loglm(cond3, data=HairEyeColor)
+#
+# saturated(3, HairEyeColor)
+# loglin2formula(saturated(3, HairEyeColor))
+# loglin2string(saturated(3, HairEyeColor))
+# loglin2string(saturated(3, HairEyeColor), brackets='{}', sep=', ')
+#
+#
+#NULL
 
 
 
 
 
-#' The Logarithmic Series Distribution
-#'
-#' The logarithmic series distribution is a long-tailed distribution introduced
-#' by Fisher etal. (1943) in connection with data on the abundance of
-#' individuals classified by species.
-#'
-#' These functions provide the density, distribution function, quantile
-#' function and random generation for the logarithmic series distribution with
-#' parameter \code{prob}.
-#'
-#' The logarithmic series distribution with \code{prob} = \eqn{p} has density
-#' \deqn{ p ( x ) = \alpha p^x / x } for \eqn{x = 1, 2, \dots}, where
-#' \eqn{\alpha= -1 / \log(1 - p)} and \eqn{0 < p <1}.  Note that counts
-#' \code{x==2} cannot occur.
-#'
-#' @aliases Logseries dlogseries plogseries qlogseries rlogseries
-#' @param x,q vector of quantiles representing the number of events.
-#' @param prob parameter for the distribution, \code{0 < prob < 1}
-#' @param log,log.p logical; if TRUE, probabilities \code{p} are given as
-#' \code{log(p)}
-#' @param lower.tail logical; if TRUE (default), probabilities are \eqn{P[X \le
-#' x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.
-#' @param p vector of probabilities
-#' @param max.value maximum value returned by \code{qlogseries}
-#' @param n number of observations for \code{rlogseries}
-#' @return \code{dlogseries} gives the density, \code{plogseries} gives the
-#' distribution function, \code{qlogseries} gives the quantile function, and
-#' \code{rlogseries} generates random deviates.
-#'
-#' @author Michael Friendly, using original code modified from the
-#' \code{gmlss.dist} package by Mikis Stasinopoulos.
-#'
-#' @seealso \code{\link[stats]{Distributions}}, ~~~
-#' @references \url{https://en.wikipedia.org/wiki/Logarithmic_distribution}
-#'
-#' Fisher, R. A. and Corbet, A. S. and Williams, C. B. (1943). The relation
-#' between the number of species and the number of individuals \emph{Journal of
-#' Animal Ecology}, 12, 42-58.
-#' @keywords distribution
-#' @examples
-#'
-#' XL <-expand.grid(x=1:5, p=c(0.33, 0.66, 0.99))
-#' lgs.df <- data.frame(XL, prob=dlogseries(XL[,"x"], XL[,"p"]))
-#' lgs.df$p = factor(lgs.df$p)
-#' str(lgs.df)
-#'
-#' require(lattice)
-#' mycol <- palette()[2:4]
-#' xyplot( prob ~ x, data=lgs.df, groups=p,
-#' 	xlab=list('Number of events (k)', cex=1.25),
-#' 	ylab=list('Probability',  cex=1.25),
-#' 	type='b', pch=15:17, lwd=2, cex=1.25, col=mycol,
-#' 	key = list(
-#' 					title = 'p',
-#' 					points = list(pch=15:17, col=mycol, cex=1.25),
-#' 					lines = list(lwd=2, col=mycol),
-#' 					text = list(levels(lgs.df$p)),
-#' 					x=0.9, y=0.98, corner=c(x=1, y=1)
-#' 					)
-#' 	)
-#'
-#'
-#' # random numbers
-#' hist(rlogseries(200, prob=.4), xlab='x')
-#' hist(rlogseries(200, prob=.8), xlab='x')
-#'
-#'
-NULL
+# The Logarithmic Series Distribution
+#
+# The logarithmic series distribution is a long-tailed distribution introduced
+# by Fisher etal. (1943) in connection with data on the abundance of
+# individuals classified by species.
+#
+# These functions provide the density, distribution function, quantile
+# function and random generation for the logarithmic series distribution with
+# parameter \code{prob}.
+#
+# The logarithmic series distribution with \code{prob} = \eqn{p} has density
+# \deqn{ p ( x ) = \alpha p^x / x } for \eqn{x = 1, 2, \dots}, where
+# \eqn{\alpha= -1 / \log(1 - p)} and \eqn{0 < p <1}.  Note that counts
+# \code{x==2} cannot occur.
+#
+# @aliases Logseries dlogseries plogseries qlogseries rlogseries
+# @param x,q vector of quantiles representing the number of events.
+# @param prob parameter for the distribution, \code{0 < prob < 1}
+# @param log,log.p logical; if TRUE, probabilities \code{p} are given as
+# \code{log(p)}
+# @param lower.tail logical; if TRUE (default), probabilities are \eqn{P[X \le
+# x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.
+# @param p vector of probabilities
+# @param max.value maximum value returned by \code{qlogseries}
+# @param n number of observations for \code{rlogseries}
+# @return \code{dlogseries} gives the density, \code{plogseries} gives the
+# distribution function, \code{qlogseries} gives the quantile function, and
+# \code{rlogseries} generates random deviates.
+#
+# %% ~Describe the value returned %% If it is a LIST, use %% \item{comp1
+# }{Description of 'comp1'} %% \item{comp2 }{Description of 'comp2'} %% ...
+# @author Michael Friendly, using original code modified from the
+# \code{gmlss.dist} package by Mikis Stasinopoulos.
+# @seealso \code{\link[stats]{Distributions}}, ~~~
+# @references \url{https://en.wikipedia.org/wiki/Logarithmic_distribution}
+#
+# Fisher, R. A. and Corbet, A. S. and Williams, C. B. (1943). The relation
+# between the number of species and the number of individuals \emph{Journal of
+# Animal Ecology}, 12, 42-58.
+# @keywords distribution
+# @examples
+#
+# XL <-expand.grid(x=1:5, p=c(0.33, 0.66, 0.99))
+# lgs.df <- data.frame(XL, prob=dlogseries(XL[,"x"], XL[,"p"]))
+# lgs.df$p = factor(lgs.df$p)
+# str(lgs.df)
+#
+# require(lattice)
+# mycol <- palette()[2:4]
+# xyplot( prob ~ x, data=lgs.df, groups=p,
+# 	xlab=list('Number of events (k)', cex=1.25),
+# 	ylab=list('Probability',  cex=1.25),
+# 	type='b', pch=15:17, lwd=2, cex=1.25, col=mycol,
+# 	key = list(
+# 					title = 'p',
+# 					points = list(pch=15:17, col=mycol, cex=1.25),
+# 					lines = list(lwd=2, col=mycol),
+# 					text = list(levels(lgs.df$p)),
+# 					x=0.9, y=0.98, corner=c(x=1, y=1)
+# 					)
+# 	)
+#
+#
+# # random numbers
+# hist(rlogseries(200, prob=.4), xlab='x')
+# hist(rlogseries(200, prob=.8), xlab='x')
+#
+#
+# NULL
 
 
 
@@ -2449,11 +2407,17 @@ NULL
 #'
 #' @name Mammograms
 #' @docType data
-#' @format A frequency table in matrix form.  The format is: num [1:4, 1:4] 34
-#' 6 2 0 10 8 5 1 2 8 ...  - attr(*, "dimnames")=List of 2 ..$ Reader2: chr
-#' [1:4] "Absent" "Minimal" "Moderate" "Severe" ..$ Reader1: chr [1:4] "Absent"
-#' "Minimal" "Moderate" "Severe"
-#' @source Kundel, H. L. & Polansky, M. (2003), "Measurement of Observer
+#' @format
+#' A frequency table in matrix form.  The format is:
+#' \preformatted{
+#'   num [1:4, 1:4] 34 6 2 0 10 8 5 1 2 8 ...
+#' - attr(*, "dimnames")=List of 2
+#' ..$ Reader2: chr [1:4] "Absent" "Minimal" "Moderate" "Severe"
+#' ..$ Reader1: chr [1:4] "Absent" "Minimal" "Moderate" "Severe"
+#' }
+#'
+#' @source
+#' Kundel, H. L. & Polansky, M. (2003), "Measurement of Observer
 #' Agreement", \emph{Radiology}, \bold{228}, 303-308, Table A1
 #' @keywords datasets
 #' @examples
@@ -2483,25 +2447,31 @@ NULL
 #' health status (\code{mental}) of 1660 young New York residents by their
 #' parents' socioeconomic status (\code{ses}).
 #'
+#' @details
 #' Both \code{ses} and \code{mental} can be treated as ordered factors or
 #' integer scores.  For \code{ses}, 1="High" and 6="Low".
 #'
 #' @name Mental
 #' @docType data
 #' @format A data frame frequency table with 24 observations on the following 3
-#' variables.  \describe{ \item{list("ses")}{an ordered factor with levels
-#' \code{1} < \code{2} < \code{3} < \code{4} < \code{5} < \code{6}}
-#' \item{list("mental")}{an ordered factor with levels \code{Well} <
-#' \code{Mild} < \code{Moderate} < \code{Impaired}} \item{list("Freq")}{cell
-#' frequency: a numeric vector} }
-#' @references Friendly, M. \emph{Visualizing Categorical Data}, Cary, NC: SAS
+#' variables.
+#' \describe{
+#'   \item{\code{ses}}{an ordered factor with levels \code{1} < \code{2} < \code{3} < \code{4} < \code{5} < \code{6}}
+#'   \item{\code{mental}}{an ordered factor with levels \code{Well} < \code{Mild} < \code{Moderate} < \code{Impaired}}
+#'   \item{\code{Freq}}{cell frequency: a numeric vector}
+#' }
+#'
+#' @references
+#' Friendly, M. \emph{Visualizing Categorical Data}, Cary, NC: SAS
 #' Institute, 2000, Appendix B.7.
-#' @source Haberman, S. J.  \emph{The Analysis of Qualitative Data: New
+#' @source
+#' Haberman, S. J.  \emph{The Analysis of Qualitative Data: New
 #' Developments}, Academic Press, 1979, Vol. II, p. 375.
 #'
 #' Srole, L.; Langner, T. S.; Michael, S. T.; Kirkpatrick, P.; Opler, M. K. &
 #' Rennie, T. A. C.  \emph{Mental Health in the Metropolis: The Midtown
 #' Manhattan Study}, NYU Press, 1978, p. 289
+#'
 #' @keywords datasets
 #' @examples
 #'
@@ -2514,7 +2484,7 @@ NULL
 #' sieve(Mental.tab, gp=shading_Friendly)
 #'
 #' if(require(ca)){
-#'   plot(ca(Mental.tab), main="Mental impairment & SES")
+#'   plot(ca(Mental.tab), main="Mental impairment & SES", lines=TRUE)
 #' }
 #'
 #'
@@ -2536,15 +2506,20 @@ NULL
 #' @name Mice
 #' @docType data
 #' @format A frequency data frame with 30 observations on the following 4
-#' variables, representing a 5 x 2 x 3 contingency table.  \describe{
-#' \item{list("litter")}{litter size, a numeric vector}
-#' \item{list("treatment")}{treatment, a factor with levels \code{A} \code{B}}
-#' \item{list("deaths")}{number of depletions, a factor with levels \code{0}
-#' \code{1} \code{2+}} \item{list("Freq")}{cell frequency, a numeric vector} }
-#' @references Kastenbaum, M. A. & Lamphiear, D. E. (1959) Calculation of
+#' variables, representing a 5 x 2 x 3 contingency table.
+#' \describe{
+#'   \item{\code{litter}}{litter size, a numeric vector}
+#'   \item{\code{treatment}}{treatment, a factor with levels \code{A} \code{B}}
+#'   \item{\code{deaths}}{number of depletions, a factor with levels \code{0} \code{1} \code{2+}}
+#'   \item{\code{Freq}}{cell frequency, a numeric vector}
+#' }
+#'
+#' @references
+#' Kastenbaum, M. A. & Lamphiear, D. E. (1959) Calculation of
 #' chi-square to calculate the no three-factor interaction hypothesis.
 #' \emph{Biometrics}, 15, 107-115.
-#' @source Goodman, L. A. (1983) The analysis of dependence in
+#' @source
+#' Goodman, L. A. (1983) The analysis of dependence in
 #' cross-classifications having ordered categories, using log-linear models for
 #' frequencies and log-linear models for odds. \emph{Biometrics}, 39, 149-160.
 #' @keywords datasets
@@ -2575,12 +2550,14 @@ NULL
 #' @format A 2-dimensional array resulting from cross-tabulating 2 variables
 #' for 19912 observations. The variable names and their levels are:
 #'
-#' \tabular{rll}{ No \tab Name \tab Levels \cr 1\tab
-#' \code{Son's_Occupation}\tab \code{"UpNonMan", "LoNonMan", "UpManual",
-#' "LoManual", "Farm"}\cr 2\tab \code{Father's_Occupation}\tab
-#' \code{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr }
+#' \tabular{rll}{
+#'   No \tab Name \tab Levels \cr
+#'   1\tab \code{Son's_Occupation}\tab \code{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr
+#'     2\tab \code{Father's_Occupation}\tab \code{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr
+#' }
+#'
 #' @seealso \code{\link{Glass}}, \code{\link{Hauser79}},
-#' \code{\link{Yamaguchi87}} for other examples of mobility data.
+#'      \code{\link{Yamaguchi87}} for other examples of mobility data.
 #' @source
 #'
 #' Falguerolles, A. de and Mathieu, J. R. (1988).  \emph{Proceedings of
@@ -2625,15 +2602,17 @@ NULL
 #' @name PhdPubs
 #' @docType data
 #' @format A data frame with 915 observations on the following 6 variables.
-#' \describe{ \item{list("articles")}{number of articles published in the final
-#' three years of PhD studies} \item{list("female")}{dummy variable for gender,
-#' coded \code{1} for female} \item{list("married")}{dummy variable for marital
-#' status, coded \code{1} for married} \item{list("kid5")}{number of young
-#' children, age 5 and under} \item{list("phdprestige")}{prestige of the PhD
-#' department.  The higher the number the more prestigious the program. }
-#' \item{list("mentor")}{number of publications by the mentor in the preceeding
-#' three years} }
-#' @source Long, J. S. (1997). \emph{Regression Models for Categorical and
+#' \describe{
+#'   \item{\code{articles}}{number of articles published in the final three years of PhD studies}
+#'   \item{\code{female}}{dummy variable for gender, coded \code{1} for female}
+#'   \item{\code{married}}{dummy variable for marital status, coded \code{1} for married}
+#'   \item{\code{kid5}}{number of young children, age 5 and under}
+#'   \item{\code{phdprestige}}{prestige of the PhD department.  The higher the number the more prestigious the program.}
+#'   \item{\code{mentor}}{number of publications by the mentor in the preceeding three years}
+#' }
+#'
+#' @source
+#' Long, J. S. (1997). \emph{Regression Models for Categorical and
 #' Limited Dependent Variables}, Sage.
 #'
 #' Long, J. S. & Freese, J. (2006). \emph{Regression Models for Categorical
@@ -2682,12 +2661,16 @@ NULL
 #' @name ShakeWords
 #' @docType data
 #' @format A data frame with 100 observations on the following 2 variables.
-#' \describe{ \item{list("count")}{the number of times a word type appeared in
-#' Shakespeare's written works} \item{list("Freq")}{the number of different
-#' words (types) appearing with this count.} }
-#' @source Bradley Efron and Ronald Thisted (1976). Estimating the Number of
+#' \describe{
+#'    \item{\code{count}}{the number of times a word type appeared in Shakespeare's written works}
+#'    \item{\code{Freq}}{the number of different words (types) appearing with this count.}
+#'   }
+#
+#' @source
+#' Bradley Efron and Ronald Thisted (1976). Estimating the Number of
 #' Unseen Species: How Many Words Did Shakespeare Know? \emph{Biometrika}, Vol.
-#' 63, No. 3, pp. 435-447, %\url{http://www.jstor.org/stable/2335721}
+#' 63, No. 3, pp. 435-447,
+#' %\url{http://www.jstor.org/stable/2335721}
 #' @keywords datasets
 #' @examples
 #'
@@ -2722,18 +2705,22 @@ NULL
 #' @name Titanicp
 #' @docType data
 #' @format A data frame with 1309 observations on the following 6 variables.
-#' \describe{ \item{list("pclass")}{a factor with levels \code{1st} \code{2nd}
-#' \code{3rd}} \item{list("survived")}{a factor with levels \code{died}
-#' \code{survived}} \item{list("sex")}{a factor with levels \code{female}
-#' \code{male}} \item{list("age")}{passenger age in years (or fractions of a
-#' year, for children), a numeric vector; age is missing for 263 of the
-#' passengers} \item{list("sibsp")}{number of siblings or spouses aboard,
-#' integer: \code{0:8}} \item{list("parch")}{number of parents or children
-#' aboard, integer: \code{0:6}} }
+#' \describe{
+#'   \item{\code{pclass}}{a factor with levels \code{1st} \code{2nd} \code{3rd}}
+#'   \item{\code{survived}}{a factor with levels \code{died} \code{survived}}
+#'   \item{\code{sex}}{a factor with levels \code{female} \code{male}}
+#'   \item{\code{age}}{passenger age in years (or fractions of a year, for children), a numeric vector; age is missing for 263 of the passengers}
+#'   \item{\code{sibsp}}{number of siblings or spouses aboard, integer: \code{0:8}}
+#'   \item{\code{parch}}{number of parents or children aboard, integer: \code{0:6}}
+#' }
+#
 #' @source
 #'
 #' The original R source for this dataset was compiled by Frank Harrell and
-#' Robert Dawson \url{https://hbiostat.org/data/repo/titanic.html}.
+#' Robert Dawson:
+#' \url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic.html},
+#' described in more detail in
+#' \url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic3info.txt}
 #'
 #' For this version of the Titanic data, passenger details were deleted,
 #' survived was cast as a factor, and the name changed to \code{Titanicp} to
@@ -2766,21 +2753,22 @@ NULL
 #' @docType data
 #' @format A data frame in frequency form representing a 5 x 3 x 2 x 2
 #' contingency table, with 60 observations on the following 5 variables.
-#' \describe{ \item{list("class")}{Social class of mother, a factor with levels
-#' \code{1} \code{2} \code{3} \code{4} \code{5}}
-#' \item{list("smoke")}{Cigarettes smoked per day during pregnancy, a factor
-#' with levels \code{0} \code{1-19} \code{20+}}
-#' \item{list("hyper")}{Hypertension level, a factor with levels \code{Low}
-#' \code{High}} \item{list("urea")}{Protein urea level, a factor with levels
-#' \code{Low} \code{High}} \item{list("Freq")}{frequency in each cell, a
-#' numeric vector} }
+#' \describe{
+#'   \item{\code{class}}{Social class of mother, a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5}}
+#'   \item{\code{smoke}}{Cigarettes smoked per day during pregnancy, a factor with levels \code{0} \code{1-19} \code{20+}}
+#'   \item{\code{hyper}}{Hypertension level, a factor with levels \code{Low} \code{High}}
+#'   \item{\code{urea}}{Protein urea level, a factor with levels \code{Low} \code{High}}
+#'   \item{\code{Freq}}{frequency in each cell, a numeric vector}
+#' }
+#'
 #' @references Friendly, M.  (2000), \emph{Visualizing Categorical Data}, SAS
 #' Institute, Cary, NC, Example 7.15.
 #'
 #' Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis with R:
 #' Visualization and Modeling Techniques for Categorical and Count Data}.  Boca
 #' Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}. Example 10.10.
-#' @source Brown, P. J., Stone, J. and Ord-Smith, C. (1983), Toxaemic signs
+#' @source
+#' Brown, P. J., Stone, J. and Ord-Smith, C. (1983), Toxaemic signs
 #' during pregnancy. \emph{JRSS, Series C, Applied Statistics}, 32, 69-72
 #' @keywords datasets
 #' @examples
@@ -2828,13 +2816,19 @@ NULL
 #' (turn the television Off, Switch channels, or Persist in viewing the current
 #' channel). The \code{TV} data here includes only the Persist observations.
 #'
+#' @name TV
+#' @docType data
 #' @format A 5 x 11 x 3 array of cell frequencies with the following structure:
-#' \preformatted{ int [1:5, 1:11, 1:3] 146 244 233 174 294 151 181 161 183 281
-#' ...  - attr(*, "dimnames")=List of 3 ..$ Day : chr [1:5] "Monday" "Tuesday"
-#' "Wednesday" "Thursday" ...  ..$ Time : chr [1:11] "8:00" "8:15" "8:30"
-#' "8:45" ...  ..$ Network: chr [1:3] "ABC" "CBS" "NBC" }
+#' \preformatted{
+#'   int [1:5, 1:11, 1:3] 146 244 233 174 294 151 181 161 183 281 ...
+#'   - attr(*, "dimnames")=List of 3
+#'   ..$ Day    : chr [1:5] "Monday" "Tuesday" "Wednesday" "Thursday" ...
+#'   ..$ Time   : chr [1:11] "8:00" "8:15" "8:30" "8:45" ...
+#'   ..$ Network: chr [1:3] "ABC" "CBS" "NBC"
+#' }
 #'
-#' @references Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
+#' @references
+#' Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
 #' with R: Visualization and Modeling Techniques for Categorical and Count
 #' Data}.  Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 #'
@@ -2883,11 +2877,6 @@ NULL
 
 
 
-
-
-
-
-
 #' Student Opinion about the Vietnam War
 #'
 #' A survey of student opinion on the Vietnam War was taken at the University
@@ -2896,11 +2885,14 @@ NULL
 #' out of A,B,C or D they supported. Responses were cross-classified by
 #' gender/year.
 #'
-#' The response categories were: \describe{ \item{list("A")}{Defeat North
-#' Vietnam by widespread bombing and land invasion} \item{list("B")}{Maintain
-#' the present policy} \item{list("C")}{De-escalate military activity, stop
-#' bombing and begin negotiations} \item{list("D")}{Withdraw military forces
-#' Immediately} }
+#' The response categories were:
+#' \describe{
+#'   \item{\code{A}}{Defeat North Vietnam by widespread bombing and land invasion}
+#'   \item{\code{B}}{Maintain the present policy}
+#'   \item{\code{C}}{De-escalate military activity, stop bombing and begin negotiations}
+#'   \item{\code{D}}{Withdraw military forces Immediately}
+#' }
+#'
 #'
 #' For some analyses, it is useful to treat \code{year} as numeric, and
 #' possibly assign grad students a value \code{year=7}.
@@ -2908,12 +2900,15 @@ NULL
 #' @name Vietnam
 #' @docType data
 #' @format A frequency data frame with 40 observations representing a 2 x 5 x 4
-#' contingency table on the following 4 variables.  \describe{
-#' \item{list("sex")}{a factor with levels \code{Female} \code{Male}}
-#' \item{list("year")}{year of study, an ordered factor with levels
-#' \code{Freshmen}, \code{Sophomore}, \code{Junior}, \code{Senior}, \code{Grad
-#' student}} \item{list("response")}{a factor with levels \code{A} \code{B}
-#' \code{C} \code{D}} \item{list("Freq")}{cell frequency, a numeric vector} }
+#' contingency table on the following 4 variables.
+#' \describe{
+#'   \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
+#'   \item{\code{year}}{year of study, an ordered factor with levels
+#'     \code{Freshmen}, \code{Sophomore}, \code{Junior}, \code{Senior}, \code{Grad student}}
+#'   \item{\code{response}}{a factor with levels \code{A} \code{B} \code{C} \code{D}}
+#'   \item{\code{Freq}}{cell frequency, a numeric vector}
+#' }
+#
 #' @references Friendly, M.  (2000), \emph{Visualizing Categorical Data}, SAS
 #' Institute, Cary, NC, Example 7.9.
 #' @source Aitken, M. etal, 1989, \emph{Statistical Modelling in GLIM}
@@ -2940,19 +2935,23 @@ NULL
 #' @name Vote1980
 #' @docType data
 #' @format A frequency data frame representing a 2 x 7 x 2 table, with 28
-#' observations on the following 4 variables.  \describe{ \item{list("race")}{a
-#' factor with levels \code{NonWhite} \code{White}}
-#' \item{list("conservatism")}{ a factor with levels \code{1} \code{2} \code{3}
-#' \code{4} \code{5} \code{6} \code{7}, \code{1}=most liberal, \code{7}=most
-#' conservative} \item{list("votefor")}{a factor with levels \code{Carter}
-#' \code{Reagan}; \code{Carter} represents Jimmy Carter or other.}
-#' \item{list("Freq")}{a numeric vector} }
-#' @references Agresti, A. (1990) \emph{Categorical Data Analysis}, Table 4.12
+#' observations on the following 4 variables.
+#' \describe{
+#'   \item{\code{race}}{a factor with levels \code{NonWhite} \code{White}}
+#'   \item{\code{conservatism}}{a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5} \code{6} \code{7},
+#'        \code{1}=most liberal, \code{7}=most conservative}
+#'   \item{\code{votefor}}{a factor with levels \code{Carter} \code{Reagan}; \code{Carter}represents Jimmy Carter or other.}
+#'   \item{\code{Freq}}{a numeric vector}
+#' }
+#'
+#' @references
+#' Agresti, A. (1990) \emph{Categorical Data Analysis}, Table 4.12
 #' New York: Wiley-Interscience.
 #'
 #' Friendly, M. (2000) \emph{Visualizing Categorical Data}, Example 7.5 Cary,
 #' NC: SAS Institute.
-#' @source Clogg, C. & Shockey, J. W. (1988). In Nesselroade, J. R. & Cattell,
+#' @source
+#' Clogg, C. & Shockey, J. W. (1988). In Nesselroade, J. R. & Cattell,
 #' R. B. (ed.)  Multivariate Analysis of Discrete Data, \emph{Handbook of
 #' Multivariate Experimental Psychology}, New York: Plenum Press.
 #' @keywords datasets
@@ -2980,14 +2979,16 @@ NULL
 #' @docType data
 #' @format A frequency data frame with 8 observations on the following 4
 #' variables, representing the 2 x 2 x 2 classification of 715 cases.
-#' \describe{ \item{list("Manage")}{Quality of management, an ordered factor
-#' with levels \code{bad} < \code{good}} \item{list("Super")}{Supervisor
-#' satisfaction, an ordered factor with levels \code{low} < \code{high}}
-#' \item{list("Worker")}{Worker job satisfaction, an ordered factor with levels
-#' \code{low} < \code{high}} \item{list("Freq")}{a numeric vector} }
+#' \describe{
+#'   \item{\code{Manage}}{Quality of management, an ordered factor with levels \code{bad} < \code{good}}
+#'   \item{\code{Super}}{Supervisor satisfaction, an ordered factor with levels \code{low} < \code{high}}
+#'   \item{\code{Worker}}{Worker job satisfaction, an ordered factor with levels \code{low} < \code{high}}
+#'   \item{\code{Freq}}{a numeric vector}
+#' }
 #' @references Andersen, E. B. (1991) Statistical Analysis of Categorical Data,
 #' 2nd Ed., Springer-Verlag.
-#' @source Originally from \url{https://online.stat.psu.edu/stat504/lesson/10/}
+#' @source
+#' Originally from \url{https://online.stat.psu.edu/stat504/lesson/10/}
 #' @keywords datasets
 #' @examples
 #'
@@ -3031,12 +3032,15 @@ NULL
 #' @name Yamaguchi87
 #' @docType data
 #' @format A frequency data frame with 75 observations on the following 4
-#' variables. The total sample size is 28887.  \describe{ \item{list("Son")}{a
-#' factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM}
-#' \code{Farm}} \item{list("Father")}{a factor with levels \code{UpNM}
-#' \code{LoNM} \code{UpM} \code{LoM} \code{Farm}} \item{list("Country")}{a
-#' factor with levels \code{US} \code{UK} \code{Japan}} \item{list("Freq")}{a
-#' numeric vector} }
+#' variables. The total sample size is 28887.
+#'
+# \describe{
+#'   \item{\code{Son}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+#'   \item{\code{Father}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+#'   \item{\code{Country}}{a factor with levels \code{US} \code{UK} \code{Japan}}
+#'   \item{\code{Freq}}{a numeric vector}
+#' }
+#'
 #' @references Goodman, L. A. and Hout, M. (1998). Statistical Methods and
 #' Graphical Displays for Analyzing How the Association Between Two Qualitative
 #' Variables Differs Among Countries, Among Groups, Or Over Time: A Modified
