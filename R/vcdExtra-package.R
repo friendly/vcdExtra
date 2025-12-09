@@ -86,7 +86,8 @@
 #'
 #' \code{\link[vcd]{mosaic}} for details on mosaic displays within the
 #' strucplot framework.
-#' @references Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS
+#' @references 
+#' Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS
 #' Institute, 2000. Web materials: \url{http://www.datavis.ca/books/vcd/}.
 #'
 #' Friendly, M. and Meyer, D. (2016). \emph{Discrete Data Analysis with R:
@@ -101,6 +102,13 @@
 #' Turner, H. and Firth, D. \emph{Generalized nonlinear models in R: An
 #' overview of the gnm package}, 2007, \url{http://eprints.ncrm.ac.uk/472/}.
 #' Available in R via \code{vignette("gnmOverview", package = "gnm")}.
+#' 
+#' @importFrom grDevices hsv rgb
+#' @importFrom stats as.formula deviance family fitted formula glm logLik loglin model.frame na.pass nobs pchisq poisson qnorm quantile reformulate residuals rstandard runif terms update update.formula xtabs
+#' @importFrom utils data menu type.convert
+#' @importFrom ca cacoord multilines
+#' @importFrom graphics abline plot points text
+#' 
 #' @keywords package
 #'
 #' @examples

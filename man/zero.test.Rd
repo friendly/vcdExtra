@@ -13,8 +13,8 @@ such counts.}
 \value{
 Returns invisibly a list of three elements:
 \item{list("statistic")}{Description of 'comp1'}
-\item{list("df")}{Description of 'comp2'} \item{list("pvalue")}{Upper tail
-p-value}
+\item{list("df")}{Description of 'comp2'} 
+\item{list("pvalue")}{Upper tail p-value}
 }
 \description{
 Carries out a simple score test (van den Broek, 1995) for excess zeros in an

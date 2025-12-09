@@ -26,11 +26,14 @@
 #' 
 #' @param x A vector of non-negative counts, or a one-way frequency table of
 #' such counts.
+#' 
 #' @return Returns invisibly a list of three elements:
 #' \item{list("statistic")}{Description of 'comp1'}
-#' \item{list("df")}{Description of 'comp2'} \item{list("pvalue")}{Upper tail
-#' p-value}
+#' \item{list("df")}{Description of 'comp2'} 
+#' \item{list("pvalue")}{Upper tail p-value}
+#' 
 #' @author Michael Friendly
+#' 
 #' @references The original R code came from a Stackexchange question,
 #' \url{https://stats.stackexchange.com/questions/118322/how-to-test-for-zero-inflation-in-a-dataset}
 #' 
@@ -42,6 +45,7 @@
 #' Zero-Inflation in Overdispersed Count Data.  \emph{Communications in
 #' Statistics - Theory and Methods} \bold{39} (11) 2008-2030.
 #' DOI: 10.1080/03610920902948228
+#' 
 #' @keywords htest
 #' @examples
 #' 

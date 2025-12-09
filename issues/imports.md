@@ -1,6 +1,7 @@
 # Imports
 #
-The master branch, which did not use roxygen, has these things listed as `importFrom`, but only in the `NAMESPACE` file
+The master branch, which did not use roxygen, has imported functions listed as `importFrom`, but only in the `NAMESPACE` file.
+Please convert these into roxygen `@importFrom` comments that I can use in my `vcdExtra-package.R` file
 
 ```
 importFrom("grDevices", "hsv")

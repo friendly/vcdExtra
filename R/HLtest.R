@@ -52,6 +52,8 @@
 #' Lemeshow, S. and Hosmer, D.W.  (1982).  A review of goodness of fit
 #' statistics for use in the development of logistic regression models.
 #' \emph{American Journal of Epidemiology}, 115(1), 92-106.
+#' 
+#' @importFrom vcd rootogram
 #' @keywords htest
 #' @examples
 #' 
