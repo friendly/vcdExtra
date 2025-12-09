@@ -43,7 +43,6 @@ Suggests:
     car,
     lattice,
     stats4,
-    rgl,
     AER,
     coin,
     Hmisc,

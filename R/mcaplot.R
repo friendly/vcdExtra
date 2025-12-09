@@ -25,7 +25,7 @@
 #' @param pos Position of level labels relative to the category points; either
 #'        a single number or a vector of length equal to the number of category points.
 #' @param lines A logical or an integer vector indicating which factors are to
-#'        be joined with lines using \code{\link{multilines}}
+#'        be joined with lines using \code{\link[ca]{multilines}}
 #' @param lwd Line width(s) for the lines
 #' @param legend Logical; draw a legend for the factor names?
 #' @param legend.pos Position of the legend in the plot, as in \code{\link[graphics]{legend}}

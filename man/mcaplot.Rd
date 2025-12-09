@@ -48,7 +48,7 @@ See \code{\link[ca]{mjca}} for details.}
 a single number or a vector of length equal to the number of category points.}
 
 \item{lines}{A logical or an integer vector indicating which factors are to
-be joined with lines using \code{\link{multilines}}}
+be joined with lines using \code{\link[ca]{multilines}}}
 
 \item{lwd}{Line width(s) for the lines}
 

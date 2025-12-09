@@ -74,6 +74,7 @@
 #' @seealso \code{\link[stats]{glm}}, \code{\link[gnm]{gnm}},
 #' \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}
 #' @keywords hplot models multivariate
+#' @importFrom vcd mosaic
 #' @examples
 #'
 #' GSStab <- xtabs(count ~ sex + party, data=GSS)
@@ -332,6 +333,7 @@ mosaic.glm <-	function(x, formula = NULL,
 
 ## convenience functions for sieve and assoc plots
 
+#' @importFrom vcd sieve
 #' @export
 sieve.glm <-
 		function (x, ...)
@@ -340,6 +342,7 @@ sieve.glm <-
 }
 
 #' @export
+#' @importFrom vcd assoc
 assoc.glm <-
 		function (x, ...)
 {

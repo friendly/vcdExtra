@@ -57,8 +57,7 @@ https://www.jstor.org/stable/2532959
 Yang, Zhao, James W. Hardin, and Cheryl L. Addy (2010).  Score Tests for
 Zero-Inflation in Overdispersed Count Data.  \emph{Communications in
 Statistics - Theory and Methods} \bold{39} (11) 2008-2030.
-c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-"10.1080/03610920902948228")\Sexpr{tools:::Rd_expr_doi("10.1080/03610920902948228")}
+DOI: 10.1080/03610920902948228
 }
 \author{
 Michael Friendly

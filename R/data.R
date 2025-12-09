@@ -2121,7 +2121,6 @@ NULL
 #' @docType data
 #' @format A data frame with 200 observations on the following 22 variables.
 #' \describe{
-#'   \item{\code{id}}{Patient id code, a numeric vector}
 #'   \item{\code{died}}{Died before discharge?, a factor with levels \code{No} \code{Yes}}
 #'   \item{\code{age}}{Patient age, a numeric vector}
 #'   \item{\code{sex}}{Patient sex, a factor with levels \code{Female} \code{Male}}
