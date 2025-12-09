@@ -70,11 +70,11 @@ if (require(rgl)) {
   sl1 <- split3d(cube, c(.2, .3, .5), 1)
   col <- c("#FF000080", "#E5E5E580", "#0000FF80")
   shapelist3d(sl1, col=col)
-	
+
   open3d()
   p <- matrix(c(.6, .4, .5, .5, .2, .8), nrow=2)
   sl2 <- split3d(sl1, p, 2)
-  shapelist3d(sl2, col=col)	
+  shapelist3d(sl2, col=col)
   }
 
 }

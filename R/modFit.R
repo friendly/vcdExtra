@@ -14,15 +14,14 @@
 #' @aliases modFit modFit.loglm modFit.glm
 #' @param x A \code{glm} or \code{loglm} object
 #' @param \dots Arguments passed down
-#' @param stats One or more of \code{chisq} or \code{aic}, determining the
-#' statistics displayed.
-#' @param digits Number of digits after the decimal point in displayed
-#' statistics.
-#' @return A character string containing the formatted values of the chosen
-#' statistics.
+#' @param stats One or more of \code{chisq} or \code{aic}, determining the statistics displayed.
+#' @param digits Number of digits after the decimal point in displayed statistics.
+#'
+#' @return A character string containing the formatted values of the chosen statistics.
 #' @author Michael Friendly
-#' @seealso \code{\link{Summarise}} (soon to be deprecated),
-#' \code{\link{LRstats}}
+#'
+#' @seealso  \code{\link{LRstats}}
+#'
 #' @keywords utilities models
 #' @examples
 #'
@@ -40,7 +39,9 @@
 `modFit` <-
 function(x, ...) UseMethod("modFit")
 
-#' @exportS3Method
+#' @param stats statistics to print: one or more of \code{"chisq"}, \code{"aic"}
+#' @param digits number to digits to use in the print method
+#' @export
 modFit.glm <- function(x, stats="chisq", digits=2, ...) {
 	if (!inherits(x,"glm")) stop("modFit requires a glm object")
 	result <- NULL
@@ -53,7 +54,7 @@ modFit.glm <- function(x, stats="chisq", digits=2, ...) {
 }
 
 
-#' @exportS3Method
+#' @export
 modFit.loglm <- function(x, stats="chisq", digits=2, ...) {
 	if (!inherits(x,"loglm")) stop("modFit requires a loglm object")
 	result <- NULL

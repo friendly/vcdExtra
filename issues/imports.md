@@ -15,7 +15,7 @@ importFrom("stats",      "update.formula")
 
 
 
-# for datasets vignette -- maybe these don't need imports, if the pkgs are all in Suggests
+## for datasets vignette -- maybe these don't need imports, if the pkgs are all in Suggests
 importFrom("here",    "here")
 importFrom("readxl",  "read_excel")
 importFrom("glue",    "glue", "glue_collapse")
@@ -24,4 +24,18 @@ importFrom("stringr", "str_split_1")
 importFrom("tidyr",   "separate_longer_delim")
 importFrom("dplyr",   "select", "rename", "mutate", "group_by", "summarise", "left_join", "relocate")
 
+## check() gives:
+❯ checking dependencies in R code ... NOTE
+  Namespaces in Imports field not imported from:
+    'dplyr' 'glue' 'here' 'purrr' 'readxl' 'stringr' 'tidyr'
+    All declared Imports should be used.
+
+## Removed:
+    dplyr, 
+    glue, 
+    here, 
+    purrr, 
+    readxl, 
+    stringr, 
+    tidyr (>= 1.3.0),
 

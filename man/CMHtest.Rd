@@ -23,45 +23,39 @@ object with optional category labels specified in the dimnames(x) attribute.}
 contingency table from \code{data}.  This should be a one-sided formula when
 \code{data} is in array form, and a two-sided formula with a response
 \code{Freq} if \code{data} is a data frame with a cell frequency variable.
-For convenience, conditioning formulas can be specified indicating strata.}
+ For convenience, conditioning formulas can be specified indicating strata.}
 
-\item{data}{either a data frame, or an object of class \code{"table"} or
-\code{"ftable"}.}
+\item{data}{either a data frame, or an object of class \code{"table"} or \code{"ftable"}.}
 
-\item{subset}{an optional vector specifying a subset of observations to be
-used.}
+\item{subset}{an optional vector specifying a subset of observations to be used.}
 
-\item{na.action}{a function which indicates what should happen when the data
-contain \code{NA}s.  Ignored if \code{data} is a contingency table}
+\item{na.action}{a function which indicates what should happen when the data contain \code{NA}s.  Ignored if \code{data} is a contingency table}
 
 \item{strata}{For a 3- or higher-way table, the names or numbers of the
 factors to be treated as strata.  By default, the first 2 factors are
-treated as the main table variables, and all others considered stratifying
-factors.}
+treated as the main table variables, and all others considered stratifying factors.}
 
 \item{rscores}{Row scores.  Either a set of numbers (typically integers,
-\code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
+           \code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
 or \code{NULL} to exclude tests that depend on row scores.}
 
 \item{cscores}{Column scores. Same as for row scores.}
 
-\item{types}{Types of CMH tests to compute: Any one or more of
-\code{c("cor", "cmeans", "rmeans", "general")}, or \code{"ALL"} for all of
-these.}
+\item{types}{Types of CMH tests to compute: Any one or more of \code{c("cor", "cmeans", "rmeans", "general")}, or
+\code{"ALL"} for all of these.}
 
-\item{overall}{logical. Whether to calculate overall tests, controlling for
-the stratifying factors.}
+\item{overall}{logical. Whether to calculate overall tests, controlling for the stratifying factors.}
 
-\item{details}{logical.  Whether to include computational details in the
-result}
+\item{details}{logical.  Whether to include computational details in the result}
 
 \item{digits}{Digits to print.}
 }
 \value{
-An object of class \code{"CMHtest"} , a list with the following 4
-components: \item{table}{A matrix containing the test statistics, with
-columns \code{Chisq}, \code{Df} and \code{Prob} } \item{names}{The names of
-the table row and column variables} \item{rscore}{Row scores}
+An object of class \code{"CMHtest"} , a list with the following 4 components:
+
+\item{table}{A matrix containing the test statistics, with columns \code{Chisq}, \code{Df} and \code{Prob} }
+\item{names}{The names of the table row and column variables}
+\item{rscore}{Row scores}
 \item{cscore}{Column scores}
 
 If \code{details==TRUE}, additional components are included.

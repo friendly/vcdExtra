@@ -15,11 +15,9 @@ to extract the corresponding log-likelihood}
 
 \item{\dots}{optionally more fitted model objects}
 
-\item{saturated}{saturated model log likelihood reference value (use 0 if
-deviance is not available)}
+\item{saturated}{saturated model log likelihood reference value (use 0 if deviance is not available)}
 
-\item{sortby}{either a numeric or character string specifying the column in
-the result by which the rows are sorted (in decreasing order)}
+\item{sortby}{either a numeric or character string specifying the column in the result by which the rows are sorted (in decreasing order)}
 }
 \value{
 A data frame (also of class \code{anova}) with columns
@@ -37,8 +35,7 @@ model goodness of fit for a collection of models fit to the same data. All
 \details{
 \code{Summarise} provides a brief summary for one or more models fit to the
 same dataset for which \code{logLik} and \code{nobs} methods exist (e.g.,
-\code{glm} and \code{loglm} models). %This implementation is experimental,
-and is subject to change.
+\code{glm} and \code{loglm} models).
 
 The function relies on residual degrees of freedom for the LR chisq test
 being available in the model object.  This is true for objects inheriting
@@ -69,7 +66,7 @@ Summarise(indep, coleff, roweff, linlin)
 \code{\link[stats]{logLik}}, \code{\link[stats]{glm}},
 \code{\link[MASS]{loglm}},
 
-\code{\link{logLik.loglm}}, \code{\link{modFit}}
+\code{\link{logLik.loglm}}, \code{\link{modFit}},  \code{\link{LRstats}}
 }
 \author{
 Achim Zeileis

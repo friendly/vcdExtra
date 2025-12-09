@@ -14,6 +14,7 @@
 
 
 
+
 #' Mosaic plots for fitted generalized linear and generalized nonlinear models
 #'
 #' Produces mosaic plots (and other plots in the \code{\link[vcd]{strucplot}}
@@ -75,6 +76,8 @@
 #' \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}
 #' @keywords hplot models multivariate
 #' @importFrom vcd mosaic
+#' @importFrom vcd shading_hcl
+#' @importFrom gnm meanResiduals
 #' @examples
 #'
 #' GSStab <- xtabs(count ~ sex + party, data=GSS)

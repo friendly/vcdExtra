@@ -13,15 +13,12 @@ modFit(x, ...)
 
 \item{\dots}{Arguments passed down}
 
-\item{stats}{One or more of \code{chisq} or \code{aic}, determining the
-statistics displayed.}
+\item{stats}{One or more of \code{chisq} or \code{aic}, determining the statistics displayed.}
 
-\item{digits}{Number of digits after the decimal point in displayed
-statistics.}
+\item{digits}{Number of digits after the decimal point in displayed statistics.}
 }
 \value{
-A character string containing the formatted values of the chosen
-statistics.
+A character string containing the formatted values of the chosen statistics.
 }
 \description{
 Formats a brief summary of model fit for a \code{glm} or \code{loglm}
@@ -42,7 +39,6 @@ mosaic(Mental.mod, main=paste("Independence model,", modFit(Mental.mod)))
 
 }
 \seealso{
-\code{\link{Summarise}} (soon to be deprecated),
 \code{\link{LRstats}}
 }
 \author{

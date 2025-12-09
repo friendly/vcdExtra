@@ -50,20 +50,20 @@ Suggests:
     rmarkdown,
     seriation,
     testthat (>= 3.0.0),
-    tibble
-Imports: 
-    MASS, 
-    grDevices, 
-    stats, 
-    utils, 
-    ca,
+    tibble,
     dplyr, 
     glue, 
     here, 
     purrr, 
     readxl, 
     stringr, 
-    tidyr (>= 1.3.0),
+    tidyr (>= 1.3.0)
+Imports: 
+    MASS, 
+    grDevices, 
+    stats, 
+    utils, 
+    ca,
     rgl
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data
     and the 'gnm' package for Generalized Nonlinear Models.

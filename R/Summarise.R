@@ -18,8 +18,7 @@
 #'
 #' \code{Summarise} provides a brief summary for one or more models fit to the
 #' same dataset for which \code{logLik} and \code{nobs} methods exist (e.g.,
-#' \code{glm} and \code{loglm} models). %This implementation is experimental,
-#' and is subject to change.
+#' \code{glm} and \code{loglm} models).
 #'
 #' The function relies on residual degrees of freedom for the LR chisq test
 #' being available in the model object.  This is true for objects inheriting
@@ -29,18 +28,19 @@
 #' @param object a fitted model object for which there exists a logLik method
 #' to extract the corresponding log-likelihood
 #' @param \dots optionally more fitted model objects
-#' @param saturated saturated model log likelihood reference value (use 0 if
-#' deviance is not available)
-#' @param sortby either a numeric or character string specifying the column in
-#' the result by which the rows are sorted (in decreasing order)
+#' @param saturated saturated model log likelihood reference value (use 0 if deviance is not available)
+#' @param sortby either a numeric or character string specifying the column in the result by which the rows are sorted (in decreasing order)
+#'
 #' @return A data frame (also of class \code{anova}) with columns
 #' \code{c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")}. Row names are taken
 #' from the names of the model object(s).
 #' @author Achim Zeileis
+#'
 #' @seealso \code{\link[stats]{logLik}}, \code{\link[stats]{glm}},
 #' \code{\link[MASS]{loglm}},
 #'
-#' \code{\link{logLik.loglm}}, \code{\link{modFit}}
+#' \code{\link{logLik.loglm}}, \code{\link{modFit}},  \code{\link{LRstats}}
+#'
 #' @keywords models
 #' @examples
 #'
@@ -65,9 +65,10 @@
 #' @export
 
 Summarise <- function(object, ...) {
-  .Deprecated("LRstats")
+#  .Deprecated("LRstats")
 	UseMethod("Summarise")
 }
+
 
 #' @export
 Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
@@ -106,6 +107,7 @@ Summarise.loglmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 	rval
 }
 
+#' @export
 Summarise.default <- function(object, ..., saturated = NULL, sortby=NULL)
 {
   ## interface methods for logLik() and nobs()

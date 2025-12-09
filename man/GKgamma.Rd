@@ -10,18 +10,24 @@ GKgamma(x, level = 0.95)
 \method{print}{GKgamma}(x, digits = 3, ...)
 }
 \arguments{
-\item{x}{A two-way frequency table, in matrix or table form.  The rows and
-columns are considered to be ordinal factors}
+\item{x}{A two-way frequency table, in matrix or table form.  The rows and columns are considered to be ordinal factors}
 
-\item{level}{Confidence level for a significance test of \eqn{\gamma \ne
-=}{gamma !=0}}
+\item{level}{Confidence level for a significance test of \eqn{\gamma \ne =}{gamma !=0}}
+
+\item{digits}{number to digits to use in the print method}
+
+\item{...}{other arguments (unused), for conformity with the print generic}
 }
 \value{
-Returns an object of class \code{"GKgamma"} with 6 components, as
-follows % If it is a LIST, use %\describe{ \item{gamma}{The gamma statistic}
-\item{C}{Total number of concordant pairs in the table} \item{D}{Total
-number of discordant pairs in the table} \item{sigma}{Standard error of
-gamma } \item{CIlevel}{Confidence level} \item{CI}{Confidence interval} % }
+Returns an object of class \code{"GKgamma"} with 6 components, as follows
+\describe{
+  \item{gamma}{The gamma statistic}
+  \item{C}{Total number of concordant pairs in the table}
+  \item{D}{Total number of discordant pairs in the table}
+  \item{sigma}{Standard error of gamma }
+  \item{CIlevel}{Confidence level}
+  \item{CI}{Confidence interval}
+  }
 }
 \description{
 The Goodman-Kruskal \eqn{\gamma}{gamma} statistic is a measure of

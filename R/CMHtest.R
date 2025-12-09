@@ -72,42 +72,36 @@
 #' Note that strata combinations with insufficient data (less than 2
 #' observations) are automatically omitted from the analysis.
 #'
-#' @aliases CMHtest CMHtest.formula CMHtest.default Cochran Mantel Haenszel
-#' test print.CMHtest
+#' @aliases CMHtest CMHtest.formula CMHtest.default Cochran Mantel Haenszel test print.CMHtest
 #' @param x A 2+ way contingency table in array form, or a class \code{"table"}
-#' object with optional category labels specified in the dimnames(x) attribute.
+#'          object with optional category labels specified in the dimnames(x) attribute.
 #' @param formula a formula specifying the variables used to create a
-#' contingency table from \code{data}.  This should be a one-sided formula when
-#' \code{data} is in array form, and a two-sided formula with a response
-#' \code{Freq} if \code{data} is a data frame with a cell frequency variable.
-#' For convenience, conditioning formulas can be specified indicating strata.
-#' @param data either a data frame, or an object of class \code{"table"} or
-#' \code{"ftable"}.
-#' @param subset an optional vector specifying a subset of observations to be
-#' used.
-#' @param na.action a function which indicates what should happen when the data
-#' contain \code{NA}s.  Ignored if \code{data} is a contingency table
+#'           contingency table from \code{data}.  This should be a one-sided formula when
+#'           \code{data} is in array form, and a two-sided formula with a response
+#'           \code{Freq} if \code{data} is a data frame with a cell frequency variable.
+#'            For convenience, conditioning formulas can be specified indicating strata.
+#' @param data either a data frame, or an object of class \code{"table"} or \code{"ftable"}.
+#' @param subset an optional vector specifying a subset of observations to be used.
+#' @param na.action a function which indicates what should happen when the data contain \code{NA}s.  Ignored if \code{data} is a contingency table
 #' @param strata For a 3- or higher-way table, the names or numbers of the
-#' factors to be treated as strata.  By default, the first 2 factors are
-#' treated as the main table variables, and all others considered stratifying
-#' factors.
+#'           factors to be treated as strata.  By default, the first 2 factors are
+#'           treated as the main table variables, and all others considered stratifying factors.
 #' @param rscores Row scores.  Either a set of numbers (typically integers,
-#' \code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
+#'            \code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
 #' or \code{NULL} to exclude tests that depend on row scores.
 #' @param cscores Column scores. Same as for row scores.
-#' @param types Types of CMH tests to compute: Any one or more of
-#' \code{c("cor", "cmeans", "rmeans", "general")}, or \code{"ALL"} for all of
-#' these.
-#' @param overall logical. Whether to calculate overall tests, controlling for
-#' the stratifying factors.
-#' @param details logical.  Whether to include computational details in the
-#' result
+#' @param types Types of CMH tests to compute: Any one or more of \code{c("cor", "cmeans", "rmeans", "general")}, or
+#'           \code{"ALL"} for all of these.
+#' @param overall logical. Whether to calculate overall tests, controlling for the stratifying factors.
+#' @param details logical.  Whether to include computational details in the result
 #' @param \dots Other arguments passed to default method.
 #' @param digits Digits to print.
-#' @return An object of class \code{"CMHtest"} , a list with the following 4
-#' components: \item{table}{A matrix containing the test statistics, with
-#' columns \code{Chisq}, \code{Df} and \code{Prob} } \item{names}{The names of
-#' the table row and column variables} \item{rscore}{Row scores}
+#'
+#' @return An object of class \code{"CMHtest"} , a list with the following 4 components:
+#'
+#' \item{table}{A matrix containing the test statistics, with columns \code{Chisq}, \code{Df} and \code{Prob} }
+#' \item{names}{The names of the table row and column variables}
+#' \item{rscore}{Row scores}
 #' \item{cscore}{Column scores}
 #'
 #' If \code{details==TRUE}, additional components are included.
@@ -115,7 +109,9 @@
 #' If there are strata, the result is a list of \code{"CMHtest"} objects. If
 #' \code{overall=TRUE} another component, labeled \code{ALL} is appended to the
 #' list.
+#'
 #' @author Michael Friendly
+#'
 #' @seealso \code{\link[coin]{cmh_test}} provides the CMH test of general
 #' association; \code{\link[coin]{lbl_test}} provides the CMH correlation test
 #' of linear by linear association.
@@ -124,6 +120,7 @@
 #' Cochran-Mantel-Haenszel chi-squared test of the null that two nominal
 #' variables are conditionally independent in each stratum, assuming that there
 #' is no three-way interaction
+#'
 #' @references Stokes, M. E. & Davis, C. S.  & Koch, G., (2000).
 #' \emph{Categorical Data Analysis using the SAS System}, 2nd Ed., Cary, NC:
 #' SAS Institute, pp 74-75, 92-101, 124-129.  Details of the computation are

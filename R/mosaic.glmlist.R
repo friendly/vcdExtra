@@ -1,3 +1,4 @@
+
 #' Mosaic Displays for glmlist and loglmlist Objects
 #'
 #' This function provides a convenient interface for viewing mosaic displays
@@ -41,6 +42,7 @@
 #' @return Returns the result of \code{\link{mosaic.glm}}.
 #'
 #' @author Michael Friendly
+#' @importFrom grid viewport pushViewport
 #' @seealso \code{\link{glmlist}}, \code{\link{loglmlist}}, \code{\link{Kway}}
 #'
 #' \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},

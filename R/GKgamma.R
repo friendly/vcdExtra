@@ -12,15 +12,18 @@
 #'
 #'
 #' @aliases GKgamma print.GKgamma
-#' @param x A two-way frequency table, in matrix or table form.  The rows and
-#' columns are considered to be ordinal factors
-#' @param level Confidence level for a significance test of \eqn{\gamma \ne
-#' =}{gamma !=0}
-#' @return Returns an object of class \code{"GKgamma"} with 6 components, as
-#' follows % If it is a LIST, use %\describe{ \item{gamma}{The gamma statistic}
-#' \item{C}{Total number of concordant pairs in the table} \item{D}{Total
-#' number of discordant pairs in the table} \item{sigma}{Standard error of
-#' gamma } \item{CIlevel}{Confidence level} \item{CI}{Confidence interval} % }
+#' @param x A two-way frequency table, in matrix or table form.  The rows and columns are considered to be ordinal factors
+#' @param level Confidence level for a significance test of \eqn{\gamma \ne =}{gamma !=0}
+#' @return Returns an object of class \code{"GKgamma"} with 6 components, as follows
+#' \describe{
+#'   \item{gamma}{The gamma statistic}
+#'   \item{C}{Total number of concordant pairs in the table}
+#'   \item{D}{Total number of discordant pairs in the table}
+#'   \item{sigma}{Standard error of gamma }
+#'   \item{CIlevel}{Confidence level}
+#'   \item{CI}{Confidence interval}
+#'   }
+#'
 #' @author Michael Friendly; original version by Laura Thompson
 #' @seealso \code{\link[vcd]{assocstats}}, \link[vcd]{Kappa}
 #' @references Agresti, A. \emph{Categorical Data Analysis}. John Wiley & Sons,
@@ -83,6 +86,8 @@ GKgamma<-function(x, level=0.95)
 }
 
 #' @rdname GKgamma
+#' @param digits number to digits to use in the print method
+#' @param ... other arguments (unused), for conformity with the print generic
 #' @export
 print.GKgamma <-
 function (x, digits = 3, ...)
