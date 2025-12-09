@@ -13,7 +13,7 @@ such counts.}
 \value{
 Returns invisibly a list of three elements:
 \item{list("statistic")}{Description of 'comp1'}
-\item{list("df")}{Description of 'comp2'} 
+\item{list("df")}{Description of 'comp2'}
 \item{list("pvalue")}{Upper tail p-value}
 }
 \description{

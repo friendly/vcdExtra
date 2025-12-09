@@ -192,6 +192,7 @@ CMHtest <- function(x, ...) {
   UseMethod("CMHtest")
 }
 
+#' @rdname CMHtest
 #' @export
 CMHtest.formula <-
   function(formula, data = NULL, subset = NULL, na.action = NULL, ...) {
@@ -276,6 +277,7 @@ CMHtest.formula <-
     }
   }
 
+#' @rdname CMHtest
 #' @export
 CMHtest.default <- function(
   x,
@@ -529,6 +531,7 @@ cmh <- function(n, m, A, V, df) {
 # DONE: incorporate stratum name in the heading
 # TODO: handle the printing of pvalues better
 
+#' @rdname CMHtest
 #' @export
 print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
   heading <- "Cochran-Mantel-Haenszel Statistics"

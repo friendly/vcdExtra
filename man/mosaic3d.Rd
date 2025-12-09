@@ -7,6 +7,33 @@
 \title{3D Mosaic Plots}
 \usage{
 mosaic3d(x, ...)
+
+\method{mosaic3d}{loglm}(
+  x,
+  type = c("observed", "expected"),
+  residuals_type = c("pearson", "deviance"),
+  ...
+)
+
+\method{mosaic3d}{default}(
+  x,
+  expected = NULL,
+  residuals = NULL,
+  type = c("observed", "expected"),
+  residuals_type = NULL,
+  shape = rgl::cube3d(alpha = alpha),
+  alpha = 0.5,
+  spacing = 0.1,
+  split_dir = 1:3,
+  shading = shading_basic,
+  interpolate = c(2, 4),
+  zero_size = 0.05,
+  label_edge,
+  labeling_args = list(),
+  newpage = TRUE,
+  box = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{link[MASS]{loglm}} model object. Alternatively, a multidimensional \code{array} or \code{table}
@@ -15,12 +42,6 @@ are taken in sequential order. Use \code{link[base]{aperm}} or \code{\link[vcd]{
 
 \item{\dots}{Other arguments passed down to \code{mosaic.default} or 3D functions.}
 
-\item{expected}{optionally, for contingency tables, an array of expected frequencies of the same dimension as \code{x}, or alternatively the
-corresponding loglinear model specification as used by\code{link[stats]{loglin}} or \code{link[MASS]{loglm}} (see
-\code{\link[vcd]{structable}} for details).}
-
-\item{residuals}{optionally, an array of residuals of the same dimension as \code{x} (see details).}
-
 \item{type}{a character string indicating whether the \code{"observed"} or the \code{"expected"} frequencies in the table should be
 visualized by the volume of the 3D tiles.}
 
@@ -28,6 +49,12 @@ visualized by the volume of the 3D tiles.}
 \code{residuals_type} must be one of \code{"pearson"} (default; giving components of Pearson's chi-squared), \code{"deviance"}
 (giving components of the likelihood ratio chi-squared), or \code{"FT"} for the Freeman-Tukey residuals.  The value of this
 argument can be abbreviated.}
+
+\item{expected}{optionally, for contingency tables, an array of expected frequencies of the same dimension as \code{x}, or alternatively the
+corresponding loglinear model specification as used by\code{link[stats]{loglin}} or \code{link[MASS]{loglm}} (see
+\code{\link[vcd]{structable}} for details).}
+
+\item{residuals}{optionally, an array of residuals of the same dimension as \code{x} (see details).}
 
 \item{shape}{The initial 3D shape on which the mosaic is based.  Typically this is a call to an rgl function, and must produce a \code{shape3d} object.
 The default is a "unit cube" on (-1, +1), with transparency specified by \code{alpha}.}
@@ -42,10 +69,10 @@ dimensions of the table. The values specified are re-cycled to the number of tab
 for dimension \code{i} of the table. The values specified are re-cycled to the number of table dimensions.}
 
 \item{shading}{A function, taking an array or vector of residuals for the
-         given model, returning a vector of colors.  At present, only the default
-\code{shading=shading_basic} is provided.  This is roughly equivalent to the
-         use of the \code{shade} argument in \code{\link[graphics]{mosaicplot}} or to
-         the use of \code{gp=shading_Friendly} in \code{\link[vcd]{mosaic}}.}
+given model, returning a vector of colors.  At present, only the default \code{shading=shading_basic} is provided.
+This is roughly equivalent to the
+use of the \code{shade} argument in \code{\link[graphics]{mosaicplot}} or to
+the use of \code{gp=shading_Friendly} in \code{\link[vcd]{mosaic}}.}
 
 \item{interpolate}{a vector of interpolation values for the \code{shading} function.}
 

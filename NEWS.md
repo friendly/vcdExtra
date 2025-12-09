@@ -1,9 +1,13 @@
 ## Version 0.8.7 (2025-11-18)
 
+This is a major release of the package.
+
 o Added tests for CMHtest() PR #13 [Thx: Daniel Sabanes Bove] 
 o Automatically omit strata with a single observation in CMHtest() because they do not contribute to the test statistics
 o Use the generalized Moore-Penrose inverse from MASS in CMHtest() such that it can work when the variance
   matrix is singular.
+o Converted the package to use roxygen documentation.
+o Added `CrabSatellites` data from {countreg} b/c that's still not available on CRAN
 
 ## Version 0.8-6 (2025-07-23)
 

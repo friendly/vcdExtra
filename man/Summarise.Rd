@@ -8,6 +8,12 @@
 \title{Brief Summary of Model Fit for glm and loglm Models}
 \usage{
 Summarise(object, ...)
+
+\method{Summarise}{glmlist}(object, ..., saturated = NULL, sortby = NULL)
+
+\method{Summarise}{loglmlist}(object, ..., saturated = NULL, sortby = NULL)
+
+\method{Summarise}{default}(object, ..., saturated = NULL, sortby = NULL)
 }
 \arguments{
 \item{object}{a fitted model object for which there exists a logLik method

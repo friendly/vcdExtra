@@ -45,6 +45,7 @@
 #' frequencies are calculated from the model object.
 #'
 #' @aliases mosaic3d mosaic3d.default mosaic3d.loglm
+#'
 #' @param x A \code{link[MASS]{loglm}} model object. Alternatively, a multidimensional \code{array} or \code{table}
 #'          or\code{\link[vcd]{structable}} of frequencies in a contingency table.  In the present implementation, the dimensions
 #'          are taken in sequential order. Use \code{link[base]{aperm}} or \code{\link[vcd]{structable}} to change this.
@@ -67,8 +68,8 @@
 #'          \code{split_dir[i]} specifies the axis along which the tiles should be split
 #'          for dimension \code{i} of the table. The values specified are re-cycled to the number of table dimensions.
 #' @param shading A function, taking an array or vector of residuals for the
-#'          given model, returning a vector of colors.  At present, only the default
-#' \code{shading=shading_basic} is provided.  This is roughly equivalent to the
+#'          given model, returning a vector of colors.  At present, only the default \code{shading=shading_basic} is provided.
+#'          This is roughly equivalent to the
 #'          use of the \code{shade} argument in \code{\link[graphics]{mosaicplot}} or to
 #'          the use of \code{gp=shading_Friendly} in \code{\link[vcd]{mosaic}}.
 #' @param interpolate a vector of interpolation values for the \code{shading} function.
@@ -130,6 +131,7 @@ mosaic3d <- function(x, ...) {
 	UseMethod("mosaic3d")
 }
 
+#' @rdname mosaic3d
 #' @export
 mosaic3d.loglm <-
 function (x, type = c("observed", "expected"),
@@ -155,6 +157,7 @@ function (x, type = c("observed", "expected"),
         ...)
 }
 
+#' @rdname mosaic3d
 #' @importFrom vcd is.structable
 #' @export
 mosaic3d.default <- function(x, expected=NULL, residuals=NULL,

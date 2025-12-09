@@ -12,6 +12,21 @@
 \title{Generalized Cochran-Mantel-Haenszel Tests}
 \usage{
 CMHtest(x, ...)
+
+\method{CMHtest}{formula}(formula, data = NULL, subset = NULL, na.action = NULL, ...)
+
+\method{CMHtest}{default}(
+  x,
+  strata = NULL,
+  rscores = 1:R,
+  cscores = 1:C,
+  types = c("cor", "rmeans", "cmeans", "general"),
+  overall = FALSE,
+  details = overall,
+  ...
+)
+
+\method{print}{CMHtest}(x, digits = max(getOption("digits") - 2, 3), ...)
 }
 \arguments{
 \item{x}{A 2+ way contingency table in array form, or a class \code{"table"}

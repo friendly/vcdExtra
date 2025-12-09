@@ -83,6 +83,7 @@ The \code{sieve} and \code{assoc} methods are simple convenience interfaces
 to this plot method, setting the panel argument accordingly.
 }
 \examples{
+library(vcdExtra)
 
 GSStab <- xtabs(count ~ sex + party, data=GSS)
 # using the data in table form
@@ -103,15 +104,15 @@ mosaic(GSStab,
 
 
 # Using externally calculated residuals with the glm() object
-mosaic.glm(mod.glm1,
-           residuals=std,
-           labeling = labeling_residuals,
-           shade=TRUE)
+mosaic(mod.glm1,
+       residuals=std,
+       labeling = labeling_residuals,
+       shade=TRUE)
 
 # Using residuals_type
-mosaic.glm(mod.glm1,
-           residuals_type="rstandard",
-           labeling = labeling_residuals, shade=TRUE)
+mosaic(mod.glm1,
+       residuals_type="rstandard",
+       labeling = labeling_residuals, shade=TRUE)
 
 ## Ordinal factors and structured associations
 data(Mental)
@@ -194,7 +195,7 @@ mosaic(berk.glm1,
 berk.glm2 <- glm(Freq ~ (Dept + Gender + Admit)^2, data=berkeley, family="poisson")
 summary(berk.glm2)
 
-mosaic.glm(berk.glm2,
+mosaic(berk.glm2,
        residuals_type="rstandard",
        labeling = labeling_residuals,
        shade=TRUE,
@@ -211,12 +212,12 @@ berkeley[1:6,]
 berk.glm3 <- glm(Freq ~ Dept * (Gender+Admit) + dept1AG, data=berkeley, family="poisson")
 summary(berk.glm3)
 
-mosaic.glm(berk.glm3,
-           residuals_type="rstandard",
-           labeling = labeling_residuals,
-           shade=TRUE,
-	         formula=~Admit+Dept+Gender,
-	         main="Model: [DeptGender][DeptAdmit] + DeptA*[GA]")
+mosaic(berk.glm3,
+       residuals_type = "rstandard",
+       labeling = labeling_residuals,
+       shade=TRUE,
+	      formula = ~Admit+Dept+Gender,
+	      main = "Model: [DeptGender][DeptAdmit] + DeptA*[GA]")
 
 # compare models
 anova(berk.glm1, berk.glm3, test="Chisq")

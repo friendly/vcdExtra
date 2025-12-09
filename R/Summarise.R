@@ -70,6 +70,7 @@ Summarise <- function(object, ...) {
 }
 
 
+#' @rdname Summarise
 #' @export
 Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 {
@@ -89,6 +90,7 @@ Summarise.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 }
 
 # could just do Summarise.loglmlist <- Summarise.glmlist
+#' @rdname Summarise
 #' @export
 Summarise.loglmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 {
@@ -107,6 +109,7 @@ Summarise.loglmlist <- function(object, ..., saturated = NULL, sortby=NULL)
 	rval
 }
 
+#' @rdname Summarise
 #' @export
 Summarise.default <- function(object, ..., saturated = NULL, sortby=NULL)
 {
