@@ -24,12 +24,12 @@ A \code{\link[base]{factor}} corresponding to \code{x} is returned
 \code{x} into intervals and coding the values in \code{x} according in which
 interval they fall. However, it gives nicer labels for the factor levels and
 by default chooses convenient breaks among the values based on deciles.
-}
-\details{
+
 It is particularly useful for plots in which one wants to make a numeric
 variable discrete for the purpose of getting boxplots, spinograms or mosaic
 plots.
-
+}
+\details{
 By default, \code{\link[base]{cut}} chooses breaks by equal lengths of the
 range of \code{x}, whereas \code{cutfac} uses \code{\link[stats]{quantile}}
 to choose breaks of roughly equal count.
@@ -51,22 +51,20 @@ plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)),
   xlab = "Number of hospital stays", main = "hospital")
 }
 
-\donttest{
-# countreg not yet on CRAN
-if (require(countreg)) {
-data("CrabSatellites", package = "countreg")
+data("CrabSatellites", package = "vcdExtra")
 
 # jittered scatterplot
 plot(jitter(satellites) ~ width, data=CrabSatellites,
-  ylab="Number of satellites (jittered)", xlab="Carapace width",
+  ylab="Number of satellites (jittered)",
+  xlab="Carapace width",
   cex.lab=1.25)
-with(CrabSatellites, lines(lowess(width, satellites), col="red", lwd=2))
+with(CrabSatellites,
+     lines(lowess(width, satellites), col="red", lwd=2))
 
 # boxplot, using deciles
 plot(satellites ~ cutfac(width), data=CrabSatellites,
-     ylab="Number of satellites", xlab="Carapace width (deciles)")
-}
-}
+     ylab="Number of satellites",
+     xlab="Carapace width (deciles)")
 
 
 

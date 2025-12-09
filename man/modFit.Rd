@@ -7,15 +7,19 @@
 \title{Brief Summary of Model Fit for a glm or loglm Object}
 \usage{
 modFit(x, ...)
+
+\method{modFit}{glm}(x, stats = "chisq", digits = 2, ...)
+
+\method{modFit}{loglm}(x, stats = "chisq", digits = 2, ...)
 }
 \arguments{
 \item{x}{A \code{glm} or \code{loglm} object}
 
 \item{\dots}{Arguments passed down}
 
-\item{stats}{One or more of \code{chisq} or \code{aic}, determining the statistics displayed.}
+\item{stats}{statistics to print: one or more of \code{"chisq"}, \code{"aic"}}
 
-\item{digits}{Number of digits after the decimal point in displayed statistics.}
+\item{digits}{number to digits to use in the print method}
 }
 \value{
 A character string containing the formatted values of the chosen statistics.

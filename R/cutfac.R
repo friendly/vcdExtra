@@ -1,5 +1,7 @@
 #' Cut a Numeric Variable to a Factor
 #'
+#' @description
+#'
 #' \code{cutfac} acts like \code{\link[base]{cut}}, dividing the range of
 #' \code{x} into intervals and coding the values in \code{x} according in which
 #' interval they fall. However, it gives nicer labels for the factor levels and
@@ -9,6 +11,7 @@
 #' variable discrete for the purpose of getting boxplots, spinograms or mosaic
 #' plots.
 #'
+#' @details
 #' By default, \code{\link[base]{cut}} chooses breaks by equal lengths of the
 #' range of \code{x}, whereas \code{cutfac} uses \code{\link[stats]{quantile}}
 #' to choose breaks of roughly equal count.
@@ -18,10 +21,14 @@
 #'          single number (greater than or equal to 2) giving the number of intervals
 #'          into which \code{x} is to be cut.
 #' @param q the number of quantile groups used to define \code{breaks}, if that
-#'        has not been specified.
+#'          has not been specified.
+#'
 #' @return A \code{\link[base]{factor}} corresponding to \code{x} is returned
+#'
 #' @author Achim Zeileis
+#'
 #' @seealso \code{\link[base]{cut}}, \code{\link[stats]{quantile}}
+#'
 #' @references
 #' Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
 #' with R: Visualization and Modeling Techniques for Categorical and Count
@@ -44,22 +51,20 @@
 #'   xlab = "Number of hospital stays", main = "hospital")
 #' }
 #'
-#' \donttest{
-#' # countreg not yet on CRAN
-#' if (require(countreg)) {
-#' data("CrabSatellites", package = "countreg")
+#' data("CrabSatellites", package = "vcdExtra")
 #'
 #' # jittered scatterplot
 #' plot(jitter(satellites) ~ width, data=CrabSatellites,
-#'   ylab="Number of satellites (jittered)", xlab="Carapace width",
+#'   ylab="Number of satellites (jittered)",
+#'   xlab="Carapace width",
 #'   cex.lab=1.25)
-#' with(CrabSatellites, lines(lowess(width, satellites), col="red", lwd=2))
+#' with(CrabSatellites,
+#'      lines(lowess(width, satellites), col="red", lwd=2))
 #'
 #' # boxplot, using deciles
 #' plot(satellites ~ cutfac(width), data=CrabSatellites,
-#'      ylab="Number of satellites", xlab="Carapace width (deciles)")
-#' }
-#' }
+#'      ylab="Number of satellites",
+#'      xlab="Carapace width (deciles)")
 #'
 #'
 #'

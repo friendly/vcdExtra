@@ -11,6 +11,7 @@
 #' for inclusion in a plot title or annotation.
 #'
 #'
+#' @name modFit
 #' @aliases modFit modFit.loglm modFit.glm
 #' @param x A \code{glm} or \code{loglm} object
 #' @param \dots Arguments passed down
@@ -41,6 +42,7 @@ function(x, ...) UseMethod("modFit")
 
 #' @param stats statistics to print: one or more of \code{"chisq"}, \code{"aic"}
 #' @param digits number to digits to use in the print method
+#' @rdname modFit
 #' @export
 modFit.glm <- function(x, stats="chisq", digits=2, ...) {
 	if (!inherits(x,"glm")) stop("modFit requires a glm object")
@@ -54,6 +56,7 @@ modFit.glm <- function(x, stats="chisq", digits=2, ...) {
 }
 
 
+#' @rdname modFit
 #' @export
 modFit.loglm <- function(x, stats="chisq", digits=2, ...) {
 	if (!inherits(x,"loglm")) stop("modFit requires a loglm object")
