@@ -108,6 +108,7 @@
 #' @importFrom utils data menu type.convert
 #' @importFrom ca cacoord multilines
 #' @importFrom graphics abline plot points text
+#' @importFrom MASS loglm
 #' 
 #' @keywords package
 #'

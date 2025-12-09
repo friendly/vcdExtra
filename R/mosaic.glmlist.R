@@ -99,6 +99,7 @@
 #'
 #'
 #'
+#' @importFrom grid grid.newpage grid.layout pushViewport popViewport
 #' @export
 mosaic.glmlist <- function(x, selection,
 		panel=mosaic,
