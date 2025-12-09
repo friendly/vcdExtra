@@ -81,13 +81,13 @@ NULL
 #' @format A data frame in frequency form (comprising a 5 x 2 x 4 x 2 table)
 #' with 80 observations on the following 5 variables.
 #' \describe{
-#'   \item{list("age")}{an ordered factor with levels \code{0-9} < \code{10-19} <\code{20-29}
+#'   \item{\code{age}}{an ordered factor with levels \code{0-9} < \code{10-19} <\code{20-29}
 #'         < \code{30-49} < \code{50+}}
-#'   \item{list("result")}{a factor with levels \code{Died} \code{Injured}}
-#'   \item{list("mode")}{mode of transportation, a factor with levels \code{4-Wheeled} \code{Bicycle}
+#'   \item{\code{result}}{a factor with levels \code{Died} \code{Injured}}
+#'   \item{\code{mode}}{mode of transportation, a factor with levels \code{4-Wheeled} \code{Bicycle}
 #'         \code{Motorcycle} \code{Pedestrian}}
-#'   \item{list("gender")}{a factor with levels \code{Female} \code{Male}}
-#'   \item{list("Freq")}{a numeric vector}
+#'   \item{\code{gender}}{a factor with levels \code{Female} \code{Male}}
+#'   \item{\code{Freq}}{a numeric vector}
 #' }
 #'
 #' @references Bertin, J. (1983), \emph{Semiology of Graphics}, University of
@@ -187,14 +187,14 @@ NULL
 #' @docType data
 #' @format A data frame with 439 observations on the following 5 variables.
 #' \describe{
-#'   \item{list("Phase")}{phase of the flight, a factor with levels \code{en route} \code{landing}
+#'   \item{\code{Phase}}{phase of the flight, a factor with levels \code{en route} \code{landing}
 #'         \code{standing} \code{take-off}
 #' \code{unknown}}
-#'   \item{list("Cause")}{a factor with levels \code{criminal} \code{human error} \code{mechanical}
+#'   \item{\code{Cause}}{a factor with levels \code{criminal} \code{human error} \code{mechanical}
 #'         \code{unknown} \code{weather}}
-#'   \item{list("date")}{date of crash, a Date}
-#'   \item{list("Fatalities")}{number of fatalities, a numeric vector}
-#'   \item{list("Year")}{year, a numeric vector}
+#'   \item{\code{date}}{date of crash, a Date}
+#'   \item{\code{Fatalities}}{number of fatalities, a numeric vector}
+#'   \item{\code{Year}}{year, a numeric vector}
 #' }
 #' @references Rick Wicklin,
 #' \url{http://blogs.sas.com/content/iml/2015/03/30/visualizing-airline-crashes.html}
@@ -257,12 +257,12 @@ NULL
 #' @format A frequency data frame with 80 observations on the following 5
 #' variables.
 #' \describe{
-#'   \item{list("lake")}{a factor with levels \code{George} \code{Hancock} \code{Oklawaha} \code{Trafford}}
-#'   \item{list("sex")}{a factor with levels \code{female} \code{male}}
-#'   \item{list("size")}{alligator size, a factor with levels \code{large} (>2.3m) \code{small} (<=2.3m)}
-#'   \item{list("food")}{primary food choice, a factor with levels \code{bird} \code{fish}
+#'   \item{\code{lake}}{a factor with levels \code{George} \code{Hancock} \code{Oklawaha} \code{Trafford}}
+#'   \item{\code{sex}}{a factor with levels \code{female} \code{male}}
+#'   \item{\code{size}}{alligator size, a factor with levels \code{large} (>2.3m) \code{small} (<=2.3m)}
+#'   \item{\code{food}}{primary food choice, a factor with levels \code{bird} \code{fish}
 #'         \code{invert} \code{other} \code{reptile}}
-#'   \item{list("count")}{cell frequency, a numeric vector} }
+#'   \item{\code{count}}{cell frequency, a numeric vector} }
 #' @source Agresti, A. (2002). \emph{Categorical Data Analysis}, New York:
 #' Wiley, 2nd Ed., Table 7.1
 #' @keywords datasets
@@ -438,11 +438,11 @@ NULL
 #' @format A frequency data frame (representing a 3 x 3 x 2 x 2 frequency
 #' table) with 36 cells on the following 5 variables.
 #' \describe{
-#'   \item{list("Hair")}{hair color, a factor with levels \code{Fair} \code{Red} \code{Dark}}
-#'   \item{list("Eyes")}{eye color, a factor with levels \code{Light} \code{Mixed} \code{Dark}}
-#'   \item{list("Head")}{head shape, a factor with levels \code{Narrow} \code{Wide}}
-#'   \item{list("Stature")}{height, a factor with levels \code{Tall} \code{Short}}
-#'   \item{list("Freq")}{a numeric vector}
+#'   \item{\code{Hair}}{hair color, a factor with levels \code{Fair} \code{Red} \code{Dark}}
+#'   \item{\code{Eyes}}{eye color, a factor with levels \code{Light} \code{Mixed} \code{Dark}}
+#'   \item{\code{Head}}{head shape, a factor with levels \code{Narrow} \code{Wide}}
+#'   \item{\code{Stature}}{height, a factor with levels \code{Tall} \code{Short}}
+#'   \item{\code{Freq}}{a numeric vector}
 #' }
 #'
 #' @source Burt, C. (1950). The factorial analysis of qualitative data,
@@ -676,8 +676,8 @@ NULL
 #' @docType data
 #' @format A data frame with 208 observations on the following 2 variables.
 #' \describe{
-#'   \item{list("date")}{a Date}
-#'   \item{list("deaths")}{number of deaths, a numeric vector}
+#'   \item{\code{date}}{a Date}
+#'   \item{\code{deaths}}{number of deaths, a numeric vector}
 #'   }
 #' @references Aberdein, Jody and Spiegelhalter, David (2013). Have London's
 #' roads become more dangerous for cyclists? \emph{Significance}, 10(6),

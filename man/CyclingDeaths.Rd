@@ -7,8 +7,8 @@
 \format{
 A data frame with 208 observations on the following 2 variables.
 \describe{
-  \item{list("date")}{a Date}
-  \item{list("deaths")}{number of deaths, a numeric vector}
+  \item{\code{date}}{a Date}
+  \item{\code{deaths}}{number of deaths, a numeric vector}
   }
 }
 \source{

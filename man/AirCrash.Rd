@@ -7,14 +7,14 @@
 \format{
 A data frame with 439 observations on the following 5 variables.
 \describe{
-  \item{list("Phase")}{phase of the flight, a factor with levels \code{en route} \code{landing}
+  \item{\code{Phase}}{phase of the flight, a factor with levels \code{en route} \code{landing}
         \code{standing} \code{take-off}
 \code{unknown}}
-  \item{list("Cause")}{a factor with levels \code{criminal} \code{human error} \code{mechanical}
+  \item{\code{Cause}}{a factor with levels \code{criminal} \code{human error} \code{mechanical}
         \code{unknown} \code{weather}}
-  \item{list("date")}{date of crash, a Date}
-  \item{list("Fatalities")}{number of fatalities, a numeric vector}
-  \item{list("Year")}{year, a numeric vector}
+  \item{\code{date}}{date of crash, a Date}
+  \item{\code{Fatalities}}{number of fatalities, a numeric vector}
+  \item{\code{Year}}{year, a numeric vector}
 }
 }
 \source{

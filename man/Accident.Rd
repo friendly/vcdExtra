@@ -8,13 +8,13 @@
 A data frame in frequency form (comprising a 5 x 2 x 4 x 2 table)
 with 80 observations on the following 5 variables.
 \describe{
-  \item{list("age")}{an ordered factor with levels \code{0-9} < \code{10-19} <\code{20-29}
+  \item{\code{age}}{an ordered factor with levels \code{0-9} < \code{10-19} <\code{20-29}
         < \code{30-49} < \code{50+}}
-  \item{list("result")}{a factor with levels \code{Died} \code{Injured}}
-  \item{list("mode")}{mode of transportation, a factor with levels \code{4-Wheeled} \code{Bicycle}
+  \item{\code{result}}{a factor with levels \code{Died} \code{Injured}}
+  \item{\code{mode}}{mode of transportation, a factor with levels \code{4-Wheeled} \code{Bicycle}
         \code{Motorcycle} \code{Pedestrian}}
-  \item{list("gender")}{a factor with levels \code{Female} \code{Male}}
-  \item{list("Freq")}{a numeric vector}
+  \item{\code{gender}}{a factor with levels \code{Female} \code{Male}}
+  \item{\code{Freq}}{a numeric vector}
 }
 }
 \source{
