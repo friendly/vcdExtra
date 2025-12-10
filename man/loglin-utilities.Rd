@@ -133,3 +133,9 @@ suitable as the \code{formula} for of \code{\link[MASS]{loglm}}.
 describing the loglinear model in the shorthand bracket notation,
 e.g., \code{"[A,B] [A,C]"}.
 }
+\seealso{
+Other loglinear models: 
+\code{\link{glmlist}()},
+\code{\link{seq_loglm}()}
+}
+\concept{loglinear models}

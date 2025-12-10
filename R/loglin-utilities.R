@@ -81,6 +81,7 @@
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when \code{table} is not specified
 #' @param with    indices of the factors against which others are considered jointly independent
+#' @family loglinear models
 #' @rdname loglin-utilities
 #' @export
 

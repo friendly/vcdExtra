@@ -28,13 +28,11 @@
 #' data.frame, so you should supply the \code{formula} in the form \code{Freq ~
 #' } \dots{}.
 #'
-#' @param formula a two-sided formula for the 1-way effects in the model. The
-#' LHS should be the response, and the RHS should be the first-order terms
-#' connected by \code{+} signs.
-#' @param family a description of the error distribution and link function to
-#' be used in the model.  This can be a character string naming a family
-#' function, a family function or the result of a call to a family function.
-#' (See \code{\link[stats]{family}} for details of family functions.)
+#' @param formula a two-sided formula for the 1-way effects in the model. The LHS should be the response, and the RHS
+#'        should be the first-order terms connected by \code{+} signs.
+#' @param family a description of the error distribution and link function to be used in the model.  This can be a character
+#'        string naming a family function, a family function or the result of a call to a family function.
+#'        (See \code{\link[stats]{family}} for details of family functions.)
 #' @param data an optional data frame, list or environment (or object coercible
 #' by \code{\link[base]{as.data.frame}} to a data frame) containing the
 #' variables in the model. If not found in data, the variables are taken from
@@ -48,8 +46,10 @@
 #' @return An object of class \code{glmlist}, of length \code{order+1}
 #' containing the 0-way, 1-way, ...  models up to degree \code{order}.
 #' @author Michael Friendly and Heather Turner
+#'
 #' @seealso \code{\link{glmlist}}, \code{\link{Summarise}} (soon to be
 #' deprecated), \code{\link{LRstats}}
+#'
 #' @family glmlist functions
 #' @keywords models
 #' @examples

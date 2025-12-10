@@ -21,8 +21,9 @@
 #' \eqn{\hat{\lambda} = \bar{x}}. The number of observed zeros, \eqn{n_0} is
 #' then compared with the expected number, \eqn{n \hat{p_0}}, where
 #' \eqn{\hat{p}_0=\exp[-\hat{\lambda}]}. Then the test statistic is calculated
-#' by the formula: \deqn{\frac{(n_0 - n\hat{p}_0)^2}{n\hat{p}_0(1-\hat{p}_0) -
-#' n\bar{x}\hat{p}_0^2}} This test statistic has a \eqn{\chi^2_1} distribution.
+#' by the formula:
+#' \deqn{\frac{(n_0 - n\hat{p}_0)^2}{n\hat{p}_0(1-\hat{p}_0) - n\bar{x}\hat{p}_0^2}} .
+#' This test statistic has a \eqn{\chi^2_1} distribution.
 #'
 #' @param x A vector of non-negative counts, or a one-way frequency table of
 #' such counts.

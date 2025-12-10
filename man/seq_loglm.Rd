@@ -16,29 +16,24 @@ seq_loglm(
 )
 }
 \arguments{
-\item{x}{a contingency table in array form, with optional category labels
-specified in the dimnames(x) attribute, or else a data.frame in frequency
-form, with the frequency variable named \code{"Freq"}.}
+\item{x}{a contingency table in array form, with optional category labels specified in the dimnames(x) attribute,
+or else a data.frame in frequency form, with the frequency variable named \code{"Freq"}.}
 
-\item{type}{type of sequential model to fit, a character string. One of
-\code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"}, or
-\code{"saturated"}.}
+\item{type}{type of sequential model to fit, a character string. One of \code{"joint"}, \code{"conditional"},
+\code{"mutual"}, \code{"markov"}, or \code{"saturated"}.}
 
-\item{marginals}{which marginal sub-tables to fit? A vector of a (sub)set of
-the integers, \code{1:nf} where \code{nf} is the number of factors in the
-full n-way table.}
+\item{marginals}{which marginal sub-tables to fit? A vector of a (sub)set of the integers, \code{1:nf} where
+\code{nf} is the number of factors in the full n-way table.}
 
-\item{vorder}{order of variables, a permutation of the integers \code{1:nf},
-used to reorder the variables in the original table for the purpose of
-fitting sequential marginal models.}
+\item{vorder}{order of variables, a permutation of the integers \code{1:nf}, used to reorder the variables in
+the original table for the purpose of fitting sequential marginal models.}
 
-\item{k}{conditioning variable(s) for \code{type} = \code{"joint"},
-\code{"conditional"} or Markov chain order for \code{type} = \code{"markov"}}
+\item{k}{conditioning variable(s) for \code{type} = \code{"joint"}, \code{"conditional"} or Markov chain order
+for \code{type} = \code{"markov"}}
 
 \item{prefix}{prefix used to give names to the sequential models}
 
-\item{fitted}{argument passed to \code{loglm} to store the fitted values in
-the model objects}
+\item{fitted}{argument passed to \code{loglm} to store the fitted values in the model objects}
 
 \item{\dots}{other arguments, passed down}
 }
@@ -92,9 +87,14 @@ of mosaic displays, described in the \emph{User's Guide},
 models, \code{\link{conditional}}, \code{\link{joint}},
 \code{\link{mutual}}, \dots{}
 
-\code{\link{loglmlist}},
+\code{\link{loglmlist}}
+
+Other loglinear models: 
+\code{\link{glmlist}()},
+\code{\link{joint}()}
 }
 \author{
 Michael Friendly
 }
+\concept{loglinear models}
 \keyword{models}

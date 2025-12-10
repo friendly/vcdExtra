@@ -44,6 +44,7 @@
 #' \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
 #' object.
 #' @family glmlist functions
+#' @family loglinear models
 #'
 #' @keywords utilities models
 #' @examples

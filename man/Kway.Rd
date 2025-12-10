@@ -7,13 +7,11 @@
 Kway(formula, family = poisson, data, ..., order = nt, prefix = "kway")
 }
 \arguments{
-\item{formula}{a two-sided formula for the 1-way effects in the model. The
-LHS should be the response, and the RHS should be the first-order terms
-connected by \code{+} signs.}
+\item{formula}{a two-sided formula for the 1-way effects in the model. The LHS should be the response, and the RHS
+should be the first-order terms connected by \code{+} signs.}
 
-\item{family}{a description of the error distribution and link function to
-be used in the model.  This can be a character string naming a family
-function, a family function or the result of a call to a family function.
+\item{family}{a description of the error distribution and link function to be used in the model.  This can be a character
+string naming a family function, a family function or the result of a call to a family function.
 (See \code{\link[stats]{family}} for details of family functions.)}
 
 \item{data}{an optional data frame, list or environment (or object coercible

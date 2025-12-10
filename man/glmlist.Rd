@@ -93,10 +93,15 @@ Other glmlist functions:
 \code{\link{Kway}()},
 \code{\link{LRstats}()},
 \code{\link{mosaic.glmlist}()}
+
+Other loglinear models: 
+\code{\link{joint}()},
+\code{\link{seq_loglm}()}
 }
 \author{
 Michael Friendly; \code{coef} method by John Fox
 }
 \concept{glmlist functions}
+\concept{loglinear models}
 \keyword{models}
 \keyword{utilities}

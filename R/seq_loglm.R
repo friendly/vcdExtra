@@ -19,24 +19,20 @@
 #' the conditional probabilities of each new variable, given all prior
 #' variables.
 #'
-#' @param x a contingency table in array form, with optional category labels
-#' specified in the dimnames(x) attribute, or else a data.frame in frequency
-#' form, with the frequency variable named \code{"Freq"}.
-#' @param type type of sequential model to fit, a character string. One of
-#' \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"}, or
-#' \code{"saturated"}.
-#' @param marginals which marginal sub-tables to fit? A vector of a (sub)set of
-#' the integers, \code{1:nf} where \code{nf} is the number of factors in the
-#' full n-way table.
-#' @param vorder order of variables, a permutation of the integers \code{1:nf},
-#' used to reorder the variables in the original table for the purpose of
-#' fitting sequential marginal models.
-#' @param k conditioning variable(s) for \code{type} = \code{"joint"},
-#' \code{"conditional"} or Markov chain order for \code{type} = \code{"markov"}
+#' @param x a contingency table in array form, with optional category labels specified in the dimnames(x) attribute,
+#'          or else a data.frame in frequency form, with the frequency variable named \code{"Freq"}.
+#' @param type type of sequential model to fit, a character string. One of \code{"joint"}, \code{"conditional"},
+#'          \code{"mutual"}, \code{"markov"}, or \code{"saturated"}.
+#' @param marginals which marginal sub-tables to fit? A vector of a (sub)set of the integers, \code{1:nf} where
+#'          \code{nf} is the number of factors in the full n-way table.
+#' @param vorder order of variables, a permutation of the integers \code{1:nf}, used to reorder the variables in
+#'          the original table for the purpose of fitting sequential marginal models.
+#' @param k conditioning variable(s) for \code{type} = \code{"joint"}, \code{"conditional"} or Markov chain order
+#'          for \code{type} = \code{"markov"}
 #' @param prefix prefix used to give names to the sequential models
-#' @param fitted argument passed to \code{loglm} to store the fitted values in
-#' the model objects
+#' @param fitted argument passed to \code{loglm} to store the fitted values in the model objects
 #' @param \dots other arguments, passed down
+#'
 #' @return An object of class \code{"loglmlist"}, each of which is a class
 #' \code{"loglm"} object
 #'
@@ -44,15 +40,20 @@
 #' cannot be fit directly using \code{\link[MASS]{loglm}}. The present version
 #' uses \code{\link[stats]{loglin}}, and repairs the result to look like a
 #' \code{loglm} object (sort of).
+#'
 #' @author Michael Friendly
+#'
 #' @seealso \code{\link{loglin-utilities}} for descriptions of sequential
 #' models, \code{\link{conditional}}, \code{\link{joint}},
 #' \code{\link{mutual}}, \dots{}
 #'
-#' \code{\link{loglmlist}},
+#' \code{\link{loglmlist}}
+#' @family loglinear models
+#'
 #' @references These functions were inspired by the original SAS implementation
 #' of mosaic displays, described in the \emph{User's Guide},
 #' \url{http://www.datavis.ca/mosaics/mosaics.pdf}
+#'
 #' @keywords models
 #' @examples
 #'
