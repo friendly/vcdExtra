@@ -6,7 +6,7 @@
 \alias{_PACKAGE}
 \title{Extensions and additions to vcd: Visualizing Categorical Data}
 \description{
-\if{html}{\figure{man/figures/logo.png}{options: align='right' alt='logo' width='100'}}
+\if{html}{\figure{man/figures/logo.png}{options: alt='logo' width='100'}}
 }
 \details{
 This package provides additional data sets, documentation, and a few
