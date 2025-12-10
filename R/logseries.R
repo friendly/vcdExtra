@@ -17,13 +17,12 @@
 #' @aliases Logseries dlogseries plogseries qlogseries rlogseries
 #' @param x,q vector of quantiles representing the number of events.
 #' @param prob parameter for the distribution, `0 < prob < 1`
-#' @param log,log.p logical; if TRUE, probabilities `p` are given as
-#'        `log(p)`
-#' @param lower.tail logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]},
-#'        otherwise, \eqn{P[X > x]}{P[X > x]}.
+#' @param log,log.p logical; if TRUE, probabilities `p` are given as `log(p)`
+#' @param lower.tail logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.
 #' @param p vector of probabilities
 #' @param max.value maximum value returned by `qlogseries`
 #' @param n number of observations for `rlogseries`
+#'
 #' @return `dlogseries` gives the density,
 #'         `plogseries` gives the cumulative distribution function,
 #'         `qlogseries` gives the quantile function, and
@@ -33,12 +32,14 @@
 #' @author Michael Friendly, using original code modified from the
 #'         `gmlss.dist` package by Mikis Stasinopoulos.
 #' @seealso \code{\link[stats]{Distributions}}
+#'
 #' @references
 #' <https://en.wikipedia.org/wiki/Logarithmic_distribution>
 #'
 #' Fisher, R. A. and Corbet, A. S. and Williams, C. B. (1943). The relation
 #' between the number of species and the number of individuals *Journal of
 #' Animal Ecology*, 12, 42-58.
+#'
 #' @keywords distribution
 #' @examples
 #'

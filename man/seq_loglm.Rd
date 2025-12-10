@@ -38,8 +38,7 @@ for \code{type} = \code{"markov"}}
 \item{\dots}{other arguments, passed down}
 }
 \value{
-An object of class \code{"loglmlist"}, each of which is a class
-\code{"loglm"} object
+An object of class \code{"loglmlist"}, each of which is a class \code{"loglm"} object
 }
 \description{
 This function takes an n-way contingency table and fits a series of

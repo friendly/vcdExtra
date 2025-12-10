@@ -33,8 +33,7 @@
 #' @param fitted argument passed to `loglm` to store the fitted values in the model objects
 #' @param \dots other arguments, passed down
 #'
-#' @return An object of class `"loglmlist"`, each of which is a class
-#' `"loglm"` object
+#' @return An object of class `"loglmlist"`, each of which is a class `"loglm"` object
 #'
 #' @note One-way marginal tables are a bit of a problem here, because they
 #' cannot be fit directly using \code{\link[MASS]{loglm}}. The present version

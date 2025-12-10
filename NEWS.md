@@ -9,7 +9,7 @@ o Use the generalized Moore-Penrose inverse from MASS in CMHtest() such that it 
 o Converted the package to use roxygen documentation via {rd2roxygen}. UGH!
 o Added `CrabSatellites` data from {countreg} b/c that's still not available on CRAN
 o Moved `grid` from `Depends:` to `Imports:`
-o Now use markdown in package documenation for easier maintenance, via {roxygen2md}
+o Now use markdown in package documentation for easier maintenance, via {roxygen2md}
 
 ## Version 0.8-6 (2025-07-23)
 

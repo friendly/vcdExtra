@@ -21,11 +21,9 @@ rlogseries(n, prob = 0.5)
 
 \item{prob}{parameter for the distribution, \verb{0 < prob < 1}}
 
-\item{log, log.p}{logical; if TRUE, probabilities \code{p} are given as
-\code{log(p)}}
+\item{log, log.p}{logical; if TRUE, probabilities \code{p} are given as \code{log(p)}}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]},
-otherwise, \eqn{P[X > x]}{P[X > x]}.}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.}
 
 \item{p}{vector of probabilities}
 
