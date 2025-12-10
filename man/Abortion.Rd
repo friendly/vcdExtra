@@ -10,9 +10,9 @@ for 1100 observations. The variable names and their levels are:
 
 \tabular{rll}{
 No \tab Name                    \tab Levels \cr
-1  \tab \code{Sex}              \tab \code{"Female", "Male"}\cr
-2  \tab \code{Status}           \tab \code{"Lo", "Hi"}\cr
-3  \tab \code{Support_Abortion} \tab \code{"Yes", "No"}\cr
+1  \tab \code{Sex}              \tab \verb{"Female", "Male"}\cr
+2  \tab \code{Status}           \tab \verb{"Lo", "Hi"}\cr
+3  \tab \code{Support_Abortion} \tab \verb{"Yes", "No"}\cr
 }
 }
 \source{

@@ -11,11 +11,11 @@ are:
 
 \tabular{rll}{
 No \tab Name \tab Levels \cr
-1\tab \code{e1971}\tab \code{"71Yes", "No"}\cr
-2\tab \code{e1970}\tab \code{"70Yes", "No"}\cr
-3\tab \code{e1969}\tab \code{"69Yes", "No"}\cr
-4\tab \code{e1968}\tab \code{"68Yes", "No"}\cr
-5\tab \code{e1967}\tab \code{"67Yes", "No"}\cr
+1\tab \code{e1971}\tab \verb{"71Yes", "No"}\cr
+2\tab \code{e1970}\tab \verb{"70Yes", "No"}\cr
+3\tab \code{e1969}\tab \verb{"69Yes", "No"}\cr
+4\tab \code{e1968}\tab \verb{"68Yes", "No"}\cr
+5\tab \code{e1967}\tab \verb{"67Yes", "No"}\cr
 }
 }
 \source{

@@ -10,8 +10,8 @@ for 19912 observations. The variable names and their levels are:
 
 \tabular{rll}{
 No \tab Name \tab Levels \cr
-1\tab \code{Son's_Occupation}\tab \code{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr
-2\tab \code{Father's_Occupation}\tab \code{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr
+1\tab \verb{Son's_Occupation}\tab \verb{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr
+2\tab \verb{Father's_Occupation}\tab \verb{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr
 }
 }
 \source{

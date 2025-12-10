@@ -6,18 +6,18 @@
 #' Collapse Levels of a Table
 #' 
 #' Collapse (or re-label) variables in a a contingency table, array or
-#' \code{ftable} object by re-assigning levels of the table variables.
+#' `ftable` object by re-assigning levels of the table variables.
 #' 
-#' Each of the \code{\dots{}} arguments must be of the form \code{variable =
-#' levels}, where \code{variable} is the name of one of the table dimensions,
-#' and \code{levels} is a character or numeric vector of length equal to the
+#' Each of the \code{\dots{}} arguments must be of the form `variable =
+#' levels`, where `variable` is the name of one of the table dimensions,
+#' and `levels` is a character or numeric vector of length equal to the
 #' corresponding dimension of the table.
 #' 
 #' @param table A \code{\link[base]{table}}, \code{\link[base]{array}} or
 #' \code{\link[stats]{ftable}} object
 #' @param \dots A collection of one or more assignments of factors of the table
 #' to a list of levels
-#' @return A \code{xtabs} and \code{table} object, representing the original
+#' @return A `xtabs` and `table` object, representing the original
 #' table with one or more of its factors collapsed or rearranged into other
 #' levels.
 #' @author Michael Friendly

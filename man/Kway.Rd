@@ -58,8 +58,7 @@ saturated model.
 As presently written, the function requires a two-sided formula with an
 explicit response on the LHS. For frequency data in table form (e.g.,
 produced by \code{xtabs}) you the \code{data} argument is coerced to a
-data.frame, so you should supply the \code{formula} in the form \code{Freq ~
-} \dots{}.
+data.frame, so you should supply the \code{formula} in the form \verb{Freq ~ } \dots{}.
 }
 \examples{
 

@@ -10,10 +10,10 @@ for 13968 observations. The variable names and their levels are:
 
 \tabular{rll}{
 No \tab Name \tab Levels \cr
-1\tab \code{Status}\tab \code{"College", "School", "Job", "Other"}\cr
-2\tab \code{Rank}\tab \code{"Low", "Middle", "High"}\cr
-3\tab \code{Occupation}\tab \code{"1", "2", "3", "4", "5", "6", "7"}\cr
-4\tab \code{Sex}\tab \code{"Male", "Female"}\cr
+1\tab \code{Status}\tab \verb{"College", "School", "Job", "Other"}\cr
+2\tab \code{Rank}\tab \verb{"Low", "Middle", "High"}\cr
+3\tab \code{Occupation}\tab \verb{"1", "2", "3", "4", "5", "6", "7"}\cr
+4\tab \code{Sex}\tab \verb{"Male", "Female"}\cr
 }
 }
 \source{

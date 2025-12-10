@@ -9,21 +9,21 @@
 #' \code{\link{seq_loglm}}.
 #'
 #' @param x a contingency table in array form, with optional category labels
-#'        specified in the \code{dimnames(x)} attribute, or else a data.frame in frequency
-#'        form, with the frequency variable named \code{"Freq"}.
+#'        specified in the `dimnames(x)` attribute, or else a data.frame in frequency
+#'        form, with the frequency variable named `"Freq"`.
 #' @param panel a \code{\link[vcd]{strucplot}} panel function, typically
 #'        \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}. NOT yet implemented.}
 #' @param type type of sequential model to fit, a character string. One of
-#'        \code{"joint"}, \code{"conditional"}, \code{"mutual"}, \code{"markov"}, or
-#'         \code{"saturated"}.
+#'        `"joint"`, `"conditional"`, `"mutual"`, `"markov"`, or
+#'         `"saturated"`.
 #' @param plots which marginal sub-tables to plot? A vector of a (sub)set of
-#'        the integers, \code{1:nf} where \code{nf} is the number of factors in the
+#'        the integers, `1:nf` where `nf` is the number of factors in the
 #'        full n-way table.
-#' @param vorder order of variables, a permutation of the integers \code{1:nf},
+#' @param vorder order of variables, a permutation of the integers `1:nf`,
 #'        used to reorder the variables in the original table for the purpose of
 #'        fitting sequential marginal models.
-#' @param k conditioning variable(s) for \code{type} = \code{"joint"},
-#'        \code{"conditional"} or Markov chain order for \code{type} = \code{"markov"}
+#' @param k conditioning variable(s) for `type` = `"joint"`,
+#'        `"conditional"` or Markov chain order for `type` = `"markov"`
 #' @param \dots other arguments passed to \code{\link[vcd]{mosaic}}.
 #'
 #' @return None. Used for its side-effect of producing plots
@@ -38,8 +38,8 @@
 #'         \code{\link[vcd]{strucplot}}, for the many parameters that control the details of mosaic plots.
 #' @references
 #' These functions were inspired by the original SAS implementation
-#' of mosaic displays, described in the \emph{User's Guide for Mosaics},
-#' \url{http://www.datavis.ca/mosaics/mosaics.pdf}
+#' of mosaic displays, described in the *User's Guide for Mosaics*,
+#' <http://www.datavis.ca/mosaics/mosaics.pdf>
 #' @keywords hplots
 #' @examples
 #'

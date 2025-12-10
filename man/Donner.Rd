@@ -17,7 +17,7 @@ A data frame with 90 observations on the following 5 variables.
 }
 \source{
 D. K. Grayson, 1990, "Donner party deaths: A demographic
-assessment", \emph{J. Anthropological Research}, \bold{46}, 223-242.
+assessment", \emph{J. Anthropological Research}, \strong{46}, 223-242.
 
 Johnson, K. (1996). \emph{Unfortunate Emigrants: Narratives of the Donner
 Party}.  Logan, UT: Utah State University Press.  Additions, and dates of

@@ -17,7 +17,7 @@ table) with 36 cells on the following 5 variables.
 }
 \source{
 Burt, C. (1950). The factorial analysis of qualitative data,
-\emph{British Journal of Statistical Psychology}, \bold{3}(3), 166-185.
+\emph{British Journal of Statistical Psychology}, \strong{3}(3), 166-185.
 Table IX.
 }
 \description{

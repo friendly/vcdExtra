@@ -5,43 +5,43 @@
 
 #' Create a Model List Object
 #'
-#' \code{glmlist} creates a \code{glmlist} object containing a list of fitted
-#' \code{glm} objects with their names. \code{loglmlist} does the same for
-#' \code{loglm} objects.
+#' `glmlist` creates a `glmlist` object containing a list of fitted
+#' `glm` objects with their names. `loglmlist` does the same for
+#' `loglm` objects.
 #'
 #' The intention is to provide object classes to facilitate model comparison,
 #' extraction, summary and plotting of model components, etc., perhaps using
 #' \code{\link[base]{lapply}} or similar.
 #'
-#' There exists a \code{\link[stats]{anova.glm}} method for \code{glmlist}
-#' objects.  Here, a \code{coef} method is also defined, collecting the
+#' There exists a \code{\link[stats]{anova.glm}} method for `glmlist`
+#' objects.  Here, a `coef` method is also defined, collecting the
 #' coefficients from all models in a single object of type determined by
-#' \code{result}.
+#' `result`.
 #'
-#' The arguments to \code{glmlist} or \code{loglmlist} are of the form
-#' \code{value} or \code{name=value}.
+#' The arguments to `glmlist` or `loglmlist` are of the form
+#' `value` or `name=value`.
 #'
-#' Any objects which do not inherit the appropriate class \code{glm} or
-#' \code{loglm} are excluded, with a warning.
+#' Any objects which do not inherit the appropriate class `glm` or
+#' `loglm` are excluded, with a warning.
 #'
-#' In the \code{coef} method, coefficients from the different models are
+#' In the `coef` method, coefficients from the different models are
 #' matched by name in the list of unique names across all models.
 #'
 #' @aliases glmlist loglmlist coef.glmlist
 #' @param \dots One or more model objects, as appropriate to the function, optionally assigned names as in \code{\link{list}}.
-#' @param object a \code{"glmlist"} object
+#' @param object a `"glmlist"` object
 #' @param result type of the result to be returned
 #'
-#' @return An object of class \code{glmlist} \code{loglmlist}, just like a \code{list}, except that each model is given a \code{name} attribute.
+#' @return An object of class `glmlist` `loglmlist`, just like a `list`, except that each model is given a `name` attribute.
 #'
-#' @author Michael Friendly; \code{coef} method by John Fox
+#' @author Michael Friendly; `coef` method by John Fox
 #'
-#' @seealso The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is
+#' @seealso The function \code{\link[Hmisc]{llist}} in package `Hmisc` is
 #' similar, but perplexingly more general.
 #'
-#' The function \code{\link[stats]{anova.glm}} also handles \code{glmlist objects}
+#' The function \code{\link[stats]{anova.glm}} also handles `glmlist objects`
 #'
-#' \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
+#' \code{\link{LRstats}} gives LR statistics and tests for a `glmlist`
 #' object.
 #' @family glmlist functions
 #' @family loglinear models

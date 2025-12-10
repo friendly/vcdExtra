@@ -10,9 +10,9 @@ for 474 observations. The variable names and their levels are:
 
 \tabular{rll}{
 dim \tab Name \tab Levels \cr
-1\tab \code{Survival}\tab  \code{"Died", "Surv"}\cr
-2\tab \code{Grade}\tab \code{"Malignant", "Benign"}\cr
-3\tab \code{Center}\tab \code{"Boston", "Glamorgan"}\cr
+1\tab \code{Survival}\tab  \verb{"Died", "Surv"}\cr
+2\tab \code{Grade}\tab \verb{"Malignant", "Benign"}\cr
+3\tab \code{Center}\tab \verb{"Boston", "Glamorgan"}\cr
 }
 }
 \source{

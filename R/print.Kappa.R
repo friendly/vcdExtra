@@ -5,8 +5,8 @@
 
 #' Print Kappa
 #'
-#' This is a replacement for the \code{print.Kappa} method in \code{vcd},
-#' adding display of \code{z} values to the \code{vcd} version and optional
+#' This is a replacement for the `print.Kappa` method in `vcd`,
+#' adding display of `z` values to the `vcd` version and optional
 #' confidence intervals.
 #'
 #'

@@ -58,7 +58,7 @@ be joined with lines using \code{\link[ca]{multilines}}}
 
 \item{xlab, ylab}{Labels for horizontal and vertical axes.  The default,
 \code{"_auto_"} means that the function auto-generates a label of the form
-\code{"Dimension X (xx.x \%)"}}
+\code{"Dimension X (xx.x \\\%)"}}
 
 \item{rev.axes}{A logical vector of length 2, where TRUE reverses the
 direction of the corresponding axis}

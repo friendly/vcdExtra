@@ -9,7 +9,7 @@ A data frame in frequency form (comprising a 5 x 2 x 4 x 2 table)
 with 80 observations on the following 5 variables.
 \describe{
 \item{\code{age}}{an ordered factor with levels \code{0-9} < \code{10-19} <\code{20-29}
-< \code{30-49} < \code{50+}}
+< \code{30-49} < \verb{50+}}
 \item{\code{result}}{a factor with levels \code{Died} \code{Injured}}
 \item{\code{mode}}{mode of transportation, a factor with levels \code{4-Wheeled} \code{Bicycle}
 \code{Motorcycle} \code{Pedestrian}}

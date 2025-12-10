@@ -10,7 +10,7 @@ contingency table on the following 4 variables.
 \describe{
 \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
 \item{\code{year}}{year of study, an ordered factor with levels
-\code{Freshmen}, \code{Sophomore}, \code{Junior}, \code{Senior}, \code{Grad student}}
+\code{Freshmen}, \code{Sophomore}, \code{Junior}, \code{Senior}, \verb{Grad student}}
 \item{\code{response}}{a factor with levels \code{A} \code{B} \code{C} \code{D}}
 \item{\code{Freq}}{cell frequency, a numeric vector}
 }

@@ -13,27 +13,27 @@
 #' more packages, however it does not return a result that can be easily used
 #' to get additional information about the nature of data sets in packages.
 #' 
-#' The \code{datasets()} function is designed to produce a more useful summary
-#' display of data sets in one or more packages.  It extracts the \code{class}
-#' and dimension information (\code{dim} or codelength) of each item, and
+#' The `datasets()` function is designed to produce a more useful summary
+#' display of data sets in one or more packages.  It extracts the `class`
+#' and dimension information (`dim` or codelength) of each item, and
 #' formats these to provide additional descriptors.
 #' 
 #' The requested packages must be installed, and are silently loaded in order
-#' to extract \code{class} and size information.
+#' to extract `class` and size information.
 #' 
 #' @param package a character vector giving the package(s) to look in
 #' @param allClass a logical variable. Include all classes of the item
-#' (\code{TRUE}) or just the last class (\code{FALSE})?
+#' (`TRUE`) or just the last class (`FALSE`)?
 #' @param incPackage include the package name in result?
 #' @param maxTitle maximum length of data set Title
-#' @return A \code{data.frame} whose rows correspond to data sets found in
-#' \code{package}.
+#' @return A `data.frame` whose rows correspond to data sets found in
+#' `package`.
 #' 
 #' The columns (for a single package) are: \item{Item}{data set name, a
 #' character variable} \item{class}{class, the object class of the data set,
-#' typically one of \code{"data.frame"}, \code{"table"}, \code{"array"} ...}
+#' typically one of `"data.frame"`, `"table"`, `"array"` ...}
 #' \item{dim}{an abbreviation of the dimensions of the data set, in a form like
-#' \code{"36x3"} for a data.frame or matrix with 36 rows and 3 columns.}
+#' `"36x3"` for a data.frame or matrix with 36 rows and 3 columns.}
 #' \item{Title}{data set title}
 #' @note In Rmd documents, `datasets("package") |> knitr::kable()` can be used
 #' to create a more pleasing display.

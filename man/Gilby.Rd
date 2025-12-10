@@ -10,8 +10,8 @@ for 1725 observations. The variable names and their levels are:
 
 \tabular{rll}{
 No \tab Name \tab Levels \cr
-1\tab \code{Dullness}\tab \code{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
-2\tab \code{Clothing}\tab \code{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
+1\tab \code{Dullness}\tab \verb{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
+2\tab \code{Clothing}\tab \verb{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
 }
 }
 \source{

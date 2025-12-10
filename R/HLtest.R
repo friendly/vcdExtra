@@ -10,49 +10,49 @@
 
 #' Hosmer-Lemeshow Goodness of Fit Test
 #' 
-#' The \code{HLtest} function computes the classical Hosmer-Lemeshow (1980)
-#' goodness of fit test for a binomial \code{glm} object in logistic regression
+#' The `HLtest` function computes the classical Hosmer-Lemeshow (1980)
+#' goodness of fit test for a binomial `glm` object in logistic regression
 #' 
 #' The general idea is to assesses whether or not the observed event rates
 #' match expected event rates in subgroups of the model population. The
 #' Hosmer-Lemeshow test specifically identifies subgroups as the deciles of
-#' fitted event values, or other quantiles as determined by the \code{g}
-#' argument. Given these subgroups, a simple chisquare test on \code{g-2} df is
+#' fitted event values, or other quantiles as determined by the `g`
+#' argument. Given these subgroups, a simple chisquare test on `g-2` df is
 #' used.
 #' 
-#' In addition to \code{print} and \code{summary} methods, a \code{plot} method
+#' In addition to `print` and `summary` methods, a `plot` method
 #' is supplied to visualize the discrepancies between observed and fitted
 #' frequencies.
 #' 
 #' 
 #' @aliases HosmerLemeshow HLtest plot.HLtest print.HLtest rootogram.HLtest
 #' summary.HLtest
-#' @param model A \code{glm} model object in the \code{binomial} family
+#' @param model A `glm` model object in the `binomial` family
 #' @param g Number of groups used to partition the fitted values for the GOF
 #' test.
-#' @param x,object A \code{HLtest} object
+#' @param x,object A `HLtest` object
 #' @param \dots Other arguments passed down to methods
-#' @return A class \code{HLtest} object with the following components:
+#' @return A class `HLtest` object with the following components:
 #' \item{table}{A data.frame describing the results of partitioning the data
-#' into \code{g} groups with the following columns: \code{cut}, \code{total},
-#' \code{obs}, \code{exp}, \code{chi}} \item{chisq}{The chisquare statistics}
+#' into `g` groups with the following columns: `cut`, `total`,
+#' `obs`, `exp`, `chi`} \item{chisq}{The chisquare statistics}
 #' \item{df}{Degrees of freedom} \item{p.value}{p value} \item{groups}{Number
-#' of groups} \item{call}{\code{model} call} %% ...
+#' of groups} \item{call}{`model` call} %% ...
 #' @author Michael Friendly
 #' @seealso \code{\link[vcd]{rootogram}}, ~~~
 #' @family association tests
 #' @references
 #' 
 #' Hosmer, David W., Lemeshow, Stanley (1980).  A goodness-of-fit test for
-#' multiple logistic regression model. \emph{Communications in Statistics,
-#' Series A}, 9, 1043-1069.
+#' multiple logistic regression model. *Communications in Statistics,
+#' Series A*, 9, 1043-1069.
 #' 
-#' Hosmer, David W., Lemeshow, Stanley (2000).  \emph{Applied Logistic
-#' Regression}, New York: Wiley, ISBN 0-471-61553-6
+#' Hosmer, David W., Lemeshow, Stanley (2000).  *Applied Logistic
+#' Regression*, New York: Wiley, ISBN 0-471-61553-6
 #' 
 #' Lemeshow, S. and Hosmer, D.W.  (1982).  A review of goodness of fit
 #' statistics for use in the development of logistic regression models.
-#' \emph{American Journal of Epidemiology}, 115(1), 92-106.
+#' *American Journal of Epidemiology*, 115(1), 92-106.
 #' 
 #' @importFrom vcd rootogram
 #' @keywords htest

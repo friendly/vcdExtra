@@ -19,7 +19,7 @@ rlogseries(n, prob = 0.5)
 \arguments{
 \item{x, q}{vector of quantiles representing the number of events.}
 
-\item{prob}{parameter for the distribution, \code{0 < prob < 1}}
+\item{prob}{parameter for the distribution, \verb{0 < prob < 1}}
 
 \item{log, log.p}{logical; if TRUE, probabilities \code{p} are given as
 \code{log(p)}}

@@ -10,9 +10,9 @@ for 960 observations. The variable names and their levels are:
 
 \tabular{rll}{
 dim \tab Name          \tab Levels                \cr
-1  \tab \code{Alive}  \tab \code{"Alive", "Dead"}\cr
-2  \tab \code{Time}   \tab \code{"Now", "Spring"}\cr
-3  \tab \code{Length} \tab \code{"Long", "Short"}\cr
+1  \tab \code{Alive}  \tab \verb{"Alive", "Dead"}\cr
+2  \tab \code{Time}   \tab \verb{"Now", "Spring"}\cr
+3  \tab \code{Length} \tab \verb{"Long", "Short"}\cr
 }
 }
 \source{

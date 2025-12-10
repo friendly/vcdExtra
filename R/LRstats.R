@@ -9,21 +9,21 @@
 
 #' Brief Summary of Model Fit for glm and loglm Models
 #'
-#' For \code{glm} objects, the \code{print} and \code{summary} methods give too
+#' For `glm` objects, the `print` and `summary` methods give too
 #' much information if all one wants to see is a brief summary of model
 #' goodness of fit, and there is no easy way to display a compact comparison of
 #' model goodness of fit for a collection of models fit to the same data. All
-#' \code{loglm} models have equivalent glm forms, but the \code{print} and
-#' \code{summary} methods give quite different results.
+#' `loglm` models have equivalent glm forms, but the `print` and
+#' `summary` methods give quite different results.
 #'
-#' \code{LRstats} provides a brief summary for one or more models fit to the
-#' same dataset for which \code{logLik} and \code{nobs} methods exist (e.g.,
-#' \code{glm} and \code{loglm} models). %This implementation is experimental,
+#' `LRstats` provides a brief summary for one or more models fit to the
+#' same dataset for which `logLik` and `nobs` methods exist (e.g.,
+#' `glm` and `loglm` models). %This implementation is experimental,
 #' and is subject to change.
 #'
 #' The function relies on residual degrees of freedom for the LR chisq test
 #' being available in the model object.  This is true for objects inheriting
-#' from \code{lm}, \code{glm}, \code{loglm}, \code{polr} and \code{negbin}.
+#' from `lm`, `glm`, `loglm`, `polr` and `negbin`.
 #'
 #' @aliases LRstats LRstats.glmlist LRstats.loglmlist LRstats.default
 #' @param object a fitted model object for which there exists a logLik method
@@ -33,8 +33,8 @@
 #' deviance is not available)
 #' @param sortby either a numeric or character string specifying the column in
 #' the result by which the rows are sorted (in decreasing order)
-#' @return A data frame (also of class \code{anova}) with columns
-#' \code{c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")}. Row names are taken
+#' @return A data frame (also of class `anova`) with columns
+#' `c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")`. Row names are taken
 #' from the names of the model object(s).
 #' @author Achim Zeileis
 #' @seealso \code{\link[stats]{logLik}}, \code{\link[stats]{glm}},

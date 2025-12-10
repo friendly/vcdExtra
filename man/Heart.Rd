@@ -10,9 +10,9 @@ for 21522 observations. The variable names and their levels are:
 
 \tabular{rll}{
 No \tab Name \tab Levels \cr
-1\tab \code{Disease}\tab \code{"Disease", "None"}\cr
-2\tab \code{Gender}\tab \code{"Male", "Female"}\cr
-3\tab \code{Occup}\tab \code{"Unempl", "WhiteCol", "BlueCol"}\cr
+1\tab \code{Disease}\tab \verb{"Disease", "None"}\cr
+2\tab \code{Gender}\tab \verb{"Male", "Female"}\cr
+3\tab \code{Occup}\tab \verb{"Unempl", "WhiteCol", "BlueCol"}\cr
 }
 }
 \source{

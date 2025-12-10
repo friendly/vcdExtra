@@ -84,7 +84,7 @@ boxplot(as.data.frame(res), main="Residuals from various models")
 The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is
 similar, but perplexingly more general.
 
-The function \code{\link[stats]{anova.glm}} also handles \code{glmlist objects}
+The function \code{\link[stats]{anova.glm}} also handles \verb{glmlist objects}
 
 \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
 object.

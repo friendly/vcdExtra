@@ -8,7 +8,7 @@
 A data frame with 343 observations on the following 8 variables.
 
 \describe{
-\item{\code{category}}{Time of season, divided into 3 categories based on breeding chronology, an ordered factor with levels \code{Pre} < \code{Incubation} < \code{Chicks Present}}
+\item{\code{category}}{Time of season, divided into 3 categories based on breeding chronology, an ordered factor with levels \code{Pre} < \code{Incubation} < \verb{Chicks Present}}
 \item{\code{week}}{Week of the season}
 \item{\code{station}}{Station of observations on two different peninsulas in a park, a factor with levels \code{B1} \code{B2} \code{C1} \code{C2} \code{C3} \code{C4}}
 \item{\code{nest}}{Type of nest, an ordered factor with levels \code{no} < \code{partial} < \code{full}}
@@ -39,7 +39,7 @@ Observations were made on only 2 days in weeks 3 and 4, but 3 days in all
 other weeks. One should use log(days) as an offset, so that the response
 measures rate.
 
-\code{Cormorants$days <- ifelse(Cormorants$week \%in\% 3:4, 2, 3)}
+\verb{Cormorants$days <- ifelse(Cormorants$week \\\%in\\\% 3:4, 2, 3)}
 }
 \examples{
 

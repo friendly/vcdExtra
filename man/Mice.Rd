@@ -10,7 +10,7 @@ variables, representing a 5 x 2 x 3 contingency table.
 \describe{
 \item{\code{litter}}{litter size, a numeric vector}
 \item{\code{treatment}}{treatment, a factor with levels \code{A} \code{B}}
-\item{\code{deaths}}{number of depletions, a factor with levels \code{0} \code{1} \code{2+}}
+\item{\code{deaths}}{number of depletions, a factor with levels \code{0} \code{1} \verb{2+}}
 \item{\code{Freq}}{cell frequency, a numeric vector}
 }
 }

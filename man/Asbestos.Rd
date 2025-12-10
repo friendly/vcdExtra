@@ -51,9 +51,9 @@ plot(Asbestos.ca, lines=TRUE)
 \references{
 Beh, E. J., and D. R. Smith (2011b), Real World Occupational
 Epidemiology, Part 2: A Visual Interpretation of Statistical Significance,
-\emph{Archives of Environmental & Occupational Health}, \bold{66}, 245-248.
+\emph{Archives of Environmental & Occupational Health}, \strong{66}, 245-248.
 
 Selikoff, I. J. (1981), Household Risks With Inorganic Fibers,
-\emph{Bulletin of the New York Academy of Medicine}, \bold{57}, 947-961.
+\emph{Bulletin of the New York Academy of Medicine}, \strong{57}, 947-961.
 }
 \keyword{datasets}
