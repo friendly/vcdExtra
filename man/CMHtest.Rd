@@ -44,7 +44,8 @@ contingency table from \code{data}.  This should be a one-sided formula when
 
 \item{subset}{an optional vector specifying a subset of observations to be used.}
 
-\item{na.action}{a function which indicates what should happen when the data contain \code{NA}s.  Ignored if \code{data} is a contingency table}
+\item{na.action}{a function which indicates what should happen when the data contain \code{NA}s.
+Ignored if \code{data} is a contingency table.}
 
 \item{strata}{For a 3- or higher-way table, the names or numbers of the
 factors to be treated as strata.  By default, the first 2 factors are
