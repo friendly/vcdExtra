@@ -16,8 +16,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overview
 
-The purpose of this document is to illustrate inconsistent results by the `vcdExtra 0.7-5` package when doing a CMH analysis under certain scenarios. We will use a mock data set to compare the results obtained from SAS's Proc FREQ and R's vcdExtra package.
+The purpose of this document was to illustrate inconsistent results by the `vcdExtra 0.7-5` package when doing a CMH analysis under certain scenarios. We will use a mock data set to compare the results obtained from SAS's Proc FREQ and R's `vcdExtra` package.
 
+Status: Updated 10 December 2025 to reflect current status of the `vcdExtra` package, version 0.8-7.
 
 # SAS 
 
@@ -118,14 +119,14 @@ CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types = "ALL")$ALL$t
 ```
 
 ```{r, eval = F}
-        Chisq    Df Prob        
-general 26.02779 1  3.365374e-07
+        Chisq    Df Prob
+general 26.02779 2  2.229135e-06
 rmeans  26.02779 2  2.229135e-06
-cmeans  6.458575 1  0.01104181  
-cor     6.458575 2  0.03958569
+cmeans  6.458575 1  0.01104181
+cor     6.458575 1  0.01104181
 ```
 
-In this example, we see the **test statistics match** with the previous R results, however the **degrees of freedom are mismatched**, leading to incorrect p-values.
+In this example, we see the results match with the previous R results, just the order of the rows in the output is different.
 
 ## Test 2 - types = "rmeans"
 In this test case, the `row means` test statistic is of particular interest and specify it directly.
@@ -138,7 +139,7 @@ CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types = "rmeans")$AL
        Chisq    Df Prob
 rmeans 26.02779 NA NA  
 ```
-Here the test statistic is returned and appears to be correct, however the df and p-value are returned as NA.
+Here the test statistic is returned and appears to be correct, however the df and p-value are returned as `NA`.
 
 
 ## Test 3 - random order
@@ -152,28 +153,19 @@ CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types=c("cor","gener
 CMHtest(Freq~x+y|k, data=r_cmh, overall=TRUE, details=TRUE, types=c("rmeans","general","cor"))$ALL$table
 ```
 ```{r, eval = F}   
-        Chisq    Df Prob        
-cor     6.458575 1  0.01104181  
+        Chisq    Df Prob
+cor     6.458575 1  0.01104181
 general 26.02779 2  2.229135e-06
 rmeans  26.02779 2  2.229135e-06
 
-        Chisq    Df Prob        
-rmeans  26.02779 1  3.365374e-07
+        Chisq    Df Prob
+rmeans  26.02779 2  2.229135e-06
 general 26.02779 2  2.229135e-06
-cor     6.458575 2  0.03958569  
+cor     6.458575 1  0.01104181
 ```
 
-We see that test statistics again match, but the degrees of freedom mixed up leading to incorrect p-values.
+Also here it works correctly.
 
-# Recommendation
-Given the potential impact for efficacy analysis and the unclear nature of the issue, we caution against using this package at the current time. We plan to post this example to the package authors github page as an issue.
-
-However, if you choose to use the package, we advise:
-
-* Omitting the type parameter altogether. This seemed to provide consistent results with SAS.
-
-* For 2 x 2 x K designs, this might not be an issue as the test statistics, df and p-values are identical in this scenario. However, specifying a type argument in this design still technically results in mismatched, albeit equal, values. Please be aware of this. 
- 
 # Versions
 
 SAS 9.4 was used for SAS-based computations
