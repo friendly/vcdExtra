@@ -41,6 +41,7 @@
 #' \code{\link[MASS]{loglm}},
 #'
 #' \code{\link{logLik.loglm}}, \code{\link{modFit}}
+#' @family glmlist functions
 #' @keywords models
 #' @examples
 #'

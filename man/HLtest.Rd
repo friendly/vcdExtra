@@ -99,8 +99,14 @@ statistics for use in the development of logistic regression models.
 }
 \seealso{
 \code{\link[vcd]{rootogram}}, ~~~
+
+Other association tests: 
+\code{\link{CMHtest}()},
+\code{\link{GKgamma}()},
+\code{\link{zero.test}()}
 }
 \author{
 Michael Friendly
 }
+\concept{association tests}
 \keyword{htest}

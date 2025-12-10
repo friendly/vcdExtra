@@ -26,6 +26,7 @@
 #'
 #' @author Michael Friendly; original version by Laura Thompson
 #' @seealso \code{\link[vcd]{assocstats}}, \link[vcd]{Kappa}
+#' @family association tests
 #' @references Agresti, A. \emph{Categorical Data Analysis}. John Wiley & Sons,
 #' 2002, pp. 57--59.
 #'

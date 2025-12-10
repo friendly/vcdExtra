@@ -29,7 +29,7 @@ Authors@R: c(
             person(given = "Daniel", family = "Sabanes Bove", role="ctb")
             )
 Maintainer: Michael Friendly <friendly@yorku.ca>
-Depends: R (>= 3.5.0), vcd, gnm (>= 1.0-3), grid
+Depends: R (>= 3.5.0), vcd, gnm (>= 1.0-3)
 Suggests: 
     gmodels,
     Fahrmeir,
@@ -58,11 +58,12 @@ Suggests:
     readxl, 
     stringr, 
     tidyr (>= 1.3.0)
-Imports: 
-    MASS, 
-    grDevices, 
-    stats, 
-    utils, 
+Imports:
+    MASS,
+    grDevices,
+    grid,
+    stats,
+    utils,
     ca,
     rgl
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data

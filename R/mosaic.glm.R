@@ -74,6 +74,8 @@
 #'
 #' @seealso \code{\link[stats]{glm}}, \code{\link[gnm]{gnm}},
 #' \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}
+#' @family mosaic plots
+#'
 #' @keywords hplot models multivariate
 #' @importFrom vcd mosaic
 #' @importFrom vcd shading_hcl
@@ -337,6 +339,7 @@ mosaic.glm <-	function(x, formula = NULL,
 
 ## convenience functions for sieve and assoc plots
 
+#' @rdname mosaic.glm
 #' @importFrom vcd sieve
 #' @export
 sieve.glm <-
@@ -345,8 +348,9 @@ sieve.glm <-
 	mosaic(x, panel = sieve, ...)
 }
 
-#' @export
+#' @rdname mosaic.glm
 #' @importFrom vcd assoc
+#' @export
 assoc.glm <-
 		function (x, ...)
 {

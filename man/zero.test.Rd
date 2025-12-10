@@ -12,9 +12,9 @@ such counts.}
 }
 \value{
 Returns invisibly a list of three elements:
-\item{list("statistic")}{Description of 'comp1'}
-\item{list("df")}{Description of 'comp2'}
-\item{list("pvalue")}{Upper tail p-value}
+\item{\code{statistic}}{Value of the test statistic}
+\item{\code{df}}{Degrees of freedom}
+\item{\code{pvalue}}{Upper tail p-value}
 }
 \description{
 Carries out a simple score test (van den Broek, 1995) for excess zeros in an
@@ -59,7 +59,14 @@ Zero-Inflation in Overdispersed Count Data.  \emph{Communications in
 Statistics - Theory and Methods} \bold{39} (11) 2008-2030.
 DOI: 10.1080/03610920902948228
 }
+\seealso{
+Other association tests: 
+\code{\link{CMHtest}()},
+\code{\link{GKgamma}()},
+\code{\link{HLtest}()}
+}
 \author{
 Michael Friendly
 }
+\concept{association tests}
 \keyword{htest}

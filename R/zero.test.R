@@ -28,9 +28,9 @@
 #' such counts.
 #'
 #' @return Returns invisibly a list of three elements:
-#' \item{list("statistic")}{Description of 'comp1'}
-#' \item{list("df")}{Description of 'comp2'}
-#' \item{list("pvalue")}{Upper tail p-value}
+#' \item{\code{statistic}}{Value of the test statistic}
+#' \item{\code{df}}{Degrees of freedom}
+#' \item{\code{pvalue}}{Upper tail p-value}
 #'
 #' @author Michael Friendly
 #'
@@ -45,6 +45,8 @@
 #' Zero-Inflation in Overdispersed Count Data.  \emph{Communications in
 #' Statistics - Theory and Methods} \bold{39} (11) 2008-2030.
 #' DOI: 10.1080/03610920902948228
+#'
+#' @family association tests
 #'
 #' @keywords htest
 #' @export

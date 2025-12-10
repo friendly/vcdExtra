@@ -90,11 +90,14 @@
 #'
 #' @author Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 #'
-#' @seealso \code{\link[vcd]{strucplot}}, \code{\link[vcd]{mosaic}},
+#' @seealso
+#' \code{\link[vcd]{strucplot}}, \code{\link[vcd]{mosaic}},
 #' \code{\link[graphics]{mosaicplot}}
 #'
 #' \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}} for details on
 #' fitting loglinear models
+#' @family mosaic plots
+#'
 #' @references Friendly, M. (1995). Conceptual and Visual Models for
 #' Categorical Data, \emph{The American Statistician}, \bold{49}, 153-160.
 #'

@@ -99,8 +99,14 @@ LRstats(modRoch)
 \seealso{
 \code{\link{glmlist}}, \code{\link{Summarise}} (soon to be
 deprecated), \code{\link{LRstats}}
+
+Other glmlist functions: 
+\code{\link{LRstats}()},
+\code{\link{glmlist}()},
+\code{\link{mosaic.glmlist}()}
 }
 \author{
 Michael Friendly and Heather Turner
 }
+\concept{glmlist functions}
 \keyword{models}

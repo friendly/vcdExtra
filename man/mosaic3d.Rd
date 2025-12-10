@@ -162,8 +162,13 @@ Theus, M. & Lauer, S. R. W. (1999) Visualizing Loglinear Models.
 
 \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}} for details on
 fitting loglinear models
+
+Other mosaic plots: 
+\code{\link{mosaic.glm}()},
+\code{\link{mosaic.glmlist}()}
 }
 \author{
 Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 }
+\concept{mosaic plots}
 \keyword{hplot}

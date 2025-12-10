@@ -8,6 +8,7 @@ o Use the generalized Moore-Penrose inverse from MASS in CMHtest() such that it 
   matrix is singular.
 o Converted the package to use roxygen documentation.
 o Added `CrabSatellites` data from {countreg} b/c that's still not available on CRAN
+o Moved `grid` from `Depends:` to `Imports:`
 
 ## Version 0.8-6 (2025-07-23)
 

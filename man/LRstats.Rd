@@ -76,8 +76,14 @@ LRstats(indep, coleff, roweff, linlin)
 \code{\link[MASS]{loglm}},
 
 \code{\link{logLik.loglm}}, \code{\link{modFit}}
+
+Other glmlist functions: 
+\code{\link{Kway}()},
+\code{\link{glmlist}()},
+\code{\link{mosaic.glmlist}()}
 }
 \author{
 Achim Zeileis
 }
+\concept{glmlist functions}
 \keyword{models}

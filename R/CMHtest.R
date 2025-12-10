@@ -119,6 +119,7 @@
 #' Cochran-Mantel-Haenszel chi-squared test of the null that two nominal
 #' variables are conditionally independent in each stratum, assuming that there
 #' is no three-way interaction
+#' @family association tests
 #'
 #' @references Stokes, M. E. & Davis, C. S.  & Koch, G., (2000).
 #' \emph{Categorical Data Analysis using the SAS System}, 2nd Ed., Cary, NC:

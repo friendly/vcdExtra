@@ -50,6 +50,7 @@
 #' @author Michael Friendly and Heather Turner
 #' @seealso \code{\link{glmlist}}, \code{\link{Summarise}} (soon to be
 #' deprecated), \code{\link{LRstats}}
+#' @family glmlist functions
 #' @keywords models
 #' @examples
 #'

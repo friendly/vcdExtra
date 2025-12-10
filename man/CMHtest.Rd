@@ -210,8 +210,14 @@ of linear by linear association.
 Cochran-Mantel-Haenszel chi-squared test of the null that two nominal
 variables are conditionally independent in each stratum, assuming that there
 is no three-way interaction
+
+Other association tests: 
+\code{\link{GKgamma}()},
+\code{\link{HLtest}()},
+\code{\link{zero.test}()}
 }
 \author{
 Michael Friendly
 }
+\concept{association tests}
 \keyword{htest}

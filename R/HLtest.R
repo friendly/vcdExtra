@@ -40,6 +40,7 @@
 #' of groups} \item{call}{\code{model} call} %% ...
 #' @author Michael Friendly
 #' @seealso \code{\link[vcd]{rootogram}}, ~~~
+#' @family association tests
 #' @references
 #' 
 #' Hosmer, David W., Lemeshow, Stanley (1980).  A goodness-of-fit test for

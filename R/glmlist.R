@@ -28,21 +28,23 @@
 #' matched by name in the list of unique names across all models.
 #'
 #' @aliases glmlist loglmlist coef.glmlist
-#' @param \dots One or more model objects, as appropriate to the function,
-#' optionally assigned names as in \code{list}.
-#' @param object a \code{glmlist} object
+#' @param \dots One or more model objects, as appropriate to the function, optionally assigned names as in \code{\link{list}}.
+#' @param object a \code{"glmlist"} object
 #' @param result type of the result to be returned
-#' @return An object of class \code{glmlist} \code{loglmlist}, just like a
-#' \code{list}, except that each model is given a \code{name} attribute.
+#'
+#' @return An object of class \code{glmlist} \code{loglmlist}, just like a \code{list}, except that each model is given a \code{name} attribute.
+#'
 #' @author Michael Friendly; \code{coef} method by John Fox
+#'
 #' @seealso The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is
 #' similar, but perplexingly more general.
 #'
-#' The function \code{\link[stats]{anova.glm}} also handles \code{glmlist
-#' objects}
+#' The function \code{\link[stats]{anova.glm}} also handles \code{glmlist objects}
 #'
 #' \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
 #' object.
+#' @family glmlist functions
+#'
 #' @keywords utilities models
 #' @examples
 #'
@@ -91,7 +93,7 @@ glmlist <- function(...) {
     is.glm <- unlist(lapply(args, function(x) inherits(x, "glm")))
     if (!all(is.glm)) {
     	warning("Objects ", paste(vname[!is.glm], collapse=', '),
-              " removed because they are not glm objects")
+              " removed because they are not `glm` objects")
     	args <- args[is.glm]
     }
     class(args) <- "glmlist"
@@ -115,7 +117,7 @@ loglmlist <- function(...) {
     is.loglm <- unlist(lapply(args, function(x) inherits(x, "loglm")))
     if (!all(is.loglm)) {
     	warning("Objects ", paste(vname[!is.loglm], collapse=', '),
-              " removed because they are not loglm objects")
+              " removed because they are not `loglm` objects")
     	args <- args[is.loglm]
     }
     class(args) <- "loglmlist"

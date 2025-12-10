@@ -17,6 +17,10 @@
   gp_args = list(),
   ...
 )
+
+\method{sieve}{glm}(x, ...)
+
+\method{assoc}{glm}(x, ...)
 }
 \arguments{
 \item{x}{A \code{glm} or \code{gnm} object. The response variable, typically
@@ -227,10 +231,15 @@ anova(berk.glm1, berk.glm3, test="Chisq")
 \seealso{
 \code{\link[stats]{glm}}, \code{\link[gnm]{gnm}},
 \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}
+
+Other mosaic plots: 
+\code{\link{mosaic.glmlist}()},
+\code{\link{mosaic3d}()}
 }
 \author{
 Heather Turner, Michael Friendly, with help from Achim Zeileis
 }
+\concept{mosaic plots}
 \keyword{hplot}
 \keyword{models}
 \keyword{multivariate}

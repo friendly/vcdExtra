@@ -138,7 +138,7 @@ mosaic(modMental, ask=FALSE, margins=c(3,1,1,2), labeling_args=list(abbreviate_l
 \references{
 David Meyer, Achim Zeileis, and Kurt Hornik (2006). The
 Strucplot Framework: Visualizing Multi-Way Contingency Tables with vcd.
-\emph{Journal of Statistical Software}, 17(3), 1-48.  %
+\emph{Journal of Statistical Software}, 17(3), 1-48.
 \url{https://www.jstatsoft.org/v17/i03/},
 available as \code{vignette("strucplot", package="vcd")}.
 }
@@ -148,8 +148,19 @@ available as \code{vignette("strucplot", package="vcd")}.
 \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
 \code{\link[vcd]{strucplot}}, for the many parameters that control the
 details of mosaic plots.
+
+Other mosaic plots: 
+\code{\link{mosaic.glm}()},
+\code{\link{mosaic3d}()}
+
+Other glmlist functions: 
+\code{\link{Kway}()},
+\code{\link{LRstats}()},
+\code{\link{glmlist}()}
 }
 \author{
 Michael Friendly
 }
+\concept{glmlist functions}
+\concept{mosaic plots}
 \keyword{hplot}

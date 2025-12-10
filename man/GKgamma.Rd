@@ -54,9 +54,15 @@ American Statistical Association}, 58, 310-364.
 }
 \seealso{
 \code{\link[vcd]{assocstats}}, \link[vcd]{Kappa}
+
+Other association tests: 
+\code{\link{CMHtest}()},
+\code{\link{HLtest}()},
+\code{\link{zero.test}()}
 }
 \author{
 Michael Friendly; original version by Laura Thompson
 }
+\concept{association tests}
 \keyword{category}
 \keyword{htest}
