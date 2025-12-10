@@ -76,7 +76,6 @@ The range of a numeric variable`x` is divided into intervals based on the
 is returned by the function.
 
 ```{r, spine1}
-#| spine1,
 #| fig.height = 6,
 #| fig.width = 6,
 #| fig.show = "hold",

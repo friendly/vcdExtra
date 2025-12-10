@@ -1,5 +1,5 @@
-pandoc: '3.2'
-pkgdown: 2.1.1
+pandoc: 3.6.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   a1-creating: a1-creating.html
@@ -11,7 +11,7 @@ articles:
   a7-continuous: a7-continuous.html
   datasets: datasets.html
   tidyCats: tidyCats.html
-last_built: 2025-03-24T18:23Z
+last_built: 2025-12-10T18:07Z
 urls:
-  reference: http://friendly.github.io/vcdExtra/reference
-  article: http://friendly.github.io/vcdExtra/articles
+  reference: https://friendly.github.io/vcdExtra/reference
+  article: https://friendly.github.io/vcdExtra/articles

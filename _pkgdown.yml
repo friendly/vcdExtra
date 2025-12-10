@@ -1,4 +1,4 @@
-url: http://friendly.github.io/vcdExtra
+url: https://friendly.github.io/vcdExtra
 
 template:
   bootstrap: 5
@@ -35,7 +35,7 @@ reference:
       - mutual
       - saturated
       - seq_loglm
- 
+
   - title: Statistical tests
     desc: Statistical tests for categorical data
     contents:
@@ -59,7 +59,7 @@ reference:
       - plogseries
       - qlogseries
       - rlogseries
-    
+
   - title: Utility
     desc: Utility functions in the package
     contents:
@@ -74,11 +74,10 @@ reference:
     desc:  Other functions in the package (not yet classified)
     contents:
       - mcaplot
-      - summarise
       - Summarise
       - update.xtabs
       - vcdExtra-package
-  
+
   - title: Data
     desc: Some small data sets used in examples or in [DDAR](http://ddar.datavis.ca/)
     contents:
@@ -92,6 +91,7 @@ reference:
       - Caesar
       - Cancer
       - Cormorants
+      - CrabSatellites
       - CyclingDeaths
       - DaytonSurvey
       - Depends

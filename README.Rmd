@@ -43,6 +43,9 @@ In particular, `vcdExtra` extends mosaic, assoc and sieve plots from vcd to hand
 `gnm()` models and
 adds a 3D version in `mosaic3d()`.
 
+It also adds extensions to modeling functions for models fit using `glm()` and `MASS::loglm()`, using the contruct `glmlist()`
+to construct a list of related models which can be summarized (via `LRstats()`) and graphed (via `mosaic.glmlist()`)
+
 `vcdExtra` is a support package for the book [*Discrete Data Analysis with R*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835) (DDAR) by Michael Friendly and David Meyer. There is also a
 [web site for DDAR](http://ddar.datavis.ca) with all figures and code samples from the book.
 It is also used in my graduate course, [Psy 6136: Categorical Data Analysis](https://friendly.github.io/psy6136/).

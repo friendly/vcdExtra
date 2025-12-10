@@ -18,7 +18,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- Version 0.8-6 -->
 
-Version 0.8-7; documentation built for `pkgdown` 2025-12-07
+Version 0.8-7; documentation built for `pkgdown` 2025-12-10
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -27,6 +27,11 @@ Categorical Data* and the [gnm](https://CRAN.R-project.org/package=gnm)
 package for *Generalized Nonlinear Models*. In particular, `vcdExtra`
 extends mosaic, assoc and sieve plots from vcd to handle `glm()` and
 `gnm()` models and adds a 3D version in `mosaic3d()`.
+
+It also adds extensions to modeling functions for models fit using
+`glm()` and `MASS::loglm()`, using the contruct `glmlist()` to construct
+a list of related models which can be summarized (via `LRstats()`) and
+graphed (via `mosaic.glmlist()`)
 
 `vcdExtra` is a support package for the book [*Discrete Data Analysis
 with
@@ -131,16 +136,16 @@ packages.
 vcdExtra::datasets("vcdExtra")[,1]
 ##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     
 ##  [5] "Asbestos"       "Bartlett"       "Burt"           "Caesar"        
-##  [9] "Cancer"         "Cormorants"     "CyclingDeaths"  "DaytonSurvey"  
-## [13] "Depends"        "Detergent"      "Donner"         "Draft1970"     
-## [17] "Draft1970table" "Dyke"           "Fungicide"      "GSS"           
-## [21] "Geissler"       "Gilby"          "Glass"          "HairEyePlace"  
-## [25] "Hauser79"       "Heart"          "Heckman"        "HospVisits"    
-## [29] "HouseTasks"     "Hoyt"           "ICU"            "JobSat"        
-## [33] "Mammograms"     "Mental"         "Mice"           "Mobility"      
-## [37] "PhdPubs"        "ShakeWords"     "TV"             "Titanicp"      
-## [41] "Toxaemia"       "Vietnam"        "Vote1980"       "WorkerSat"     
-## [45] "Yamaguchi87"
+##  [9] "Cancer"         "Cormorants"     "CrabSatellites" "CyclingDeaths" 
+## [13] "DaytonSurvey"   "Depends"        "Detergent"      "Donner"        
+## [17] "Draft1970"      "Draft1970table" "Dyke"           "Fungicide"     
+## [21] "GSS"            "Geissler"       "Gilby"          "Glass"         
+## [25] "HairEyePlace"   "Hauser79"       "Heart"          "Heckman"       
+## [29] "HospVisits"     "HouseTasks"     "Hoyt"           "ICU"           
+## [33] "JobSat"         "Mammograms"     "Mental"         "Mice"          
+## [37] "Mobility"       "PhdPubs"        "ShakeWords"     "TV"            
+## [41] "Titanicp"       "Toxaemia"       "Vietnam"        "Vote1980"      
+## [45] "WorkerSat"      "Yamaguchi87"
 ```
 
 - a [collection of tutorial
