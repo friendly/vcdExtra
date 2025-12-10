@@ -18,9 +18,9 @@ A data frame with 1309 observations on the following 6 variables.
 \source{
 The original R source for this dataset was compiled by Frank Harrell and
 Robert Dawson:
-\url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic.html},
+\url{https://hbiostat.org/data/repo/titanic.txt},
 described in more detail in
-\url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic3info.txt}
+\url{https://hbiostat.org/data/repo/titanic}
 
 For this version of the Titanic data, passenger details were deleted,
 survived was cast as a factor, and the name changed to \code{Titanicp} to

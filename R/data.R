@@ -199,7 +199,7 @@ NULL
 #' @references Rick Wicklin,
 #' \url{http://blogs.sas.com/content/iml/2015/03/30/visualizing-airline-crashes.html}
 #' @source Originally from David McCandless,
-#' \url{http://www.informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/},
+#' \url{https://www.informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/},
 #' with the data at
 #' \url{https://docs.google.com/spreadsheets/d/1OvDq4_BtbR6nSnnHnjD5hVC3HQ-ulZPGbo0RDGbzM3Q/edit?usp=drive_web},
 #' downloaded April 14, 2015.
@@ -683,7 +683,7 @@ NULL
 #' roads become more dangerous for cyclists? \emph{Significance}, 10(6),
 #' 46--48.
 #' @source
-#' \url{https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-data},
+#' \url{https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-accidents-safety-data},
 #' STATS 19 data, 2005-2012, using the files \code{Casualty0512.csv} and
 #' \code{Accidents0512.csv}
 #' @keywords datasets
@@ -1053,7 +1053,7 @@ NULL
 #' \url{https://en.wikipedia.org/wiki/Draft_lottery_(1969)}
 #' @source Starr, N. (1997). Nonrandom Risk: The 1970 Draft Lottery,
 #' \emph{Journal of Statistics Education}, v.5, n.2
-#' \url{http://jse.amstat.org/v5n2/datasets.starr.html}
+#' \url{https://jse.amstat.org/v5n2/datasets.starr.html}
 #' @keywords datasets
 #' @examples
 #'
@@ -2717,9 +2717,9 @@ NULL
 #'
 #' The original R source for this dataset was compiled by Frank Harrell and
 #' Robert Dawson:
-#' \url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic.html},
+#' \url{https://hbiostat.org/data/repo/titanic.txt},
 #' described in more detail in
-#' \url{https://biostat.app.vumc.org/wiki/pub/Main/DataSets/titanic3info.txt}
+#' \url{https://hbiostat.org/data/repo/titanic}
 #'
 #' For this version of the Titanic data, passenger details were deleted,
 #' survived was cast as a factor, and the name changed to \code{Titanicp} to

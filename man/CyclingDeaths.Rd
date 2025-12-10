@@ -12,7 +12,7 @@ A data frame with 208 observations on the following 2 variables.
   }
 }
 \source{
-\url{https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-data},
+\url{https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-accidents-safety-data},
 STATS 19 data, 2005-2012, using the files \code{Casualty0512.csv} and
 \code{Accidents0512.csv}
 }
