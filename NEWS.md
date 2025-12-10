@@ -1,6 +1,6 @@
 ## Version 0.8.7 (2025-11-18)
 
-This is a major release of the package.
+This is a major release of the package, fixing bugs and revising documentation
 
 o Added tests for CMHtest() PR #13 [Thx: Daniel Sabanes Bove] 
 o Automatically omit strata with a single observation in CMHtest() because they do not contribute to the test statistics
