@@ -17,8 +17,6 @@
 # DONE: With strata, calculate overall CMH tests controlling for strata
 # FIXED: rmeans and cmeans tests were labeled incorrectly
 
-
-
 #' Generalized Cochran-Mantel-Haenszel Tests
 #'
 #' Provides generalized Cochran-Mantel-Haenszel tests of association of two
@@ -82,7 +80,8 @@
 #'            For convenience, conditioning formulas can be specified indicating strata.
 #' @param data either a data frame, or an object of class \code{"table"} or \code{"ftable"}.
 #' @param subset an optional vector specifying a subset of observations to be used.
-#' @param na.action a function which indicates what should happen when the data contain \code{NA}s.  Ignored if \code{data} is a contingency table
+#' @param na.action a function which indicates what should happen when the data contain \code{NA}s.
+#'           Ignored if \code{data} is a contingency table.
 #' @param strata For a 3- or higher-way table, the names or numbers of the
 #'           factors to be treated as strata.  By default, the first 2 factors are
 #'           treated as the main table variables, and all others considered stratifying factors.
