@@ -15,7 +15,7 @@ A data frame containing 173 observations on 5 variables.
 }
 }
 \source{
-Table 4.3 in Agresti (2002). This dataset was taken from the \pkg{countreg}, which is not on CRAN
+Table 4.3 in Agresti (2002). This dataset was taken from the \pkg{countreg} package, which is not on CRAN
 }
 \description{
 Determinants of mating for male satellites to nesting horseshoe crabs.
@@ -32,9 +32,7 @@ Agresti (2002, 2013) reanalyzes the number of satellites using count models. Exp
 color, spine condition, weight, and carapace width. Color and spine condition are ordered factors but are treated as numeric in some analyses.
 }
 \examples{
-# example code
-## load data, use ordered factors as numeric, and
-## grouped factor version of width
+## load data, use ordered factors as numeric, and grouped factor version of width
 data("CrabSatellites", package = "vcdExtra")
 CrabSatellites <- transform(CrabSatellites,
   color = as.numeric(color),

@@ -1,4 +1,4 @@
-## Version 0.8.7 (2025-11-18)
+## Version 0.8.7 (2025-12-10)
 
 This is a major release of the package, fixing bugs and revising documentation
 

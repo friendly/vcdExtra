@@ -5,7 +5,9 @@
 
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![R_Universe](https://friendly.r-universe.dev/badges/vcdExtra)](https://friendly.r-universe.dev/vcdExtra)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
+[![Last
+Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://github.com/friendly/vceExtra/)
+[![downloads](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -47,7 +49,7 @@ Get the released version from CRAN:
 
      install.packages("vcdExtra")
 
-The development version can be installed to your R library from
+The current development version can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
