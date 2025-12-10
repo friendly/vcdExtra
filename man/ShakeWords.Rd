@@ -7,15 +7,15 @@
 \format{
 A data frame with 100 observations on the following 2 variables.
 \describe{
-   \item{\code{count}}{the number of times a word type appeared in Shakespeare's written works}
-   \item{\code{Freq}}{the number of different words (types) appearing with this count.}
-  }
+\item{\code{count}}{the number of times a word type appeared in Shakespeare's written works}
+\item{\code{Freq}}{the number of different words (types) appearing with this count.}
+}
 }
 \source{
 Bradley Efron and Ronald Thisted (1976). Estimating the Number of
 Unseen Species: How Many Words Did Shakespeare Know? \emph{Biometrika}, Vol.
 63, No. 3, pp. 435-447,
-%\url{http://www.jstor.org/stable/2335721}
+\%\url{http://www.jstor.org/stable/2335721}
 }
 \description{
 This data set, from Efron and Thisted (1976), gives the number of distinct

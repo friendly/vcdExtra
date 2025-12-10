@@ -28,7 +28,6 @@ One or both tables have been widely analyzed in conjunction with RC and
 canonical correlation models for categorical data, e.g., Becker and Clogg
 (1989).
 
-
 The hair and eye colors are ordered as in the original source, suggesting
 that they form ordered categories.
 }

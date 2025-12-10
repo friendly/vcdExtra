@@ -38,7 +38,7 @@ object with optional category labels specified in the dimnames(x) attribute.}
 contingency table from \code{data}.  This should be a one-sided formula when
 \code{data} is in array form, and a two-sided formula with a response
 \code{Freq} if \code{data} is a data frame with a cell frequency variable.
- For convenience, conditioning formulas can be specified indicating strata.}
+For convenience, conditioning formulas can be specified indicating strata.}
 
 \item{data}{either a data frame, or an object of class \code{"table"} or \code{"ftable"}.}
 
@@ -52,7 +52,7 @@ factors to be treated as strata.  By default, the first 2 factors are
 treated as the main table variables, and all others considered stratifying factors.}
 
 \item{rscores}{Row scores.  Either a set of numbers (typically integers,
-           \code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
+\code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
 or \code{NULL} to exclude tests that depend on row scores.}
 
 \item{cscores}{Column scores. Same as for row scores.}

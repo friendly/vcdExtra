@@ -91,8 +91,8 @@ mcaplot(haireye.mca, legend=TRUE, cex.lab=1.3)
 }
 \seealso{
 \code{\link[ca]{mjca}}, \code{\link[ca]{plot.mjca}}
-         \code{\link[ca]{cacoord}} returns CA and MCA coordinates,
-         \code{\link[ca]{multilines}} draw multiple lines according to a factor,
+\code{\link[ca]{cacoord}} returns CA and MCA coordinates,
+\code{\link[ca]{multilines}} draw multiple lines according to a factor,
 }
 \author{
 Michael Friendly

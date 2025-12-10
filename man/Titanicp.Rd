@@ -7,12 +7,12 @@
 \format{
 A data frame with 1309 observations on the following 6 variables.
 \describe{
-  \item{\code{pclass}}{a factor with levels \code{1st} \code{2nd} \code{3rd}}
-  \item{\code{survived}}{a factor with levels \code{died} \code{survived}}
-  \item{\code{sex}}{a factor with levels \code{female} \code{male}}
-  \item{\code{age}}{passenger age in years (or fractions of a year, for children), a numeric vector; age is missing for 263 of the passengers}
-  \item{\code{sibsp}}{number of siblings or spouses aboard, integer: \code{0:8}}
-  \item{\code{parch}}{number of parents or children aboard, integer: \code{0:6}}
+\item{\code{pclass}}{a factor with levels \code{1st} \code{2nd} \code{3rd}}
+\item{\code{survived}}{a factor with levels \code{died} \code{survived}}
+\item{\code{sex}}{a factor with levels \code{female} \code{male}}
+\item{\code{age}}{passenger age in years (or fractions of a year, for children), a numeric vector; age is missing for 263 of the passengers}
+\item{\code{sibsp}}{number of siblings or spouses aboard, integer: \code{0:8}}
+\item{\code{parch}}{number of parents or children aboard, integer: \code{0:6}}
 }
 }
 \source{

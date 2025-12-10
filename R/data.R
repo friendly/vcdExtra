@@ -33,9 +33,7 @@
 #'
 #' @source
 #'
-#' % \cite{Christensen:90 [p. 92]}
-#' Christensen, R. (1990).  \emph{Log-Linear
-#' Models}, New York, NY: Springer-Verlag, p. 92, Example 3.5.2.
+#' Christensen, R. (1990).  \emph{Log-Linear Models}, New York, NY: Springer-Verlag, p. 92, Example 3.5.2.
 #'
 #' Christensen, R. (1997).  \emph{Log-Linear Models and Logistic Regression},
 #' New York, NY: Springer, p. 100, Example 3.5.2.
@@ -315,10 +313,13 @@ NULL
 #'
 #' @name Asbestos
 #' @docType data
-#' @format The format is: num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
-#' - attr(*, "dimnames")=List of 2 ..$ exposure: chr [1:5] "0-9" "10-19"
-#' "20-29" "30-39" ...  ..$ grade : chr [1:4] "None" "Grade 1" "Grade 2" "Grade
-#' 3"
+#' @format The format is:
+#' \preformatted{
+#'  num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
+#'  - attr(*, "dimnames")=List of 2
+#'   ..$ exposure: chr [1:5] "0-9" "10-19" "20-29" "30-39" ...
+#'   ..$ grade   : chr [1:4] "None" "Grade 1" "Grade 2" "Grade 3"#'
+#'   }
 #' @references Beh, E. J., and D. R. Smith (2011b), Real World Occupational
 #' Epidemiology, Part 2: A Visual Interpretation of Statistical Significance,
 #' \emph{Archives of Environmental & Occupational Health}, \bold{66}, 245-248.
@@ -372,15 +373,14 @@ NULL
 #' }
 
 #'
-#' @references % \cite{Bartlett:35} Bartlett, M. S. (1935).  Contingency Table
-#' Interactions \emph{Journal of the Royal Statistical Society}, Supplement,
+#' @references
+#' Bartlett, M. S. (1935).  Contingency Table Interactions \emph{Journal of the Royal Statistical Society}, Supplement,
 #' 1935, 2, 248-252.
+#'
 #' @source
 #'
-#' % \cite{Hand-etal:94 [p.15 #19]}
-#' Hand, D. and Daly, F. and Lunn, A. D.and
-#' McConway, K. J. and Ostrowski, E. (1994). \emph{A Handbook of Small Data
-#' Sets}.  London: Chapman & Hall, p. 15, # 19.
+#' Hand, D. and Daly, F. and Lunn, A. D.and McConway, K. J. and Ostrowski, E. (1994). \emph{A Handbook of Small Data Sets}.
+#' London: Chapman & Hall, p. 15, # 19.
 #' @keywords datasets
 #' @examples
 #'
@@ -1398,14 +1398,11 @@ NULL
 #' }
 
 #' @references
-#' % \cite{Gilby & Pearson 1911, from Anscombe 1981, p 302}
 #' Gilby, W. H. (1911).
 #' On the significance of the teacher's appreciation of general
-#' intelligence.  \emph{Biometrika}, 8, 93-108 (esp. p. 94).  [Quoted by
-#' Kendall (1943,..., 1953) Table 13.1, p 320.]
+#' intelligence.  \emph{Biometrika}, 8, 93-108 (esp. p. 94).  (Quoted by Kendall (1943,..., 1953) Table 13.1, p 320.)
 #'
-#' @source Anscombe, F. J. (1981). \emph{Computing in Statistical Science
-#' Through APL}. New York: Springer-Verlag, p. 302
+#' @source Anscombe, F. J. (1981). \emph{Computing in Statistical Science Through APL}. New York: Springer-Verlag, p. 302
 #' @keywords datasets
 #' @examples
 #'
@@ -2011,16 +2008,10 @@ NULL
 #' Education} 27, 187-194.
 #' @source
 #'
-#' % \cite{Hoyt-etal:59}
-#' % \cite{Fienberg:80 [pp.91-92]}
-#' % \cite{Plackett:74}
-#' % \cite{minn38{MASS}}
-#'
 #' Fienberg, S. E. (1980). \emph{The Analysis of Cross-Classified Categorical
 #' Data}. Cambridge, MA: MIT Press, p. 91-92.
 #'
-#' R. L. Plackett, (1974). \emph{The Analysis of Categorical Data}. London:
-#' Griffin.
+#' R. L. Plackett, (1974). \emph{The Analysis of Categorical Data}. London: Griffin.
 #' @keywords datasets
 #' @examples
 #'

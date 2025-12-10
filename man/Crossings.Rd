@@ -47,7 +47,7 @@ University of California Press, pp. 649-696.
 }
 \seealso{
 \code{\link[stats]{glm}}, \code{\link[gnm]{gnm}} for model fitting
-     functions for frequency tables;
+functions for frequency tables;
 \code{\link[gnm]{Diag}}, \code{\link[gnm]{Mult}}, \code{\link[gnm]{Symm}},
 \code{\link[gnm]{Topo}} for similar extensions to terms in model formulas.
 }

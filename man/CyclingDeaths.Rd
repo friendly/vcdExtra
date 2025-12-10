@@ -7,9 +7,9 @@
 \format{
 A data frame with 208 observations on the following 2 variables.
 \describe{
-  \item{\code{date}}{a Date}
-  \item{\code{deaths}}{number of deaths, a numeric vector}
-  }
+\item{\code{date}}{a Date}
+\item{\code{deaths}}{number of deaths, a numeric vector}
+}
 }
 \source{
 \url{https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-accidents-safety-data},

@@ -9,9 +9,9 @@ A frequency data frame with 25 observations on the following 3
 variables, representing the cross-classification of 19912 individuals by
 father's occupation and son's first occupation.
 \describe{
-  \item{\code{Son}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
-  \item{\code{Father}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
-  \item{\code{Freq}}{a numeric vector}
+\item{\code{Son}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+\item{\code{Father}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+\item{\code{Freq}}{a numeric vector}
 }
 }
 \source{

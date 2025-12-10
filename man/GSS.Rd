@@ -9,9 +9,9 @@ A data frame in frequency form with 6 observations on the following
 3 variables.
 
 \describe{
-  \item{\code{sex}}{a factor with levels \code{female} \code{male}}
-  \item{\code{party}}{a factor with levels \code{dem} \code{indep} \code{rep}}
-  \item{\code{count}}{a numeric vector}
+\item{\code{sex}}{a factor with levels \code{female} \code{male}}
+\item{\code{party}}{a factor with levels \code{dem} \code{indep} \code{rep}}
+\item{\code{count}}{a numeric vector}
 }
 }
 \source{

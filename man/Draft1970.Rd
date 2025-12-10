@@ -7,9 +7,9 @@
 \format{
 A data frame with 366 observations on the following 3 variables.
 \describe{
-  \item{\code{Day}}{day of the year, 1:366}
-  \item{\code{Rank}}{draft priority rank of people born on that day}
-  \item{\code{Month}}{an ordered factor with levels \code{Jan} < \code{Feb} \dots < \code{Dec}}
+\item{\code{Day}}{day of the year, 1:366}
+\item{\code{Rank}}{draft priority rank of people born on that day}
+\item{\code{Month}}{an ordered factor with levels \code{Jan} < \code{Feb} \dots < \code{Dec}}
 }
 }
 \source{

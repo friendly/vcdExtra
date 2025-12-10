@@ -8,7 +8,7 @@
 A 4-dimensional array resulting from cross-tabulating 4 variables
 for 1008 observations. The variable names and their levels are:
 
-  \tabular{rll}{
+\tabular{rll}{
 dim \tab Name \tab Levels \cr
 1\tab \code{Temperature}\tab \code{"High", "Low"}\cr
 2\tab \code{M_User}\tab \code{"Yes", "No"}\cr

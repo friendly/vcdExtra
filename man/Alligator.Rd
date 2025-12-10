@@ -8,12 +8,12 @@
 A frequency data frame with 80 observations on the following 5
 variables.
 \describe{
-  \item{\code{lake}}{a factor with levels \code{George} \code{Hancock} \code{Oklawaha} \code{Trafford}}
-  \item{\code{sex}}{a factor with levels \code{female} \code{male}}
-  \item{\code{size}}{alligator size, a factor with levels \code{large} (>2.3m) \code{small} (<=2.3m)}
-  \item{\code{food}}{primary food choice, a factor with levels \code{bird} \code{fish}
-        \code{invert} \code{other} \code{reptile}}
-  \item{\code{count}}{cell frequency, a numeric vector} }
+\item{\code{lake}}{a factor with levels \code{George} \code{Hancock} \code{Oklawaha} \code{Trafford}}
+\item{\code{sex}}{a factor with levels \code{female} \code{male}}
+\item{\code{size}}{alligator size, a factor with levels \code{large} (>2.3m) \code{small} (<=2.3m)}
+\item{\code{food}}{primary food choice, a factor with levels \code{bird} \code{fish}
+\code{invert} \code{other} \code{reptile}}
+\item{\code{count}}{cell frequency, a numeric vector} }
 }
 \source{
 Agresti, A. (2002). \emph{Categorical Data Analysis}, New York:
