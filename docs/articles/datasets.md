@@ -1,6 +1,6 @@
 # Datasets for categorical data analysis
 
-The `vcdExtra` package contains 45 datasets, taken from the literature
+The `vcdExtra` package contains 46 datasets, taken from the literature
 on categorical data analysis, and selected to illustrate various methods
 of analysis and data display. These are in addition to the 33 datasets
 in the [vcd package](https://cran.r-project.org/package=vcd).

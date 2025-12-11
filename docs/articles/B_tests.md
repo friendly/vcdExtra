@@ -465,7 +465,7 @@ package gives one implmentation. For an \\r \times c\\ table, the method
 provides a breakdown of the Pearson \\\chi^2\\ for association in up to
 \\M = \min(r-1, c-1)\\ dimensions, and finds scores for the row
 (\\x\_{im}\\) and column (\\y\_{jm}\\) categories such that the
-observations have the maximum possible correlations.%[^1]
+observations have the maximum possible correlations.%[¹](#fn1)
 
 Here, we carry out a simple correspondence analysis of the `HairEye`
 data. The printed results show that nearly 99% of the association
@@ -534,7 +534,9 @@ Landis, R. J., E. R. Heyman, and G. G. Koch. 1978. “Average Partial
 Association in Three-Way Contingency Tables: A Review and Discussion of
 Alternative Tests,” *International Statistical Review* 46: 237–54.
 
-[^1]: Related methods are the non-parametric CMH tests using assumed
+------------------------------------------------------------------------
+
+1.  Related methods are the non-parametric CMH tests using assumed
     row/column scores (), the analogous
     [`glm()`](https://rdrr.io/r/stats/glm.html) model-based methods (),
     and the more general RC models which can be fit using

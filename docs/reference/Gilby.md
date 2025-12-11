@@ -32,8 +32,8 @@ are profitable.
 ## References
 
 Gilby, W. H. (1911). On the significance of the teacher's appreciation
-of general intelligence. *Biometrika*, 8, 93-108 (esp. p. 94). \[Quoted
-by Kendall (1943,..., 1953) Table 13.1, p 320.\]
+of general intelligence. *Biometrika*, 8, 93-108 (esp. p. 94). (Quoted
+by Kendall (1943,..., 1953) Table 13.1, p 320.)
 
 ## Examples
 

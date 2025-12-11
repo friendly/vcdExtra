@@ -65,7 +65,7 @@ Observations were made on only 2 days in weeks 3 and 4, but 3 days in
 all other weeks. One should use log(days) as an offset, so that the
 response measures rate.
 
-`Cormorants$days <- ifelse(Cormorants$week %in% 3:4, 2, 3)`
+`Cormorants$days <- ifelse(Cormorants$week \%in\% 3:4, 2, 3)`
 
 ## Examples
 

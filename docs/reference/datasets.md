@@ -72,8 +72,8 @@ order to extract `class` and size information.
 
 ## Note
 
-In Rmd documents, \`datasets("package") \|\> knitr::kable()\` can be
-used to create a more pleasing display.
+In Rmd documents, `datasets("package") |> knitr::kable()` can be used to
+create a more pleasing display.
 
 ## See also
 
@@ -99,41 +99,42 @@ datasets("vcdExtra")
 #> 8          Caesar      table   3x2x2x2
 #> 9          Cancer      table     2x2x2
 #> 10     Cormorants data.frame     343x8
-#> 11  CyclingDeaths data.frame     208x2
-#> 12   DaytonSurvey data.frame      32x6
-#> 13        Depends      table        15
-#> 14      Detergent      table   2x2x2x3
-#> 15         Donner data.frame      90x5
-#> 16      Draft1970 data.frame     366x3
-#> 17 Draft1970table      table      12x3
-#> 18           Dyke      table 2x2x2x2x2
-#> 19      Fungicide      array   2x2x2x2
-#> 20            GSS data.frame       6x3
-#> 21       Geissler data.frame      90x4
-#> 22          Gilby      table       6x4
-#> 23          Glass data.frame      25x3
-#> 24   HairEyePlace      array     4x5x2
-#> 25       Hauser79 data.frame      25x3
-#> 26          Heart      table     2x2x3
-#> 27        Heckman      table 2x2x2x2x2
-#> 28     HospVisits      table       3x3
-#> 29     HouseTasks      table      13x4
-#> 30           Hoyt      table   4x3x7x2
-#> 31            ICU data.frame    200x22
-#> 32         JobSat      table       4x4
-#> 33     Mammograms      array       4x4
-#> 34         Mental data.frame      24x3
-#> 35           Mice data.frame      30x4
-#> 36       Mobility      table       5x5
-#> 37        PhdPubs data.frame     915x6
-#> 38     ShakeWords data.frame     100x2
-#> 39             TV      array    5x11x3
-#> 40       Titanicp data.frame    1309x6
-#> 41       Toxaemia data.frame      60x5
-#> 42        Vietnam data.frame      40x4
-#> 43       Vote1980 data.frame      28x4
-#> 44      WorkerSat data.frame       8x4
-#> 45    Yamaguchi87 data.frame      75x4
+#> 11 CrabSatellites data.frame     173x5
+#> 12  CyclingDeaths data.frame     208x2
+#> 13   DaytonSurvey data.frame      32x6
+#> 14        Depends      table        15
+#> 15      Detergent      table   2x2x2x3
+#> 16         Donner data.frame      90x5
+#> 17      Draft1970 data.frame     366x3
+#> 18 Draft1970table      table      12x3
+#> 19           Dyke      table 2x2x2x2x2
+#> 20      Fungicide      array   2x2x2x2
+#> 21            GSS data.frame       6x3
+#> 22       Geissler data.frame      90x4
+#> 23          Gilby      table       6x4
+#> 24          Glass data.frame      25x3
+#> 25   HairEyePlace      array     4x5x2
+#> 26       Hauser79 data.frame      25x3
+#> 27          Heart      table     2x2x3
+#> 28        Heckman      table 2x2x2x2x2
+#> 29     HospVisits      table       3x3
+#> 30     HouseTasks      table      13x4
+#> 31           Hoyt      table   4x3x7x2
+#> 32            ICU data.frame    200x22
+#> 33         JobSat      table       4x4
+#> 34     Mammograms      array       4x4
+#> 35         Mental data.frame      24x3
+#> 36           Mice data.frame      30x4
+#> 37       Mobility      table       5x5
+#> 38        PhdPubs data.frame     915x6
+#> 39     ShakeWords data.frame     100x2
+#> 40             TV      array    5x11x3
+#> 41       Titanicp data.frame    1309x6
+#> 42       Toxaemia data.frame      60x5
+#> 43        Vietnam data.frame      40x4
+#> 44       Vote1980 data.frame      28x4
+#> 45      WorkerSat data.frame       8x4
+#> 46    Yamaguchi87 data.frame      75x4
 #>                                                    Title
 #> 1                                  Abortion Opinion Data
 #> 2             Traffic Accident Victims in France in 1958
@@ -145,41 +146,42 @@ datasets("vcdExtra")
 #> 8         Risk Factors for Infection in Caesarian Births
 #> 9                     Survival of Breast Cancer Patients
 #> 10              Advertising Behavior by Males Cormorants
-#> 11                                 London Cycling Deaths
-#> 12                Dayton Student Survey on Substance Use
-#> 13                            Dependencies of R Packages
-#> 14                             Detergent preference data
-#> 15                          Survival in the Donner Party
-#> 16                           USA 1970 Draft Lottery Data
-#> 17                          USA 1970 Draft Lottery Table
-#> 18                        Sources of Knowledge of Cancer
-#> 19                   Carcinogenic Effects of a Fungicide
-#> 20      General Social Survey- Sex and Party affiliation
-#> 21                Geissler's Data on the Human Sex Ratio
-#> 22          Clothing and Intelligence Rating of Children
-#> 23              British Social Mobility from Glass(1954)
-#> 24    Hair Color and Eye Color in Caithness and Aberdeen
-#> 25                 Hauser (1979) Data on Social Mobility
-#> 26                     Sex, Occupation and Heart Disease
-#> 27 Labour Force Participation of Married Women 1967-1971
-#> 28                                  Hospital Visits Data
-#> 29       Household Tasks Performed by Husbands and Wives
-#> 30                       Minnesota High School Graduates
-#> 31                                          ICU data set
-#> 32    Cross-classification of job satisfaction by income
-#> 33                                     Mammogram Ratings
-#> 34                     Mental Impairment and Parents SES
-#> 35                                   Mice Depletion Data
-#> 36                                  Social Mobility data
-#> 37                        Publications of PhD Candidates
-#> 38                   Shakespeare's Word Type Frequencies
-#> 39                                       TV Viewing Data
-#> 40                             Passengers on the Titanic
-#> 41                        Toxaemia Symptoms in Pregnancy
-#> 42                 Student Opinion about the Vietnam War
-#> 43       Race and Politics in the 1980 Presidential Vote
-#> 44                              Worker Satisfaction Data
-#> 45              Occupational Mobility in Three Countries
+#> 11                                 Horseshoe Crab Mating
+#> 12                                 London Cycling Deaths
+#> 13                Dayton Student Survey on Substance Use
+#> 14                            Dependencies of R Packages
+#> 15                             Detergent Preference Data
+#> 16                          Survival in the Donner Party
+#> 17                           USA 1970 Draft Lottery Data
+#> 18                          USA 1970 Draft Lottery Table
+#> 19                        Sources of Knowledge of Cancer
+#> 20                   Carcinogenic Effects of a Fungicide
+#> 21      General Social Survey- Sex and Party affiliation
+#> 22                Geissler's Data on the Human Sex Ratio
+#> 23          Clothing and Intelligence Rating of Children
+#> 24              British Social Mobility from Glass(1954)
+#> 25    Hair Color and Eye Color in Caithness and Aberdeen
+#> 26                 Hauser (1979) Data on Social Mobility
+#> 27                     Sex, Occupation and Heart Disease
+#> 28 Labour Force Participation of Married Women 1967-1971
+#> 29                                  Hospital Visits Data
+#> 30       Household Tasks Performed by Husbands and Wives
+#> 31                       Minnesota High School Graduates
+#> 32                                          ICU data set
+#> 33    Cross-classification of job satisfaction by income
+#> 34                                     Mammogram Ratings
+#> 35                     Mental Impairment and Parents SES
+#> 36                                   Mice Depletion Data
+#> 37                                  Social Mobility data
+#> 38                        Publications of PhD Candidates
+#> 39                   Shakespeare's Word Type Frequencies
+#> 40                                       TV Viewing Data
+#> 41                             Passengers on the Titanic
+#> 42                        Toxaemia Symptoms in Pregnancy
+#> 43                 Student Opinion about the Vietnam War
+#> 44       Race and Politics in the 1980 Presidential Vote
+#> 45                              Worker Satisfaction Data
+#> 46              Occupational Mobility in Three Countries
 # datasets(c("vcd", "vcdExtra"))
 datasets("datasets", maxTitle=50)
 #>                              Item      class     dim
@@ -405,16 +407,16 @@ datasets("datasets", maxTitle=50)
 datasets("vcdExtra")[,"Item"]
 #>  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     
 #>  [5] "Asbestos"       "Bartlett"       "Burt"           "Caesar"        
-#>  [9] "Cancer"         "Cormorants"     "CyclingDeaths"  "DaytonSurvey"  
-#> [13] "Depends"        "Detergent"      "Donner"         "Draft1970"     
-#> [17] "Draft1970table" "Dyke"           "Fungicide"      "GSS"           
-#> [21] "Geissler"       "Gilby"          "Glass"          "HairEyePlace"  
-#> [25] "Hauser79"       "Heart"          "Heckman"        "HospVisits"    
-#> [29] "HouseTasks"     "Hoyt"           "ICU"            "JobSat"        
-#> [33] "Mammograms"     "Mental"         "Mice"           "Mobility"      
-#> [37] "PhdPubs"        "ShakeWords"     "TV"             "Titanicp"      
-#> [41] "Toxaemia"       "Vietnam"        "Vote1980"       "WorkerSat"     
-#> [45] "Yamaguchi87"   
+#>  [9] "Cancer"         "Cormorants"     "CrabSatellites" "CyclingDeaths" 
+#> [13] "DaytonSurvey"   "Depends"        "Detergent"      "Donner"        
+#> [17] "Draft1970"      "Draft1970table" "Dyke"           "Fungicide"     
+#> [21] "GSS"            "Geissler"       "Gilby"          "Glass"         
+#> [25] "HairEyePlace"   "Hauser79"       "Heart"          "Heckman"       
+#> [29] "HospVisits"     "HouseTasks"     "Hoyt"           "ICU"           
+#> [33] "JobSat"         "Mammograms"     "Mental"         "Mice"          
+#> [37] "Mobility"       "PhdPubs"        "ShakeWords"     "TV"            
+#> [41] "Titanicp"       "Toxaemia"       "Vietnam"        "Vote1980"      
+#> [45] "WorkerSat"      "Yamaguchi87"   
 datasets("vcd")[,"Item"]
 #>  [1] "Arthritis"       "Baseball"        "BrokenMarriage"  "Bundesliga"     
 #>  [5] "Bundestag2005"   "Butterfly"       "CoalMiners"      "DanishWelfare"  

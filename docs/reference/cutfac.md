@@ -91,23 +91,21 @@ plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)),
 
 
 data("CrabSatellites", package = "vcdExtra")
-#> Warning: data set 'CrabSatellites' not found
 
 # jittered scatterplot
 plot(jitter(satellites) ~ width, data=CrabSatellites,
   ylab="Number of satellites (jittered)",
   xlab="Carapace width",
   cex.lab=1.25)
-#> Error in eval(m$data, eframe): object 'CrabSatellites' not found
 with(CrabSatellites,
      lines(lowess(width, satellites), col="red", lwd=2))
-#> Error: object 'CrabSatellites' not found
+
 
 # boxplot, using deciles
 plot(satellites ~ cutfac(width), data=CrabSatellites,
      ylab="Number of satellites",
      xlab="Carapace width (deciles)")
-#> Error in eval(m$data, eframe): object 'CrabSatellites' not found
+
 
 
 ```

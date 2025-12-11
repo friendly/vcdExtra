@@ -37,9 +37,9 @@ B
 #> [1] 1.0000000 0.8888889
 #> 
 Kappa(Mammograms)
-#>             value     ASE      z  Pr(>|z|)
-#> Unweighted 0.3713 0.06033  6.154 7.560e-10
-#> Weighted   0.5964 0.04923 12.114 8.901e-34
+#>             value     ASE      z
+#> Unweighted 0.3713 0.06033  6.154
+#> Weighted   0.5964 0.04923 12.114
 
 ## other displays
 mosaic(Mammograms, shade=TRUE)

@@ -68,6 +68,8 @@ A class `HLtest` object with the following components:
 
   `model` call
 
+%% ...
+
 ## Details
 
 The general idea is to assesses whether or not the observed event rates

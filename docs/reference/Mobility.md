@@ -11,12 +11,15 @@ A 2-dimensional array resulting from cross-tabulating 2 variables for
 |  |  |  |
 |----|----|----|
 | No | Name | Levels |
-| 1 | `Son's_Occupation}\tab \code{"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"}\cr 2\tab \code{Father's_Occupation` | `"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"` |
+| 1 | `Son's_Occupation` | `"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"` |
+| 2 | `Father's_Occupation` | `"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"` |
 
 ## Source
 
 Falguerolles, A. de and Mathieu, J. R. (1988). *Proceedings of COMPSTAT
 88*, Copenhagen, Denmark, Springer-Verlag.
+
+% FeathermanHauser:78
 
 Featherman, D. L. and Hauser, R. M. Occupations and social mobility in
 the United States. *Sociological Microjournal*, 12, Fiche 62.

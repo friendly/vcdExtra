@@ -15,7 +15,7 @@ strata."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,7 +102,7 @@ object with optional category labels specified in the dimnames(x) attribute.</p>
 contingency table from <code>data</code>.  This should be a one-sided formula when
 <code>data</code> is in array form, and a two-sided formula with a response
 <code>Freq</code> if <code>data</code> is a data frame with a cell frequency variable.
- For convenience, conditioning formulas can be specified indicating strata.</p></dd>
+For convenience, conditioning formulas can be specified indicating strata.</p></dd>
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
@@ -126,7 +126,7 @@ treated as the main table variables, and all others considered stratifying facto
 
 <dt id="arg-rscores">rscores<a class="anchor" aria-label="anchor" href="#arg-rscores"></a></dt>
 <dd><p>Row scores.  Either a set of numbers (typically integers,
-           <code>1:R</code>) or the string <code>"midrank"</code> for standardized midrank scores,
+<code>1:R</code>) or the string <code>"midrank"</code> for standardized midrank scores,
 or <code>NULL</code> to exclude tests that depend on row scores.</p></dd>
 
 
@@ -185,18 +185,18 @@ and or column scores to test for linear trends or differences in row or
 column means.</p>
 <p>The CMH analysis for a two-way table produces generalized
 Cochran-Mantel-Haenszel statistics (Landis etal., 1978).</p>
-<p>These include the CMH <b>correlation</b> statistic (<code>"cor"</code>), treating
+<p>These include the CMH <strong>correlation</strong> statistic (<code>"cor"</code>), treating
 both factors as ordered. For a given statum, with equally spaced row and
 column scores, this CMH statistic reduces to \((n-1) r^2\), where \(r\)
 is the Pearson correlation between X and Y. With <code>"midrank"</code> scores,
 this CMH statistic is analogous to \((n-1) r_S^2\), using the Spearman
 rank correlation.</p>
-<p>The <b>ANOVA</b> (row mean scores and column mean scores) statistics, treat
+<p>The <strong>ANOVA</strong> (row mean scores and column mean scores) statistics, treat
 the columns and rows respectively as ordinal, and are sensitive to mean
 shifts over columns or rows. These are transforms of the \(F\) statistics
 from one-way ANOVAs with equally spaced scores and to Kruskal-Wallis tests
 with <code>"midrank"</code> scores.</p>
-<p>The CMH <b>general</b> association statistic treat both factors as
+<p>The CMH <strong>general</strong> association statistic treat both factors as
 unordered, and give a test closely related to the Pearson \(\chi^2\) test.
 When there is more than one stratum, the overall general CMH statistic gives
 a stratum-adjusted Pearson \(\chi^2\), equivalent to what is calculated by
@@ -216,14 +216,12 @@ observations) are automatically omitted from the analysis.</p>
     <p>Stokes, M. E. &amp; Davis, C. S.  &amp; Koch, G., (2000).
 <em>Categorical Data Analysis using the SAS System</em>, 2nd Ed., Cary, NC:
 SAS Institute, pp 74-75, 92-101, 124-129.  Details of the computation are
-given at:
-<a href="http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm%0A" class="external-link">http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm
-</a></p>
+given at: <a href="http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm" class="external-link">http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm</a></p>
 <p>Cochran, W. G. (1954), Some Methods for Strengthening the Common
 \(\chi^2\) Tests, <em>Biometrics</em>, 10, 417-451.</p>
 <p>Landis, R. J., Heyman, E. R., and Koch, G. G. (1978).  Average Partial
 Association in Three-way Contingency Tables: A Review and Discussion of
-Alternative Tests, <em>International Statistical Review</em>, <b>46</b>,
+Alternative Tests, <em>International Statistical Review</em>, <strong>46</strong>,
 237-254.</p>
 <p>Mantel, N. (1963), Chi-square Tests with One Degree of Freedom: Extensions
 of the Mantel-Haenszel Procedure," <em>Journal of the American Statistical

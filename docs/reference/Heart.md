@@ -17,7 +17,7 @@ A 3-dimensional array resulting from cross-tabulating 3 variables for
 
 ## Source
 
-Karger, (1980).
+% Karger, 1980 Karger, (1980).
 
 ## Examples
 

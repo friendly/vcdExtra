@@ -33,7 +33,7 @@ loglin2string(x, brackets = c("[", "]"), sep = ",", collapse = " ", abbrev)
 
 ## Source
 
-Code from Henrique Dallazuanna, \<wwwhsd@gmail.com\>, R-help 7-4-2013
+Code from Henrique Dallazuanna, <wwwhsd@gmail.com>, R-help 7-4-2013
 
 ## Arguments
 

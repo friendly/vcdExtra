@@ -265,7 +265,7 @@ the labels for the variables or levels. This is easy when the data are
 in table form: [`aperm()`](https://rdrr.io/r/base/aperm.html) permutes
 the dimensions, and assigning to `names` and `dimnames` changes variable
 names and level labels respectively. We will use the following version
-of `UCBAdmissions` in @(sec:mantel) below. [^1]
+of `UCBAdmissions` in @(sec:mantel) below. [¹](#fn1)
 
 ``` r
 UCB <- aperm(UCBAdmissions, c(2, 1, 3))
@@ -740,10 +740,10 @@ another.
 
 For example, a contingency table in table form (an object of
 `class(table)`) can be converted to a data.frame with
-[`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html). [^2] The
-resulting `data.frame` contains columns representing the classifying
-factors and the table entries (as a column named by the `responseName`
-argument, defaulting to `Freq`. This is the inverse of
+[`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html).
+[²](#fn2) The resulting `data.frame` contains columns representing the
+classifying factors and the table entries (as a column named by the
+`responseName` argument, defaulting to `Freq`. This is the inverse of
 [`xtabs()`](https://rdrr.io/r/stats/xtabs.html).
 
 ***Example***: Convert the `GSStab` in table form to a data.frame in
@@ -764,7 +764,7 @@ as.data.frame(GSStab)
 table of `Treatment` \\\times\\ `Sex` \\\times\\ `Improved`. Note the
 use of [`with()`](https://rdrr.io/r/base/with.html) to avoid having to
 use `Arthritis\$Treatment` etc. within the call to
-[`table()`](https://rdrr.io/r/base/table.html).% [^3]
+[`table()`](https://rdrr.io/r/base/table.html).% [³](#fn3)
 
 ``` r
 Art.tab <- with(Arthritis, table(Treatment, Sex, Improved))
@@ -895,7 +895,7 @@ dim(TV)
 But this 4-way table is too large and awkward to work with. Among the
 networks, Fox and Other occur infrequently. We can also cut it down to a
 3-way table by considering only viewers who persist with the current
-station. [^4]
+station. [⁴](#fn4)
 
 ``` r
 TV2 <- TV[,,1:3,]      # keep only ABC, CBS, NBC
@@ -997,17 +997,19 @@ Jersey: John Wiley & Sons.
 Hartigan, J. A., & Kleiner, B. (1984). A mosaic of television ratings.
 *The American Statistician*, *38*, 32–35.
 
-[^1]: Changing `Admit` to `Admit?` might be useful for display purposes,
+------------------------------------------------------------------------
+
+1.  Changing `Admit` to `Admit?` might be useful for display purposes,
     but is dangerous— because it is then difficult to use that variable
     name in a model formula. See @(sec:tips) for options `labeling_args`
     and `set_labels`to change variable and level names for displays in
     the `strucplot` framework.
 
-[^2]: Because R is object-oriented, this is actually a short-hand for
-    the function
+2.  Because R is object-oriented, this is actually a short-hand for the
+    function
     [`as.data.frame.table()`](https://rdrr.io/r/base/table.html).
 
-[^3]: [`table()`](https://rdrr.io/r/base/table.html) does not allow a
+3.  [`table()`](https://rdrr.io/r/base/table.html) does not allow a
     `data` argument to provide an environment in which the table
     variables are to be found. In the examples in @(sec:table) I used
     `attach(mydata)` for this purpose, but
@@ -1017,6 +1019,6 @@ Hartigan, J. A., & Kleiner, B. (1984). A mosaic of television ratings.
     [`table()`](https://rdrr.io/r/base/table.html) expression in a
     temporary environment of the data.
 
-[^4]: This relies on the fact that that indexing an array drops
-    dimensions of length 1 by default, using the argument `drop=TRUE`;
-    the result is coerced to the lowest possible dimension.
+4.  This relies on the fact that that indexing an array drops dimensions
+    of length 1 by default, using the argument `drop=TRUE`; the result
+    is coerced to the lowest possible dimension.

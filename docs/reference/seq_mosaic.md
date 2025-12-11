@@ -89,10 +89,8 @@ for descriptions of sequential models,
 [`mosaic.loglmlist`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md),
 [`seq_loglm`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
 
-[`mosaic.glm`](https://friendly.github.io/vcdExtra/reference/mosaic.glm.md),
-[`mosaic`](https://rdrr.io/pkg/vcd/man/mosaic.html),
-[`strucplot`](https://rdrr.io/pkg/vcd/man/strucplot.html), for the many
-parameters that control the details of mosaic plots.
+        \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
+        \code{\link[vcd]{strucplot}}, for the many parameters that control the details of mosaic plots.
 
 ## Author
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +45,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.7" id="version-087-2025-11-18">Version 0.8.7 (2025-11-18)<a class="anchor" aria-label="anchor" href="#version-087-2025-11-18"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.8.7" id="version-087-2025-12-10">Version 0.8.7 (2025-12-10)<a class="anchor" aria-label="anchor" href="#version-087-2025-12-10"></a></h2>
 <p>This is a major release of the package, fixing bugs and revising documentation</p>
-<p>o Added tests for CMHtest() PR <a href="https://github.com/friendly/vcdExtra/issues/13" class="external-link">#13</a> [Thx: Daniel Sabanes Bove] o Automatically omit strata with a single observation in CMHtest() because they do not contribute to the test statistics o Use the generalized Moore-Penrose inverse from MASS in CMHtest() such that it can work when the variance matrix is singular. o Converted the package to use roxygen documentation. o Added <code>CrabSatellites</code> data from {countreg} b/c that’s still not available on CRAN o Moved <code>grid</code> from <code>Depends:</code> to <code>Imports:</code></p>
+<p>o Added tests for CMHtest() PR <a href="https://github.com/friendly/vcdExtra/issues/13" class="external-link">#13</a> [Thx: Daniel Sabanes Bove] o Automatically omit strata with a single observation in CMHtest() because they do not contribute to the test statistics o Use the generalized Moore-Penrose inverse from MASS in CMHtest() such that it can work when the variance matrix is singular. o Converted the package to use roxygen documentation via {rd2roxygen}. UGH! o Added <code>CrabSatellites</code> data from {countreg} b/c that’s still not available on CRAN o Moved <code>grid</code> from <code>Depends:</code> to <code>Imports:</code> o Now use markdown in package documentation for easier maintenance, via {roxygen2md}</p>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8-6" id="version-08-6-2025-07-23">Version 0.8-6 (2025-07-23)<a class="anchor" aria-label="anchor" href="#version-08-6-2025-07-23"></a></h2><p class="text-muted">CRAN release: 2025-07-24</p>
@@ -150,9 +150,9 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6-9" id="version-06-9-2015-06-11">Version 0.6-9 (2015-06-11)<a class="anchor" aria-label="anchor" href="#version-06-9-2015-06-11"></a></h2><p class="text-muted">CRAN release: 2015-07-11</p>
 <ul><li>Added Mice data</li>
-<li>Removed uses of <code>summarise()</code> and Summarise() from demos and examples, in preparation for deprecating them.</li>
+<li>Removed uses of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> and Summarise() from demos and examples, in preparation for deprecating them.</li>
 <li>
-<code>summarise()</code> is now deprecated</li>
+<code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise()</a></code> is now deprecated</li>
 <li>Now use <code>importsFrom()</code> for all functions from recommended packages</li>
 </ul></div>
     <div class="section level2">

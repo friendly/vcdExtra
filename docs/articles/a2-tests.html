@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -213,7 +213,7 @@ Cochran-Mantel-Haenszel
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
 chi test of the null hypothesis that two nominal variables are
 <em>conditionally independent</em>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⟂</mo><mi>B</mi><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>C</mi></mrow><annotation encoding="application/x-tex">A \perp B \; | \; C</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊥</mo><mi>B</mi><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>C</mi></mrow><annotation encoding="application/x-tex">A \perp B \; | \; C</annotation></semantics></math>,
 in each stratum, assuming that there is no three-way interaction.
 <code>X</code> is a 3 dimensional contingency table, where the last
 dimension refers to the strata.</p>
@@ -492,9 +492,9 @@ for <code>Kappa</code> objects provides confidence intervals.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">SexualFun</span>, package <span class="op">=</span> <span class="st">"vcd"</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vcd/man/Kappa.html" class="external-link">Kappa</a></span><span class="op">(</span><span class="va">SexualFun</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">##             value     ASE     z Pr(&gt;|z|)</span></span>
-<span><span class="co">## Unweighted 0.1293 0.06860 1.885 0.059387</span></span>
-<span><span class="co">## Weighted   0.2374 0.07832 3.031 0.002437</span></span>
+<span><span class="co">##             value     ASE     z</span></span>
+<span><span class="co">## Unweighted 0.1293 0.06860 1.885</span></span>
+<span><span class="co">## Weighted   0.2374 0.07832 3.031</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span></span>
 <span><span class="co">##             </span></span>
 <span><span class="co">## Kappa                 lwr       upr</span></span>

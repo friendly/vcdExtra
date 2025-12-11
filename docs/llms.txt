@@ -2,7 +2,7 @@
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.8-7; documentation built for `pkgdown` 2025-12-07
+Version 0.8-7; documentation built for `pkgdown` 2025-12-10
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -13,6 +13,16 @@ extends mosaic, assoc and sieve plots from vcd to handle
 [`glm()`](https://rdrr.io/r/stats/glm.html) and `gnm()` models and adds
 a 3D version in
 [`mosaic3d()`](https://friendly.github.io/vcdExtra/reference/mosaic3d.md).
+
+It also adds extensions to modeling functions for models fit using
+[`glm()`](https://rdrr.io/r/stats/glm.html) and
+[`MASS::loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html), using the
+contruct
+[`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+to construct a list of related models which can be summarized (via
+[`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md))
+and graphed (via
+[`mosaic.glmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md))
 
 `vcdExtra` is a support package for the book [*Discrete Data Analysis
 with
@@ -30,7 +40,7 @@ Get the released version from CRAN:
  install.packages("vcdExtra")
 ```
 
-The development version can be installed to your R library from
+The current development version can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
@@ -136,16 +146,16 @@ packages.
 vcdExtra::datasets("vcdExtra")[,1]
 ##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     
 ##  [5] "Asbestos"       "Bartlett"       "Burt"           "Caesar"        
-##  [9] "Cancer"         "Cormorants"     "CyclingDeaths"  "DaytonSurvey"  
-## [13] "Depends"        "Detergent"      "Donner"         "Draft1970"     
-## [17] "Draft1970table" "Dyke"           "Fungicide"      "GSS"           
-## [21] "Geissler"       "Gilby"          "Glass"          "HairEyePlace"  
-## [25] "Hauser79"       "Heart"          "Heckman"        "HospVisits"    
-## [29] "HouseTasks"     "Hoyt"           "ICU"            "JobSat"        
-## [33] "Mammograms"     "Mental"         "Mice"           "Mobility"      
-## [37] "PhdPubs"        "ShakeWords"     "TV"             "Titanicp"      
-## [41] "Toxaemia"       "Vietnam"        "Vote1980"       "WorkerSat"     
-## [45] "Yamaguchi87"
+##  [9] "Cancer"         "Cormorants"     "CrabSatellites" "CyclingDeaths" 
+## [13] "DaytonSurvey"   "Depends"        "Detergent"      "Donner"        
+## [17] "Draft1970"      "Draft1970table" "Dyke"           "Fungicide"     
+## [21] "GSS"            "Geissler"       "Gilby"          "Glass"         
+## [25] "HairEyePlace"   "Hauser79"       "Heart"          "Heckman"       
+## [29] "HospVisits"     "HouseTasks"     "Hoyt"           "ICU"           
+## [33] "JobSat"         "Mammograms"     "Mental"         "Mice"          
+## [37] "Mobility"       "PhdPubs"        "ShakeWords"     "TV"            
+## [41] "Titanicp"       "Toxaemia"       "Vietnam"        "Vote1980"      
+## [45] "WorkerSat"      "Yamaguchi87"
 ```
 
 - a [collection of tutorial

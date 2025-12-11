@@ -177,7 +177,7 @@ observations) are automatically omitted from the analysis.
 Stokes, M. E. & Davis, C. S. & Koch, G., (2000). *Categorical Data
 Analysis using the SAS System*, 2nd Ed., Cary, NC: SAS Institute, pp
 74-75, 92-101, 124-129. Details of the computation are given at:
-[http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm](http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm%0A)
+<http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm>
 
 Cochran, W. G. (1954), Some Methods for Strengthening the Common
 \\\chi^2\\ Tests, *Biometrics*, 10, 417-451.

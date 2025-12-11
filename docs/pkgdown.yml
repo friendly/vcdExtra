@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 pandoc: '3.4'
-=======
-pandoc: 3.6.3
->>>>>>> 8504463c214f338f59f7c37821f329f753d99458
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
@@ -15,11 +11,7 @@ articles:
   a7-continuous: a7-continuous.html
   datasets: datasets.html
   tidyCats: tidyCats.html
-<<<<<<< HEAD
-last_built: 2025-12-10T02:52Z
-=======
-last_built: 2025-12-10T18:07Z
->>>>>>> 8504463c214f338f59f7c37821f329f753d99458
+last_built: 2025-12-11T01:54Z
 urls:
   reference: https://friendly.github.io/vcdExtra/reference
   article: https://friendly.github.io/vcdExtra/articles

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,8 +116,7 @@ saturated model.</p>
 <p>As presently written, the function requires a two-sided formula with an
 explicit response on the LHS. For frequency data in table form (e.g.,
 produced by <code>xtabs</code>) you the <code>data</code> argument is coerced to a
-data.frame, so you should supply the <code>formula</code> in the form <code>Freq ~
-</code> ....</p>
+data.frame, so you should supply the <code>formula</code> in the form <code>Freq ~ </code> ....</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -148,21 +147,19 @@ deprecated), <code><a href="LRstats.html">LRstats</a></code></p>
 <span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 234.98 236.57   33.697 35     0.5309</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 234.31 243.81   23.020 30     0.8144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 244.09 266.26   16.802 22     0.7742</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 249.24 277.74   13.952 18     0.7322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 235.61 237.19   34.531 35     0.4906</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 242.79 252.29   31.714 30     0.3810</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 252.30 274.47   25.216 22     0.2868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 257.29 285.80   22.213 18     0.2227</span>
 <span class="r-in"><span><span class="va">mods4</span> <span class="op">&lt;-</span> <span class="fu">Kway</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span> <span class="op">+</span> <span class="va">D</span>, data<span class="op">=</span><span class="va">df</span>, family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 234.98 236.57   33.697 35     0.5309    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 235.69 246.78   22.405 29     0.8030    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 250.77 282.44   11.485 16     0.7786    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 265.81 316.48    2.519  4     0.6412    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 271.29 328.29    0.000  0     &lt;2e-16 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 235.61 237.19   34.531 35     0.4906</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 244.40 255.48   31.318 29     0.3506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 262.11 293.78   23.032 16     0.1129</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 268.70 319.38    5.625  4     0.2289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 271.08 328.09    0.000  0     1.0000</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># JobSatisfaction data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">JobSatisfaction</span>, package<span class="op">=</span><span class="st">"vcd"</span><span class="op">)</span></span></span>

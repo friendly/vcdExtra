@@ -149,7 +149,7 @@ mosaic displays within the strucplot framework.
 
 Michael Friendly
 
-Maintainer: Michael Friendly \<friendly AT yorku.ca\> \|\|
+Maintainer: Michael Friendly
 ([ORCID](https://orcid.org/0000-0002-3237-0941))
 
 ## Examples
@@ -157,38 +157,40 @@ Maintainer: Michael Friendly \<friendly AT yorku.ca\> \|\|
 ``` r
 example(mosaic.glm)
 #> 
+#> msc.gl> library(vcdExtra)
+#> 
 #> msc.gl> GSStab <- xtabs(count ~ sex + party, data=GSS)
 #> 
 #> msc.gl> # using the data in table form
 #> msc.gl> mod.glm1 <- glm(Freq ~ sex + party, family = poisson, data = GSStab)
 #> 
-#> msc.gl> res <- residuals(mod.glm1)    
+#> msc.gl> res <- residuals(mod.glm1)
 #> 
 #> msc.gl> std <- rstandard(mod.glm1)
 #> 
 #> msc.gl> # For mosaic.default(), need to re-shape residuals to conform to data
-#> msc.gl> stdtab <- array(std, 
-#> msc.gl+                 dim=dim(GSStab), 
+#> msc.gl> stdtab <- array(std,
+#> msc.gl+                 dim=dim(GSStab),
 #> msc.gl+                 dimnames=dimnames(GSStab))
 #> 
-#> msc.gl> mosaic(GSStab, 
-#> msc.gl+        gp=shading_Friendly, 
-#> msc.gl+        residuals=stdtab, 
-#> msc.gl+        residuals_type="Std\nresiduals", 
+#> msc.gl> mosaic(GSStab,
+#> msc.gl+        gp=shading_Friendly,
+#> msc.gl+        residuals=stdtab,
+#> msc.gl+        residuals_type="Std\nresiduals",
 #> msc.gl+        labeling = labeling_residuals)
 
 #> 
 #> msc.gl> # Using externally calculated residuals with the glm() object
-#> msc.gl> mosaic.glm(mod.glm1, 
-#> msc.gl+            residuals=std, 
-#> msc.gl+            labeling = labeling_residuals, 
-#> msc.gl+            shade=TRUE)
+#> msc.gl> mosaic(mod.glm1,
+#> msc.gl+        residuals=std,
+#> msc.gl+        labeling = labeling_residuals,
+#> msc.gl+        shade=TRUE)
 
 #> 
 #> msc.gl> # Using residuals_type
-#> msc.gl> mosaic.glm(mod.glm1, 
-#> msc.gl+            residuals_type="rstandard", 
-#> msc.gl+            labeling = labeling_residuals, shade=TRUE)
+#> msc.gl> mosaic(mod.glm1,
+#> msc.gl+        residuals_type="rstandard",
+#> msc.gl+        labeling = labeling_residuals, shade=TRUE)
 
 #> 
 #> msc.gl> ## Ordinal factors and structured associations
@@ -202,7 +204,7 @@ example(mosaic.glm)
 #>   Moderate  58  54  65  77  54  54
 #>   Impaired  46  40  60  94  78  71
 #> 
-#> msc.gl> long.labels <- list(set_varnames = c(mental="Mental Health Status", 
+#> msc.gl> long.labels <- list(set_varnames = c(mental="Mental Health Status",
 #> msc.gl+                                      ses="Parent SES"))
 #> 
 #> msc.gl> # fit independence model
@@ -210,25 +212,25 @@ example(mosaic.glm)
 #> msc.gl> indep <- glm(Freq ~ mental+ses,
 #> msc.gl+              family = poisson, data = Mental)
 #> 
-#> msc.gl> long.labels <- list(set_varnames = c(mental="Mental Health Status", 
+#> msc.gl> long.labels <- list(set_varnames = c(mental="Mental Health Status",
 #> msc.gl+                                      ses="Parent SES"))
 #> 
 #> msc.gl> mosaic(indep,
-#> msc.gl+        residuals_type="rstandard", 
-#> msc.gl+        labeling_args = long.labels, 
+#> msc.gl+        residuals_type="rstandard",
+#> msc.gl+        labeling_args = long.labels,
 #> msc.gl+        labeling=labeling_residuals)
 #> Warning: no formula provided, assuming ~ses + mental
 
 #> 
 #> msc.gl> # or, show as a sieve diagram
-#> msc.gl> mosaic(indep, 
-#> msc.gl+        labeling_args = long.labels, 
-#> msc.gl+        panel=sieve, 
+#> msc.gl> mosaic(indep,
+#> msc.gl+        labeling_args = long.labels,
+#> msc.gl+        panel=sieve,
 #> msc.gl+        gp=shading_Friendly)
 #> Warning: no formula provided, assuming ~ses + mental
 
 #> 
-#> msc.gl> # fit linear x linear (uniform) association.  Use integer scores for rows/cols 
+#> msc.gl> # fit linear x linear (uniform) association.  Use integer scores for rows/cols
 #> msc.gl> Cscore <- as.numeric(Mental$ses)
 #> 
 #> msc.gl> Rscore <- as.numeric(Mental$mental)
@@ -237,10 +239,10 @@ example(mosaic.glm)
 #> msc.gl+                 family = poisson, data = Mental)
 #> 
 #> msc.gl> mosaic(linlin,
-#> msc.gl+        residuals_type="rstandard", 
-#> msc.gl+        labeling_args = long.labels, 
-#> msc.gl+        labeling=labeling_residuals, 
-#> msc.gl+        suppress=1, 
+#> msc.gl+        residuals_type="rstandard",
+#> msc.gl+        labeling_args = long.labels,
+#> msc.gl+        labeling=labeling_residuals,
+#> msc.gl+        suppress=1,
 #> msc.gl+        gp=shading_Friendly,
 #> msc.gl+        main="Lin x Lin model")
 #> Warning: no formula provided, assuming ~ses + mental
@@ -254,10 +256,10 @@ example(mosaic.glm)
 #> msc.gl+                 family = poisson, data = Mental)
 #> msc.gl+ 
 #> msc.gl+ mosaic(RC1model,
-#> msc.gl+        residuals_type="rstandard", 
-#> msc.gl+        labeling_args = long.labels, 
-#> msc.gl+        labeling=labeling_residuals, 
-#> msc.gl+        suppress=1, 
+#> msc.gl+        residuals_type="rstandard",
+#> msc.gl+        labeling_args = long.labels,
+#> msc.gl+        labeling=labeling_residuals,
+#> msc.gl+        suppress=1,
 #> msc.gl+        gp=shading_Friendly,
 #> msc.gl+        main="RC1 model")
 #> msc.gl+  }
@@ -269,7 +271,7 @@ example(mosaic.glm)
 
 #> 
 #> msc.gl>  ############# UCB Admissions data, fit using glm()
-#> msc.gl>  
+#> msc.gl> 
 #> msc.gl> structable(Dept ~ Admit+Gender,UCBAdmissions)
 #>                 Dept   A   B   C   D   E   F
 #> Admit    Gender                             
@@ -320,19 +322,19 @@ example(mosaic.glm)
 #> Number of Fisher Scoring iterations: 4
 #> 
 #> 
-#> msc.gl> mosaic(berk.glm1, 
-#> msc.gl+        gp=shading_Friendly, 
-#> msc.gl+        labeling=labeling_residuals, 
+#> msc.gl> mosaic(berk.glm1,
+#> msc.gl+        gp=shading_Friendly,
+#> msc.gl+        labeling=labeling_residuals,
 #> msc.gl+        formula=~Admit+Dept+Gender)
 
 #> 
-#> msc.gl> # the same, displaying studentized residuals; 
+#> msc.gl> # the same, displaying studentized residuals;
 #> msc.gl> # note use of formula to reorder factors in the mosaic
-#> msc.gl> mosaic(berk.glm1, 
-#> msc.gl+        residuals_type="rstandard", 
-#> msc.gl+        labeling=labeling_residuals, 
-#> msc.gl+        shade=TRUE, 
-#> msc.gl+       formula=~Admit+Dept+Gender, 
+#> msc.gl> mosaic(berk.glm1,
+#> msc.gl+        residuals_type="rstandard",
+#> msc.gl+        labeling=labeling_residuals,
+#> msc.gl+        shade=TRUE,
+#> msc.gl+       formula=~Admit+Dept+Gender,
 #> msc.gl+       main="Model: [DeptGender][DeptAdmit]")
 
 #> 
@@ -378,11 +380,11 @@ example(mosaic.glm)
 #> Number of Fisher Scoring iterations: 4
 #> 
 #> 
-#> msc.gl> mosaic.glm(berk.glm2, 
-#> msc.gl+        residuals_type="rstandard", 
-#> msc.gl+        labeling = labeling_residuals, 
+#> msc.gl> mosaic(berk.glm2,
+#> msc.gl+        residuals_type="rstandard",
+#> msc.gl+        labeling = labeling_residuals,
 #> msc.gl+        shade=TRUE,
-#> msc.gl+       formula=~Admit+Dept+Gender, 
+#> msc.gl+       formula=~Admit+Dept+Gender,
 #> msc.gl+       main="Model: [DeptGender][DeptAdmit][AdmitGender]")
 
 #> 
@@ -396,7 +398,7 @@ example(mosaic.glm)
 #> 2         5     20.204  1   1.5312   0.2159
 #> 
 #> msc.gl> # Add 1 df term for association of [GenderAdmit] only in Dept A
-#> msc.gl> berkeley <- within(berkeley, 
+#> msc.gl> berkeley <- within(berkeley,
 #> msc.gl+                    dept1AG <- (Dept=='A')*(Gender=='Female')*(Admit=='Admitted'))
 #> 
 #> msc.gl> berkeley[1:6,]
@@ -449,12 +451,12 @@ example(mosaic.glm)
 #> Number of Fisher Scoring iterations: 3
 #> 
 #> 
-#> msc.gl> mosaic.glm(berk.glm3, 
-#> msc.gl+            residuals_type="rstandard", 
-#> msc.gl+            labeling = labeling_residuals, 
-#> msc.gl+            shade=TRUE,
-#> msc.gl+           formula=~Admit+Dept+Gender, 
-#> msc.gl+           main="Model: [DeptGender][DeptAdmit] + DeptA*[GA]")
+#> msc.gl> mosaic(berk.glm3,
+#> msc.gl+        residuals_type = "rstandard",
+#> msc.gl+        labeling = labeling_residuals,
+#> msc.gl+        shade=TRUE,
+#> msc.gl+        formula = ~Admit+Dept+Gender,
+#> msc.gl+        main = "Model: [DeptGender][DeptAdmit] + DeptA*[GA]")
 
 #> 
 #> msc.gl> # compare models

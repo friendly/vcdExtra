@@ -20,8 +20,9 @@ A 4-dimensional array resulting from cross-tabulating 4 variables for
 
 ## Source
 
-Fahrmeir, L. & Tutz, G. (1994). Multivariate Statistical Modelling Based
-on Generalized Linear Models New York: Springer Verlag, Table 1.1.
+% Fahrmeir:94 Fahrmeir, L. & Tutz, G. (1994). Multivariate Statistical
+Modelling Based on Generalized Linear Models New York: Springer Verlag,
+Table 1.1.
 
 ## Details
 

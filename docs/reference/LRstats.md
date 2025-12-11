@@ -53,7 +53,8 @@ from the names of the model object(s).
 
 `LRstats` provides a brief summary for one or more models fit to the
 same dataset for which `logLik` and `nobs` methods exist (e.g., `glm`
-and `loglm` models). and is subject to change.
+and `loglm` models). %This implementation is experimental, and is
+subject to change.
 
 The function relies on residual degrees of freedom for the LR chisq test
 being available in the model object. This is true for objects inheriting

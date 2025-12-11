@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,8 +124,7 @@ models)</p></dd>
 <dd><p>Visualize glm(), multinom() and polr() models from
 <code>example(housing, package="MASS")</code></p></dd>
 
-</dl><p>Use <code>
-demo(package="vcdExtra")</code> for a complete current list.</p>
+</dl><p>Use <code> demo(package="vcdExtra")</code> for a complete current list.</p>
 <p>The <span class="pkg">vcdExtra</span> package now contains a large number of data sets
 illustrating various forms of categorical data analysis and related
 visualizations, from simple to advanced. Use <code>data(package="vcdExtra")</code>
@@ -141,7 +140,7 @@ Visualization and Modeling Techniques for Categorical and Count Data</em>. Boca
 Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="external-link">http://ddar.datavis.ca</a>.</p>
 <p>Meyer, D.; Zeileis, A. &amp; Hornik, K. The Strucplot Framework: Visualizing
 Multi-way Contingency Tables with vcd <em>Journal of Statistical
-Software</em>, 2006, <b>17</b>, 1-48. Available in R via
+Software</em>, 2006, <strong>17</strong>, 1-48. Available in R via
 <code><a href="https://cran.rstudio.com/web/packages/vcd/vignettes/strucplot.pdf" class="external-link">vignette("strucplot", package = "vcd")</a></code></p>
 <p>Turner, H. and Firth, D. <em>Generalized nonlinear models in R: An
 overview of the gnm package</em>, 2007, <a href="http://eprints.ncrm.ac.uk/472/" class="external-link">http://eprints.ncrm.ac.uk/472/</a>.
@@ -157,7 +156,7 @@ strucplot framework.</p></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Michael Friendly</p>
-<p>Maintainer: Michael Friendly &lt;friendly AT yorku.ca&gt; ||
+<p>Maintainer: Michael Friendly
 (<a href="https://orcid.org/0000-0002-3237-0941" class="external-link">ORCID</a>)</p>
     </div>
 
@@ -166,38 +165,40 @@ strucplot framework.</p></div>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/example.html" class="external-link">example</a></span><span class="op">(</span><span class="va">mosaic.glm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; library(vcdExtra)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; GSStab &lt;- xtabs(count ~ sex + party, data=GSS)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # using the data in table form</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mod.glm1 &lt;- glm(Freq ~ sex + party, family = poisson, data = GSStab)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; res &lt;- residuals(mod.glm1)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; res &lt;- residuals(mod.glm1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; std &lt;- rstandard(mod.glm1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # For mosaic.default(), need to re-shape residuals to conform to data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; stdtab &lt;- array(std, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 dim=dim(GSStab), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; stdtab &lt;- array(std,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 dim=dim(GSStab),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 dimnames=dimnames(GSStab))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(GSStab, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals=stdtab, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="Std\nresiduals", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(GSStab,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals=stdtab,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="Std\nresiduals",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling = labeling_residuals)</span>
 <span class="r-plt img"><img src="vcdExtra-package-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # Using externally calculated residuals with the glm() object</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic.glm(mod.glm1, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            residuals=std, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            labeling = labeling_residuals, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            shade=TRUE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(mod.glm1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals=std,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling = labeling_residuals,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        shade=TRUE)</span>
 <span class="r-plt img"><img src="vcdExtra-package-2.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # Using residuals_type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic.glm(mod.glm1, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            residuals_type="rstandard", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            labeling = labeling_residuals, shade=TRUE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(mod.glm1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling = labeling_residuals, shade=TRUE)</span>
 <span class="r-plt img"><img src="vcdExtra-package-3.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; ## Ordinal factors and structured associations</span>
@@ -211,7 +212,7 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Moderate  58  54  65  77  54  54</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Impaired  46  40  60  94  78  71</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; long.labels &lt;- list(set_varnames = c(mental="Mental Health Status", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; long.labels &lt;- list(set_varnames = c(mental="Mental Health Status",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                                      ses="Parent SES"))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # fit independence model</span>
@@ -219,25 +220,25 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; indep &lt;- glm(Freq ~ mental+ses,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+              family = poisson, data = Mental)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; long.labels &lt;- list(set_varnames = c(mental="Mental Health Status", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; long.labels &lt;- list(set_varnames = c(mental="Mental Health Status",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                                      ses="Parent SES"))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(indep,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals)</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-4.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # or, show as a sieve diagram</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(indep, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        panel=sieve, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(indep,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        panel=sieve,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly)</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-5.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # fit linear x linear (uniform) association.  Use integer scores for rows/cols </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # fit linear x linear (uniform) association.  Use integer scores for rows/cols</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; Cscore &lt;- as.numeric(Mental$ses)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; Rscore &lt;- as.numeric(Mental$mental)</span>
@@ -246,10 +247,10 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 family = poisson, data = Mental)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(linlin,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        suppress=1, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        suppress=1,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        main="Lin x Lin model")</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
@@ -263,10 +264,10 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 family = poisson, data = Mental)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ mosaic(RC1model,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        suppress=1, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        suppress=1,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        main="RC1 model")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+  }</span>
@@ -278,7 +279,7 @@ strucplot framework.</p></div>
 <span class="r-plt img"><img src="vcdExtra-package-7.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt;  ############# UCB Admissions data, fit using glm()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; structable(Dept ~ Admit+Gender,UCBAdmissions)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 Dept   A   B   C   D   E   F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Admit    Gender                             </span>
@@ -329,19 +330,19 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of Fisher Scoring iterations: 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(berk.glm1, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(berk.glm1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula=~Admit+Dept+Gender)</span>
 <span class="r-plt img"><img src="vcdExtra-package-8.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # the same, displaying studentized residuals; </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # the same, displaying studentized residuals;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # note use of formula to reorder factors in the mosaic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(berk.glm1, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        shade=TRUE, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	     formula=~Admit+Dept+Gender, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(berk.glm1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        shade=TRUE,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	     formula=~Admit+Dept+Gender,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	     main="Model: [DeptGender][DeptAdmit]")</span>
 <span class="r-plt img"><img src="vcdExtra-package-9.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -387,11 +388,11 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of Fisher Scoring iterations: 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic.glm(berk.glm2, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling = labeling_residuals, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(berk.glm2,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling = labeling_residuals,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        shade=TRUE,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	     formula=~Admit+Dept+Gender, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	     formula=~Admit+Dept+Gender,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	     main="Model: [DeptGender][DeptAdmit][AdmitGender]")</span>
 <span class="r-plt img"><img src="vcdExtra-package-10.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -405,7 +406,7 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2         5     20.204  1   1.5312   0.2159</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # Add 1 df term for association of [GenderAdmit] only in Dept A</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; berkeley &lt;- within(berkeley, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; berkeley &lt;- within(berkeley,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                    dept1AG &lt;- (Dept=='A')*(Gender=='Female')*(Admit=='Admitted'))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; berkeley[1:6,]</span>
@@ -458,12 +459,12 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of Fisher Scoring iterations: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic.glm(berk.glm3, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            residuals_type="rstandard", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            labeling = labeling_residuals, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+            shade=TRUE,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	         formula=~Admit+Dept+Gender, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	         main="Model: [DeptGender][DeptAdmit] + DeptA*[GA]")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(berk.glm3,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type = "rstandard",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling = labeling_residuals,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        shade=TRUE,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	      formula = ~Admit+Dept+Gender,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ 	      main = "Model: [DeptGender][DeptAdmit] + DeptA*[GA]")</span>
 <span class="r-plt img"><img src="vcdExtra-package-11.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # compare models</span>

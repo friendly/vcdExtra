@@ -109,21 +109,19 @@ mods3 <- Kway(Freq ~ A + B + C, data=df, family=poisson)
 LRstats(mods3)
 #> Likelihood summary table:
 #>           AIC    BIC LR Chisq Df Pr(>Chisq)
-#> kway.0 234.98 236.57   33.697 35     0.5309
-#> kway.1 234.31 243.81   23.020 30     0.8144
-#> kway.2 244.09 266.26   16.802 22     0.7742
-#> kway.3 249.24 277.74   13.952 18     0.7322
+#> kway.0 235.61 237.19   34.531 35     0.4906
+#> kway.1 242.79 252.29   31.714 30     0.3810
+#> kway.2 252.30 274.47   25.216 22     0.2868
+#> kway.3 257.29 285.80   22.213 18     0.2227
 mods4 <- Kway(Freq ~ A + B + C + D, data=df, family=poisson)
 LRstats(mods4)
 #> Likelihood summary table:
-#>           AIC    BIC LR Chisq Df Pr(>Chisq)    
-#> kway.0 234.98 236.57   33.697 35     0.5309    
-#> kway.1 235.69 246.78   22.405 29     0.8030    
-#> kway.2 250.77 282.44   11.485 16     0.7786    
-#> kway.3 265.81 316.48    2.519  4     0.6412    
-#> kway.4 271.29 328.29    0.000  0     <2e-16 ***
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#>           AIC    BIC LR Chisq Df Pr(>Chisq)
+#> kway.0 235.61 237.19   34.531 35     0.4906
+#> kway.1 244.40 255.48   31.318 29     0.3506
+#> kway.2 262.11 293.78   23.032 16     0.1129
+#> kway.3 268.70 319.38    5.625  4     0.2289
+#> kway.4 271.08 328.09    0.000  0     1.0000
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")

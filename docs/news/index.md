@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 0.8.7 (2025-11-18)
+## Version 0.8.7 (2025-12-10)
 
 This is a major release of the package, fixing bugs and revising
 documentation
@@ -11,9 +11,10 @@ Sabanes Bove\] o Automatically omit strata with a single observation in
 CMHtest() because they do not contribute to the test statistics o Use
 the generalized Moore-Penrose inverse from MASS in CMHtest() such that
 it can work when the variance matrix is singular. o Converted the
-package to use roxygen documentation. o Added `CrabSatellites` data from
-{countreg} b/c that’s still not available on CRAN o Moved `grid` from
-`Depends:` to `Imports:`
+package to use roxygen documentation via {rd2roxygen}. UGH! o Added
+`CrabSatellites` data from {countreg} b/c that’s still not available on
+CRAN o Moved `grid` from `Depends:` to `Imports:` o Now use markdown in
+package documentation for easier maintenance, via {roxygen2md}
 
 ## Version 0.8-6 (2025-07-23)
 
@@ -168,9 +169,12 @@ CRAN release: 2015-09-17
 CRAN release: 2015-07-11
 
 - Added Mice data
-- Removed uses of `summarise()` and Summarise() from demos and examples,
-  in preparation for deprecating them.
-- `summarise()` is now deprecated
+- Removed uses of
+  [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)
+  and Summarise() from demos and examples, in preparation for
+  deprecating them.
+- [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)
+  is now deprecated
 - Now use `importsFrom()` for all functions from recommended packages
 
 ## Version 0.6-8 (2015-04-15)

@@ -23,7 +23,7 @@ A data frame with 100 observations on the following 2 variables.
 
 Bradley Efron and Ronald Thisted (1976). Estimating the Number of Unseen
 Species: How Many Words Did Shakespeare Know? *Biometrika*, Vol. 63, No.
-3, pp. 435-447,
+3, pp. 435-447, %<http://www.jstor.org/stable/2335721>
 
 ## Details
 

@@ -17,7 +17,7 @@ trees and nests."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8-7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,25 +71,25 @@ trees and nests.</p>
 <dl><dt><code>category</code></dt>
 <dd><p>Time of season, divided into 3 categories based on breeding chronology, an ordered factor with levels <code>Pre</code> &lt; <code>Incubation</code> &lt; <code>Chicks Present</code></p></dd>
 
-  <dt><code>week</code></dt>
+<dt><code>week</code></dt>
 <dd><p>Week of the season</p></dd>
 
-  <dt><code>station</code></dt>
+<dt><code>station</code></dt>
 <dd><p>Station of observations on two different peninsulas in a park, a factor with levels <code>B1</code> <code>B2</code> <code>C1</code> <code>C2</code> <code>C3</code> <code>C4</code></p></dd>
 
-  <dt><code>nest</code></dt>
+<dt><code>nest</code></dt>
 <dd><p>Type of nest, an ordered factor with levels <code>no</code> &lt; <code>partial</code> &lt; <code>full</code></p></dd>
 
-  <dt><code>height</code></dt>
+<dt><code>height</code></dt>
 <dd><p>Relative height of bird in the tree, an ordered factor with levels <code>low</code> &lt; <code>mid</code> &lt; <code>high</code></p></dd>
 
-  <dt><code>density</code></dt>
+<dt><code>density</code></dt>
 <dd><p>Number of other nests in the tree, an ordered factor with levels <code>zero</code> &lt; <code>few</code> &lt; <code>moderate</code> &lt; <code>high</code></p></dd>
 
-  <dt><code>tree_health</code></dt>
+<dt><code>tree_health</code></dt>
 <dd><p>Health of the tree the bird is advertising in, a factor with levels <code>dead</code> <code>healthy</code></p></dd>
 
-  <dt><code>count</code></dt>
+<dt><code>count</code></dt>
 <dd><p>Number of birds advertising, a numeric vector</p></dd>
 
 
@@ -107,7 +107,7 @@ and spatially, as well as with characteristics of nesting sites.</p>
 <p>Observations were made on only 2 days in weeks 3 and 4, but 3 days in all
 other weeks. One should use log(days) as an offset, so that the response
 measures rate.</p>
-<p><code>Cormorants$days &lt;- ifelse(Cormorants$week %in% 3:4, 2, 3)</code></p>
+<p><code>Cormorants$days &lt;- ifelse(Cormorants$week \%in\% 3:4, 2, 3)</code></p>
     </div>
 
     <div class="section level2">

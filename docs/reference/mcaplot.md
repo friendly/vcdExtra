@@ -89,7 +89,7 @@ mcaplot(
 
   Labels for horizontal and vertical axes. The default, `"_auto_"` means
   that the function auto-generates a label of the form
-  `"Dimension X (xx.x %)"`
+  `"Dimension X (xx.x \%)"`
 
 - rev.axes:
 

@@ -32,8 +32,8 @@ A data frame containing 173 observations on 5 variables.
 
 ## Source
 
-Table 4.3 in Agresti (2002). This dataset was taken from the countreg,
-which is not on CRAN
+Table 4.3 in Agresti (2002). This dataset was taken from the countreg
+package, which is not on CRAN
 
 ## Details
 
@@ -63,23 +63,27 @@ Limulus polyphemus”, Ethology, 102(1), 1–21.
 ## Examples
 
 ``` r
-# example code
-## load data, use ordered factors as numeric, and
-## grouped factor version of width
+## load data, use ordered factors as numeric, and grouped factor version of width
 data("CrabSatellites", package = "vcdExtra")
-#> Warning: data set 'CrabSatellites' not found
 CrabSatellites <- transform(CrabSatellites,
   color = as.numeric(color),
   spine = as.numeric(spine),
   cwidth = cut(width, c(-Inf, seq(23.25, 29.25), Inf))
 )
-#> Error: object 'CrabSatellites' not found
 
 ## Agresti, Table 4.4
 aggregate(CrabSatellites$satellites,
           list(CrabSatellites$cwidth), function(x)
   round(c(Number = length(x), Sum = sum(x), Mean = mean(x), Var = var(x)), digits = 2))
-#> Error: object 'CrabSatellites' not found
+#>       Group.1 x.Number  x.Sum x.Mean  x.Var
+#> 1 (-Inf,23.2]    14.00  14.00   1.00   2.77
+#> 2 (23.2,24.2]    14.00  20.00   1.43   8.88
+#> 3 (24.2,25.2]    28.00  67.00   2.39   6.54
+#> 4 (25.2,26.2]    39.00 105.00   2.69  11.38
+#> 5 (26.2,27.2]    22.00  63.00   2.86   6.89
+#> 6 (27.2,28.2]    24.00  93.00   3.88   8.81
+#> 7 (28.2,29.2]    18.00  71.00   3.94  16.88
+#> 8 (29.2, Inf]    14.00  72.00   5.14   8.29
 
 ## Agresti, Figure 4.4
 plot(tapply(satellites, cwidth, mean) ~ tapply(width, cwidth, mean),
@@ -87,7 +91,7 @@ plot(tapply(satellites, cwidth, mean) ~ tapply(width, cwidth, mean),
   ylim = c(0, 6), pch = 19, cex = 1.5,
   xlab = "Mean carapace width (cm)",
   ylab = "Mean number of satellites")
-#> Error in eval(m$data, eframe): object 'CrabSatellites' not found
+
 
 ## More examples: ?countreg::CrabSatellites` has examples of other plots and count data models
 ```

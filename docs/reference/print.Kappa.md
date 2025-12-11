@@ -56,24 +56,24 @@ Michael Friendly
 ``` r
 data("SexualFun")
 Kappa(SexualFun)
-#>             value     ASE     z Pr(>|z|)
-#> Unweighted 0.1293 0.06860 1.885 0.059387
-#> Weighted   0.2374 0.07832 3.031 0.002437
+#>             value     ASE     z
+#> Unweighted 0.1293 0.06860 1.885
+#> Weighted   0.2374 0.07832 3.031
 print(Kappa(SexualFun), CI=TRUE)
-#>             value     ASE     z Pr(>|z|)    lower  upper
-#> Unweighted 0.1293 0.06860 1.885 0.059387 -0.00512 0.2638
-#> Weighted   0.2374 0.07832 3.031 0.002437  0.08388 0.3909
+#>             value     ASE     z    lower  upper
+#> Unweighted 0.1293 0.06860 1.885 -0.00512 0.2638
+#> Weighted   0.2374 0.07832 3.031  0.08388 0.3909
 
 # stratified 3-way table
 apply(MSPatients, 3, Kappa)
 #> $Winnipeg
-#>             value     ASE     z  Pr(>|z|)
-#> Unweighted 0.2079 0.05046 4.121 3.767e-05
-#> Weighted   0.3797 0.05167 7.350 1.988e-13
+#>             value     ASE     z
+#> Unweighted 0.2079 0.05046 4.121
+#> Weighted   0.3797 0.05167 7.350
 #> 
 #> $`New Orleans`
-#>             value     ASE     z  Pr(>|z|)
-#> Unweighted 0.2965 0.07850 3.777 1.587e-04
-#> Weighted   0.4773 0.07303 6.535 6.352e-11
+#>             value     ASE     z
+#> Unweighted 0.2965 0.07850 3.777
+#> Weighted   0.4773 0.07303 6.535
 #> 
 ```

@@ -39,9 +39,9 @@ years), etc.
 
 ## References
 
-Heckman, J.J. & Willis, R.J. (1977). "A beta-logistic model for the
-analysis of sequential labor force participation by married women."
-*Journal of Political Economy*, 85: 27-58
+% HeckmanWillis:77 Heckman, J.J. & Willis, R.J. (1977). "A beta-logistic
+model for the analysis of sequential labor force participation by
+married women." *Journal of Political Economy*, 85: 27-58
 
 ## Examples
 

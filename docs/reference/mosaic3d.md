@@ -171,7 +171,7 @@ are then used to color or shade each of the tiles.
 This is a developing implementation. The arguments and details are
 subject to change.
 
-Friendly (1995), Friendly \[Sect. 4.5\](2000) and Theus and Lauer (1999)
+Friendly (1995), Friendly (2000, Sect. 4.5) and Theus and Lauer (1999)
 have all used the idea of 3D mosaic displays to explain various aspects
 of loglinear models (the iterative proportional fitting algorithm, the
 structure of various models for 3-way and n-way tables, etc.), but no

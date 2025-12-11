@@ -30,8 +30,8 @@ no three-way interaction in a contingency table.
 
 ## References
 
-Interactions *Journal of the Royal Statistical Society*, Supplement,
-1935, 2, 248-252.
+Bartlett, M. S. (1935). Contingency Table Interactions *Journal of the
+Royal Statistical Society*, Supplement, 1935, 2, 248-252.
 
 ## Examples
 
