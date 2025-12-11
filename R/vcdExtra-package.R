@@ -79,8 +79,9 @@
 #' @aliases vcdExtra-package vcdExtra _PACKAGE
 #' @author Michael Friendly
 #'
-#' Maintainer: Michael Friendly <friendly AT yorku.ca> ||
+#' Maintainer: Michael Friendly 
 #' (\href{https://orcid.org/0000-0002-3237-0941}{ORCID})
+#' 
 #' @seealso \code{\link[gnm]{gnm-package}}, for an extended range of models for
 #' contingency tables
 #'
