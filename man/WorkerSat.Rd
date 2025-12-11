@@ -8,10 +8,10 @@
 A frequency data frame with 8 observations on the following 4
 variables, representing the 2 x 2 x 2 classification of 715 cases.
 \describe{
-  \item{\code{Manage}}{Quality of management, an ordered factor with levels \code{bad} < \code{good}}
-  \item{\code{Super}}{Supervisor satisfaction, an ordered factor with levels \code{low} < \code{high}}
-  \item{\code{Worker}}{Worker job satisfaction, an ordered factor with levels \code{low} < \code{high}}
-  \item{\code{Freq}}{a numeric vector}
+\item{\code{Manage}}{Quality of management, an ordered factor with levels \code{bad} < \code{good}}
+\item{\code{Super}}{Supervisor satisfaction, an ordered factor with levels \code{low} < \code{high}}
+\item{\code{Worker}}{Worker job satisfaction, an ordered factor with levels \code{low} < \code{high}}
+\item{\code{Freq}}{a numeric vector}
 }
 }
 \source{

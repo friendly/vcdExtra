@@ -72,8 +72,7 @@ glm()} \item{vision-quasi}{VisualAcuity data: Quasi- and Symmetry models}
 and RC(1) models)} \item{Wong3-1}{Political views, support for women to work
 and national welfare spending (3-way, marginal, and conditional independence
 models)} \item{housing}{Visualize glm(), multinom() and polr() models from
-\code{example(housing, package="MASS")}} } Use \code{
-demo(package="vcdExtra")} for a complete current list.
+\code{example(housing, package="MASS")}} } Use \code{ demo(package="vcdExtra")} for a complete current list.
 
 The \pkg{vcdExtra} package now contains a large number of data sets
 illustrating various forms of categorical data analysis and related
@@ -98,7 +97,7 @@ Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 
 Meyer, D.; Zeileis, A. & Hornik, K. The Strucplot Framework: Visualizing
 Multi-way Contingency Tables with vcd \emph{Journal of Statistical
-Software}, 2006, \bold{17}, 1-48. Available in R via
+Software}, 2006, \strong{17}, 1-48. Available in R via
 \code{vignette("strucplot", package = "vcd")}
 
 Turner, H. and Firth, D. \emph{Generalized nonlinear models in R: An
@@ -115,7 +114,7 @@ strucplot framework.
 \author{
 Michael Friendly
 
-Maintainer: Michael Friendly 
+Maintainer: Michael Friendly
 (\href{https://orcid.org/0000-0002-3237-0941}{ORCID})
 }
 \keyword{package}

@@ -48,7 +48,7 @@ The requested packages must be installed, and are silently loaded in order
 to extract \code{class} and size information.
 }
 \note{
-In Rmd documents, `datasets("package") |> knitr::kable()` can be used
+In Rmd documents, \code{datasets("package") |> knitr::kable()} can be used
 to create a more pleasing display.
 }
 \examples{

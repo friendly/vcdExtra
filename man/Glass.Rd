@@ -8,9 +8,9 @@
 A frequency data frame with 25 observations on the following 3
 variables representing a 5 x 5 table with 3500 cases.
 \describe{
-  \item{\code{father}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
-  \item{\code{son}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
-  \item{\code{Freq}}{a numeric vector}
+\item{\code{father}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
+\item{\code{son}}{a factor with levels \code{Managerial} \code{Professional} \code{Skilled} \code{Supervisory} \code{Unskilled}}
+\item{\code{Freq}}{a numeric vector}
 }
 }
 \source{

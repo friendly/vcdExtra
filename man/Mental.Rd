@@ -8,9 +8,9 @@
 A data frame frequency table with 24 observations on the following 3
 variables.
 \describe{
-  \item{\code{ses}}{an ordered factor with levels \code{1} < \code{2} < \code{3} < \code{4} < \code{5} < \code{6}}
-  \item{\code{mental}}{an ordered factor with levels \code{Well} < \code{Mild} < \code{Moderate} < \code{Impaired}}
-  \item{\code{Freq}}{cell frequency: a numeric vector}
+\item{\code{ses}}{an ordered factor with levels \code{1} < \code{2} < \code{3} < \code{4} < \code{5} < \code{6}}
+\item{\code{mental}}{an ordered factor with levels \code{Well} < \code{Mild} < \code{Moderate} < \code{Impaired}}
+\item{\code{Freq}}{cell frequency: a numeric vector}
 }
 }
 \source{

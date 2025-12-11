@@ -5,10 +5,13 @@
 \alias{Asbestos}
 \title{Effect of Exposure to Asbestos}
 \format{
-The format is: num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
-- attr(*, "dimnames")=List of 2 ..$ exposure: chr [1:5] "0-9" "10-19"
-"20-29" "30-39" ...  ..$ grade : chr [1:4] "None" "Grade 1" "Grade 2" "Grade
-3"
+The format is:
+\preformatted{
+ num [1:5, 1:4] 310 212 21 25 7 36 158 35 102 35 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ exposure: chr [1:5] "0-9" "10-19" "20-29" "30-39" ...
+  ..$ grade   : chr [1:4] "None" "Grade 1" "Grade 2" "Grade 3"#'
+  }
 }
 \source{
 Beh, E. J. & Lombardo, R. (2022). Features of the Polynomial Biplot
@@ -48,9 +51,9 @@ plot(Asbestos.ca, lines=TRUE)
 \references{
 Beh, E. J., and D. R. Smith (2011b), Real World Occupational
 Epidemiology, Part 2: A Visual Interpretation of Statistical Significance,
-\emph{Archives of Environmental & Occupational Health}, \bold{66}, 245-248.
+\emph{Archives of Environmental & Occupational Health}, \strong{66}, 245-248.
 
 Selikoff, I. J. (1981), Household Risks With Inorganic Fibers,
-\emph{Bulletin of the New York Academy of Medicine}, \bold{57}, 947-961.
+\emph{Bulletin of the New York Academy of Medicine}, \strong{57}, 947-961.
 }
 \keyword{datasets}

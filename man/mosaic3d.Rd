@@ -148,13 +148,13 @@ demo("mosaic-hec")
 }
 \references{
 Friendly, M. (1995). Conceptual and Visual Models for
-Categorical Data, \emph{The American Statistician}, \bold{49}, 153-160.
+Categorical Data, \emph{The American Statistician}, \strong{49}, 153-160.
 
 Friendly, M. \emph{Visualizing Categorical Data}, Cary NC: SAS Institute,
 2000. Web materials: \url{http://www.datavis.ca/books/vcd/}.
 
 Theus, M. & Lauer, S. R. W. (1999) Visualizing Loglinear Models.
-\emph{Journal of Computational and Graphical Statistics}, \bold{8}, 396-412.
+\emph{Journal of Computational and Graphical Statistics}, \strong{8}, 396-412.
 }
 \seealso{
 \code{\link[vcd]{strucplot}}, \code{\link[vcd]{mosaic}},
@@ -162,8 +162,13 @@ Theus, M. & Lauer, S. R. W. (1999) Visualizing Loglinear Models.
 
 \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}} for details on
 fitting loglinear models
+
+Other mosaic plots: 
+\code{\link{mosaic.glm}()},
+\code{\link{mosaic.glmlist}()}
 }
 \author{
 Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 }
+\concept{mosaic plots}
 \keyword{hplot}

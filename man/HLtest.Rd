@@ -35,7 +35,7 @@ A class \code{HLtest} object with the following components:
 into \code{g} groups with the following columns: \code{cut}, \code{total},
 \code{obs}, \code{exp}, \code{chi}} \item{chisq}{The chisquare statistics}
 \item{df}{Degrees of freedom} \item{p.value}{p value} \item{groups}{Number
-of groups} \item{call}{\code{model} call} %% ...
+of groups} \item{call}{\code{model} call} \%\% ...
 }
 \description{
 The \code{HLtest} function computes the classical Hosmer-Lemeshow (1980)
@@ -99,8 +99,14 @@ statistics for use in the development of logistic regression models.
 }
 \seealso{
 \code{\link[vcd]{rootogram}}, ~~~
+
+Other association tests: 
+\code{\link{CMHtest}()},
+\code{\link{GKgamma}()},
+\code{\link{zero.test}()}
 }
 \author{
 Michael Friendly
 }
+\concept{association tests}
 \keyword{htest}

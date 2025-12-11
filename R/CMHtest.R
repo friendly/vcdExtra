@@ -17,13 +17,11 @@
 # DONE: With strata, calculate overall CMH tests controlling for strata
 # FIXED: rmeans and cmeans tests were labeled incorrectly
 
-
-
 #' Generalized Cochran-Mantel-Haenszel Tests
 #'
 #' Provides generalized Cochran-Mantel-Haenszel tests of association of two
 #' possibly ordered factors, optionally stratified other factor(s).  With
-#' strata, \code{CMHtest} calculates these tests for each level of the
+#' strata, `CMHtest` calculates these tests for each level of the
 #' stratifying variables and also provides overall tests controlling for the
 #' strata.
 #'
@@ -41,29 +39,29 @@
 #' The CMH analysis for a two-way table produces generalized
 #' Cochran-Mantel-Haenszel statistics (Landis etal., 1978).
 #'
-#' These include the CMH \bold{correlation} statistic (\code{"cor"}), treating
+#' These include the CMH **correlation** statistic (`"cor"`), treating
 #' both factors as ordered. For a given statum, with equally spaced row and
 #' column scores, this CMH statistic reduces to \eqn{(n-1) r^2}, where \eqn{r}
-#' is the Pearson correlation between X and Y. With \code{"midrank"} scores,
+#' is the Pearson correlation between X and Y. With `"midrank"` scores,
 #' this CMH statistic is analogous to \eqn{(n-1) r_S^2}, using the Spearman
 #' rank correlation.
 #'
-#' The \bold{ANOVA} (row mean scores and column mean scores) statistics, treat
+#' The **ANOVA** (row mean scores and column mean scores) statistics, treat
 #' the columns and rows respectively as ordinal, and are sensitive to mean
 #' shifts over columns or rows. These are transforms of the \eqn{F} statistics
 #' from one-way ANOVAs with equally spaced scores and to Kruskal-Wallis tests
-#' with \code{"midrank"} scores.
+#' with `"midrank"` scores.
 #'
-#' The CMH \bold{general} association statistic treat both factors as
+#' The CMH **general** association statistic treat both factors as
 #' unordered, and give a test closely related to the Pearson \eqn{\chi^2} test.
 #' When there is more than one stratum, the overall general CMH statistic gives
 #' a stratum-adjusted Pearson \eqn{\chi^2}, equivalent to what is calculated by
 #' \code{\link[stats]{mantelhaen.test}}.
 #'
 #' For a 3+ way table, one table of CMH tests is produced for each combination
-#' of the factors identified as \code{strata}. If \code{overall=TRUE}, an
+#' of the factors identified as `strata`. If `overall=TRUE`, an
 #' additional table is calculated for the same two primary variables,
-#' controlling for (pooling over) the \code{strata} variables.
+#' controlling for (pooling over) the `strata` variables.
 #'
 #' These overall tests implicitly assume no interactions between the primary
 #' variables and the strata and they will have low power in the presence of
@@ -73,41 +71,42 @@
 #' observations) are automatically omitted from the analysis.
 #'
 #' @aliases CMHtest CMHtest.formula CMHtest.default Cochran Mantel Haenszel test print.CMHtest
-#' @param x A 2+ way contingency table in array form, or a class \code{"table"}
+#' @param x A 2+ way contingency table in array form, or a class `"table"`
 #'          object with optional category labels specified in the dimnames(x) attribute.
 #' @param formula a formula specifying the variables used to create a
-#'           contingency table from \code{data}.  This should be a one-sided formula when
-#'           \code{data} is in array form, and a two-sided formula with a response
-#'           \code{Freq} if \code{data} is a data frame with a cell frequency variable.
+#'           contingency table from `data`.  This should be a one-sided formula when
+#'           `data` is in array form, and a two-sided formula with a response
+#'           `Freq` if `data` is a data frame with a cell frequency variable.
 #'            For convenience, conditioning formulas can be specified indicating strata.
-#' @param data either a data frame, or an object of class \code{"table"} or \code{"ftable"}.
+#' @param data either a data frame, or an object of class `"table"` or `"ftable"`.
 #' @param subset an optional vector specifying a subset of observations to be used.
-#' @param na.action a function which indicates what should happen when the data contain \code{NA}s.  Ignored if \code{data} is a contingency table
+#' @param na.action a function which indicates what should happen when the data contain `NA`s.
+#'           Ignored if `data` is a contingency table.
 #' @param strata For a 3- or higher-way table, the names or numbers of the
 #'           factors to be treated as strata.  By default, the first 2 factors are
 #'           treated as the main table variables, and all others considered stratifying factors.
 #' @param rscores Row scores.  Either a set of numbers (typically integers,
-#'            \code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
-#' or \code{NULL} to exclude tests that depend on row scores.
+#'            `1:R`) or the string `"midrank"` for standardized midrank scores,
+#' or `NULL` to exclude tests that depend on row scores.
 #' @param cscores Column scores. Same as for row scores.
-#' @param types Types of CMH tests to compute: Any one or more of \code{c("cor", "cmeans", "rmeans", "general")}, or
-#'           \code{"ALL"} for all of these.
+#' @param types Types of CMH tests to compute: Any one or more of `c("cor", "cmeans", "rmeans", "general")`, or
+#'           `"ALL"` for all of these.
 #' @param overall logical. Whether to calculate overall tests, controlling for the stratifying factors.
 #' @param details logical.  Whether to include computational details in the result
 #' @param \dots Other arguments passed to default method.
 #' @param digits Digits to print.
 #'
-#' @return An object of class \code{"CMHtest"} , a list with the following 4 components:
+#' @return An object of class `"CMHtest"` , a list with the following 4 components:
 #'
-#' \item{table}{A matrix containing the test statistics, with columns \code{Chisq}, \code{Df} and \code{Prob} }
+#' \item{table}{A matrix containing the test statistics, with columns `Chisq`, `Df` and `Prob` }
 #' \item{names}{The names of the table row and column variables}
 #' \item{rscore}{Row scores}
 #' \item{cscore}{Column scores}
 #'
-#' If \code{details==TRUE}, additional components are included.
+#' If `details==TRUE`, additional components are included.
 #'
-#' If there are strata, the result is a list of \code{"CMHtest"} objects. If
-#' \code{overall=TRUE} another component, labeled \code{ALL} is appended to the
+#' If there are strata, the result is a list of `"CMHtest"` objects. If
+#' `overall=TRUE` another component, labeled `ALL` is appended to the
 #' list.
 #'
 #' @author Michael Friendly
@@ -120,25 +119,25 @@
 #' Cochran-Mantel-Haenszel chi-squared test of the null that two nominal
 #' variables are conditionally independent in each stratum, assuming that there
 #' is no three-way interaction
+#' @family association tests
 #'
-#' @references Stokes, M. E. & Davis, C. S.  & Koch, G., (2000).
-#' \emph{Categorical Data Analysis using the SAS System}, 2nd Ed., Cary, NC:
+#' @references
+#' Stokes, M. E. & Davis, C. S.  & Koch, G., (2000).
+#' *Categorical Data Analysis using the SAS System*, 2nd Ed., Cary, NC:
 #' SAS Institute, pp 74-75, 92-101, 124-129.  Details of the computation are
-#' given at:
-#' \url{http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm
-#' }
+#' given at: <http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm>
 #'
 #' Cochran, W. G. (1954), Some Methods for Strengthening the Common
-#' \eqn{\chi^2} Tests, \emph{Biometrics}, 10, 417-451.
+#' \eqn{\chi^2} Tests, *Biometrics*, 10, 417-451.
 #'
 #' Landis, R. J., Heyman, E. R., and Koch, G. G. (1978).  Average Partial
 #' Association in Three-way Contingency Tables: A Review and Discussion of
-#' Alternative Tests, \emph{International Statistical Review}, \bold{46},
+#' Alternative Tests, *International Statistical Review*, **46**,
 #' 237-254.
 #'
 #' Mantel, N. (1963), Chi-square Tests with One Degree of Freedom: Extensions
-#' of the Mantel-Haenszel Procedure," \emph{Journal of the American Statistical
-#' Association}, 58, 690-700.
+#' of the Mantel-Haenszel Procedure," *Journal of the American Statistical
+#' Association*, 58, 690-700.
 #' @keywords htest
 #' @export
 #' @examples

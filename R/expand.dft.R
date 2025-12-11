@@ -11,7 +11,7 @@
 #' in frequency form to a data frame representing individual observations in
 #' the table.
 #' 
-#' \code{expand.table} is a synonym for \code{expand.dft}.
+#' `expand.table` is a synonym for `expand.dft`.
 #' 
 #' @aliases expand.dft expand.table
 #' @param x A table object, or a data frame in frequency form containing
@@ -20,21 +20,21 @@
 #' @param var.names A list of variable names for the factors, if you wish to
 #' override those already in the table
 #' @param freq The name of the frequency variable in the table
-#' @param \dots Other arguments passed down to \code{type.convert}.  In
-#' particular, pay attention to \code{na.strings} (default:
-#' \code{na.strings=NA} if there are missing cells) and \code{as.is} (default:
-#' \code{as.is=FALSE}, converting character vectors to factors).
+#' @param \dots Other arguments passed down to `type.convert`.  In
+#' particular, pay attention to `na.strings` (default:
+#' `na.strings=NA` if there are missing cells) and `as.is` (default:
+#' `as.is=FALSE`, converting character vectors to factors).
 #' @return A data frame containing the factors in the table and as many
-#' observations as are represented by the total of the \code{freq} variable.
+#' observations as are represented by the total of the `freq` variable.
 #' @author Mark Schwarz
 #' @seealso \code{\link[utils]{type.convert}},
 #' \code{\link[gnm]{expandCategorical}}
 #' @references Originally posted on R-Help, Jan 20, 2009,
 #' http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html
 #' 
-#' Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis with R:
-#' Visualization and Modeling Techniques for Categorical and Count Data}.  Boca
-#' Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+#' Friendly, M. and Meyer, D. (2016).  *Discrete Data Analysis with R:
+#' Visualization and Modeling Techniques for Categorical and Count Data*.  Boca
+#' Raton, FL: Chapman & Hall/CRC. <http://ddar.datavis.ca>.
 #' @keywords manip array
 #' @examples
 #' 

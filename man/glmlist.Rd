@@ -13,16 +13,14 @@ loglmlist(...)
 \method{coef}{glmlist}(object, result = c("list", "matrix", "data.frame"), ...)
 }
 \arguments{
-\item{\dots}{One or more model objects, as appropriate to the function,
-optionally assigned names as in \code{list}.}
+\item{\dots}{One or more model objects, as appropriate to the function, optionally assigned names as in \code{\link{list}}.}
 
-\item{object}{a \code{glmlist} object}
+\item{object}{a \code{"glmlist"} object}
 
 \item{result}{type of the result to be returned}
 }
 \value{
-An object of class \code{glmlist} \code{loglmlist}, just like a
-\code{list}, except that each model is given a \code{name} attribute.
+An object of class \code{glmlist} \code{loglmlist}, just like a \code{list}, except that each model is given a \code{name} attribute.
 }
 \description{
 \code{glmlist} creates a \code{glmlist} object containing a list of fitted
@@ -86,14 +84,24 @@ boxplot(as.data.frame(res), main="Residuals from various models")
 The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is
 similar, but perplexingly more general.
 
-The function \code{\link[stats]{anova.glm}} also handles \code{glmlist
-objects}
+The function \code{\link[stats]{anova.glm}} also handles \verb{glmlist objects}
 
 \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
 object.
+
+Other glmlist functions: 
+\code{\link{Kway}()},
+\code{\link{LRstats}()},
+\code{\link{mosaic.glmlist}()}
+
+Other loglinear models: 
+\code{\link{joint}()},
+\code{\link{seq_loglm}()}
 }
 \author{
 Michael Friendly; \code{coef} method by John Fox
 }
+\concept{glmlist functions}
+\concept{loglinear models}
 \keyword{models}
 \keyword{utilities}

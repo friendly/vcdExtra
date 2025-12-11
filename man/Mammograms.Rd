@@ -15,7 +15,7 @@ A frequency table in matrix form.  The format is:
 }
 \source{
 Kundel, H. L. & Polansky, M. (2003), "Measurement of Observer
-Agreement", \emph{Radiology}, \bold{228}, 303-308, Table A1
+Agreement", \emph{Radiology}, \strong{228}, 303-308, Table A1
 }
 \description{
 Kundel & Polansky (2003) give (possibly contrived) data on a set of 110

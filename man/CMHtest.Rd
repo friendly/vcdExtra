@@ -38,20 +38,21 @@ object with optional category labels specified in the dimnames(x) attribute.}
 contingency table from \code{data}.  This should be a one-sided formula when
 \code{data} is in array form, and a two-sided formula with a response
 \code{Freq} if \code{data} is a data frame with a cell frequency variable.
- For convenience, conditioning formulas can be specified indicating strata.}
+For convenience, conditioning formulas can be specified indicating strata.}
 
 \item{data}{either a data frame, or an object of class \code{"table"} or \code{"ftable"}.}
 
 \item{subset}{an optional vector specifying a subset of observations to be used.}
 
-\item{na.action}{a function which indicates what should happen when the data contain \code{NA}s.  Ignored if \code{data} is a contingency table}
+\item{na.action}{a function which indicates what should happen when the data contain \code{NA}s.
+Ignored if \code{data} is a contingency table.}
 
 \item{strata}{For a 3- or higher-way table, the names or numbers of the
 factors to be treated as strata.  By default, the first 2 factors are
 treated as the main table variables, and all others considered stratifying factors.}
 
 \item{rscores}{Row scores.  Either a set of numbers (typically integers,
-           \code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
+\code{1:R}) or the string \code{"midrank"} for standardized midrank scores,
 or \code{NULL} to exclude tests that depend on row scores.}
 
 \item{cscores}{Column scores. Same as for row scores.}
@@ -101,20 +102,20 @@ column means.
 The CMH analysis for a two-way table produces generalized
 Cochran-Mantel-Haenszel statistics (Landis etal., 1978).
 
-These include the CMH \bold{correlation} statistic (\code{"cor"}), treating
+These include the CMH \strong{correlation} statistic (\code{"cor"}), treating
 both factors as ordered. For a given statum, with equally spaced row and
 column scores, this CMH statistic reduces to \eqn{(n-1) r^2}, where \eqn{r}
 is the Pearson correlation between X and Y. With \code{"midrank"} scores,
 this CMH statistic is analogous to \eqn{(n-1) r_S^2}, using the Spearman
 rank correlation.
 
-The \bold{ANOVA} (row mean scores and column mean scores) statistics, treat
+The \strong{ANOVA} (row mean scores and column mean scores) statistics, treat
 the columns and rows respectively as ordinal, and are sensitive to mean
 shifts over columns or rows. These are transforms of the \eqn{F} statistics
 from one-way ANOVAs with equally spaced scores and to Kruskal-Wallis tests
 with \code{"midrank"} scores.
 
-The CMH \bold{general} association statistic treat both factors as
+The CMH \strong{general} association statistic treat both factors as
 unordered, and give a test closely related to the Pearson \eqn{\chi^2} test.
 When there is more than one stratum, the overall general CMH statistic gives
 a stratum-adjusted Pearson \eqn{\chi^2}, equivalent to what is calculated by
@@ -184,16 +185,14 @@ chisq.test(parties)
 Stokes, M. E. & Davis, C. S.  & Koch, G., (2000).
 \emph{Categorical Data Analysis using the SAS System}, 2nd Ed., Cary, NC:
 SAS Institute, pp 74-75, 92-101, 124-129.  Details of the computation are
-given at:
-\url{http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm
-}
+given at: \url{http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm}
 
 Cochran, W. G. (1954), Some Methods for Strengthening the Common
 \eqn{\chi^2} Tests, \emph{Biometrics}, 10, 417-451.
 
 Landis, R. J., Heyman, E. R., and Koch, G. G. (1978).  Average Partial
 Association in Three-way Contingency Tables: A Review and Discussion of
-Alternative Tests, \emph{International Statistical Review}, \bold{46},
+Alternative Tests, \emph{International Statistical Review}, \strong{46},
 237-254.
 
 Mantel, N. (1963), Chi-square Tests with One Degree of Freedom: Extensions
@@ -209,8 +208,14 @@ of linear by linear association.
 Cochran-Mantel-Haenszel chi-squared test of the null that two nominal
 variables are conditionally independent in each stratum, assuming that there
 is no three-way interaction
+
+Other association tests: 
+\code{\link{GKgamma}()},
+\code{\link{HLtest}()},
+\code{\link{zero.test}()}
 }
 \author{
 Michael Friendly
 }
+\concept{association tests}
 \keyword{htest}

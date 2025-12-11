@@ -29,7 +29,7 @@
 #' color, spine condition, weight, and carapace width. Color and spine condition are ordered factors but are treated as numeric in some analyses.
 
 #' @source
-#' Table 4.3 in Agresti (2002). This dataset was taken from the \pkg{countreg}, which is not on CRAN
+#' Table 4.3 in Agresti (2002). This dataset was taken from the \pkg{countreg} package, which is not on CRAN
 #'
 #' @references
 #' Agresti A (2002). Categorical Data Analysis, 2nd ed., John Wiley & Sons, Hoboken.
@@ -39,9 +39,7 @@
 #' Brockmann HJ (1996). “Satellite Male Groups in Horseshoe Crabs, Limulus polyphemus”, Ethology, 102(1), 1–21.
 #'
 #' @examples
-#' # example code
-#' ## load data, use ordered factors as numeric, and
-#' ## grouped factor version of width
+#' ## load data, use ordered factors as numeric, and grouped factor version of width
 #' data("CrabSatellites", package = "vcdExtra")
 #' CrabSatellites <- transform(CrabSatellites,
 #'   color = as.numeric(color),

@@ -9,14 +9,13 @@ A 2-dimensional array resulting from cross-tabulating 2 variables
 for 1725 observations. The variable names and their levels are:
 
 \tabular{rll}{
-  No \tab Name \tab Levels \cr
-  1\tab \code{Dullness}\tab \code{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
-  2\tab \code{Clothing}\tab \code{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
+No \tab Name \tab Levels \cr
+1\tab \code{Dullness}\tab \verb{"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"}\cr
+2\tab \code{Clothing}\tab \verb{"V.Well clad", "Well clad", "Passable", "Insufficient"}\cr
 }
 }
 \source{
-Anscombe, F. J. (1981). \emph{Computing in Statistical Science
-Through APL}. New York: Springer-Verlag, p. 302
+Anscombe, F. J. (1981). \emph{Computing in Statistical Science Through APL}. New York: Springer-Verlag, p. 302
 }
 \description{
 Schoolboys were classified according to their clothing and to their teachers
@@ -50,10 +49,8 @@ if(require(ca)){
 
 }
 \references{
-% \cite{Gilby & Pearson 1911, from Anscombe 1981, p 302}
 Gilby, W. H. (1911).
 On the significance of the teacher's appreciation of general
-intelligence.  \emph{Biometrika}, 8, 93-108 (esp. p. 94).  [Quoted by
-Kendall (1943,..., 1953) Table 13.1, p 320.]
+intelligence.  \emph{Biometrika}, 8, 93-108 (esp. p. 94).  (Quoted by Kendall (1943,..., 1953) Table 13.1, p 320.)
 }
 \keyword{datasets}

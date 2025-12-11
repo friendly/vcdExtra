@@ -14,7 +14,7 @@
 #' @aliases GKgamma print.GKgamma
 #' @param x A two-way frequency table, in matrix or table form.  The rows and columns are considered to be ordinal factors
 #' @param level Confidence level for a significance test of \eqn{\gamma \ne =}{gamma !=0}
-#' @return Returns an object of class \code{"GKgamma"} with 6 components, as follows
+#' @return Returns an object of class `"GKgamma"` with 6 components, as follows
 #' \describe{
 #'   \item{gamma}{The gamma statistic}
 #'   \item{C}{Total number of concordant pairs in the table}
@@ -26,16 +26,17 @@
 #'
 #' @author Michael Friendly; original version by Laura Thompson
 #' @seealso \code{\link[vcd]{assocstats}}, \link[vcd]{Kappa}
-#' @references Agresti, A. \emph{Categorical Data Analysis}. John Wiley & Sons,
+#' @family association tests
+#' @references Agresti, A. *Categorical Data Analysis*. John Wiley & Sons,
 #' 2002, pp. 57--59.
 #'
 #' Goodman, L. A., & Kruskal, W. H. (1954). Measures of association for cross
-#' classifications. \emph{Journal of the American Statistical Association}, 49,
+#' classifications. *Journal of the American Statistical Association*, 49,
 #' 732-764.
 #'
 #' Goodman, L. A., & Kruskal, W. H. (1963). Measures of association for cross
-#' classifications III: Approximate sampling theory. \emph{Journal of the
-#' American Statistical Association}, 58, 310-364.
+#' classifications III: Approximate sampling theory. *Journal of the
+#' American Statistical Association*, 58, 310-364.
 #' @keywords htest category
 #' @examples
 #'

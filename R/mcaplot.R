@@ -3,20 +3,20 @@
 #' This function is intended as an alternative to \code{\link[ca]{plot.mjca}}
 #' for plotting multiple correspondence analysis solutions. It provides more
 #' flexibility for labeling factor levels and connecting them with lines. It
-#' does not support some features of \code{plot.mjca} (centroids, supplementary
+#' does not support some features of `plot.mjca` (centroids, supplementary
 #' points, arrows, etc.)
 #'
 #'
-#' @param obj An \code{"mjca"} object
+#' @param obj An `"mjca"` object
 #' @param map Character string specifying the map type, i.e., the scaling
 #'        applied to coordinates for different types of MCA representations. Allowed
-#'        options include: \code{"symmetric"} (default), \code{"rowprincipal"},
-#'        \code{"colprincipal"},
-#'        \code{"symbiplot"},
-#'        \code{"rowgab"},
-#'        \code{"colgab"},
-#'        \code{"rowgreen"},
-#'        \code{"colgreen"}.
+#'        options include: `"symmetric"` (default), `"rowprincipal"`,
+#'        `"colprincipal"`,
+#'        `"symbiplot"`,
+#'        `"rowgab"`,
+#'        `"colgab"`,
+#'        `"rowgreen"`,
+#'        `"colgreen"`.
 #'        See \code{\link[ca]{mjca}} for details.
 #' @param dim Dimensions to plot, an integer vector of length 2
 #' @param col Vector of colors, one for each factor in the MCA
@@ -30,11 +30,11 @@
 #' @param legend Logical; draw a legend for the factor names?
 #' @param legend.pos Position of the legend in the plot, as in \code{\link[graphics]{legend}}
 #' @param xlab,ylab Labels for horizontal and vertical axes.  The default,
-#'        \code{"_auto_"} means that the function auto-generates a label of the form
-#'        \code{"Dimension X (xx.x \%)"}
+#'        `"_auto_"` means that the function auto-generates a label of the form
+#'        `"Dimension X (xx.x \%)"`
 #' @param rev.axes A logical vector of length 2, where TRUE reverses the
 #'        direction of the corresponding axis
-#' @param \dots Arguments passed down to \code{plot}
+#' @param \dots Arguments passed down to `plot`
 #' @return Returns the coordinates of the category points invisibly
 #'
 #' @author Michael Friendly

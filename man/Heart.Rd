@@ -9,14 +9,14 @@ A 3-dimensional array resulting from cross-tabulating 3 variables
 for 21522 observations. The variable names and their levels are:
 
 \tabular{rll}{
-  No \tab Name \tab Levels \cr
-  1\tab \code{Disease}\tab \code{"Disease", "None"}\cr
-  2\tab \code{Gender}\tab \code{"Male", "Female"}\cr
-  3\tab \code{Occup}\tab \code{"Unempl", "WhiteCol", "BlueCol"}\cr
+No \tab Name \tab Levels \cr
+1\tab \code{Disease}\tab \verb{"Disease", "None"}\cr
+2\tab \code{Gender}\tab \verb{"Male", "Female"}\cr
+3\tab \code{Occup}\tab \verb{"Unempl", "WhiteCol", "BlueCol"}\cr
 }
 }
 \source{
-% \cite{Karger, 1980}
+\% \cite{Karger, 1980}
 Karger, (1980).
 }
 \description{

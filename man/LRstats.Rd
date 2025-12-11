@@ -43,7 +43,7 @@ model goodness of fit for a collection of models fit to the same data. All
 \details{
 \code{LRstats} provides a brief summary for one or more models fit to the
 same dataset for which \code{logLik} and \code{nobs} methods exist (e.g.,
-\code{glm} and \code{loglm} models). %This implementation is experimental,
+\code{glm} and \code{loglm} models). \%This implementation is experimental,
 and is subject to change.
 
 The function relies on residual degrees of freedom for the LR chisq test
@@ -76,8 +76,14 @@ LRstats(indep, coleff, roweff, linlin)
 \code{\link[MASS]{loglm}},
 
 \code{\link{logLik.loglm}}, \code{\link{modFit}}
+
+Other glmlist functions: 
+\code{\link{Kway}()},
+\code{\link{glmlist}()},
+\code{\link{mosaic.glmlist}()}
 }
 \author{
 Achim Zeileis
 }
+\concept{glmlist functions}
 \keyword{models}

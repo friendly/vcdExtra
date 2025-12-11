@@ -8,16 +8,16 @@
 A frequency data frame (representing a 3 x 3 x 2 x 2 frequency
 table) with 36 cells on the following 5 variables.
 \describe{
-  \item{\code{Hair}}{hair color, a factor with levels \code{Fair} \code{Red} \code{Dark}}
-  \item{\code{Eyes}}{eye color, a factor with levels \code{Light} \code{Mixed} \code{Dark}}
-  \item{\code{Head}}{head shape, a factor with levels \code{Narrow} \code{Wide}}
-  \item{\code{Stature}}{height, a factor with levels \code{Tall} \code{Short}}
-  \item{\code{Freq}}{a numeric vector}
+\item{\code{Hair}}{hair color, a factor with levels \code{Fair} \code{Red} \code{Dark}}
+\item{\code{Eyes}}{eye color, a factor with levels \code{Light} \code{Mixed} \code{Dark}}
+\item{\code{Head}}{head shape, a factor with levels \code{Narrow} \code{Wide}}
+\item{\code{Stature}}{height, a factor with levels \code{Tall} \code{Short}}
+\item{\code{Freq}}{a numeric vector}
 }
 }
 \source{
 Burt, C. (1950). The factorial analysis of qualitative data,
-\emph{British Journal of Statistical Psychology}, \bold{3}(3), 166-185.
+\emph{British Journal of Statistical Psychology}, \strong{3}(3), 166-185.
 Table IX.
 }
 \description{

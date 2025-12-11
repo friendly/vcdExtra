@@ -22,7 +22,8 @@ library(vcdExtra)
 
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![R_Universe](https://friendly.r-universe.dev/badges/vcdExtra)](https://friendly.r-universe.dev/vcdExtra)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
+[![Last Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://github.com/friendly/vceExtra/)
+[![downloads](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html) 
 
@@ -43,6 +44,9 @@ In particular, `vcdExtra` extends mosaic, assoc and sieve plots from vcd to hand
 `gnm()` models and
 adds a 3D version in `mosaic3d()`.
 
+It also adds extensions to modeling functions for models fit using `glm()` and `MASS::loglm()`, using the contruct `glmlist()`
+to construct a list of related models which can be summarized (via `LRstats()`) and graphed (via `mosaic.glmlist()`)
+
 `vcdExtra` is a support package for the book [*Discrete Data Analysis with R*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835) (DDAR) by Michael Friendly and David Meyer. There is also a
 [web site for DDAR](http://ddar.datavis.ca) with all figures and code samples from the book.
 It is also used in my graduate course, [Psy 6136: Categorical Data Analysis](https://friendly.github.io/psy6136/).
@@ -53,7 +57,7 @@ Get the released version from CRAN:
 
      install.packages("vcdExtra")
 
-The development version can be installed to your R library from [R-universe](https://friendly.r-universe.dev/vcdExtra) or
+The current development version can be installed from [R-universe](https://friendly.r-universe.dev/vcdExtra) or
 directly from the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
      if (!require(remotes)) install.packages("remotes")
@@ -65,12 +69,9 @@ directly from the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
 ### Overview
 
-The original purpose of this package was to serve as a sandbox for
-introducing extensions of
-mosaic plots and related graphical methods
-that apply to loglinear models fitted using `MASS::loglm()`,
-generalized linear models using
-`stats::glm()` and the related, generalized _nonlinear_ models fitted
+The original purpose of this package was to serve as a sandbox for introducing extensions of
+mosaic plots and related graphical methods that apply to loglinear models fitted using `MASS::loglm()`,
+generalized linear models using `stats::glm()` and the related, generalized _nonlinear_ models fitted
 with `gnm()` in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
 A related purpose was to fill in some holes in the analysis of

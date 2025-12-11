@@ -9,10 +9,10 @@ A frequency data frame with 75 observations on the following 4
 variables. The total sample size is 28887.
 
 \describe{
-  \item{\code{Son}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
-  \item{\code{Father}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
-  \item{\code{Country}}{a factor with levels \code{US} \code{UK} \code{Japan}}
-  \item{\code{Freq}}{a numeric vector}
+\item{\code{Son}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+\item{\code{Father}}{a factor with levels \code{UpNM} \code{LoNM} \code{UpM} \code{LoM} \code{Farm}}
+\item{\code{Country}}{a factor with levels \code{US} \code{UK} \code{Japan}}
+\item{\code{Freq}}{a numeric vector}
 }
 }
 \source{

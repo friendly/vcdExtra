@@ -10,28 +10,28 @@
 #' models, such as those fit using \code{\link[VGAM]{vglm}} in the \pkg{VGAM}.
 #' 
 #' For two binary variables with levels 0,1 the logits are calculated assuming
-#' the columns in \code{Y} are given in the order 11, 10, 01, 00, so the logits
+#' the columns in `Y` are given in the order 11, 10, 01, 00, so the logits
 #' give the log odds of the 1 response compared to 0.  If this is not the case,
-#' either use \code{rev=TRUE} or supply \code{Y[,4:1]} as the first argument.
+#' either use `rev=TRUE` or supply `Y[,4:1]` as the first argument.
 #' 
 #' @param Y A four-column matrix or data frame whose columns correspond to the
 #' 2 x 2 combinations of two binary responses.
 #' @param add Constant added to all cells to allow for zero frequencies.  The
-#' default is 0.5 if \code{any(Y)==0} and 0 otherwise.
+#' default is 0.5 if `any(Y)==0` and 0 otherwise.
 #' @param colnames Names for the columns of the results. The default is
-#' \code{c("logit1", "logit2", "logOR")}.  If less than three names are
+#' `c("logit1", "logit2", "logOR")`.  If less than three names are
 #' supplied, the remaining ones are filled in from the default.
 #' @param row.vars A data frame or matrix giving the factor levels of one or
-#' more factors corresponding to the rows of \code{Y}
+#' more factors corresponding to the rows of `Y`
 #' @param rev A logical, indicating whether the order of the columns in
-#' \code{Y} should be reversed.
-#' @return A data frame with \code{nrow(Y)} rows and \code{3 + ncol(row.vars)}
+#' `Y` should be reversed.
+#' @return A data frame with `nrow(Y)` rows and `3 + ncol(row.vars)`
 #' columns
 #' @author Michael Friendly
 #' @seealso \code{\link[VGAM]{vglm}}
-#' @references Friendly, M. and Meyer, D. (2016).  \emph{Discrete Data Analysis
+#' @references Friendly, M. and Meyer, D. (2016).  *Discrete Data Analysis
 #' with R: Visualization and Modeling Techniques for Categorical and Count
-#' Data}.  Boca Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
+#' Data*.  Boca Raton, FL: Chapman & Hall/CRC. <http://ddar.datavis.ca>.
 #' @keywords manip
 #' @examples
 #' 

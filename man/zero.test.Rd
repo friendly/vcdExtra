@@ -12,9 +12,9 @@ such counts.}
 }
 \value{
 Returns invisibly a list of three elements:
-\item{list("statistic")}{Description of 'comp1'}
-\item{list("df")}{Description of 'comp2'}
-\item{list("pvalue")}{Upper tail p-value}
+\item{\code{statistic}}{Value of the test statistic}
+\item{\code{df}}{Degrees of freedom}
+\item{\code{pvalue}}{Upper tail p-value}
 }
 \description{
 Carries out a simple score test (van den Broek, 1995) for excess zeros in an
@@ -26,8 +26,9 @@ The test first calculates the rate estimate from the mean,
 \eqn{\hat{\lambda} = \bar{x}}. The number of observed zeros, \eqn{n_0} is
 then compared with the expected number, \eqn{n \hat{p_0}}, where
 \eqn{\hat{p}_0=\exp[-\hat{\lambda}]}. Then the test statistic is calculated
-by the formula: \deqn{\frac{(n_0 - n\hat{p}_0)^2}{n\hat{p}_0(1-\hat{p}_0) -
-n\bar{x}\hat{p}_0^2}} This test statistic has a \eqn{\chi^2_1} distribution.
+by the formula:
+\deqn{\frac{(n_0 - n\hat{p}_0)^2}{n\hat{p}_0(1-\hat{p}_0) - n\bar{x}\hat{p}_0^2}} .
+This test statistic has a \eqn{\chi^2_1} distribution.
 }
 \examples{
 
@@ -51,15 +52,22 @@ The original R code came from a Stackexchange question,
 \url{https://stats.stackexchange.com/questions/118322/how-to-test-for-zero-inflation-in-a-dataset}
 
 Van den Broek, J. (1995).  A Score Test for Zero Inflation in a Poisson
-Distribution.  \emph{Biometrics}, \bold{51}(2), 738-743.
+Distribution.  \emph{Biometrics}, \strong{51}(2), 738-743.
 https://www.jstor.org/stable/2532959
 
 Yang, Zhao, James W. Hardin, and Cheryl L. Addy (2010).  Score Tests for
 Zero-Inflation in Overdispersed Count Data.  \emph{Communications in
-Statistics - Theory and Methods} \bold{39} (11) 2008-2030.
+Statistics - Theory and Methods} \strong{39} (11) 2008-2030.
 DOI: 10.1080/03610920902948228
+}
+\seealso{
+Other association tests: 
+\code{\link{CMHtest}()},
+\code{\link{GKgamma}()},
+\code{\link{HLtest}()}
 }
 \author{
 Michael Friendly
 }
+\concept{association tests}
 \keyword{htest}

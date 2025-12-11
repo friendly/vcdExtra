@@ -8,10 +8,10 @@
 A data frame with 90 observations on the following 4 variables.  The
 rows represent the non-NA entries in Edwards' table.
 \describe{
-  \item{\code{boys}}{number of boys in the family, \code{0:12}}
-  \item{\code{girls}}{number of girls in the family, \code{0:12}}
-  \item{\code{size}}{family size: \code{boys+girls}}
-  \item{\code{Freq}}{number of families with this sex composition}
+\item{\code{boys}}{number of boys in the family, \code{0:12}}
+\item{\code{girls}}{number of girls in the family, \code{0:12}}
+\item{\code{size}}{family size: \code{boys+girls}}
+\item{\code{Freq}}{number of families with this sex composition}
 }
 }
 \source{

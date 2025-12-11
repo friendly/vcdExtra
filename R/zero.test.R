@@ -21,30 +21,33 @@
 #' \eqn{\hat{\lambda} = \bar{x}}. The number of observed zeros, \eqn{n_0} is
 #' then compared with the expected number, \eqn{n \hat{p_0}}, where
 #' \eqn{\hat{p}_0=\exp[-\hat{\lambda}]}. Then the test statistic is calculated
-#' by the formula: \deqn{\frac{(n_0 - n\hat{p}_0)^2}{n\hat{p}_0(1-\hat{p}_0) -
-#' n\bar{x}\hat{p}_0^2}} This test statistic has a \eqn{\chi^2_1} distribution.
+#' by the formula:
+#' \deqn{\frac{(n_0 - n\hat{p}_0)^2}{n\hat{p}_0(1-\hat{p}_0) - n\bar{x}\hat{p}_0^2}} .
+#' This test statistic has a \eqn{\chi^2_1} distribution.
 #'
 #' @param x A vector of non-negative counts, or a one-way frequency table of
 #' such counts.
 #'
 #' @return Returns invisibly a list of three elements:
-#' \item{list("statistic")}{Description of 'comp1'}
-#' \item{list("df")}{Description of 'comp2'}
-#' \item{list("pvalue")}{Upper tail p-value}
+#' \item{`statistic`}{Value of the test statistic}
+#' \item{`df`}{Degrees of freedom}
+#' \item{`pvalue`}{Upper tail p-value}
 #'
 #' @author Michael Friendly
 #'
 #' @references The original R code came from a Stackexchange question,
-#' \url{https://stats.stackexchange.com/questions/118322/how-to-test-for-zero-inflation-in-a-dataset}
+#' <https://stats.stackexchange.com/questions/118322/how-to-test-for-zero-inflation-in-a-dataset>
 #'
 #' Van den Broek, J. (1995).  A Score Test for Zero Inflation in a Poisson
-#' Distribution.  \emph{Biometrics}, \bold{51}(2), 738-743.
+#' Distribution.  *Biometrics*, **51**(2), 738-743.
 #' https://www.jstor.org/stable/2532959
 #'
 #' Yang, Zhao, James W. Hardin, and Cheryl L. Addy (2010).  Score Tests for
-#' Zero-Inflation in Overdispersed Count Data.  \emph{Communications in
-#' Statistics - Theory and Methods} \bold{39} (11) 2008-2030.
+#' Zero-Inflation in Overdispersed Count Data.  *Communications in
+#' Statistics - Theory and Methods* **39** (11) 2008-2030.
 #' DOI: 10.1080/03610920902948228
+#'
+#' @family association tests
 #'
 #' @keywords htest
 #' @export

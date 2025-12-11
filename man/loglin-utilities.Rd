@@ -21,7 +21,7 @@
 \alias{other}
 \title{Loglinear Model Utilities}
 \source{
-Code from Henrique Dallazuanna, <wwwhsd@gmail.com>, R-help 7-4-2013
+Code from Henrique Dallazuanna, \href{mailto:wwwhsd@gmail.com}{wwwhsd@gmail.com}, R-help 7-4-2013
 }
 \usage{
 joint(nf, table = NULL, factors = 1:nf, with = nf)
@@ -94,37 +94,36 @@ shorthand notation for loglinear models, with factors A, B, C, \dots{},
 where brackets are used to delimit the high-order terms in the loglinear
 model.
 \tabular{llll}{
-  \strong{function} \tab \strong{3-way} \tab \strong{4-way} \tab \strong{5-way} \cr
-  \code{mutual} \tab  [A]  [B]  [C]  \tab
-  [A]  [B]  [C]  [D]  \tab
-  [A]  [B]  [C]  [D]  [E] \cr
-  \code{joint}  \tab  [AB]  [C]  \tab
-  [ABC]  [D]  \tab
-  [ABCE]  [E]  \cr
-  \code{joint (with=1)} \tab
-  [A]  [BC]  \tab
-  [A]  [BCD]  \tab
-  [A]  [BCDE]  \cr
-  \code{conditional}  \tab
-  [AC]  [BC]  \tab
-  [AD]  [BD]  [CD]  \tab
-  [AE]  [BE]  [CE]  [DE] \cr
-  \code{condit (with=1)}  \tab
-  [AB]  [AC]  \tab
-  [AB]  [AC]  [AD]  \tab
-  [AB]  [AC]  [AD]  [AE] \cr
-  \code{markov (order=1)}  \tab
-  [AB]  [BC]  \tab
-  [AB]  [BC]  [CD]  \tab
-  [AB]  [BC]  [CD]  [DE] \cr
-  \code{markov (order=2)}  \tab
-  [A]  [B]  [C]  \tab
-  [ABC]  [BCD]  \tab
-  [ABC]  [BCD]  [CDE]  \cr
-  \code{saturated}  \tab
-  [ABC] \tab [ABCD] \tab [ABCDE] \cr
+\strong{function} \tab \strong{3-way} \tab \strong{4-way} \tab \strong{5-way} \cr
+\code{mutual} \tab  [A]  [B]  [C]  \tab
+[A]  [B]  [C]  [D]  \tab
+[A]  [B]  [C]  [D]  [E] \cr
+\code{joint}  \tab  [AB]  [C]  \tab
+[ABC]  [D]  \tab
+[ABCE]  [E]  \cr
+\code{joint (with=1)} \tab
+[A]  [BC]  \tab
+[A]  [BCD]  \tab
+[A]  [BCDE]  \cr
+\code{conditional}  \tab
+[AC]  [BC]  \tab
+[AD]  [BD]  [CD]  \tab
+[AE]  [BE]  [CE]  [DE] \cr
+\code{condit (with=1)}  \tab
+[AB]  [AC]  \tab
+[AB]  [AC]  [AD]  \tab
+[AB]  [AC]  [AD]  [AE] \cr
+\code{markov (order=1)}  \tab
+[AB]  [BC]  \tab
+[AB]  [BC]  [CD]  \tab
+[AB]  [BC]  [CD]  [DE] \cr
+\code{markov (order=2)}  \tab
+[A]  [B]  [C]  \tab
+[ABC]  [BCD]  \tab
+[ABC]  [BCD]  [CDE]  \cr
+\code{saturated}  \tab
+[ABC] \tab [ABCD] \tab [ABCDE] \cr
 }
-
 
 \code{loglin2formula} converts the output of one of these to a model formula
 suitable as the \code{formula} for of \code{\link[MASS]{loglm}}.
@@ -133,3 +132,9 @@ suitable as the \code{formula} for of \code{\link[MASS]{loglm}}.
 describing the loglinear model in the shorthand bracket notation,
 e.g., \code{"[A,B] [A,C]"}.
 }
+\seealso{
+Other loglinear models: 
+\code{\link{glmlist}()},
+\code{\link{seq_loglm}()}
+}
+\concept{loglinear models}

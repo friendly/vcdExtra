@@ -25,55 +25,57 @@
 #' models that can be fit with \code{\link[MASS]{loglm}}. They are intended for
 #' models for counts using the Poisson family (or quasi-poisson), but should be
 #' sensible as long as (a) the response variable is non-negative and (b) the
-#' predictors visualized in the \code{strucplot} are discrete factors.
+#' predictors visualized in the `strucplot` are discrete factors.
 #'
 #' For both poisson family generalized linear models and loglinear models,
-#' standardized residuals provided by \code{rstandard} (sometimes called
+#' standardized residuals provided by `rstandard` (sometimes called
 #' adjusted residuals) are often preferred because they have constant unit
 #' asymptotic variance.
 #'
-#' The \code{sieve} and \code{assoc} methods are simple convenience interfaces
+#' The `sieve` and `assoc` methods are simple convenience interfaces
 #' to this plot method, setting the panel argument accordingly.
 #'
 #' @aliases mosaic.glm sieve.glm assoc.glm
-#' @param x A \code{glm} or \code{gnm} object. The response variable, typically
+#' @param x A `glm` or `gnm` object. The response variable, typically
 #' a cell frequency, should be non-negative.
 #' @param formula A one-sided formula with the indexing factors of the plot
 #' separated by '+', determining the order in which the variables are used in
-#' the mosaic.  A formula must be provided unless \code{x$data} inherits from
-#' class \code{"table"} -- in which case the indexing factors of this table are
-#' used, or the factors in \code{x$data} (or model.frame(x) if \code{x$data} is
+#' the mosaic.  A formula must be provided unless `x$data` inherits from
+#' class `"table"` -- in which case the indexing factors of this table are
+#' used, or the factors in `x$data` (or model.frame(x) if `x$data` is
 #' an environment) exactly cross-classify the data -- in which case this set of
 #' cross-classifying factors are used.
 #' @param panel Panel function used to draw the plot for visualizing the
 #' observed values, residuals and expected values. Currently, one of
-#' \code{"mosaic"}, \code{"assoc"}, or \code{"sieve"} in \code{vcd}.
-#' @param type A character string indicating whether the \code{"observed"} or
-#' the \code{"expected"} values of the table should be visualized by the area
+#' `"mosaic"`, `"assoc"`, or `"sieve"` in `vcd`.
+#' @param type A character string indicating whether the `"observed"` or
+#' the `"expected"` values of the table should be visualized by the area
 #' of the tiles or bars.
 #' @param residuals An optional array or vector of residuals corresponding to
 #' the cells in the data, for example, as calculated by
-#' \code{residuals.glm(x)}, \code{residuals.gnm(x)}.
-#' @param residuals_type If the \code{residuals} argument is \code{NULL},
+#' `residuals.glm(x)`, `residuals.gnm(x)`.
+#' @param residuals_type If the `residuals` argument is `NULL`,
 #' residuals are calculated internally and used in the display.  In this case,
-#' \code{residual_type} can be \code{"pearson"}, \code{"deviance"} or
-#' \code{"rstandard"}.  Otherwise (when \code{residuals} is supplied),
-#' \code{residuals_type} is used as a label for the legend in the plot.
-#' @param gp Object of class \code{"gpar"}, shading function or a corresponding
+#' `residual_type` can be `"pearson"`, `"deviance"` or
+#' `"rstandard"`.  Otherwise (when `residuals` is supplied),
+#' `residuals_type` is used as a label for the legend in the plot.
+#' @param gp Object of class `"gpar"`, shading function or a corresponding
 #' generating function (see \code{\link[vcd]{strucplot}} Details and
 #' \code{\link[vcd]{shadings}}).  Ignored if shade = FALSE.
 #' @param gp_args A list of arguments for the shading-generating function, if
 #' specified.
-#' @param \dots Other arguments passed to the \code{panel} function e.g.,
+#' @param \dots Other arguments passed to the `panel` function e.g.,
 #' \code{\link[vcd]{mosaic}}
 #'
-#' @return The \code{structable} visualized by \code{\link[vcd]{strucplot}} is
+#' @return The `structable` visualized by \code{\link[vcd]{strucplot}} is
 #' returned invisibly.
 #'
 #' @author Heather Turner, Michael Friendly, with help from Achim Zeileis
 #'
 #' @seealso \code{\link[stats]{glm}}, \code{\link[gnm]{gnm}},
 #' \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}
+#' @family mosaic plots
+#'
 #' @keywords hplot models multivariate
 #' @importFrom vcd mosaic
 #' @importFrom vcd shading_hcl
@@ -337,6 +339,7 @@ mosaic.glm <-	function(x, formula = NULL,
 
 ## convenience functions for sieve and assoc plots
 
+#' @rdname mosaic.glm
 #' @importFrom vcd sieve
 #' @export
 sieve.glm <-
@@ -345,8 +348,9 @@ sieve.glm <-
 	mosaic(x, panel = sieve, ...)
 }
 
-#' @export
+#' @rdname mosaic.glm
 #' @importFrom vcd assoc
+#' @export
 assoc.glm <-
 		function (x, ...)
 {

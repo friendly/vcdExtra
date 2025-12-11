@@ -6,39 +6,40 @@
 #'
 #' These functions provide the density, distribution function, quantile
 #' function and random generation for the logarithmic series distribution with
-#' parameter \code{prob}.
+#' parameter `prob`.
 #'
-#' The logarithmic series distribution with \code{prob} = \eqn{p} has density
+#' The logarithmic series distribution with `prob` = \eqn{p} has density
 #' \deqn{ p ( x ) = \alpha p^x / x } for \eqn{x = 1, 2, \dots},
 #' where
 #' \eqn{\alpha= -1 / \log(1 - p)} and \eqn{0 < p < 1}.
-#' % Note that counts \code{x==2} cannot occur.
+#' % Note that counts `x==2` cannot occur.
 #'
 #' @aliases Logseries dlogseries plogseries qlogseries rlogseries
 #' @param x,q vector of quantiles representing the number of events.
-#' @param prob parameter for the distribution, \code{0 < prob < 1}
-#' @param log,log.p logical; if TRUE, probabilities \code{p} are given as
-#'        \code{log(p)}
-#' @param lower.tail logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]},
-#'        otherwise, \eqn{P[X > x]}{P[X > x]}.
+#' @param prob parameter for the distribution, `0 < prob < 1`
+#' @param log,log.p logical; if TRUE, probabilities `p` are given as `log(p)`
+#' @param lower.tail logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.
 #' @param p vector of probabilities
-#' @param max.value maximum value returned by \code{qlogseries}
-#' @param n number of observations for \code{rlogseries}
-#' @return \code{dlogseries} gives the density,
-#'         \code{plogseries} gives the cumulative distribution function,
-#'         \code{qlogseries} gives the quantile function, and
-#'         \code{rlogseries} generates random deviates.
+#' @param max.value maximum value returned by `qlogseries`
+#' @param n number of observations for `rlogseries`
+#'
+#' @return `dlogseries` gives the density,
+#'         `plogseries` gives the cumulative distribution function,
+#'         `qlogseries` gives the quantile function, and
+#'         `rlogseries` generates random deviates.
 #'
 #'
 #' @author Michael Friendly, using original code modified from the
-#'         \code{gmlss.dist} package by Mikis Stasinopoulos.
+#'         `gmlss.dist` package by Mikis Stasinopoulos.
 #' @seealso \code{\link[stats]{Distributions}}
+#'
 #' @references
-#' \url{https://en.wikipedia.org/wiki/Logarithmic_distribution}
+#' <https://en.wikipedia.org/wiki/Logarithmic_distribution>
 #'
 #' Fisher, R. A. and Corbet, A. S. and Williams, C. B. (1943). The relation
-#' between the number of species and the number of individuals \emph{Journal of
-#' Animal Ecology}, 12, 42-58.
+#' between the number of species and the number of individuals *Journal of
+#' Animal Ecology*, 12, 42-58.
+#'
 #' @keywords distribution
 #' @examples
 #'

@@ -8,16 +8,16 @@
 A data frame with 90 observations on the following 5 variables.
 
 \describe{
-  \item{\code{family}}{family name, a factor with 10 levels }
-  \item{\code{age}}{age of person, a numeric vector}
-  \item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
-  \item{\code{survived}}{a numeric vector, 0 or 1}
-  \item{\code{death}}{date of death for those who died before rescue, a POSIXct}
+\item{\code{family}}{family name, a factor with 10 levels }
+\item{\code{age}}{age of person, a numeric vector}
+\item{\code{sex}}{a factor with levels \code{Female} \code{Male}}
+\item{\code{survived}}{a numeric vector, 0 or 1}
+\item{\code{death}}{date of death for those who died before rescue, a POSIXct}
 }
 }
 \source{
 D. K. Grayson, 1990, "Donner party deaths: A demographic
-assessment", \emph{J. Anthropological Research}, \bold{46}, 223-242.
+assessment", \emph{J. Anthropological Research}, \strong{46}, 223-242.
 
 Johnson, K. (1996). \emph{Unfortunate Emigrants: Narratives of the Donner
 Party}.  Logan, UT: Utah State University Press.  Additions, and dates of

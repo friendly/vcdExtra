@@ -58,7 +58,7 @@ be joined with lines using \code{\link[ca]{multilines}}}
 
 \item{xlab, ylab}{Labels for horizontal and vertical axes.  The default,
 \code{"_auto_"} means that the function auto-generates a label of the form
-\code{"Dimension X (xx.x \%)"}}
+\code{"Dimension X (xx.x \\\%)"}}
 
 \item{rev.axes}{A logical vector of length 2, where TRUE reverses the
 direction of the corresponding axis}
@@ -91,8 +91,8 @@ mcaplot(haireye.mca, legend=TRUE, cex.lab=1.3)
 }
 \seealso{
 \code{\link[ca]{mjca}}, \code{\link[ca]{plot.mjca}}
-         \code{\link[ca]{cacoord}} returns CA and MCA coordinates,
-         \code{\link[ca]{multilines}} draw multiple lines according to a factor,
+\code{\link[ca]{cacoord}} returns CA and MCA coordinates,
+\code{\link[ca]{multilines}} draw multiple lines according to a factor,
 }
 \author{
 Michael Friendly

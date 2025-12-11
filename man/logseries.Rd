@@ -19,13 +19,11 @@ rlogseries(n, prob = 0.5)
 \arguments{
 \item{x, q}{vector of quantiles representing the number of events.}
 
-\item{prob}{parameter for the distribution, \code{0 < prob < 1}}
+\item{prob}{parameter for the distribution, \verb{0 < prob < 1}}
 
-\item{log, log.p}{logical; if TRUE, probabilities \code{p} are given as
-\code{log(p)}}
+\item{log, log.p}{logical; if TRUE, probabilities \code{p} are given as \code{log(p)}}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]},
-otherwise, \eqn{P[X > x]}{P[X > x]}.}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \eqn{P[X \le x]}{P[X <= x]}, otherwise, \eqn{P[X > x]}{P[X > x]}.}
 
 \item{p}{vector of probabilities}
 
@@ -35,9 +33,9 @@ otherwise, \eqn{P[X > x]}{P[X > x]}.}
 }
 \value{
 \code{dlogseries} gives the density,
-        \code{plogseries} gives the cumulative distribution function,
-        \code{qlogseries} gives the quantile function, and
-        \code{rlogseries} generates random deviates.
+\code{plogseries} gives the cumulative distribution function,
+\code{qlogseries} gives the quantile function, and
+\code{rlogseries} generates random deviates.
 }
 \description{
 The logarithmic series distribution is a long-tailed distribution introduced
@@ -53,7 +51,7 @@ The logarithmic series distribution with \code{prob} = \eqn{p} has density
 \deqn{ p ( x ) = \alpha p^x / x } for \eqn{x = 1, 2, \dots},
 where
 \eqn{\alpha= -1 / \log(1 - p)} and \eqn{0 < p < 1}.
-% Note that counts \code{x==2} cannot occur.
+\% Note that counts \code{x==2} cannot occur.
 }
 \examples{
 
@@ -97,6 +95,6 @@ Animal Ecology}, 12, 42-58.
 }
 \author{
 Michael Friendly, using original code modified from the
-        \code{gmlss.dist} package by Mikis Stasinopoulos.
+\code{gmlss.dist} package by Mikis Stasinopoulos.
 }
 \keyword{distribution}

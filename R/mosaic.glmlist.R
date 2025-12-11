@@ -3,40 +3,40 @@
 #'
 #' This function provides a convenient interface for viewing mosaic displays
 #' associated with a collection of glm models for frequency tables that have
-#' been stored in a \code{glmlist} or \code{loglmlist} object.  You can plot
+#' been stored in a `glmlist` or `loglmlist` object.  You can plot
 #' either selected models individually, or mosaics for all models in an array
 #' of viewports.
 #'
 #' Most details of the plots produced can be controlled via \dots{} arguments
 #' as shown in some of the examples below.  In particular, with
-#' \code{panel=sieve} you need to also pass \code{gp=shading_Friendly} to get a
+#' `panel=sieve` you need to also pass `gp=shading_Friendly` to get a
 #' color version.
 #'
 #' @aliases mosaic.glmlist mosaic.loglmlist
-#' @param x         a \code{glmlist} or \code{loglmlist} object
-#' @param selection the index or name of one \code{glm} or \code{loglm} object
-#'        in \code{x}.  If no selection is specified, a menu of models is presented or
+#' @param x         a `glmlist` or `loglmlist` object
+#' @param selection the index or name of one `glm` or `loglm` object
+#'        in `x`.  If no selection is specified, a menu of models is presented or
 #'        all models are plotted.
 #' @param panel     a \code{\link[vcd]{strucplot}} panel function, typically
 #'        \code{\link[vcd]{mosaic}} or \code{\link[vcd]{sieve}}
-#' @param type      a character string indicating whether the \code{"observed"} or
-#'        the \code{"expected"} values of the table should be visualized
+#' @param type      a character string indicating whether the `"observed"` or
+#'        the `"expected"` values of the table should be visualized
 #' @param legend    logical: show a legend for residuals in the mosaic display(s)?
 #'        The default behavior is to include a legend when only a single plot is
-#'        shown, i.e., if \code{ask} is \code{TRUE} or a \code{selection} has been
+#'        shown, i.e., if `ask` is `TRUE` or a `selection` has been
 #'        specified.
 #' @param main either a logical, or a vector of character strings used for
-#'        plotting the main title.  If main is a logical and \code{TRUE}, the name of
+#'        plotting the main title.  If main is a logical and `TRUE`, the name of
 #'        the selected glm object is used.
 #' @param ask logical: should the function display a menu of models, when one
-#'        is not specified in \code{selection}? If \code{selection} is not supplied
-#'        and \code{ask} is \code{TRUE} (the default), a menu of model names is
-#'        presented; if \code{ask} is \code{FALSE}, mosaics for all models are plotted
+#'        is not specified in `selection`? If `selection` is not supplied
+#'        and `ask` is `TRUE` (the default), a menu of model names is
+#'        presented; if `ask` is `FALSE`, mosaics for all models are plotted
 #'        in an array.
-#' @param graphics logical: use a graphic dialog box when \code{ask=TRUE}?
-#' @param rows,cols when \code{ask=FALSE}, the number of rows and columns in
+#' @param graphics logical: use a graphic dialog box when `ask=TRUE`?
+#' @param rows,cols when `ask=FALSE`, the number of rows and columns in
 #'        which to plot the mosaics.
-#' @param newpage start a new page? (only applies to \code{ask=FALSE})
+#' @param newpage start a new page? (only applies to `ask=FALSE`)
 #' @param \dots other arguments passed to \code{\link{mosaic.glm}} and
 #'        ultimately to \code{\link[vcd]{mosaic}}.
 #' @return Returns the result of \code{\link{mosaic.glm}}.
@@ -48,13 +48,16 @@
 #' \code{\link{mosaic.glm}}, \code{\link[vcd]{mosaic}},
 #' \code{\link[vcd]{strucplot}}, for the many parameters that control the
 #' details of mosaic plots.
+#' @family mosaic plots
+#' @family glmlist functions
 #'
 #' @references
 #' David Meyer, Achim Zeileis, and Kurt Hornik (2006). The
 #' Strucplot Framework: Visualizing Multi-Way Contingency Tables with vcd.
-#' \emph{Journal of Statistical Software}, 17(3), 1-48.  %
-#' \url{https://www.jstatsoft.org/v17/i03/},
-#' available as \code{vignette("strucplot", package="vcd")}.
+#' *Journal of Statistical Software*, 17(3), 1-48.
+#' <https://www.jstatsoft.org/v17/i03/>,
+#' available as `vignette("strucplot", package="vcd")`.
+#'
 #' @keywords hplot
 #' @examples
 #'

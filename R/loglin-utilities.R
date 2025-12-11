@@ -14,16 +14,16 @@
 #' functions, but can also be used directly.
 #'
 #' @details
-#' The main model specification functions, \code{conditional}, \code{joint},
-#' \code{markov}, \dots{}, \code{saturated}, return a list of vectors
-#' indicating the marginal totals to be fit, via the \code{margin} argument to
+#' The main model specification functions, `conditional`, `joint`,
+#' `markov`, \dots{}, `saturated`, return a list of vectors
+#' indicating the marginal totals to be fit, via the `margin` argument to
 #' \code{\link[stats]{loglin}}.
 #' Each element of this list corresponds to a
 #' high-order term in a hierarchical loglinear model, where, e.g., a term like
-#' \code{c("A", "B")} is equivalent to the \code{\link[MASS]{loglm}} term
-#' \code{"A:B"} and hence automatically includes all low-order terms.
+#' `c("A", "B")` is equivalent to the \code{\link[MASS]{loglm}} term
+#' `"A:B"` and hence automatically includes all low-order terms.
 #'
-#' Note that these can be used to supply the \code{expected} argument for the
+#' Note that these can be used to supply the `expected` argument for the
 #' default \code{\link[vcd]{mosaic}} function, when the data is supplied as a
 #' contingency table.
 #'
@@ -32,44 +32,44 @@
 #' where brackets are used to delimit the high-order terms in the loglinear
 #' model.
 #' \tabular{llll}{
-#'   \strong{function} \tab \strong{3-way} \tab \strong{4-way} \tab \strong{5-way} \cr
-#'   \code{mutual} \tab  [A]  [B]  [C]  \tab
-#'   [A]  [B]  [C]  [D]  \tab
-#'   [A]  [B]  [C]  [D]  [E] \cr
-#'   \code{joint}  \tab  [AB]  [C]  \tab
-#'   [ABC]  [D]  \tab
-#'   [ABCE]  [E]  \cr
-#'   \code{joint (with=1)} \tab
-#'   [A]  [BC]  \tab
-#'   [A]  [BCD]  \tab
-#'   [A]  [BCDE]  \cr
-#'   \code{conditional}  \tab
-#'   [AC]  [BC]  \tab
-#'   [AD]  [BD]  [CD]  \tab
-#'   [AE]  [BE]  [CE]  [DE] \cr
-#'   \code{condit (with=1)}  \tab
-#'   [AB]  [AC]  \tab
-#'   [AB]  [AC]  [AD]  \tab
-#'   [AB]  [AC]  [AD]  [AE] \cr
-#'   \code{markov (order=1)}  \tab
-#'   [AB]  [BC]  \tab
-#'   [AB]  [BC]  [CD]  \tab
-#'   [AB]  [BC]  [CD]  [DE] \cr
-#'   \code{markov (order=2)}  \tab
-#'   [A]  [B]  [C]  \tab
-#'   [ABC]  [BCD]  \tab
-#'   [ABC]  [BCD]  [CDE]  \cr
-#'   \code{saturated}  \tab
-#'   [ABC] \tab [ABCD] \tab [ABCDE] \cr
+#'   **function** \tab **3-way** \tab **4-way** \tab **5-way** \cr
+#'   `mutual` \tab  \[A\]  \[B\]  \[C\]  \tab
+#'   \[A\]  \[B\]  \[C\]  \[D\]  \tab
+#'   \[A\]  \[B\]  \[C\]  \[D\]  \[E\] \cr
+#'   `joint`  \tab  \[AB\]  \[C\]  \tab
+#'   \[ABC\]  \[D\]  \tab
+#'   \[ABCE\]  \[E\]  \cr
+#'   `joint (with=1)` \tab
+#'   \[A\]  \[BC\]  \tab
+#'   \[A\]  \[BCD\]  \tab
+#'   \[A\]  \[BCDE\]  \cr
+#'   `conditional`  \tab
+#'   \[AC\]  \[BC\]  \tab
+#'   \[AD\]  \[BD\]  \[CD\]  \tab
+#'   \[AE\]  \[BE\]  \[CE\]  \[DE\] \cr
+#'   `condit (with=1)`  \tab
+#'   \[AB\]  \[AC\]  \tab
+#'   \[AB\]  \[AC\]  \[AD\]  \tab
+#'   \[AB\]  \[AC\]  \[AD\]  \[AE\] \cr
+#'   `markov (order=1)`  \tab
+#'   \[AB\]  \[BC\]  \tab
+#'   \[AB\]  \[BC\]  \[CD\]  \tab
+#'   \[AB\]  \[BC\]  \[CD\]  \[DE\] \cr
+#'   `markov (order=2)`  \tab
+#'   \[A\]  \[B\]  \[C\]  \tab
+#'   \[ABC\]  \[BCD\]  \tab
+#'   \[ABC\]  \[BCD\]  \[CDE\]  \cr
+#'   `saturated`  \tab
+#'   \[ABC\] \tab \[ABCD\] \tab \[ABCDE\] \cr
 #' }
 #'
 #'
-#' \code{loglin2formula} converts the output of one of these to a model formula
-#' suitable as the \code{formula} for of \code{\link[MASS]{loglm}}.
+#' `loglin2formula` converts the output of one of these to a model formula
+#' suitable as the `formula` for of \code{\link[MASS]{loglm}}.
 #'
-#' \code{loglin2string} converts the output of one of these to a string
+#' `loglin2string` converts the output of one of these to a string
 #' describing the loglinear model in the shorthand bracket notation,
-#' e.g., \code{"[A,B] [A,C]"}.
+#' e.g., `"[A,B] [A,C]"`.
 #'
 #' @aliases loglin-utilities conditional joint loglin2formula loglin2string
 #'          markov mutual saturated
@@ -79,8 +79,9 @@
 #'
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
-#' @param factors names of factors used in the model when \code{table} is not specified
+#' @param factors names of factors used in the model when `table` is not specified
 #' @param with    indices of the factors against which others are considered jointly independent
+#' @family loglinear models
 #' @rdname loglin-utilities
 #' @export
 
@@ -101,7 +102,7 @@ joint <- function(nf,
 
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
-#' @param factors names of factors used in the model when \code{table} is not specified
+#' @param factors names of factors used in the model when `table` is not specified
 #' @param with    indices of the factors against which others are considered conditionally independent
 #' @rdname loglin-utilities
 #' @export
@@ -125,7 +126,7 @@ conditional <- function(nf,
 
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
-#' @param factors names of factors used in the model when \code{table} is not specified
+#' @param factors names of factors used in the model when `table` is not specified
 #' @rdname loglin-utilities
 #' @export
 
@@ -143,7 +144,7 @@ mutual <- function(nf,
 
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
-#' @param factors names of factors used in the model when \code{table} is not specified
+#' @param factors names of factors used in the model when `table` is not specified
 #' @rdname loglin-utilities
 #' @export
 
@@ -171,7 +172,7 @@ saturated <- function(nf,
 
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
-#' @param factors names of factors used in the model when \code{table} is not specified
+#' @param factors names of factors used in the model when `table` is not specified
 #' @param order   order of the markov chain
 #' @rdname loglin-utilities
 #' @export
@@ -202,7 +203,7 @@ markov <- function(nf,
 
 #' convert a loglin model to a model formula for loglm
 
-#' @param  x a list of terms in a loglinear model, such as returned by \code{joint}, \code{conditional}, \dots
+#' @param  x a list of terms in a loglinear model, such as returned by `joint`, `conditional`, \dots
 #' @param  env environment in which to evaluate the formula
 #' @source Code from Henrique Dallazuanna, <wwwhsd@gmail.com>, R-help 7-4-2013
 #' @rdname loglin-utilities
@@ -216,7 +217,7 @@ loglin2formula <- function(x,
 
 #' convert a loglin model to a string, using bracket notation for the high-order terms
 
-#' @param x a list of terms in a loglinear model, such as returned by \code{joint}, \code{conditional}, \dots
+#' @param x a list of terms in a loglinear model, such as returned by `joint`, `conditional`, \dots
 #' @param brackets characters to use to surround model terms.  Either a single character string containing two characters
 #'        or a character vector of length two.
 #' @param sep characters used to separate factor names within a term

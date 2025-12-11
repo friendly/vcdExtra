@@ -7,12 +7,12 @@
 \format{
 A data frame with 1309 observations on the following 6 variables.
 \describe{
-  \item{\code{pclass}}{a factor with levels \code{1st} \code{2nd} \code{3rd}}
-  \item{\code{survived}}{a factor with levels \code{died} \code{survived}}
-  \item{\code{sex}}{a factor with levels \code{female} \code{male}}
-  \item{\code{age}}{passenger age in years (or fractions of a year, for children), a numeric vector; age is missing for 263 of the passengers}
-  \item{\code{sibsp}}{number of siblings or spouses aboard, integer: \code{0:8}}
-  \item{\code{parch}}{number of parents or children aboard, integer: \code{0:6}}
+\item{\code{pclass}}{a factor with levels \verb{1st} \verb{2nd} \verb{3rd}}
+\item{\code{survived}}{a factor with levels \code{died} \code{survived}}
+\item{\code{sex}}{a factor with levels \code{female} \code{male}}
+\item{\code{age}}{passenger age in years (or fractions of a year, for children), a numeric vector; age is missing for 263 of the passengers}
+\item{\code{sibsp}}{number of siblings or spouses aboard, integer: \code{0:8}}
+\item{\code{parch}}{number of parents or children aboard, integer: \code{0:6}}
 }
 }
 \source{
@@ -33,7 +33,7 @@ individual identifier variables.
 \details{
 There are a number of related versions of the Titanic data, in various
 formats. This version was derived from \code{ptitanic} in the
-\pkg{rpart.plot} package, modifying it to remove the \code{Class 'labelled'}
+\pkg{rpart.plot} package, modifying it to remove the \verb{Class 'labelled'}
 attributes for some variables (inherited from Frank Harrell's
 \code{titanic3} version) which caused problems with some applications,
 notably \code{ggplot2}.

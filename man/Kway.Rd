@@ -7,13 +7,11 @@
 Kway(formula, family = poisson, data, ..., order = nt, prefix = "kway")
 }
 \arguments{
-\item{formula}{a two-sided formula for the 1-way effects in the model. The
-LHS should be the response, and the RHS should be the first-order terms
-connected by \code{+} signs.}
+\item{formula}{a two-sided formula for the 1-way effects in the model. The LHS should be the response, and the RHS
+should be the first-order terms connected by \code{+} signs.}
 
-\item{family}{a description of the error distribution and link function to
-be used in the model.  This can be a character string naming a family
-function, a family function or the result of a call to a family function.
+\item{family}{a description of the error distribution and link function to be used in the model.  This can be a character
+string naming a family function, a family function or the result of a call to a family function.
 (See \code{\link[stats]{family}} for details of family functions.)}
 
 \item{data}{an optional data frame, list or environment (or object coercible
@@ -60,8 +58,7 @@ saturated model.
 As presently written, the function requires a two-sided formula with an
 explicit response on the LHS. For frequency data in table form (e.g.,
 produced by \code{xtabs}) you the \code{data} argument is coerced to a
-data.frame, so you should supply the \code{formula} in the form \code{Freq ~
-} \dots{}.
+data.frame, so you should supply the \code{formula} in the form \verb{Freq ~ } \dots{}.
 }
 \examples{
 
@@ -99,8 +96,14 @@ LRstats(modRoch)
 \seealso{
 \code{\link{glmlist}}, \code{\link{Summarise}} (soon to be
 deprecated), \code{\link{LRstats}}
+
+Other glmlist functions: 
+\code{\link{LRstats}()},
+\code{\link{glmlist}()},
+\code{\link{mosaic.glmlist}()}
 }
 \author{
 Michael Friendly and Heather Turner
 }
+\concept{glmlist functions}
 \keyword{models}
