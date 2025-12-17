@@ -32,11 +32,15 @@ woolf_test_general <- function(x) {
   STATISTIC <- sum(w * (o - e)^2)
   PARAMETER <- k - 1
   PVAL <- 1 - pchisq(STATISTIC, PARAMETER)
-  METHOD <- "Woolf-test on Homogeneity of Odds Ratios (no 3-Way assoc.)"
+  METHOD <- "Woolf-test on Homogeneity of Odds Ratios (no k-Way assoc.)"
   names(STATISTIC) <- "X-squared"
   names(PARAMETER) <- "df"
-  structure(list(statistic = STATISTIC, parameter = PARAMETER,
-                 p.value = PVAL, method = METHOD, data.name = DNAME, observed = o,
+  structure(list(statistic = STATISTIC, 
+                 parameter = PARAMETER,
+                 p.value = PVAL, 
+                 method = METHOD, 
+                 data.name = DNAME, 
+                 observed = o,
                  expected = e), class = "htest")
 }
 
