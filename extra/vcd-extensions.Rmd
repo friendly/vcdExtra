@@ -56,7 +56,8 @@ source(here::here("extra", "woolf_test_general.R"))
 woolf_test_general(Fungicide)
 ```
 
-Source code: [woolf_test_general.R]()
+Source code: [woolf_test_general.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_general.R)
+
 
 #### Four-way case of 2 x 2 x R x C
 
@@ -70,7 +71,7 @@ source(here::here("extra", "woolf_test_2way.R"))
 woolf_test_2way(Fungicide)
 ```
 
-Source code: [woolf_test_general.R]()
+Source code: [woolf_test_2way.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_2way.R)
 
 **TODO**: These ideas could be incorporated into `vcd::woolf_test()`, but I'm not sure quite how.
 
