@@ -1,0 +1,32 @@
+---
+title: "vcd/vcdExtra Upgradea"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output: 
+  html_document
+---
+
+
+Notes on some {vcd} and {vcdExtra} functions that could be made more usable, better documented or illustrated in examples
+
+## `vcd::woolf_test()`
+## 
+Only handles 3-way tables, 2 x 2 x k. Could extend this simply to the 2 x 2 x R x C case by taking all the R x C strata
+together, making this into a 2 x 2 x k=R*C table
+
+e.g., for the `Fungicide` data, 2 x 2 x 2 x 2
+
+```{r error=FALSE}
+data(Fungicide, package = "vcdExtra")
+# rearrange `group` for ease of interpretation, so odds ratio > 1 means worse outcome for Treated group
+Fungicide <- Fungicide[2:1, , , ]
+ftable(sex + strain ~ outcome + group, data=Fungicide)
+
+oddsratio(Fungicide) |>
+  summary()
+
+#' Woolf test only only handles 2 x 2 x k tables
+woolf_test(Fungicide)
+```
+
+
