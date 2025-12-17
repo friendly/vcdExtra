@@ -1,32 +1,34 @@
 Package: vcdExtra
 Type: Package
 Title: 'vcd' Extensions and Additions
-Version: 0.8.7
-Date: 2025-12-10
+Version: 0.9.0
+Date: 2025-12-17
 Language: en-US
 Authors@R: c(
-            person(given = "Michael", 
-                   family = "Friendly", 
+            person(given = "Michael", family = "Friendly", 
                    role=c("aut", "cre"), 
                    email="friendly@yorku.ca",
                    comment = c(ORCID = "0000-0002-3237-0941")),
-            person(given = "Heather", family = "Turner", role="ctb"),
-            person(given = "David",
-                   family = "Meyer", 
+            person(given = "Heather", family = "Turner", 
                    role="ctb"),
-            person(given = "Achim", 
-                   family = "Zeileis", 
+            person(given = "David", family = "Meyer", 
                    role="ctb",
+                   email = "david.meyer@wu.ac.at"),
+            person(given = "Achim", family = "Zeileis", 
+                   role="ctb",
+                   email = "Achim.Zeileis@uibk.ac.at",
                    comment = c(ORCID = "0000-0003-0918-3766")),
             person(given = "Duncan", 
-                   family = "Murdoch", 
+                   family = "Murdoch",
+                   email = "murdoch.duncan@gmail.com",
                    role="ctb"),
-            person(given = "David", 
-                   family = "Firth", 
+            person(given = "David", family = "Firth", 
                    role="ctb"),
+            person(given = "Daniel", family = "Sabanes Bove", 
+                   role="ctb",
+                   email = "daniel.sabanesbove@gmail.com"),
             person(given = "Matt", family = "Kumar", role="ctb"),
-            person(given = "Shuguang", family = "Sun", role="ctb"),
-            person(given = "Daniel", family = "Sabanes Bove", role="ctb")
+            person(given = "Shuguang", family = "Sun", role="ctb")
             )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 3.5.0), vcd, gnm (>= 1.0-3)

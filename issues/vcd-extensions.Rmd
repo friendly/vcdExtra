@@ -1,5 +1,5 @@
 ---
-title: "vcd/vcdExtra Upgrades"
+title: "Extending Categorical Data Analysis"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 output: 
@@ -11,21 +11,43 @@ output:
 knitr::opts_chunk$set(
   warning = FALSE,   # avoid warnings and messages in the output
   message = FALSE)
+
+```
+
+
+```{r load-packages}
+library(dplyr)
+library(vcdExtra)
 ```
 
 Here are some notes on some {vcd} and {vcdExtra} functions that could be made more usable, better documented or illustrated in examples.
 
-They are prompted by the fact that I'm teaching my [Categorical Data Analysis course]() again this year, but also from the view that
+They are prompted by the fact that I'm teaching my [Categorical Data Analysis course](https://friendly.github.io/6135/) again this year, but also from the view that
 statistical and graphic methods for categorical data have lagged far behind recent developments for traditional quantitative data.
+This might be a good time to look these over and try to make them more coherent and useful. 
+
+## Task View
+
+Hey, what about a CRAN **Task View for Categorical Data Analysis**?
+
+Here's the start of such a list: 
+
+* {vcd}, {vcdExtra}, {gnm}, {pscl}, {MASS}, {nestedLogit} : functions for standard loglinear, glm models and extensions
+* {VGAM} ...
+
+What other packages should be added?
 
 ## vcd documentation
 
-I recently did an overhaul of {vcdExtra} to 
+I recently did an overhaul of {vcdExtra} to: 
 
 * Convert `.Rd` documentation to `roxygen` format. That was painful, because the {rd2roxygen} package made a mess of formatting, but the result is now much easier to maintain and extend. A benefit was that all datasets in the package are now documented in a single file, `R/data.R`, facilitating maintenance.
 
-* Group statistical and graphic methods in broader categories for user ease in seeing what's related. Most functions use `@seealso`, but the documentation
-is much clearer using `@family` tags.  I introduced the following in {vcdExtra} and this kind of classification would be very useful in {vcd}.
+* Group statistical and graphic methods in broader categories for user ease in seeing what's related. Most functions already use `@seealso`, but the documentation
+is much clearer using `@family` tags.  In v. 0.8.7, I introduced the following in {vcdExtra} and this kind of classification would be very useful in {vcd}.
+
+### `@family` tags
+
 
 ```r
 # Mosaic plotting functions
@@ -79,7 +101,7 @@ is much clearer using `@family` tags.  I introduced the following in {vcdExtra} 
 - `case-form-data` - Individual-level data frames (Donner, ICU, Titanicp)
 ```
 
-(b) Tentative tags for each dataset
+(b) Using this scheme, here are some Tentative tags for a few datasets
 
 ```
 ## Abortion
@@ -107,11 +129,41 @@ is much clearer using `@family` tags.  I introduced the following in {vcdExtra} 
 
 The complete scheme is described in these documents:
 
-* [Dataset Classification Scheme for vcdExtra Package]()
-* [Dataset Concept Tags Proposal]()
+* [Dataset Classification Scheme for vcdExtra Package](https://github.com/friendly/vcdExtra/blob/master/issues/dataset_classification.md)
+* [Dataset Concept Tags Proposal](https://github.com/friendly/vcdExtra/blob/master/issues/dataset_concepts.md)
 
-## `vcd::woolf_test()` for homogeneity of odds ratios
-## 
+Feedback on these categories and classifications would be very helpful before I implement this.
+
+### `vcd` Datasets
+
+There are 33 datasets in the {vcd} package. Would the same categories apply? (`one-way-table` would be new here)
+
+```{r vcd-datasets}
+datasets("vcd") |>
+  mutate(Title = stringr::str_sub(Title, end = 30))
+```
+
+Here are the one-way tables
+
+```{r}
+datasets("vcd") |> 
+  filter(class=="table", 
+         !stringr::str_detect(dim, "x"))
+```
+
+
+## Documentation examples
+
+Some functions and datasets have extensive examples, some have only the bare minimum. It would be useful to revisit these in both
+{vcd} and {vcdExtra}
+
+## Function improvements
+
+Can some of the functions in these packages be generalized to be of (a) wider scope or (b) produce better output?
+I'll list here a few things I've found
+
+### `vcd::woolf_test()` for homogeneity of odds ratios
+
 Only handles 3-way tables, 2 x 2 x k. Could extend this simply to the 2 x 2 x R x C case by taking all the R x C strata
 together, making this into a 2 x 2 x k table where k=R*C
 

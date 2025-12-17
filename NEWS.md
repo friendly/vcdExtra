@@ -1,3 +1,8 @@
+## Version 0.9.0
+
+* Begin to categorize the datasets in the package with `@concept` tags
+* Begin to flesh out more general conception of CDA
+
 ## Version 0.8.7 (2025-12-10)
 
 This is a major release of the package, fixing bugs and revising documentation
