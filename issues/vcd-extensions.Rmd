@@ -37,6 +37,19 @@ Here's the start of such a list:
 
 What other packages should be added?
 
+A more detailed look at this possibility is included in the document
+[CRAN Task View: Categorical Data Analysis](https://github.com/friendly/vcdExtra/blob/master/issues/CDA-Task-View.md)
+
+## tidyCat
+
+> Frequency tables need some Tidy Love ❤️
+
+Tidy methods for quantitative data & models have advanced considerably, but there hasn't been much
+development of similar ideas for "categorical data", by which I mean data that is often compactly represented
+as $n$-way frequency tables, cross classified by one or more discrete factors. 
+
+The vignette [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) gives some initial thoughts on this topic.
+
 ## vcd documentation
 
 I recently did an overhaul of {vcdExtra} to: 
