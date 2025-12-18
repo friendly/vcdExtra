@@ -3,6 +3,7 @@
 * Begin to categorize the datasets in the package with `@concept` tags
 * Begin to flesh out more general conception of CDA
 * `datasets()`: added `ndim` arg; package="vcdExtra" default
+* Added a tidyCat hex logo
 
 ## Version 0.8.7 (2025-12-10)
 

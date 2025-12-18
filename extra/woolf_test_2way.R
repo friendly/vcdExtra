@@ -115,7 +115,7 @@ print.woolf_test_2way <- function(x, ...) {
 # - Residual: Tests Age-Region interaction in OR (df=6)
 #
 
-TEST <- TRUE
+TEST <- FALSE
 
 if(TEST) {
 data(Fungicide, package = "vcdExtra")
