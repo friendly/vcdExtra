@@ -215,8 +215,6 @@ woolf_test_general(Fungicide)
 
 **Source code**: [woolf_test_general.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_general.R)
 
-**Recommendation**: This version, `woolf_test_general()` should replace `vcd::woolf_test()`. Can do this in {vcdExtra} simply by masking the
-version in {vcd}
 
 
 #### Four-way case of 2 x 2 x R x C
@@ -251,6 +249,8 @@ woolf_test(Fungicide, decompose = TRUE)
 
 Source code: [woolf_test_new.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_new.R)
 
+**Recommendation**: This version of `woolf_test()` should replace `vcd::woolf_test()`. I can do this in {vcdExtra} simply by masking the
+version in {vcd}, but it should better go into {vcd}.
 
 ## `vcd::assocstats()` print method
 
