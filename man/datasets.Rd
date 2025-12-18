@@ -5,31 +5,31 @@
 \title{Information on Data Sets in Packages}
 \usage{
 datasets(
-  package,
+  package = "vcdExtra",
   allClass = FALSE,
   incPackage = length(package) > 1,
-  maxTitle = NULL
+  maxTitle = NULL,
+  ndim = FALSE
 )
 }
 \arguments{
 \item{package}{a character vector giving the package(s) to look in}
 
-\item{allClass}{a logical variable. Include all classes of the item
-(\code{TRUE}) or just the last class (\code{FALSE})?}
+\item{allClass}{a logical variable. Include all classes of the item (\code{TRUE}) or just the last class (\code{FALSE})?}
 
 \item{incPackage}{include the package name in result?}
 
 \item{maxTitle}{maximum length of data set Title}
+
+\item{ndim}{logical; include the number of dimensions in the result?}
 }
 \value{
-A \code{data.frame} whose rows correspond to data sets found in
-\code{package}.
+A \code{data.frame} whose rows correspond to data sets found in \code{package}.
 
-The columns (for a single package) are: \item{Item}{data set name, a
-character variable} \item{class}{class, the object class of the data set,
-typically one of \code{"data.frame"}, \code{"table"}, \code{"array"} ...}
-\item{dim}{an abbreviation of the dimensions of the data set, in a form like
-\code{"36x3"} for a data.frame or matrix with 36 rows and 3 columns.}
+The columns (for a single package) are:
+\item{Item}{data set name, a character variable}
+\item{class}{class, the object class of the data set, typically one of \code{"data.frame"}, \code{"table"}, \code{"array"} ...}
+\item{dim}{an abbreviation of the dimensions of the data set, in a form like \code{"36x3"} for a data.frame or matrix with 36 rows and 3 columns.}
 \item{Title}{data set title}
 }
 \description{
@@ -60,6 +60,11 @@ datasets("datasets", maxTitle=50)
 # just list dataset names in a package
 datasets("vcdExtra")[,"Item"]
 datasets("vcd")[,"Item"]
+
+# Find one-way tables in vcd (dim doesn't contain "x")
+datasets("vcd") |>
+  dplyr::filter(class=="table",
+                !stringr::str_detect(dim, "x"))
 
 
 }

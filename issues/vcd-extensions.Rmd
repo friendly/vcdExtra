@@ -152,16 +152,13 @@ Feedback on these categories and classifications would be very helpful before I 
 There are 33 datasets in the {vcd} package. Would the same categories apply? (`one-way-table` would be new here)
 
 ```{r vcd-datasets}
-datasets("vcd") |>
-  mutate(Title = stringr::str_sub(Title, end = 30))
+datasets("vcd", maxTitle=30) 
 ```
 
 Here are the one-way tables
 
 ```{r}
-datasets("vcd") |> 
-  filter(class=="table", 
-         !stringr::str_detect(dim, "x"))
+datasets("vcd", ndim=TRUE) |> dplyr::filter(ndim==1)
 ```
 
 

@@ -4,7 +4,7 @@
 \alias{collapse.table}
 \title{Collapse Levels of a Table}
 \usage{
-collapse.table(table, ...)
+\method{collapse}{table}(table, ...)
 }
 \arguments{
 \item{table}{A \code{\link[base]{table}}, \code{\link[base]{array}} or
