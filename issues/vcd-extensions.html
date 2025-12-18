@@ -686,10 +686,17 @@ woolf_test(Fungicide)</code></pre>
 ## 
 ## Note: Overall = Rows + Columns + Residual</code></pre>
 <p>Source code: <a href="https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_new.R">woolf_test_new.R</a></p>
-<p><strong>Recommendation</strong>: This version of
-<code>woolf_test()</code> should replace <code>vcd::woolf_test()</code>.
-I can do this in {vcdExtra} simply by masking the version in {vcd}, but
-it should better go into {vcd}.</p>
+</div>
+<div id="recommendation" class="section level4">
+<h4>Recommendation</h4>
+<p>This version of <code>woolf_test()</code> should replace
+<code>vcd::woolf_test()</code>. I can do this in {vcdExtra} simply by
+masking the version in {vcd}, but it should better go into {vcd}.</p>
+<p>I’m already overriding <code>print.Kappa()</code> which gives this
+message when I load the package:</p>
+<pre><code>Registered S3 method overwritten by &#39;vcdExtra&#39;:
+  method      from
+  print.Kappa vcd </code></pre>
 </div>
 </div>
 </div>

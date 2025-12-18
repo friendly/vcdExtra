@@ -249,8 +249,18 @@ woolf_test(Fungicide, decompose = TRUE)
 
 Source code: [woolf_test_new.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_new.R)
 
-**Recommendation**: This version of `woolf_test()` should replace `vcd::woolf_test()`. I can do this in {vcdExtra} simply by masking the
+#### Recommendation
+
+This version of `woolf_test()` should replace `vcd::woolf_test()`. I can do this in {vcdExtra} simply by masking the
 version in {vcd}, but it should better go into {vcd}.
+
+I'm already overriding `print.Kappa()` which gives this message when I load the package:
+
+```
+Registered S3 method overwritten by 'vcdExtra':
+  method      from
+  print.Kappa vcd 
+```
 
 ## `vcd::assocstats()` print method
 
