@@ -152,16 +152,13 @@ Feedback on these categories and classifications would be very helpful before I 
 There are 33 datasets in the {vcd} package. Would the same categories apply? (`one-way-table` would be new here)
 
 ```{r vcd-datasets}
-datasets("vcd") |>
-  mutate(Title = stringr::str_sub(Title, end = 30))
+datasets("vcd", maxTitle=30) 
 ```
 
 Here are the one-way tables
 
 ```{r}
-datasets("vcd") |> 
-  filter(class=="table", 
-         !stringr::str_detect(dim, "x"))
+datasets("vcd", ndim=TRUE) |> dplyr::filter(ndim==1)
 ```
 
 
@@ -218,8 +215,6 @@ woolf_test_general(Fungicide)
 
 **Source code**: [woolf_test_general.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_general.R)
 
-**Recommendation**: This version, `woolf_test_general()` should replace `vcd::woolf_test()`. Can do this in {vcdExtra} simply by masking the
-version in {vcd}
 
 
 #### Four-way case of 2 x 2 x R x C
@@ -236,8 +231,39 @@ woolf_test_2way(Fungicide)
 
 Source code: [woolf_test_2way.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_2way.R)
 
-**TODO**: This idea could also be incorporated into `woolf_test()`, but I'm not sure quite how.
+#### Fully general version
 
+This combines the ideas of these two enhancements, into a new version of `woolf_test()`. The case of a 4-way table
+is handled specially, with a new `decompose` argument, where `decompose == TRUE` does the row/col decomposition.
+It also has a new print method, which shows the OR variables, strata variables explicitly, and is fully documented
+in roxygen format.
+
+
+```{r woolf-test-new}
+source(here::here("extra", "woolf_test_new.R"))
+
+woolf_test(Fungicide)
+
+woolf_test(Fungicide, decompose = TRUE)
+```
+
+Source code: [woolf_test_new.R](https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_new.R)
+
+#### Recommendation
+
+This version of `woolf_test()` should replace `vcd::woolf_test()`. I can do this in {vcdExtra} simply by masking the
+version in {vcd}, but it should better go into {vcd}.
+
+I'm already overriding `print.Kappa()` which gives this message when I load the package:
+
+```
+Registered S3 method overwritten by 'vcdExtra':
+  method      from
+  print.Kappa vcd 
+```
 
 ## `vcd::assocstats()` print method
+
+This is another case that could use work to make the results more comprehensible. At present, we get a list of the table LR, Pearson
+stats and coefficients for all the strata.
 

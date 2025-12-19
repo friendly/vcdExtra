@@ -510,8 +510,7 @@ helpful before I implement this.</p>
 <h3><code>vcd</code> Datasets</h3>
 <p>There are 33 datasets in the {vcd} package. Would the same categories
 apply? (<code>one-way-table</code> would be new here)</p>
-<pre class="r"><code>datasets(&quot;vcd&quot;) |&gt;
-  mutate(Title = stringr::str_sub(Title, end = 30))</code></pre>
+<pre class="r"><code>datasets(&quot;vcd&quot;, maxTitle=30) </code></pre>
 <pre><code>##               Item      class             dim                          Title
 ## 1        Arthritis data.frame            84x5       Arthritis Treatment Data
 ## 2         Baseball data.frame          322x25                  Baseball Data
@@ -547,16 +546,14 @@ apply? (<code>one-way-table</code> would be new here)</p>
 ## 32      WeldonDice      table              11             Weldon&#39;s Dice Data
 ## 33      WomenQueue      table              11                Women in Queues</code></pre>
 <p>Here are the one-way tables</p>
-<pre class="r"><code>datasets(&quot;vcd&quot;) |&gt; 
-  filter(class==&quot;table&quot;, 
-         !stringr::str_detect(dim, &quot;x&quot;))</code></pre>
-<pre><code>##         Item class dim                       Title
-## 1  Butterfly table  24 Butterfly Species in Malaya
-## 2 Federalist table   7  &#39;May&#39; in Federalist Papers
-## 3 HorseKicks table   5        Death by Horse Kicks
-## 4     Saxony table  13          Families in Saxony
-## 5 WeldonDice table  11          Weldon&#39;s Dice Data
-## 6 WomenQueue table  11             Women in Queues</code></pre>
+<pre class="r"><code>datasets(&quot;vcd&quot;, ndim=TRUE) |&gt; dplyr::filter(ndim==1)</code></pre>
+<pre><code>##         Item class ndim dim                       Title
+## 1  Butterfly table    1  24 Butterfly Species in Malaya
+## 2 Federalist table    1   7  &#39;May&#39; in Federalist Papers
+## 3 HorseKicks table    1   5        Death by Horse Kicks
+## 4     Saxony table    1  13          Families in Saxony
+## 5 WeldonDice table    1  11          Weldon&#39;s Dice Data
+## 6 WomenQueue table    1  11             Women in Queues</code></pre>
 </div>
 </div>
 <div id="documentation-examples" class="section level2">
@@ -628,10 +625,6 @@ woolf_test_general(Fungicide)</code></pre>
 ## data:  Fungicide
 ## X-squared = 0.85483, df = 3, p-value = 0.8363</code></pre>
 <p><strong>Source code</strong>: <a href="https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_general.R">woolf_test_general.R</a></p>
-<p><strong>Recommendation</strong>: This version,
-<code>woolf_test_general()</code> should replace
-<code>vcd::woolf_test()</code>. Can do this in {vcdExtra} simply by
-masking the version in {vcd}</p>
 </div>
 <div id="four-way-case-of-2-x-2-x-r-x-c" class="section level4">
 <h4>Four-way case of 2 x 2 x R x C</h4>
@@ -655,13 +648,63 @@ woolf_test_2way(Fungicide)</code></pre>
 ## 
 ## Note: Overall = Rows + Columns + Residual</code></pre>
 <p>Source code: <a href="https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_2way.R">woolf_test_2way.R</a></p>
-<p><strong>TODO</strong>: This idea could also be incorporated into
-<code>woolf_test()</code>, but I’m not sure quite how.</p>
+</div>
+<div id="fully-general-version" class="section level4">
+<h4>Fully general version</h4>
+<p>This combines the ideas of these two enhancements, into a new version
+of <code>woolf_test()</code>. The case of a 4-way table is handled
+specially, with a new <code>decompose</code> argument, where
+<code>decompose == TRUE</code> does the row/col decomposition. It also
+has a new print method, which shows the OR variables, strata variables
+explicitly, and is fully documented in roxygen format.</p>
+<pre class="r"><code>source(here::here(&quot;extra&quot;, &quot;woolf_test_new.R&quot;))
+
+woolf_test(Fungicide)</code></pre>
+<pre><code>## 
+## Woolf-test on Homogeneity of Odds Ratios (no 4-way association) 
+## 
+## Data:          Fungicide 
+## OR variables:  group, outcome 
+## Strata:        sex, strain 
+## 
+## X-squared = 0.8548, df = 3, p-value = 0.8363</code></pre>
+<pre class="r"><code>woolf_test(Fungicide, decompose = TRUE)</code></pre>
+<pre><code>## 
+## Woolf-test on Homogeneity of Odds Ratios (no 4-way association) 
+## 
+## Data:          Fungicide 
+## OR variables:  group, outcome 
+## Strata:        sex, strain 
+## 
+## Overall homogeneity test:
+##   X-squared = 0.8548, df = 3, p-value = 0.8363
+## 
+## Decomposition:
+##   Rows (sex):  X-squared = 0.0086, df = 1, p-value = 0.9261
+##   Cols (strain):  X-squared = 0.8257, df = 1, p-value = 0.3635
+##   Residual:       X-squared = 0.0205, df = 1, p-value = 0.8861
+## 
+## Note: Overall = Rows + Columns + Residual</code></pre>
+<p>Source code: <a href="https://github.com/friendly/vcdExtra/blob/master/extra/woolf_test_new.R">woolf_test_new.R</a></p>
+</div>
+<div id="recommendation" class="section level4">
+<h4>Recommendation</h4>
+<p>This version of <code>woolf_test()</code> should replace
+<code>vcd::woolf_test()</code>. I can do this in {vcdExtra} simply by
+masking the version in {vcd}, but it should better go into {vcd}.</p>
+<p>I’m already overriding <code>print.Kappa()</code> which gives this
+message when I load the package:</p>
+<pre><code>Registered S3 method overwritten by &#39;vcdExtra&#39;:
+  method      from
+  print.Kappa vcd </code></pre>
 </div>
 </div>
 </div>
 <div id="vcdassocstats-print-method" class="section level2">
 <h2><code>vcd::assocstats()</code> print method</h2>
+<p>This is another case that could use work to make the results more
+comprehensible. At present, we get a list of the table LR, Pearson stats
+and coefficients for all the strata.</p>
 </div>
 
 

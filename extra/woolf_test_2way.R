@@ -113,3 +113,27 @@ print.woolf_test_2way <- function(x, ...) {
 # - Rows: Tests if OR varies across 3 Age groups (pooling regions) (df=2)
 # - Columns: Tests if OR varies across 4 Regions (pooling ages) (df=3)
 # - Residual: Tests Age-Region interaction in OR (df=6)
+#
+
+TEST <- FALSE
+
+if(TEST) {
+data(Fungicide, package = "vcdExtra")
+str(Fungicide)
+
+# rearrange `group` for ease of interpretation, so odds ratio > 1 means worse outcome for Treated group
+Fungicide <- Fungicide[2:1, , , ]
+
+#' Woolf test only only handles 2 x 2 x k tables
+purrr::safely(woolf_test(Fungicide))
+
+# Handles any number of dimensions > 2
+woolf_test_general(Fungicide)
+
+woolf_test_2way(Fungicide)
+
+# what about 5-way table?
+data(Dyke, package = "vcdExtra")
+woolf_test_general(Dyke)
+
+}

@@ -2,6 +2,9 @@
 
 * Begin to categorize the datasets in the package with `@concept` tags
 * Begin to flesh out more general conception of CDA
+* `datasets()`: added `ndim` arg; package="vcdExtra" default
+* Added a tidyCat hex logo
+* Generalized vcd::woolf_test() to handle strata better, with special hanlding for 2 x 2 x R x C case. Presently in `extra/`
 
 ## Version 0.8.7 (2025-12-10)
 
