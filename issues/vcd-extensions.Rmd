@@ -40,7 +40,7 @@ What other packages should be added?
 A more detailed look at this possibility is included in the document
 [CRAN Task View: Categorical Data Analysis](https://github.com/friendly/vcdExtra/blob/master/issues/CDA-Task-View.md)
 
-## tidyCat
+## tidyCat {#tidycat}
 
 > Frequency tables need some Tidy Love ❤️
 
@@ -50,7 +50,7 @@ as $n$-way frequency tables, cross classified by one or more discrete factors.
 
 The vignette [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) gives some initial thoughts on this topic.
 
-## vcd documentation
+## vcd documentation {#vcd-doc}
 
 I recently did an overhaul of {vcdExtra} to: 
 
@@ -175,7 +175,7 @@ Some functions and datasets have extensive examples, some have only the bare min
 Can some of the functions in these packages be generalized to be of (a) wider scope or (b) produce better output?
 I'll list here a few things I've found
 
-### `vcd::woolf_test()` for homogeneity of odds ratios
+### `vcd::woolf_test()` for homogeneity of odds ratios {#woolf-test}
 
 Only handles 3-way tables, 2 x 2 x k. Could extend this simply to the 2 x 2 x R x C case by taking all the R x C strata
 together, making this into a 2 x 2 x k table where k=R*C
