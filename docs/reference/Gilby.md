@@ -12,11 +12,11 @@ small counts.
 A 2-dimensional array resulting from cross-tabulating 2 variables for
 1725 observations. The variable names and their levels are:
 
-|  |  |  |
-|----|----|----|
-| No | Name | Levels |
-| 1 | `Dullness` | `"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"` |
-| 2 | `Clothing` | `"V.Well clad", "Well clad", "Passable", "Insufficient"` |
+|     |            |                                                                                  |
+|-----|------------|----------------------------------------------------------------------------------|
+| No  | Name       | Levels                                                                           |
+| 1   | `Dullness` | `"Ment. defective", "Slow", "Slow Intell", "Fairly Intell", "Capable", "V.Able"` |
+| 2   | `Clothing` | `"V.Well clad", "Well clad", "Passable", "Insufficient"`                         |
 
 ## Source
 

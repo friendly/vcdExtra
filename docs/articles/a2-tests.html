@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,14 +68,13 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>2. Tests of Independence</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>2. Tests of Independence</h1>
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2025-12-10</h4>
+            <h4 data-toc-skip class="date">2025-12-22</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a2-tests.Rmd" class="external-link"><code>vignettes/a2-tests.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a2-tests.Rmd" class="external-link"><code>vignettes/a2-tests.Rmd</code></a></small>
       <div class="d-none name"><code>a2-tests.Rmd</code></div>
     </div>
 
@@ -202,7 +201,8 @@ generates an error for the <code>HairEye</code> data with
 total frequency.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html" class="external-link">fisher.test</a></span><span class="op">(</span><span class="va">HairEye</span><span class="op">)</span></span>
-<span><span class="co">## Error in fisher.test(HairEye): FEXACT error 6 (f5xact).  LDKEY=618 is too small for this problem: kval=238045028.</span></span>
+<span><span class="co">## <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `fisher.test()`:</span></span></span>
+<span><span class="co">## <span style="color: #BBBB00;">!</span> FEXACT error 6 (f5xact).  LDKEY=618 is too small for this problem: kval=238045028.</span></span>
 <span><span class="co">## Try increasing the size of the workspace.</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -242,7 +242,7 @@ is probably violated. For
 tables, this can be examined from the odds ratios for each
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math>
 table (<code><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="external-link">oddsratio()</a></code>), and tested by using
-<code><a href="https://rdrr.io/pkg/vcd/man/woolf_test.html" class="external-link">woolf_test()</a></code> in <code>vcd</code>.</p>
+<code><a href="../reference/woolf_test.html">woolf_test()</a></code> in <code>vcd</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="external-link">oddsratio</a></span><span class="op">(</span><span class="va">UCBAdmissions</span>, log<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">##  odds ratios for Admit and Gender by Dept </span></span>
@@ -265,12 +265,15 @@ table (<code><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="extern
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/woolf_test.html" class="external-link">woolf_test</a></span><span class="op">(</span><span class="va">UCBAdmissions</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="../reference/woolf_test.html">woolf_test</a></span><span class="op">(</span><span class="va">UCBAdmissions</span><span class="op">)</span> </span>
 <span><span class="co">## </span></span>
-<span><span class="co">##  Woolf-test on Homogeneity of Odds Ratios (no 3-Way assoc.)</span></span>
+<span><span class="co">## Woolf-test on Homogeneity of Odds Ratios (no 3-way association) </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## data:  UCBAdmissions</span></span>
-<span><span class="co">## X-squared = 17.902, df = 5, p-value = 0.003072</span></span></code></pre></div>
+<span><span class="co">## Data:          UCBAdmissions </span></span>
+<span><span class="co">## OR variables:  Admit, Gender </span></span>
+<span><span class="co">## Strata:        Dept </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## X-squared = 17.9017, df = 5, p-value = 0.003072</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="some-plot-methods">Some plot methods<a class="anchor" aria-label="anchor" href="#some-plot-methods"></a>
@@ -382,7 +385,7 @@ assigning numeric scores to the row and/or column variables. For
 example, with two ordinal factors (assumed to be equally spaced),
 assigning integer scores, <code>1:R</code> and <code>1:C</code> tests
 the linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>×</mi><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
 linear component of association. This is statistically equivalent to the
 Pearson correlation between the integer-scored table variables, with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>r</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\chi^2 = (n-1) r^2</annotation></semantics></math>,

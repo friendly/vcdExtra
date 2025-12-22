@@ -18,6 +18,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="vcd Extensions and Additions">
 <meta name="description" content='Provides additional data sets, methods and documentation to complement the vcd package for Visualizing Categorical Data and the gnm package for Generalized Nonlinear Models. In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and adds a 3D version in mosaic3d. Additionally, methods are provided for comparing and visualizing lists of glm and loglm objects. This package is now a support package for the book, "Discrete Data Analysis with R" by Michael Friendly and David Meyer.'>
 <meta property="og:description" content='Provides additional data sets, methods and documentation to complement the vcd package for Visualizing Categorical Data and the gnm package for Generalized Nonlinear Models. In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and adds a 3D version in mosaic3d. Additionally, methods are provided for comparing and visualizing lists of glm and loglm objects. This package is now a support package for the book, "Discrete Data Analysis with R" by Michael Friendly and David Meyer.'>
+<meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -27,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,13 +69,15 @@
   <main id="main" class="col-md-9">
 <!-- badges: end -->
 <div class="section level1">
-<div class="page-header"><h1 id="vcdextra-">vcdExtra <img src="reference/figures/logo.png" style="float:right; height:200px;"><a class="anchor" aria-label="anchor" href="#vcdextra-"></a>
-</h1></div>
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="vcdextra-">vcdExtra <a class="anchor" aria-label="anchor" href="#vcdextra-"></a>
+</h1>
+</div>
 <div class="section level2">
 <h2 id="extensions-and-additions-to-vcd-visualizing-categorical-data">Extensions and additions to vcd: Visualizing Categorical Data<a class="anchor" aria-label="anchor" href="#extensions-and-additions-to-vcd-visualizing-categorical-data"></a>
 </h2>
 <!-- Version 0.8-6 -->
-<p>Version 0.8-7; documentation built for <code>pkgdown</code> 2025-12-10</p>
+<p>Version 0.9.0; documentation built for <code>pkgdown</code> 2025-12-22</p>
 <p>This package provides additional data sets, documentation, and many functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>.</p>
 <p>It also adds extensions to modeling functions for models fit using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, using the contruct <code><a href="reference/glmlist.html">glmlist()</a></code> to construct a list of related models which can be summarized (via <code><a href="reference/LRstats.html">LRstats()</a></code>) and graphed (via <code><a href="reference/mosaic.glmlist.html">mosaic.glmlist()</a></code>)</p>
 <p><code>vcdExtra</code> is a support package for the book <a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835" class="external-link"><em>Discrete Data Analysis with R</em></a> (DDAR) by Michael Friendly and David Meyer. There is also a <a href="http://ddar.datavis.ca" class="external-link">web site for DDAR</a> with all figures and code samples from the book. It is also used in my graduate course, <a href="https://friendly.github.io/psy6136/" class="external-link">Psy 6136: Categorical Data Analysis</a>.</p>
@@ -152,52 +155,11 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/getVignetteInfo.html" class="external-link">getVignetteInfo</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"File"</span>, <span class="st">"Title"</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
-<colgroup>
-<col width="28%">
-<col width="71%">
-</colgroup>
-<thead><tr>
+<thead><tr class="header">
 <th align="left">File</th>
 <th align="left">Title</th>
 </tr></thead>
-<tbody>
-<tr>
-<td align="left">a1-creating.Rmd</td>
-<td align="left">1. Creating and manipulating frequency tables</td>
-</tr>
-<tr>
-<td align="left">a2-tests.Rmd</td>
-<td align="left">2. Tests of Independence</td>
-</tr>
-<tr>
-<td align="left">a3-loglinear.Rmd</td>
-<td align="left">3. Loglinear Models</td>
-</tr>
-<tr>
-<td align="left">a4-mosaics.Rmd</td>
-<td align="left">4. Mosaic plots</td>
-</tr>
-<tr>
-<td align="left">a5-demo-housing.Rmd</td>
-<td align="left">5. Demo - Housing Data</td>
-</tr>
-<tr>
-<td align="left">a6-mobility.Rmd</td>
-<td align="left">6. Mobility tables</td>
-</tr>
-<tr>
-<td align="left">a7-continuous.Rmd</td>
-<td align="left">7. Continuous predictors</td>
-</tr>
-<tr>
-<td align="left">datasets.Rmd</td>
-<td align="left">Datasets for categorical data analysis</td>
-</tr>
-<tr>
-<td align="left">tidyCats.Rmd</td>
-<td align="left">tidyCat: Tidy Methods For Categorical Data Analysis</td>
-</tr>
-</tbody>
+<tbody></tbody>
 </table>
 <ul>
 <li>a few useful utility functions for manipulating categorical data sets and working with models for categorical data.</li>
@@ -383,10 +345,11 @@
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=vcdExtra" class="external-link"><img src="http://www.r-pkg.org/badges/version/vcdExtra" alt="CRAN_Status"></a></li>
 <li><a href="https://friendly.r-universe.dev/vcdExtra" class="external-link"><img src="https://friendly.r-universe.dev/badges/vcdExtra" alt="R_Universe"></a></li>
-<li><a href="https://github.com/friendly/vceExtra/" class="external-link"><img src="https://img.shields.io/github/last-commit/friendly/vcdExtra" alt="Last Commit"></a></li>
+<li><a href="https://github.com/friendly/vcdExtra/" class="external-link"><img src="https://img.shields.io/github/last-commit/friendly/vcdExtra" alt="Last Commit"></a></li>
 <li><a href="https://cran.r-project.org/package=vcdExtra" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra" alt="downloads"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-2.0.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat" alt="License"></a></li>
+<li><a href="https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 

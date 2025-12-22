@@ -73,6 +73,9 @@ Statistical tests for categorical data
   : Brief Summary of Model Fit for glm and loglm Models
 - [`modFit()`](https://friendly.github.io/vcdExtra/reference/modFit.md)
   : Brief Summary of Model Fit for a glm or loglm Object
+- [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
+  [`print(`*`<woolf_test>`*`)`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
+  : Woolf Test for Homogeneity of Odds Ratios
 - [`zero.test()`](https://friendly.github.io/vcdExtra/reference/zero.test.md)
   : Score test for zero inflation in Poisson data
 

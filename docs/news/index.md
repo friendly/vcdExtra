@@ -1,6 +1,19 @@
 # Changelog
 
+## Version 0.9.0
+
+- Begin to categorize the datasets in the package with `@concept` tags
+- Begin to flesh out more general conception of CDA
+- [`datasets()`](https://friendly.github.io/vcdExtra/reference/datasets.md):
+  added `ndim` arg; package=“vcdExtra” default
+- Added a tidyCat hex logo
+- Generalized vcd::woolf_test() to handle strata better, with special
+  handling for 2 x 2 x R x C case.
+- Added GH actions R-CMD-check & pkgdown
+
 ## Version 0.8.7 (2025-12-10)
+
+CRAN release: 2025-12-11
 
 This is a major release of the package, fixing bugs and revising
 documentation

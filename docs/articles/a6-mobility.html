@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,14 +68,13 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>6. Mobility tables</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>6. Mobility tables</h1>
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2025-12-10</h4>
+            <h4 data-toc-skip class="date">2025-12-22</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a6-mobility.Rmd" class="external-link"><code>vignettes/a6-mobility.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a6-mobility.Rmd" class="external-link"><code>vignettes/a6-mobility.Rmd</code></a></small>
       <div class="d-none name"><code>a6-mobility.Rmd</code></div>
     </div>
 
@@ -193,7 +192,7 @@ simplest plot for the frequencies is the default <code><a href="https://rdrr.io/
 method, giving a <code><a href="https://rdrr.io/r/graphics/mosaicplot.html" class="external-link">graphics::mosaicplot()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Hauser_tab</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/mosaicplot-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/mosaicplot-1.png" class="r-plt" alt="" width="672"></p>
 <p>The frequencies are first split according to father’s occupational
 category (the first table dimension) and then by sons’ occupation. The
 most common category for fathers is lower manual, followed by farm.</p>
@@ -215,7 +214,7 @@ assign longer labels for the row and column variables, using the
 <span>       labeling_args <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>       shade<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/mosaic1-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/mosaic1-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="fitting-and-graphing-models">Fitting and graphing models<a class="anchor" aria-label="anchor" href="#fitting-and-graphing-models"></a>
@@ -241,7 +240,7 @@ formula.)</p>
 <span>       labeling_args <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Independence model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/indep-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/indep-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -254,7 +253,7 @@ association in the diagonal cells. The result is a model of
 <em>quasi-independence</em>, asserting that fathers’ and sons’
 occupations are independent, ignoring the diagonal cells.</p>
 <p>For a two-way table, quasi-independence can be expressed as
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><msub><mi>π</mi><mrow><mi>i</mi><mo>+</mo></mrow></msub><msub><mi>π</mi><mrow><mi>+</mi><mi>j</mi></mrow></msub><mspace width="1.0em"></mspace><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">for </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mo>≠</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><msub><mi>π</mi><mrow><mi>i</mi><mo>+</mo></mrow></msub><msub><mi>π</mi><mrow><mo>+</mo><mi>j</mi></mrow></msub><mspace width="1.0em"></mspace><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">for </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mo>≠</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">
  \pi_{ij} = \pi_{i+} \pi_{+j} \quad\quad \mbox{for } i\ne j
 </annotation></semantics></math> or in loglinear form as:
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><msub><mi>m</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mi>μ</mi><mo>+</mo><msubsup><mi>λ</mi><mi>i</mi><mi>A</mi></msubsup><mo>+</mo><msubsup><mi>λ</mi><mi>j</mi><mi>B</mi></msubsup><mo>+</mo><msub><mi>δ</mi><mi>i</mi></msub><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>=</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="1.0em"></mspace><mi>.</mi></mrow><annotation encoding="application/x-tex">
@@ -288,7 +287,7 @@ the independence model, adding the term
 <span>       labeling_args <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Quasi-independence model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/quasi-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/quasi-1.png" class="r-plt" alt="" width="672"></p>
 <p>Note that the pattern of residuals shows a systematic pattern of
 <span style="color: blue;">positive</span> and <span style="color: red;">negative</span> residuals above and below the
 diagonal tiles. We turn to this next.</p>
@@ -318,7 +317,7 @@ average would mean that
 </annotation></semantics></math> Yet this model is overly strong,
 because it also asserts <strong>marginal homogeneity</strong>, that the
 marginal probabilities of row and column values are equal,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mrow><mi>i</mi><mo>+</mo></mrow></msub><mo>=</mo><msub><mi>π</mi><mrow><mi>+</mi><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\pi_{i+} = \pi_{+i}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mrow><mi>i</mi><mo>+</mo></mrow></msub><mo>=</mo><msub><mi>π</mi><mrow><mo>+</mo><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\pi_{i+} = \pi_{+i}</annotation></semantics></math>
 for all
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
 Consequently, this hypothesis is most often tested as a model for
@@ -377,7 +376,7 @@ standardized residuals.</p>
 <span>       residuals_type <span class="op">=</span><span class="st">"rstandard"</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Quasi-symmetry model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/qsymm-mosaic-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/qsymm-mosaic-1.png" class="r-plt" alt="" width="672"></p>
 <p>The cells with the largest lack of symmetry (using standardized
 residuals) are those for the upper and lower non-manual occupations,
 where the son of an upper manual worker is less likely to move to lower
@@ -414,7 +413,7 @@ associations can be specified, implemented in
 <span>       residuals_type <span class="op">=</span><span class="st">"rstandard"</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Topological model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/topo-mosaic-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/topo-mosaic-1.png" class="r-plt" alt="" width="672"></p>
 <p>Comparing models, we can see that the model of quasi-symmetry is the
 best so far, using AIC as the measure:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -510,7 +509,7 @@ father.</p>
 <span>       residuals_type <span class="op">=</span><span class="st">"rstandard"</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Uniform association + Diag()"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/UAdiag-mosaic-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/UAdiag-mosaic-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="model-comparison-plots">Model comparison plots<a class="anchor" aria-label="anchor" href="#model-comparison-plots"></a>

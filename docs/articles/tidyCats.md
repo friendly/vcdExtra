@@ -1,22 +1,24 @@
 # tidyCat: Tidy Methods For Categorical Data Analysis
 
-``` r
-library(MASS)
-library(vcdExtra)
-```
+![](fig/tidyCat-logo.png)
 
 > Frequency tables need some Tidy Love ❤️
 
 Tidy methods for quantitative data & models have advanced considerably,
 but there hasn’t been much development of similar ideas for “categorical
 data”, by which I mean data that is often compactly represented as
-$`n`$-way frequency tables, cross classified by one or more discrete
+$n$-way frequency tables, cross classified by one or more discrete
 factors.
 
 What would it take to implement a tidy framework for such data? These
 notes are, in effect, a call for participation in developing a `tidyCat`
 package for this purpose. Other possible names for this: `tidyCDA`,
-`tidyfreq` …
+`tidyfreq` but `tidyCat` makes for a nice logo!
+
+``` r
+library(MASS)
+library(vcdExtra)
+```
 
 I see three areas that could be developed here:
 
@@ -24,7 +26,7 @@ I see three areas that could be developed here:
 
 Current non-tidy data forms and operations, following (Friendly & Meyer,
 2016) are described in the vignette [Creating and manipulating frequency
-tables](https://friendly.github.io/vcdExtra/articles/a1-creating.md)
+tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html)
 
 It seems clear that the most flexible and general form, and one that
 most closely matches a tidy data frame is **case form**, because this
@@ -73,10 +75,11 @@ expand.dft(hec.df) |> head()
 ```
 
 - [`vcd::structable()`](https://rdrr.io/pkg/vcd/man/structable.html)
-  produces a ‘flat’ representation of a high-dimensional contingency
-  table constructed by recursive splits (similar to the construction of
-  mosaic displays). One can be constructed from a table or from a data
-  frame with a formula method,
+  (and [`stats::ftable()`](https://rdrr.io/r/stats/ftable.html)) produce
+  a ‘flat’ representation of a high-dimensional contingency table
+  constructed by recursive splits (similar to the construction of mosaic
+  displays). One can be constructed from a table or from a data frame
+  with a formula method,
 
 ``` r
 structable(Titanic)
@@ -102,14 +105,14 @@ structable(Sex + Class ~ Survived + Age, data = Titanic)
 ```
 
 and there are a suite of methods for indexing and selecting parts of an
-$`n`$-way table.
+$n$-way table.
 
 - The methods in the `plyr` package (now retired) provided a coherent
   set of tools for a split-apply-combine strategy that works nicely with
   multidimensional arrays. Perhaps there are some useful ideas for
   frequency tables that could be resurrected here.
 
-- There is also a role for `purrr` methods and thinking here: $`n`$-way
+- There is also a role for `purrr` methods and thinking here: $n$-way
   tables as nested lists/arrays? The ideas of mapping over these?
 
 ## Manipulating factor levels
@@ -117,10 +120,8 @@ $`n`$-way table.
 Also needed:
 
 - methods for **recoding and collapsing** the levels of a factor:
-  [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html),
-  [`forcats::fct_collapse()`](https://forcats.tidyverse.org/reference/fct_collapse.html),
-  [`forcats::fct_lump_min()`](https://forcats.tidyverse.org/reference/fct_lump.html)
-  are useful here.
+  `forcats::fct_recode()`, `forcats::fct_collapse()`,
+  `forcats::fct_lump_min()` are useful here.
 
 - methods for **reordering the levels** of a factor, either manually or
   for some analysis purpose. For example, Data from Glass (1954) gave
@@ -208,7 +209,7 @@ required is accessible from standard functions, but not in a tidy form.
 - `glance.loglm()` – **model level** statistics. These are given in the
   output of the [`print()`](https://rdrr.io/r/base/print.html) method,
   and available from the [`print()`](https://rdrr.io/r/base/print.html)
-  method. A complication is both LR and Pearson $`\chi^2`$ are reported,
+  method. A complication is both LR and Pearson $\chi^{2}$ are reported,
   so these would need to be made to appear in separate columns. There
   are also related
   [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
@@ -307,7 +308,8 @@ What about `hatvalues`? Not implemented, but shouldn’t be too hard.
 
 ``` r
 hatvalues(hec.indep)
-## Error in UseMethod("hatvalues"): no applicable method for 'hatvalues' applied to an object of class "loglm"
+## Error in `UseMethod()`:
+## ! no applicable method for 'hatvalues' applied to an object of class "loglm"
 ```
 
 ## Graphical methods

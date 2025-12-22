@@ -20,7 +20,7 @@ library(effects)
 
 The content here is the dataset
 [`MASS::housing`](https://rdrr.io/pkg/MASS/man/housing.html), giving a
-4-way, $`3 \times 3 \times 4 \times 2`$ frequency table of 1681
+4-way, $3 \times 3 \times 4 \times 2$ frequency table of 1681
 individuals from the *Copenhagen Housing Conditions Survey*, classified
 by their:
 
@@ -170,7 +170,7 @@ the conditioning order of variables in the mosaic can be set using the
 `formula` argument. Here, I rearrange the variables to put `Sat` as the
 last variable in the splitting / conditioning sequence. I also use
 [`vcdExtra::modFit()`](https://friendly.github.io/vcdExtra/reference/modFit.md)
-to add the LR $`G^2`$ fit statistic to the plot title.
+to add the LR $G^{2}$ fit statistic to the plot title.
 
 ``` r
 mosaic(house.glm0, 
@@ -244,11 +244,12 @@ iterative proportional scaling algorithm of
 
 As before, [`anova()`](https://rdrr.io/r/stats/anova.html) tests the
 added contribution of each more complex model over the one before. The
-residual deviance $`G^2`$ has been reduced from $`G^2 (46) = 217.46`$
-for the baseline model `house.glm0` to $`G^2 (34) = 38.66`$ for the
-revised model `house.glm1`. The difference,
-$`G^2(M1 | M0) = G^2 (12) = 178.79`$ tests the collective additional fit
-provided by the two-way association of satisfaction with the predictors.
+residual deviance $G^{2}$ has been reduced from $G^{2}(46) = 217.46$ for
+the baseline model `house.glm0` to $G^{2}(34) = 38.66$ for the revised
+model `house.glm1`. The difference,
+$G^{2}\left( M1|M0 \right) = G^{2}(12) = 178.79$ tests the collective
+additional fit provided by the two-way association of satisfaction with
+the predictors.
 
 ``` r
 anova(house.glm0, house.glm1, test="Chisq")
@@ -270,7 +271,7 @@ The model `house.glm1` fits reasonably well, G^2(34)=38.66, so most
 residuals are small. In the mosaic below, I use `gp=shading_Friendly` to
 shade the tiles so that positive and negative residuals are
 distinguished by color, and they are filled when the absolute value of
-the residual is outside $`\pm 2, 4`$.
+the residual is outside $\pm 2,4$.
 
 ``` r
 mosaic(house.glm1, 
@@ -352,10 +353,11 @@ MASS::addterm(house.glm1,
 ```
 
 The result shows that adding the term `Infl:Type:Sat` reduces the
-deviance $`G^2`$ from 38.66 to 16.11. The difference,
-$`G^2(M1 + ITS | M1) = G^2 (12) = 22.55`$ reflects a substantial
-improvement. The remaining two-way interaction terms reduce the deviance
-by smaller and non-significant amounts, relative to `house.glm1`.
+deviance $G^{2}$ from 38.66 to 16.11. The difference,
+$G^{2}\left( M1 + ITS|M1 \right) = G^{2}(12) = 22.55$ reflects a
+substantial improvement. The remaining two-way interaction terms reduce
+the deviance by smaller and non-significant amounts, relative to
+`house.glm1`.
 
 Model fitting should be guided by substance, not just statistical
 machinery. Nonetheless, it seems arguably sensible to add one two-way
@@ -377,16 +379,11 @@ a slightly better fit, but requires more model terms and parameters.
 
 The AIC and BIC statistics are designed to adjust our assessment of
 model fit by penalizing it for using more parameters. Equivalently, they
-deduct from the likelihood ratio $`G^2`$ a term proportional to the
-residual $`\text{df}`$ of the model. In any case – **smaller is better**
+deduct from the likelihood ratio $G^{2}$ a term proportional to the
+residual $\text{df}$ of the model. In any case – **smaller is better**
 for both AIC and BIC.
 
-``` math
-AIC = G^2 - 2 \: \text{df}
-```
-``` math
-BIC = G^2 - \log(n) \: \text{df}
-```
+$$AIC = G^{2} - 2\ \text{df}$$$$BIC = G^{2} - \log(n)\ \text{df}$$
 
 These measures are provided by
 [`AIC()`](https://rdrr.io/r/stats/AIC.html),
@@ -406,5 +403,5 @@ LRstats(house.glm0, house.glm1, house.glm2)
 ```
 
 By these metrics, model `house.glm1` is best on both AIC and BIC. The
-increased goodness-of-fit (smaller $`G^2`$) of model `house.glm2` is not
+increased goodness-of-fit (smaller $G^{2}$) of model `house.glm2` is not
 worth the extra cost of parameters in the `house.glm2` model.

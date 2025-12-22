@@ -5,7 +5,7 @@ more packages, however it does not return a result that can be easily used
 to get additional information about the nature of data sets in packages."><meta property="og:description" content="The data function is used both to load data sets from
 packages, and give a display of the names and titles of data sets in one or
 more packages, however it does not return a result that can be easily used
-to get additional information about the nature of data sets in packages."></head><body>
+to get additional information about the nature of data sets in packages."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -13,7 +13,7 @@ to get additional information about the nature of data sets in packages."></head
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +45,8 @@ to get additional information about the nature of data sets in packages."></head
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Information on Data Sets in Packages</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/datasets.R" class="external-link"><code>R/datasets.R</code></a></small>
+      <img src="../logo.png" class="logo" alt=""><h1>Information on Data Sets in Packages</h1>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/datasets.R" class="external-link"><code>R/datasets.R</code></a></small>
       <div class="d-none name"><code>datasets.Rd</code></div>
     </div>
 
@@ -61,10 +60,11 @@ to get additional information about the nature of data sets in packages.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">datasets</span><span class="op">(</span></span>
-<span>  <span class="va">package</span>,</span>
+<span>  package <span class="op">=</span> <span class="st">"vcdExtra"</span>,</span>
 <span>  allClass <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  incPackage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">package</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span>,</span>
-<span>  maxTitle <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  maxTitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -77,8 +77,7 @@ to get additional information about the nature of data sets in packages.</p>
 
 
 <dt id="arg-allclass">allClass<a class="anchor" aria-label="anchor" href="#arg-allclass"></a></dt>
-<dd><p>a logical variable. Include all classes of the item
-(<code>TRUE</code>) or just the last class (<code>FALSE</code>)?</p></dd>
+<dd><p>a logical variable. Include all classes of the item (<code>TRUE</code>) or just the last class (<code>FALSE</code>)?</p></dd>
 
 
 <dt id="arg-incpackage">incPackage<a class="anchor" aria-label="anchor" href="#arg-incpackage"></a></dt>
@@ -88,22 +87,23 @@ to get additional information about the nature of data sets in packages.</p>
 <dt id="arg-maxtitle">maxTitle<a class="anchor" aria-label="anchor" href="#arg-maxtitle"></a></dt>
 <dd><p>maximum length of data set Title</p></dd>
 
+
+<dt id="arg-ndim">ndim<a class="anchor" aria-label="anchor" href="#arg-ndim"></a></dt>
+<dd><p>logical; include the number of dimensions in the result?</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>data.frame</code> whose rows correspond to data sets found in
-<code>package</code>.</p>
+    <p>A <code>data.frame</code> whose rows correspond to data sets found in <code>package</code>.</p>
 <p>The columns (for a single package) are:</p>
 <dl><dt>Item</dt>
-<dd><p>data set name, a
-character variable</p></dd>
- <dt>class</dt>
-<dd><p>class, the object class of the data set,
-typically one of <code>"data.frame"</code>, <code>"table"</code>, <code>"array"</code> ...</p></dd>
+<dd><p>data set name, a character variable</p></dd>
+
+<dt>class</dt>
+<dd><p>class, the object class of the data set, typically one of <code>"data.frame"</code>, <code>"table"</code>, <code>"array"</code> ...</p></dd>
 
 <dt>dim</dt>
-<dd><p>an abbreviation of the dimensions of the data set, in a form like
-<code>"36x3"</code> for a data.frame or matrix with 36 rows and 3 columns.</p></dd>
+<dd><p>an abbreviation of the dimensions of the data set, in a form like <code>"36x3"</code> for a data.frame or matrix with 36 rows and 3 columns.</p></dd>
 
 <dt>Title</dt>
 <dd><p>data set title</p></dd>
@@ -475,6 +475,18 @@ to create a more pleasing display.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [25] "SexualFun"       "SpaceShuttle"    "Suicide"         "Trucks"         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [29] "UKSoccer"        "VisualAcuity"    "VonBort"         "WeldonDice"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [33] "WomenQueue"     </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Find one-way tables in vcd (dim doesn't contain "x")</span></span></span>
+<span class="r-in"><span><span class="fu">datasets</span><span class="op">(</span><span class="st">"vcd"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">class</span><span class="op">==</span><span class="st">"table"</span>,</span></span>
+<span class="r-in"><span>                <span class="op">!</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">dim</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Item class dim                       Title</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Butterfly table  24 Butterfly Species in Malaya</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Federalist table   7  'May' in Federalist Papers</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 HorseKicks table   5        Death by Horse Kicks</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     Saxony table  13          Families in Saxony</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 WeldonDice table  11          Weldon's Dice Data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 WomenQueue table  11             Women in Queues</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

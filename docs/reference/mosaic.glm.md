@@ -233,7 +233,7 @@ mosaic(RC1model,
  }
 #> Initialising
 #> Running start-up iterations..
-#> Running main iterations.........
+#> Running main iterations.......
 #> Done
 #> Warning: no formula provided, assuming ~ses + mental
 
@@ -277,7 +277,7 @@ summary(berk.glm1)
 #> DeptE:AdmitRejected  1.68296    0.11733  14.343  < 2e-16 ***
 #> DeptF:AdmitRejected  3.26911    0.16707  19.567  < 2e-16 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for poisson family taken to be 1)
 #> 
@@ -334,7 +334,7 @@ summary(berk.glm2)
 #> DeptF:AdmitRejected         3.30648    0.16998  19.452  < 2e-16 ***
 #> GenderFemale:AdmitRejected -0.09987    0.08085  -1.235    0.217    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for poisson family taken to be 1)
 #> 
@@ -403,7 +403,7 @@ summary(berk.glm3)
 #> DeptE:AdmitRejected  1.58162    0.11933  13.254  < 2e-16 ***
 #> DeptF:AdmitRejected  3.16777    0.16848  18.803  < 2e-16 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for poisson family taken to be 1)
 #> 
@@ -432,6 +432,6 @@ anova(berk.glm1, berk.glm3, test="Chisq")
 #> 1         6    21.7355                          
 #> 2         5     2.6815  1   19.054 1.271e-05 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 ```

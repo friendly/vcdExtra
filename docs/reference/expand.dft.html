@@ -3,7 +3,7 @@
 in frequency form to a data frame representing individual observations in
 the table."><meta property="og:description" content="Converts a frequency table, given either as a table object or a data frame
 in frequency form to a data frame representing individual observations in
-the table."></head><body>
+the table."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -11,7 +11,7 @@ the table."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,9 +43,8 @@ the table."></head><body>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Expand a frequency table to case form</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/expand.dft.R" class="external-link"><code>R/expand.dft.R</code></a></small>
+      <img src="../logo.png" class="logo" alt=""><h1>Expand a frequency table to case form</h1>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/expand.dft.R" class="external-link"><code>R/expand.dft.R</code></a></small>
       <div class="d-none name"><code>expand.dft.Rd</code></div>
     </div>
 
@@ -133,27 +132,27 @@ Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="exter
 <span class="r-in"><span><span class="op">(</span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>, <span class="fl">20</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a b c d e f </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 3 5 3 2 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 5 4 2 2 5 </span>
 <span class="r-in"><span><span class="fu">expand.table</span><span class="op">(</span><span class="va">tab</span>, var.names<span class="op">=</span><span class="st">"letter"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    letter</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1       a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2       a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5       a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6       b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7       b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8       b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8       c</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9       c</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10      c</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11      c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12      c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13      c</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14      d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15      d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16      d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17      e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18      e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12      d</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13      d</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14      e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15      e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16      f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17      f</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18      f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19      f</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 20      f</span>
 <span class="r-in"><span></span></span>

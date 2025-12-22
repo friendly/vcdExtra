@@ -81,6 +81,7 @@ American Statistical Association*, 58, 310-364.
 Other association tests:
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),
 [`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md),
+[`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md),
 [`zero.test()`](https://friendly.github.io/vcdExtra/reference/zero.test.md)
 
 ## Author

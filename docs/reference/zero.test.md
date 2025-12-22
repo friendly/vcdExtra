@@ -62,7 +62,8 @@ Statistics - Theory and Methods* **39** (11) 2008-2030. DOI:
 Other association tests:
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),
 [`GKgamma()`](https://friendly.github.io/vcdExtra/reference/GKgamma.md),
-[`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md)
+[`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md),
+[`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
 
 ## Author
 
@@ -81,14 +82,14 @@ zero.test(rpois(100, 1))
 zero.test(rpois(100, 5))
 #> Score test for zero inflation
 #> 
-#>      Chi-square = 0.50489 
+#>      Chi-square = 0.51537 
 #>      df = 1
-#>      pvalue: 0.47736 
+#>      pvalue: 0.47283 
 # add some extra zeros
 zero.test(c(rep(0, 20), rpois(100, 5)))
 #> Score test for zero inflation
 #> 
-#>      Chi-square = 188.65465 
+#>      Chi-square = 190.45068 
 #>      df = 1
 #>      pvalue: < 2.22e-16 
 

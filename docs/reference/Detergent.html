@@ -5,7 +5,7 @@ softness of the laundry water used, (b) previous use of detergent Brand M,
 Brand X or Brand M in a blind trial."><meta property="og:description" content="Cross-classification of a sample of 1008 consumers according to (a) the
 softness of the laundry water used, (b) previous use of detergent Brand M,
 (c) the temperature of laundry water used and (d) expressed preference for
-Brand X or Brand M in a blind trial."></head><body>
+Brand X or Brand M in a blind trial."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -13,7 +13,7 @@ Brand X or Brand M in a blind trial."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +45,8 @@ Brand X or Brand M in a blind trial."></head><body>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Detergent Preference Data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <img src="../logo.png" class="logo" alt=""><h1>Detergent Preference Data</h1>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Detergent.Rd</code></div>
     </div>
 
@@ -111,7 +110,7 @@ chi-square for preference testing in multidimensional problems.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Temperature:Water_softness  2 52.830  6.0991   0.04738 *  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> M_User:Water_softness       2 57.854  1.0751   0.58418    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># model for Preference as a response</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">det.mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></span><span class="op">(</span><span class="op">~</span> <span class="va">Preference</span> <span class="op">+</span> <span class="op">(</span><span class="va">Temperature</span> <span class="op">*</span> <span class="va">M_User</span> <span class="op">*</span> <span class="va">Water_softness</span><span class="op">)</span>,</span></span>

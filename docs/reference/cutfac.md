@@ -81,8 +81,8 @@ plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)),
 #> Loading required package: lmtest
 #> Loading required package: zoo
 #> 
-#> Attaching package: 'zoo'
-#> The following objects are masked from 'package:base':
+#> Attaching package: ‘zoo’
+#> The following objects are masked from ‘package:base’:
 #> 
 #>     as.Date, as.Date.numeric
 #> Loading required package: sandwich

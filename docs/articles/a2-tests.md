@@ -28,7 +28,7 @@ GSS <- data.frame(
 ```
 
 Generate a cross-table showing cell frequency and the cell contribution
-to $`\chi^2`$.
+to $\chi^{2}$.
 
 ``` r
 # 2-Way Cross Tabulation
@@ -74,9 +74,9 @@ for details.
 
 For 2-way tables you can use
 [`chisq.test()`](https://rdrr.io/r/stats/chisq.test.html) to test
-independence of the row and column variable. By default, the $`p`$-value
+independence of the row and column variable. By default, the $p$-value
 is calculated from the asymptotic chi-squared distribution of the test
-statistic. Optionally, the $`p`$-value can be derived via Monte Carlo
+statistic. Optionally, the $p$-value can be derived via Monte Carlo
 simulation.
 
 ``` r
@@ -109,7 +109,7 @@ chisq.test(HairEye, simulate.p.value = TRUE)
 `fisher.test(X)` provides an **exact test** of independence. `X` must be
 a two-way contingency table in table form. Another form,
 `fisher.test(X, Y)` takes two categorical vectors of the same length.  
-For tables larger than $`2 \times 2`$ the method can be computationally
+For tables larger than $2 \times 2$ the method can be computationally
 intensive (or can fail) if the frequencies are not small.
 
 ``` r
@@ -123,25 +123,25 @@ fisher.test(GSStab)
 ```
 
 Fisher’s test is meant for tables with small total sample size. It
-generates an error for the `HairEye` data with $`n`$=592 total
-frequency.
+generates an error for the `HairEye` data with $n$=592 total frequency.
 
 ``` r
 fisher.test(HairEye)
-## Error in fisher.test(HairEye): FEXACT error 6 (f5xact).  LDKEY=618 is too small for this problem: kval=238045028.
+## Error in `fisher.test()`:
+## ! FEXACT error 6 (f5xact).  LDKEY=618 is too small for this problem: kval=238045028.
 ## Try increasing the size of the workspace.
 ```
 
 ## Mantel-Haenszel test and conditional association
 
 Use the `mantelhaen.test(X)` function to perform a
-Cochran-Mantel-Haenszel $`\chi^2`$ chi test of the null hypothesis that
-two nominal variables are *conditionally independent*,
-$`A \perp B \; | \; C`$, in each stratum, assuming that there is no
-three-way interaction. `X` is a 3 dimensional contingency table, where
-the last dimension refers to the strata.
+Cochran-Mantel-Haenszel $\chi^{2}$ chi test of the null hypothesis that
+two nominal variables are *conditionally independent*, $A\bot B\;|\; C$,
+in each stratum, assuming that there is no three-way interaction. `X` is
+a 3 dimensional contingency table, where the last dimension refers to
+the strata.
 
-The `UCBAdmissions` serves as an example of a $`2 \times 2 \times 6`$
+The `UCBAdmissions` serves as an example of a $2 \times 2 \times 6$
 table, with `Dept` as the stratifying variable.
 
 ``` r
@@ -163,11 +163,12 @@ mantelhaen.test(UCBAdmissions)
 The results show no evidence for association between admission and
 gender when adjusted for department. However, we can easily see that the
 assumption of equal association across the strata (no 3-way association)
-is probably violated. For $`2 \times 2 \times k`$ tables, this can be
-examined from the odds ratios for each $`2 \times 2`$ table
+is probably violated. For $2 \times 2 \times k$ tables, this can be
+examined from the odds ratios for each $2 \times 2$ table
 ([`oddsratio()`](https://rdrr.io/pkg/vcd/man/loddsratio.html)), and
 tested by using
-[`woolf_test()`](https://rdrr.io/pkg/vcd/man/woolf_test.html) in `vcd`.
+[`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
+in `vcd`.
 
 ``` r
 oddsratio(UCBAdmissions, log=FALSE)
@@ -193,10 +194,13 @@ summary(lor)
 
 woolf_test(UCBAdmissions) 
 ## 
-##  Woolf-test on Homogeneity of Odds Ratios (no 3-Way assoc.)
+## Woolf-test on Homogeneity of Odds Ratios (no 3-way association) 
 ## 
-## data:  UCBAdmissions
-## X-squared = 17.902, df = 5, p-value = 0.003072
+## Data:          UCBAdmissions 
+## OR variables:  Admit, Gender 
+## Strata:        Dept 
+## 
+## X-squared = 17.9017, df = 5, p-value = 0.003072
 ```
 
 ## Some plot methods
@@ -206,9 +210,9 @@ woolf_test(UCBAdmissions)
 We can visualize the odds ratios of Admission for each department with
 fourfold displays using
 [`fourfold()`](https://rdrr.io/pkg/vcd/man/fourfold.html). The cell
-frequencies $`n_{ij}`$ of each $`2 \times  2`$ table are shown as a
-quarter circle whose radius is proportional to $`\sqrt{n_{ij}}`$, so
-that its area is proportional to the cell frequency.
+frequencies $n_{ij}$ of each $2 \times 2$ table are shown as a quarter
+circle whose radius is proportional to $\sqrt{n_{ij}}$, so that its area
+is proportional to the cell frequency.
 
 ``` r
 UCB <- aperm(UCBAdmissions, c(2, 1, 3))
@@ -301,7 +305,7 @@ Log odds ratio plot for the `UCBAdmissions` data.
 
 ## Cochran-Mantel-Haenszel tests for ordinal factors
 
-The standard $`\chi^2`$ tests for association in a two-way table treat
+The standard $\chi^{2}$ tests for association in a two-way table treat
 both table factors as nominal (unordered) categories. When one or both
 factors of a two-way table are quantitative or ordinal, more powerful
 tests of association may be obtained by taking ordinality into account,
@@ -312,15 +316,15 @@ More general versions of the CMH tests (Landis etal., 1978) (Landis,
 Heyman, and Koch 1978) are provided by assigning numeric scores to the
 row and/or column variables. For example, with two ordinal factors
 (assumed to be equally spaced), assigning integer scores, `1:R` and
-`1:C` tests the linear $`\times`$ linear component of association. This
-is statistically equivalent to the Pearson correlation between the
-integer-scored table variables, with $`\chi^2 = (n-1) r^2`$, with only 1
-$`df`$ rather than $`(R-1)\times(C-1)`$ for the test of general
+`1:C` tests the linear $\times$ linear component of association. This is
+statistically equivalent to the Pearson correlation between the
+integer-scored table variables, with $\chi^{2} = (n - 1)r^{2}$, with
+only 1 $df$ rather than $(R - 1) \times (C - 1)$ for the test of general
 association.
 
 When only one table variable is ordinal, these general CMH tests are
 analogous to an ANOVA, testing whether the row mean scores or column
-mean scores are equal, again consuming fewer $`df`$ than the test of
+mean scores are equal, again consuming fewer $df$ than the test of
 general association.
 
 The
@@ -330,7 +334,7 @@ possibly ordered factors, optionally stratified other factor(s).
 
 ***Example***:
 
-Recall the $`4 \times 4`$ table, `JobSat` introduced in
+Recall the $4 \times 4$ table, `JobSat` introduced in
 @ref(sec:creating),
 
 ``` r
@@ -368,16 +372,16 @@ respectively.
 ## Measures of Association
 
 There are a variety of statistical measures of *strength* of association
-for contingency tables— similar in spirit to $`r`$ or $`r^2`$ for
+for contingency tables— similar in spirit to $r$ or $r^{2}$ for
 continuous variables. With a large sample size, even a small degree of
-association can show a significant $`\chi^2`$, as in the example below
+association can show a significant $\chi^{2}$, as in the example below
 for the `GSS` data.
 
 The [`assocstats()`](https://rdrr.io/pkg/vcd/man/assocstats.html)
-function in `vcd` calculates the $`\phi`$ contingency coefficient, and
-Cramer’s V for an $`r \times c`$ table. The input must be in table form,
-a two-way $`r \times c`$ table. It won’t work with `GSS` in frequency
-form, but by now you should know how to convert.
+function in `vcd` calculates the $\phi$ contingency coefficient, and
+Cramer’s V for an $r \times c$ table. The input must be in table form, a
+two-way $r \times c$ table. It won’t work with `GSS` in frequency form,
+but by now you should know how to convert.
 
 ``` r
 assocstats(GSStab)
@@ -391,7 +395,7 @@ assocstats(GSStab)
 ```
 
 For tables with ordinal variables, like `JobSat`, some people prefer the
-Goodman-Kruskal $`\gamma`$ statistic (Agresti 2002, 2.4.3) based on a
+Goodman-Kruskal $\gamma$ statistic (Agresti 2002, 2.4.3) based on a
 comparison of concordant and discordant pairs of observations in the
 case-form equivalent of a two-way table.
 
@@ -405,10 +409,10 @@ GKgamma(JobSat)
 ## Measures of Agreement
 
 The [`Kappa()`](https://rdrr.io/pkg/vcd/man/Kappa.html) function in the
-`vcd` package calculates Cohen’s $`\kappa`$ and weighted $`\kappa`$ for
-a square two-way table with the same row and column categories (Cohen
-1960). Normal-theory $`z`$-tests are obtained by dividing $`\kappa`$ by
-its asymptotic standard error (ASE). A
+`vcd` package calculates Cohen’s $\kappa$ and weighted $\kappa$ for a
+square two-way table with the same row and column categories (Cohen
+1960). Normal-theory $z$-tests are obtained by dividing $\kappa$ by its
+asymptotic standard error (ASE). A
 [`confint()`](https://rdrr.io/r/stats/confint.html) method for `Kappa`
 objects provides confidence intervals.
 
@@ -433,7 +437,7 @@ function. (**fig?**)(fig:agreesex) shows the agreementplot for the
 
 The Bangdiwala measures (returned by the function) represent the
 proportion of the shaded areas of the diagonal rectangles, using weights
-$`w_1`$ for exact agreement, and $`w_2`$ for partial agreement one step
+$w_{1}$ for exact agreement, and $w_{2}$ for partial agreement one step
 from the main diagonal.
 
 ``` r
@@ -461,11 +465,11 @@ to different frequency of use of categories by the two raters– lack of
 
 Correspondence analysis is a technique for visually exploring
 relationships between rows and columns in contingency tables. The `ca`
-package gives one implementation. For an $`r \times c`$ table, the
-method provides a breakdown of the Pearson $`\chi^2`$ for association in
-up to $`M = \min(r-1, c-1)`$ dimensions, and finds scores for the row
-($`x_{im}`$) and column ($`y_{jm}`$) categories such that the
-observations have the maximum possible correlations.% [¹](#fn1)
+package gives one implementation. For an $r \times c$ table, the method
+provides a breakdown of the Pearson $\chi^{2}$ for association in up to
+$M = \min(r - 1,c - 1)$ dimensions, and finds scores for the row
+($x_{im}$) and column ($y_{jm}$) categories such that the observations
+have the maximum possible correlations.% [¹](#fn1)
 
 Here, we carry out a simple correspondence analysis of the `HairEye`
 data. The printed results show that nearly 99% of the association

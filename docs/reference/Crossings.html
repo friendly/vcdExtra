@@ -5,7 +5,7 @@ degrees of difficulty in crossing from one level to the next, as described
 by Goodman (1972)."><meta property="og:description" content="Given two ordered factors in a square, n x n frequency table,
 Crossings creates an n-1 column matrix corresponding to different
 degrees of difficulty in crossing from one level to the next, as described
-by Goodman (1972)."></head><body>
+by Goodman (1972)."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -13,7 +13,7 @@ by Goodman (1972)."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +45,8 @@ by Goodman (1972)."></head><body>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Crossings Interaction of Factors</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/Crossings.R" class="external-link"><code>R/Crossings.R</code></a></small>
+      <img src="../logo.png" class="logo" alt=""><h1>Crossings Interaction of Factors</h1>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/Crossings.R" class="external-link"><code>R/Crossings.R</code></a></small>
       <div class="d-none name"><code>Crossings.Rd</code></div>
     </div>
 
@@ -120,7 +119,7 @@ functions for frequency tables;
 <span class="r-out co"><span class="r-pr">#&gt;</span>              AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CR 318.63 334.47   89.914 12  5.131e-14 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hauser.CRdiag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>,</span></span>
 <span class="r-in"><span>                        <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -129,7 +128,7 @@ functions for frequency tables;
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CRdiag 298.95 318.45   64.237  9   2.03e-10 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
