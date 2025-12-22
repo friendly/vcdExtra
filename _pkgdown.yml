@@ -50,6 +50,7 @@ reference:
       - modFit
       - modFit.glm
       - modFit.loglm
+      - woolf_test
       - zero.test
 
   - title: Distributions
