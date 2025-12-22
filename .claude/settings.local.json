@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo:*)",
+      "Bash(/c/R/R-4.5.1/bin/Rscript.exe:*)",
+      "Bash(cat:*)",
+      "Bash(source ~/.profile)",
+      "Bash(Rscript --version:*)",
+      "Bash(Rscript:*)"
+    ]
+  }
+}

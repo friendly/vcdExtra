@@ -5,6 +5,7 @@
 * `datasets()`: added `ndim` arg; package="vcdExtra" default
 * Added a tidyCat hex logo
 * Generalized vcd::woolf_test() to handle strata better, with special handling for 2 x 2 x R x C case. 
+* Added GH actions R-CMD-check & pkgdown
 
 ## Version 0.8.7 (2025-12-10)
 

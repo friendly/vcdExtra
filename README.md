@@ -11,6 +11,7 @@ Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://gi
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
+[![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 
@@ -20,7 +21,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.0; documentation built for `pkgdown` 2025-12-21
+Version 0.9.0; documentation built for `pkgdown` 2025-12-22
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the

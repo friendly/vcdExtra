@@ -23,3 +23,5 @@ README.*
 ^[.]?air[.]toml$
 ^NAMESPACE-old$
 ^.github$
+^.claude$
+^\.github$
