@@ -6,7 +6,7 @@
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![R_Universe](https://friendly.r-universe.dev/badges/vcdExtra)](https://friendly.r-universe.dev/vcdExtra)
 [![Last
-Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://github.com/friendly/vceExtra/)
+Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://github.com/friendly/vcdExtra/)
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -20,7 +20,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- Version 0.8-6 -->
 
-Version 0.8-7; documentation built for `pkgdown` 2025-12-10
+Version 0.9.0; documentation built for `pkgdown` 2025-12-21
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -159,17 +159,8 @@ vcdExtra::datasets("vcdExtra")[,1]
 tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
 ```
 
-| File                | Title                                               |
-|:--------------------|:----------------------------------------------------|
-| a1-creating.Rmd     | 1\. Creating and manipulating frequency tables      |
-| a2-tests.Rmd        | 2\. Tests of Independence                           |
-| a3-loglinear.Rmd    | 3\. Loglinear Models                                |
-| a4-mosaics.Rmd      | 4\. Mosaic plots                                    |
-| a5-demo-housing.Rmd | 5\. Demo - Housing Data                             |
-| a6-mobility.Rmd     | 6\. Mobility tables                                 |
-| a7-continuous.Rmd   | 7\. Continuous predictors                           |
-| datasets.Rmd        | Datasets for categorical data analysis              |
-| tidyCats.Rmd        | tidyCat: Tidy Methods For Categorical Data Analysis |
+| File | Title |
+|:-----|:------|
 
 - a few useful utility functions for manipulating categorical data sets
   and working with models for categorical data.

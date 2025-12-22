@@ -22,7 +22,7 @@ library(vcdExtra)
 
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![R_Universe](https://friendly.r-universe.dev/badges/vcdExtra)](https://friendly.r-universe.dev/vcdExtra)
-[![Last Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://github.com/friendly/vceExtra/)
+[![Last Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://github.com/friendly/vcdExtra/)
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html) 
