@@ -64,7 +64,8 @@ DOI: 10.1080/03610920902948228
 Other association tests: 
 \code{\link{CMHtest}()},
 \code{\link{GKgamma}()},
-\code{\link{HLtest}()}
+\code{\link{HLtest}()},
+\code{\link{woolf_test}()}
 }
 \author{
 Michael Friendly

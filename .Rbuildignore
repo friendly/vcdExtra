@@ -22,3 +22,4 @@ README.*
 ^\.vscode$
 ^[.]?air[.]toml$
 ^NAMESPACE-old$
+^.github$

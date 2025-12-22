@@ -212,6 +212,7 @@ is no three-way interaction
 Other association tests: 
 \code{\link{GKgamma}()},
 \code{\link{HLtest}()},
+\code{\link{woolf_test}()},
 \code{\link{zero.test}()}
 }
 \author{
