@@ -33,34 +33,14 @@
 #' model.
 #' \tabular{llll}{
 #'   **function** \tab **3-way** \tab **4-way** \tab **5-way** \cr
-#'   `mutual` \tab  \[A\]  \[B\]  \[C\]  \tab
-#'   \[A\]  \[B\]  \[C\]  \[D\]  \tab
-#'   \[A\]  \[B\]  \[C\]  \[D\]  \[E\] \cr
-#'   `joint`  \tab  \[AB\]  \[C\]  \tab
-#'   \[ABC\]  \[D\]  \tab
-#'   \[ABCE\]  \[E\]  \cr
-#'   `joint (with=1)` \tab
-#'   \[A\]  \[BC\]  \tab
-#'   \[A\]  \[BCD\]  \tab
-#'   \[A\]  \[BCDE\]  \cr
-#'   `conditional`  \tab
-#'   \[AC\]  \[BC\]  \tab
-#'   \[AD\]  \[BD\]  \[CD\]  \tab
-#'   \[AE\]  \[BE\]  \[CE\]  \[DE\] \cr
-#'   `condit (with=1)`  \tab
-#'   \[AB\]  \[AC\]  \tab
-#'   \[AB\]  \[AC\]  \[AD\]  \tab
-#'   \[AB\]  \[AC\]  \[AD\]  \[AE\] \cr
-#'   `markov (order=1)`  \tab
-#'   \[AB\]  \[BC\]  \tab
-#'   \[AB\]  \[BC\]  \[CD\]  \tab
-#'   \[AB\]  \[BC\]  \[CD\]  \[DE\] \cr
-#'   `markov (order=2)`  \tab
-#'   \[A\]  \[B\]  \[C\]  \tab
-#'   \[ABC\]  \[BCD\]  \tab
-#'   \[ABC\]  \[BCD\]  \[CDE\]  \cr
-#'   `saturated`  \tab
-#'   \[ABC\] \tab \[ABCD\] \tab \[ABCDE\] \cr
+#'   `mutual` \tab  \[A\]  \[B\]  \[C\]  \tab  \[A\]  \[B\]  \[C\]  \[D\]  \tab \[A\]  \[B\]  \[C\]  \[D\]  \[E\] \cr
+#'   `joint`  \tab  \[AB\]  \[C\]  \tab  \[ABC\]  \[D\]  \tab  \[ABCE\]  \[E\]  \cr
+#'   `joint (with=1)` \tab   \[A\]  \[BC\]  \tab   \[A\]  \[BCD\]  \tab  \[A\]  \[BCDE\]  \cr
+#'   `conditional`  \tab  \[AC\]  \[BC\]  \tab  \[AD\]  \[BD\]  \[CD\]  \tab   \[AE\]  \[BE\]  \[CE\]  \[DE\] \cr
+#'   `condit (with=1)`  \tab  \[AB\]  \[AC\]  \tab   \[AB\]  \[AC\]  \[AD\]  \tab  \[AB\]  \[AC\]  \[AD\]  \[AE\] \cr
+#'   `markov (order=1)`  \tab   \[AB\]  \[BC\]  \tab   \[AB\]  \[BC\]  \[CD\]  \tab  \[AB\]  \[BC\]  \[CD\]  \[DE\] \cr   
+#'   `markov (order=2)`  \tab   \[A\]  \[B\]  \[C\]  \tab  \[ABC\]  \[BCD\]  \tab   \[ABC\]  \[BCD\]  \[CDE\]  \cr
+#'   `saturated`  \tab \[ABC\] \tab \[ABCD\] \tab \[ABCDE\] \cr
 #' }
 #'
 #'
