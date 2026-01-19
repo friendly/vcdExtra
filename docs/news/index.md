@@ -18,6 +18,7 @@ of odds ratios.
   [`vcd::woolf_test()`](https://rdrr.io/pkg/vcd/man/woolf_test.html) to
   fully handle R x C strata, with tests for rows/cols/residuals
 - Added GH actions R-CMD-check & pkgdown
+- Now depends R (\>= 4.1.0) due to use of native pipe `|>`
 
 ## Version 0.8.7 (2025-12-10)
 
