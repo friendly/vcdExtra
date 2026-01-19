@@ -74,7 +74,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a3-loglinear.Rmd" class="external-link"><code>vignettes/a3-loglinear.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a3-loglinear.Rmd" class="external-link"><code>vignettes/a3-loglinear.Rmd</code></a></small>
       <div class="d-none name"><code>a3-loglinear.Rmd</code></div>
     </div>
 
@@ -103,7 +103,7 @@ in the form &lt;code&gt;glm(Freq&lt;/code&gt;
 of the cell frequency variable and &lt;code&gt;...&lt;/code&gt; specifies the
 &lt;em&gt;Model formula&lt;/em&gt;.&lt;/p&gt;'><sup>1</sup></a> In the <strong>Interpretation</strong>
 column, the symbol
-“<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟂</mo><annotation encoding="application/x-tex">\perp</annotation></semantics></math>”
+“<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⊥</mo><annotation encoding="application/x-tex">\perp</annotation></semantics></math>”
 is to be read as “is independent of,” and
 “<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace></mrow><annotation encoding="application/x-tex">\;|\;</annotation></semantics></math>”
 means “conditional on,” or “adjusting for,” or just “given”.</p>
@@ -125,19 +125,19 @@ means “conditional on,” or “adjusting for,” or just “given”.</p>
 <td align="left">Mutual independence</td>
 <td align="left"><code>~A + B + C</code></td>
 <td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>A</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>B</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>C</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">[A][B][C]</annotation></semantics></math></td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⟂</mo><mi>B</mi><mo>⟂</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A \perp B \perp C</annotation></semantics></math></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊥</mo><mi>B</mi><mo>⊥</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A \perp B \perp C</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td align="left">Joint independence</td>
 <td align="left"><code>~A*B + C</code></td>
 <td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>A</mi><mi>B</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>C</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">[AB][C]</annotation></semantics></math></td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mspace width="0.222em"></mspace><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⟂</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">(A \: B) \perp C</annotation></semantics></math></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mspace width="0.222em"></mspace><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⊥</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">(A \: B) \perp C</annotation></semantics></math></td>
 </tr>
 <tr class="odd">
 <td align="left">Conditional independence</td>
 <td align="left"><code>~(A+B)*C</code></td>
 <td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>A</mi><mi>C</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>B</mi><mi>C</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">[AC][BC]</annotation></semantics></math></td>
-<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mo>⟂</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>C</mi></mrow><annotation encoding="application/x-tex">(A \perp B) \;|\; C</annotation></semantics></math></td>
+<td align="left"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mo>⊥</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>C</mi></mrow><annotation encoding="application/x-tex">(A \perp B) \;|\; C</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td align="left">All two-way associations</td>
@@ -166,7 +166,7 @@ and
 pertain to the differences among the one-way marginal frequencies for
 the factors A, B and C.</p>
 <p>Similarly, the model of <em>joint independence</em>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mspace width="0.222em"></mspace><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⟂</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">(A \: B) \perp C</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mspace width="0.222em"></mspace><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⊥</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">(A \: B) \perp C</annotation></semantics></math>,
 allows an association between A and B, but specifies that C is
 independent of both of these and their combinations,</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>m</mi><mrow><mi>i</mi><mi>j</mi><mi>k</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>μ</mi><mo>+</mo><msubsup><mi>λ</mi><mi>i</mi><mi>A</mi></msubsup><mo>+</mo><msubsup><mi>λ</mi><mi>j</mi><mi>B</mi></msubsup><mo>+</mo><msubsup><mi>λ</mi><mi>k</mi><mi>C</mi></msubsup><mo>+</mo><msubsup><mi>λ</mi><mrow><mi>i</mi><mi>j</mi></mrow><mrow><mi>A</mi><mi>B</mi></mrow></msubsup><mo>≡</mo><mi>A</mi><mo>*</mo><mi>B</mi><mo>+</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">  \log ( m_{ijk} ) = \mu + \lambda_i^A + \lambda_j^B + \lambda_k^C + \lambda_{ij}^{AB} \equiv A * B + C </annotation></semantics></math></p>
@@ -185,7 +185,7 @@ the three possible two-way associations. There are three such models,
 depending on which variable is conditioned upon. For a given conditional
 independence model, e.g., <code>[AB][AC]</code>, the given variable is
 the one common to all terms, so this example has the interpretation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>⟂</mo><mi>C</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>A</mi></mrow><annotation encoding="application/x-tex">(B \perp C) \;|\; A</annotation></semantics></math>.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>⊥</mo><mi>C</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>A</mi></mrow><annotation encoding="application/x-tex">(B \perp C) \;|\; A</annotation></semantics></math>.</p>
 <div class="section level2">
 <h2 id="sec:loglm">Fitting with <code>loglm()</code><a class="anchor" aria-label="anchor" href="#sec:loglm"></a>
 </h2>

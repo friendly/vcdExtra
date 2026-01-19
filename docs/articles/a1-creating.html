@@ -74,7 +74,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a1-creating.Rmd" class="external-link"><code>vignettes/a1-creating.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a1-creating.Rmd" class="external-link"><code>vignettes/a1-creating.Rmd</code></a></small>
       <div class="d-none name"><code>a1-creating.Rmd</code></div>
     </div>
 
@@ -738,22 +738,22 @@ package provides a collection of functions for reordering the levels of
 a factor or grouping categories according to their frequency:</p>
 <ul>
 <li>
-<code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code>: Reorder a factor by another
+<code>forcats::fct_reorder()</code>: Reorder a factor by another
 variable.</li>
 <li>
-<code><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">forcats::fct_infreq()</a></code>: Reorder a factor by the
+<code>forcats::fct_infreq()</code>: Reorder a factor by the
 frequency of values.</li>
 <li>
-<code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html" class="external-link">forcats::fct_relevel()</a></code>: Change the order of a factor by
+<code>forcats::fct_relevel()</code>: Change the order of a factor by
 hand.</li>
 <li>
-<code><a href="https://forcats.tidyverse.org/reference/fct_lump.html" class="external-link">forcats::fct_lump()</a></code>: Collapse the least/most frequent
+<code>forcats::fct_lump()</code>: Collapse the least/most frequent
 values of a factor into “other”.</li>
 <li>
-<code><a href="https://forcats.tidyverse.org/reference/fct_collapse.html" class="external-link">forcats::fct_collapse()</a></code>: Collapse factor levels into
+<code>forcats::fct_collapse()</code>: Collapse factor levels into
 manually defined groups.</li>
 <li>
-<code><a href="https://forcats.tidyverse.org/reference/fct_recode.html" class="external-link">forcats::fct_recode()</a></code>: Change factor levels by
+<code>forcats::fct_recode()</code>: Change factor levels by
 hand.</li>
 </ul>
 </div>
@@ -837,8 +837,8 @@ table form to a data.frame in frequency form.</p>
 <span><span class="co">## 6   male   rep  191</span></span></code></pre></div>
 <p><strong><em>Example</em></strong>: Convert the <code>Arthritis</code>
 data in case form to a 3-way table of <code>Treatment</code>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>×</mi><annotation encoding="application/x-tex">\times</annotation></semantics></math><code>Sex</code>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>×</mi><annotation encoding="application/x-tex">\times</annotation></semantics></math><code>Improved</code>. Note the use of <code><a href="https://rdrr.io/r/base/with.html" class="external-link">with()</a></code> to avoid
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math><code>Sex</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math><code>Improved</code>. Note the use of <code><a href="https://rdrr.io/r/base/with.html" class="external-link">with()</a></code> to avoid
 having to use <code>Arthritis\$Treatment</code> etc. within the call to
 <code><a href="https://rdrr.io/r/base/table.html" class="external-link">table()</a></code>.% <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;code&gt;&lt;a href="https://rdrr.io/r/base/table.html" class="external-link"&gt;table()&lt;/a&gt;&lt;/code&gt; does not allow a &lt;code&gt;data&lt;/code&gt;
 argument to provide an environment in which the table variables are to

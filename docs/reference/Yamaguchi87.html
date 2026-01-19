@@ -48,7 +48,7 @@ time (e.g., Goodman and Hout, 1998; Xie, 1992)."><meta property="og:image" conte
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Occupational Mobility in Three Countries</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Yamaguchi87.Rd</code></div>
     </div>
 
@@ -165,7 +165,7 @@ mobility tables. <em>American Sociological Review</em>, 57 (June), 380-395.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Father   4   3859.2        66      23419 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Country  2  14231.1        64       9188 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">yama.indep</span>, <span class="op">~</span><span class="va">Son</span><span class="op">+</span><span class="va">Father</span>, main<span class="op">=</span><span class="st">"[S][F] ignoring country"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Yamaguchi87-1.png" alt="" width="700" height="433"></span>
@@ -198,7 +198,7 @@ mobility tables. <em>American Sociological Review</em>, 57 (June), 380-395.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Son:Country     8   1062.9        56       8125 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Father:Country  8   2533.8        48       5592 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">yama.noRC</span>, <span class="op">~</span><span class="op">~</span><span class="va">Country</span> <span class="op">+</span> <span class="va">Son</span> <span class="op">+</span> <span class="va">Father</span>, condvars<span class="op">=</span><span class="st">"Country"</span>,</span></span>
 <span class="r-in"><span>       labeling_args<span class="op">=</span><span class="va">largs</span>,</span></span>
@@ -206,7 +206,7 @@ mobility tables. <em>American Sociological Review</em>, 57 (June), 380-395.</p>
 <span class="r-plt img"><img src="Yamaguchi87-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ignore diagonal cells</span></span></span>
-<span class="r-in"><span><span class="va">yama.quasi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">yama.noRC</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">Diag</a></span><span class="op">(</span><span class="va">Son</span>,<span class="va">Father</span><span class="op">)</span><span class="op">:</span><span class="va">Country</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">yama.quasi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">yama.noRC</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Son</span>,<span class="va">Father</span><span class="op">)</span><span class="op">:</span><span class="va">Country</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">yama.quasi</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analysis of Deviance Table</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -226,7 +226,7 @@ mobility tables. <em>American Sociological Review</em>, 57 (June), 380-395.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Father:Country             8   2533.8        48       5592 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Country:Diag(Son, Father) 15   4255.3        33       1336 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">yama.quasi</span>, <span class="op">~</span><span class="va">Son</span> <span class="op">+</span> <span class="va">Father</span>, main<span class="op">=</span><span class="st">"Quasi [S][F]"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Yamaguchi87-4.png" alt="" width="700" height="433"></span>
