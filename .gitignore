@@ -8,3 +8,6 @@ revdep/
 
 /doc/
 /Meta/
+
+# Claude Code local settings
+.claude/
