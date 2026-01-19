@@ -74,7 +74,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-19</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a2-tests.Rmd" class="external-link"><code>vignettes/a2-tests.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a2-tests.Rmd" class="external-link"><code>vignettes/a2-tests.Rmd</code></a></small>
       <div class="d-none name"><code>a2-tests.Rmd</code></div>
     </div>
 
@@ -213,7 +213,7 @@ Cochran-Mantel-Haenszel
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
 chi test of the null hypothesis that two nominal variables are
 <em>conditionally independent</em>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⟂</mo><mi>B</mi><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>C</mi></mrow><annotation encoding="application/x-tex">A \perp B \; | \; C</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊥</mo><mi>B</mi><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>C</mi></mrow><annotation encoding="application/x-tex">A \perp B \; | \; C</annotation></semantics></math>,
 in each stratum, assuming that there is no three-way interaction.
 <code>X</code> is a 3 dimensional contingency table, where the last
 dimension refers to the strata.</p>
@@ -385,7 +385,7 @@ assigning numeric scores to the row and/or column variables. For
 example, with two ordinal factors (assumed to be equally spaced),
 assigning integer scores, <code>1:R</code> and <code>1:C</code> tests
 the linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>×</mi><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
 linear component of association. This is statistically equivalent to the
 Pearson correlation between the integer-scored table variables, with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>r</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\chi^2 = (n-1) r^2</annotation></semantics></math>,

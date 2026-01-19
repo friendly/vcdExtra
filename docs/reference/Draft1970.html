@@ -42,7 +42,7 @@ a data frame."><meta property="og:image" content="https://friendly.github.io/vcd
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>USA 1970 Draft Lottery Data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Draft1970.Rd</code></div>
     </div>
 
@@ -131,7 +131,7 @@ the last of these was September 24.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Month      11  290507   26410  2.4634 0.00558 **</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residuals 354 3795120   10721                   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make the table version</span></span></span>
 <span class="r-in"><span><span class="va">Draft1970</span><span class="op">$</span><span class="va">Risk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">Draft1970</span><span class="op">$</span><span class="va">Rank</span>, breaks<span class="op">=</span><span class="fl">3</span>, labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"High"</span>, <span class="st">"Med"</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span></span></span>

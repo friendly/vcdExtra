@@ -219,9 +219,9 @@ woolf_test(Fungicide, decompose = TRUE)
 #>   X-squared = 0.8548, df = 3, p-value = 0.8363
 #> 
 #> Decomposition:
-#>   Rows (sex):  X-squared = 0.0086, df = 1, p-value = 0.9261
-#>   Cols (strain):  X-squared = 0.8257, df = 1, p-value = 0.3635
-#>   Residual:       X-squared = 0.0205, df = 1, p-value = 0.8861
+#>   Rows (sex):    X-squared = 0.0086, df = 1, p-value = 0.9261
+#>   Cols (strain): X-squared = 0.8257, df = 1, p-value = 0.3635
+#>   Residual:      X-squared = 0.0205, df = 1, p-value = 0.8861
 #> 
 #> Note: Overall = Rows + Columns + Residual
 

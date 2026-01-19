@@ -40,17 +40,19 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/friendly/vcdExtra/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.9.0" id="version-090">Version 0.9.0<a class="anchor" aria-label="anchor" href="#version-090"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.9.0" id="version-090-2026-01-17">Version 0.9.0 (2026-01-17)<a class="anchor" aria-label="anchor" href="#version-090-2026-01-17"></a></h2>
+<p>This is a major release of the package, adding structure to dataset examples and introducing an new extension Woolf’s test for homogeneity of odds ratios.</p>
 <ul><li>Begin to categorize the datasets in the package with <code>@concept</code> tags</li>
 <li>Begin to flesh out more general conception of CDA</li>
 <li>
 <code><a href="../reference/datasets.html">datasets()</a></code>: added <code>ndim</code> arg; package=“vcdExtra” default</li>
 <li>Added a tidyCat hex logo</li>
-<li>Generalized vcd::woolf_test() to handle strata better, with special handling for 2 x 2 x R x C case.</li>
+<li>Generalized <code><a href="https://rdrr.io/pkg/vcd/man/woolf_test.html" class="external-link">vcd::woolf_test()</a></code> to handle strata better, with special handling for 2 x 2 x R x C case.</li>
+<li>Completed extension of <code><a href="https://rdrr.io/pkg/vcd/man/woolf_test.html" class="external-link">vcd::woolf_test()</a></code> to fully handle R x C strata, with tests for rows/cols/residuals</li>
 <li>Added GH actions R-CMD-check &amp; pkgdown</li>
 </ul></div>
     <div class="section level2">

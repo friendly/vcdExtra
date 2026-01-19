@@ -1,14 +1,22 @@
 # Changelog
 
-## Version 0.9.0
+## Version 0.9.0 (2026-01-17)
+
+This is a major release of the package, adding structure to dataset
+examples and introducing an new extension Woolf’s test for homogeneity
+of odds ratios.
 
 - Begin to categorize the datasets in the package with `@concept` tags
 - Begin to flesh out more general conception of CDA
 - [`datasets()`](https://friendly.github.io/vcdExtra/reference/datasets.md):
   added `ndim` arg; package=“vcdExtra” default
 - Added a tidyCat hex logo
-- Generalized vcd::woolf_test() to handle strata better, with special
-  handling for 2 x 2 x R x C case.
+- Generalized
+  [`vcd::woolf_test()`](https://rdrr.io/pkg/vcd/man/woolf_test.html) to
+  handle strata better, with special handling for 2 x 2 x R x C case.
+- Completed extension of
+  [`vcd::woolf_test()`](https://rdrr.io/pkg/vcd/man/woolf_test.html) to
+  fully handle R x C strata, with tests for rows/cols/residuals
 - Added GH actions R-CMD-check & pkgdown
 
 ## Version 0.8.7 (2025-12-10)
