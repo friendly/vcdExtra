@@ -355,7 +355,7 @@ fit to the same data.
 
 [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
 provides a brief summary for one or more models fit to the same dataset.
-The likelihood ratio $`\chi^2`$ values (`LR Chisq`)test lack of fit. By
+The likelihood ratio $\chi^{2}$ values (`LR Chisq`)test lack of fit. By
 these tests, none of the ordinal models show significant lack of fit. By
 the AIC and BIC statistics, the `linlin` model is the best, combining
 parsimony and goodness of fit.

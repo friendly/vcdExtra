@@ -186,17 +186,10 @@ association in the diagonal cells. The result is a model of
 independent, ignoring the diagonal cells.
 
 For a two-way table, quasi-independence can be expressed as
-``` math
-
- \pi_{ij} = \pi_{i+} \pi_{+j} \quad\quad \mbox{for } i\ne j
-```
+$$\pi_{ij} = \pi_{i +}\pi_{+ j}\quad\quad{\text{for}\mspace{6mu}}i \neq j$$
 or in loglinear form as:
-``` math
-
- \log m_{ij} = \mu + \lambda_i^A + \lambda_j^B + \delta_i I(i=j)
- \quad .
-```
-This model effectively adds one parameter, $`\delta_i`$, for each main
+$$\log m_{ij} = \mu + \lambda_{i}^{A} + \lambda_{j}^{B} + \delta_{i}I(i = j)\quad.$$
+This model effectively adds one parameter, $\delta_{i}$, for each main
 diagonal cell and fits those frequencies perfectly.
 
 In the [`gnm`](https://CRAN.R-project.org/package=gnm) package,
@@ -240,22 +233,16 @@ Another advance from the social mobility literature was the idea of how
 to test for *differences* in occupational categories between fathers and
 sons. The null hypothesis of no systematic differences can be formulated
 as a test of **symmetry** in the table,
-``` math
-
- \pi_{ij} = \pi_{ji} \quad\quad \mbox{for } i\ne j \quad ,
-```
+$$\pi_{ij} = \pi_{ji}\quad\quad{\text{for}\mspace{6mu}}i \neq j\quad,$$
 which asserts that sons are as likely to move from their father’s
-occupation $`i`$ to another category $`j`$ as they were to move in the
-reverse direction, $`j`$ to $`i`$. An alternative, “Upward mobility”,
-i.e., that sons who did not stay in their father’s occupational category
-moved to a higher category on average would mean that
-``` math
-
- \pi_{ij} < \pi_{ji} \quad\quad \mbox{for } i\ne j
-```
-Yet this model is overly strong, because it also asserts **marginal
+occupation $i$ to another category $j$ as they were to move in the
+reverse direction, $j$ to $i$. An alternative, “Upward mobility”, i.e.,
+that sons who did not stay in their father’s occupational category moved
+to a higher category on average would mean that
+$$\pi_{ij} < \pi_{ji}\quad\quad{\text{for}\mspace{6mu}}i \neq j$$ Yet
+this model is overly strong, because it also asserts **marginal
 homogeneity**, that the marginal probabilities of row and column values
-are equal, $`\pi_{i+} = \pi_{+i}`$ for all $`i`$. Consequently, this
+are equal, $\pi_{i +} = \pi_{+ i}$ for all $i$. Consequently, this
 hypothesis is most often tested as a model for **quasi-symmetry**, that
 also ignores the diagonal cells.
 
@@ -394,18 +381,14 @@ scores (typically consecutive integers) to the categories.
 
 When both variables are assigned scores, this gives the
 **linear-by-linear model**,
-``` math
-
-\log ( m_{ij} ) = \mu  +  \lambda_i^A
-+  \lambda_j^B  +  \gamma \: a_i b_j \quad ,
-```
-where $`a_i`$ and $`b_j`$ are the row and column numeric scores. This
+$$\log\left( m_{ij} \right) = \mu + \lambda_{i}^{A} + \lambda_{j}^{B} + \gamma\ a_{i}b_{j}\quad,$$
+where $a_{i}$ and $b_{j}$ are the row and column numeric scores. This
 model is also called the model of **uniform association** (Goodman,
-1979) because, for integer scores, $`a_i=i`$, $`b_j=j`$, this model has
-only one extra parameter, $`\gamma`$, which is the common odds local
-ratio. The independence model is the special case, $`\gamma=0`$. In
+1979) because, for integer scores, $a_{i} = i$, $b_{j} = j$, this model
+has only one extra parameter, $\gamma$, which is the common odds local
+ratio. The independence model is the special case, $\gamma = 0$. In
 contrast, the saturated model, allowing general association
-$`\lambda_{ij}^{AB}`$, uses $`(I-1)(J-1)`$ additional parameters.
+$\lambda_{ij}^{AB}$, uses $(I - 1)(J - 1)$ additional parameters.
 
 For square tables, like mobility tables, this model can be amended to
 include a diagonal term,
@@ -442,7 +425,7 @@ LRstats(hauser.UAdiag)
 ```
 
 In this model, the estimated common local log odds ratio—the coefficient
-$`\gamma`$ for the linear-by-linear term `Fscore:Sscore`, is given by:
+$\gamma$ for the linear-by-linear term `Fscore:Sscore`, is given by:
 
 ``` r
 coef(hauser.UAdiag)[["Fscore:Sscore"]]
@@ -451,8 +434,8 @@ coef(hauser.UAdiag)[["Fscore:Sscore"]]
 
 For comparisons not involving the diagonal cells, each step down the
 scale of occupational categories for the father multiplies the odds that
-the son will also be in one lower category by $`\exp (0.158) = 1.172`$,
-an increase of 17%.
+the son will also be in one lower category by $\exp(0.158) = 1.172$, an
+increase of 17%.
 
 But this model does not seem to be any improvement over quasi-symmetry.
 From the pattern of residuals in the mosaic, we see a number of large
@@ -474,7 +457,7 @@ mosaic(hauser.UAdiag, ~ Father+Son,
 
 Finally, for comparing a largish collection of models, a model
 comparison plot can show the trade-off between goodness-of-fit and
-parsimony by plotting measures like $`G^2/df`$, AIC, or BIC against
+parsimony by plotting measures like $G^{2}/df$, AIC, or BIC against
 degrees of freedom. The plot below, including quite a few more models,
 uses a log scale for BIC to emphasize differences among better fitting
 models. (The code for this plot is shown on p. 399 of Friendly & Meyer

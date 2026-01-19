@@ -10,16 +10,16 @@ All `loglm` models have equivalent glm forms, but the `print` and
 ## Usage
 
 ``` r
-LRstats(object, ...)
+Summarise(object, ...)
 
 # S3 method for class 'glmlist'
-LRstats(object, ..., saturated = NULL, sortby = NULL)
+Summarise(object, ..., saturated = NULL, sortby = NULL)
 
 # S3 method for class 'loglmlist'
-LRstats(object, ..., saturated = NULL, sortby = NULL)
+Summarise(object, ..., saturated = NULL, sortby = NULL)
 
 # Default S3 method
-LRstats(object, ..., saturated = NULL, sortby = NULL)
+Summarise(object, ..., saturated = NULL, sortby = NULL)
 ```
 
 ## Arguments
@@ -51,10 +51,9 @@ from the names of the model object(s).
 
 ## Details
 
-`LRstats` provides a brief summary for one or more models fit to the
+`Summarise` provides a brief summary for one or more models fit to the
 same dataset for which `logLik` and `nobs` methods exist (e.g., `glm`
-and `loglm` models). %This implementation is experimental, and is
-subject to change.
+and `loglm` models).
 
 The function relies on residual degrees of freedom for the LR chisq test
 being available in the model object. This is true for objects inheriting
@@ -67,12 +66,8 @@ from `lm`, `glm`, `loglm`, `polr` and `negbin`.
 [`loglm`](https://rdrr.io/pkg/MASS/man/loglm.html),
 
 [`logLik.loglm`](https://friendly.github.io/vcdExtra/reference/logLik.loglm.md),
-[`modFit`](https://friendly.github.io/vcdExtra/reference/modFit.md)
-
-Other glmlist functions:
-[`Kway()`](https://friendly.github.io/vcdExtra/reference/Kway.md),
-[`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md),
-[`mosaic.glmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md)
+[`modFit`](https://friendly.github.io/vcdExtra/reference/modFit.md),
+[`LRstats`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
 
 ## Author
 
@@ -84,7 +79,7 @@ Achim Zeileis
 data(Mental)
 indep <- glm(Freq ~ mental+ses,
                 family = poisson, data = Mental)
-LRstats(indep)
+Summarise(indep)
 #> Likelihood summary table:
 #>          AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> indep 209.59 220.19   47.418 15  3.155e-05 ***
@@ -101,7 +96,7 @@ linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
 
 # compare models
-LRstats(indep, coleff, roweff, linlin)
+Summarise(indep, coleff, roweff, linlin)
 #> Likelihood summary table:
 #>           AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> indep  209.59 220.19   47.418 15  3.155e-05 ***

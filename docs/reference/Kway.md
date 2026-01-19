@@ -108,20 +108,24 @@ df <- cbind(factors, Freq)
 mods3 <- Kway(Freq ~ A + B + C, data=df, family=poisson)
 LRstats(mods3)
 #> Likelihood summary table:
-#>           AIC    BIC LR Chisq Df Pr(>Chisq)
-#> kway.0 235.61 237.19   34.531 35     0.4906
-#> kway.1 242.79 252.29   31.714 30     0.3810
-#> kway.2 252.30 274.47   25.216 22     0.2868
-#> kway.3 257.29 285.80   22.213 18     0.2227
+#>           AIC    BIC LR Chisq Df Pr(>Chisq)  
+#> kway.0 249.69 251.28   49.216 35    0.05601 .
+#> kway.1 256.21 265.71   45.735 30    0.03293 *
+#> kway.2 256.64 278.81   30.168 22    0.11444  
+#> kway.3 258.52 287.02   24.042 18    0.15366  
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 mods4 <- Kway(Freq ~ A + B + C + D, data=df, family=poisson)
 LRstats(mods4)
 #> Likelihood summary table:
-#>           AIC    BIC LR Chisq Df Pr(>Chisq)
-#> kway.0 235.61 237.19   34.531 35     0.4906
-#> kway.1 244.40 255.48   31.318 29     0.3506
-#> kway.2 262.11 293.78   23.032 16     0.1129
-#> kway.3 268.70 319.38    5.625  4     0.2289
-#> kway.4 271.08 328.09    0.000  0     1.0000
+#>           AIC    BIC LR Chisq Df Pr(>Chisq)  
+#> kway.0 249.69 251.28   49.216 35    0.05601 .
+#> kway.1 258.17 269.25   45.690 29    0.02518 *
+#> kway.2 255.38 287.05   16.902 16    0.39196  
+#> kway.3 265.50 316.18    3.028  4    0.55313  
+#> kway.4 270.48 327.48    0.000  0    1.00000  
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
@@ -136,7 +140,7 @@ LRstats(modSat)
 #> JobSat.2  63.541  64.097    0.065  1     0.7989    
 #> JobSat.3  65.476  66.111    0.000  0     1.0000    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 anova(modSat, test="Chisq")
 #> Analysis of Deviance Table
 #> 
@@ -152,7 +156,7 @@ anova(modSat, test="Chisq")
 #> 3         1      0.065  3  117.932   <2e-16 ***
 #> 4         0      0.000  1    0.065   0.7989    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # Rochdale data: very sparse, in table form
 data(Rochdale, package="vcd")

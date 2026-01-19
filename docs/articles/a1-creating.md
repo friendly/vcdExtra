@@ -31,7 +31,7 @@ The `Arthritis` data is available in case form in the `vcd` package.
 There are two explanatory factors: `Treatment` and `Sex`. `Age` is a
 numeric covariate, and `Improved` is the response— an ordered factor,
 with levels None \< Some \< Marked. Excluding `Age`, this represents a
-$`2 \times 2 \times 3`$ contingency table for `Treatment`, `Sex` and
+$2 \times 2 \times 3$ contingency table for `Treatment`, `Sex` and
 `Improved`, but in case form.
 
 ``` r
@@ -102,7 +102,7 @@ sum(GSS$count)
 #### Table form
 
 Table form data is represented by a `matrix`, `array` or `table` object,
-whose elements are the frequencies in an $`n`$-way table. The variable
+whose elements are the frequencies in an $n$-way table. The variable
 names (factors) and their levels are given by `dimnames(X)`. The total
 number of observations is `sum(X)`. The number of dimensions of the
 table is `length(dimnames(X))`, and the table sizes are given by
@@ -260,10 +260,10 @@ on the first CA dimension.
 #### Re-ordering dimensions
 
 Finally, there are situations where, particularly for display purposes,
-you want to re-order the *dimensions* of an $`n`$-way table, or change
-the labels for the variables or levels. This is easy when the data are
-in table form: [`aperm()`](https://rdrr.io/r/base/aperm.html) permutes
-the dimensions, and assigning to `names` and `dimnames` changes variable
+you want to re-order the *dimensions* of an $n$-way table, or change the
+labels for the variables or levels. This is easy when the data are in
+table form: [`aperm()`](https://rdrr.io/r/base/aperm.html) permutes the
+dimensions, and assigning to `names` and `dimnames` changes variable
 names and level labels respectively. We will use the following version
 of `UCBAdmissions` in @ref(sec:mantel) below. [^1]
 
@@ -474,7 +474,7 @@ using the argument `FUN=sum` to sum the frequency variable over the
 factors *not* mentioned in the formula.
 
 ***Example***: The data frame `DaytonSurvey` in the `vcdExtra` package
-represents a $`2^5`$ table giving the frequencies of reported use
+represents a $2^{5}$ table giving the frequencies of reported use
 (\`\`ever used?’’) of alcohol, cigarettes and marijuana in a sample of
 high school seniors, also classified by sex and race.
 
@@ -605,7 +605,7 @@ display purposes, we want to reduce Age to 20-year intervals. The
 function in `vcdExtra` was designed for this purpose.
 
 ***Example***: Create a 3-way table, and collapse Age from 10-year to
-20-year intervals. First, we generate a $`2 \times 6 \times 3`$ table of
+20-year intervals. First, we generate a $2 \times 6 \times 3$ table of
 random counts from a Poisson distribution with mean of 100.
 
 ``` r
@@ -709,18 +709,14 @@ The [`forcats`](https://CRAN.R-project.org/package=forcats) package
 provides a collection of functions for reordering the levels of a factor
 or grouping categories according to their frequency:
 
-- [`forcats::fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html):
-  Reorder a factor by another variable.
-- [`forcats::fct_infreq()`](https://forcats.tidyverse.org/reference/fct_inorder.html):
-  Reorder a factor by the frequency of values.
-- [`forcats::fct_relevel()`](https://forcats.tidyverse.org/reference/fct_relevel.html):
-  Change the order of a factor by hand.
-- [`forcats::fct_lump()`](https://forcats.tidyverse.org/reference/fct_lump.html):
-  Collapse the least/most frequent values of a factor into “other”.
-- [`forcats::fct_collapse()`](https://forcats.tidyverse.org/reference/fct_collapse.html):
-  Collapse factor levels into manually defined groups.
-- [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html):
-  Change factor levels by hand.
+- `forcats::fct_reorder()`: Reorder a factor by another variable.
+- `forcats::fct_infreq()`: Reorder a factor by the frequency of values.
+- `forcats::fct_relevel()`: Change the order of a factor by hand.
+- `forcats::fct_lump()`: Collapse the least/most frequent values of a
+  factor into “other”.
+- `forcats::fct_collapse()`: Collapse factor levels into manually
+  defined groups.
+- `forcats::fct_recode()`: Change factor levels by hand.
 
 ### Converting among frequency tables and data frames
 
@@ -761,8 +757,8 @@ as.data.frame(GSStab)
 ```
 
 ***Example***: Convert the `Arthritis` data in case form to a 3-way
-table of `Treatment` $`\times`$`Sex` $`\times`$`Improved`. Note the use
-of [`with()`](https://rdrr.io/r/base/with.html) to avoid having to use
+table of `Treatment` $\times$`Sex` $\times$`Improved`. Note the use of
+[`with()`](https://rdrr.io/r/base/with.html) to avoid having to use
 `Arthritis\$Treatment` etc. within the call to
 [`table()`](https://rdrr.io/r/base/table.html).% [^3]
 
@@ -811,7 +807,7 @@ str(Art.df)
 
 If you’ve followed so far, you’re ready for a more complicated example.
 The data file, `tv.dat` represents a 4-way table of size
-$`5 \times 11 \times 5 \times 3`$ where the table variables (unnamed in
+$5 \times 11 \times 5 \times 3$ where the table variables (unnamed in
 the file) are read as `V1` – `V4`, and the cell frequency is read as
 `V5`. The file, stored in the `doc/extdata` directory of `vcdExtra`, can
 be read as follows:
