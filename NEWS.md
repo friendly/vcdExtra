@@ -9,6 +9,7 @@ This is a major release of the package, adding structure to dataset examples and
 * Generalized `vcd::woolf_test()` to handle strata better, with special handling for 2 x 2 x R x C case. 
 * Completed extension of `vcd::woolf_test()` to fully handle R x C strata, with tests for rows/cols/residuals
 * Added GH actions R-CMD-check & pkgdown
+* Now depends R (>= 4.1.0) due to use of native pipe `|>`
 
 ## Version 0.8.7 (2025-12-10)
 

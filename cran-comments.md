@@ -1,24 +1,22 @@
 ## Test environments
-* local Windows 10, R version 4.5.1 (2025-06-13 ucrt)
+* local Windows 10, R version 4.5.2 (2025-10-31 ucrt) 
 * win-builder R Under development (unstable) (2025-07-22 r88445 ucrt)
 
 
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs 
 
-## Version 0.8.7 (2025-11-18)
+## Version 0.9.0 (2026-01-17)
 
-This is a major release of the package, fixing bugs and revising documentation
+This is a major release of the package, adding structure to dataset examples and introducing an new extension Woolf's test for homogeneity of odds ratios.
 
-o Added tests for CMHtest() PR #13 [Thx: Daniel Sabanes Bove] 
-o Automatically omit strata with a single observation in CMHtest() because they do not contribute to the test statistics
-o Use the generalized Moore-Penrose inverse from MASS in CMHtest() such that it can work when the variance
-  matrix is singular.
-o Converted the package to use roxygen documentation.
-o Added `CrabSatellites` data from {countreg} b/c that's still not available on CRAN
-o Moved `grid` from `Depends:` to `Imports:`
-o Now use markdown in package documentation for easier maintenance, via {roxygen2md}
-
+* Begin to categorize the datasets in the package with `@concept` tags
+* Begin to flesh out more general conception of CDA
+* `datasets()`: added `ndim` arg; package="vcdExtra" default
+* Added a tidyCat hex logo
+* Generalized `vcd::woolf_test()` to handle strata better, with special handling for 2 x 2 x R x C case. 
+* Completed extension of `vcd::woolf_test()` to fully handle R x C strata, with tests for rows/cols/residuals
+* Added GH actions R-CMD-check & pkgdown
 
 # reverse dependencies
 

@@ -34,7 +34,7 @@ Authors@R: c(
             person(given = "Shuguang", family = "Sun", role="ctb")
             )
 Maintainer: Michael Friendly <friendly@yorku.ca>
-Depends: R (>= 3.5.0), vcd, gnm (>= 1.0-3)
+Depends: R (>= 4.1.0), vcd, gnm (>= 1.0-3)
 Suggests: 
     gmodels,
     Fahrmeir,
