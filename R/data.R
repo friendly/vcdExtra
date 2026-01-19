@@ -810,7 +810,7 @@ NULL
 #'  ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
 #' }
 #' @source Using code from
-#' <https://blog.revolutionanalytics.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies.html>
+#' <https://www.r-bloggers.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies/>
 #' @keywords datasets
 #' @examples
 #'
@@ -2978,7 +2978,7 @@ NULL
 #' @references Andersen, E. B. (1991) Statistical Analysis of Categorical Data,
 #' 2nd Ed., Springer-Verlag.
 #' @source
-#' Originally from <https://online.stat.psu.edu/stat504/lesson/10/>
+#' Originally from <https://online.stat.psu.edu/stat504/Lesson10>
 #' @keywords datasets
 #' @examples
 #'

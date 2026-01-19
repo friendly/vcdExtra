@@ -16,7 +16,7 @@ The format is a one-way frequency table of counts of packages with
 }
 \source{
 Using code from
-\url{https://blog.revolutionanalytics.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies.html}
+\url{https://www.r-bloggers.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies/}
 }
 \description{
 This one-way table gives the type-token distribution of the number of

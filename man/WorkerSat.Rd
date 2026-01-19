@@ -15,7 +15,7 @@ variables, representing the 2 x 2 x 2 classification of 715 cases.
 }
 }
 \source{
-Originally from \url{https://online.stat.psu.edu/stat504/lesson/10/}
+Originally from \url{https://online.stat.psu.edu/stat504/Lesson10}
 }
 \description{
 Blue collar workers job satisfaction from large scale investigation in
