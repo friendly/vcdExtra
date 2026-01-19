@@ -5,8 +5,6 @@
 - **Michael Friendly**. Author, maintainer.
   [](https://orcid.org/0000-0002-3237-0941)
 
-- **Heather Turner**. Contributor.
-
 - **David Meyer**. Contributor.
 
 - **Achim Zeileis**. Contributor.
@@ -14,26 +12,29 @@
 
 - **Duncan Murdoch**. Contributor.
 
+- **Heather Turner**. Contributor.
+  [](https://orcid.org/0000-0002-1256-3375)
+
 - **David Firth**. Contributor.
+
+- **Daniel Sabanes Bove**. Contributor.
 
 - **Matt Kumar**. Contributor.
 
 - **Shuguang Sun**. Contributor.
-
-- **Daniel Sabanes Bove**. Contributor.
 
 ## Citation
 
 Source:
 [`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/HEAD/DESCRIPTION)
 
-Friendly M (2025). *vcdExtra: 'vcd' Extensions and Additions*. R package
-version 0.8.7, <https://friendly.github.io/vcdExtra/>.
+Friendly M (2026). *vcdExtra: 'vcd' Extensions and Additions*. R package
+version 0.9.0, <https://friendly.github.io/vcdExtra/>.
 
     @Manual{,
       title = {vcdExtra: 'vcd' Extensions and Additions},
       author = {Michael Friendly},
-      year = {2025},
-      note = {R package version 0.8.7},
+      year = {2026},
+      note = {R package version 0.9.0},
       url = {https://friendly.github.io/vcdExtra/},
     }

@@ -1,9 +1,6 @@
 # tidyCat: Tidy Methods For Categorical Data Analysis
 
-``` r
-library(MASS)
-library(vcdExtra)
-```
+![](fig/tidyCat-logo.png)
 
 > Frequency tables need some Tidy Love ❤️
 
@@ -16,7 +13,12 @@ factors.
 What would it take to implement a tidy framework for such data? These
 notes are, in effect, a call for participation in developing a `tidyCat`
 package for this purpose. Other possible names for this: `tidyCDA`,
-`tidyfreq` …
+`tidyfreq` but `tidyCat` makes for a nice logo!
+
+``` r
+library(MASS)
+library(vcdExtra)
+```
 
 I see three areas that could be developed here:
 
@@ -24,7 +26,7 @@ I see three areas that could be developed here:
 
 Current non-tidy data forms and operations, following (Friendly & Meyer,
 2016) are described in the vignette [Creating and manipulating frequency
-tables](https://friendly.github.io/vcdExtra/articles/a1-creating.md)
+tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html)
 
 It seems clear that the most flexible and general form, and one that
 most closely matches a tidy data frame is **case form**, because this
@@ -73,10 +75,11 @@ expand.dft(hec.df) |> head()
 ```
 
 - [`vcd::structable()`](https://rdrr.io/pkg/vcd/man/structable.html)
-  produces a ‘flat’ representation of a high-dimensional contingency
-  table constructed by recursive splits (similar to the construction of
-  mosaic displays). One can be constructed from a table or from a data
-  frame with a formula method,
+  (and [`stats::ftable()`](https://rdrr.io/r/stats/ftable.html)) produce
+  a ‘flat’ representation of a high-dimensional contingency table
+  constructed by recursive splits (similar to the construction of mosaic
+  displays). One can be constructed from a table or from a data frame
+  with a formula method,
 
 ``` r
 structable(Titanic)
@@ -307,7 +310,8 @@ What about `hatvalues`? Not implemented, but shouldn’t be too hard.
 
 ``` r
 hatvalues(hec.indep)
-## Error in UseMethod("hatvalues"): no applicable method for 'hatvalues' applied to an object of class "loglm"
+## Error in `UseMethod()`:
+## ! no applicable method for 'hatvalues' applied to an object of class "loglm"
 ```
 
 ## Graphical methods

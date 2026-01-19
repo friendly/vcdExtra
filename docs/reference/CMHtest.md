@@ -205,6 +205,7 @@ each stratum, assuming that there is no three-way interaction
 Other association tests:
 [`GKgamma()`](https://friendly.github.io/vcdExtra/reference/GKgamma.md),
 [`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md),
+[`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md),
 [`zero.test()`](https://friendly.github.io/vcdExtra/reference/zero.test.md)
 
 ## Author

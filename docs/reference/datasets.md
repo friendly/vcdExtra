@@ -10,10 +10,11 @@ nature of data sets in packages.
 
 ``` r
 datasets(
-  package,
+  package = "vcdExtra",
   allClass = FALSE,
   incPackage = length(package) > 1,
-  maxTitle = NULL
+  maxTitle = NULL,
+  ndim = FALSE
 )
 ```
 
@@ -35,6 +36,10 @@ datasets(
 - maxTitle:
 
   maximum length of data set Title
+
+- ndim:
+
+  logical; include the number of dimensions in the result?
 
 ## Value
 
@@ -427,5 +432,17 @@ datasets("vcd")[,"Item"]
 #> [25] "SexualFun"       "SpaceShuttle"    "Suicide"         "Trucks"         
 #> [29] "UKSoccer"        "VisualAcuity"    "VonBort"         "WeldonDice"     
 #> [33] "WomenQueue"     
+
+# Find one-way tables in vcd (dim doesn't contain "x")
+datasets("vcd") |>
+  dplyr::filter(class=="table",
+                !stringr::str_detect(dim, "x"))
+#>         Item class dim                       Title
+#> 1  Butterfly table  24 Butterfly Species in Malaya
+#> 2 Federalist table   7  'May' in Federalist Papers
+#> 3 HorseKicks table   5        Death by Horse Kicks
+#> 4     Saxony table  13          Families in Saxony
+#> 5 WeldonDice table  11          Weldon's Dice Data
+#> 6 WomenQueue table  11             Women in Queues
 
 ```

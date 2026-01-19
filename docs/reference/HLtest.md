@@ -103,6 +103,7 @@ statistics for use in the development of logistic regression models.
 Other association tests:
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),
 [`GKgamma()`](https://friendly.github.io/vcdExtra/reference/GKgamma.md),
+[`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md),
 [`zero.test()`](https://friendly.github.io/vcdExtra/reference/zero.test.md)
 
 ## Author

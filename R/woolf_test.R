@@ -40,6 +40,58 @@
 #' For 4-dimensional tables, optionally provides a two-way decomposition
 #' of the homogeneity test into row effects, column effects, and residual.
 #'
+#' @details
+#' The Woolf test (Woolf, 1955) tests the hypothesis that the odds ratios
+#' \eqn{\theta_i} are equal across all \eqn{k} strata. The test statistic
+#' is computed as the weighted sum of squared deviations of the log odds ratios
+#' from their weighted mean:
+#'
+#' \deqn{\chi^2_W = \sum_{i=1}^{k} w_i [\log(\theta_i) - \log(\bar{\theta}_w)]^2
+#'       = \sum_{i=1}^{k} w_i \log^2(\theta_i / \bar{\theta}_w)}
+#'
+#' where \eqn{\theta_i = (n_{11i} n_{22i}) / (n_{12i} n_{21i})} is the odds ratio
+#' in stratum \eqn{i}, and \eqn{\bar{\theta}_w} is the weighted average odds ratio
+#' (computed as the exponential of the weighted mean of the log odds ratios).
+#'
+#' The weights \eqn{w_i} are the inverse variances of the log odds ratios:
+#' \deqn{w_i = 1 / \text{Var}(\log \theta_i) = 1 / (1/n_{11i} + 1/n_{12i} + 1/n_{21i} + 1/n_{22i})}
+#'
+#' Under the null hypothesis of homogeneous odds ratios, \eqn{\chi^2_W} follows
+#' a chi-squared distribution with \eqn{k - 1} degrees of freedom.
+#'
+#' \strong{Decomposition for 4-way tables:}
+#' For a \eqn{2 \times 2 \times R \times C} table, the strata
+#' form an \eqn{R \times C} two-way layout with odds ratios
+#' \eqn{\theta_{ij}} for row \eqn{i} and column \eqn{j}. This suggests
+#' that overall Woolf test
+#' of homogeneity can be decomposed into three components, conceptually
+#' analogous to a two-way ANOVA with one observation per cell:
+#'
+#' \deqn{\chi^2_{\text{W:Total}} = \chi^2_{\text{W:Rows}} + \chi^2_{\text{W:Cols}} + \chi^2_{\text{W:Residual}}}
+#'
+#' where:
+#' \itemize{
+#'   \item \eqn{\chi^2_{\text{W:Rows}} } tests whether the odds ratios differ among
+#'     row levels (pooling over columns), with \eqn{R - 1} df
+#'   \item \eqn{\chi^2_{\text{W:Cols}}} tests whether the odds ratios differ among
+#'     column levels (pooling over rows), with \eqn{C - 1} df
+#'   \item \eqn{\chi^2_{\text{W:Residual}}} tests the row \eqn{\times}{x} column interaction
+#'     (deviation from additivity on the log odds scale), with \eqn{(R-1)(C-1)} df
+#' }
+#'
+#' The row effect test compares the marginal log odds ratios
+#' \eqn{\log \bar{\theta}_{i+}} (pooled over columns) to the overall weighted mean.
+#' Similarly, the column effect test compares \eqn{\log \bar{\theta}_{+j}}
+#' (pooled over rows). The residual tests whether the cell log odds ratios
+#' \eqn{\log \theta_{ij}} are additive in the row and column effects.
+#'
+#' \strong{Note:} The two-way ANOVA-like decomposition for 4-dimensional tables
+#' appears to be a novel extension introduced in this package. The existing
+#' literature on the Woolf test (and related Breslow-Day test) treats strata
+#' as unstructured, testing only whether all \eqn{k} odds ratios are equal.
+#' This decomposition exploits the factorial structure of \eqn{R \times C}{R x C}
+#' strata to provide more detailed insight into the sources of heterogeneity.
+#'
 #' @param x A \eqn{2 \times 2 \times k}{2 x 2 x k} table, or more generally,
 #'   a \eqn{2 \times 2 \times \ldots}{2 x 2 x ...} array where the first
 #'   two dimensions are both 2.
@@ -275,12 +327,18 @@ print.woolf_test <- function(x, ...) {
                 x$statistic, x$parameter, x$p.value))
 
     cat("Decomposition:\n")
-    cat(sprintf("  Rows (%s):  X-squared = %.4f, df = %d, p-value = %.4g\n",
-                x$strata_vars[1], x$rows$statistic, x$rows$df, x$rows$p.value))
-    cat(sprintf("  Cols (%s):  X-squared = %.4f, df = %d, p-value = %.4g\n",
-                x$strata_vars[2], x$cols$statistic, x$cols$df, x$cols$p.value))
-    cat(sprintf("  Residual:       X-squared = %.4f, df = %d, p-value = %.4g\n",
-                x$residual$statistic, x$residual$df, x$residual$p.value))
+    # Calculate label widths for alignment
+    row_label <- sprintf("Rows (%s):", x$strata_vars[1])
+    col_label <- sprintf("Cols (%s):", x$strata_vars[2])
+    res_label <- "Residual:"
+    max_width <- max(nchar(row_label), nchar(col_label), nchar(res_label))
+
+    cat(sprintf("  %-*s X-squared = %.4f, df = %d, p-value = %.4g\n",
+                max_width, row_label, x$rows$statistic, x$rows$df, x$rows$p.value))
+    cat(sprintf("  %-*s X-squared = %.4f, df = %d, p-value = %.4g\n",
+                max_width, col_label, x$cols$statistic, x$cols$df, x$cols$p.value))
+    cat(sprintf("  %-*s X-squared = %.4f, df = %d, p-value = %.4g\n",
+                max_width, res_label, x$residual$statistic, x$residual$df, x$residual$p.value))
 
     cat("\nNote: Overall = Rows + Columns + Residual\n")
   }

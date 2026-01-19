@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,12 +68,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>tidyCat: Tidy Methods For Categorical Data Analysis</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>tidyCat: Tidy Methods For Categorical Data Analysis</h1>
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2025-12-10</h4>
+            <h4 data-toc-skip class="date">2026-01-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/tidyCats.Rmd" class="external-link"><code>vignettes/tidyCats.Rmd</code></a></small>
       <div class="d-none name"><code>tidyCats.Rmd</code></div>
@@ -81,9 +80,9 @@ Friendly</h4>
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://friendly.github.io/vcdExtra/">vcdExtra</a></span><span class="op">)</span></span></code></pre></div>
+<center>
+<img src="fig/tidyCat-logo.png" height="160">
+</center>
 <blockquote>
 <p>Frequency tables need some Tidy Love ❤️</p>
 </blockquote>
@@ -96,14 +95,18 @@ frequency tables, cross classified by one or more discrete factors.</p>
 <p>What would it take to implement a tidy framework for such data? These
 notes are, in effect, a call for participation in developing a
 <code>tidyCat</code> package for this purpose. Other possible names for
-this: <code>tidyCDA</code>, <code>tidyfreq</code> …</p>
+this: <code>tidyCDA</code>, <code>tidyfreq</code> but
+<code>tidyCat</code> makes for a nice logo!</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://friendly.github.io/vcdExtra/">vcdExtra</a></span><span class="op">)</span></span></code></pre></div>
 <p>I see three areas that could be developed here:</p>
 <div class="section level2">
 <h2 id="constructing-categorical-data-sets">Constructing categorical data sets<a class="anchor" aria-label="anchor" href="#constructing-categorical-data-sets"></a>
 </h2>
 <p>Current non-tidy data forms and operations, following <span class="citation">(Friendly &amp; Meyer, 2016)</span> are described in
-the vignette <a href="a1-creating.html">Creating and manipulating
-frequency tables</a></p>
+the vignette <a href="https://friendly.github.io/vcdExtra/articles/a1-creating.html">Creating
+and manipulating frequency tables</a></p>
 <p>It seems clear that the most flexible and general form, and one that
 most closely matches a tidy data frame is <strong>case form</strong>,
 because this allows for numeric variables as well. Thus:</p>
@@ -149,10 +152,11 @@ form</p></li>
 <span><span class="co">## 6 Black Brown Male</span></span></code></pre></div>
 <ul>
 <li>
-<code><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">vcd::structable()</a></code> produces a ‘flat’ representation of a
-high-dimensional contingency table constructed by recursive splits
-(similar to the construction of mosaic displays). One can be constructed
-from a table or from a data frame with a formula method,</li>
+<code><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">vcd::structable()</a></code> (and <code><a href="https://rdrr.io/r/stats/ftable.html" class="external-link">stats::ftable()</a></code>)
+produce a ‘flat’ representation of a high-dimensional contingency table
+constructed by recursive splits (similar to the construction of mosaic
+displays). One can be constructed from a table or from a data frame with
+a formula method,</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">structable</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
@@ -376,7 +380,8 @@ level</strong> statistics: fitted values, residuals, …</li>
 too hard.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html" class="external-link">hatvalues</a></span><span class="op">(</span><span class="va">hec.indep</span><span class="op">)</span></span>
-<span><span class="co">## Error in UseMethod("hatvalues"): no applicable method for 'hatvalues' applied to an object of class "loglm"</span></span></code></pre></div>
+<span><span class="co">## <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `UseMethod()`:</span></span></span>
+<span><span class="co">## <span style="color: #BBBB00;">!</span> no applicable method for 'hatvalues' applied to an object of class "loglm"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="graphical-methods">Graphical methods<a class="anchor" aria-label="anchor" href="#graphical-methods"></a>

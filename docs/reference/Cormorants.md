@@ -97,7 +97,6 @@ if (require("ggplot2")) {
     geom_vline(xintercept=c(4.5, 9.5)))
 }
 #> Loading required package: ggplot2
-#> Warning: package 'ggplot2' was built under R version 4.5.2
 
 #> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.

@@ -128,7 +128,8 @@ frequency.
 
 ``` r
 fisher.test(HairEye)
-## Error in fisher.test(HairEye): FEXACT error 6 (f5xact).  LDKEY=618 is too small for this problem: kval=238045028.
+## Error in `fisher.test()`:
+## ! FEXACT error 6 (f5xact).  LDKEY=618 is too small for this problem: kval=238045028.
 ## Try increasing the size of the workspace.
 ```
 
@@ -167,7 +168,8 @@ is probably violated. For $`2 \times 2 \times k`$ tables, this can be
 examined from the odds ratios for each $`2 \times 2`$ table
 ([`oddsratio()`](https://rdrr.io/pkg/vcd/man/loddsratio.html)), and
 tested by using
-[`woolf_test()`](https://rdrr.io/pkg/vcd/man/woolf_test.html) in `vcd`.
+[`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
+in `vcd`.
 
 ``` r
 oddsratio(UCBAdmissions, log=FALSE)
@@ -193,10 +195,13 @@ summary(lor)
 
 woolf_test(UCBAdmissions) 
 ## 
-##  Woolf-test on Homogeneity of Odds Ratios (no 3-Way assoc.)
+## Woolf-test on Homogeneity of Odds Ratios (no 3-way association) 
 ## 
-## data:  UCBAdmissions
-## X-squared = 17.902, df = 5, p-value = 0.003072
+## Data:          UCBAdmissions 
+## OR variables:  Admit, Gender 
+## Strata:        Dept 
+## 
+## X-squared = 17.9017, df = 5, p-value = 0.003072
 ```
 
 ## Some plot methods
@@ -465,7 +470,7 @@ package gives one implementation. For an $`r \times c`$ table, the
 method provides a breakdown of the Pearson $`\chi^2`$ for association in
 up to $`M = \min(r-1, c-1)`$ dimensions, and finds scores for the row
 ($`x_{im}`$) and column ($`y_{jm}`$) categories such that the
-observations have the maximum possible correlations.% [¹](#fn1)
+observations have the maximum possible correlations.% [^1]
 
 Here, we carry out a simple correspondence analysis of the `HairEye`
 data. The printed results show that nearly 99% of the association
@@ -534,9 +539,7 @@ Landis, R. J., E. R. Heyman, and G. G. Koch. 1978. “Average Partial
 Association in Three-Way Contingency Tables: A Review and Discussion of
 Alternative Tests,” *International Statistical Review* 46: 237–54.
 
-------------------------------------------------------------------------
-
-1.  Related methods are the non-parametric CMH tests using assumed
+[^1]: Related methods are the non-parametric CMH tests using assumed
     row/column scores (@ref(sec:CMH), the analogous
     [`glm()`](https://rdrr.io/r/stats/glm.html) model-based methods
     (@ref(sec:CMH), and the more general RC models which can be fit

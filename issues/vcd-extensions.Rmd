@@ -267,3 +267,14 @@ Registered S3 method overwritten by 'vcdExtra':
 This is another case that could use work to make the results more comprehensible. At present, we get a list of the table LR, Pearson
 stats and coefficients for all the strata.
 
+
+## mosaic plots
+
+* `vcd::mosaic()`: It would be nice to add the facility to display the observed or expected frequency in a cell by point symbols
+proportional to the count.
+
+* It would be nice to have a `ggplot` version of mosaic plots that shows residuals from a models as in `vcd::mosaic()`. The `ggmosaic` package only provides marimekko charts. This seems to require a `stat_mosaic()` that calculates a fitted loglinear model
+and finds residuals for the cells.
+
+  * forked https://github.com/haleyjeppson/ggmosaic as https://github.com/friendly/ggmosaic
+

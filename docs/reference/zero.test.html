@@ -3,7 +3,7 @@
 otherwise Poisson distribution of counts.  It gives a \(\chi^2_1\)
 statistic on one degree of freedom."><meta property="og:description" content="Carries out a simple score test (van den Broek, 1995) for excess zeros in an
 otherwise Poisson distribution of counts.  It gives a \(\chi^2_1\)
-statistic on one degree of freedom."></head><body>
+statistic on one degree of freedom."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -11,7 +11,7 @@ statistic on one degree of freedom."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +43,7 @@ statistic on one degree of freedom."></head><body>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Score test for zero inflation in Poisson data</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Score test for zero inflation in Poisson data</h1>
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/zero.test.R" class="external-link"><code>R/zero.test.R</code></a></small>
       <div class="d-none name"><code>zero.test.Rd</code></div>
     </div>
@@ -109,7 +108,8 @@ DOI: 10.1080/03610920902948228</p>
     <div class="dont-index"><p>Other association tests:
 <code><a href="CMHtest.html">CMHtest()</a></code>,
 <code><a href="GKgamma.html">GKgamma()</a></code>,
-<code><a href="HLtest.html">HLtest()</a></code></p></div>
+<code><a href="HLtest.html">HLtest()</a></code>,
+<code><a href="woolf_test.html">woolf_test()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -123,20 +123,20 @@ DOI: 10.1080/03610920902948228</p>
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.92385 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 1.32458 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.33647 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.24977 </span>
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.50489 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 0.5101 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.47736 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: 0.4751 </span>
 <span class="r-in"><span><span class="co"># add some extra zeros</span></span></span>
 <span class="r-in"><span><span class="fu">zero.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Score test for zero inflation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 188.65465 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	Chi-square = 178.18317 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	df = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	pvalue: &lt; 2.22e-16 </span>
 <span class="r-in"><span></span></span>

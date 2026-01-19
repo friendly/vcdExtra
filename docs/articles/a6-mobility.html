@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,12 +68,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>6. Mobility tables</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>6. Mobility tables</h1>
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2025-12-10</h4>
+            <h4 data-toc-skip class="date">2026-01-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a6-mobility.Rmd" class="external-link"><code>vignettes/a6-mobility.Rmd</code></a></small>
       <div class="d-none name"><code>a6-mobility.Rmd</code></div>
@@ -193,7 +192,7 @@ simplest plot for the frequencies is the default <code><a href="https://rdrr.io/
 method, giving a <code><a href="https://rdrr.io/r/graphics/mosaicplot.html" class="external-link">graphics::mosaicplot()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Hauser_tab</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/mosaicplot-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/mosaicplot-1.png" class="r-plt" alt="" width="672"></p>
 <p>The frequencies are first split according to father’s occupational
 category (the first table dimension) and then by sons’ occupation. The
 most common category for fathers is lower manual, followed by farm.</p>
@@ -215,7 +214,7 @@ assign longer labels for the row and column variables, using the
 <span>       labeling_args <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>       shade<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/mosaic1-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/mosaic1-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="fitting-and-graphing-models">Fitting and graphing models<a class="anchor" aria-label="anchor" href="#fitting-and-graphing-models"></a>
@@ -241,7 +240,7 @@ formula.)</p>
 <span>       labeling_args <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Independence model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/indep-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/indep-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 </div>
 <div class="section level2">
@@ -288,7 +287,7 @@ the independence model, adding the term
 <span>       labeling_args <span class="op">=</span> <span class="va">labels</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Quasi-independence model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/quasi-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/quasi-1.png" class="r-plt" alt="" width="672"></p>
 <p>Note that the pattern of residuals shows a systematic pattern of
 <span style="color: blue;">positive</span> and <span style="color: red;">negative</span> residuals above and below the
 diagonal tiles. We turn to this next.</p>
@@ -377,7 +376,7 @@ standardized residuals.</p>
 <span>       residuals_type <span class="op">=</span><span class="st">"rstandard"</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Quasi-symmetry model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/qsymm-mosaic-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/qsymm-mosaic-1.png" class="r-plt" alt="" width="672"></p>
 <p>The cells with the largest lack of symmetry (using standardized
 residuals) are those for the upper and lower non-manual occupations,
 where the son of an upper manual worker is less likely to move to lower
@@ -414,7 +413,7 @@ associations can be specified, implemented in
 <span>       residuals_type <span class="op">=</span><span class="st">"rstandard"</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Topological model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/topo-mosaic-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/topo-mosaic-1.png" class="r-plt" alt="" width="672"></p>
 <p>Comparing models, we can see that the model of quasi-symmetry is the
 best so far, using AIC as the measure:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -510,7 +509,7 @@ father.</p>
 <span>       residuals_type <span class="op">=</span><span class="st">"rstandard"</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>       main<span class="op">=</span><span class="st">"Uniform association + Diag()"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a6-mobility_files/figure-html/UAdiag-mosaic-1.png" class="r-plt" width="672"></p>
+<p><img src="a6-mobility_files/figure-html/UAdiag-mosaic-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="model-comparison-plots">Model comparison plots<a class="anchor" aria-label="anchor" href="#model-comparison-plots"></a>

@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,12 +68,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>4. Mosaic plots</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>4. Mosaic plots</h1>
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2025-12-10</h4>
+            <h4 data-toc-skip class="date">2026-01-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a4-mosaics.Rmd" class="external-link"><code>vignettes/a4-mosaics.Rmd</code></a></small>
       <div class="d-none name"><code>a4-mosaics.Rmd</code></div>
@@ -240,7 +239,7 @@ variables and abbreviate the occupational category labels. and
 <span>  main<span class="op">=</span><span class="st">"Alphabetic order"</span>, </span>
 <span>  legend<span class="op">=</span><span class="cn">FALSE</span>, </span>
 <span>  rot_labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">90</span>,<span class="fl">0</span>,<span class="fl">70</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a4-mosaics_files/figure-html/glass-mosaic1-1.png" class="r-plt" width="672"></p>
+<p><img src="a4-mosaics_files/figure-html/glass-mosaic1-1.png" class="r-plt" alt="" width="672"></p>
 <p>The occupational categories differ in <strong>status</strong>, and
 can be reordered correctly as follows, from <code>Professional</code>
 down to <code>Unskilled</code>.</p>
@@ -259,7 +258,7 @@ columns of the table using <code>ord</code>.</p>
 <span>  main<span class="op">=</span><span class="st">"Effect order"</span>, </span>
 <span>  legend<span class="op">=</span><span class="cn">FALSE</span>, </span>
 <span>  rot_labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">90</span>,<span class="fl">0</span>,<span class="fl">70</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a4-mosaics_files/figure-html/glass-mosaic2-1.png" class="r-plt" width="672"></p>
+<p><img src="a4-mosaics_files/figure-html/glass-mosaic2-1.png" class="r-plt" alt="" width="672"></p>
 <p>From this, and for the examples in the next section, it is useful to
 re-define <code>father</code> and <code>son</code> as
 <strong>ordered</strong> factors in the original <code>Glass</code>
@@ -391,7 +390,7 @@ analysis.</p>
 <span>  legend<span class="op">=</span><span class="cn">FALSE</span>, </span>
 <span>  rot_labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">90</span>,<span class="fl">0</span>,<span class="fl">70</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="a4-mosaics_files/figure-html/glass-quasi-1.png" class="r-plt" width="672"></p>
+<p><img src="a4-mosaics_files/figure-html/glass-quasi-1.png" class="r-plt" alt="" width="672"></p>
 <p>Mosaic plots for the other models would give further visual
 assessment of these models, however we can also test differences among
 them. For nested models, <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code> gives tests of how much
@@ -442,7 +441,7 @@ this purpose.</p>
 <span>  legend<span class="op">=</span><span class="cn">FALSE</span>, </span>
 <span>  rot_labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">90</span>,<span class="fl">0</span>,<span class="fl">70</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="a4-mosaics_files/figure-html/glass-qsymm-1.png" class="r-plt" width="672"></p>
+<p><img src="a4-mosaics_files/figure-html/glass-qsymm-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level2">
 <h2 id="correspondence-analysis-ordering">Correspondence analysis ordering<a class="anchor" aria-label="anchor" href="#correspondence-analysis-ordering"></a>
@@ -505,7 +504,7 @@ used to make the display more readable.</p>
 <span>                                  just_labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>,<span class="st">"right"</span><span class="op">)</span>,</span>
 <span>                                  tl_varnames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a4-mosaics_files/figure-html/housetasks-mos1-1.png" class="r-plt" width="672"></p>
+<p><img src="a4-mosaics_files/figure-html/housetasks-mos1-1.png" class="r-plt" alt="" width="672"></p>
 <p>Correspondence analysis, using the <a href="https://cran.r-project.org/package=ca" class="external-link">ca package</a>, shows that
 nearly 89% of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
@@ -530,7 +529,7 @@ Dim2 distinguishes tasks that are done singly vs. those that are done
 jointly.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">HT.ca</span>, lines <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a4-mosaics_files/figure-html/housetasks-ca-plot-1.png" class="r-plt" width="672"></p>
+<p><img src="a4-mosaics_files/figure-html/housetasks-ca-plot-1.png" class="r-plt" alt="" width="672"></p>
 <p>So, we can use the <code>CA</code> method of
 <code><a href="https://rdrr.io/pkg/seriation/man/seriate.html" class="external-link">seriation::seriate()</a></code> to find the order of permutations of
 <code>Task</code> and <code>Who</code> along the CA dimensions.</p>
@@ -558,7 +557,7 @@ the resulting mosaic:</p>
 <span>                                  just_labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>,<span class="st">"right"</span><span class="op">)</span>,</span>
 <span>                                  tl_varnames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="a4-mosaics_files/figure-html/housetasks-mos2-1.png" class="r-plt" width="672"></p>
+<p><img src="a4-mosaics_files/figure-html/housetasks-mos2-1.png" class="r-plt" alt="" width="672"></p>
 <p>It is now easy to see the cluster of tasks (laundry and cooking) done
 largely by the wife at the top, and those (repairs, driving) done
 largely by the husband at the bottom.</p>
