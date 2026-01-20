@@ -2,7 +2,7 @@
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.9.0; documentation built for `pkgdown` 2025-12-22
+Version 0.9.0; documentation built for `pkgdown` 2026-01-20
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -34,20 +34,20 @@ Data Analysis](https://friendly.github.io/psy6136/).
 
 ## Installation
 
-Get the released version from CRAN:
+Get the released version (0.8.7) from CRAN:
 
 ``` R
  install.packages("vcdExtra")
 ```
 
-The current development version can be installed from
+The current development version (0.9.0) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
 ``` R
  if (!require(remotes)) install.packages("remotes")
  
- install.packages("mvinfluence", repos = c('https://friendly.r-universe.dev')
+ install.packages("vcdExtra", repos = c('https://friendly.r-universe.dev')
  # or
  remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
 ```
@@ -69,7 +69,7 @@ packages.
 
 ##### See also:
 
-[![](http://ddar.datavis.ca/images/ddar-cover.png)](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835) 
+[![](reference/figures/ddar-cover.png)](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835) 
    
 [![](https://friendly.github.io/psy6136/icons/psy6136-highres.png)](https://friendly.github.io/psy6136/) 
    
@@ -164,26 +164,54 @@ vcdExtra::datasets("vcdExtra")[,1]
   `browseVignettes(package = "vcdExtra")`;
 
 ``` r
-tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
+vigns <- as.data.frame(tools::getVignetteInfo("vcdExtra")[,c("File", "Title")])
+vigns$Title <- paste0("[", vigns$Title, "](https://friendly.github.io/vcdExtra/articles/",
+                      tools::file_path_sans_ext(vigns$File), ".html)")
+vigns |> knitr::kable()
 ```
 
-| File | Title |
-|------|-------|
+| File                | Title                                                                                                             |
+|:--------------------|:------------------------------------------------------------------------------------------------------------------|
+| a1-creating.Rmd     | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html)    |
+| a2-tests.Rmd        | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html)                            |
+| a3-loglinear.Rmd    | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html)                             |
+| a4-mosaics.Rmd      | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html)                                   |
+| a5-demo-housing.Rmd | [5. Demo - Housing Data](https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html)                       |
+| a6-mobility.Rmd     | [6. Mobility tables](https://friendly.github.io/vcdExtra/articles/a6-mobility.html)                               |
+| a7-continuous.Rmd   | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html)                       |
+| datasets.Rmd        | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html)              |
+| tidyCats.Rmd        | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) |
 
 - a few useful utility functions for manipulating categorical data sets
-  and working with models for categorical data.
+  and working with models for categorical data:
+  [`joint()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
+  [`conditional()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
+  [`mutual()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
+  [`saturated()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md).
+
+- A re-implementation of
+  [`vcd::woolf_test()`](https://rdrr.io/pkg/vcd/man/woolf_test.html)
+  extends the analysis of homogeneity of odds ratios in 2 x 2 x R x C
+  tables to provide tests for differences among the R strata rows and C
+  strata columns.
 
 ## Examples
 
-These `README` examples simply provide illustrations of using some of
+These `README` examples provide simple illustrations of using some of
 the package functions in the context of loglinear models for frequency
 tables fit using [`glm()`](https://rdrr.io/r/stats/glm.html), including
 models for *structured associations* taking ordinality into account.
 
-The dataset `Mental` is a data frame frequency table representing the
-cross-classification of mental health status (`mental`) of 1660 young
-New York residents by their parents’ socioeconomic status (`ses`). Both
-are *ordered* factors.
+### `Mental` dataset
+
+The dataset
+[`vcdExtra::Mental`](https://friendly.github.io/vcdExtra/reference/Mental.md)
+is a data frame frequency table representing the cross-classification of
+mental health status (`mental`) of 1660 young New York residents by
+their parents’ socioeconomic status (`ses`). Both are *ordered* factors.
+The questions are: \* Is `mental` health associated with parents `ses`?
+\* If so, what is the pattern/nature of the association? \* How can I
+take the ordinal nature of the factors into account?
 
 ``` r
 data(Mental)
@@ -273,6 +301,17 @@ variables. These models typically use equally spaced *integer* scores.
 The test for association here is analogous to a test of the correlation
 between the frequency-weighted scores, carried out using
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md).
+
+``` r
+CMHtest(Mental.tab)
+## Cochran-Mantel-Haenszel Statistics for ses by mental 
+## 
+##                  AltHypothesis  Chisq Df       Prob
+## cor        Nonzero correlation 37.156  1 1.0907e-09
+## rmeans  Row mean scores differ 40.297  5 1.3012e-07
+## cmeans  Col mean scores differ 40.666  3 7.6971e-09
+## general    General association 45.958 15 5.4003e-05
+```
 
 In the data, `ses` and `mental` were declared to be ordered factors, so
 using `as.numeric(Mental$ses)` is sufficient to create a new `Cscore`
