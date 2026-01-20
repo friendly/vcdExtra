@@ -26,7 +26,7 @@ representing the 2 x 2 x 2 classification of 715 cases.
 
 ## Source
 
-Originally from <https://online.stat.psu.edu/stat504/lesson/10/>
+Originally from <https://online.stat.psu.edu/stat504/Lesson10>
 
 ## References
 

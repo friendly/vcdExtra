@@ -19,6 +19,7 @@ of odds ratios.
   fully handle R x C strata, with tests for rows/cols/residuals
 - Added GH actions R-CMD-check & pkgdown
 - Now depends R (\>= 4.1.0) due to use of native pipe `|>`
+- Fixed some broken URLs in `R/data.R`
 
 ## Version 0.8.7 (2025-12-10)
 

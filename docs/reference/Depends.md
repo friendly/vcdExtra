@@ -16,7 +16,7 @@ The format is a one-way frequency table of counts of packages with 0, 1,
 ## Source
 
 Using code from
-<https://blog.revolutionanalytics.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies.html>
+<https://www.r-bloggers.com/2013/12/a-look-at-the-distribution-of-r-package-dependencies/>
 
 ## Examples
 
