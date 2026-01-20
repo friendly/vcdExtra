@@ -79,9 +79,9 @@ categorical data in R, not provided in base R, [vcd](https://CRAN.R-project.org/
 or other commonly used packages.
 
 ##### See also:
-<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="http://ddar.datavis.ca/images/ddar-cover.png" style="height:70px;"/></a>&nbsp; &nbsp; &nbsp; 
-<a href="https://friendly.github.io/psy6136/"><img src="https://friendly.github.io/psy6136/icons/psy6136-highres.png" style="height:70px;" /></a>&nbsp; &nbsp; &nbsp; 
-<a href="https://friendly.github.io/nestedLogit/"><img src="https://friendly.github.io/nestedLogit/logo.png" style="height:70px;" /></a>
+<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="man/figures/ddar-cover.png" style="height:80px;"/></a>&nbsp; &nbsp; &nbsp; 
+<a href="https://friendly.github.io/psy6136/"><img src="https://friendly.github.io/psy6136/icons/psy6136-highres.png" style="height:80px;" /></a>&nbsp; &nbsp; &nbsp; 
+<a href="https://friendly.github.io/nestedLogit/"><img src="https://friendly.github.io/nestedLogit/logo.png" style="height:80px;" /></a>
 
 
 * My book, [*Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data*](https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835)

@@ -21,7 +21,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.0; documentation built for `pkgdown` 2025-12-22
+Version 0.9.0; documentation built for `pkgdown` 2026-01-20
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -76,7 +76,7 @@ packages.
 
 ##### See also:
 
-<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="http://ddar.datavis.ca/images/ddar-cover.png" style="height:70px;"/></a> 
+<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="man/figures/ddar-cover.png" style="height:70px;"/></a> 
    
 <a href="https://friendly.github.io/psy6136/"><img src="https://friendly.github.io/psy6136/icons/psy6136-highres.png" style="height:70px;" /></a> 
    

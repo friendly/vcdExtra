@@ -5,7 +5,8 @@
 /*.Rproj
 Rplots.pdf
 revdep/
-
+# pkgdown now build by github actions
+/docs/
 /doc/
 /Meta/
 
