@@ -209,9 +209,11 @@ The dataset
 is a data frame frequency table representing the cross-classification of
 mental health status (`mental`) of 1660 young New York residents by
 their parents’ socioeconomic status (`ses`). Both are *ordered* factors.
-The questions are: \* Is `mental` health associated with parents `ses`?
-\* If so, what is the pattern/nature of the association? \* How can I
-take the ordinal nature of the factors into account?
+The questions are:
+
+- Is `mental` health associated with parents `ses`?
+- If so, what is the pattern/nature of the association?
+- How can I take the ordinal nature of the factors into account?
 
 ``` r
 data(Mental)
