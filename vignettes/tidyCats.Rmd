@@ -76,7 +76,7 @@ expand.dft(hec.df) |> head()
 ```
 
 
-* `vcd::structable()` (and `stats::ftable()`) produce a ‘flat’ representation of a high-dimensional contingency table constructed by recursive splits (similar to the construction of mosaic displays). One can be constructed from a table or from a data frame with
+* `vcd::structable()` (and `stats::ftable()`) produce a 'flat' representation of a high-dimensional contingency table constructed by recursive splits (similar to the construction of mosaic displays). One can be constructed from a table or from a data frame with
 a formula method,
 
 ```{r}

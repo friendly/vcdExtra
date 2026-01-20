@@ -15,7 +15,10 @@ knitr::opts_chunk$set(
 #  out.width = "100%"
 )
 
+# get package versions
 library(vcdExtra)
+cran_version <- available.packages(repos = "https://cloud.r-project.org")["vcdExtra", "Version"]
+dev_version <- getNamespaceVersion("vcdExtra")
 ```
 
 <!-- badges: start -->
@@ -53,16 +56,16 @@ It is also used in my graduate course, [Psy 6136: Categorical Data Analysis](htt
 
 ## Installation
 
-Get the released version from CRAN:
+Get the released version (`r cran_version`) from CRAN:
 
      install.packages("vcdExtra")
 
-The current development version can be installed from [R-universe](https://friendly.r-universe.dev/vcdExtra) or
+The current development version (`r dev_version`) can be installed from [R-universe](https://friendly.r-universe.dev/vcdExtra) or
 directly from the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
      if (!require(remotes)) install.packages("remotes")
      
-     install.packages("mvinfluence", repos = c('https://friendly.r-universe.dev')
+     install.packages("vcdExtra", repos = c('https://friendly.r-universe.dev')
      # or
      remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
 
@@ -137,21 +140,33 @@ vcdExtra::datasets("vcdExtra")[,1]
 * a [collection of tutorial vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/). In the installed package, they can be viewed using `browseVignettes(package = "vcdExtra")`;
 
 ```{r vignettes}
-tools::getVignetteInfo("vcdExtra")[,c("File", "Title")] |> knitr::kable()
+vigns <- as.data.frame(tools::getVignetteInfo("vcdExtra")[,c("File", "Title")])
+vigns$Title <- paste0("[", vigns$Title, "](https://friendly.github.io/vcdExtra/articles/",
+                      tools::file_path_sans_ext(vigns$File), ".html)")
+vigns |> knitr::kable()
 ```
 
 * a few useful utility functions for manipulating categorical data sets and working with models for
-categorical data. 
+categorical data: `joint()`, `conditional()`, `mutual()`, `saturated()`. 
+
+* A re-implementation of `vcd::woolf_test()` extends the analysis of homogeneity of odds ratios
+in 2 x 2 x R x C tables to provide tests for differences among the R strata rows and C strata columns.
+
+
 
 
 ## Examples
 
-These `README` examples simply provide illustrations of using some of the package functions in the
+These `README` examples provide simple illustrations of using some of the package functions in the
 context of loglinear models for frequency tables fit using `glm()`, including
 models for _structured associations_ taking ordinality into account.
 
-The dataset `Mental` is a data frame frequency table representing the cross-classification of mental health status (`mental`) of 1660 young New York residents by their parents' socioeconomic status (`ses`).
-Both are _ordered_ factors.
+### `Mental` dataset
+The dataset `vcdExtra::Mental` is a data frame frequency table representing the cross-classification of mental health status (`mental`) of 1660 young New York residents by their parents' socioeconomic status (`ses`).
+Both are _ordered_ factors. The questions are: 
+* Is `mental` health associated with parents `ses`? 
+* If so, what is the pattern/nature of the association?
+* How can I take the ordinal nature of the factors into account?
 
 ```{r ex-mental1}
 data(Mental)
@@ -211,6 +226,11 @@ Ordinal models use **numeric** scores for the row and/or column variables.
 These models typically use equally spaced _integer_ scores.
 The test for association here is analogous to a test of the correlation
 between the frequency-weighted scores, carried out using `CMHtest()`.
+
+```{r}
+CMHtest(Mental.tab)
+```
+
 
 In the data, `ses` and `mental` were declared to be ordered factors,
 so using `as.numeric(Mental$ses)` is sufficient to create a new `Cscore`
