@@ -2,6 +2,8 @@
 
 ## Version 0.9.0 (2026-01-17)
 
+CRAN release: 2026-01-21
+
 This is a major release of the package, adding structure to dataset
 examples and introducing an new extension Woolf’s test for homogeneity
 of odds ratios.
