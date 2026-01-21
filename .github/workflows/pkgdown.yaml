@@ -44,5 +44,7 @@ jobs:
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git checkout ${{ github.ref_name }}
+          git pull --rebase origin ${{ github.ref_name }}
           git add docs/\*
-          git diff-index --quiet HEAD || git commit -m "Update pkgdown site (GHA)" && git push
+          git diff-index --quiet HEAD || git commit -m "Update pkgdown site (GHA)" && git push origin ${{ github.ref_name }}
