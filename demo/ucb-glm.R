@@ -21,5 +21,8 @@ mod.3 <- glm(Freq ~ Dept * (Gender+Admit), data=berkeley, family="poisson")
 summary(mod.3)
 
 # (BUG FIXED )the large residuals are all in Dept A
-mosaic(mod.3, residuals_type="rstandard", labeling=labeling_residuals)
+mosaic(mod.3, 
+       formula = ~Admit + Gender + Dept,
+       residuals_type="rstandard", 
+       labeling=labeling_residuals)
 

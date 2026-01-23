@@ -88,10 +88,14 @@ mosaic(HairEyeColor, labeling = labeling_points(
 # -----------------------------------------------------------------------------
 
 # Titanic - 4-way table
-mosaic(Titanic, labeling = labeling_points(scale = 20))
+mosaic(Titanic, 
+       shade = TRUE, legend = FALSE,
+       labeling = labeling_points(scale = 2))
 
 # UCBAdmissions
-mosaic(UCBAdmissions, labeling = labeling_points(scale = 10))
+mosaic(UCBAdmissions, 
+       shade = TRUE, legend = FALSE,
+       labeling = labeling_points(scale = 2))
 
 # -----------------------------------------------------------------------------
 # Edge cases
@@ -101,10 +105,12 @@ mosaic(UCBAdmissions, labeling = labeling_points(scale = 10))
 small_table <- as.table(matrix(c(2, 5, 3, 8), nrow = 2,
                                 dimnames = list(A = c("a1", "a2"),
                                                B = c("b1", "b2"))))
-mosaic(small_table, labeling = labeling_points(scale = 1))
+mosaic(small_table, 
+       labeling = labeling_points(scale = 1, size = 2))
 
 # Table with zeros
-zero_table <- as.table(matrix(c(0, 5, 3, 0), nrow = 2,
+zero_table <- as.table(matrix(c(0, 15, 10, 0), nrow = 2,
                                dimnames = list(A = c("a1", "a2"),
                                               B = c("b1", "b2"))))
-mosaic(zero_table, labeling = labeling_points(scale = 1))
+mosaic(zero_table, 
+       labeling = labeling_points(scale = 1))

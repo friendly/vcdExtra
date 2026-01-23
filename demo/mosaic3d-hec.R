@@ -14,7 +14,7 @@ structable(HairEyeColor)
 # mutual independence model
 mosaic(HairEyeColor, shade=TRUE)
 # joint independence of Hair*Eye with Sex
-mosaic(HairEyeColor, expected =~(Hair*Eye)+Sex)
+mosaic(HairEyeColor, expected = ~(Hair*Eye)+Sex)
 
 # observed frequencies, mutual independence
 mosaic3d(HairEyeColor)

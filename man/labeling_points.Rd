@@ -40,13 +40,13 @@ large counts.}
 Default is \code{unit(0.5, "char")}.}
 
 \item{gp_points}{A \code{\link[grid]{gpar}} object controlling point appearance
-(color, alpha, etc.).}
+(color, alpha, etc.), for example: \code{gp_points = gpar(col = "red")}.}
 
 \item{margin}{Margin inside cells as a \code{\link[grid]{unit}} object.
 Points are drawn within this inset area. Default is \code{unit(0.1, "npc")}.}
 
 \item{seed}{Optional integer seed for reproducible point placement.
-If \code{NULL} (default}
+If \code{NULL} (default), no seed is set.}
 
 \item{jitter}{Numeric jitter amount (0-1) for point placement.
 Default is 1 (full random). Values < 1 create more regular patterns.}
@@ -90,18 +90,20 @@ library(vcd)
 HairEye <- margin.table(HairEyeColor, 2:1)
 
 # Basic usage - observed frequencies as points
-mosaic(HairEye, labeling = labeling_points(scale = 2))
+mosaic(HairEye, 
+       labeling = labeling_points(scale = 1))
 
 # Show expected frequencies instead of observed
-mosaic(HairEye, labeling = labeling_points(
-  value_type = "expected",
-  scale = 2,
-  seed = 42
-))
+mosaic(HairEye, 
+       labeling = labeling_points(
+                     value_type = "expected",
+                     scale = 2,
+                     seed = 42)
+      )
 
 # Combine with residual shading
 mosaic(HairEye,
-       shade = TRUE,
+       shade = TRUE, legend = FALSE,
        labeling = labeling_points(scale = 2))
 
 }
