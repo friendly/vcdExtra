@@ -13,6 +13,9 @@ points. (Sieve diagrams (`sieve()`) already do something similar.)
 [^1]: Friendly, M. (1995). [Conceptual and Visual Models for Categorical Data](https://www.datavis.ca/papers/amstat95.pdf). 
 _The American Statistician_, **49**, 153–160
 
+This capability would be implemented in `vcdExtra`, hopefully requiring
+no changes to `vcd`.
+
 ## Architecture Understanding
 
 The `vcd` implementation of this class of visualization methods under the `strucplot()` framework is brilliant!
@@ -122,7 +125,7 @@ class(labeling_points) <- "grapcon_generator"
 - Start with a grid, add jitter
 - More even distribution, less natural looking
 
-**Option C: Quasi-random (recommended)**
+**Option C: Quasi-random** (maybe too much?)
 - Use Halton or Sobol sequences for low-discrepancy sampling
 - Even coverage without obvious patterns
 - Could use `randtoolbox::halton()` or implement simple version
@@ -147,7 +150,7 @@ class(labeling_points) <- "grapcon_generator"
 - All points same color (parameter `gp_points`)
 
 **Option B: Inherit from cell shading**
-- Match point color to residual-based shading
+- Match point color to residual-based shading, but darker or outlined in black?
 - Access `gp$fill` from the cell's graphical parameters
 
 **Option C: Both options**

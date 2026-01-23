@@ -25,3 +25,4 @@ README.*
 ^.github$
 ^.claude$
 ^\.github$
+^dev$
