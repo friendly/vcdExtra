@@ -170,7 +170,7 @@ summary(icu.full)
 #> whiteNon-white   0.565729   0.926828   0.610  0.54160    
 #> unconsYes        5.232292   1.226303   4.267 1.98e-05 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for binomial family taken to be 1)
 #> 
@@ -201,7 +201,7 @@ summary(icu.mod1)
 #> admitEmergency  3.171332   0.962323   3.295 0.000982 ***
 #> unconsYes       3.934575   0.961746   4.091 4.29e-05 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for binomial family taken to be 1)
 #> 
@@ -230,7 +230,7 @@ summary(icu.mod2)
 #> admitEmergency  3.10218    0.91860   3.377 0.000733 ***
 #> unconsYes       3.70546    0.87647   4.228 2.36e-05 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for binomial family taken to be 1)
 #> 
@@ -254,7 +254,7 @@ anova(icu.mod2, icu.mod1, icu.full, test="Chisq")
 #> 2       193     134.38  2   4.7582  0.09263 .
 #> 3       180     120.78 13  13.5981  0.40274  
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 ## Reproduce Fig 6.12 from VCD
 

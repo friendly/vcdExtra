@@ -19,18 +19,18 @@ Assume we have a 3-way contingency table based on variables A, B, and C.
 The possible different forms of loglinear models for a 3-way table are
 shown in the table below. @(tab:loglin-3way) The **Model formula**
 column shows how to express each model for
-[`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) in R. [^1] In the
-**Interpretation** column, the symbol “\\\perp\\” is to be read as “is
-independent of,” and “\\\\\|\\\\” means “conditional on,” or “adjusting
-for,” or just “given”.
+[`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) in R. [¹](#fn1) In
+the **Interpretation** column, the symbol “\\\perp\\” is to be read as
+“is independent of,” and “\\\\\|\\\\” means “conditional on,” or
+“adjusting for,” or just “given”.
 
-| **Model** | **Model formula** | **Symbol** | **Interpretation** |
-|:---|:---|:---|:---|
-| Mutual independence | `~A + B + C` | \\\[A\]\[B\]\[C\]\\ | \\A \perp B \perp C\\ |
-| Joint independence | `~A*B + C` | \\\[AB\]\[C\]\\ | \\(A \\ B) \perp C\\ |
-| Conditional independence | `~(A+B)*C` | \\\[AC\]\[BC\]\\ | \\(A \perp B) \\\|\\ C\\ |
-| All two-way associations | `~A*B + A*C + B*C` | \\\[AB\]\[AC\]\[BC\]\\ | homogeneous association |
-| Saturated model | `~A*B*C` | \\\[ABC\]\\ | 3-way association |
+| **Model**                | **Model formula**  | **Symbol**             | **Interpretation**       |
+|:-------------------------|:-------------------|:-----------------------|:-------------------------|
+| Mutual independence      | `~A + B + C`       | \\\[A\]\[B\]\[C\]\\    | \\A \perp B \perp C\\    |
+| Joint independence       | `~A*B + C`         | \\\[AB\]\[C\]\\        | \\(A \\ B) \perp C\\     |
+| Conditional independence | `~(A+B)*C`         | \\\[AC\]\[BC\]\\       | \\(A \perp B) \\\|\\ C\\ |
+| All two-way associations | `~A*B + A*C + B*C` | \\\[AB\]\[AC\]\[BC\]\\ | homogeneous association  |
+| Saturated model          | `~A*B*C`           | \\\[ABC\]\\            | 3-way association        |
 
 For example, the formula `~A + B + C` specifies the model of *mutual
 independence* with no associations among the three factors. In standard
@@ -283,7 +283,7 @@ of generalized linear models with a log link, this can be expressed as
 
 where the row-multiplicative effect parameters \\\gamma_i\\ and
 corresponding column parameters \\\delta_j\\ are estimated from the
-data.% [^2]
+data.% [²](#fn2)
 
 Similarly, the RC(2) model adds two multiplicative terms to the
 independence model,
@@ -326,12 +326,14 @@ Goodman, L. A. (1979). Simple models for the analysis of association in
 cross-classifications having ordered categories. *Journal of the
 American Statistical Association*, *74*, 537–552.
 
-[^1]: For [`glm()`](https://rdrr.io/r/stats/glm.html), or
+------------------------------------------------------------------------
+
+1.  For [`glm()`](https://rdrr.io/r/stats/glm.html), or
     [`gnm()`](https://rdrr.io/pkg/gnm/man/gnm.html), with the data in
     the form of a frequency data.frame, the same model is specified in
     the form `glm(Freq` \\\sim\\ `..., family="poisson")`, where `Freq`
     is the name of the cell frequency variable and `...` specifies the
     *Model formula*.
 
-[^2]: This is similar in spirit to a correspondence analysis with a
-    single dimension, but as a statistical model.
+2.  This is similar in spirit to a correspondence analysis with a single
+    dimension, but as a statistical model.
