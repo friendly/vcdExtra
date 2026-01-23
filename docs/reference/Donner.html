@@ -54,7 +54,7 @@ died."><meta property="og:image" content="https://friendly.github.io/vcdExtra/lo
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Survival in the Donner Party</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Donner.Rd</code></div>
     </div>
 
@@ -188,7 +188,7 @@ Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="exter
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex      1   6.7274        87     111.13 0.009494 **</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> age:sex  1   0.4003        86     110.73 0.526922   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">survived</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">age</span>,<span class="fl">2</span><span class="op">)</span> <span class="op">*</span> <span class="va">sex</span>, data<span class="op">=</span><span class="va">Donner</span>, family<span class="op">=</span><span class="va">binomial</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -220,7 +220,7 @@ Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="exter
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex               1   8.0908        86    106.731 0.004449 **</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(age, 2):sex  2   8.9321        84     97.799 0.011492 * </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="fu"><a href="glmlist.html">glmlist</a></span><span class="op">(</span><span class="va">mod1</span>, <span class="va">mod2</span>, <span class="va">mod3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         AIC    BIC LR Chisq Df Pr(&gt;Chisq)  </span>
@@ -228,7 +228,7 @@ Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="exter
 <span class="r-out co"><span class="r-pr">#&gt;</span> mod2 118.73 128.73  110.727 86    0.03755 *</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mod3 109.80 124.80   97.799 84    0.14408  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># plot fitted probabilities from mod2 and mod3</span></span></span>
 <span class="r-in"><span><span class="co"># idea from: http://www.ling.upenn.edu/~joseff/rstudy/summer2010_ggplot2_intro.html</span></span></span>

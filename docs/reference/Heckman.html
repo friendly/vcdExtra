@@ -48,7 +48,7 @@ or not they were employed in the labor force."><meta property="og:image" content
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Labour Force Participation of Married Women 1967-1971</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Heckman.Rd</code></div>
     </div>
 
@@ -96,7 +96,7 @@ participation by married women."  <em>Journal of Political Economy</em>, 85:
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Heckman</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># independence model</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">Heckman</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">Heckman</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Heckman-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># same, as a loglm()</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span></span>
@@ -108,7 +108,7 @@ participation by married women."  <em>Journal of Political Economy</em>, 85:
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       X^2 df P(&gt; X^2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood Ratio 3824.863 26        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pearson          8747.019 26        0</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">heckman.mod0</span>, main<span class="op">=</span><span class="st">"Independence model"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">heckman.mod0</span>, main<span class="op">=</span><span class="st">"Independence model"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Heckman-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># first-order markov chain: bad fit</span></span></span>
@@ -121,7 +121,7 @@ participation by married women."  <em>Journal of Political Economy</em>, 85:
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       X^2 df P(&gt; X^2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood Ratio 210.2251 22        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pearson          254.8971 22        0</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">heckman.mod1</span>, main<span class="op">=</span><span class="st">"1st order markov chain model"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">heckman.mod1</span>, main<span class="op">=</span><span class="st">"1st order markov chain model"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Heckman-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># second-order markov chain: bad fit</span></span></span>
@@ -134,7 +134,7 @@ participation by married women."  <em>Journal of Political Economy</em>, 85:
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       X^2 df     P(&gt; X^2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood Ratio 62.67163 16 1.845162e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pearson          75.99393 16 8.698373e-10</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">heckman.mod2</span>, main<span class="op">=</span><span class="st">"2nd order markov chain model"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">heckman.mod2</span>, main<span class="op">=</span><span class="st">"2nd order markov chain model"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Heckman-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># third-order markov chain: fits OK</span></span></span>
@@ -147,7 +147,7 @@ participation by married women."  <em>Journal of Political Economy</em>, 85:
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       X^2 df  P(&gt; X^2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood Ratio 9.023246  8 0.3403388</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pearson          8.155529  8 0.4184270</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">heckman.mod2</span>, main<span class="op">=</span><span class="st">"3rd order markov chain model"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">heckman.mod2</span>, main<span class="op">=</span><span class="st">"3rd order markov chain model"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Heckman-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
