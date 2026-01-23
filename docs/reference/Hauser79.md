@@ -124,7 +124,7 @@ LRstats(hauser.roweff)
 #>                  AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.roweff 2308.9 2324.7   2080.2 12  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # uniform association
 hauser.UA <- update(hauser.indep, ~ . + Fscore*Sscore)
@@ -133,7 +133,7 @@ LRstats(hauser.UA)
 #>              AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.UA 2503.4 2515.6   2280.7 15  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # uniform association, omitting diagonals
 hauser.UAdiag <- update(hauser.indep, ~ . + Fscore*Sscore + Diag(Father,Son))
@@ -142,7 +142,7 @@ LRstats(hauser.UAdiag)
 #>                  AIC BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.UAdiag 305.72 324   73.007 10  1.161e-11 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Levels for Hauser 5-level model
 levels <- matrix(c(
@@ -169,7 +169,7 @@ LRstats(hauser.RC)
 #>              AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.RC 920.16 939.66   685.45  9  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # crossings models
 hauser.CR <- update(hauser.indep, ~ . + Crossings(Father,Son))
@@ -180,7 +180,7 @@ LRstats(hauser.CR)
 #>              AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.CR 318.63 334.47   89.914 12  5.131e-14 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 hauser.CRdiag <- update(hauser.indep, ~ . + Crossings(Father,Son) + Diag(Father,Son))
 LRstats(hauser.CRdiag)
@@ -188,7 +188,7 @@ LRstats(hauser.CRdiag)
 #>                  AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.CRdiag 298.95 318.45   64.237  9   2.03e-10 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 # compare model fit statistics
@@ -210,7 +210,7 @@ sumry[order(sumry$AIC, decreasing=TRUE),]
 #> hauser.topo    295.3  311.1     66.6 12  1.397e-09 ***
 #> hauser.qsymm   268.2  291.3     27.4  6  0.0001193 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 # or, more simply
 LRstats(modlist, sortby="AIC")
 #> Likelihood summary table:
@@ -226,7 +226,7 @@ LRstats(modlist, sortby="AIC")
 #> hauser.topo    295.3  311.1     66.6 12  1.397e-09 ***
 #> hauser.qsymm   268.2  291.3     27.4  6  0.0001193 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 mods <- substring(rownames(sumry),8)
 with(sumry,

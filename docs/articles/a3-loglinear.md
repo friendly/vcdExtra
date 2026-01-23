@@ -19,36 +19,38 @@ Assume we have a 3-way contingency table based on variables A, B, and C.
 The possible different forms of loglinear models for a 3-way table are
 shown in the table below. @(tab:loglin-3way) The **Model formula**
 column shows how to express each model for
-[`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) in R. [¹](#fn1) In
-the **Interpretation** column, the symbol “$\bot$” is to be read as “is
-independent of,” and “$\;|\;$” means “conditional on,” or “adjusting
+[`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) in R. [^1] In the
+**Interpretation** column, the symbol “\\\perp\\” is to be read as “is
+independent of,” and “\\\\\|\\\\” means “conditional on,” or “adjusting
 for,” or just “given”.
 
-| **Model**                | **Model formula**  | **Symbol**                                            | **Interpretation**      |
-|:-------------------------|:-------------------|:------------------------------------------------------|:------------------------|
-| Mutual independence      | `~A + B + C`       | $\lbrack A\rbrack\lbrack B\rbrack\lbrack C\rbrack$    | $A\bot B\bot C$         |
-| Joint independence       | `~A*B + C`         | $\lbrack AB\rbrack\lbrack C\rbrack$                   | $(A\ B)\bot C$          |
-| Conditional independence | `~(A+B)*C`         | $\lbrack AC\rbrack\lbrack BC\rbrack$                  | $(A\bot B)\;|\; C$      |
-| All two-way associations | `~A*B + A*C + B*C` | $\lbrack AB\rbrack\lbrack AC\rbrack\lbrack BC\rbrack$ | homogeneous association |
-| Saturated model          | `~A*B*C`           | $\lbrack ABC\rbrack$                                  | 3-way association       |
+| **Model** | **Model formula** | **Symbol** | **Interpretation** |
+|:---|:---|:---|:---|
+| Mutual independence | `~A + B + C` | \\\[A\]\[B\]\[C\]\\ | \\A \perp B \perp C\\ |
+| Joint independence | `~A*B + C` | \\\[AB\]\[C\]\\ | \\(A \\ B) \perp C\\ |
+| Conditional independence | `~(A+B)*C` | \\\[AC\]\[BC\]\\ | \\(A \perp B) \\\|\\ C\\ |
+| All two-way associations | `~A*B + A*C + B*C` | \\\[AB\]\[AC\]\[BC\]\\ | homogeneous association |
+| Saturated model | `~A*B*C` | \\\[ABC\]\\ | 3-way association |
 
 For example, the formula `~A + B + C` specifies the model of *mutual
 independence* with no associations among the three factors. In standard
-notation for the expected frequencies $m_{ijk}$, this corresponds to
+notation for the expected frequencies \\m\_{ijk}\\, this corresponds to
 
-$$\log\left( m_{ijk} \right) = \mu + \lambda_{i}^{A} + \lambda_{j}^{B} + \lambda_{k}^{C} \equiv A + B + C$$
+\\ \log ( m\_{ijk} ) = \mu + \lambda_i^A + \lambda_j^B + \lambda_k^C
+\equiv A + B + C \\
 
-The parameters $\lambda_{i}^{A},\lambda_{j}^{B}$ and $\lambda_{k}^{C}$
-pertain to the differences among the one-way marginal frequencies for
-the factors A, B and C.
+The parameters \\\lambda_i^A , \lambda_j^B\\ and \\\lambda_k^C\\ pertain
+to the differences among the one-way marginal frequencies for the
+factors A, B and C.
 
-Similarly, the model of *joint independence*, $(A\ B)\bot C$, allows an
-association between A and B, but specifies that C is independent of both
-of these and their combinations,
+Similarly, the model of *joint independence*, \\(A \\ B) \perp C\\,
+allows an association between A and B, but specifies that C is
+independent of both of these and their combinations,
 
-$$\log\left( m_{ijk} \right) = \mu + \lambda_{i}^{A} + \lambda_{j}^{B} + \lambda_{k}^{C} + \lambda_{ij}^{AB} \equiv A*B + C$$
+\\ \log ( m\_{ijk} ) = \mu + \lambda_i^A + \lambda_j^B + \lambda_k^C +
+\lambda\_{ij}^{AB} \equiv A \* B + C \\
 
-where the parameters $\lambda_{ij}^{AB}$ pertain to the overall
+where the parameters \\\lambda\_{ij}^{AB}\\ pertain to the overall
 association between A and B (collapsing over C).
 
 In the literature or text books, you will often find these models
@@ -61,7 +63,7 @@ Models of *conditional independence* allow (and fit) two of the three
 possible two-way associations. There are three such models, depending on
 which variable is conditioned upon. For a given conditional independence
 model, e.g., `[AB][AC]`, the given variable is the one common to all
-terms, so this example has the interpretation $(B\bot C)\;|\; A$.
+terms, so this example has the interpretation \\(B \perp C) \\\|\\ A\\.
 
 ## Fitting with `loglm()`
 
@@ -277,16 +279,17 @@ Goodman RC(1) model (Goodman, 1979), which allows a multiplicative term
 to account for the association of the table variables. In the notation
 of generalized linear models with a log link, this can be expressed as
 
-$$\log\mu_{ij} = \alpha_{i} + \beta_{j} + \gamma_{i}\delta_{j},$$
+\\ \log \mu\_{ij} = \alpha_i + \beta_j + \gamma\_{i} \delta\_{j} ,\\
 
-where the row-multiplicative effect parameters $\gamma_{i}$ and
-corresponding column parameters $\delta_{j}$ are estimated from the
-data.% [²](#fn2)
+where the row-multiplicative effect parameters \\\gamma_i\\ and
+corresponding column parameters \\\delta_j\\ are estimated from the
+data.% [^2]
 
 Similarly, the RC(2) model adds two multiplicative terms to the
 independence model,
 
-$$\log\mu_{ij} = \alpha_{i} + \beta_{j} + \gamma_{i1}\delta_{j1} + \gamma_{i2}\delta_{j2}.$$
+\\ \log \mu\_{ij} = \alpha_i + \beta_j + \gamma\_{i1} \delta\_{j1} +
+\gamma\_{i2} \delta\_{j2} . \\
 
 In the `gnm` package, these models may be fit using the
 [`Mult()`](https://rdrr.io/pkg/gnm/man/Mult.html) to specify the
@@ -323,14 +326,12 @@ Goodman, L. A. (1979). Simple models for the analysis of association in
 cross-classifications having ordered categories. *Journal of the
 American Statistical Association*, *74*, 537–552.
 
-------------------------------------------------------------------------
-
-1.  For [`glm()`](https://rdrr.io/r/stats/glm.html), or
+[^1]: For [`glm()`](https://rdrr.io/r/stats/glm.html), or
     [`gnm()`](https://rdrr.io/pkg/gnm/man/gnm.html), with the data in
     the form of a frequency data.frame, the same model is specified in
-    the form `glm(Freq` $\sim$`..., family="poisson")`, where `Freq` is
-    the name of the cell frequency variable and `...` specifies the
+    the form `glm(Freq` \\\sim\\ `..., family="poisson")`, where `Freq`
+    is the name of the cell frequency variable and `...` specifies the
     *Model formula*.
 
-2.  This is similar in spirit to a correspondence analysis with a single
-    dimension, but as a statistical model.
+[^2]: This is similar in spirit to a correspondence analysis with a
+    single dimension, but as a statistical model.

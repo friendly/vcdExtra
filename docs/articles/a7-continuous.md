@@ -131,7 +131,7 @@ str(Donner)
 ```
 
 A potential model of interest is the logistic regression model for
-$Pr(survived)$, allowing separate fits for males and females as a
+\\Pr(survived)\\, allowing separate fits for males and females as a
 function of `age`. The key to this is the
 [`stat_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
 function, using `method = "glm", method.args = list(family = binomial)`.
@@ -172,10 +172,10 @@ Logistic regression plots for the `Donner` data showing survival
 vs. age, by sex. Left: linear logistic model; right: quadratic model
 {#fig:donner3}
 
-These plots very nicely show (a) the fitted $Pr(survived)$ for males and
-females; (b) confidence bands around the smoothed model fits and (c) the
-individual observations by jittered points at 0 and 1 for those who died
-and survived, respectively.
+These plots very nicely show (a) the fitted \\Pr(survived)\\ for males
+and females; (b) confidence bands around the smoothed model fits and (c)
+the individual observations by jittered points at 0 and 1 for those who
+died and survived, respectively.
 
 ## References
 

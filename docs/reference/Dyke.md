@@ -97,6 +97,6 @@ drop1(dyke.mod0, test="Chisq")
 #> Knowledge                         1 338.37 90.114   <2e-16 ***
 #> Reading:Radio:Lectures:Newspaper  1 248.63  0.374   0.5406    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ```

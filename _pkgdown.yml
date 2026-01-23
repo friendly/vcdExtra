@@ -3,11 +3,12 @@ url: https://friendly.github.io/vcdExtra
 template:
   bootstrap: 5
   # For pkgdown >= 2.1.0, can use: math-rendering: mathjax
-  includes:
-    in_header: |
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"
-              integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  math-rendering: mathjax
+  # includes:
+  #   in_header: |
+  #     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"
+  #             integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA=="
+  #             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   params:
     bootswatch: cosmo
 

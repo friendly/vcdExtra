@@ -170,17 +170,17 @@ vigns$Title <- paste0("[", vigns$Title, "](https://friendly.github.io/vcdExtra/a
 vigns |> knitr::kable()
 ```
 
-| File                | Title                                                                                                             |
-|:--------------------|:------------------------------------------------------------------------------------------------------------------|
-| a1-creating.Rmd     | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html)    |
-| a2-tests.Rmd        | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html)                            |
-| a3-loglinear.Rmd    | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html)                             |
-| a4-mosaics.Rmd      | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html)                                   |
-| a5-demo-housing.Rmd | [5. Demo - Housing Data](https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html)                       |
-| a6-mobility.Rmd     | [6. Mobility tables](https://friendly.github.io/vcdExtra/articles/a6-mobility.html)                               |
-| a7-continuous.Rmd   | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html)                       |
-| datasets.Rmd        | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html)              |
-| tidyCats.Rmd        | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) |
+| File | Title |
+|:---|:---|
+| a1-creating.Rmd | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html) |
+| a2-tests.Rmd | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html) |
+| a3-loglinear.Rmd | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html) |
+| a4-mosaics.Rmd | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html) |
+| a5-demo-housing.Rmd | [5. Demo - Housing Data](https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html) |
+| a6-mobility.Rmd | [6. Mobility tables](https://friendly.github.io/vcdExtra/articles/a6-mobility.html) |
+| a7-continuous.Rmd | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html) |
+| datasets.Rmd | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html) |
+| tidyCats.Rmd | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) |
 
 - a few useful utility functions for manipulating categorical data sets
   and working with models for categorical data:
@@ -396,7 +396,7 @@ fit to the same data.
 
 [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
 provides a brief summary for one or more models fit to the same dataset.
-The likelihood ratio $\chi^{2}$ values (`LR Chisq`)test lack of fit. By
+The likelihood ratio \\\chi^2\\ values (`LR Chisq`)test lack of fit. By
 these tests, none of the ordinal models show significant lack of fit. By
 the AIC and BIC statistics, the `linlin` model is the best, combining
 parsimony and goodness of fit.

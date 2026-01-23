@@ -6,14 +6,14 @@ of a loglinear model.
 
 For a two-way table,
 [`mosaic()`](https://rdrr.io/pkg/vcd/man/mosaic.html), by default, fits
-a model of independence, $\lbrack A\rbrack\lbrack B\rbrack$ or `~A + B`
-as an R formula. The `vcdExtra` package extends this to models fit using
+a model of independence, \\\[A\]\[B\]\\ or `~A + B` as an R formula. The
+`vcdExtra` package extends this to models fit using
 `glm(..., family=poisson)`, which can include specialized models for
 ordered factors, or square tables that are intermediate between the
-saturated model, $\lbrack AB\rbrack$ = `A * B`, and the independence
-model $\lbrack A\rbrack\lbrack B\rbrack$.
+saturated model, \\\[A B\]\\ = `A * B`, and the independence model
+\\\[A\]\[B\]\\.
 
-For $n$-way tables,
+For \\n\\-way tables,
 [`vcd::mosaic()`](https://rdrr.io/pkg/vcd/man/mosaic.html) can fit any
 loglinear model, and can also be used to plot a model fit with
 `MASS:loglm()`. The `vcdExtra` package extends this to models fit using
@@ -50,7 +50,7 @@ The essential ideas are to:
 range of options for the directions of splitting, the specification of
 shading, labeling, spacing, legend and many other details. It is
 actually implemented as a special case of a more general class of
-displays for $n$-way tables called `strucplot`, including sieve
+displays for \\n\\-way tables called `strucplot`, including sieve
 diagrams, association plots, double-decker plots as well as mosaic
 plots.
 
@@ -101,9 +101,9 @@ summary(art)
 ```
 
 In contrast, one of the other shading schemes, from Friendly (1994)
-(use: `gp = shading_Friendly`), uses fixed cutoffs of $\pm 2, \pm 4$, to
-shade cells which are *individually* significant at approximately
-$\alpha = 0.05$ and $\alpha = 0.001$ levels, respectively. The plot
+(use: `gp = shading_Friendly`), uses fixed cutoffs of \\\pm 2, \pm 4\\,
+to shade cells which are *individually* significant at approximately
+\\\alpha = 0.05\\ and \\\alpha = 0.001\\ levels, respectively. The plot
 below uses `gp = shading_Friendly`.
 
 ``` r
@@ -236,25 +236,24 @@ association, different from `A:B` which specifies the saturated model in
 this notation.
 
 - **Quasi-independence**: Asserts independence, but ignores the diagonal
-  cells by fitting them exactly. The loglinear model is:
-  $\log m_{ij} = \mu + \lambda_{i}^{A} + \lambda_{j}^{B} + \delta_{i}I(i = j)$,
-  where $I{()}$ is the indicator function.
+  cells by fitting them exactly. The loglinear model is: \\\log m\_{ij}
+  = \mu + \lambda^A_i + \lambda^B_j + \delta_i I(i = j)\\, where \\I()\\
+  is the indicator function.
 
 - **Symmetry**: This model asserts that the joint distribution of the
-  row and column variables is symmetric, that is $\pi_{ij} = \pi_{ji}$:
-  A son is equally likely to move from their father’s occupational
-  category $i$ to another category, $j$, as the reverse, moving from $j$
-  to $i$. Symmetry is quite strong, because it also implies **marginal
-  homogeneity**, that the marginal probabilities of the row and column
-  variables are equal,
-  $\pi{i +} = \sum_{j}\pi_{ij} = \sum_{j}\pi_{ji} = \pi_{+ i}$ for all
-  $i$.
+  row and column variables is symmetric, that is \\\pi\_{ij} =
+  \pi\_{ji}\\: A son is equally likely to move from their father’s
+  occupational category \\i\\ to another category, \\j\\, as the
+  reverse, moving from \\j\\ to \\i\\. Symmetry is quite strong, because
+  it also implies **marginal homogeneity**, that the marginal
+  probabilities of the row and column variables are equal, \\\pi{i+} =
+  \sum_j \pi\_{ij} = \sum_j \pi\_{ji} = \pi\_{+i}\\ for all \\i\\.
 
 - **Quasi-symmetry**: This model uses the standard main-effect terms in
   the loglinear model, but asserts that the association parameters are
-  symmetric,
-  $\log m_{ij} = \mu + \lambda_{i}^{A} + \lambda_{j}^{B} + \lambda_{ij}^{AB}$,
-  where $\lambda_{ij}^{AB} = \lambda_{ji}^{AB}$.
+  symmetric, \\\log m\_{ij} = \mu + \lambda^A_i + \lambda^B_j +
+  \lambda^{AB}\_{ij}\\, where \\\lambda^{AB}\_{ij} =
+  \lambda^{AB}\_{ji}\\.
 
 The [gnm package](https://cran.r-project.org/package=gnm) provides a
 variety of these functions:
@@ -265,7 +264,7 @@ interaction factor as specified by an array of levels, which may be
 arbitrarily structured.
 
 For example, the following generates a term for a diagonal factor in a
-$4 \times 4$ table. The diagonal values reflect parameters fitted for
+\\4 \times 4\\ table. The diagonal values reflect parameters fitted for
 each diagonal cell. Off-diagonal values, “.” are ignored.
 
 ``` r
@@ -379,7 +378,7 @@ By all criteria, the model of quasi symmetry fits best. The residual
 deviance \$G^2 is not significant. The mosaic is largely unshaded,
 indicating a good fit, but there are a few shaded cells that indicate
 the remaining positive and negative residuals. For comparative mosaic
-displays, it is sometimes useful to show the $G^{2}$ statistic in the
+displays, it is sometimes useful to show the \\G^2\\ statistic in the
 main title, using
 [`vcdExtra::modFit()`](https://friendly.github.io/vcdExtra/reference/modFit.md)
 for this purpose.
@@ -409,7 +408,7 @@ The general ideas are that:
   to best account for the association in 1, 2, … dimensions
 
 - The first CA dimension accounts for largest proportion of the Pearson
-  $\chi^{2}$
+  \\\chi^2\\
 
 - Therefore, permuting the levels of the row and column variables by the
   CA Dim1 scores gives a more coherent mosaic plot, more clearly showing
@@ -465,7 +464,7 @@ mosaic(HouseTasks, shade = TRUE,
 
 Correspondence analysis, using the [ca
 package](https://cran.r-project.org/package=ca), shows that nearly 89%
-of the $\chi^{2}$ can be accounted for in two dimensions.
+of the \\\chi^2\\ can be accounted for in two dimensions.
 
 ``` r
 require(ca)

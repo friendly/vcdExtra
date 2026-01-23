@@ -11,12 +11,17 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="2. Tests of Independence">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -75,7 +80,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a2-tests.Rmd" class="external-link"><code>vignettes/a2-tests.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a2-tests.Rmd" class="external-link"><code>vignettes/a2-tests.Rmd</code></a></small>
       <div class="d-none name"><code>a2-tests.Rmd</code></div>
     </div>
 
@@ -105,8 +110,7 @@ cell.</p>
 <span><span class="co">##   female 279    73 225</span></span>
 <span><span class="co">##   male   165    47 191</span></span></code></pre></div>
 <p>Generate a cross-table showing cell frequency and the cell
-contribution to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>.</p>
+contribution to <span class="math inline">\(\chi^2\)</span>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 2-Way Cross Tabulation</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-gregmisc/gmodels" class="external-link">gmodels</a></span><span class="op">)</span></span>
@@ -147,12 +151,9 @@ output! See <code><a href="https://rdrr.io/pkg/gmodels/man/CrossTable.html" clas
 <h2 id="chi-square-test">Chi-square test<a class="anchor" aria-label="anchor" href="#chi-square-test"></a>
 </h2>
 <p>For 2-way tables you can use <code><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test()</a></code> to test
-independence of the row and column variable. By default, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>-value
-is calculated from the asymptotic chi-squared distribution of the test
-statistic. Optionally, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>-value
-can be derived via Monte Carlo simulation.</p>
+independence of the row and column variable. By default, the <span class="math inline">\(p\)</span>-value is calculated from the asymptotic
+chi-squared distribution of the test statistic. Optionally, the <span class="math inline">\(p\)</span>-value can be derived via Monte Carlo
+simulation.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">HairEye</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/marginSums.html" class="external-link">margin.table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">##        Eye</span></span>
@@ -184,8 +185,7 @@ can be derived via Monte Carlo simulation.</p>
 of independence. <code>X</code> must be a two-way contingency table in
 table form. Another form, <code>fisher.test(X, Y)</code> takes two
 categorical vectors of the same length.<br>
-For tables larger than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math>
+For tables larger than <span class="math inline">\(2 \times 2\)</span>
 the method can be computationally intensive (or can fail) if the
 frequencies are not small.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -197,9 +197,7 @@ frequencies are not small.</p>
 <span><span class="co">## p-value = 0.03115</span></span>
 <span><span class="co">## alternative hypothesis: two.sided</span></span></code></pre></div>
 <p>Fisher’s test is meant for tables with small total sample size. It
-generates an error for the <code>HairEye</code> data with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>=592
-total frequency.</p>
+generates an error for the <code>HairEye</code> data with <span class="math inline">\(n\)</span>=592 total frequency.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html" class="external-link">fisher.test</a></span><span class="op">(</span><span class="va">HairEye</span><span class="op">)</span></span>
 <span><span class="co">## <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `fisher.test()`:</span></span></span>
@@ -210,17 +208,14 @@ total frequency.</p>
 <h2 id="sec:mantel">Mantel-Haenszel test and conditional association<a class="anchor" aria-label="anchor" href="#sec:mantel"></a>
 </h2>
 <p>Use the <code>mantelhaen.test(X)</code> function to perform a
-Cochran-Mantel-Haenszel
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
-chi test of the null hypothesis that two nominal variables are
-<em>conditionally independent</em>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊥</mo><mi>B</mi><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.278em"></mspace><mi>C</mi></mrow><annotation encoding="application/x-tex">A \perp B \; | \; C</annotation></semantics></math>,
-in each stratum, assuming that there is no three-way interaction.
-<code>X</code> is a 3 dimensional contingency table, where the last
-dimension refers to the strata.</p>
-<p>The <code>UCBAdmissions</code> serves as an example of a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn><mo>×</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">2 \times 2 \times 6</annotation></semantics></math>
-table, with <code>Dept</code> as the stratifying variable.</p>
+Cochran-Mantel-Haenszel <span class="math inline">\(\chi^2\)</span> chi
+test of the null hypothesis that two nominal variables are
+<em>conditionally independent</em>, <span class="math inline">\(A \perp
+B \; | \; C\)</span>, in each stratum, assuming that there is no
+three-way interaction. <code>X</code> is a 3 dimensional contingency
+table, where the last dimension refers to the strata.</p>
+<p>The <code>UCBAdmissions</code> serves as an example of a <span class="math inline">\(2 \times 2 \times 6\)</span> table, with
+<code>Dept</code> as the stratifying variable.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># UC Berkeley Student Admissions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/mantelhaen.test.html" class="external-link">mantelhaen.test</a></span><span class="op">(</span><span class="va">UCBAdmissions</span><span class="op">)</span></span>
@@ -238,11 +233,10 @@ table, with <code>Dept</code> as the stratifying variable.</p>
 <p>The results show no evidence for association between admission and
 gender when adjusted for department. However, we can easily see that the
 assumption of equal association across the strata (no 3-way association)
-is probably violated. For
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn><mo>×</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">2 \times 2 \times k</annotation></semantics></math>
-tables, this can be examined from the odds ratios for each
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times 2</annotation></semantics></math>
-table (<code><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="external-link">oddsratio()</a></code>), and tested by using
+is probably violated. For <span class="math inline">\(2 \times 2 \times
+k\)</span> tables, this can be examined from the odds ratios for each
+<span class="math inline">\(2 \times 2\)</span> table
+(<code><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="external-link">oddsratio()</a></code>), and tested by using
 <code><a href="../reference/woolf_test.html">woolf_test()</a></code> in <code>vcd</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="external-link">oddsratio</a></span><span class="op">(</span><span class="va">UCBAdmissions</span>, log<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
@@ -284,13 +278,9 @@ table (<code><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="extern
 </h3>
 <p>We can visualize the odds ratios of Admission for each department
 with fourfold displays using <code><a href="https://rdrr.io/pkg/vcd/man/fourfold.html" class="external-link">fourfold()</a></code>. The cell
-frequencies
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">n_{ij}</annotation></semantics></math>
-of each
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2 \times  2</annotation></semantics></math>
-table are shown as a quarter circle whose radius is proportional to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><msub><mi>n</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></msqrt><annotation encoding="application/x-tex">\sqrt{n_{ij}}</annotation></semantics></math>,
-so that its area is proportional to the cell frequency.</p>
+frequencies <span class="math inline">\(n_{ij}\)</span> of each <span class="math inline">\(2 \times  2\)</span> table are shown as a quarter
+circle whose radius is proportional to <span class="math inline">\(\sqrt{n_{ij}}\)</span>, so that its area is
+proportional to the cell frequency.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">UCB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/aperm.html" class="external-link">aperm</a></span><span class="op">(</span><span class="va">UCBAdmissions</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">UCB</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yes"</span>, <span class="st">"No"</span><span class="op">)</span></span>
@@ -373,40 +363,31 @@ Log odds ratio plot for the <code>UCBAdmissions</code> data.
 <div class="section level2">
 <h2 id="sec:CMH">Cochran-Mantel-Haenszel tests for ordinal factors<a class="anchor" aria-label="anchor" href="#sec:CMH"></a>
 </h2>
-<p>The standard
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
-tests for association in a two-way table treat both table factors as
-nominal (unordered) categories. When one or both factors of a two-way
-table are quantitative or ordinal, more powerful tests of association
-may be obtained by taking ordinality into account, using row and or
-column scores to test for linear trends or differences in row or column
+<p>The standard <span class="math inline">\(\chi^2\)</span> tests for
+association in a two-way table treat both table factors as nominal
+(unordered) categories. When one or both factors of a two-way table are
+quantitative or ordinal, more powerful tests of association may be
+obtained by taking ordinality into account, using row and or column
+scores to test for linear trends or differences in row or column
 means.</p>
 <p>More general versions of the CMH tests (Landis etal., 1978) <span class="citation">(Landis, Heyman, and Koch 1978)</span> are provided by
 assigning numeric scores to the row and/or column variables. For
 example, with two ordinal factors (assumed to be equally spaced),
 assigning integer scores, <code>1:R</code> and <code>1:C</code> tests
-the linear
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
-linear component of association. This is statistically equivalent to the
-Pearson correlation between the integer-scored table variables, with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>r</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\chi^2 = (n-1) r^2</annotation></semantics></math>,
-with only 1
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">df</annotation></semantics></math>
-rather than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>R</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>×</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(R-1)\times(C-1)</annotation></semantics></math>
-for the test of general association.</p>
+the linear <span class="math inline">\(\times\)</span> linear component
+of association. This is statistically equivalent to the Pearson
+correlation between the integer-scored table variables, with <span class="math inline">\(\chi^2 = (n-1) r^2\)</span>, with only 1 <span class="math inline">\(df\)</span> rather than <span class="math inline">\((R-1)\times(C-1)\)</span> for the test of general
+association.</p>
 <p>When only one table variable is ordinal, these general CMH tests are
 analogous to an ANOVA, testing whether the row mean scores or column
-mean scores are equal, again consuming fewer
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">df</annotation></semantics></math>
-than the test of general association.</p>
+mean scores are equal, again consuming fewer <span class="math inline">\(df\)</span> than the test of general
+association.</p>
 <p>The <code><a href="../reference/CMHtest.html">CMHtest()</a></code> function in <code>vcdExtra</code>
 calculates these various CMH tests for two possibly ordered factors,
 optionally stratified other factor(s).</p>
 <p><strong><em>Example</em></strong>:</p>
-<p>Recall the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 \times 4</annotation></semantics></math>
-table, <code>JobSat</code> introduced in @ref(sec:creating),</p>
+<p>Recall the <span class="math inline">\(4 \times 4\)</span> table,
+<code>JobSat</code> introduced in @ref(sec:creating),</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">JobSat</span></span>
 <span><span class="co">##         satisfaction</span></span>
@@ -438,23 +419,16 @@ general association and linear x linear association respectively.</p>
 <h2 id="measures-of-association">Measures of Association<a class="anchor" aria-label="anchor" href="#measures-of-association"></a>
 </h2>
 <p>There are a variety of statistical measures of <em>strength</em> of
-association for contingency tables— similar in spirit to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
-or
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>r</mi><mn>2</mn></msup><annotation encoding="application/x-tex">r^2</annotation></semantics></math>
-for continuous variables. With a large sample size, even a small degree
-of association can show a significant
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>,
-as in the example below for the <code>GSS</code> data.</p>
+association for contingency tables— similar in spirit to <span class="math inline">\(r\)</span> or <span class="math inline">\(r^2\)</span> for continuous variables. With a
+large sample size, even a small degree of association can show a
+significant <span class="math inline">\(\chi^2\)</span>, as in the
+example below for the <code>GSS</code> data.</p>
 <p>The <code><a href="https://rdrr.io/pkg/vcd/man/assocstats.html" class="external-link">assocstats()</a></code> function in <code>vcd</code> calculates
-the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math>
-contingency coefficient, and Cramer’s V for an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>×</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">r \times c</annotation></semantics></math>
-table. The input must be in table form, a two-way
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>×</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">r \times c</annotation></semantics></math>
-table. It won’t work with <code>GSS</code> in frequency form, but by now
-you should know how to convert.</p>
+the <span class="math inline">\(\phi\)</span> contingency coefficient,
+and Cramer’s V for an <span class="math inline">\(r \times c\)</span>
+table. The input must be in table form, a two-way <span class="math inline">\(r \times c\)</span> table. It won’t work with
+<code>GSS</code> in frequency form, but by now you should know how to
+convert.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/assocstats.html" class="external-link">assocstats</a></span><span class="op">(</span><span class="va">GSStab</span><span class="op">)</span></span>
 <span><span class="co">##                     X^2 df P(&gt; X^2)</span></span>
@@ -465,11 +439,9 @@ you should know how to convert.</p>
 <span><span class="co">## Contingency Coeff.: 0.084 </span></span>
 <span><span class="co">## Cramer's V        : 0.085</span></span></code></pre></div>
 <p>For tables with ordinal variables, like <code>JobSat</code>, some
-people prefer the Goodman-Kruskal
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>
-statistic <span class="citation">(Agresti 2002, 2.4.3)</span> based on a
-comparison of concordant and discordant pairs of observations in the
-case-form equivalent of a two-way table.</p>
+people prefer the Goodman-Kruskal <span class="math inline">\(\gamma\)</span> statistic <span class="citation">(Agresti 2002, 2.4.3)</span> based on a comparison of
+concordant and discordant pairs of observations in the case-form
+equivalent of a two-way table.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/GKgamma.html">GKgamma</a></span><span class="op">(</span><span class="va">JobSat</span><span class="op">)</span></span>
 <span><span class="co">## gamma        : 0.221 </span></span>
@@ -483,16 +455,11 @@ case-form equivalent of a two-way table.</p>
 <h2 id="measures-of-agreement">Measures of Agreement<a class="anchor" aria-label="anchor" href="#measures-of-agreement"></a>
 </h2>
 <p>The <code><a href="https://rdrr.io/pkg/vcd/man/Kappa.html" class="external-link">Kappa()</a></code> function in the <code>vcd</code> package
-calculates Cohen’s
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>
-and weighted
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>
-for a square two-way table with the same row and column categories <span class="citation">(Cohen 1960)</span>. Normal-theory
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>-tests
-are obtained by dividing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>
-by its asymptotic standard error (ASE). A <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> method
-for <code>Kappa</code> objects provides confidence intervals.</p>
+calculates Cohen’s <span class="math inline">\(\kappa\)</span> and
+weighted <span class="math inline">\(\kappa\)</span> for a square
+two-way table with the same row and column categories <span class="citation">(Cohen 1960)</span>. Normal-theory <span class="math inline">\(z\)</span>-tests are obtained by dividing <span class="math inline">\(\kappa\)</span> by its asymptotic standard error
+(ASE). A <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> method for <code>Kappa</code> objects
+provides confidence intervals.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">SexualFun</span>, package <span class="op">=</span> <span class="st">"vcd"</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vcd/man/Kappa.html" class="external-link">Kappa</a></span><span class="op">(</span><span class="va">SexualFun</span><span class="op">)</span><span class="op">)</span></span>
@@ -512,10 +479,8 @@ agreementplot for the <code>SexualFun</code> data, produced as shown
 below.</p>
 <p>The Bangdiwala measures (returned by the function) represent the
 proportion of the shaded areas of the diagonal rectangles, using weights
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>1</mn></msub><annotation encoding="application/x-tex">w_1</annotation></semantics></math>
-for exact agreement, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>2</mn></msub><annotation encoding="application/x-tex">w_2</annotation></semantics></math>
-for partial agreement one step from the main diagonal.</p>
+<span class="math inline">\(w_1\)</span> for exact agreement, and <span class="math inline">\(w_2\)</span> for partial agreement one step from
+the main diagonal.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vcd/man/agreementplot.html" class="external-link">agreementplot</a></span><span class="op">(</span><span class="va">SexualFun</span>, main<span class="op">=</span><span class="st">"Is sex fun?"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -538,18 +503,11 @@ two raters– lack of <em>marginal homogeneity</em>.</p>
 </h2>
 <p>Correspondence analysis is a technique for visually exploring
 relationships between rows and columns in contingency tables. The
-<code>ca</code> package gives one implementation. For an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>×</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">r \times c</annotation></semantics></math>
-table, the method provides a breakdown of the Pearson
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
-for association in up to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>r</mi><mo>−</mo><mn>1</mn><mo>,</mo><mi>c</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">M = \min(r-1, c-1)</annotation></semantics></math>
-dimensions, and finds scores for the row
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mrow><mi>i</mi><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">x_{im}</annotation></semantics></math>)
-and column
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mrow><mi>j</mi><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">y_{jm}</annotation></semantics></math>)
-categories such that the observations have the maximum possible
-correlations.% <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Related methods are the non-parametric CMH tests using
+<code>ca</code> package gives one implementation. For an <span class="math inline">\(r \times c\)</span> table, the method provides a
+breakdown of the Pearson <span class="math inline">\(\chi^2\)</span> for
+association in up to <span class="math inline">\(M = \min(r-1,
+c-1)\)</span> dimensions, and finds scores for the row (<span class="math inline">\(x_{im}\)</span>) and column (<span class="math inline">\(y_{jm}\)</span>) categories such that the
+observations have the maximum possible correlations.% <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Related methods are the non-parametric CMH tests using
 assumed row/column scores (@ref(sec:CMH), the analogous
 &lt;code&gt;&lt;a href="https://rdrr.io/r/stats/glm.html" class="external-link"&gt;glm()&lt;/a&gt;&lt;/code&gt; model-based methods (@ref(sec:CMH), and the more
 general RC models which can be fit using &lt;code&gt;&lt;a href="https://rdrr.io/pkg/gnm/man/gnm.html" class="external-link"&gt;gnm()&lt;/a&gt;&lt;/code&gt;.

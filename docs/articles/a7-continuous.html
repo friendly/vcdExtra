@@ -11,12 +11,17 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="7. Continuous predictors">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -75,7 +80,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a7-continuous.Rmd" class="external-link"><code>vignettes/a7-continuous.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a7-continuous.Rmd" class="external-link"><code>vignettes/a7-continuous.Rmd</code></a></small>
       <div class="d-none name"><code>a7-continuous.Rmd</code></div>
     </div>
 
@@ -194,10 +199,9 @@ lived and who died?</p>
 <span><span class="co">##  $ survived: int  0 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">##  $ death   : POSIXct, format: "1846-12-29" NA ...</span></span></code></pre></div>
 <p>A potential model of interest is the logistic regression model for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mi>u</mi><mi>r</mi><mi>v</mi><mi>i</mi><mi>v</mi><mi>e</mi><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Pr(survived)</annotation></semantics></math>,
-allowing separate fits for males and females as a function of
-<code>age</code>. The key to this is the <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth()</a></code>
-function, using
+<span class="math inline">\(Pr(survived)\)</span>, allowing separate
+fits for males and females as a function of <code>age</code>. The key to
+this is the <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth()</a></code> function, using
 <code>method = "glm", method.args = list(family = binomial)</code>. The
 <code>formula = y ~ x</code> specifies a linear fit on the logit scale
 (@ref{fig:donner3}, left)</p>
@@ -222,17 +226,16 @@ right).</p>
 <span>              formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">2</span><span class="op">)</span>, </span>
 <span>              alpha <span class="op">=</span> <span class="fl">0.2</span>, size<span class="op">=</span><span class="fl">2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="a7-continuous_files/figure-html/donner3a-1.png" class="r-plt" alt="Logistic regression plots for the  `Donner` data showing survival vs. age, by sex. Left: linear logistic model; right: quadratic model {#fig:donner3}" width="46%"><img src="a7-continuous_files/figure-html/donner3a-2.png" class="r-plt" alt="Logistic regression plots for the  `Donner` data showing survival vs. age, by sex. Left: linear logistic model; right: quadratic model {#fig:donner3}" width="46%"><p class="caption">
+<img src="a7-continuous_files/figure-html/donner3a-1.png" class="r-plt" alt="Logistic regression plots for the  `Donner` data  showing survival vs. age, by sex. Left: linear logistic model; right: quadratic model {#fig:donner3}" width="46%"><img src="a7-continuous_files/figure-html/donner3a-2.png" class="r-plt" alt="Logistic regression plots for the  `Donner` data  showing survival vs. age, by sex. Left: linear logistic model; right: quadratic model {#fig:donner3}" width="46%"><p class="caption">
 Logistic regression plots for the <code>Donner</code> data showing
 survival vs. age, by sex. Left: linear logistic model; right: quadratic
 model {#fig:donner3}
 </p>
 </div>
-<p>These plots very nicely show (a) the fitted
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mi>u</mi><mi>r</mi><mi>v</mi><mi>i</mi><mi>v</mi><mi>e</mi><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Pr(survived)</annotation></semantics></math>
-for males and females; (b) confidence bands around the smoothed model
-fits and (c) the individual observations by jittered points at 0 and 1
-for those who died and survived, respectively.</p>
+<p>These plots very nicely show (a) the fitted <span class="math inline">\(Pr(survived)\)</span> for males and females; (b)
+confidence bands around the smoothed model fits and (c) the individual
+observations by jittered points at 0 and 1 for those who died and
+survived, respectively.</p>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

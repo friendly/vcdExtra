@@ -11,7 +11,13 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
-<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -19,7 +25,6 @@
 <meta name="description" content='Provides additional data sets, methods and documentation to complement the vcd package for Visualizing Categorical Data and the gnm package for Generalized Nonlinear Models. In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and adds a 3D version in mosaic3d. Additionally, methods are provided for comparing and visualizing lists of glm and loglm objects. This package is now a support package for the book, "Discrete Data Analysis with R" by Michael Friendly and David Meyer.'>
 <meta property="og:description" content='Provides additional data sets, methods and documentation to complement the vcd package for Visualizing Categorical Data and the gnm package for Generalized Nonlinear Models. In particular, vcdExtra extends mosaic, assoc and sieve plots from vcd to handle glm() and gnm() models and adds a 3D version in mosaic3d. Additionally, methods are provided for comparing and visualizing lists of glm and loglm objects. This package is now a support package for the book, "Discrete Data Analysis with R" by Michael Friendly and David Meyer.'>
 <meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -163,44 +168,44 @@
 <col width="50%">
 <col width="50%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th align="left">File</th>
 <th align="left">Title</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td align="left">a1-creating.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a1-creating.html">1. Creating and manipulating frequency tables</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">a2-tests.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a2-tests.html">2. Tests of Independence</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">a3-loglinear.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a3-loglinear.html">3. Loglinear Models</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">a4-mosaics.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a4-mosaics.html">4. Mosaic plots</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">a5-demo-housing.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html">5. Demo - Housing Data</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">a6-mobility.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a6-mobility.html">6. Mobility tables</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">a7-continuous.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a7-continuous.html">7. Continuous predictors</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td align="left">datasets.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/datasets.html">Datasets for categorical data analysis</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td align="left">tidyCats.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></td>
 </tr>
@@ -337,7 +342,7 @@
 <span><span class="va">coleff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">ses</span><span class="op">)</span></span>
 <span><span class="va">rowcol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">.</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Rscore</span><span class="op">:</span><span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span><span class="op">:</span><span class="va">Cscore</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Compare the models</strong>: For <code>glm</code> objects, the <code>print</code> and <code>summary</code> methods give too much information if all one wants to see is a brief summary of model goodness of fit, and there is no easy way to display a compact comparison of model goodness of fit for a collection of models fit to the same data.</p>
-<p><code><a href="reference/LRstats.html">LRstats()</a></code> provides a brief summary for one or more models fit to the same dataset. The likelihood ratio <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math> values (<code>LR Chisq</code>)test lack of fit. By these tests, none of the ordinal models show significant lack of fit. By the AIC and BIC statistics, the <code>linlin</code> model is the best, combining parsimony and goodness of fit.</p>
+<p><code><a href="reference/LRstats.html">LRstats()</a></code> provides a brief summary for one or more models fit to the same dataset. The likelihood ratio <span class="math inline">\(\chi^2\)</span> values (<code>LR Chisq</code>)test lack of fit. By these tests, none of the ordinal models show significant lack of fit. By the AIC and BIC statistics, the <code>linlin</code> model is the best, combining parsimony and goodness of fit.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">indep</span>, <span class="va">linlin</span>, <span class="va">roweff</span>, <span class="va">coleff</span>, <span class="va">rowcol</span><span class="op">)</span></span>
 <span><span class="co">## Likelihood summary table:</span></span>

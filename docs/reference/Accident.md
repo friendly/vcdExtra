@@ -100,7 +100,7 @@ LRstats(acc.mod0)
 #>            AIC   BIC LR Chisq Df Pr(>Chisq)    
 #> acc.mod0 60983 61007    60320 70  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 mosaic(acc.mod0, ~mode + age + gender + result)
 
@@ -114,7 +114,7 @@ LRstats(acc.mod1)
 #>             AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> acc.mod1 2942.4 3040.1   2217.7 39  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 mosaic(acc.mod1, ~mode + age + gender + result,
     labeling_args = list(abbreviate = c(gender=1, result=4)))
@@ -129,7 +129,7 @@ LRstats(acc.mod2)
 #>             AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> acc.mod2 968.13 1084.8   227.47 31  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 mosaic(acc.mod2, ~mode + age + gender + result,
     labeling_args = list(abbreviate = c(gender=1, result=4)))
 
@@ -142,15 +142,15 @@ LRstats(acc.mods)
 #> acc.mod1  2942  3040     2218 39  < 2.2e-16 ***
 #> acc.mod2   968  1085      227 31  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ## Binomial (logistic regression) models for result
 ## ------------------------------------------------
 library(car)  # for Anova()
 #> Loading required package: carData
 #> 
-#> Attaching package: ‘carData’
-#> The following object is masked from ‘package:vcdExtra’:
+#> Attaching package: 'carData'
+#> The following object is masked from 'package:vcdExtra':
 #> 
 #>     Burt
 acc.bin1 <- glm(result=='Died' ~ age + mode + gender,
@@ -164,7 +164,7 @@ Anova(acc.bin1)
 #> mode     136.82  3  < 2.2e-16 ***
 #> gender   467.70  1  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 acc.bin2 <- glm(result=='Died' ~ (age + mode + gender)^2,
     weights=Freq, data=Accident, family=binomial)
@@ -180,7 +180,7 @@ Anova(acc.bin2)
 #> age:gender     46.86  4  1.631e-09 ***
 #> mode:gender    21.94  3  6.702e-05 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 acc.bin3 <- glm(result=='Died' ~ (age + mode + gender)^3,
     weights=Freq, data=Accident, family=binomial)
@@ -197,7 +197,7 @@ Anova(acc.bin3)
 #> mode:gender        21.94  3  6.702e-05 ***
 #> age:mode:gender    13.02 12     0.3675    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # compare models
 anova(acc.bin1, acc.bin2, acc.bin3, test="Chisq")
@@ -211,7 +211,7 @@ anova(acc.bin1, acc.bin2, acc.bin3, test="Chisq")
 #> 2        52      64384 19  214.445   <2e-16 ***
 #> 3        40      64371 12   13.022   0.3675    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # visualize probability of death with effect plots
 if (FALSE) { # \dontrun{

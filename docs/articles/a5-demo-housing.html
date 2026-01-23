@@ -11,12 +11,17 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="5. Demo - Housing Data">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -75,7 +80,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a5-demo-housing.Rmd" class="external-link"><code>vignettes/a5-demo-housing.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a5-demo-housing.Rmd" class="external-link"><code>vignettes/a5-demo-housing.Rmd</code></a></small>
       <div class="d-none name"><code>a5-demo-housing.Rmd</code></div>
     </div>
 
@@ -99,8 +104,7 @@ display.</p>
 <h2 id="housing-data">Housing data<a class="anchor" aria-label="anchor" href="#housing-data"></a>
 </h2>
 <p>The content here is the dataset <code><a href="https://rdrr.io/pkg/MASS/man/housing.html" class="external-link">MASS::housing</a></code>, giving a
-4-way,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>×</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">3 \times 3 \times 4 \times 2</annotation></semantics></math>
+4-way, <span class="math inline">\(3 \times 3 \times 4 \times 2\)</span>
 frequency table of 1681 individuals from the <em>Copenhagen Housing
 Conditions Survey</em>, classified by their:</p>
 <ul>
@@ -238,9 +242,7 @@ conditioning used is <code>~Sat + Infl + Type + Cont</code>.</p>
 the mosaic can be set using the <code>formula</code> argument. Here, I
 rearrange the variables to put <code>Sat</code> as the last variable in
 the splitting / conditioning sequence. I also use
-<code><a href="../reference/modFit.html">vcdExtra::modFit()</a></code> to add the LR
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>G</mi><mn>2</mn></msup><annotation encoding="application/x-tex">G^2</annotation></semantics></math>
-fit statistic to the plot title.</p>
+<code><a href="../reference/modFit.html">vcdExtra::modFit()</a></code> to add the LR <span class="math inline">\(G^2\)</span> fit statistic to the plot title.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">house.glm0</span>, </span>
 <span>       formula <span class="op">=</span> <span class="op">~</span> <span class="va">Type</span> <span class="op">+</span> <span class="va">Infl</span> <span class="op">+</span> <span class="va">Cont</span> <span class="op">+</span> <span class="va">Sat</span>, </span>
@@ -305,16 +307,12 @@ iterative proportional scaling algorithm of
 <h2 id="did-the-model-get-better">Did the model get better?<a class="anchor" aria-label="anchor" href="#did-the-model-get-better"></a>
 </h2>
 <p>As before, <code><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova()</a></code> tests the added contribution of each
-more complex model over the one before. The residual deviance
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>G</mi><mn>2</mn></msup><annotation encoding="application/x-tex">G^2</annotation></semantics></math>
-has been reduced from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>G</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>46</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>217.46</mn></mrow><annotation encoding="application/x-tex">G^2 (46) = 217.46</annotation></semantics></math>
-for the baseline model <code>house.glm0</code> to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>G</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>34</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>38.66</mn></mrow><annotation encoding="application/x-tex">G^2 (34) = 38.66</annotation></semantics></math>
-for the revised model <code>house.glm1</code>. The difference,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>G</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mn>1</mn><mo stretchy="false" form="prefix">|</mo><mi>M</mi><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>G</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>12</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>178.79</mn></mrow><annotation encoding="application/x-tex">G^2(M1 | M0) = G^2 (12) = 178.79</annotation></semantics></math>
-tests the collective additional fit provided by the two-way association
-of satisfaction with the predictors.</p>
+more complex model over the one before. The residual deviance <span class="math inline">\(G^2\)</span> has been reduced from <span class="math inline">\(G^2 (46) = 217.46\)</span> for the baseline model
+<code>house.glm0</code> to <span class="math inline">\(G^2 (34) =
+38.66\)</span> for the revised model <code>house.glm1</code>. The
+difference, <span class="math inline">\(G^2(M1 | M0) = G^2 (12) =
+178.79\)</span> tests the collective additional fit provided by the
+two-way association of satisfaction with the predictors.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">house.glm0</span>, <span class="va">house.glm1</span>, test<span class="op">=</span><span class="st">"Chisq"</span><span class="op">)</span></span>
 <span><span class="co">## Analysis of Deviance Table</span></span>
@@ -335,8 +333,7 @@ of satisfaction with the predictors.</p>
 G^2(34)=38.66, so most residuals are small. In the mosaic below, I use
 <code>gp=shading_Friendly</code> to shade the tiles so that positive and
 negative residuals are distinguished by color, and they are filled when
-the absolute value of the residual is outside
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mn>2</mn><mo>,</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\pm 2, 4</annotation></semantics></math>.</p>
+the absolute value of the residual is outside <span class="math inline">\(\pm 2, 4\)</span>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">house.glm1</span>, </span>
 <span>       labeling_args<span class="op">=</span><span class="va">largs</span>, </span>
@@ -409,13 +406,11 @@ time, with <code><a href="https://rdrr.io/pkg/MASS/man/addterm.html" class="exte
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>The result shows that adding the term <code>Infl:Type:Sat</code>
-reduces the deviance
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>G</mi><mn>2</mn></msup><annotation encoding="application/x-tex">G^2</annotation></semantics></math>
-from 38.66 to 16.11. The difference,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>G</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mn>1</mn><mo>+</mo><mi>I</mi><mi>T</mi><mi>S</mi><mo stretchy="false" form="prefix">|</mo><mi>M</mi><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>G</mi><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>12</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>22.55</mn></mrow><annotation encoding="application/x-tex">G^2(M1 + ITS | M1) = G^2 (12) = 22.55</annotation></semantics></math>
-reflects a substantial improvement. The remaining two-way interaction
-terms reduce the deviance by smaller and non-significant amounts,
-relative to <code>house.glm1</code>.</p>
+reduces the deviance <span class="math inline">\(G^2\)</span> from 38.66
+to 16.11. The difference, <span class="math inline">\(G^2(M1 + ITS | M1)
+= G^2 (12) = 22.55\)</span> reflects a substantial improvement. The
+remaining two-way interaction terms reduce the deviance by smaller and
+non-significant amounts, relative to <code>house.glm1</code>.</p>
 <p>Model fitting should be guided by substance, not just statistical
 machinery. Nonetheless, it seems arguably sensible to add one two-way
 term to the model, giving <code>house.glm2</code>.</p>
@@ -433,13 +428,12 @@ Sometimes we might prefer a model with fewer parameters to one that has
 a slightly better fit, but requires more model terms and parameters.</p>
 <p>The AIC and BIC statistics are designed to adjust our assessment of
 model fit by penalizing it for using more parameters. Equivalently, they
-deduct from the likelihood ratio
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>G</mi><mn>2</mn></msup><annotation encoding="application/x-tex">G^2</annotation></semantics></math>
-a term proportional to the residual
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">df</mtext><annotation encoding="application/x-tex">\text{df}</annotation></semantics></math>
-of the model. In any case – <strong>smaller is better</strong> for both
-AIC and BIC.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>I</mi><mi>C</mi><mo>=</mo><msup><mi>G</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mspace width="0.222em"></mspace><mtext mathvariant="normal">df</mtext></mrow><annotation encoding="application/x-tex">AIC = G^2 - 2 \: \text{df}</annotation></semantics></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>I</mi><mi>C</mi><mo>=</mo><msup><mi>G</mi><mn>2</mn></msup><mo>−</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.222em"></mspace><mtext mathvariant="normal">df</mtext></mrow><annotation encoding="application/x-tex">BIC = G^2 - \log(n) \: \text{df}</annotation></semantics></math></p>
+deduct from the likelihood ratio <span class="math inline">\(G^2\)</span> a term proportional to the residual
+<span class="math inline">\(\text{df}\)</span> of the model. In any case
+– <strong>smaller is better</strong> for both AIC and BIC.</p>
+<p><span class="math display">\[AIC = G^2 - 2 \: \text{df}\]</span>
+<span class="math display">\[BIC = G^2 - \log(n) \:
+\text{df}\]</span></p>
 <p>These measures are provided by <code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">AIC()</a></code>,
 <code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">BIC()</a></code>, and can be used to compare models using
 <code><a href="../reference/LRstats.html">vcdExtra::LRstats()</a></code>.</p>
@@ -453,10 +447,9 @@ AIC and BIC.</p>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>By these metrics, model <code>house.glm1</code> is best on both AIC
-and BIC. The increased goodness-of-fit (smaller
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>G</mi><mn>2</mn></msup><annotation encoding="application/x-tex">G^2</annotation></semantics></math>)
-of model <code>house.glm2</code> is not worth the extra cost of
-parameters in the <code>house.glm2</code> model.</p>
+and BIC. The increased goodness-of-fit (smaller <span class="math inline">\(G^2\)</span>) of model <code>house.glm2</code> is
+not worth the extra cost of parameters in the <code>house.glm2</code>
+model.</p>
 <!-- ## Effect plots -->
 <!-- ```{r} -->
 <!-- house.eff <-allEffects(house.glm1) -->

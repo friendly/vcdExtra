@@ -69,7 +69,7 @@ LRstats(hauser.CR)
 #>              AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.CR 318.63 334.47   89.914 12  5.131e-14 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 hauser.CRdiag <- update(hauser.indep,
                         ~ . + Crossings(Father,Son) + Diag(Father,Son))
@@ -78,6 +78,6 @@ LRstats(hauser.CRdiag)
 #>                  AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> hauser.CRdiag 298.95 318.45   64.237  9   2.03e-10 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ```

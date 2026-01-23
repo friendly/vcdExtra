@@ -105,17 +105,17 @@ shorthand notation for loglinear models, with factors A, B, C, ...,
 where brackets are used to delimit the high-order terms in the loglinear
 model.
 
-|                    |                   |                         |                               |
-|--------------------|-------------------|-------------------------|-------------------------------|
-| **function**       | **3-way**         | **4-way**               | **5-way**                     |
-| `mutual`           | \[A\] \[B\] \[C\] | \[A\] \[B\] \[C\] \[D\] | \[A\] \[B\] \[C\] \[D\] \[E\] |
-| `joint`            | \[AB\] \[C\]      | \[ABC\] \[D\]           | \[ABCE\] \[E\]                |
-| `joint (with=1)`   | \[A\] \[BC\]      | \[A\] \[BCD\]           | \[A\] \[BCDE\]                |
-| `conditional`      | \[AC\] \[BC\]     | \[AD\] \[BD\] \[CD\]    | \[AE\] \[BE\] \[CE\] \[DE\]   |
-| `condit (with=1)`  | \[AB\] \[AC\]     | \[AB\] \[AC\] \[AD\]    | \[AB\] \[AC\] \[AD\] \[AE\]   |
-| `markov (order=1)` | \[AB\] \[BC\]     | \[AB\] \[BC\] \[CD\]    | \[AB\] \[BC\] \[CD\] \[DE\]   |
-| `markov (order=2)` | \[A\] \[B\] \[C\] | \[ABC\] \[BCD\]         | \[ABC\] \[BCD\] \[CDE\]       |
-| `saturated`        | \[ABC\]           | \[ABCD\]                | \[ABCDE\]                     |
+|  |  |  |  |
+|----|----|----|----|
+| **function** | **3-way** | **4-way** | **5-way** |
+| `mutual` | \[A\] \[B\] \[C\] | \[A\] \[B\] \[C\] \[D\] | \[A\] \[B\] \[C\] \[D\] \[E\] |
+| `joint` | \[AB\] \[C\] | \[ABC\] \[D\] | \[ABCE\] \[E\] |
+| `joint (with=1)` | \[A\] \[BC\] | \[A\] \[BCD\] | \[A\] \[BCDE\] |
+| `conditional` | \[AC\] \[BC\] | \[AD\] \[BD\] \[CD\] | \[AE\] \[BE\] \[CE\] \[DE\] |
+| `condit (with=1)` | \[AB\] \[AC\] | \[AB\] \[AC\] \[AD\] | \[AB\] \[AC\] \[AD\] \[AE\] |
+| `markov (order=1)` | \[AB\] \[BC\] | \[AB\] \[BC\] \[CD\] | \[AB\] \[BC\] \[CD\] \[DE\] |
+| `markov (order=2)` | \[A\] \[B\] \[C\] | \[ABC\] \[BCD\] | \[ABC\] \[BCD\] \[CDE\] |
+| `saturated` | \[ABC\] | \[ABCD\] | \[ABCDE\] |
 
 `loglin2formula` converts the output of one of these to a model formula
 suitable as the `formula` for of

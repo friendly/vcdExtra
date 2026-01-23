@@ -11,12 +11,17 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="1. Creating and manipulating frequency tables">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -75,7 +80,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a1-creating.Rmd" class="external-link"><code>vignettes/a1-creating.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a1-creating.Rmd" class="external-link"><code>vignettes/a1-creating.Rmd</code></a></small>
       <div class="d-none name"><code>a1-creating.Rmd</code></div>
     </div>
 
@@ -110,10 +115,9 @@ and the number of variables is <code>ncol(X)</code>.</p>
 <code>Treatment</code> and <code>Sex</code>. <code>Age</code> is a
 numeric covariate, and <code>Improved</code> is the response— an ordered
 factor, with levels None &lt; Some &lt; Marked. Excluding
-<code>Age</code>, this represents a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>2</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">2 \times 2 \times 3</annotation></semantics></math>
-contingency table for <code>Treatment</code>, <code>Sex</code> and
-<code>Improved</code>, but in case form.</p>
+<code>Age</code>, this represents a <span class="math inline">\(2 \times
+2 \times 3\)</span> contingency table for <code>Treatment</code>,
+<code>Sex</code> and <code>Improved</code>, but in case form.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">Arthritis</span><span class="op">)</span>      <span class="co"># show the variables</span></span>
 <span><span class="co">## [1] "ID"        "Treatment" "Sex"       "Age"       "Improved"</span></span>
@@ -181,9 +185,8 @@ identification.</p>
 </h4>
 <p>Table form data is represented by a <code>matrix</code>,
 <code>array</code> or <code>table</code> object, whose elements are the
-frequencies in an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-way
-table. The variable names (factors) and their levels are given by
+frequencies in an <span class="math inline">\(n\)</span>-way table. The
+variable names (factors) and their levels are given by
 <code>dimnames(X)</code>. The total number of observations is
 <code>sum(X)</code>. The number of dimensions of the table is
 <code>length(dimnames(X))</code>, and the table sizes are given by
@@ -331,13 +334,11 @@ scores on the first CA dimension.</p>
 <h4 id="re-ordering-dimensions">Re-ordering dimensions<a class="anchor" aria-label="anchor" href="#re-ordering-dimensions"></a>
 </h4>
 <p>Finally, there are situations where, particularly for display
-purposes, you want to re-order the <em>dimensions</em> of an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-way
-table, or change the labels for the variables or levels. This is easy
-when the data are in table form: <code><a href="https://rdrr.io/r/base/aperm.html" class="external-link">aperm()</a></code> permutes the
-dimensions, and assigning to <code>names</code> and
-<code>dimnames</code> changes variable names and level labels
-respectively. We will use the following version of
+purposes, you want to re-order the <em>dimensions</em> of an <span class="math inline">\(n\)</span>-way table, or change the labels for the
+variables or levels. This is easy when the data are in table form:
+<code><a href="https://rdrr.io/r/base/aperm.html" class="external-link">aperm()</a></code> permutes the dimensions, and assigning to
+<code>names</code> and <code>dimnames</code> changes variable names and
+level labels respectively. We will use the following version of
 <code>UCBAdmissions</code> in @ref(sec:mantel) below. <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Changing &lt;code&gt;Admit&lt;/code&gt; to &lt;code&gt;Admit?&lt;/code&gt; might
 be useful for display purposes, but is dangerous— because it is then
 difficult to use that variable name in a model formula. See
@@ -528,11 +529,10 @@ the argument <code>FUN=sum</code> to sum the frequency variable over the
 factors <em>not</em> mentioned in the formula.</p>
 <p><strong><em>Example</em></strong>: The data frame
 <code>DaytonSurvey</code> in the <code>vcdExtra</code> package
-represents a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>5</mn></msup><annotation encoding="application/x-tex">2^5</annotation></semantics></math>
-table giving the frequencies of reported use (``ever used?’’) of
-alcohol, cigarettes and marijuana in a sample of high school seniors,
-also classified by sex and race.</p>
+represents a <span class="math inline">\(2^5\)</span> table giving the
+frequencies of reported use (``ever used?’’) of alcohol, cigarettes and
+marijuana in a sample of high school seniors, also classified by sex and
+race.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"DaytonSurvey"</span>, package<span class="op">=</span><span class="st">"vcdExtra"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">DaytonSurvey</span><span class="op">)</span></span>
@@ -647,9 +647,8 @@ display purposes, we want to reduce Age to 20-year intervals. The
 <code><a href="../reference/collapse.table.html">collapse.table()</a></code> function in <code>vcdExtra</code> was
 designed for this purpose.</p>
 <p><strong><em>Example</em></strong>: Create a 3-way table, and collapse
-Age from 10-year to 20-year intervals. First, we generate a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>6</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">2 \times 6 \times 3</annotation></semantics></math>
-table of random counts from a Poisson distribution with mean of 100.</p>
+Age from 10-year to 20-year intervals. First, we generate a <span class="math inline">\(2 \times 6 \times 3\)</span> table of random
+counts from a Poisson distribution with mean of 100.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create some sample data in frequency form</span></span>
 <span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span></span>
@@ -739,22 +738,22 @@ package provides a collection of functions for reordering the levels of
 a factor or grouping categories according to their frequency:</p>
 <ul>
 <li>
-<code>forcats::fct_reorder()</code>: Reorder a factor by another
+<code><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">forcats::fct_reorder()</a></code>: Reorder a factor by another
 variable.</li>
 <li>
-<code>forcats::fct_infreq()</code>: Reorder a factor by the
+<code><a href="https://forcats.tidyverse.org/reference/fct_inorder.html" class="external-link">forcats::fct_infreq()</a></code>: Reorder a factor by the
 frequency of values.</li>
 <li>
-<code>forcats::fct_relevel()</code>: Change the order of a factor by
+<code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html" class="external-link">forcats::fct_relevel()</a></code>: Change the order of a factor by
 hand.</li>
 <li>
-<code>forcats::fct_lump()</code>: Collapse the least/most frequent
+<code><a href="https://forcats.tidyverse.org/reference/fct_lump.html" class="external-link">forcats::fct_lump()</a></code>: Collapse the least/most frequent
 values of a factor into “other”.</li>
 <li>
-<code>forcats::fct_collapse()</code>: Collapse factor levels into
+<code><a href="https://forcats.tidyverse.org/reference/fct_collapse.html" class="external-link">forcats::fct_collapse()</a></code>: Collapse factor levels into
 manually defined groups.</li>
 <li>
-<code>forcats::fct_recode()</code>: Change factor levels by
+<code><a href="https://forcats.tidyverse.org/reference/fct_recode.html" class="external-link">forcats::fct_recode()</a></code>: Change factor levels by
 hand.</li>
 </ul>
 </div>
@@ -837,10 +836,9 @@ table form to a data.frame in frequency form.</p>
 <span><span class="co">## 5 female   rep  225</span></span>
 <span><span class="co">## 6   male   rep  191</span></span></code></pre></div>
 <p><strong><em>Example</em></strong>: Convert the <code>Arthritis</code>
-data in case form to a 3-way table of <code>Treatment</code>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math><code>Sex</code>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math><code>Improved</code>. Note the use of <code><a href="https://rdrr.io/r/base/with.html" class="external-link">with()</a></code> to avoid
-having to use <code>Arthritis\$Treatment</code> etc. within the call to
+data in case form to a 3-way table of <code>Treatment</code> <span class="math inline">\(\times\)</span> <code>Sex</code> <span class="math inline">\(\times\)</span> <code>Improved</code>. Note the
+use of <code><a href="https://rdrr.io/r/base/with.html" class="external-link">with()</a></code> to avoid having to use
+<code>Arthritis\$Treatment</code> etc. within the call to
 <code><a href="https://rdrr.io/r/base/table.html" class="external-link">table()</a></code>.% <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;code&gt;&lt;a href="https://rdrr.io/r/base/table.html" class="external-link"&gt;table()&lt;/a&gt;&lt;/code&gt; does not allow a &lt;code&gt;data&lt;/code&gt;
 argument to provide an environment in which the table variables are to
 be found. In the examples in @ref(sec:table) I used
@@ -889,8 +887,7 @@ data in table form (<code>Art.tab</code>) back to a
 </h3>
 <p>If you’ve followed so far, you’re ready for a more complicated
 example. The data file, <code>tv.dat</code> represents a 4-way table of
-size
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>×</mo><mn>11</mn><mo>×</mo><mn>5</mn><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">5 \times 11 \times 5 \times 3</annotation></semantics></math>
+size <span class="math inline">\(5 \times 11 \times 5 \times 3\)</span>
 where the table variables (unnamed in the file) are read as
 <code>V1</code> – <code>V4</code>, and the cell frequency is read as
 <code>V5</code>. The file, stored in the <code>doc/extdata</code>

@@ -112,7 +112,7 @@ LRstats(mods)
 #> Row     174.45 188.59    6.281 12     0.9013    
 #> LinxLin 174.07 185.85    9.895 14     0.7698    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 coef(mods, result='data.frame')
 #>                             Indep        Col        Row     LinxLin

@@ -11,12 +11,17 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="4. Mosaic plots">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -75,7 +80,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/a4-mosaics.Rmd" class="external-link"><code>vignettes/a4-mosaics.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/a4-mosaics.Rmd" class="external-link"><code>vignettes/a4-mosaics.Rmd</code></a></small>
       <div class="d-none name"><code>a4-mosaics.Rmd</code></div>
     </div>
 
@@ -85,20 +90,15 @@ Friendly</h4>
 tables and for visualizing the fit— or more importantly— <strong>lack of
 fit</strong> of a loglinear model.</p>
 <p>For a two-way table, <code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic()</a></code>, by default, fits a model
-of independence,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>A</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>B</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">[A][B]</annotation></semantics></math>
-or <code>~A + B</code> as an R formula. The <code>vcdExtra</code>
-package extends this to models fit using
-<code>glm(..., family=poisson)</code>, which can include specialized
-models for ordered factors, or square tables that are intermediate
-between the saturated model,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mi>A</mi><mi>B</mi><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[A B]</annotation></semantics></math>
-= <code>A * B</code>, and the independence model
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>A</mi><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo stretchy="true" form="prefix">[</mo><mi>B</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">[A][B]</annotation></semantics></math>.</p>
-<p>For
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-way
-tables, <code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">vcd::mosaic()</a></code> can fit any loglinear model, and can
-also be used to plot a model fit with <code>MASS:loglm()</code>. The
+of independence, <span class="math inline">\([A][B]\)</span> or
+<code>~A + B</code> as an R formula. The <code>vcdExtra</code> package
+extends this to models fit using <code>glm(..., family=poisson)</code>,
+which can include specialized models for ordered factors, or square
+tables that are intermediate between the saturated model, <span class="math inline">\([A B]\)</span> = <code>A * B</code>, and the
+independence model <span class="math inline">\([A][B]\)</span>.</p>
+<p>For <span class="math inline">\(n\)</span>-way tables,
+<code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">vcd::mosaic()</a></code> can fit any loglinear model, and can also be
+used to plot a model fit with <code>MASS:loglm()</code>. The
 <code>vcdExtra</code> package extends this to models fit using
 <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">stats::glm()</a></code> and, by extension, to non-linear models fit
 using the <a href="https://cran.r-project.org/package=gnm" class="external-link">gnm
@@ -133,10 +133,9 @@ fit.</p></li>
 <p><code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic()</a></code> provides a wide range of options for the
 directions of splitting, the specification of shading, labeling,
 spacing, legend and many other details. It is actually implemented as a
-special case of a more general class of displays for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-way
-tables called <code>strucplot</code>, including sieve diagrams,
-association plots, double-decker plots as well as mosaic plots.</p>
+special case of a more general class of displays for <span class="math inline">\(n\)</span>-way tables called
+<code>strucplot</code>, including sieve diagrams, association plots,
+double-decker plots as well as mosaic plots.</p>
 <p>For details, see <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">help(strucplot)</a></code> and the “See also”
 links therein, and also <span class="citation">Meyer, Zeileis, &amp;
 Hornik (2006)</span>, which is available as an R vignette via
@@ -178,15 +177,9 @@ highly significant.</p>
 <span><span class="co">## Test for independence of all factors:</span></span>
 <span><span class="co">##  Chisq = 13.055, df = 2, p-value = 0.001463</span></span></code></pre></div>
 <p>In contrast, one of the other shading schemes, from <span class="citation">Friendly (1994)</span> (use:
-<code>gp = shading_Friendly</code>), uses fixed cutoffs of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mn>2</mn><mo>,</mo><mo>±</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\pm 2, \pm 4</annotation></semantics></math>,
-to shade cells which are <em>individually</em> significant at
-approximately
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha = 0.05</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.001</mn></mrow><annotation encoding="application/x-tex">\alpha = 0.001</annotation></semantics></math>
-levels, respectively. The plot below uses
-<code>gp = shading_Friendly</code>.</p>
+<code>gp = shading_Friendly</code>), uses fixed cutoffs of <span class="math inline">\(\pm 2, \pm 4\)</span>, to shade cells which are
+<em>individually</em> significant at approximately <span class="math inline">\(\alpha = 0.05\)</span> and <span class="math inline">\(\alpha = 0.001\)</span> levels, respectively. The
+plot below uses <code>gp = shading_Friendly</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">art</span>, gp <span class="op">=</span> <span class="va">shading_Friendly</span>, </span>
 <span>            split_vertical <span class="op">=</span> <span class="cn">TRUE</span>, </span>
@@ -297,35 +290,20 @@ saturated model in this notation.</p>
 <ul>
 <li><p><strong>Quasi-independence</strong>: Asserts independence, but
 ignores the diagonal cells by fitting them exactly. The loglinear model
-is:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><msub><mi>m</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mi>μ</mi><mo>+</mo><msubsup><mi>λ</mi><mi>i</mi><mi>A</mi></msubsup><mo>+</mo><msubsup><mi>λ</mi><mi>j</mi><mi>B</mi></msubsup><mo>+</mo><msub><mi>δ</mi><mi>i</mi></msub><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>=</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\log m_{ij} = \mu + \lambda^A_i + \lambda^B_j + \delta_i I(i = j)</annotation></semantics></math>,
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I()</annotation></semantics></math>
-is the indicator function.</p></li>
+is: <span class="math inline">\(\log m_{ij} = \mu + \lambda^A_i +
+\lambda^B_j + \delta_i I(i = j)\)</span>, where <span class="math inline">\(I()\)</span> is the indicator function.</p></li>
 <li><p><strong>Symmetry</strong>: This model asserts that the joint
-distribution of the row and column variables is symmetric, that is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><msub><mi>π</mi><mrow><mi>j</mi><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\pi_{ij} = \pi_{ji}</annotation></semantics></math>:
-A son is equally likely to move from their father’s occupational
-category
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-to another category,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>,
-as the reverse, moving from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
-to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
-Symmetry is quite strong, because it also implies <strong>marginal
-homogeneity</strong>, that the marginal probabilities of the row and
-column variables are equal,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mrow><mi>i</mi><mo>+</mo></mrow><mo>=</mo><msub><mo>∑</mo><mi>j</mi></msub><msub><mi>π</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><msub><mo>∑</mo><mi>j</mi></msub><msub><mi>π</mi><mrow><mi>j</mi><mi>i</mi></mrow></msub><mo>=</mo><msub><mi>π</mi><mrow><mo>+</mo><mi>i</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\pi{i+} = \sum_j \pi_{ij} = \sum_j \pi_{ji} = \pi_{+i}</annotation></semantics></math>
-for all
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.</p></li>
+distribution of the row and column variables is symmetric, that is <span class="math inline">\(\pi_{ij} = \pi_{ji}\)</span>: A son is equally
+likely to move from their father’s occupational category <span class="math inline">\(i\)</span> to another category, <span class="math inline">\(j\)</span>, as the reverse, moving from <span class="math inline">\(j\)</span> to <span class="math inline">\(i\)</span>. Symmetry is quite strong, because it
+also implies <strong>marginal homogeneity</strong>, that the marginal
+probabilities of the row and column variables are equal, <span class="math inline">\(\pi{i+} = \sum_j \pi_{ij} = \sum_j \pi_{ji} =
+\pi_{+i}\)</span> for all <span class="math inline">\(i\)</span>.</p></li>
 <li><p><strong>Quasi-symmetry</strong>: This model uses the standard
 main-effect terms in the loglinear model, but asserts that the
-association parameters are symmetric,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><msub><mi>m</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mi>μ</mi><mo>+</mo><msubsup><mi>λ</mi><mi>i</mi><mi>A</mi></msubsup><mo>+</mo><msubsup><mi>λ</mi><mi>j</mi><mi>B</mi></msubsup><mo>+</mo><msubsup><mi>λ</mi><mrow><mi>i</mi><mi>j</mi></mrow><mrow><mi>A</mi><mi>B</mi></mrow></msubsup></mrow><annotation encoding="application/x-tex">\log m_{ij} = \mu + \lambda^A_i + \lambda^B_j + \lambda^{AB}_{ij}</annotation></semantics></math>,
-where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>λ</mi><mrow><mi>i</mi><mi>j</mi></mrow><mrow><mi>A</mi><mi>B</mi></mrow></msubsup><mo>=</mo><msubsup><mi>λ</mi><mrow><mi>j</mi><mi>i</mi></mrow><mrow><mi>A</mi><mi>B</mi></mrow></msubsup></mrow><annotation encoding="application/x-tex">\lambda^{AB}_{ij} = \lambda^{AB}_{ji}</annotation></semantics></math>.</p></li>
+association parameters are symmetric, <span class="math inline">\(\log
+m_{ij} = \mu + \lambda^A_i + \lambda^B_j + \lambda^{AB}_{ij}\)</span>,
+where <span class="math inline">\(\lambda^{AB}_{ij} =
+\lambda^{AB}_{ji}\)</span>.</p></li>
 </ul>
 <p>The <a href="https://cran.r-project.org/package=gnm" class="external-link">gnm package</a>
 provides a variety of these functions: <code><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">gnm::Diag()</a></code>,
@@ -333,10 +311,9 @@ provides a variety of these functions: <code><a href="https://rdrr.io/pkg/gnm/ma
 factor as specified by an array of levels, which may be arbitrarily
 structured.</p>
 <p>For example, the following generates a term for a diagonal factor in
-a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 \times 4</annotation></semantics></math>
-table. The diagonal values reflect parameters fitted for each diagonal
-cell. Off-diagonal values, “.” are ignored.</p>
+a <span class="math inline">\(4 \times 4\)</span> table. The diagonal
+values reflect parameters fitted for each diagonal cell. Off-diagonal
+values, “.” are ignored.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rowfac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">16</span><span class="op">)</span></span>
 <span><span class="va">colfac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/gl.html" class="external-link">gl</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">16</span><span class="op">)</span></span>
@@ -428,10 +405,8 @@ statistics reflecting model parsimony.</p>
 deviance $G^2 is not significant. The mosaic is largely unshaded,
 indicating a good fit, but there are a few shaded cells that indicate
 the remaining positive and negative residuals. For comparative mosaic
-displays, it is sometimes useful to show the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>G</mi><mn>2</mn></msup><annotation encoding="application/x-tex">G^2</annotation></semantics></math>
-statistic in the main title, using <code><a href="../reference/modFit.html">vcdExtra::modFit()</a></code> for
-this purpose.</p>
+displays, it is sometimes useful to show the <span class="math inline">\(G^2\)</span> statistic in the main title, using
+<code><a href="../reference/modFit.html">vcdExtra::modFit()</a></code> for this purpose.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">glass.qsymm</span>, </span>
 <span>  residuals_type<span class="op">=</span><span class="st">"rstandard"</span>, </span>
@@ -456,8 +431,7 @@ analysis.</p>
 variables to best account for the association in 1, 2, …
 dimensions</p></li>
 <li><p>The first CA dimension accounts for largest proportion of the
-Pearson
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math></p></li>
+Pearson <span class="math inline">\(\chi^2\)</span></p></li>
 <li><p>Therefore, permuting the levels of the row and column variables
 by the CA Dim1 scores gives a more coherent mosaic plot, more clearly
 showing the nature of the association.</p></li>
@@ -507,9 +481,8 @@ used to make the display more readable.</p>
 <span>       legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a4-mosaics_files/figure-html/housetasks-mos1-1.png" class="r-plt" alt="" width="672"></p>
 <p>Correspondence analysis, using the <a href="https://cran.r-project.org/package=ca" class="external-link">ca package</a>, shows that
-nearly 89% of the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
-can be accounted for in two dimensions.</p>
+nearly 89% of the <span class="math inline">\(\chi^2\)</span> can be
+accounted for in two dimensions.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://www.carme-n.org/" class="external-link">ca</a></span><span class="op">)</span></span>
 <span><span class="co">## Loading required package: ca</span></span>

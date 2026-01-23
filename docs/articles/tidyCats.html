@@ -11,12 +11,17 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="tidyCat: Tidy Methods For Categorical Data Analysis">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -75,7 +80,7 @@ Friendly</h4>
             
             <h4 data-toc-skip class="date">2026-01-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/tidyCats.Rmd" class="external-link"><code>vignettes/tidyCats.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/vignettes/tidyCats.Rmd" class="external-link"><code>vignettes/tidyCats.Rmd</code></a></small>
       <div class="d-none name"><code>tidyCats.Rmd</code></div>
     </div>
 
@@ -90,9 +95,8 @@ Friendly</h4>
 <p>Tidy methods for quantitative data &amp; models have advanced
 considerably, but there hasn’t been much development of similar ideas
 for “categorical data”, by which I mean data that is often compactly
-represented as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-way
-frequency tables, cross classified by one or more discrete factors.</p>
+represented as <span class="math inline">\(n\)</span>-way frequency
+tables, cross classified by one or more discrete factors.</p>
 <p>What would it take to implement a tidy framework for such data? These
 notes are, in effect, a call for participation in developing a
 <code>tidyCat</code> package for this purpose. Other possible names for
@@ -181,18 +185,15 @@ a formula method,</li>
 <span><span class="co">## Yes      Child          5  11  13    0      1  13  14    0</span></span>
 <span><span class="co">##          Adult         57  14  75  192    140  80  76   20</span></span></code></pre></div>
 <p>and there are a suite of methods for indexing and selecting parts of
-an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-way
-table.</p>
+an <span class="math inline">\(n\)</span>-way table.</p>
 <ul>
 <li><p>The methods in the <code>plyr</code> package (now retired)
 provided a coherent set of tools for a split-apply-combine strategy that
 works nicely with multidimensional arrays. Perhaps there are some useful
 ideas for frequency tables that could be resurrected here.</p></li>
 <li><p>There is also a role for <code>purrr</code> methods and thinking
-here:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-way
-tables as nested lists/arrays? The ideas of mapping over these?</p></li>
+here: <span class="math inline">\(n\)</span>-way tables as nested
+lists/arrays? The ideas of mapping over these?</p></li>
 </ul>
 </div>
 </div>
@@ -202,9 +203,9 @@ tables as nested lists/arrays? The ideas of mapping over these?</p></li>
 <p>Also needed:</p>
 <ul>
 <li><p>methods for <strong>recoding and collapsing</strong> the levels
-of a factor: <code>forcats::fct_recode()</code>,
-<code>forcats::fct_collapse()</code>,
-<code>forcats::fct_lump_min()</code> are useful here.</p></li>
+of a factor: <code><a href="https://forcats.tidyverse.org/reference/fct_recode.html" class="external-link">forcats::fct_recode()</a></code>,
+<code><a href="https://forcats.tidyverse.org/reference/fct_collapse.html" class="external-link">forcats::fct_collapse()</a></code>,
+<code><a href="https://forcats.tidyverse.org/reference/fct_lump.html" class="external-link">forcats::fct_lump_min()</a></code> are useful here.</p></li>
 <li><p>methods for <strong>reordering the levels</strong> of a factor,
 either manually or for some analysis purpose. For example, Data from
 <span class="citation">Glass (1954)</span> gave this 5 x 5 table on the
@@ -282,12 +283,10 @@ but not in a tidy form.</p>
 <code>glance.loglm()</code> – <strong>model level</strong>
 statistics. These are given in the output of the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>
 method, and available from the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method. A
-complication is both LR and Pearson
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>χ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\chi^2</annotation></semantics></math>
-are reported, so these would need to be made to appear in separate
-columns. There are also related <code><a href="../reference/LRstats.html">LRstats()</a></code> functions in
-<code>vcdExtra</code>, which report <code>AIC</code> and
-<code>BIC</code>.</li>
+complication is both LR and Pearson <span class="math inline">\(\chi^2\)</span> are reported, so these would need
+to be made to appear in separate columns. There are also related
+<code><a href="../reference/LRstats.html">LRstats()</a></code> functions in <code>vcdExtra</code>, which report
+<code>AIC</code> and <code>BIC</code>.</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hec.indep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></span><span class="op">(</span><span class="op">~</span><span class="va">Hair</span><span class="op">+</span><span class="va">Eye</span><span class="op">+</span><span class="va">Sex</span>, data<span class="op">=</span><span class="va">HairEyeColor</span><span class="op">)</span></span>
