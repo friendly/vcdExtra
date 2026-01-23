@@ -1,3 +1,7 @@
+## Version 0.9.1 (2026-01-23)
+
+* Added `labeling_points()` for mosaic displays to show observed or expected frequencies as random points in the tiles
+
 ## Version 0.9.0 (2026-01-17)
 
 This is a major release of the package, adding structure to dataset examples and introducing an new extension Woolf's test for homogeneity of odds ratios.

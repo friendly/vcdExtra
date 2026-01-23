@@ -127,7 +127,7 @@ Woolf, B. (1955). On estimating the relation between blood group and disease.
 \emph{Annals of Human Genetics}, \bold{19}, 251-253.
 }
 \seealso{
-\code{\link[stats]{mantelhaen.test}}
+\code{\link[stats]{mantelhaen.test}}, \code{\link[DescTools]{BreslowDayTest}}
 
 Other association tests: 
 \code{\link{CMHtest}()},

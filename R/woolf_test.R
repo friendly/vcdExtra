@@ -120,7 +120,7 @@
 #'   \item{residual}{list with statistic, df, p.value for residual (interaction).}
 #'
 #' @importFrom stats weighted.mean
-#' @seealso \code{\link[stats]{mantelhaen.test}}
+#' @seealso \code{\link[stats]{mantelhaen.test}}, \code{\link[DescTools]{BreslowDayTest}}
 #' @family association tests
 #'
 #' @references
