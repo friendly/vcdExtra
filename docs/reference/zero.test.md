@@ -76,20 +76,20 @@ Michael Friendly
 zero.test(rpois(100, 1))
 #> Score test for zero inflation
 #> 
-#>      Chi-square = 0.49304 
+#>      Chi-square = 0.16856 
 #>      df = 1
-#>      pvalue: 0.48258 
+#>      pvalue: 0.68139 
 zero.test(rpois(100, 5))
 #> Score test for zero inflation
 #> 
-#>      Chi-square = 0.30386 
+#>      Chi-square = 0.54816 
 #>      df = 1
-#>      pvalue: 0.58148 
+#>      pvalue: 0.45907 
 # add some extra zeros
 zero.test(c(rep(0, 20), rpois(100, 5)))
 #> Score test for zero inflation
 #> 
-#>      Chi-square = 233.94407 
+#>      Chi-square = 212.04692 
 #>      df = 1
 #>      pvalue: < 2.22e-16 
 

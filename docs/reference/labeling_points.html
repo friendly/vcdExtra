@@ -5,10 +5,12 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Labeling Function for Mosaic Displays Using Points — labeling_points"><meta name="description" content='This labeling function for use with strucplot displays
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Labeling Function for Mosaic Displays Using Points — labeling_points"><meta name="description" content='This labeling function for use with strucplot displays,
+such as mosaic, draws
 random points within each cell of a mosaic plot, where the number of points
 represents observed or expected frequencies. This creates a "dot-density"
-visualization that provides a direct visual representation of cell frequencies.'><meta property="og:description" content='This labeling function for use with strucplot displays
+visualization that provides a direct visual representation of cell frequencies.'><meta property="og:description" content='This labeling function for use with strucplot displays,
+such as mosaic, draws
 random points within each cell of a mosaic plot, where the number of points
 represents observed or expected frequencies. This creates a "dot-density"
 visualization that provides a direct visual representation of cell frequencies.'><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
@@ -57,7 +59,8 @@ visualization that provides a direct visual representation of cell frequencies.'
     </div>
 
     <div class="ref-description section level2">
-    <p>This labeling function for use with <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">strucplot</a></code> displays
+    <p>This labeling function for use with <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">strucplot</a></code> displays,
+such as <code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></code>, draws
 random points within each cell of a mosaic plot, where the number of points
 represents observed or expected frequencies. This creates a "dot-density"
 visualization that provides a direct visual representation of cell frequencies.</p>
@@ -206,9 +209,17 @@ The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd.
 <span class="r-in"><span><span class="co"># Combine with residual shading</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">HairEye</span>,</span></span>
 <span class="r-in"><span>       shade <span class="op">=</span> <span class="cn">TRUE</span>, legend <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>       labeling <span class="op">=</span> <span class="fu">labeling_points</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>       labeling <span class="op">=</span> <span class="fu">labeling_points</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="labeling_points-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make tiles show expected frequencies, show points for observed frequencies</span></span></span>
+<span class="r-in"><span><span class="co"># Reproduces: Fig 6 in Friendly (1995)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">HairEye</span>,</span></span>
+<span class="r-in"><span>       type <span class="op">=</span> <span class="st">"expected"</span>,</span></span>
+<span class="r-in"><span>       shade <span class="op">=</span> <span class="cn">TRUE</span>, legend <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>       labeling <span class="op">=</span> <span class="fu">labeling_points</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="labeling_points-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>       </span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

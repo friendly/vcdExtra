@@ -1,9 +1,10 @@
 # Labeling Function for Mosaic Displays Using Points
 
 This labeling function for use with
-[`strucplot`](https://rdrr.io/pkg/vcd/man/strucplot.html) displays
-random points within each cell of a mosaic plot, where the number of
-points represents observed or expected frequencies. This creates a
+[`strucplot`](https://rdrr.io/pkg/vcd/man/strucplot.html) displays, such
+as [`mosaic`](https://rdrr.io/pkg/vcd/man/mosaic.html), draws random
+points within each cell of a mosaic plot, where the number of points
+represents observed or expected frequencies. This creates a
 "dot-density" visualization that provides a direct visual representation
 of cell frequencies.
 
@@ -162,6 +163,15 @@ mosaic(HairEye,
 # Combine with residual shading
 mosaic(HairEye,
        shade = TRUE, legend = FALSE,
-       labeling = labeling_points(scale = 2))
+       labeling = labeling_points(scale = 2, seed = 42))
 
+
+# Make tiles show expected frequencies, show points for observed frequencies
+# Reproduces: Fig 6 in Friendly (1995)
+mosaic(HairEye,
+       type = "expected",
+       shade = TRUE, legend = FALSE,
+       labeling = labeling_points(scale = 2, seed = 42))
+
+       
 ```

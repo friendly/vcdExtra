@@ -233,7 +233,7 @@ mosaic(RC1model,
  }
 #> Initialising
 #> Running start-up iterations..
-#> Running main iterations.......
+#> Running main iterations........
 #> Done
 #> Warning: no formula provided, assuming ~ses + mental
 
