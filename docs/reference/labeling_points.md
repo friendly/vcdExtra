@@ -19,10 +19,10 @@ labeling_points(
   pch = 19,
   size = unit(0.5, "char"),
   gp_points = gpar(col = "black", alpha = 0.7),
-  margin = unit(0.1, "npc"),
+  margin = unit(0.05, "npc"),
   seed = NULL,
   jitter = 1,
-  clip = TRUE,
+  clip = FALSE,
   ...
 )
 ```
@@ -71,12 +71,12 @@ labeling_points(
 
   Margin inside cells as a [`unit`](https://rdrr.io/r/grid/unit.html)
   object. Points are drawn within this inset area. Default is
-  `unit(0.1, "npc")`.
+  `unit(0.05, "npc")`.
 
 - seed:
 
-  Optional integer seed for reproducible point placement. If `NULL`
-  (default), no seed is set.
+  Optional integer seed for reproducible point placement across several
+  similar plots. If `NULL` (default), no seed is set.
 
 - jitter:
 
@@ -86,7 +86,7 @@ labeling_points(
 - clip:
 
   Logical indicating whether to clip points at cell boundaries. Default
-  is `TRUE`.
+  is `FALSE`.
 
 - ...:
 
@@ -99,7 +99,7 @@ labeling_points(
 A function of class `"grapcon_generator"` suitable for use as the
 `labeling` argument in
 [`strucplot`](https://rdrr.io/pkg/vcd/man/strucplot.html) and related
-functions.
+functions like `mosaict`.
 
 ## Details
 
@@ -108,7 +108,7 @@ labeling functions. It returns a function that can be passed to the
 `labeling` argument of
 [`strucplot`](https://rdrr.io/pkg/vcd/man/strucplot.html),
 [`mosaic`](https://rdrr.io/pkg/vcd/man/mosaic.html), or related
-functions.
+functions as the argument `labeling = labeling_poionts(...)`.
 
 The visualization is inspired by the conceptual model described in
 Friendly (1995), where cell frequencies are represented as physical
@@ -125,6 +125,11 @@ density to represent association.
 Friendly, M. (1995). Conceptual and Visual Models for Categorical Data.
 *The American Statistician*, **49**, 153-160.
 [doi:10.1080/00031305.1995.10476131](https://doi.org/10.1080/00031305.1995.10476131)
+
+Friendly, M. (1997). Conceptual Models for Visualizing Contingency Table
+Data. In M. Greenacre & J. Blasius (Eds.), *Visualization of Categorical
+Data* (pp. 17–35). Academic Press.
+<https://www.datavis.ca/papers/koln/kolnpapr.pdf>
 
 Meyer, D., Zeileis, A., and Hornik, K. (2006). The Strucplot Framework:
 Visualizing Multi-way Contingency Tables with vcd. *Journal of
@@ -147,12 +152,12 @@ library(vcd)
 HairEye <- margin.table(HairEyeColor, 2:1)
 
 # Basic usage - observed frequencies as points
-mosaic(HairEye, 
+mosaic(HairEye,
        labeling = labeling_points(scale = 1))
 
 
 # Show expected frequencies instead of observed
-mosaic(HairEye, 
+mosaic(HairEye,
        labeling = labeling_points(
                      value_type = "expected",
                      scale = 2,
@@ -173,5 +178,4 @@ mosaic(HairEye,
        shade = TRUE, legend = FALSE,
        labeling = labeling_points(scale = 2, seed = 42))
 
-       
 ```
