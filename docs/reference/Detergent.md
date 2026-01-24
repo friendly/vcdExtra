@@ -64,7 +64,7 @@ add1(det.mod0, ~ .^2, test="Chisq")
 #> Temperature:Water_softness  2 52.830  6.0991   0.04738 *  
 #> M_User:Water_softness       2 57.854  1.0751   0.58418    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # model for Preference as a response
 (det.mod1 <- loglm(~ Preference + (Temperature * M_User * Water_softness),

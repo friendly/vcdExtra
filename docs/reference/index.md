@@ -25,6 +25,8 @@ and related displays to `glm` and `gnm` objects and 3D displays
   : Subdivide a 3D Object
 - [`seq_mosaic()`](https://friendly.github.io/vcdExtra/reference/seq_mosaic.md)
   : Sequential Mosaics and Strucplots for an N-way Table
+- [`labeling_points()`](https://friendly.github.io/vcdExtra/reference/labeling_points.md)
+  : Labeling Function for Mosaic Displays Using Points
 
 ## Loglinear models
 

@@ -89,7 +89,7 @@ LRstats(indep)
 #>          AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> indep 209.59 220.19   47.418 15  3.155e-05 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
 
@@ -109,6 +109,6 @@ LRstats(indep, coleff, roweff, linlin)
 #> roweff 174.45 188.59    6.281 12     0.9013    
 #> linlin 174.07 185.85    9.895 14     0.7698    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ```

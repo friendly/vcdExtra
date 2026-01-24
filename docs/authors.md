@@ -26,15 +26,15 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/HEAD/DESCRIPTION)
 
 Friendly M (2026). *vcdExtra: 'vcd' Extensions and Additions*. R package
-version 0.9.0, <https://friendly.github.io/vcdExtra/>.
+version 0.9.1, <https://friendly.github.io/vcdExtra/>.
 
     @Manual{,
       title = {vcdExtra: 'vcd' Extensions and Additions},
       author = {Michael Friendly},
       year = {2026},
-      note = {R package version 0.9.0},
+      note = {R package version 0.9.1},
       url = {https://friendly.github.io/vcdExtra/},
     }

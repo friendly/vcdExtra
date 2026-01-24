@@ -120,8 +120,10 @@ and there are a suite of methods for indexing and selecting parts of an
 Also needed:
 
 - methods for **recoding and collapsing** the levels of a factor:
-  `forcats::fct_recode()`, `forcats::fct_collapse()`,
-  `forcats::fct_lump_min()` are useful here.
+  [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html),
+  [`forcats::fct_collapse()`](https://forcats.tidyverse.org/reference/fct_collapse.html),
+  [`forcats::fct_lump_min()`](https://forcats.tidyverse.org/reference/fct_lump.html)
+  are useful here.
 
 - methods for **reordering the levels** of a factor, either manually or
   for some analysis purpose. For example, Data from Glass (1954) gave

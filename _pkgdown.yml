@@ -27,6 +27,7 @@ reference:
       - split3d
       - range3d
       - seq_mosaic
+      - labeling_points
 
   - title: Loglinear models
     desc: Functions for constructing and manipulating loglinear models

@@ -160,7 +160,8 @@ disease. *Annals of Human Genetics*, **19**, 251-253.
 
 ## See also
 
-[`mantelhaen.test`](https://rdrr.io/r/stats/mantelhaen.test.html)
+[`mantelhaen.test`](https://rdrr.io/r/stats/mantelhaen.test.html),
+[`BreslowDayTest`](https://andrisignorell.github.io/DescTools/reference/BreslowDayTest.html)
 
 Other association tests:
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),

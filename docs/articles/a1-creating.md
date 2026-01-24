@@ -709,14 +709,18 @@ The [`forcats`](https://CRAN.R-project.org/package=forcats) package
 provides a collection of functions for reordering the levels of a factor
 or grouping categories according to their frequency:
 
-- `forcats::fct_reorder()`: Reorder a factor by another variable.
-- `forcats::fct_infreq()`: Reorder a factor by the frequency of values.
-- `forcats::fct_relevel()`: Change the order of a factor by hand.
-- `forcats::fct_lump()`: Collapse the least/most frequent values of a
-  factor into “other”.
-- `forcats::fct_collapse()`: Collapse factor levels into manually
-  defined groups.
-- `forcats::fct_recode()`: Change factor levels by hand.
+- [`forcats::fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html):
+  Reorder a factor by another variable.
+- [`forcats::fct_infreq()`](https://forcats.tidyverse.org/reference/fct_inorder.html):
+  Reorder a factor by the frequency of values.
+- [`forcats::fct_relevel()`](https://forcats.tidyverse.org/reference/fct_relevel.html):
+  Change the order of a factor by hand.
+- [`forcats::fct_lump()`](https://forcats.tidyverse.org/reference/fct_lump.html):
+  Collapse the least/most frequent values of a factor into “other”.
+- [`forcats::fct_collapse()`](https://forcats.tidyverse.org/reference/fct_collapse.html):
+  Collapse factor levels into manually defined groups.
+- [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html):
+  Change factor levels by hand.
 
 ### Converting among frequency tables and data frames
 

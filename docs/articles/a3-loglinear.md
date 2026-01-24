@@ -24,13 +24,13 @@ the **Interpretation** column, the symbol “\\\perp\\” is to be read as
 “is independent of,” and “\\\\\|\\\\” means “conditional on,” or
 “adjusting for,” or just “given”.
 
-| **Model**                | **Model formula**  | **Symbol**             | **Interpretation**       |
-|:-------------------------|:-------------------|:-----------------------|:-------------------------|
-| Mutual independence      | `~A + B + C`       | \\\[A\]\[B\]\[C\]\\    | \\A \perp B \perp C\\    |
-| Joint independence       | `~A*B + C`         | \\\[AB\]\[C\]\\        | \\(A \\ B) \perp C\\     |
-| Conditional independence | `~(A+B)*C`         | \\\[AC\]\[BC\]\\       | \\(A \perp B) \\\|\\ C\\ |
-| All two-way associations | `~A*B + A*C + B*C` | \\\[AB\]\[AC\]\[BC\]\\ | homogeneous association  |
-| Saturated model          | `~A*B*C`           | \\\[ABC\]\\            | 3-way association        |
+| **Model** | **Model formula** | **Symbol** | **Interpretation** |
+|:---|:---|:---|:---|
+| Mutual independence | `~A + B + C` | \\\[A\]\[B\]\[C\]\\ | \\A \perp B \perp C\\ |
+| Joint independence | `~A*B + C` | \\\[AB\]\[C\]\\ | \\(A \\ B) \perp C\\ |
+| Conditional independence | `~(A+B)*C` | \\\[AC\]\[BC\]\\ | \\(A \perp B) \\\|\\ C\\ |
+| All two-way associations | `~A*B + A*C + B*C` | \\\[AB\]\[AC\]\[BC\]\\ | homogeneous association |
+| Saturated model | `~A*B*C` | \\\[ABC\]\\ | 3-way association |
 
 For example, the formula `~A + B + C` specifies the model of *mutual
 independence* with no associations among the three factors. In standard

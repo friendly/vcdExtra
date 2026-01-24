@@ -105,7 +105,7 @@ anova(indep, linlin, test="Chisq")
 #> 1        22     38.261                          
 #> 2        21     23.885  1   14.376 0.0001497 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 mosaic(linlin, residuals_type="rstandard", gp=shading_Friendly)
 #> Warning: no formula provided, assuming ~Month + Risk
 

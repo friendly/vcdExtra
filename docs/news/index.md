@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 0.9.1 (2026-01-23)
+
+- Added
+  [`labeling_points()`](https://friendly.github.io/vcdExtra/reference/labeling_points.md)
+  for mosaic displays to show observed or expected frequencies as random
+  points in the tiles
+
 ## Version 0.9.0 (2026-01-17)
 
 CRAN release: 2026-01-21
