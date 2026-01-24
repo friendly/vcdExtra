@@ -96,11 +96,11 @@ str(lgs.df)
 require(lattice)
 #> Loading required package: lattice
 #> 
-#> Attaching package: 'lattice'
-#> The following object is masked from 'package:seriation':
+#> Attaching package: ‘lattice’
+#> The following object is masked from ‘package:seriation’:
 #> 
 #>     panel.lines
-#> The following object is masked from 'package:gnm':
+#> The following object is masked from ‘package:gnm’:
 #> 
 #>     barley
 mycol <- palette()[2:4]

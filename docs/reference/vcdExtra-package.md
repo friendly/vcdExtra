@@ -265,7 +265,7 @@ example(mosaic.glm)
 #> msc.gl+  }
 #> Initialising
 #> Running start-up iterations..
-#> Running main iterations........
+#> Running main iterations.......
 #> Done
 #> Warning: no formula provided, assuming ~ses + mental
 
@@ -311,7 +311,7 @@ example(mosaic.glm)
 #> DeptE:AdmitRejected  1.68296    0.11733  14.343  < 2e-16 ***
 #> DeptF:AdmitRejected  3.26911    0.16707  19.567  < 2e-16 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for poisson family taken to be 1)
 #> 
@@ -369,7 +369,7 @@ example(mosaic.glm)
 #> DeptF:AdmitRejected         3.30648    0.16998  19.452  < 2e-16 ***
 #> GenderFemale:AdmitRejected -0.09987    0.08085  -1.235    0.217    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for poisson family taken to be 1)
 #> 
@@ -440,7 +440,7 @@ example(mosaic.glm)
 #> DeptE:AdmitRejected  1.58162    0.11933  13.254  < 2e-16 ***
 #> DeptF:AdmitRejected  3.16777    0.16848  18.803  < 2e-16 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> (Dispersion parameter for poisson family taken to be 1)
 #> 
@@ -469,7 +469,7 @@ example(mosaic.glm)
 #> 1         6    21.7355                          
 #> 2         5     2.6815  1   19.054 1.271e-05 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 demo("mental-glm")
 #> 
@@ -556,7 +556,7 @@ demo("mental-glm")
 #> 3        10      6.829  2   -0.549              
 #> 4        14      9.895 -4   -3.066    0.5469    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #> 
 #> > AIC(indep, roweff, coleff, linlin)
 #>        df      AIC
