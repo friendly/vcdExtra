@@ -6,6 +6,9 @@
   [`labeling_points()`](https://friendly.github.io/vcdExtra/reference/labeling_points.md)
   for mosaic displays to show observed or expected frequencies as random
   points in the tiles
+- Changed defaults for `clip` and `margin` in
+  [`labeling_points()`](https://friendly.github.io/vcdExtra/reference/labeling_points.md)
+  to be more sensible \[Thx: Achim Zeileis\]
 
 ## Version 0.9.0 (2026-01-17)
 

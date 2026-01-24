@@ -239,7 +239,7 @@ fitting loglinear models</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 2 x 2 x 2</span></span></span>
-<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rgl"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">rgl.useNULL</span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">mosaic3d</span><span class="op">(</span><span class="va">Bartlett</span>, box<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># compare with expected frequencies under model of mutual independence</span></span></span>
 <span class="r-in"><span><span class="fu">mosaic3d</span><span class="op">(</span><span class="va">Bartlett</span>, type<span class="op">=</span><span class="st">"expected"</span>, box<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -247,6 +247,7 @@ fitting loglinear models</p>
 <span class="r-in"><span><span class="co"># 2 x 2 x 3</span></span></span>
 <span class="r-in"><span><span class="fu">mosaic3d</span><span class="op">(</span><span class="va">Heart</span>, box<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in rgl.useNULL():</span> could not find function "rgl.useNULL"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># 2 x 2 x 2 x 3</span></span></span>
@@ -254,7 +255,7 @@ fitting loglinear models</p>
 <span class="r-in"><span><span class="fu">mosaic3d</span><span class="op">(</span><span class="va">Detergent</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compare 2D and 3D mosaics</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"mosaic-hec"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#demo("mosaic-hec")</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>

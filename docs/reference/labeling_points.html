@@ -76,10 +76,10 @@ visualization that provides a direct visual representation of cell frequencies.<
 <span>  pch <span class="op">=</span> <span class="fl">19</span>,</span>
 <span>  size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">"char"</span><span class="op">)</span>,</span>
 <span>  gp_points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,</span>
-<span>  margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"npc"</span><span class="op">)</span>,</span>
+<span>  margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="st">"npc"</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  jitter <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  clip <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  clip <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -126,11 +126,11 @@ Default is <code>unit(0.5, "char")</code>.</p></dd>
 
 <dt id="arg-margin">margin<a class="anchor" aria-label="anchor" href="#arg-margin"></a></dt>
 <dd><p>Margin inside cells as a <code><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></code> object.
-Points are drawn within this inset area. Default is <code>unit(0.1, "npc")</code>.</p></dd>
+Points are drawn within this inset area. Default is <code>unit(0.05, "npc")</code>.</p></dd>
 
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
-<dd><p>Optional integer seed for reproducible point placement.
+<dd><p>Optional integer seed for reproducible point placement across several similar plots.
 If <code>NULL</code> (default), no seed is set.</p></dd>
 
 
@@ -141,7 +141,7 @@ Default is 1 (full random). Values &lt; 1 create more regular patterns.</p></dd>
 
 <dt id="arg-clip">clip<a class="anchor" aria-label="anchor" href="#arg-clip"></a></dt>
 <dd><p>Logical indicating whether to clip points at cell boundaries.
-Default is <code>TRUE</code>.</p></dd>
+Default is <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -153,14 +153,14 @@ for axis labels.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A function of class <code>"grapcon_generator"</code> suitable for use
 as the <code>labeling</code> argument in <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">strucplot</a></code> and
-related functions.</p>
+related functions like <code>mosaict</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function follows the "grapcon_generator" pattern used by vcd labeling
 functions. It returns a function that can be passed to the <code>labeling</code>
 argument of <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">strucplot</a></code>, <code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></code>, or
-related functions.</p>
+related functions as the argument <code>labeling = labeling_poionts(...)</code>.</p>
 <p>The visualization is inspired by the conceptual model described in
 Friendly (1995), where cell frequencies are represented as physical
 counts of objects. Under independence, point density would be uniform
@@ -174,6 +174,9 @@ which also use density to represent association.</p>
     <p>Friendly, M. (1995). Conceptual and Visual Models for Categorical Data.
 <em>The American Statistician</em>, <strong>49</strong>, 153-160.
 <a href="https://doi.org/10.1080/00031305.1995.10476131" class="external-link">doi:10.1080/00031305.1995.10476131</a></p>
+<p>Friendly, M. (1997). Conceptual Models for Visualizing Contingency Table Data.
+In M. Greenacre &amp; J. Blasius (Eds.), <em>Visualization of Categorical Data</em> (pp. 17–35).
+Academic Press. <a href="https://www.datavis.ca/papers/koln/kolnpapr.pdf" class="external-link">https://www.datavis.ca/papers/koln/kolnpapr.pdf</a></p>
 <p>Meyer, D., Zeileis, A., and Hornik, K. (2006).
 The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd.
 <em>Journal of Statistical Software</em>, <strong>17</strong>(3), 1-48.
@@ -193,12 +196,12 @@ The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd.
 <span class="r-in"><span><span class="va">HairEye</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/marginSums.html" class="external-link">margin.table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Basic usage - observed frequencies as points</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">HairEye</span>, </span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">HairEye</span>,</span></span>
 <span class="r-in"><span>       labeling <span class="op">=</span> <span class="fu">labeling_points</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="labeling_points-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Show expected frequencies instead of observed</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">HairEye</span>, </span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">HairEye</span>,</span></span>
 <span class="r-in"><span>       labeling <span class="op">=</span> <span class="fu">labeling_points</span><span class="op">(</span></span></span>
 <span class="r-in"><span>                     value_type <span class="op">=</span> <span class="st">"expected"</span>,</span></span>
 <span class="r-in"><span>                     scale <span class="op">=</span> <span class="fl">2</span>,</span></span>
@@ -219,7 +222,7 @@ The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd.
 <span class="r-in"><span>       shade <span class="op">=</span> <span class="cn">TRUE</span>, legend <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>       labeling <span class="op">=</span> <span class="fu">labeling_points</span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="labeling_points-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span>       </span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
