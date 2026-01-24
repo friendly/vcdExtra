@@ -199,11 +199,16 @@ Theus, M. & Lauer, S. R. W. (1999) Visualizing Loglinear Models.
 
 [`strucplot`](https://rdrr.io/pkg/vcd/man/strucplot.html),
 [`mosaic`](https://rdrr.io/pkg/vcd/man/mosaic.html),
-[`mosaicplot`](https://rdrr.io/r/graphics/mosaicplot.html)
+[`mosaicplot`](https://rdrr.io/r/graphics/mosaicplot.html) for aspects
+of mosaic plots.
 
 [`loglin`](https://rdrr.io/r/stats/loglin.html),
 [`loglm`](https://rdrr.io/pkg/MASS/man/loglm.html) for details on
 fitting loglinear models
+
+[`play3d`](https://dmurdoch.github.io/rgl/dev/reference/play3d.html),
+[`movie3d`](https://dmurdoch.github.io/rgl/dev/reference/play3d.html)
+for what you can do with a 3D mosaic plot
 
 Other mosaic plots:
 [`mosaic.glm()`](https://friendly.github.io/vcdExtra/reference/mosaic.glm.md),
@@ -226,6 +231,12 @@ mosaic3d(Bartlett, type="expected", box=TRUE)
 mosaic3d(Heart, box=TRUE)
 }
 #> Error in rgl.useNULL(): could not find function "rgl.useNULL"
+
+# Make a dynamic display
+if (FALSE) { # \dontrun{
+  mosaic3d(Heart, box=TRUE, alpha = 0.3, interpolate = c(1, 2, 4))
+  play3d(spin3d(axis = c(0, 1, 0), rpm = 10), duration = 5)
+} # }
 
 if (FALSE) { # \dontrun{
 # 2 x 2 x 2 x 3
