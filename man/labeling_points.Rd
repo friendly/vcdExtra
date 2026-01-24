@@ -63,7 +63,8 @@ as the \code{labeling} argument in \code{\link[vcd]{strucplot}} and
 related functions.
 }
 \description{
-This labeling function for use with \code{\link[vcd]{strucplot}} displays
+This labeling function for use with \code{\link[vcd]{strucplot}} displays,
+such as \code{\link[vcd]{mosaic}}, draws
 random points within each cell of a mosaic plot, where the number of points
 represents observed or expected frequencies. This creates a "dot-density"
 visualization that provides a direct visual representation of cell frequencies.
@@ -104,8 +105,15 @@ mosaic(HairEye,
 # Combine with residual shading
 mosaic(HairEye,
        shade = TRUE, legend = FALSE,
-       labeling = labeling_points(scale = 2))
+       labeling = labeling_points(scale = 2, seed = 42))
 
+# Make tiles show expected frequencies, show points for observed frequencies
+# Reproduces: Fig 6 in Friendly (1995)
+mosaic(HairEye,
+       type = "expected",
+       shade = TRUE, legend = FALSE,
+       labeling = labeling_points(scale = 2, seed = 42))
+       
 }
 \references{
 Friendly, M. (1995). Conceptual and Visual Models for Categorical Data.
