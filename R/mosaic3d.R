@@ -92,10 +92,12 @@
 #'
 #' @seealso
 #' \code{\link[vcd]{strucplot}}, \code{\link[vcd]{mosaic}},
-#' \code{\link[graphics]{mosaicplot}}
+#' \code{\link[graphics]{mosaicplot}} for aspects of mosaic plots.
 #'
 #' \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}} for details on
 #' fitting loglinear models
+#'
+#' \code{\link[rgl]{play3d}}, \code{\link[rgl]{movie3d}} for what you can do with a 3D mosaic plot
 #' @family mosaic plots
 #'
 #' @references Friendly, M. (1995). Conceptual and Visual Models for
@@ -106,6 +108,7 @@
 #'
 #' Theus, M. & Lauer, S. R. W. (1999) Visualizing Loglinear Models.
 #' *Journal of Computational and Graphical Statistics*, **8**, 396-412.
+#' @concept 3D
 #' @keywords hplot
 #' @examples
 #'
@@ -117,6 +120,12 @@
 #'
 #' # 2 x 2 x 3
 #' mosaic3d(Heart, box=TRUE)
+#' }
+#'
+#' # Make a dynamic display
+#' \dontrun{
+#'   mosaic3d(Heart, box=TRUE, alpha = 0.3, interpolate = c(1, 2, 4))
+#'   play3d(spin3d(axis = c(0, 1, 0), rpm = 10), duration = 5)
 #' }
 #'
 #' \dontrun{

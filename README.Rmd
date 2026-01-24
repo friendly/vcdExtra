@@ -146,6 +146,10 @@ vigns$Title <- paste0("[", vigns$Title, "](https://friendly.github.io/vcdExtra/a
 vigns |> knitr::kable()
 ```
 
+* there is also a set of simple demonstration files illustrating analysis of datasets with
+more detail than provided in their individual help files. Use `demo(package = "vcdExtra")`
+to see the list and `demo("occStatus") to run the analysis for this example.
+
 * a few useful utility functions for manipulating categorical data sets and working with models for
 categorical data: `joint()`, `conditional()`, `mutual()`, `saturated()`. 
 

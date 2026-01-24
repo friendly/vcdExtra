@@ -87,4 +87,5 @@ objects.
 \author{
 Duncan Murdoch, with refinements by Michael Friendly
 }
+\concept{3D}
 \keyword{dplot}
