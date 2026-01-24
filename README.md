@@ -1,6 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- This README requires access to the vignettes in the package. Please run
+     devtools::install(build_vignettes = TRUE) before knitting this to README.md -->
+
 <!-- badges: start -->
 
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
@@ -21,7 +24,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.0; documentation built for `pkgdown` 2026-01-20
+Version 0.9.1; documentation built for `pkgdown` 2026-01-24
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -46,11 +49,11 @@ Data Analysis](https://friendly.github.io/psy6136/).
 
 ## Installation
 
-Get the released version (0.8.7) from CRAN:
+Get the released version (0.9.0) from CRAN:
 
      install.packages("vcdExtra")
 
-The current development version (0.9.0) can be installed from
+The current development version (0.9.1) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
@@ -174,6 +177,11 @@ vigns |> knitr::kable()
 | a7-continuous.Rmd | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html) |
 | datasets.Rmd | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html) |
 | tidyCats.Rmd | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) |
+
+- there is also a set of simple demonstration files illustrating
+  analysis of datasets with more detail than provided in their
+  individual help files. Use `demo(package = "vcdExtra")` to see the
+  list and \`demo(“occStatus”) to run the analysis for this example.
 
 - a few useful utility functions for manipulating categorical data sets
   and working with models for categorical data: `joint()`,
