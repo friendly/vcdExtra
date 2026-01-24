@@ -12,10 +12,10 @@ labeling_points(
   pch = 19,
   size = unit(0.5, "char"),
   gp_points = gpar(col = "black", alpha = 0.7),
-  margin = unit(0.1, "npc"),
+  margin = unit(0.05, "npc"),
   seed = NULL,
   jitter = 1,
-  clip = TRUE,
+  clip = FALSE,
   ...
 )
 }
@@ -43,16 +43,16 @@ Default is \code{unit(0.5, "char")}.}
 (color, alpha, etc.), for example: \code{gp_points = gpar(col = "red")}.}
 
 \item{margin}{Margin inside cells as a \code{\link[grid]{unit}} object.
-Points are drawn within this inset area. Default is \code{unit(0.1, "npc")}.}
+Points are drawn within this inset area. Default is \code{unit(0.05, "npc")}.}
 
-\item{seed}{Optional integer seed for reproducible point placement.
+\item{seed}{Optional integer seed for reproducible point placement across several similar plots.
 If \code{NULL} (default), no seed is set.}
 
 \item{jitter}{Numeric jitter amount (0-1) for point placement.
 Default is 1 (full random). Values < 1 create more regular patterns.}
 
 \item{clip}{Logical indicating whether to clip points at cell boundaries.
-Default is \code{TRUE}.}
+Default is \code{FALSE}.}
 
 \item{...}{Additional arguments passed to \code{\link[vcd]{labeling_border}}
 for axis labels.}
@@ -60,7 +60,7 @@ for axis labels.}
 \value{
 A function of class \code{"grapcon_generator"} suitable for use
 as the \code{labeling} argument in \code{\link[vcd]{strucplot}} and
-related functions.
+related functions like \code{\link[vcd]{mosaict}}.
 }
 \description{
 This labeling function for use with \code{\link[vcd]{strucplot}} displays,
@@ -73,7 +73,7 @@ visualization that provides a direct visual representation of cell frequencies.
 This function follows the "grapcon_generator" pattern used by vcd labeling
 functions. It returns a function that can be passed to the \code{labeling}
 argument of \code{\link[vcd]{strucplot}}, \code{\link[vcd]{mosaic}}, or
-related functions.
+related functions as the argument \code{labeling = labeling_poionts(...)}.
 
 The visualization is inspired by the conceptual model described in
 Friendly (1995), where cell frequencies are represented as physical
@@ -91,11 +91,11 @@ library(vcd)
 HairEye <- margin.table(HairEyeColor, 2:1)
 
 # Basic usage - observed frequencies as points
-mosaic(HairEye, 
+mosaic(HairEye,
        labeling = labeling_points(scale = 1))
 
 # Show expected frequencies instead of observed
-mosaic(HairEye, 
+mosaic(HairEye,
        labeling = labeling_points(
                      value_type = "expected",
                      scale = 2,
@@ -113,12 +113,16 @@ mosaic(HairEye,
        type = "expected",
        shade = TRUE, legend = FALSE,
        labeling = labeling_points(scale = 2, seed = 42))
-       
+
 }
 \references{
 Friendly, M. (1995). Conceptual and Visual Models for Categorical Data.
 \emph{The American Statistician}, \strong{49}, 153-160.
 \doi{10.1080/00031305.1995.10476131}
+
+Friendly, M. (1997). Conceptual Models for Visualizing Contingency Table Data.
+In M. Greenacre & J. Blasius (Eds.), \emph{Visualization of Categorical Data} (pp. 17–35).
+Academic Press. \url{https://www.datavis.ca/papers/koln/kolnpapr.pdf}
 
 Meyer, D., Zeileis, A., and Hornik, K. (2006).
 The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd.

@@ -110,7 +110,7 @@
 #' @examples
 #'
 #' # 2 x 2 x 2
-#' if(requireNamespace("rgl")){
+#' if (!rgl.useNULL() && interactive()){
 #' mosaic3d(Bartlett, box=TRUE)
 #' # compare with expected frequencies under model of mutual independence
 #' mosaic3d(Bartlett, type="expected", box=TRUE)
@@ -125,7 +125,7 @@
 #' mosaic3d(Detergent)
 #'
 #' # compare 2D and 3D mosaics
-#' demo("mosaic-hec")
+#' #demo("mosaic-hec")
 #' }
 #'
 #'

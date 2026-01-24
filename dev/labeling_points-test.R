@@ -8,16 +8,34 @@ devtools::load_all()
 # Simple 2-way table
 HairEye <- margin.table(HairEyeColor, 2:1)
 
+# test clipping and margins
+#
+# default: clip = TRUE, unit(0.1, "npc")
+mosaic(HairEye,
+       labeling = labeling_points(scale = 1, size = 1.2, seed = 42))
+
+# don't clip
+mosaic(HairEye,
+       labeling = labeling_points(scale = 1, size = 1.2, seed = 42,
+                                  clip =FALSE))
+
+# set margin = 0
+mosaic(HairEye,
+       labeling = labeling_points(scale = 1, size = 1.2, seed = 42,
+                                  clip =FALSE, margin = 0))
+
+
+
 # Basic usage
 # Reproduces Fig 5 in Friendly (1995)
-mosaic(HairEye,  
+mosaic(HairEye,
        direction = c("v", "h"),
        labeling = labeling_points(scale = 1),
        main = "Hair-Eye Color\n# of points = cell n",
        main_gp = gpar(fontsize = 16))
 
 # Show expected frequencies instead of observed in cells
-mosaic(HairEye, 
+mosaic(HairEye,
        direction = c("v", "h"),
        labeling = labeling_points(
             value_type = "expected",
@@ -29,20 +47,20 @@ mosaic(HairEye,
 
 # Make tiles show expected frequencies, show points for observed frequencies
 # Reproduces Fig 6 in Friendly (1995),
-mosaic(HairEye, 
+mosaic(HairEye,
        type = "expected",
        direction = c("v", "h"),
        labeling = labeling_points(
          value_type = "observed",
          scale = 1,
-         seed = 42)       
+         seed = 42)
        )
 
 # Combine with residual shading
 mosaic(HairEye, # direction = c("v", "h"),
        shade = TRUE,
        legend = FALSE,
-       labeling = labeling_points(scale = 1, 
+       labeling = labeling_points(scale = 1,
                                   gp_points = gpar(col = "black")))
 
 # Customize point appearance
@@ -88,12 +106,12 @@ mosaic(HairEyeColor, labeling = labeling_points(
 # -----------------------------------------------------------------------------
 
 # Titanic - 4-way table
-mosaic(Titanic, 
+mosaic(Titanic,
        shade = TRUE, legend = FALSE,
        labeling = labeling_points(scale = 2))
 
 # UCBAdmissions
-mosaic(UCBAdmissions, 
+mosaic(UCBAdmissions,
        shade = TRUE, legend = FALSE,
        labeling = labeling_points(scale = 2))
 
@@ -105,12 +123,16 @@ mosaic(UCBAdmissions,
 small_table <- as.table(matrix(c(2, 5, 3, 8), nrow = 2,
                                 dimnames = list(A = c("a1", "a2"),
                                                B = c("b1", "b2"))))
-mosaic(small_table, 
+mosaic(small_table,
        labeling = labeling_points(scale = 1, size = 2))
 
 # Table with zeros
 zero_table <- as.table(matrix(c(0, 15, 10, 0), nrow = 2,
                                dimnames = list(A = c("a1", "a2"),
                                               B = c("b1", "b2"))))
-mosaic(zero_table, 
+mosaic(zero_table,
        labeling = labeling_points(scale = 1))
+
+# -----------------------------------------------------------------------------
+# Try with other strucplots
+# -----------------------------------------------------------------------------
