@@ -83,7 +83,7 @@
 <h2 id="extensions-and-additions-to-vcd-visualizing-categorical-data">Extensions and additions to vcd: Visualizing Categorical Data<a class="anchor" aria-label="anchor" href="#extensions-and-additions-to-vcd-visualizing-categorical-data"></a>
 </h2>
 <!-- Version 0.8-6 -->
-<p>Version 0.9.1; documentation built for <code>pkgdown</code> 2026-01-24</p>
+<p>Version 0.9.1; documentation built for <code>pkgdown</code> 2026-01-25</p>
 <p>This package provides additional data sets, documentation, and many functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>.</p>
 <p>It also adds extensions to modeling functions for models fit using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, using the contruct <code><a href="reference/glmlist.html">glmlist()</a></code> to construct a list of related models which can be summarized (via <code><a href="reference/LRstats.html">LRstats()</a></code>) and graphed (via <code><a href="reference/mosaic.glmlist.html">mosaic.glmlist()</a></code>)</p>
 <p><code>vcdExtra</code> is a support package for the book <a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835" class="external-link"><em>Discrete Data Analysis with R</em></a> (DDAR) by Michael Friendly and David Meyer. There is also a <a href="http://ddar.datavis.ca" class="external-link">web site for DDAR</a> with all figures and code samples from the book. It is also used in my graduate course, <a href="https://friendly.github.io/psy6136/" class="external-link">Psy 6136: Categorical Data Analysis</a>.</p>
@@ -94,11 +94,10 @@
 <p>Get the released version (0.9.0) from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
 <p>The current development version (0.9.1) can be installed from <a href="https://friendly.r-universe.dev/vcdExtra" class="external-link">R-universe</a> or directly from the <a href="https://github.com/friendly/vcdExtra" class="external-link">GitHub repo</a> via:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a> </span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">'https://friendly.r-universe.dev'</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a> <span class="co"># or</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a> remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"friendly/vcdExtra"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)C<span class="sc">:</span>\Dropbox\Documents\images\pryamids\BritishBeehive.png</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">'https://friendly.r-universe.dev'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a> <span class="co"># or</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a> remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"friendly/vcdExtra"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
@@ -421,6 +420,7 @@
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-2.0.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat" alt="License"></a></li>
 <li><a href="https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://bsky.app/profile/datavisFriendly.bsky.social" class="external-link"><img src="https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&amp;logoColor=0285FF&amp;label=Follow%20on&amp;color=0285FF" alt="Follow on Bluesky"></a></li>
 </ul>
 </div>
 
