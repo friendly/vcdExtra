@@ -6,16 +6,22 @@
 # ✅ DONE: Suppress Warning `In chisq.test(x) : Chi-squared approximation may be incorrect`
 # ✅ DONE: Test cases in dev/test-color_table.R using vcd::Suicide, vcd::PreSex, vcdExtra::Abortion
 #
-# ‼ TODO: When there are two (or more) variables for the row, these should appear as a nested hierarchy similar
+# ‼ TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
+#         hierarchy similar
 #         to what is shown in the table for the Titanic data in `dev/Titanic-residual-shading.png`. That is,
 #         the Hair-Sex combinations that appear like "Black_Male" should be two columns for Hair and Sex, and
 #         the rows for the other cases of black hair should have Sex empty. Not sure whether nested row groups
 #         can be shown to look nested otherwise.
 #
 # ‼ TODO: Make the display of the Total row and column optional.
+#
 # ‼ TODO: The column variables appear bold, with the Total column in italics. The category labels for the row
 #         variables should match those columns, e.g., bold for the category labels and italic for the Total.
+#
+# ‼ TODO: Should also allow the input argument, x, to be a dataset in frequency form.
+#
 # ‼ TODO: Consider use of patterned backgrounds using gt facilities-- e.g., opt_stylize()
+#
 # ‼ TODO: To handle  table, xtabs, ftable, or structable objects as the input, perhaps it would be better to
 #         reorganize this as an S3 generic, with specific methods for table, xtabs, ftable, structable objects.
 #

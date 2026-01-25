@@ -4,11 +4,6 @@ template:
   bootstrap: 5
   # For pkgdown >= 2.1.0, can use: math-rendering: mathjax
   math-rendering: mathjax
-  # includes:
-  #   in_header: |
-  #     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"
-  #             integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Hze7/hhB1gPvMKkM79q/z7M7sU2bDjPB/ZADWKp8ssv2qA=="
-  #             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   params:
     bootswatch: cosmo
 
@@ -43,6 +38,13 @@ reference:
       - mutual
       - saturated
       - seq_loglm
+
+  - title: Other graphical methods
+    desc: Other functions for visualizing contingency tables
+    contents:
+      - color_table
+      - mcaplot
+
 
   - title: Statistical tests
     desc: Statistical tests for categorical data
@@ -82,7 +84,6 @@ reference:
   - title: Other
     desc:  Other functions in the package (not yet classified)
     contents:
-      - mcaplot
       - Summarise
       - update.xtabs
       - vcdExtra-package
