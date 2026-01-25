@@ -60,7 +60,7 @@ for axis labels.}
 \value{
 A function of class \code{"grapcon_generator"} suitable for use
 as the \code{labeling} argument in \code{\link[vcd]{strucplot}} and
-related functions like \code{\link[vcd]{mosaict}}.
+related functions like \code{\link[vcd]{mosaic}}.
 }
 \description{
 This labeling function for use with \code{\link[vcd]{strucplot}} displays,

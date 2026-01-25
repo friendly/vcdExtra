@@ -56,7 +56,6 @@ Suggests:
     seriation,
     testthat (>= 3.0.0),
     tibble,
-    dplyr, 
     glue, 
     here, 
     purrr, 
@@ -69,8 +68,12 @@ Imports:
     grid,
     stats,
     utils,
+    dplyr, 
     ca,
-    rgl
+    rgl,
+    colorspace,
+    gt,
+    scales
 Description: Provides additional data sets, methods and documentation to complement the 'vcd' package for Visualizing Categorical Data
     and the 'gnm' package for Generalized Nonlinear Models.
 	In particular, 'vcdExtra' extends mosaic, assoc and sieve plots from 'vcd' to handle 'glm()' and 'gnm()' models and

@@ -2,6 +2,7 @@
 
 * Added `labeling_points()` for mosaic displays to show observed or expected frequencies as random points in the tiles
 * Changed defaults for `clip` and `margin` in `labeling_points()` to be more sensible [Thx: Achim Zeileis]
+* Added `color_table()` to display frequency tables with color shaded backgrounds to show patterns
 
 ## Version 0.9.0 (2026-01-17)
 

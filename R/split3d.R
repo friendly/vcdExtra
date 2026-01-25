@@ -50,7 +50,7 @@
 #' @keywords dplot
 #' @examples
 #'
-#' if (require(rgl)) {
+#' if (!rgl::rgl.useNULL() && interactive()){
 #'   open3d()
 #'   cube <- cube3d(alpha=0.4)
 #'   sl1 <- split3d(cube, c(.2, .3, .5), 1)

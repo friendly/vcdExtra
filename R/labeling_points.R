@@ -49,7 +49,7 @@
 #'
 #' @return A function of class \code{"grapcon_generator"} suitable for use
 #'   as the \code{labeling} argument in \code{\link[vcd]{strucplot}} and
-#'   related functions like \code{\link[vcd]{mosaict}}.
+#'   related functions like \code{\link[vcd]{mosaic}}.
 #'
 #' @references
 #' Friendly, M. (1995). Conceptual and Visual Models for Categorical Data.
