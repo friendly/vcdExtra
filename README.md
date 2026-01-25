@@ -15,6 +15,8 @@ Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://gi
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
+[![Follow on
+Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285FF&label=Follow%20on&color=0285FF)](https://bsky.app/profile/datavisFriendly.bsky.social)
 
 <!-- badges: end -->
 
@@ -24,7 +26,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.1; documentation built for `pkgdown` 2026-01-24
+Version 0.9.1; documentation built for `pkgdown` 2026-01-25
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -57,8 +59,7 @@ The current development version (0.9.1) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
-     if (!require(remotes)) install.packages("remotes")
-     
+     if (!require(remotes)) install.packages("remotes")C:\Dropbox\Documents\images\pryamids\BritishBeehive.png
      install.packages("vcdExtra", repos = c('https://friendly.r-universe.dev')
      # or
      remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
