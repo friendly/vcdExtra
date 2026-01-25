@@ -29,6 +29,9 @@
 # ‼ TODO: To handle  table, xtabs, ftable, or structable objects as the input, perhaps it would be better to
 #         reorganize this as an S3 generic, with specific methods for table, xtabs, ftable, structable objects.
 #
+# ‼ TODO: Add filename arg, which if not NULL saves the `gt` result as an image. Needed because gt output is
+#         hard to show in Rmd / qmd output. Most likely use `gt::gtsave()`.
+#
 
 
 #' Display Frequency Table with Colored Cell Backgrounds
