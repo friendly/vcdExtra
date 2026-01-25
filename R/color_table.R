@@ -6,6 +6,10 @@
 # ✅ DONE: Suppress Warning `In chisq.test(x) : Chi-squared approximation may be incorrect`
 # ✅ DONE: Test cases in dev/test-color_table.R using vcd::Suicide, vcd::PreSex, vcdExtra::Abortion
 #
+# ‼ FIXME:There's a bug in format(round(df_display[[col]], digits), nsmall = digits) at color_table.R#205
+#         Gives error: Error in Math.factor(c(1L, 2L, 3L, 4L, 1L, 2L, 3L, 4L, 1L, 2L, 3L, 4L,  :
+#         ‘round’ not meaningful for factors
+#
 # ‼ TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
 #         hierarchy similar
 #         to what is shown in the table for the Titanic data in `dev/Titanic-residual-shading.png`. That is,
@@ -25,7 +29,6 @@
 # ‼ TODO: To handle  table, xtabs, ftable, or structable objects as the input, perhaps it would be better to
 #         reorganize this as an S3 generic, with specific methods for table, xtabs, ftable, structable objects.
 #
-# ‼ FIXME: Example 3: Using a specific model gives an error:
 
 
 #' Display Frequency Table with Colored Cell Backgrounds
