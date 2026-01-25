@@ -223,9 +223,10 @@ Categorical Data, <em>The American Statistician</em>, <strong>49</strong>, 153-1
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">strucplot</a></code>, <code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></code>,
-<code><a href="https://rdrr.io/r/graphics/mosaicplot.html" class="external-link">mosaicplot</a></code></p>
+<code><a href="https://rdrr.io/r/graphics/mosaicplot.html" class="external-link">mosaicplot</a></code> for aspects of mosaic plots.</p>
 <p><code><a href="https://rdrr.io/r/stats/loglin.html" class="external-link">loglin</a></code>, <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></code> for details on
 fitting loglinear models</p>
+<p><code><a href="https://dmurdoch.github.io/rgl/dev/reference/play3d.html" class="external-link">play3d</a></code>, <code><a href="https://dmurdoch.github.io/rgl/dev/reference/play3d.html" class="external-link">movie3d</a></code> for what you can do with a 3D mosaic plot</p>
 <p>Other mosaic plots:
 <code><a href="mosaic.glm.html">mosaic.glm()</a></code>,
 <code><a href="mosaic.glmlist.html">mosaic.glmlist()</a></code></p></div>
@@ -248,6 +249,12 @@ fitting loglinear models</p>
 <span class="r-in"><span><span class="fu">mosaic3d</span><span class="op">(</span><span class="va">Heart</span>, box<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in rgl.useNULL():</span> could not find function "rgl.useNULL"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Make a dynamic display</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span>  <span class="fu">mosaic3d</span><span class="op">(</span><span class="va">Heart</span>, box<span class="op">=</span><span class="cn">TRUE</span>, alpha <span class="op">=</span> <span class="fl">0.3</span>, interpolate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">play3d</span><span class="op">(</span><span class="fu">spin3d</span><span class="op">(</span>axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, rpm <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, duration <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># 2 x 2 x 2 x 3</span></span></span>
