@@ -51,6 +51,15 @@ Functions for constructing and manipulating loglinear models
 - [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
   : Sequential Loglinear Models for an N-way Table
 
+## Other graphical methods
+
+Other functions for visualizing contingency tables
+
+- [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
+  : Display Frequency Table with Colored Cell Backgrounds
+- [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
+  : Simple and enhanced plot of MCA solutions
+
 ## Statistical tests
 
 Statistical tests for categorical data
@@ -109,9 +118,6 @@ Utility functions in the package
 ## Other
 
 Other functions in the package (not yet classified)
-
-- [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
-  : Simple and enhanced plot of MCA solutions
 
 - [`Summarise()`](https://friendly.github.io/vcdExtra/reference/Summarise.md)
   : Brief Summary of Model Fit for glm and loglm Models

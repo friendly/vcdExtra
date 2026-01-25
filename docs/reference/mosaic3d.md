@@ -222,7 +222,7 @@ Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 
 ``` r
 # 2 x 2 x 2
-if (!rgl.useNULL() && interactive()){
+if (!rgl::rgl.useNULL() && interactive()){
 mosaic3d(Bartlett, box=TRUE)
 # compare with expected frequencies under model of mutual independence
 mosaic3d(Bartlett, type="expected", box=TRUE)
@@ -230,7 +230,6 @@ mosaic3d(Bartlett, type="expected", box=TRUE)
 # 2 x 2 x 3
 mosaic3d(Heart, box=TRUE)
 }
-#> Error in rgl.useNULL(): could not find function "rgl.useNULL"
 
 # Make a dynamic display
 if (FALSE) { # \dontrun{

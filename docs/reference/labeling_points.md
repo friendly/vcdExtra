@@ -99,7 +99,7 @@ labeling_points(
 A function of class `"grapcon_generator"` suitable for use as the
 `labeling` argument in
 [`strucplot`](https://rdrr.io/pkg/vcd/man/strucplot.html) and related
-functions like `mosaict`.
+functions like [`mosaic`](https://rdrr.io/pkg/vcd/man/mosaic.html).
 
 ## Details
 

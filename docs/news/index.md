@@ -9,6 +9,10 @@
 - Changed defaults for `clip` and `margin` in
   [`labeling_points()`](https://friendly.github.io/vcdExtra/reference/labeling_points.md)
   to be more sensible \[Thx: Achim Zeileis\]
+- Added
+  [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
+  to display frequency tables with color shaded backgrounds to show
+  patterns
 
 ## Version 0.9.0 (2026-01-17)
 
