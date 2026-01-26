@@ -5,9 +5,15 @@
 # ✅ DONE: The default palette for diverging uses darker shades from RdBu (#2166AC, #B2182B)
 # ✅ DONE: Suppress Warning `In chisq.test(x) : Chi-squared approximation may be incorrect`
 # ✅ DONE: Test cases in dev/test-color_table.R using vcd::Suicide, vcd::PreSex, vcdExtra::Abortion
-#
 # ✅ DONE: Fixed bug in format(round(...)) - now checks is.numeric() before applying round()
 #         The error occurred because as.data.frame() on a matrix can include factor columns.
+# ✅ DONE:  Make the display of the Total row and column optional. -- handled by `marginss`
+#
+# ✅ DONE: Row category labels (stub) now bold, matching column labels; Total row stub is italic.
+#         Future enhancement: could extend `margins` to accept a list for custom styling.
+#
+# ✅ DONE: Add filename arg, which if not NULL saves the `gt` result as an image via gt::gtsave().
+#         Supports .png, .svg, .pdf, .html, .rtf, .docx formats. Additional args passed via `...`.
 #
 # ‼ TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
 #         hierarchy similar
@@ -16,26 +22,14 @@
 #         the rows for the other cases of black hair should have Sex empty. Not sure whether nested row groups
 #         can be shown to look nested otherwise.
 #
-# ✅ DONE:  Make the display of the Total row and column optional. -- handled by `marginss`
-#
-# ✅ DONE: Row category labels (stub) now bold, matching column labels; Total row stub is italic.
-#         Future enhancement: could extend `margins` to accept a list for custom styling.
-#
 # ‼ TODO: Should also allow the input argument, x, to be a dataset in frequency form.
-#
-# ‼ TODO: Consider use of patterned backgrounds using gt facilities-- e.g., opt_stylize()
 #
 # ‼ TODO: To handle  table, xtabs, ftable, or structable objects as the input, perhaps it would be better to
 #         reorganize this as an S3 generic, with specific methods for table, xtabs, ftable, structable objects.
+#         The color_table.default() method could then be much simpler. This re-factoring may be difficult, so
+#         do this as a test version, in the file `dev/color_table2.R`
 #
-# ‼ TODO: Add filename arg, which if not NULL saves the `gt` result as an image. Needed because gt output is
-#         hard to show in Rmd / qmd output. Most likely use `gt::gtsave()`. NB: `gt` documentation uses
-#         `.svg` files in the README as: <img src="man/figures/gt_sp500_table.svg" width="800px">.
-#
-#         In man pages via roxygen it uses for examples:
-#              \if{html}{\out{
-#                 `r man_get_image_tag(file = "man_gt_1.png")`
-#               }}
+# ‼ TODO: Consider use of patterned backgrounds using gt facilities-- e.g., opt_stylize(). Low priority.
 #
 
 
@@ -56,7 +50,12 @@
 #' @param margins Logical, include row/column totals?
 #' @param digits Number of decimal places for displayed values
 #' @param title Optional table title
-#' @param ... Additional arguments (currently unused)
+#' @param filename Optional filename to save the table as an image. If provided,
+#'   the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
+#'   \code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
+#'   The format is determined by the file extension.
+#' @param ... Additional arguments passed to \code{\link[gt]{gtsave}} when
+#'   \code{filename} is specified (e.g., \code{vwidth}, \code{vheight} for image dimensions)
 #'
 #' @details
 #' This function provides a heatmap-style representation of a frequency table,
@@ -74,6 +73,20 @@
 #' is used to determine the optimal text color according to WCAG 2.1 guidelines.
 #' Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.
 #'
+#' In R Markdown (\code{.Rmd}) or Quarto (\code{.qmd}) documents, \pkg{gt} tables
+#' may not render correctly in all output formats. The \code{filename} argument
+#' provides a workaround: save the table as an image, then include it using
+#' \code{\link[knitr]{include_graphics}}. For example:
+#'
+#' \preformatted{
+#' color_table(my_table, filename = "my_table.png")
+#' knitr::include_graphics("my_table.png")
+#' }
+#'
+#' For higher quality output, \code{.svg} format is recommended. You can control
+#' the image dimensions using the \code{vwidth} and \code{vheight} arguments
+#' (passed via \code{...}).
+#'
 #' @return A gt table object that can be further customized
 #'
 #' @examples
@@ -88,6 +101,10 @@
 #'
 #' # 3-way table
 #' color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
+#'
+#' # Save table as an image file
+#' color_table(HEC, filename = "hair_eye_table.png")
+#' color_table(HEC, filename = "hair_eye_table.svg", vwidth = 600)
 #' }
 #'
 #' @importFrom stats chisq.test residuals
@@ -104,6 +121,7 @@ color_table <- function(x,
                         margins = TRUE,
                         digits = 0,
                         title = NULL,
+                        filename = NULL,
                         ...) {
 
 
@@ -381,6 +399,11 @@ gt_tbl <- gt_tbl |>
         style = gt::cell_text(weight = "bold"),
         locations = gt::cells_stub()
       )
+  }
+
+  # Save to file if filename is provided
+  if (!is.null(filename)) {
+    gt::gtsave(gt_tbl, filename = filename, ...)
   }
 
   return(gt_tbl)
