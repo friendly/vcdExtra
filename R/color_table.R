@@ -1,12 +1,12 @@
-# ✅ DONE: Initial implementation, using `gt` pkg for the table
+# ✔️DONE: Initial implementation, using `gt` pkg for the table
 #
-# ✅ DONE: When the cell is colored a dark shade, use white text for readability.
+# ✔️DONE: When the cell is colored a dark shade, use white text for readability.
 #         Uses colorspace::contrast_ratio() to pick optimal text color.
-# ✅ DONE: The default palette for diverging uses darker shades from RdBu (#2166AC, #B2182B)
-# ✅ DONE: Suppress Warning `In chisq.test(x) : Chi-squared approximation may be incorrect`
-# ✅ DONE: Test cases in dev/test-color_table.R using vcd::Suicide, vcd::PreSex, vcdExtra::Abortion
+# ✔️DONE: The default palette for diverging uses darker shades from RdBu (#2166AC, #B2182B)
+# ✔️DONE: Suppress Warning `In chisq.test(x) : Chi-squared approximation may be incorrect`
+# ✔️DONE: Test cases in dev/test-color_table.R using vcd::Suicide, vcd::PreSex, vcdExtra::Abortion
 #
-# ✅ DONE: Fixed bug in format(round(...)) - now checks is.numeric() before applying round()
+# ✔️DONE: Fixed bug in format(round(...)) - now checks is.numeric() before applying round()
 #         The error occurred because as.data.frame() on a matrix can include factor columns.
 #
 # ‼ TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
@@ -16,9 +16,9 @@
 #         the rows for the other cases of black hair should have Sex empty. Not sure whether nested row groups
 #         can be shown to look nested otherwise.
 #
-# ✅ DONE:  Make the display of the Total row and column optional. -- handled by `marginss`
+# ✔️DONE:  Make the display of the Total row and column optional. -- handled by `marginss`
 #
-# ✅ DONE: Row category labels (stub) now bold, matching column labels; Total row stub is italic.
+# ✔️DONE: Row category labels (stub) now bold, matching column labels; Total row stub is italic.
 #         Future enhancement: could extend `margins` to accept a list for custom styling.
 #
 # ‼ TODO: Should also allow the input argument, x, to be a dataset in frequency form.
