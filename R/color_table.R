@@ -7,7 +7,7 @@
 # ✔️DONE: Test cases in dev/test-color_table.R using vcd::Suicide, vcd::PreSex, vcdExtra::Abortion
 # ✔️DONE: Fixed bug in format(round(...)) - now checks is.numeric() before applying round()
 #         The error occurred because as.data.frame() on a matrix can include factor columns.
-# ✔️DONE:  Make the display of the Total row and column optional. -- handled by `margins`
+# ✔️DONE: Make the display of the Total row and column optional. -- handled by `margins`
 #
 # ✔️DONE: Row category labels (stub) now bold, matching column labels; Total row stub is italic.
 #         Future enhancement: could extend `margins` to accept a list for custom styling.
@@ -15,21 +15,23 @@
 # ✔️DONE: Add filename arg, which if not NULL saves the `gt` result as an image via gt::gtsave().
 #         Supports .png, .svg, .pdf, .html, .rtf, .docx formats. Additional args passed via `...`.
 #
-# ‼ TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
-#         hierarchy similar
-#         to what is shown in the table for the Titanic data in `dev/Titanic-residual-shading.png`. That is,
-#         the Hair-Sex combinations that appear like "Black_Male" should be two columns for Hair and Sex, and
-#         the rows for the other cases of black hair should have Sex empty. Not sure whether nested row groups
-#         can be shown to look nested otherwise.
+# ✔️DONE: Refactored as S3 generic with methods for table, xtabs, ftable, structable, data.frame, matrix.
+#         The .color_table_impl() internal function handles the core gt table building.
 #
-# ‼ TODO: Should also allow the input argument, x, to be a dataset in frequency form.
+# ✔️DONE: Allow input argument x to be a dataset in frequency form (data.frame with Freq column).
+#         New freq_col parameter allows specifying the frequency column name.
 #
-# ‼ TODO: To handle  table, xtabs, ftable, or structable objects as the input, perhaps it would be better to
-#         reorganize this as an S3 generic, with specific methods for table, xtabs, ftable, structable objects.
-#         The color_table.default() method could then be much simpler. This re-factoring may be difficult, so
-#         do this as a test version, in the file `dev/color_table2.R`
+# ✔️DONE: For multi-way tables, use MASS::loglm() to fit complete independence model and compute
+#         proper Pearson residuals. Print message with X^2, df, p-value when shade != "freq".
 #
-# ‼ TODO: Consider use of patterned backgrounds using gt facilities-- e.g., opt_stylize(). Low priority.
+# 🚩TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
+#         hierarchy similar to what is shown in the table for the Titanic data in
+#         `dev/Titanic-residual-shading.png`. That is, the Hair-Sex combinations that appear like
+#         "Black_Male" should be two columns for Hair and Sex, and the rows for the other cases of
+#         black hair should have Sex empty. Not sure whether nested row groups can be shown to look
+#         nested otherwise.
+#
+# 🚩TODO: Consider use of patterned backgrounds using gt facilities-- e.g., opt_stylize(). Low priority.
 #
 
 
@@ -37,25 +39,10 @@
 #'
 #' Creates a formatted table display of frequency data with cell backgrounds
 #' colored according to observed frequencies or their residuals from a loglinear model.
+#' This is an S3 generic function with methods for different input types.
 #'
-#' @param x A table, xtabs, matrix, ftable, or structable object
-#' @param formula Formula specifying row ~ col layout (passed to structable if needed)
-#' @param shade What values determine cell shading: "residuals" (default), "freq",
-#'   "pearson", or "deviance"
-#' @param model A fitted model (loglm or glm) to compute residuals from.
-#'   If NULL and shade involves residuals, uses independence model.
-#' @param expected Expected frequencies (alternative to model)
-#' @param palette Color palette function or vector. Default depends on shade type.
-#' @param legend Logical, show color legend/scale?
-#' @param margins Logical, include row/column totals?
-#' @param digits Number of decimal places for displayed values
-#' @param title Optional table title
-#' @param filename Optional filename to save the table as an image. If provided,
-#'   the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
-#'   \code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
-#'   The format is determined by the file extension.
-#' @param ... Additional arguments passed to \code{\link[gt]{gtsave}} when
-#'   \code{filename} is specified (e.g., \code{vwidth}, \code{vheight} for image dimensions)
+#' @param x A table, xtabs, matrix, ftable, structable, or data.frame object
+#' @param ... Additional arguments passed to methods
 #'
 #' @details
 #' This function provides a heatmap-style representation of a frequency table,
@@ -65,6 +52,11 @@
 #' residuals (fewer than expected) are shaded blue. This makes it easy to identify
 #' cells that deviate substantially from what would be expected under a given model
 #' (by default, the independence model).
+#'
+#' For multi-way tables (3 or more dimensions), residuals are computed from the
+#' model of complete independence among all factors using \code{\link[MASS]{loglm}}.
+#' A message is printed showing the chi-squared statistic, degrees of freedom,
+#' and p-value for this test.
 #'
 #' For cells with dark background colors, black text can be difficult to read.
 #' This function automatically selects white or black text for each cell based
@@ -91,88 +83,331 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Basic usage - shade by residuals from independence
+#' # Basic usage with 2-way table - shade by residuals from independence
 #' data(HairEyeColor)
-#' HEC <- margin.table(HairEyeColor, 2:1)
-#' color_table(HEC)
+#' HEC2 <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
+#' color_table(HEC2)
+#' # Prints: "Shading based on residuals from model of independence, X^2 = ..."
 #'
-#' # Shade by frequencies instead
-#' color_table(HEC, shade = "freq")
+#' # Shade by frequencies instead (no message printed)
+#' color_table(HEC2, shade = "freq")
 #'
-#' # 3-way table
+#' # 3-way table - requires formula to specify layout
 #' color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
+#' # Prints: "Shading based on residuals from model of complete independence, X^2 = ..."
+#'
+#' # From a data.frame in frequency form (2-way)
+#' hec_df <- as.data.frame(HEC2)
+#' color_table(hec_df)
 #'
 #' # Save table as an image file
-#' color_table(HEC, filename = "hair_eye_table.png")
-#' color_table(HEC, filename = "hair_eye_table.svg", vwidth = 600)
+#' color_table(HEC2, filename = "hair_eye_table.png")
 #' }
 #'
-#' @importFrom stats chisq.test residuals
+#' @importFrom stats chisq.test residuals xtabs pchisq
 #' @importFrom grDevices col2rgb
 #' @importFrom dplyr all_of everything
 #' @export
-color_table <- function(x,
-                        formula = NULL,
-                        shade = c("residuals", "freq", "pearson", "deviance"),
-                        model = NULL,
-                        expected = NULL,
-                        palette = NULL,
-                        legend = TRUE,
-                        margins = TRUE,
-                        digits = 0,
-                        title = NULL,
-                        filename = NULL,
-                        ...) {
+color_table <- function(x, ...) {
+  UseMethod("color_table")
+}
 
+#' @describeIn color_table Method for table objects (including result of xtabs)
+#' @param formula Formula specifying row ~ col layout (for multi-way tables)
+#' @param shade What values determine cell shading: "residuals" (default), "freq",
+#'   "pearson", or "deviance"
+#' @param model A fitted model (loglm or glm) to compute residuals from.
+#'   If NULL and shade involves residuals, uses an independence model for all factors.
+#' @param expected Expected frequencies (alternative to model)
+#' @param palette Color palette function or vector. Default depends on shade type.
+#' @param legend Logical, show color legend/scale?
+#' @param margins Logical, include row/column totals?
+#' @param digits Number of decimal places for displayed values
+#' @param title Optional table title
+#' @param filename Optional filename to save the table as an image. If provided,
+#'   the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
+#'   \code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
+#'   The format is determined by the file extension.
+#' @export
+color_table.table <- function(x,
+                               formula = NULL,
+                               shade = c("residuals", "freq", "pearson", "deviance"),
+                               model = NULL,
+                               expected = NULL,
+                               palette = NULL,
+                               legend = TRUE,
+                               margins = TRUE,
+                               digits = 0,
+                               title = NULL,
+                               filename = NULL,
+                               ...) {
+
+  shade <- match.arg(shade)
+  if (shade == "pearson") shade <- "residuals"
+
+  # Store original table for proper residual computation
+  x_orig <- x
+
+  dims <- dim(x)
+  ndim <- length(dims)
+
+  # For multi-way tables with formula, use structable to flatten
+  if (ndim > 2 && !is.null(formula)) {
+    if (requireNamespace("vcd", quietly = TRUE)) {
+      st <- vcd::structable(formula, data = x)
+      x_mat <- as.matrix(st)
+    } else {
+      stop("Package 'vcd' is required to use formula with multi-way tables.")
+    }
+  } else if (ndim > 2) {
+    warning("Multi-way table without formula: collapsing to 2D. Use formula for better control.")
+    x_mat <- as.matrix(margin.table(x, 1:2))
+    x_orig <- margin.table(x, 1:2)  # Use collapsed table for residuals too
+  } else {
+    x_mat <- as.matrix(x)
+  }
+
+  .color_table_impl(x_mat,
+                    x_orig = x_orig,
+                    formula = formula,
+                    shade = shade,
+                    model = model,
+                    expected = expected,
+                    palette = palette,
+                    legend = legend,
+                    margins = margins,
+                    digits = digits,
+                    title = title,
+                    filename = filename,
+                    ...)
+}
+
+#' @describeIn color_table Method for ftable objects
+#' @export
+color_table.ftable <- function(x,
+                                shade = c("residuals", "freq", "pearson", "deviance"),
+                                model = NULL,
+                                expected = NULL,
+                                palette = NULL,
+                                legend = TRUE,
+                                margins = TRUE,
+                                digits = 0,
+                                title = NULL,
+                                filename = NULL,
+                                ...) {
+
+  shade <- match.arg(shade)
+  if (shade == "pearson") shade <- "residuals"
+
+  # Convert ftable to matrix
+  x_mat <- as.matrix(x)
+
+  # ftable loses the original structure, so we can only use 2D residuals
+  .color_table_impl(x_mat,
+                    x_orig = NULL,
+                    formula = NULL,
+                    shade = shade,
+                    model = model,
+                    expected = expected,
+                    palette = palette,
+                    legend = legend,
+                    margins = margins,
+                    digits = digits,
+                    title = title,
+                    filename = filename,
+                    ...)
+}
+
+#' @describeIn color_table Method for structable objects (vcd package)
+#' @export
+color_table.structable <- function(x,
+                                    shade = c("residuals", "freq", "pearson", "deviance"),
+                                    model = NULL,
+                                    expected = NULL,
+                                    palette = NULL,
+                                    legend = TRUE,
+                                    margins = TRUE,
+                                    digits = 0,
+                                    title = NULL,
+                                    filename = NULL,
+                                    ...) {
+
+  shade <- match.arg(shade)
+  if (shade == "pearson") shade <- "residuals"
+
+  # Convert structable to matrix (flattened 2D form)
+  x_mat <- as.matrix(x)
+
+  # structable loses the original structure, so we can only use 2D residuals
+  .color_table_impl(x_mat,
+                    x_orig = NULL,
+                    formula = NULL,
+                    shade = shade,
+                    model = model,
+                    expected = expected,
+                    palette = palette,
+                    legend = legend,
+                    margins = margins,
+                    digits = digits,
+                    title = title,
+                    filename = filename,
+                    ...)
+}
+
+#' @describeIn color_table Method for data.frame in frequency form
+#' @param freq_col Name of the frequency column. If NULL, looks for "Freq" or "count".
+#' @export
+color_table.data.frame <- function(x,
+                                    formula = NULL,
+                                    freq_col = NULL,
+                                    shade = c("residuals", "freq", "pearson", "deviance"),
+                                    model = NULL,
+                                    expected = NULL,
+                                    palette = NULL,
+                                    legend = TRUE,
+                                    margins = TRUE,
+                                    digits = 0,
+                                    title = NULL,
+                                    filename = NULL,
+                                    ...) {
+
+  shade <- match.arg(shade)
+  if (shade == "pearson") shade <- "residuals"
+
+  # Find the frequency column
+  if (is.null(freq_col)) {
+    if ("Freq" %in% names(x)) {
+      freq_col <- "Freq"
+    } else if ("count" %in% names(x)) {
+      freq_col <- "count"
+    } else {
+      stop("Cannot find frequency column. Specify freq_col or use a column named 'Freq' or 'count'.")
+    }
+  }
+
+  # Get factor columns (all columns except the frequency column)
+  factor_cols <- setdiff(names(x), freq_col)
+
+  if (length(factor_cols) < 2) {
+    stop("Data frame must have at least 2 factor columns plus a frequency column.")
+  }
+
+  # Build xtabs formula
+  if (is.null(formula)) {
+    # Default: first factor as rows, second as columns
+    xtabs_formula <- as.formula(paste(freq_col, "~", paste(factor_cols, collapse = " + ")))
+  } else {
+    # User provided formula - need to add freq_col to LHS
+    xtabs_formula <- as.formula(paste(freq_col, "~", as.character(formula)[2]))
+  }
+
+  # Convert to table using xtabs
+  x_table <- xtabs(xtabs_formula, data = x)
+
+  # Now use the table method
+  color_table.table(x_table,
+                    formula = formula,
+                    shade = shade,
+                    model = model,
+                    expected = expected,
+                    palette = palette,
+                    legend = legend,
+                    margins = margins,
+                    digits = digits,
+                    title = title,
+                    filename = filename,
+                    ...)
+}
+
+#' @describeIn color_table Method for matrix objects
+#' @export
+color_table.matrix <- function(x,
+                                shade = c("residuals", "freq", "pearson", "deviance"),
+                                model = NULL,
+                                expected = NULL,
+                                palette = NULL,
+                                legend = TRUE,
+                                margins = TRUE,
+                                digits = 0,
+                                title = NULL,
+                                filename = NULL,
+                                ...) {
+
+  shade <- match.arg(shade)
+  if (shade == "pearson") shade <- "residuals"
+
+  .color_table_impl(x,
+                    x_orig = NULL,
+                    formula = NULL,
+                    shade = shade,
+                    model = model,
+                    expected = expected,
+                    palette = palette,
+                    legend = legend,
+                    margins = margins,
+                    digits = digits,
+                    title = title,
+                    filename = filename,
+                    ...)
+}
+
+#' @describeIn color_table Default method
+#' @export
+color_table.default <- function(x, ...) {
+  stop("color_table() does not know how to handle object of class ",
+       paste(class(x), collapse = "/"),
+       ". Supported classes: table, xtabs, ftable, structable, data.frame, matrix.")
+}
+
+# ###
+# Internal implementation function
+# ###
+
+# Internal workhorse function for color_table
+#
+# This function takes a 2D matrix and builds the gt table with colored cells.
+# All S3 methods convert their input to a matrix and call this function.
+#
+# @param x A 2D matrix with row and column names (the flattened display matrix)
+# @param x_orig The original table (for multi-way tables, used to compute
+#   complete independence residuals). NULL for 2D tables.
+# @param formula The formula used for flattening (needed for residual mapping)
+# @param shade Type of shading
+# @param model Optional fitted model
+# @param expected Optional expected frequencies
+# @param palette Color palette
+# @param legend Show legend?
+# @param margins Show margins?
+# @param digits Decimal places
+# @param title Table title
+# @param filename Optional file to save
+# @param ... Additional arguments passed to gtsave
+#
+# @noRd
+.color_table_impl <- function(x,
+                               x_orig = NULL,
+                               formula = NULL,
+                               shade = "residuals",
+                               model = NULL,
+                               expected = NULL,
+                               palette = NULL,
+                               legend = TRUE,
+                               margins = TRUE,
+                               digits = 0,
+                               title = NULL,
+                               filename = NULL,
+                               ...) {
 
   if (!requireNamespace("gt", quietly = TRUE)) {
     stop("Package 'gt' is required for color_table(). Please install it.")
   }
 
-  shade <- match.arg(shade)
-  if (shade == "pearson") shade <- "residuals"
-
-
-  # Store original for potential model fitting
-
-  x_orig <- x
-
-  # Handle structable input
-  if (inherits(x, "structable")) {
-    # Convert structable to matrix (flattened 2D form)
-    x <- as.matrix(x)
-  }
-
-  # Handle ftable input
-  if (inherits(x, "ftable")) {
-    x <- as.matrix(x)
-  }
-
-  # For multi-way tables with formula, use structable to flatten
-  dims <- dim(x)
-  ndim <- length(dims)
-
-  if (ndim > 2 && !is.null(formula)) {
-    # Use structable to flatten according to formula
-    if (requireNamespace("vcd", quietly = TRUE)) {
-      st <- vcd::structable(formula, data = x)
-      # Convert to matrix to get true 2D flattened form
-      x <- as.matrix(st)
-      dims <- dim(x)
-      ndim <- 2
-    }
-  } else if (ndim > 2) {
-    # Flatten to 2D by collapsing dimensions
-    warning("Multi-way table without formula: collapsing to 2D. Use formula for better control.")
-    x <- margin.table(x, 1:2)
-    dims <- dim(x)
-    ndim <- 2
-  }
-
-  # Ensure x is a matrix at this point
+  # Ensure x is a matrix
   if (!is.matrix(x)) {
     x <- as.matrix(x)
   }
+
+  dims <- dim(x)
 
   # Get dimension names
   dn <- dimnames(x)
@@ -181,7 +416,7 @@ color_table <- function(x,
   rvar <- names(dn)[1]
   cvar <- names(dn)[2]
 
- # Provide default names if missing
+  # Provide default names if missing
   if (is.null(rnames)) rnames <- paste0("R", seq_len(dims[1]))
   if (is.null(cnames)) cnames <- paste0("C", seq_len(dims[2]))
   if (is.null(rvar) || rvar == "") rvar <- "Row"
@@ -197,33 +432,91 @@ color_table <- function(x,
   } else {
     # Compute residuals
     if (!is.null(model)) {
-      # Use provided model
-      resid_mat <- matrix(residuals(model, type = "pearson"),
-                          nrow = dims[1], ncol = dims[2])
+      # Use provided model - extract and reshape residuals
+      resid_arr <- residuals(model, type = "pearson")
+      resid_mat <- matrix(as.vector(resid_arr), nrow = dims[1], ncol = dims[2])
+      # Print model info
+      if (inherits(model, "loglm")) {
+        message(sprintf("Shading based on residuals from fitted model, X^2 = %.2f, df = %d, p = %.4g",
+                        model$pearson, model$df, 1 - pchisq(model$pearson, model$df)))
+      }
     } else if (!is.null(expected)) {
       # Use provided expected values
       resid_mat <- (x - expected) / sqrt(expected)
+      message("Shading based on residuals from user-supplied expected frequencies")
     } else {
-      # Fit independence model on the (possibly flattened) 2D table
-      # chisq.test works on matrices
-      chi_result <- suppressWarnings(chisq.test(x))
-      resid_mat <- chi_result$residuals
+      # Fit independence model
+      # For multi-way tables, use loglm for complete independence
+      if (!is.null(x_orig) && length(dim(x_orig)) > 2) {
+        # Multi-way table: fit complete independence model
+        if (!requireNamespace("MASS", quietly = TRUE)) {
+          stop("Package 'MASS' is required for residuals from multi-way tables.")
+        }
+
+        # Build formula for complete independence: ~ A + B + C + ...
+        var_names <- names(dimnames(x_orig))
+        indep_formula <- as.formula(paste("~", paste(var_names, collapse = " + ")))
+
+        mod_indep <- MASS::loglm(indep_formula, data = x_orig)
+
+        # Get residuals from the model
+        resid_arr <- residuals(mod_indep, type = "pearson")
+
+        # Map residuals to the flattened matrix structure
+        # The structable flattening preserves cell order, so we can reshape
+        if (!is.null(formula)) {
+          # Re-create the structable to get proper cell ordering
+          st <- vcd::structable(formula, data = x_orig)
+          # The residuals need to be extracted in the same order as structable
+          resid_st <- vcd::structable(formula, data = resid_arr)
+          resid_mat <- as.matrix(resid_st)
+        } else {
+          # No formula - shouldn't happen for multi-way, but handle gracefully
+          resid_mat <- matrix(as.vector(resid_arr), nrow = dims[1], ncol = dims[2])
+        }
+
+        # Print model info
+        message(sprintf("Shading based on residuals from model of complete independence, X^2 = %.2f, df = %d, p = %.4g",
+                        mod_indep$pearson, mod_indep$df, 1 - pchisq(mod_indep$pearson, mod_indep$df)))
+
+      } else {
+        # 2-way table: use chisq.test (equivalent to complete independence)
+        chi_result <- suppressWarnings(chisq.test(x))
+        resid_mat <- chi_result$residuals
+
+        # Print model info
+        message(sprintf("Shading based on residuals from model of independence, X^2 = %.2f, df = %d, p = %.4g",
+                        chi_result$statistic, chi_result$parameter,
+                        chi_result$p.value))
+      }
     }
 
     if (shade == "deviance" && is.null(model)) {
       # Compute deviance residuals
+      # For multi-way tables, need expected from loglm
+      if (!is.null(x_orig) && length(dim(x_orig)) > 2) {
+        var_names <- names(dimnames(x_orig))
+        indep_formula <- as.formula(paste("~", paste(var_names, collapse = " + ")))
+        mod_indep <- MASS::loglm(indep_formula, data = x_orig)
+        exp_arr <- fitted(mod_indep)
+        if (!is.null(formula)) {
+          exp_st <- vcd::structable(formula, data = exp_arr)
+          exp_mat <- as.matrix(exp_st)
+        } else {
+          exp_mat <- matrix(as.vector(exp_arr), nrow = dims[1], ncol = dims[2])
+        }
+      } else {
+        chi_result <- suppressWarnings(chisq.test(x))
+        exp_mat <- chi_result$expected
+      }
       obs <- x
-      exp <- chi_result$expected
-      resid_mat <- sign(obs - exp) * sqrt(2 * ifelse(obs > 0, obs * log(obs / exp), 0))
+      resid_mat <- sign(obs - exp_mat) * sqrt(2 * ifelse(obs > 0, obs * log(obs / exp_mat), 0))
     }
 
     shade_values <- resid_mat
   }
 
-
   # Create data frame for gt
-  # Convert to a plain matrix first to avoid table-specific behavior in as.data.frame()
-  # (as.data.frame on a table gives long format with Freq column, which we don't want)
   x_mat <- matrix(as.vector(x), nrow = nrow(x), ncol = ncol(x),
                   dimnames = list(rnames, cnames))
   df <- as.data.frame(x_mat, check.names = FALSE)
@@ -234,7 +527,6 @@ color_table <- function(x,
   }
 
   # Convert to character for display (preserving integers)
-  # Only apply round() to numeric columns - factors would cause an error
   df_display <- df
   for (col in names(df_display)) {
     if (is.numeric(df_display[[col]])) {
@@ -243,7 +535,7 @@ color_table <- function(x,
   }
 
   # Add row names as first column
- df_display <- cbind(data.frame(row_var = rownames(df)), df_display)
+  df_display <- cbind(data.frame(row_var = rownames(df)), df_display)
   names(df_display)[1] <- rvar
 
   # Add column totals row if margins requested
@@ -256,11 +548,9 @@ color_table <- function(x,
   # Set up color palette
   if (is.null(palette)) {
     if (shade == "freq") {
-      # Sequential palette for frequencies
       palette <- c("white", "firebrick")
     } else {
-      # Diverging palette for residuals
-      palette <- c("#2166AC", "white", "#B2182B")  # darker blue/red from RdBu
+      palette <- c("#2166AC", "white", "#B2182B")
     }
   }
 
@@ -268,7 +558,6 @@ color_table <- function(x,
   if (shade == "freq") {
     domain <- c(0, max(shade_values, na.rm = TRUE))
   } else {
-    # Symmetric domain for residuals
     max_abs <- max(abs(shade_values), na.rm = TRUE)
     domain <- c(-max_abs, max_abs)
   }
@@ -277,7 +566,6 @@ color_table <- function(x,
   gt_tbl <- gt::gt(df_display, rowname_col = rvar)
 
   # Apply colors to data cells (not totals)
-  # Create a matrix of colors
   n_row <- nrow(shade_values)
   n_col <- ncol(shade_values)
 
@@ -288,15 +576,11 @@ color_table <- function(x,
   # Uses colorspace::contrast_ratio if available, otherwise luminance-based fallback
   get_text_color <- function(bg_color) {
     if (requireNamespace("colorspace", quietly = TRUE)) {
-      # Use contrast_ratio to pick better text color
       contrast_white <- colorspace::contrast_ratio(bg_color, "white")
       contrast_black <- colorspace::contrast_ratio(bg_color, "black")
       if (contrast_white > contrast_black) "white" else "black"
     } else {
-      # Fallback: use relative luminance calculation
-      # Convert hex to RGB
-      rgb_vals <- col2rgb(bg_color) / 255
-      # Calculate relative luminance (ITU-R BT.709)
+      rgb_vals <- grDevices::col2rgb(bg_color) / 255
       luminance <- 0.2126 * rgb_vals[1] + 0.7152 * rgb_vals[2] + 0.0722 * rgb_vals[3]
       if (luminance < 0.5) "white" else "black"
     }
@@ -320,16 +604,14 @@ color_table <- function(x,
     }
   }
 
-  # Style the totals row and column (light gray)
+  # Style the totals row and column
   if (margins) {
-    # Total column
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_fill(color = "#D1FFBD"),
         locations = gt::cells_body(columns = "Total")
       )
 
-    # Total row (last row)
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_fill(color = "#D1FFBD"),
@@ -345,33 +627,32 @@ color_table <- function(x,
   gt_tbl <- gt_tbl |>
     gt::tab_spanner(
       label = cvar,
-      columns = all_of(cnames)
+      columns = dplyr::all_of(cnames)
     )
 
   # Add title if provided
-  if (!is.null(title))
+  if (!is.null(title)) {
     gt_tbl <- gt_tbl |> gt::tab_header(title = title)
+  }
 
   # Add styling
-gt_tbl <- gt_tbl |>
+  gt_tbl <- gt_tbl |>
     gt::tab_options(
       table.font.size = 14,
       column_labels.font.weight = "bold",
       row_group.font.weight = "bold"
     ) |>
-    gt::cols_align(align = "center", columns = everything())
+    gt::cols_align(align = "center", columns = dplyr::everything())
 
   # Style row labels (stub) to match column label styling
   # Bold for category labels, italic for Total
   if (margins) {
-    # Bold the row category labels (all rows except the Total row)
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_text(weight = "bold"),
         locations = gt::cells_stub(rows = seq_len(n_row))
       )
 
-    # Style "Total" column: italic for column label and all values in that column
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_text(style = "italic"),
@@ -382,7 +663,6 @@ gt_tbl <- gt_tbl |>
         locations = gt::cells_column_labels(columns = "Total")
       )
 
-    # Style "Total" row: bold italic for label, italic for all values
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_text(weight = "bold", style = "italic"),
@@ -393,7 +673,6 @@ gt_tbl <- gt_tbl |>
         locations = gt::cells_body(rows = n_row + 1)
       )
   } else {
-    # No margins - still bold the row category labels
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_text(weight = "bold"),

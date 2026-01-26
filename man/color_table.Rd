@@ -2,9 +2,17 @@
 % Please edit documentation in R/color_table.R
 \name{color_table}
 \alias{color_table}
+\alias{color_table.table}
+\alias{color_table.ftable}
+\alias{color_table.structable}
+\alias{color_table.data.frame}
+\alias{color_table.matrix}
+\alias{color_table.default}
 \title{Display Frequency Table with Colored Cell Backgrounds}
 \usage{
-color_table(
+color_table(x, ...)
+
+\method{color_table}{table}(
   x,
   formula = NULL,
   shade = c("residuals", "freq", "pearson", "deviance"),
@@ -18,11 +26,73 @@ color_table(
   filename = NULL,
   ...
 )
+
+\method{color_table}{ftable}(
+  x,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+\method{color_table}{structable}(
+  x,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+\method{color_table}{data.frame}(
+  x,
+  formula = NULL,
+  freq_col = NULL,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+\method{color_table}{matrix}(
+  x,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+\method{color_table}{default}(x, ...)
 }
 \arguments{
-\item{x}{A table, xtabs, matrix, ftable, or structable object}
+\item{x}{A table, xtabs, matrix, ftable, structable, or data.frame object}
 
-\item{formula}{Formula specifying row ~ col layout (passed to structable if needed)}
+\item{...}{Additional arguments passed to methods}
+
+\item{formula}{Formula specifying row ~ col layout (for multi-way tables)}
 
 \item{shade}{What values determine cell shading: "residuals" (default), "freq",
 "pearson", or "deviance"}
@@ -47,8 +117,7 @@ the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
 \code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
 The format is determined by the file extension.}
 
-\item{...}{Additional arguments passed to \code{\link[gt]{gtsave}} when
-\code{filename} is specified (e.g., \code{vwidth}, \code{vheight} for image dimensions)}
+\item{freq_col}{Name of the frequency column. If NULL, looks for "Freq" or "count".}
 }
 \value{
 A gt table object that can be further customized
@@ -56,6 +125,7 @@ A gt table object that can be further customized
 \description{
 Creates a formatted table display of frequency data with cell backgrounds
 colored according to observed frequencies or their residuals from a loglinear model.
+This is an S3 generic function with methods for different input types.
 }
 \details{
 This function provides a heatmap-style representation of a frequency table,
@@ -87,6 +157,21 @@ For higher quality output, \code{.svg} format is recommended. You can control
 the image dimensions using the \code{vwidth} and \code{vheight} arguments
 (passed via \code{...}).
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{color_table(table)}: Method for table objects (including xtabs)
+
+\item \code{color_table(ftable)}: Method for ftable objects
+
+\item \code{color_table(structable)}: Method for structable objects (vcd package)
+
+\item \code{color_table(data.frame)}: Method for data.frame in frequency form
+
+\item \code{color_table(matrix)}: Method for matrix objects
+
+\item \code{color_table(default)}: Default method
+
+}}
 \examples{
 \dontrun{
 # Basic usage - shade by residuals from independence
@@ -97,8 +182,12 @@ color_table(HEC)
 # Shade by frequencies instead
 color_table(HEC, shade = "freq")
 
-# 3-way table
+# 3-way table with formula
 color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
+
+# From a data.frame in frequency form
+hec_df <- as.data.frame(HEC)
+color_table(hec_df)
 
 # Save table as an image file
 color_table(HEC, filename = "hair_eye_table.png")

@@ -1,4 +1,4 @@
-# Wong2-3  Political views and support for women to work
+# wong2-3  Political views and support for women to work
 
 library(vcdExtra)
 # Data from Wong, R. (2010), Association Models, Los Angeles: Sage, Number 07-164
@@ -41,7 +41,7 @@ dimnames(Wong23.xtab) <- long.lnames
 library(ca)
 
 plot(ca(Wong23.xtab))
-title(main="Political views and support for women to work", 
+title(main="Political views and support for women to work",
       xlab="Dim 1 (90.8%)", ylab="Dim 2 (8.5%)")
 
 
@@ -50,9 +50,9 @@ title(main="Political views and support for women to work",
 
 ## OK now, gives warning
 Wong23.O <- gnm(Freq~polviews+fefam, family=poisson, data=Wong23)
- 
+
 # OK, with formula
-mosaic(Wong23.O, main=paste("Independence model", modFit(Wong23.O)), 
+mosaic(Wong23.O, main=paste("Independence model", modFit(Wong23.O)),
 	formula=~polviews+fefam,
 	labeling_args=long.vnames, set_labels=long.lnames)
 
@@ -92,7 +92,7 @@ anova(Wong23.C)
 mosaic(Wong23.C, formula=~polviews+fefam, main="Column effects model",
 	labeling_args=long.vnames, set_labels=long.lnames, residuals_type="rstandard",
 	labeling=labeling_residuals, suppress=1, gp=shading_Friendly)
-	
+
 #####################################
 # Model D - R+C: Row and Column Effect
 oldopt <- options(contrasts = c(factor="contr.treatment", ordered="contr.treatment"))

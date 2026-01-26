@@ -1,4 +1,4 @@
-# Wong3-1  Political views, support for women to work and national welfare spending
+# wong3-1  Political views, support for women to work and national welfare spending
 
 library(vcdExtra)
 # Data from Wong, R. (2010), Association Models, Los Angeles: Sage, Number 07-164
