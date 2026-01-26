@@ -2,11 +2,15 @@
 
 Creates a formatted table display of frequency data with cell
 backgrounds colored according to observed frequencies or their residuals
-from a loglinear model.
+from a loglinear model. This is an S3 generic function with methods for
+different input types.
 
 ## Usage
 
 ``` r
+color_table(x, ...)
+
+# S3 method for class 'table'
 color_table(
   x,
   formula = NULL,
@@ -21,17 +25,86 @@ color_table(
   filename = NULL,
   ...
 )
+
+# S3 method for class 'ftable'
+color_table(
+  x,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+# S3 method for class 'structable'
+color_table(
+  x,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+# S3 method for class 'data.frame'
+color_table(
+  x,
+  formula = NULL,
+  freq_col = NULL,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+# S3 method for class 'matrix'
+color_table(
+  x,
+  shade = c("residuals", "freq", "pearson", "deviance"),
+  model = NULL,
+  expected = NULL,
+  palette = NULL,
+  legend = TRUE,
+  margins = TRUE,
+  digits = 0,
+  title = NULL,
+  filename = NULL,
+  ...
+)
+
+# Default S3 method
+color_table(x, ...)
 ```
 
 ## Arguments
 
 - x:
 
-  A table, xtabs, matrix, ftable, or structable object
+  A table, xtabs, matrix, ftable, structable, or data.frame object
+
+- ...:
+
+  Additional arguments passed to methods
 
 - formula:
 
-  Formula specifying row ~ col layout (passed to structable if needed)
+  Formula specifying row ~ col layout (for multi-way tables)
 
 - shade:
 
@@ -75,12 +148,9 @@ color_table(
   formats include `.png`, `.svg`, `.pdf`, `.html`, `.rtf`, and `.docx`.
   The format is determined by the file extension.
 
-- ...:
+- freq_col:
 
-  Additional arguments passed to
-  [`gtsave`](https://gt.rstudio.com/reference/gtsave.html) when
-  `filename` is specified (e.g., `vwidth`, `vheight` for image
-  dimensions)
+  Name of the frequency column. If NULL, looks for "Freq" or "count".
 
 ## Value
 
@@ -119,6 +189,20 @@ For higher quality output, `.svg` format is recommended. You can control
 the image dimensions using the `vwidth` and `vheight` arguments (passed
 via `...`).
 
+## Methods (by class)
+
+- `color_table(table)`: Method for table objects (including xtabs)
+
+- `color_table(ftable)`: Method for ftable objects
+
+- `color_table(structable)`: Method for structable objects (vcd package)
+
+- `color_table(data.frame)`: Method for data.frame in frequency form
+
+- `color_table(matrix)`: Method for matrix objects
+
+- `color_table(default)`: Default method
+
 ## Examples
 
 ``` r
@@ -131,8 +215,12 @@ color_table(HEC)
 # Shade by frequencies instead
 color_table(HEC, shade = "freq")
 
-# 3-way table
+# 3-way table with formula
 color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
+
+# From a data.frame in frequency form
+hec_df <- as.data.frame(HEC)
+color_table(hec_df)
 
 # Save table as an image file
 color_table(HEC, filename = "hair_eye_table.png")
