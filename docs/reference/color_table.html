@@ -6,8 +6,10 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Display Frequency Table with Colored Cell Backgrounds — color_table"><meta name="description" content="Creates a formatted table display of frequency data with cell backgrounds
-colored according to observed frequencies or their residuals from a loglinear model."><meta property="og:description" content="Creates a formatted table display of frequency data with cell backgrounds
-colored according to observed frequencies or their residuals from a loglinear model."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
+colored according to observed frequencies or their residuals from a loglinear model.
+This is an S3 generic function with methods for different input types."><meta property="og:description" content="Creates a formatted table display of frequency data with cell backgrounds
+colored according to observed frequencies or their residuals from a loglinear model.
+This is an S3 generic function with methods for different input types."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -54,12 +56,16 @@ colored according to observed frequencies or their residuals from a loglinear mo
 
     <div class="ref-description section level2">
     <p>Creates a formatted table display of frequency data with cell backgrounds
-colored according to observed frequencies or their residuals from a loglinear model.</p>
+colored according to observed frequencies or their residuals from a loglinear model.
+This is an S3 generic function with methods for different input types.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">color_table</span><span class="op">(</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">color_table</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'table'</span></span>
+<span><span class="fu">color_table</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  formula <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
@@ -72,7 +78,72 @@ colored according to observed frequencies or their residuals from a loglinear mo
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'ftable'</span></span>
+<span><span class="fu">color_table</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
+<span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'structable'</span></span>
+<span><span class="fu">color_table</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
+<span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'data.frame'</span></span>
+<span><span class="fu">color_table</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  formula <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  freq_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
+<span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'matrix'</span></span>
+<span><span class="fu">color_table</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
+<span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Default S3 method</span></span>
+<span><span class="fu">color_table</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -80,11 +151,15 @@ colored according to observed frequencies or their residuals from a loglinear mo
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A table, xtabs, matrix, ftable, or structable object</p></dd>
+<dd><p>A table, xtabs, matrix, ftable, structable, or data.frame object</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to methods</p></dd>
 
 
 <dt id="arg-formula">formula<a class="anchor" aria-label="anchor" href="#arg-formula"></a></dt>
-<dd><p>Formula specifying row ~ col layout (passed to structable if needed)</p></dd>
+<dd><p>Formula specifying row ~ col layout (for multi-way tables)</p></dd>
 
 
 <dt id="arg-shade">shade<a class="anchor" aria-label="anchor" href="#arg-shade"></a></dt>
@@ -128,9 +203,8 @@ the table is saved using <code><a href="https://gt.rstudio.com/reference/gtsave.
 The format is determined by the file extension.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></code> when
-<code>filename</code> is specified (e.g., <code>vwidth</code>, <code>vheight</code> for image dimensions)</p></dd>
+<dt id="arg-freq-col">freq_col<a class="anchor" aria-label="anchor" href="#arg-freq-col"></a></dt>
+<dd><p>Name of the frequency column. If NULL, looks for "Freq" or "count".</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -164,6 +238,16 @@ provides a workaround: save the table as an image, then include it using
 the image dimensions using the <code>vwidth</code> and <code>vheight</code> arguments
 (passed via <code>...</code>).</p>
     </div>
+    <div class="section level2">
+    <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
+
+<ul><li><p><code>color_table(table)</code>: Method for table objects (including xtabs)</p></li>
+<li><p><code>color_table(ftable)</code>: Method for ftable objects</p></li>
+<li><p><code>color_table(structable)</code>: Method for structable objects (vcd package)</p></li>
+<li><p><code>color_table(data.frame)</code>: Method for data.frame in frequency form</p></li>
+<li><p><code>color_table(matrix)</code>: Method for matrix objects</p></li>
+<li><p><code>color_table(default)</code>: Default method</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -176,8 +260,12 @@ the image dimensions using the <code>vwidth</code> and <code>vheight</code> argu
 <span class="r-in"><span><span class="co"># Shade by frequencies instead</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, shade <span class="op">=</span> <span class="st">"freq"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># 3-way table</span></span></span>
+<span class="r-in"><span><span class="co"># 3-way table with formula</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HairEyeColor</span>, formula <span class="op">=</span> <span class="va">Eye</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># From a data.frame in frequency form</span></span></span>
+<span class="r-in"><span><span class="va">hec_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">HEC</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">hec_df</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Save table as an image file</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.png"</span><span class="op">)</span></span></span>
