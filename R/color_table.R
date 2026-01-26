@@ -6,9 +6,8 @@
 # ✅ DONE: Suppress Warning `In chisq.test(x) : Chi-squared approximation may be incorrect`
 # ✅ DONE: Test cases in dev/test-color_table.R using vcd::Suicide, vcd::PreSex, vcdExtra::Abortion
 #
-# ‼ FIXME:There's a bug in format(round(df_display[[col]], digits), nsmall = digits) at color_table.R#205
-#         Gives error: Error in Math.factor(c(1L, 2L, 3L, 4L, 1L, 2L, 3L, 4L, 1L, 2L, 3L, 4L,  :
-#         ‘round’ not meaningful for factors
+# ✅ DONE: Fixed bug in format(round(...)) - now checks is.numeric() before applying round()
+#         The error occurred because as.data.frame() on a matrix can include factor columns.
 #
 # ‼ TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
 #         hierarchy similar
@@ -17,10 +16,10 @@
 #         the rows for the other cases of black hair should have Sex empty. Not sure whether nested row groups
 #         can be shown to look nested otherwise.
 #
-# ‼ TODO: Make the display of the Total row and column optional.
+# ✅ DONE:  Make the display of the Total row and column optional. -- handled by `marginss`
 #
-# ‼ TODO: The column variables appear bold, with the Total column in italics. The category labels for the row
-#         variables should match those columns, e.g., bold for the category labels and italic for the Total.
+# ✅ DONE: Row category labels (stub) now bold, matching column labels; Total row stub is italic.
+#         Future enhancement: could extend `margins` to accept a list for custom styling.
 #
 # ‼ TODO: Should also allow the input argument, x, to be a dataset in frequency form.
 #
@@ -30,7 +29,13 @@
 #         reorganize this as an S3 generic, with specific methods for table, xtabs, ftable, structable objects.
 #
 # ‼ TODO: Add filename arg, which if not NULL saves the `gt` result as an image. Needed because gt output is
-#         hard to show in Rmd / qmd output. Most likely use `gt::gtsave()`.
+#         hard to show in Rmd / qmd output. Most likely use `gt::gtsave()`. NB: `gt` documentation uses
+#         `.svg` files in the README as: <img src="man/figures/gt_sp500_table.svg" width="800px">.
+#
+#         In man pages via roxygen it uses for examples:
+#              \if{html}{\out{
+#                 `r man_get_image_tag(file = "man_gt_1.png")`
+#               }}
 #
 
 
@@ -197,8 +202,13 @@ color_table <- function(x,
     shade_values <- resid_mat
   }
 
+
   # Create data frame for gt
-  df <- as.data.frame(x)
+  # Convert to a plain matrix first to avoid table-specific behavior in as.data.frame()
+  # (as.data.frame on a table gives long format with Freq column, which we don't want)
+  x_mat <- matrix(as.vector(x), nrow = nrow(x), ncol = ncol(x),
+                  dimnames = list(rnames, cnames))
+  df <- as.data.frame(x_mat, check.names = FALSE)
 
   # Add row totals if margins requested
   if (margins) {
@@ -206,9 +216,12 @@ color_table <- function(x,
   }
 
   # Convert to character for display (preserving integers)
+  # Only apply round() to numeric columns - factors would cause an error
   df_display <- df
   for (col in names(df_display)) {
-    df_display[[col]] <- format(round(df_display[[col]], digits), nsmall = digits)
+    if (is.numeric(df_display[[col]])) {
+      df_display[[col]] <- format(round(df_display[[col]], digits), nsmall = digits)
+    }
   }
 
   # Add row names as first column
@@ -330,8 +343,17 @@ gt_tbl <- gt_tbl |>
     ) |>
     gt::cols_align(align = "center", columns = everything())
 
-  # Italicize "Total" labels
+  # Style row labels (stub) to match column label styling
+  # Bold for category labels, italic for Total
   if (margins) {
+    # Bold the row category labels (all rows except the Total row)
+    gt_tbl <- gt_tbl |>
+      gt::tab_style(
+        style = gt::cell_text(weight = "bold"),
+        locations = gt::cells_stub(rows = seq_len(n_row))
+      )
+
+    # Style "Total" column: italic for column label and all values in that column
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_text(style = "italic"),
@@ -340,6 +362,24 @@ gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_text(style = "italic"),
         locations = gt::cells_column_labels(columns = "Total")
+      )
+
+    # Style "Total" row: bold italic for label, italic for all values
+    gt_tbl <- gt_tbl |>
+      gt::tab_style(
+        style = gt::cell_text(weight = "bold", style = "italic"),
+        locations = gt::cells_stub(rows = n_row + 1)
+      ) |>
+      gt::tab_style(
+        style = gt::cell_text(style = "italic"),
+        locations = gt::cells_body(rows = n_row + 1)
+      )
+  } else {
+    # No margins - still bold the row category labels
+    gt_tbl <- gt_tbl |>
+      gt::tab_style(
+        style = gt::cell_text(weight = "bold"),
+        locations = gt::cells_stub()
       )
   }
 
