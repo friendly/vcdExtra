@@ -169,7 +169,7 @@ This is an S3 generic function with methods for different input types.</p>
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
 <dd><p>A fitted model (loglm or glm) to compute residuals from.
-If NULL and shade involves residuals, uses independence model.</p></dd>
+If NULL and shade involves residuals, uses an independence model for all factors.</p></dd>
 
 
 <dt id="arg-expected">expected<a class="anchor" aria-label="anchor" href="#arg-expected"></a></dt>
@@ -220,6 +220,10 @@ When shading by residuals (the default), cells with large positive residuals
 residuals (fewer than expected) are shaded blue. This makes it easy to identify
 cells that deviate substantially from what would be expected under a given model
 (by default, the independence model).</p>
+<p>For multi-way tables (3 or more dimensions), residuals are computed from the
+model of complete independence among all factors using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></code>.
+A message is printed showing the chi-squared statistic, degrees of freedom,
+and p-value for this test.</p>
 <p>For cells with dark background colors, black text can be difficult to read.
 This function automatically selects white or black text for each cell based
 on which provides better contrast against the background color. If the
@@ -241,7 +245,7 @@ the image dimensions using the <code>vwidth</code> and <code>vheight</code> argu
     <div class="section level2">
     <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
 
-<ul><li><p><code>color_table(table)</code>: Method for table objects (including xtabs)</p></li>
+<ul><li><p><code>color_table(table)</code>: Method for table objects (including result of xtabs)</p></li>
 <li><p><code>color_table(ftable)</code>: Method for ftable objects</p></li>
 <li><p><code>color_table(structable)</code>: Method for structable objects (vcd package)</p></li>
 <li><p><code>color_table(data.frame)</code>: Method for data.frame in frequency form</p></li>
@@ -252,24 +256,25 @@ the image dimensions using the <code>vwidth</code> and <code>vheight</code> argu
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Basic usage - shade by residuals from independence</span></span></span>
+<span class="r-in"><span><span class="co"># Basic usage with 2-way table - shade by residuals from independence</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">HEC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/marginSums.html" class="external-link">margin.table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">HEC2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/marginSums.html" class="external-link">margin.table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>  <span class="co"># 2-way: Hair x Eye</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Prints: "Shading based on residuals from model of independence, X^2 = ..."</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Shade by frequencies instead</span></span></span>
-<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, shade <span class="op">=</span> <span class="st">"freq"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Shade by frequencies instead (no message printed)</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC2</span>, shade <span class="op">=</span> <span class="st">"freq"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># 3-way table with formula</span></span></span>
+<span class="r-in"><span><span class="co"># 3-way table - requires formula to specify layout</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HairEyeColor</span>, formula <span class="op">=</span> <span class="va">Eye</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Prints: "Shading based on residuals from model of complete independence, X^2 = ..."</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># From a data.frame in frequency form</span></span></span>
-<span class="r-in"><span><span class="va">hec_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">HEC</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># From a data.frame in frequency form (2-way)</span></span></span>
+<span class="r-in"><span><span class="va">hec_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">HEC2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">hec_df</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Save table as an image file</span></span></span>
-<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.png"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.svg"</span>, vwidth <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC2</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.png"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
