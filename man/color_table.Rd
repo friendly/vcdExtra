@@ -22,6 +22,7 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
+  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -36,6 +37,7 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
+  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -50,6 +52,7 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
+  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -66,6 +69,7 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
+  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -80,6 +84,7 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
+  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -92,15 +97,17 @@ color_table(x, ...)
 
 \item{...}{Additional arguments passed to methods}
 
-\item{formula}{Formula specifying row ~ col layout (for multi-way tables)}
+\item{formula}{Formula specifying a \code{row_vars ~ col_vars} layout (for multi-way tables) to
+make them "flat" as defined for \code{vcd::structable()} and \code{stats::ftable()}.}
 
-\item{shade}{What values determine cell shading: "residuals" (default), "freq",
-"pearson", or "deviance"}
+\item{shade}{What values determine cell shading: \code{"residuals"} (default), \code{"freq"},
+\code{"pearson"}, or \code{"deviance"}}
 
 \item{model}{A fitted model (loglm or glm) to compute residuals from.
 If NULL and shade involves residuals, uses an independence model for all factors.}
 
-\item{expected}{Expected frequencies (alternative to model)}
+\item{expected}{Expected frequencies (alternative to \code{model}), a data structure of the same shape
+as \code{x}}
 
 \item{palette}{Color palette function or vector. Default depends on shade type.}
 
@@ -109,6 +116,10 @@ If NULL and shade involves residuals, uses an independence model for all factors
 \item{margins}{Logical, include row/column totals?}
 
 \item{digits}{Number of decimal places for displayed values}
+
+\item{values}{What values to display in cells: \code{"freq"} for observed frequencies (default),
+or \code{"residuals"} to display the residual values. When \code{values = "residuals"}, margins
+are suppressed since residuals don't have meaningful totals.}
 
 \item{title}{Optional table title}
 
@@ -137,9 +148,12 @@ cells that deviate substantially from what would be expected under a given model
 (by default, the independence model).
 
 For multi-way tables (3 or more dimensions), residuals are computed from the
-model of complete independence among all factors using \code{\link[MASS]{loglm}}.
+model of complete independence among all factors using \code{\link[MASS]{loglm}},
+unless you specify a model using the \code{model} or \code{expected} arguments.
 A message is printed showing the chi-squared statistic, degrees of freedom,
 and p-value for this test.
+
+\strong{Contrast shading}
 
 For cells with dark background colors, black text can be difficult to read.
 This function automatically selects white or black text for each cell based
@@ -148,19 +162,27 @@ on which provides better contrast against the background color. If the
 is used to determine the optimal text color according to WCAG 2.1 guidelines.
 Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.
 
+\strong{Use in documents}
+
 In R Markdown (\code{.Rmd}) or Quarto (\code{.qmd}) documents, \pkg{gt} tables
 may not render correctly in all output formats. The \code{filename} argument
 provides a workaround: save the table as an image, then include it using
 \code{\link[knitr]{include_graphics}}. For example:
 
 \preformatted{
-color_table(my_table, filename = "my_table.png")
-knitr::include_graphics("my_table.png")
+    color_table(my_table, filename = "my_table.png")
+    knitr::include_graphics("my_table.png")
 }
 
 For higher quality output, \code{.svg} format is recommended. You can control
 the image dimensions using the \code{vwidth} and \code{vheight} arguments
 (passed via \code{...}).
+
+If you need a caption for cross-referencing (especially in Quarto or R Markdown),
+you can use \code{gt::tab_caption()}
+\preformatted{
+     gt_object |> tab_caption(caption = "Table 1: Pattern of Association in MyTable")
+ }
 }
 \section{Methods (by class)}{
 \itemize{
@@ -181,23 +203,24 @@ the image dimensions using the \code{vwidth} and \code{vheight} arguments
 \dontrun{
 # Basic usage with 2-way table - shade by residuals from independence
 data(HairEyeColor)
-HEC2 <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
-color_table(HEC2)
-# Prints: "Shading based on residuals from model of independence, X^2 = ..."
+HEC <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
+color_table(HEC)
 
 # Shade by frequencies instead (no message printed)
-color_table(HEC2, shade = "freq")
+color_table(HEC, shade = "freq")
 
-# 3-way table - requires formula to specify layout
+# 3-way table - using a formula to specify layout
 color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
-# Prints: "Shading based on residuals from model of complete independence, X^2 = ..."
+
+# Display residual values in cells instead of frequencies
+color_table(HEC, values = "residuals")
 
 # From a data.frame in frequency form (2-way)
-hec_df <- as.data.frame(HEC2)
+hec_df <- as.data.frame(HEC)
 color_table(hec_df)
 
 # Save table as an image file
-color_table(HEC2, filename = "hair_eye_table.png")
+color_table(HEC, filename = "hair_eye_table.png")
 }
 
 }

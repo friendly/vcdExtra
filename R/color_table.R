@@ -25,14 +25,29 @@
 #         proper Pearson residuals. Print message with X^2, df, p-value when shade != "freq".
 #         Uses cat() for output to ensure visibility in all R environments.
 #
+# 🚩TODO: Need to have a note or a graphic legend for the table, so that the shading can be
+#         interpreted. For the case `shade = "freq"`: say "Shading based on values of observed
+#         frequencies"; otherwise, use the same text as in what is printed to the console.
+#         Most likely use `gt::tab_source_note()`. NB: There's already a `legend` argument, but this
+#         has no effect (isn't used). Could do this by allowing `legend = T/F/"note"`, where T is the
+#         same as "note" (default); F gives no legend and allows for a later addition of
+#         `legend = "graphic` which shows a graphic legend in a style like
+#         `dev/color-tab-figs/shading-legend.png`.
+#
+# ✔️DONE: Add an argument `values = "frequency" | "residuals"` (possibly
+#         abbreviated) to all the values displayed in the table to be the cell
+#         frequencies (as now, and default), or to be the residuals for the `model` fit.
+#
 # 🚩TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
 #         hierarchy similar to what is shown in the table for the Titanic data in
-#         `dev/Titanic-residual-shading.png`. That is, the Hair-Sex combinations that appear like
-#         "Black_Male" should be two columns for Hair and Sex, and the rows for the other cases of
-#         black hair should have Sex empty. Not sure whether nested row groups can be shown to look
-#         nested otherwise.
+#         `dev/color-tab-figs/Titanic-residual-shading.png`. That is, the
+#         Hair-Sex combinations that appear like "Black_Male" should be two
+#         columns for Hair and Sex, and the rows for the other cases of black
+#         hair should have Sex empty. Not sure whether nested row groups can be
+#         shown to look nested otherwise.
 #
-# 🚩TODO: Consider use of patterned backgrounds using gt facilities-- e.g., opt_stylize(). Low priority.
+# 🚩TODO: Consider use of patterned backgrounds using gt facilities-- e.g., opt_stylize().
+#         Low priority.
 #
 
 
@@ -55,9 +70,12 @@
 #' (by default, the independence model).
 #'
 #' For multi-way tables (3 or more dimensions), residuals are computed from the
-#' model of complete independence among all factors using \code{\link[MASS]{loglm}}.
+#' model of complete independence among all factors using \code{\link[MASS]{loglm}},
+#' unless you specify a model using the `model` or `expected` arguments.
 #' A message is printed showing the chi-squared statistic, degrees of freedom,
 #' and p-value for this test.
+#'
+#' **Contrast shading**
 #'
 #' For cells with dark background colors, black text can be difficult to read.
 #' This function automatically selects white or black text for each cell based
@@ -66,19 +84,27 @@
 #' is used to determine the optimal text color according to WCAG 2.1 guidelines.
 #' Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.
 #'
+#' **Use in documents**
+#'
 #' In R Markdown (\code{.Rmd}) or Quarto (\code{.qmd}) documents, \pkg{gt} tables
 #' may not render correctly in all output formats. The \code{filename} argument
 #' provides a workaround: save the table as an image, then include it using
 #' \code{\link[knitr]{include_graphics}}. For example:
 #'
 #' \preformatted{
-#' color_table(my_table, filename = "my_table.png")
-#' knitr::include_graphics("my_table.png")
+#'     color_table(my_table, filename = "my_table.png")
+#'     knitr::include_graphics("my_table.png")
 #' }
 #'
 #' For higher quality output, \code{.svg} format is recommended. You can control
 #' the image dimensions using the \code{vwidth} and \code{vheight} arguments
 #' (passed via \code{...}).
+#'
+#' If you need a caption for cross-referencing (especially in Quarto or R Markdown),
+#' you can use `gt::tab_caption()`
+#' \preformatted{
+#'      gt_object |> tab_caption(caption = "Table 1: Pattern of Association in MyTable")
+#'  }
 #'
 #' @return A gt table object that can be further customized
 #'
@@ -86,23 +112,24 @@
 #' \dontrun{
 #' # Basic usage with 2-way table - shade by residuals from independence
 #' data(HairEyeColor)
-#' HEC2 <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
-#' color_table(HEC2)
-#' # Prints: "Shading based on residuals from model of independence, X^2 = ..."
+#' HEC <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
+#' color_table(HEC)
 #'
 #' # Shade by frequencies instead (no message printed)
-#' color_table(HEC2, shade = "freq")
+#' color_table(HEC, shade = "freq")
 #'
-#' # 3-way table - requires formula to specify layout
+#' # 3-way table - using a formula to specify layout
 #' color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
-#' # Prints: "Shading based on residuals from model of complete independence, X^2 = ..."
+#'
+#' # Display residual values in cells instead of frequencies
+#' color_table(HEC, values = "residuals")
 #'
 #' # From a data.frame in frequency form (2-way)
-#' hec_df <- as.data.frame(HEC2)
+#' hec_df <- as.data.frame(HEC)
 #' color_table(hec_df)
 #'
 #' # Save table as an image file
-#' color_table(HEC2, filename = "hair_eye_table.png")
+#' color_table(HEC, filename = "hair_eye_table.png")
 #' }
 #'
 #' @importFrom stats chisq.test residuals xtabs pchisq
@@ -114,12 +141,17 @@ color_table <- function(x, ...) {
 }
 
 #' @describeIn color_table Method for table objects (including result of xtabs)
-#' @param formula Formula specifying row ~ col layout (for multi-way tables)
-#' @param shade What values determine cell shading: "residuals" (default), "freq",
-#'   "pearson", or "deviance"
+#' @param formula Formula specifying a `row_vars ~ col_vars` layout (for multi-way tables) to
+#'        make them "flat" as defined for `vcd::structable()` and `stats::ftable()`.
+#' @param values What values to display in cells: `"freq"` for observed frequencies (default),
+#'   or `"residuals"` to display the residual values. When `values = "residuals"`, margins
+#'   are suppressed since residuals don't have meaningful totals.
+#' @param shade What values determine cell shading: `"residuals"` (default), `"freq"`,
+#'        `"pearson"`, or `"deviance"`
 #' @param model A fitted model (loglm or glm) to compute residuals from.
-#'   If NULL and shade involves residuals, uses an independence model for all factors.
-#' @param expected Expected frequencies (alternative to model)
+#'        If NULL and shade involves residuals, uses an independence model for all factors.
+#' @param expected Expected frequencies (alternative to `model`), a data structure of the same shape
+#'        as `x`
 #' @param palette Color palette function or vector. Default depends on shade type.
 #' @param legend Logical, show color legend/scale?
 #' @param margins Logical, include row/column totals?
@@ -132,6 +164,7 @@ color_table <- function(x, ...) {
 #' @export
 color_table.table <- function(x,
                                formula = NULL,
+                               values = c("freq", "residuals"),
                                shade = c("residuals", "freq", "pearson", "deviance"),
                                model = NULL,
                                expected = NULL,
@@ -143,6 +176,7 @@ color_table.table <- function(x,
                                filename = NULL,
                                ...) {
 
+  values <- match.arg(values)
   shade <- match.arg(shade)
   if (shade == "pearson") shade <- "residuals"
 
@@ -172,6 +206,7 @@ color_table.table <- function(x,
   .color_table_impl(x_mat,
                     x_orig = x_orig,
                     formula = formula,
+                    values = values,
                     shade = shade,
                     model = model,
                     expected = expected,
@@ -187,6 +222,7 @@ color_table.table <- function(x,
 #' @describeIn color_table Method for ftable objects
 #' @export
 color_table.ftable <- function(x,
+                                values = c("freq", "residuals"),
                                 shade = c("residuals", "freq", "pearson", "deviance"),
                                 model = NULL,
                                 expected = NULL,
@@ -198,6 +234,7 @@ color_table.ftable <- function(x,
                                 filename = NULL,
                                 ...) {
 
+  values <- match.arg(values)
   shade <- match.arg(shade)
   if (shade == "pearson") shade <- "residuals"
 
@@ -208,6 +245,7 @@ color_table.ftable <- function(x,
   .color_table_impl(x_mat,
                     x_orig = NULL,
                     formula = NULL,
+                    values = values,
                     shade = shade,
                     model = model,
                     expected = expected,
@@ -223,6 +261,7 @@ color_table.ftable <- function(x,
 #' @describeIn color_table Method for structable objects (vcd package)
 #' @export
 color_table.structable <- function(x,
+                                    values = c("freq", "residuals"),
                                     shade = c("residuals", "freq", "pearson", "deviance"),
                                     model = NULL,
                                     expected = NULL,
@@ -234,6 +273,7 @@ color_table.structable <- function(x,
                                     filename = NULL,
                                     ...) {
 
+  values <- match.arg(values)
   shade <- match.arg(shade)
   if (shade == "pearson") shade <- "residuals"
 
@@ -244,6 +284,7 @@ color_table.structable <- function(x,
   .color_table_impl(x_mat,
                     x_orig = NULL,
                     formula = NULL,
+                    values = values,
                     shade = shade,
                     model = model,
                     expected = expected,
@@ -262,6 +303,7 @@ color_table.structable <- function(x,
 color_table.data.frame <- function(x,
                                     formula = NULL,
                                     freq_col = NULL,
+                                    values = c("freq", "residuals"),
                                     shade = c("residuals", "freq", "pearson", "deviance"),
                                     model = NULL,
                                     expected = NULL,
@@ -273,6 +315,7 @@ color_table.data.frame <- function(x,
                                     filename = NULL,
                                     ...) {
 
+  values <- match.arg(values)
   shade <- match.arg(shade)
   if (shade == "pearson") shade <- "residuals"
 
@@ -316,6 +359,7 @@ color_table.data.frame <- function(x,
                     legend = legend,
                     margins = margins,
                     digits = digits,
+                    values = values,
                     title = title,
                     filename = filename,
                     ...)
@@ -324,6 +368,7 @@ color_table.data.frame <- function(x,
 #' @describeIn color_table Method for matrix objects
 #' @export
 color_table.matrix <- function(x,
+                                values = c("freq", "residuals"),
                                 shade = c("residuals", "freq", "pearson", "deviance"),
                                 model = NULL,
                                 expected = NULL,
@@ -335,12 +380,14 @@ color_table.matrix <- function(x,
                                 filename = NULL,
                                 ...) {
 
+  values <- match.arg(values)
   shade <- match.arg(shade)
   if (shade == "pearson") shade <- "residuals"
 
   .color_table_impl(x,
                     x_orig = NULL,
                     formula = NULL,
+                    values = values,
                     shade = shade,
                     model = model,
                     expected = expected,
@@ -380,6 +427,7 @@ color_table.default <- function(x, ...) {
 # @param palette Color palette
 # @param legend Show legend?
 # @param margins Show margins?
+# @param values What to display in cells: "freq" or "residuals"
 # @param digits Decimal places
 # @param title Table title
 # @param filename Optional file to save
@@ -389,6 +437,7 @@ color_table.default <- function(x, ...) {
 .color_table_impl <- function(x,
                                x_orig = NULL,
                                formula = NULL,
+                               values = "freq",
                                shade = "residuals",
                                model = NULL,
                                expected = NULL,
@@ -437,11 +486,17 @@ color_table.default <- function(x, ...) {
   dimnames(x) <- list(rnames, cnames)
   names(dimnames(x)) <- c(rvar, cvar)
 
+  # Validate values parameter
+  if (values == "residuals" && shade == "freq") {
+    stop("Cannot display residuals when shade = 'freq'. Use shade = 'residuals' or similar.")
+  }
+
   # Compute shading values
   # cat("DEBUG: About to compute shading values\n")
   if (shade == "freq") {
     # cat("DEBUG: shade == 'freq', skipping residuals\n")
     shade_values <- x
+    resid_mat <- NULL  # No residuals computed
   } else {
     # cat("DEBUG: Computing residuals (shade != 'freq')\n")
     # Compute residuals
@@ -539,17 +594,29 @@ color_table.default <- function(x, ...) {
     shade_values <- resid_mat
   }
 
+  # Determine what values to display in cells
+  if (values == "residuals") {
+    display_mat <- resid_mat
+    # Margins don't make sense for residuals
+    show_margins <- FALSE
+    # Use more decimal places for residuals if digits is 0
+    if (digits == 0) digits <- 2
+  } else {
+    display_mat <- x
+    show_margins <- margins
+  }
+
   # Create data frame for gt
-  x_mat <- matrix(as.vector(x), nrow = nrow(x), ncol = ncol(x),
+  x_mat <- matrix(as.vector(display_mat), nrow = nrow(display_mat), ncol = ncol(display_mat),
                   dimnames = list(rnames, cnames))
   df <- as.data.frame(x_mat, check.names = FALSE)
 
-  # Add row totals if margins requested
-  if (margins) {
-    df$Total <- rowSums(x)
+  # Add row totals if margins requested (only for frequencies)
+  if (show_margins) {
+    df$Total <- rowSums(x)  # Always use frequencies for totals
   }
 
-  # Convert to character for display (preserving integers)
+  # Convert to character for display
   df_display <- df
   for (col in names(df_display)) {
     if (is.numeric(df_display[[col]])) {
@@ -561,8 +628,8 @@ color_table.default <- function(x, ...) {
   df_display <- cbind(data.frame(row_var = rownames(df)), df_display)
   names(df_display)[1] <- rvar
 
-  # Add column totals row if margins requested
-  if (margins) {
+  # Add column totals row if margins requested (only for frequencies)
+  if (show_margins) {
     col_totals <- c("Total", as.character(colSums(x)),
                     as.character(sum(x)))
     df_display <- rbind(df_display, col_totals)
@@ -628,7 +695,7 @@ color_table.default <- function(x, ...) {
   }
 
   # Style the totals row and column
-  if (margins) {
+  if (show_margins) {
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_fill(color = "#D1FFBD"),
@@ -669,7 +736,7 @@ color_table.default <- function(x, ...) {
 
   # Style row labels (stub) to match column label styling
   # Bold for category labels, italic for Total
-  if (margins) {
+  if (show_margins) {
     gt_tbl <- gt_tbl |>
       gt::tab_style(
         style = gt::cell_text(weight = "bold"),
