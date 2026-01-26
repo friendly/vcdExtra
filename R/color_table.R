@@ -23,6 +23,7 @@
 #
 # ✔️DONE: For multi-way tables, use MASS::loglm() to fit complete independence model and compute
 #         proper Pearson residuals. Print message with X^2, df, p-value when shade != "freq".
+#         Uses cat() for output to ensure visibility in all R environments.
 #
 # 🚩TODO: [HARD] When there are two (or more) variables for the row, these should appear as a nested
 #         hierarchy similar to what is shown in the table for the Titanic data in
@@ -151,18 +152,19 @@ color_table.table <- function(x,
   dims <- dim(x)
   ndim <- length(dims)
 
-  # For multi-way tables with formula, use structable to flatten
-  if (ndim > 2 && !is.null(formula)) {
+  # For multi-way tables, use structable to flatten
+  if (ndim > 2) {
     if (requireNamespace("vcd", quietly = TRUE)) {
-      st <- vcd::structable(formula, data = x)
+      if (!is.null(formula)) {
+        st <- vcd::structable(formula, data = x)
+      } else {
+        # Default: first variable as rows, remaining as columns
+        st <- vcd::structable(x)
+      }
       x_mat <- as.matrix(st)
     } else {
-      stop("Package 'vcd' is required to use formula with multi-way tables.")
+      stop("Package 'vcd' is required for multi-way tables.")
     }
-  } else if (ndim > 2) {
-    warning("Multi-way table without formula: collapsing to 2D. Use formula for better control.")
-    x_mat <- as.matrix(margin.table(x, 1:2))
-    x_orig <- margin.table(x, 1:2)  # Use collapsed table for residuals too
   } else {
     x_mat <- as.matrix(x)
   }
@@ -398,6 +400,15 @@ color_table.default <- function(x, ...) {
                                filename = NULL,
                                ...) {
 
+
+  # # DEBUG: Confirm function entry and parameters
+  # cat("DEBUG: Entering .color_table_impl\n")
+  # cat("DEBUG: shade =", shade, "\n")
+  # cat("DEBUG: is.null(x_orig) =", is.null(x_orig), "\n")
+  # if (!is.null(x_orig)) {
+  #   cat("DEBUG: length(dim(x_orig)) =", length(dim(x_orig)), "\n")
+  # }
+
   if (!requireNamespace("gt", quietly = TRUE)) {
     stop("Package 'gt' is required for color_table(). Please install it.")
   }
@@ -427,9 +438,12 @@ color_table.default <- function(x, ...) {
   names(dimnames(x)) <- c(rvar, cvar)
 
   # Compute shading values
+  # cat("DEBUG: About to compute shading values\n")
   if (shade == "freq") {
+    # cat("DEBUG: shade == 'freq', skipping residuals\n")
     shade_values <- x
   } else {
+    # cat("DEBUG: Computing residuals (shade != 'freq')\n")
     # Compute residuals
     if (!is.null(model)) {
       # Use provided model - extract and reshape residuals
@@ -437,18 +451,19 @@ color_table.default <- function(x, ...) {
       resid_mat <- matrix(as.vector(resid_arr), nrow = dims[1], ncol = dims[2])
       # Print model info
       if (inherits(model, "loglm")) {
-        message(sprintf("Shading based on residuals from fitted model, X^2 = %.2f, df = %d, p = %.4g",
-                        model$pearson, model$df, 1 - pchisq(model$pearson, model$df)))
+        cat(sprintf("Shading based on residuals from fitted model, X^2 = %.2f, df = %d, p = %.4g\n",
+                    model$pearson, model$df, 1 - pchisq(model$pearson, model$df)))
       }
     } else if (!is.null(expected)) {
       # Use provided expected values
       resid_mat <- (x - expected) / sqrt(expected)
-      message("Shading based on residuals from user-supplied expected frequencies")
+      cat("Shading based on residuals from user-supplied expected frequencies\n")
     } else {
       # Fit independence model
       # For multi-way tables, use loglm for complete independence
       if (!is.null(x_orig) && length(dim(x_orig)) > 2) {
         # Multi-way table: fit complete independence model
+        # cat("DEBUG: In multi-way table branch (>2 dimensions)\n")
         if (!requireNamespace("MASS", quietly = TRUE)) {
           stop("Package 'MASS' is required for residuals from multi-way tables.")
         }
@@ -457,7 +472,8 @@ color_table.default <- function(x, ...) {
         var_names <- names(dimnames(x_orig))
         indep_formula <- as.formula(paste("~", paste(var_names, collapse = " + ")))
 
-        mod_indep <- MASS::loglm(indep_formula, data = x_orig)
+        # Use do.call to avoid scoping issues with loglm's non-standard evaluation
+        mod_indep <- do.call(MASS::loglm, list(formula = indep_formula, data = x_orig))
 
         # Get residuals from the model
         resid_arr <- residuals(mod_indep, type = "pearson")
@@ -466,28 +482,34 @@ color_table.default <- function(x, ...) {
         # The structable flattening preserves cell order, so we can reshape
         if (!is.null(formula)) {
           # Re-create the structable to get proper cell ordering
-          st <- vcd::structable(formula, data = x_orig)
-          # The residuals need to be extracted in the same order as structable
           resid_st <- vcd::structable(formula, data = resid_arr)
           resid_mat <- as.matrix(resid_st)
         } else {
-          # No formula - shouldn't happen for multi-way, but handle gracefully
-          resid_mat <- matrix(as.vector(resid_arr), nrow = dims[1], ncol = dims[2])
+          # No formula - use default structable flattening
+          resid_st <- vcd::structable(resid_arr)
+          resid_mat <- as.matrix(resid_st)
         }
 
         # Print model info
-        message(sprintf("Shading based on residuals from model of complete independence, X^2 = %.2f, df = %d, p = %.4g",
-                        mod_indep$pearson, mod_indep$df, 1 - pchisq(mod_indep$pearson, mod_indep$df)))
+        msg <- sprintf("Shading based on residuals from model of complete independence, X^2 = %.2f, df = %d, p = %.4g",
+                       mod_indep$pearson, mod_indep$df, 1 - pchisq(mod_indep$pearson, mod_indep$df))
+        if (is.null(formula)) {
+          msg <- paste0(msg, "\nUse formula for better control.")
+        }
+        cat(msg, "\n")
 
       } else {
-        # 2-way table: use chisq.test (equivalent to complete independence)
+        # 2-way table: use chisq.test (equivalent to independence)
+        # cat("DEBUG: In 2-way table branch, about to run chisq.test\n")
         chi_result <- suppressWarnings(chisq.test(x))
         resid_mat <- chi_result$residuals
+        # cat("DEBUG: chisq.test completed, X^2 =", unname(chi_result$statistic), "\n")
 
         # Print model info
-        message(sprintf("Shading based on residuals from model of independence, X^2 = %.2f, df = %d, p = %.4g",
-                        chi_result$statistic, chi_result$parameter,
-                        chi_result$p.value))
+        cat(sprintf("Shading based on residuals from model of independence, X^2 = %.2f, df = %d, p = %.4g\n",
+                    unname(chi_result$statistic),
+                    unname(chi_result$parameter),
+                    chi_result$p.value))
       }
     }
 
@@ -497,13 +519,14 @@ color_table.default <- function(x, ...) {
       if (!is.null(x_orig) && length(dim(x_orig)) > 2) {
         var_names <- names(dimnames(x_orig))
         indep_formula <- as.formula(paste("~", paste(var_names, collapse = " + ")))
-        mod_indep <- MASS::loglm(indep_formula, data = x_orig)
+        mod_indep <- do.call(MASS::loglm, list(formula = indep_formula, data = x_orig))
         exp_arr <- fitted(mod_indep)
         if (!is.null(formula)) {
           exp_st <- vcd::structable(formula, data = exp_arr)
           exp_mat <- as.matrix(exp_st)
         } else {
-          exp_mat <- matrix(as.vector(exp_arr), nrow = dims[1], ncol = dims[2])
+          exp_st <- vcd::structable(exp_arr)
+          exp_mat <- as.matrix(exp_st)
         }
       } else {
         chi_result <- suppressWarnings(chisq.test(x))

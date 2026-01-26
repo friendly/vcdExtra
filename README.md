@@ -26,7 +26,7 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.1; documentation built for `pkgdown` 2026-01-25
+Version 0.9.1; documentation built for `pkgdown` 2026-01-26
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -34,12 +34,19 @@ functions designed to extend the
 Categorical Data* and the [gnm](https://CRAN.R-project.org/package=gnm)
 package for *Generalized Nonlinear Models*. In particular, `vcdExtra`
 extends mosaic, assoc and sieve plots from vcd to handle `glm()` and
-`gnm()` models and adds a 3D version in `mosaic3d()`.
+`gnm()` models and adds a 3D version in `mosaic3d()`. The functions here
+use the “strucplot” framework (Meyer et-al., 2006), which is a natural
+conceptual system for implementing visualization and other displays for
+*n*-way frequency tables which have a nested, hierarchical structure in
+[vcd](https://CRAN.R-project.org/package=vcd). \[This can be compared to
+the “productplots” framework in
+[producplots](https://CRAN.R-project.org/package=productplots), and the
+defunct `ggmosaic` package\]
 
-It also adds extensions to modeling functions for models fit using
-`glm()` and `MASS::loglm()`, using the contruct `glmlist()` to construct
-a list of related models which can be summarized (via `LRstats()`) and
-graphed (via `mosaic.glmlist()`)
+`vcdExtra` also adds extensions to modeling functions for models fit
+using `glm()` and `MASS::loglm()`, using the construct `glmlist()` to
+construct a list of related models which can be summarized (via
+`LRstats()`) and graphed (via `mosaic.glmlist()`)
 
 `vcdExtra` is a support package for the book [*Discrete Data Analysis
 with
@@ -80,11 +87,11 @@ packages.
 
 ##### See also:
 
-<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="man/figures/ddar-cover.png" style="height:80px;"/></a> 
+<a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="man/figures/ddar-cover.png" style="height:100px;"/></a> 
    
-<a href="https://friendly.github.io/psy6136/"><img src="https://friendly.github.io/psy6136/icons/psy6136-highres.png" style="height:80px;" /></a> 
+<a href="https://friendly.github.io/psy6136/"><img src="https://friendly.github.io/psy6136/icons/psy6136-highres.png" style="height:100px;" /></a> 
    
-<a href="https://friendly.github.io/nestedLogit/"><img src="https://friendly.github.io/nestedLogit/logo.png" style="height:80px;" /></a>
+<a href="https://friendly.github.io/nestedLogit/"><img src="https://friendly.github.io/nestedLogit/logo.png" style="height:100px;" /></a>
 
 - My book, [*Discrete Data Analysis with R: Visualization and Modeling
   Techniques for Categorical and Count
@@ -191,6 +198,11 @@ vigns |> knitr::kable()
 - A re-implementation of `vcd::woolf_test()` extends the analysis of
   homogeneity of odds ratios in 2 x 2 x R x C tables to provide tests
   for differences among the R strata rows and C strata columns.
+
+- A collection of demo files illustrating analysis of other datasets and
+  models. Run `demo(package = "vcdExtra")` to see them, and, for
+  example, `demo("mental-glm", package = "vcdExtra")` to run
+  `demo("demo/mental-glm.R")` in your R console.
 
 ## Examples
 
@@ -427,3 +439,8 @@ anova(indep, linlin, roweff, test = "Chisq")
 Friendly, M. & Meyer, D. (2016). *Discrete Data Analysis with R:
 Visualization and Modeling Techniques for Categorical and Count Data*.
 Boca Raton, FL: Chapman & Hall/CRC.
+
+Meyer, D., Zeileis, A., & Hornik, K. (2006). The Strucplot Framework:
+Visualizing Multi-way Contingency Tables with vcd. *Journal of
+Statistical Software*, **17**(3), 1–48.
+<http://www.jstatsoft.org/v17/i03/>
