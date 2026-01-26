@@ -15,6 +15,7 @@ color_table(
   margins = TRUE,
   digits = 0,
   title = NULL,
+  filename = NULL,
   ...
 )
 }
@@ -41,7 +42,13 @@ If NULL and shade involves residuals, uses independence model.}
 
 \item{title}{Optional table title}
 
-\item{...}{Additional arguments (currently unused)}
+\item{filename}{Optional filename to save the table as an image. If provided,
+the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
+\code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
+The format is determined by the file extension.}
+
+\item{...}{Additional arguments passed to \code{\link[gt]{gtsave}} when
+\code{filename} is specified (e.g., \code{vwidth}, \code{vheight} for image dimensions)}
 }
 \value{
 A gt table object that can be further customized
@@ -65,6 +72,20 @@ on which provides better contrast against the background color. If the
 \pkg{colorspace} package is available, \code{\link[colorspace]{contrast_ratio}}
 is used to determine the optimal text color according to WCAG 2.1 guidelines.
 Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.
+
+In R Markdown (\code{.Rmd}) or Quarto (\code{.qmd}) documents, \pkg{gt} tables
+may not render correctly in all output formats. The \code{filename} argument
+provides a workaround: save the table as an image, then include it using
+\code{\link[knitr]{include_graphics}}. For example:
+
+\preformatted{
+color_table(my_table, filename = "my_table.png")
+knitr::include_graphics("my_table.png")
+}
+
+For higher quality output, \code{.svg} format is recommended. You can control
+the image dimensions using the \code{vwidth} and \code{vheight} arguments
+(passed via \code{...}).
 }
 \examples{
 \dontrun{
@@ -78,6 +99,10 @@ color_table(HEC, shade = "freq")
 
 # 3-way table
 color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
+
+# Save table as an image file
+color_table(HEC, filename = "hair_eye_table.png")
+color_table(HEC, filename = "hair_eye_table.svg", vwidth = 600)
 }
 
 }

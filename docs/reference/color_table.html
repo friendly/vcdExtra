@@ -70,6 +70,7 @@ colored according to observed frequencies or their residuals from a loglinear mo
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -120,8 +121,16 @@ If NULL and shade involves residuals, uses independence model.</p></dd>
 <dd><p>Optional table title</p></dd>
 
 
+<dt id="arg-filename">filename<a class="anchor" aria-label="anchor" href="#arg-filename"></a></dt>
+<dd><p>Optional filename to save the table as an image. If provided,
+the table is saved using <code><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></code>. Supported formats include
+<code>.png</code>, <code>.svg</code>, <code>.pdf</code>, <code>.html</code>, <code>.rtf</code>, and <code>.docx</code>.
+The format is determined by the file extension.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments (currently unused)</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></code> when
+<code>filename</code> is specified (e.g., <code>vwidth</code>, <code>vheight</code> for image dimensions)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -143,6 +152,17 @@ on which provides better contrast against the background color. If the
 <span class="pkg">colorspace</span> package is available, <code><a href="https://colorspace.R-Forge.R-project.org/reference/contrast_ratio.html" class="external-link">contrast_ratio</a></code>
 is used to determine the optimal text color according to WCAG 2.1 guidelines.
 Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.</p>
+<p>In R Markdown (<code>.Rmd</code>) or Quarto (<code>.qmd</code>) documents, <span class="pkg">gt</span> tables
+may not render correctly in all output formats. The <code>filename</code> argument
+provides a workaround: save the table as an image, then include it using
+<code><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></code>. For example:</p>
+<div class="sourceCode"><pre><code><span></span>
+<span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">my_table</span>, filename <span class="op">=</span> <span class="st">"my_table.png"</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"my_table.png"</span><span class="op">)</span></span></code></pre></div>
+
+<p>For higher quality output, <code>.svg</code> format is recommended. You can control
+the image dimensions using the <code>vwidth</code> and <code>vheight</code> arguments
+(passed via <code>...</code>).</p>
     </div>
 
     <div class="section level2">
@@ -158,6 +178,10 @@ Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 3-way table</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HairEyeColor</span>, formula <span class="op">=</span> <span class="va">Eye</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Save table as an image file</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.png"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.svg"</span>, vwidth <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
