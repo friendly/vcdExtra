@@ -2,7 +2,7 @@
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.9.1; documentation built for `pkgdown` 2026-01-25
+Version 0.9.1; documentation built for `pkgdown` 2026-01-26
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -13,11 +13,18 @@ extends mosaic, assoc and sieve plots from vcd to handle
 [`glm()`](https://rdrr.io/r/stats/glm.html) and `gnm()` models and adds
 a 3D version in
 [`mosaic3d()`](https://friendly.github.io/vcdExtra/reference/mosaic3d.md).
+The functions here use the “strucplot” framework (Meyer et-al., 2006),
+which is a natural conceptual system for implementing visualization and
+other displays for *n*-way frequency tables which have a nested,
+hierarchical structure in [vcd](https://CRAN.R-project.org/package=vcd).
+\[This can be compared to the “productplots” framework in
+[producplots](https://CRAN.R-project.org/package=productplots), and the
+defunct `ggmosaic` package\]
 
-It also adds extensions to modeling functions for models fit using
-[`glm()`](https://rdrr.io/r/stats/glm.html) and
+`vcdExtra` also adds extensions to modeling functions for models fit
+using [`glm()`](https://rdrr.io/r/stats/glm.html) and
 [`MASS::loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html), using the
-contruct
+construct
 [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
 to construct a list of related models which can be summarized (via
 [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md))
@@ -198,6 +205,11 @@ vigns |> knitr::kable()
   extends the analysis of homogeneity of odds ratios in 2 x 2 x R x C
   tables to provide tests for differences among the R strata rows and C
   strata columns.
+
+- A collection of demo files illustrating analysis of other datasets and
+  models. Run `demo(package = "vcdExtra")` to see them, and, for
+  example, `demo("mental-glm", package = "vcdExtra")` to run
+  `demo("demo/mental-glm.R")` in your R console.
 
 ## Examples
 
@@ -440,3 +452,8 @@ anova(indep, linlin, roweff, test = "Chisq")
 Friendly, M. & Meyer, D. (2016). *Discrete Data Analysis with R:
 Visualization and Modeling Techniques for Categorical and Count Data*.
 Boca Raton, FL: Chapman & Hall/CRC.
+
+Meyer, D., Zeileis, A., & Hornik, K. (2006). The Strucplot Framework:
+Visualizing Multi-way Contingency Tables with vcd. *Journal of
+Statistical Software*, **17**(3), 1–48.
+<http://www.jstatsoft.org/v17/i03/>

@@ -114,7 +114,7 @@ color_table(x, ...)
 - model:
 
   A fitted model (loglm or glm) to compute residuals from. If NULL and
-  shade involves residuals, uses independence model.
+  shade involves residuals, uses an independence model for all factors.
 
 - expected:
 
@@ -167,6 +167,12 @@ expected) are shaded blue. This makes it easy to identify cells that
 deviate substantially from what would be expected under a given model
 (by default, the independence model).
 
+For multi-way tables (3 or more dimensions), residuals are computed from
+the model of complete independence among all factors using
+[`loglm`](https://rdrr.io/pkg/MASS/man/loglm.html). A message is printed
+showing the chi-squared statistic, degrees of freedom, and p-value for
+this test.
+
 For cells with dark background colors, black text can be difficult to
 read. This function automatically selects white or black text for each
 cell based on which provides better contrast against the background
@@ -191,7 +197,8 @@ via `...`).
 
 ## Methods (by class)
 
-- `color_table(table)`: Method for table objects (including xtabs)
+- `color_table(table)`: Method for table objects (including result of
+  xtabs)
 
 - `color_table(ftable)`: Method for ftable objects
 
@@ -207,23 +214,24 @@ via `...`).
 
 ``` r
 if (FALSE) { # \dontrun{
-# Basic usage - shade by residuals from independence
+# Basic usage with 2-way table - shade by residuals from independence
 data(HairEyeColor)
-HEC <- margin.table(HairEyeColor, 2:1)
-color_table(HEC)
+HEC2 <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
+color_table(HEC2)
+# Prints: "Shading based on residuals from model of independence, X^2 = ..."
 
-# Shade by frequencies instead
-color_table(HEC, shade = "freq")
+# Shade by frequencies instead (no message printed)
+color_table(HEC2, shade = "freq")
 
-# 3-way table with formula
+# 3-way table - requires formula to specify layout
 color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
+# Prints: "Shading based on residuals from model of complete independence, X^2 = ..."
 
-# From a data.frame in frequency form
-hec_df <- as.data.frame(HEC)
+# From a data.frame in frequency form (2-way)
+hec_df <- as.data.frame(HEC2)
 color_table(hec_df)
 
 # Save table as an image file
-color_table(HEC, filename = "hair_eye_table.png")
-color_table(HEC, filename = "hair_eye_table.svg", vwidth = 600)
+color_table(HEC2, filename = "hair_eye_table.png")
 } # }
 ```
