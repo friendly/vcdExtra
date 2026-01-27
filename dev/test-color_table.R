@@ -7,7 +7,7 @@ library(scales)
 library(vcd)
 
 # Source the function
-source("dev/color_table.R")
+#source("dev/color_table.R")
 
 # ============================================================================
 # Example 1: Basic 2-way table - Hair x Eye
@@ -135,6 +135,10 @@ color_table(PreSex2, title = "Premarital Sex: Marital Status x Premarital Sex")
 # Full 4-way table with formula
 color_table(PreSex,
             formula = MaritalStatus + Gender ~ PremaritalSex + ExtramaritalSex,
+            title = "PreSex: Marital Status & Gender by Sexual Behavior")
+
+color_table(PreSex,
+            formula = Gender + PremaritalSex + ExtramaritalSex ~  MaritalStatus,
             title = "PreSex: Marital Status & Gender by Sexual Behavior")
 
 # ============================================================================

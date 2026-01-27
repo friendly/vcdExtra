@@ -48,7 +48,7 @@
 
 #' Display Frequency Table with Colored Cell Backgrounds
 #'
-#' Creates a formatted table display of frequency data with cell backgrounds
+#' Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
 #' colored according to observed frequencies or their residuals from a loglinear model.
 #' This is an S3 generic function with methods for different input types.
 #'
@@ -155,7 +155,7 @@ color_table <- function(x, ...) {
 #'
 #' @param legend Controls display of shading interpretation note:
 #'        \code{TRUE} or \code{"note"} (default) adds a source note explaining the shading;
-#'        \code{FALSE} suppresses the note.
+#'        \code{FALSE} (default) suppresses the note, but a message is printed in the console.
 #' @param margins Logical, include row/column totals?
 #' @param digits Number of decimal places for displayed values
 #' @param title Optional table title
@@ -172,7 +172,7 @@ color_table.table <- function(x,
                                model = NULL,
                                expected = NULL,
                                palette = NULL,
-                               legend = TRUE,
+                               legend = FALSE,
                                margins = TRUE,
                                digits = 0,
                                title = NULL,
@@ -230,7 +230,7 @@ color_table.ftable <- function(x,
                                 model = NULL,
                                 expected = NULL,
                                 palette = NULL,
-                                legend = TRUE,
+                                legend = FALSE,
                                 margins = TRUE,
                                 digits = 0,
                                 title = NULL,
@@ -269,7 +269,7 @@ color_table.structable <- function(x,
                                     model = NULL,
                                     expected = NULL,
                                     palette = NULL,
-                                    legend = TRUE,
+                                    legend = FALSE,
                                     margins = TRUE,
                                     digits = 0,
                                     title = NULL,
@@ -311,7 +311,7 @@ color_table.data.frame <- function(x,
                                     model = NULL,
                                     expected = NULL,
                                     palette = NULL,
-                                    legend = TRUE,
+                                    legend = FALSE,
                                     margins = TRUE,
                                     digits = 0,
                                     title = NULL,
@@ -376,7 +376,7 @@ color_table.matrix <- function(x,
                                 model = NULL,
                                 expected = NULL,
                                 palette = NULL,
-                                legend = TRUE,
+                                legend = FALSE,
                                 margins = TRUE,
                                 digits = 0,
                                 title = NULL,
@@ -445,7 +445,7 @@ color_table.default <- function(x, ...) {
                                model = NULL,
                                expected = NULL,
                                palette = NULL,
-                               legend = TRUE,
+                               legend = FALSE,
                                margins = TRUE,
                                digits = 0,
                                title = NULL,
@@ -570,7 +570,7 @@ color_table.default <- function(x, ...) {
         # cat("DEBUG: chisq.test completed, X^2 =", unname(chi_result$statistic), "\n")
 
         # Print model info
-        shading_message <- sprintf("Shading based on residuals from model of independence, X^2 = %.2f, df = %d, p = %.4g",
+        shading_message <- sprintf("Shading based on residuals from model of independence,\n X^2 = %.2f, df = %d, p = %.4g",
                     unname(chi_result$statistic),
                     unname(chi_result$parameter),
                     chi_result$p.value)
@@ -650,7 +650,7 @@ color_table.default <- function(x, ...) {
     if (shade == "freq") {
       palette <- c("white", "firebrick")
     } else {
-      palette <- c("#B2182B", "white", , "#2166AC")
+      palette <- c("#B2182B", "white", "#2166AC")
     }
   }
 

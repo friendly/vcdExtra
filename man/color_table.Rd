@@ -20,7 +20,7 @@ color_table(x, ...)
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -35,7 +35,7 @@ color_table(x, ...)
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -50,7 +50,7 @@ color_table(x, ...)
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -67,7 +67,7 @@ color_table(x, ...)
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -82,7 +82,7 @@ color_table(x, ...)
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -121,7 +121,7 @@ residuals. The background colors are computed by interpolation using
 
 \item{legend}{Controls display of shading interpretation note:
 \code{TRUE} or \code{"note"} (default) adds a source note explaining the shading;
-\code{FALSE} suppresses the note.}
+\code{FALSE} (default) suppresses the note, but a message is printed in the console.}
 
 \item{margins}{Logical, include row/column totals?}
 
@@ -141,7 +141,7 @@ to \code{\link[gt]{gtsave}} via \code{...}.}
 A gt table object that can be further customized
 }
 \description{
-Creates a formatted table display of frequency data with cell backgrounds
+Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
 colored according to observed frequencies or their residuals from a loglinear model.
 This is an S3 generic function with methods for different input types.
 }
