@@ -6,6 +6,7 @@
 * Refactored `color_table()` as S3 methods, adding support for frequency data frames. Added file output, other formatting options
 * Print message for `color_table()` giving the model fit statistics.
 * Now provide `color_table(values =)` to display either the frequencies (default) or residuals in the table.
+* Add `legend = "note"` to include a table note regarding what is shown
 
 ## Version 0.9.0 (2026-01-17)
 

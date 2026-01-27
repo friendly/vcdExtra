@@ -15,6 +15,7 @@ color_table(x, ...)
 \method{color_table}{table}(
   x,
   formula = NULL,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -22,7 +23,6 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -30,6 +30,7 @@ color_table(x, ...)
 
 \method{color_table}{ftable}(
   x,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -37,7 +38,6 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -45,6 +45,7 @@ color_table(x, ...)
 
 \method{color_table}{structable}(
   x,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -52,7 +53,6 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -62,6 +62,7 @@ color_table(x, ...)
   x,
   formula = NULL,
   freq_col = NULL,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -69,7 +70,6 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -77,6 +77,7 @@ color_table(x, ...)
 
 \method{color_table}{matrix}(
   x,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -84,7 +85,6 @@ color_table(x, ...)
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -93,12 +93,16 @@ color_table(x, ...)
 \method{color_table}{default}(x, ...)
 }
 \arguments{
-\item{x}{A table, xtabs, matrix, ftable, structable, or data.frame object}
+\item{x}{A \code{"table"}, \code{"xtabs"}, \code{"matrix"}, \code{"ftable"}, \code{"structable"}, or \code{"data.frame"} object}
 
 \item{...}{Additional arguments passed to methods}
 
 \item{formula}{Formula specifying a \code{row_vars ~ col_vars} layout (for multi-way tables) to
 make them "flat" as defined for \code{vcd::structable()} and \code{stats::ftable()}.}
+
+\item{values}{What values to display in cells: \code{"freq"} for observed frequencies (default),
+or \code{"residuals"} to display the residual values. When \code{values = "residuals"}, margins
+are suppressed since residuals don't have meaningful totals.}
 
 \item{shade}{What values determine cell shading: \code{"residuals"} (default), \code{"freq"},
 \code{"pearson"}, or \code{"deviance"}}
@@ -109,24 +113,27 @@ If NULL and shade involves residuals, uses an independence model for all factors
 \item{expected}{Expected frequencies (alternative to \code{model}), a data structure of the same shape
 as \code{x}}
 
-\item{palette}{Color palette function or vector. Default depends on shade type.}
+\item{palette}{Color palette function or vector for background colors. Default depends on shade
+type. When \code{shade = "freq"} the default is \code{palette = c("white", "firebrick")}; otherwise
+\code{c("#B2182B", "white", , "#2166AC")} ranging from red to blue for negative and positive
+residuals. The background colors are computed by interpolation using
+\code{scales::col_numeric()}.}
 
-\item{legend}{Logical, show color legend/scale?}
+\item{legend}{Controls display of shading interpretation note:
+\code{TRUE} or \code{"note"} (default) adds a source note explaining the shading;
+\code{FALSE} suppresses the note.}
 
 \item{margins}{Logical, include row/column totals?}
 
 \item{digits}{Number of decimal places for displayed values}
-
-\item{values}{What values to display in cells: \code{"freq"} for observed frequencies (default),
-or \code{"residuals"} to display the residual values. When \code{values = "residuals"}, margins
-are suppressed since residuals don't have meaningful totals.}
 
 \item{title}{Optional table title}
 
 \item{filename}{Optional filename to save the table as an image. If provided,
 the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
 \code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
-The format is determined by the file extension.}
+The file format is determined by the file extension. Other arguments can be passed
+to \code{\link[gt]{gtsave}} via \code{...}.}
 
 \item{freq_col}{Name of the frequency column. If NULL, looks for "Freq" or "count".}
 }

@@ -75,6 +75,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -90,6 +91,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -105,6 +107,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -122,6 +125,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -137,6 +141,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -159,12 +164,13 @@ This is an S3 generic function with methods for different input types.</p>
 
 
 <dt id="arg-formula">formula<a class="anchor" aria-label="anchor" href="#arg-formula"></a></dt>
-<dd><p>Formula specifying row ~ col layout (for multi-way tables)</p></dd>
+<dd><p>Formula specifying a <code>row_vars ~ col_vars</code> layout (for multi-way tables) to
+make them "flat" as defined for <code><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">vcd::structable()</a></code> and <code><a href="https://rdrr.io/r/stats/ftable.html" class="external-link">stats::ftable()</a></code>.</p></dd>
 
 
 <dt id="arg-shade">shade<a class="anchor" aria-label="anchor" href="#arg-shade"></a></dt>
-<dd><p>What values determine cell shading: "residuals" (default), "freq",
-"pearson", or "deviance"</p></dd>
+<dd><p>What values determine cell shading: <code>"residuals"</code> (default), <code>"freq"</code>,
+<code>"pearson"</code>, or <code>"deviance"</code></p></dd>
 
 
 <dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
@@ -173,7 +179,8 @@ If NULL and shade involves residuals, uses an independence model for all factors
 
 
 <dt id="arg-expected">expected<a class="anchor" aria-label="anchor" href="#arg-expected"></a></dt>
-<dd><p>Expected frequencies (alternative to model)</p></dd>
+<dd><p>Expected frequencies (alternative to <code>model</code>), a data structure of the same shape
+as <code>x</code></p></dd>
 
 
 <dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
@@ -190,6 +197,12 @@ If NULL and shade involves residuals, uses an independence model for all factors
 
 <dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
 <dd><p>Number of decimal places for displayed values</p></dd>
+
+
+<dt id="arg-values">values<a class="anchor" aria-label="anchor" href="#arg-values"></a></dt>
+<dd><p>What values to display in cells: <code>"freq"</code> for observed frequencies (default),
+or <code>"residuals"</code> to display the residual values. When <code>values = "residuals"</code>, margins
+are suppressed since residuals don't have meaningful totals.</p></dd>
 
 
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
@@ -221,26 +234,34 @@ residuals (fewer than expected) are shaded blue. This makes it easy to identify
 cells that deviate substantially from what would be expected under a given model
 (by default, the independence model).</p>
 <p>For multi-way tables (3 or more dimensions), residuals are computed from the
-model of complete independence among all factors using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></code>.
+model of complete independence among all factors using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></code>,
+unless you specify a model using the <code>model</code> or <code>expected</code> arguments.
 A message is printed showing the chi-squared statistic, degrees of freedom,
 and p-value for this test.</p>
+<p><strong>Contrast shading</strong></p>
 <p>For cells with dark background colors, black text can be difficult to read.
 This function automatically selects white or black text for each cell based
 on which provides better contrast against the background color. If the
 <span class="pkg">colorspace</span> package is available, <code><a href="https://colorspace.R-Forge.R-project.org/reference/contrast_ratio.html" class="external-link">contrast_ratio</a></code>
 is used to determine the optimal text color according to WCAG 2.1 guidelines.
 Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.</p>
+<p><strong>Use in documents</strong></p>
 <p>In R Markdown (<code>.Rmd</code>) or Quarto (<code>.qmd</code>) documents, <span class="pkg">gt</span> tables
 may not render correctly in all output formats. The <code>filename</code> argument
 provides a workaround: save the table as an image, then include it using
 <code><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></code>. For example:</p>
 <div class="sourceCode"><pre><code><span></span>
-<span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">my_table</span>, filename <span class="op">=</span> <span class="st">"my_table.png"</span><span class="op">)</span></span>
-<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"my_table.png"</span><span class="op">)</span></span></code></pre></div>
+<span>    <span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">my_table</span>, filename <span class="op">=</span> <span class="st">"my_table.png"</span><span class="op">)</span></span>
+<span>    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"my_table.png"</span><span class="op">)</span></span></code></pre></div>
 
 <p>For higher quality output, <code>.svg</code> format is recommended. You can control
 the image dimensions using the <code>vwidth</code> and <code>vheight</code> arguments
 (passed via <code>...</code>).</p>
+<p>If you need a caption for cross-referencing (especially in Quarto or R Markdown),
+you can use <code><a href="https://gt.rstudio.com/reference/tab_caption.html" class="external-link">gt::tab_caption()</a></code></p><div class="sourceCode"><pre><code><span></span>
+<span>     <span class="va">gt_object</span> <span class="op">|&gt;</span> <span class="fu">tab_caption</span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Table 1: Pattern of Association in MyTable"</span><span class="op">)</span></span>
+<span> </span></code></pre></div>
+
     </div>
     <div class="section level2">
     <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
@@ -258,23 +279,24 @@ the image dimensions using the <code>vwidth</code> and <code>vheight</code> argu
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Basic usage with 2-way table - shade by residuals from independence</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">HairEyeColor</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">HEC2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/marginSums.html" class="external-link">margin.table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>  <span class="co"># 2-way: Hair x Eye</span></span></span>
-<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC2</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Prints: "Shading based on residuals from model of independence, X^2 = ..."</span></span></span>
+<span class="r-in"><span><span class="va">HEC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/marginSums.html" class="external-link">margin.table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>  <span class="co"># 2-way: Hair x Eye</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Shade by frequencies instead (no message printed)</span></span></span>
-<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC2</span>, shade <span class="op">=</span> <span class="st">"freq"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, shade <span class="op">=</span> <span class="st">"freq"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># 3-way table - requires formula to specify layout</span></span></span>
+<span class="r-in"><span><span class="co"># 3-way table - using a formula to specify layout</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HairEyeColor</span>, formula <span class="op">=</span> <span class="va">Eye</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Prints: "Shading based on residuals from model of complete independence, X^2 = ..."</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display residual values in cells instead of frequencies</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, values <span class="op">=</span> <span class="st">"residuals"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># From a data.frame in frequency form (2-way)</span></span></span>
-<span class="r-in"><span><span class="va">hec_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">HEC2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hec_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">HEC</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">hec_df</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Save table as an image file</span></span></span>
-<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC2</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.png"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">color_table</span><span class="op">(</span><span class="va">HEC</span>, filename <span class="op">=</span> <span class="st">"hair_eye_table.png"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

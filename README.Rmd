@@ -167,6 +167,7 @@ in 2 x 2 x R x C tables to provide tests for differences among the R strata rows
 
 * A collection of demo files illustrating analysis of other datasets and models. Run `demo(package = "vcdExtra")` to see them, and, for example,  `demo("mental-glm", package = "vcdExtra")` to run `demo("demo/mental-glm.R")` in your R console.
 
+* A new function, `color_table()` provides semi-graphic tables of frequency tables or residuals from a loglinear model.
 
 ## Examples
 

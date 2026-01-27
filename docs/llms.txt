@@ -211,6 +211,11 @@ vigns |> knitr::kable()
   example, `demo("mental-glm", package = "vcdExtra")` to run
   `demo("demo/mental-glm.R")` in your R console.
 
+- A new function,
+  [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
+  provides semi-graphic tables of frequency tables or residuals from a
+  loglinear model.
+
 ## Examples
 
 These `README` examples provide simple illustrations of using some of
