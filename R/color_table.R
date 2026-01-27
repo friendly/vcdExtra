@@ -152,7 +152,8 @@ color_table <- function(x, ...) {
 #'        If NULL and shade involves residuals, uses an independence model for all factors.
 #' @param expected Expected frequencies (alternative to `model`), a data structure of the same shape
 #'        as `x`
-#' @param palette Color palette function or vector. Default depends on shade type.
+#' @param palette Color palette function or vector. Default depends on shade type. When `shade = "freq"` the default is `palette = c("white", "firebrick")`; otherwise `c("#B2182B", "white", , "#2166AC")` ranging from red to blue for negative and positive residuals.
+#'
 #' @param legend Logical, show color legend/scale?
 #' @param margins Logical, include row/column totals?
 #' @param digits Number of decimal places for displayed values
@@ -640,7 +641,7 @@ color_table.default <- function(x, ...) {
     if (shade == "freq") {
       palette <- c("white", "firebrick")
     } else {
-      palette <- c("#2166AC", "white", "#B2182B")
+      palette <- c("#B2182B", "white", , "#2166AC")
     }
   }
 
