@@ -25,13 +25,11 @@
 #         proper Pearson residuals. Print message with X^2, df, p-value when shade != "freq".
 #         Uses cat() for output to ensure visibility in all R environments.
 #
-# 🚩TODO: Need to have a note or a graphic legend for the table, so that the shading can be
-#         interpreted. For the case `shade = "freq"`: say "Shading based on values of observed
-#         frequencies"; otherwise, use the same text as in what is printed to the console.
-#         Most likely use `gt::tab_source_note()`. NB: There's already a `legend` argument, but this
-#         has no effect (isn't used). Could do this by allowing `legend = T/F/"note"`, where T is the
-#         same as "note" (default); F gives no legend and allows for a later addition of
-#         `legend = "graphic` which shows a graphic legend in a style like
+# ✔️DONE: Note legend for table shading interpretation implemented via `gt::tab_source_note()`.
+#         `legend = TRUE` or `legend = "note"` adds note (default); `legend = FALSE` suppresses.
+#         For `shade = "freq"`: "Shading based on values of observed frequencies".
+#         For residuals: uses same text as printed to console (X^2, df, p-value).
+#         Future: `legend = "graphic"` could show graphic legend like
 #         `dev/color-tab-figs/shading-legend.png`.
 #
 # ✔️DONE: Add an argument `values = "frequency" | "residuals"` (possibly
@@ -153,7 +151,9 @@ color_table <- function(x, ...) {
 #' @param expected Expected frequencies (alternative to `model`), a data structure of the same shape
 #'        as `x`
 #' @param palette Color palette function or vector. Default depends on shade type.
-#' @param legend Logical, show color legend/scale?
+#' @param legend Controls display of shading interpretation note:
+#'   \code{TRUE} or \code{"note"} (default) adds a source note explaining the shading;
+#'   \code{FALSE} suppresses the note.
 #' @param margins Logical, include row/column totals?
 #' @param digits Number of decimal places for displayed values
 #' @param title Optional table title
@@ -491,12 +491,16 @@ color_table.default <- function(x, ...) {
     stop("Cannot display residuals when shade = 'freq'. Use shade = 'residuals' or similar.")
   }
 
+  # Initialize shading message for legend
+  shading_message <- NULL
+
   # Compute shading values
   # cat("DEBUG: About to compute shading values\n")
   if (shade == "freq") {
     # cat("DEBUG: shade == 'freq', skipping residuals\n")
     shade_values <- x
     resid_mat <- NULL  # No residuals computed
+    shading_message <- "Shading based on values of observed frequencies"
   } else {
     # cat("DEBUG: Computing residuals (shade != 'freq')\n")
     # Compute residuals
@@ -506,13 +510,15 @@ color_table.default <- function(x, ...) {
       resid_mat <- matrix(as.vector(resid_arr), nrow = dims[1], ncol = dims[2])
       # Print model info
       if (inherits(model, "loglm")) {
-        cat(sprintf("Shading based on residuals from fitted model, X^2 = %.2f, df = %d, p = %.4g\n",
-                    model$pearson, model$df, 1 - pchisq(model$pearson, model$df)))
+        shading_message <- sprintf("Shading based on residuals from fitted model, X^2 = %.2f, df = %d, p = %.4g",
+                    model$pearson, model$df, 1 - pchisq(model$pearson, model$df))
+        cat(shading_message, "\n")
       }
     } else if (!is.null(expected)) {
       # Use provided expected values
       resid_mat <- (x - expected) / sqrt(expected)
-      cat("Shading based on residuals from user-supplied expected frequencies\n")
+      shading_message <- "Shading based on residuals from user-supplied expected frequencies"
+      cat(shading_message, "\n")
     } else {
       # Fit independence model
       # For multi-way tables, use loglm for complete independence
@@ -546,12 +552,12 @@ color_table.default <- function(x, ...) {
         }
 
         # Print model info
-        msg <- sprintf("Shading based on residuals from model of complete independence, X^2 = %.2f, df = %d, p = %.4g",
+        shading_message <- sprintf("Shading based on residuals from model of complete independence, X^2 = %.2f, df = %d, p = %.4g",
                        mod_indep$pearson, mod_indep$df, 1 - pchisq(mod_indep$pearson, mod_indep$df))
         if (is.null(formula)) {
-          msg <- paste0(msg, "\nUse formula for better control.")
+          shading_message <- paste0(shading_message, "\nUse formula for better control.")
         }
-        cat(msg, "\n")
+        cat(shading_message, "\n")
 
       } else {
         # 2-way table: use chisq.test (equivalent to independence)
@@ -561,10 +567,11 @@ color_table.default <- function(x, ...) {
         # cat("DEBUG: chisq.test completed, X^2 =", unname(chi_result$statistic), "\n")
 
         # Print model info
-        cat(sprintf("Shading based on residuals from model of independence, X^2 = %.2f, df = %d, p = %.4g\n",
+        shading_message <- sprintf("Shading based on residuals from model of independence, X^2 = %.2f, df = %d, p = %.4g",
                     unname(chi_result$statistic),
                     unname(chi_result$parameter),
-                    chi_result$p.value))
+                    chi_result$p.value)
+        cat(shading_message, "\n")
       }
     }
 
@@ -768,6 +775,13 @@ color_table.default <- function(x, ...) {
         style = gt::cell_text(weight = "bold"),
         locations = gt::cells_stub()
       )
+  }
+
+  # Add source note legend if requested
+
+  show_legend <- isTRUE(legend) || identical(legend, "note")
+  if (show_legend && !is.null(shading_message)) {
+    gt_tbl <- gt_tbl |> gt::tab_source_note(source_note = shading_message)
   }
 
   # Save to file if filename is provided
