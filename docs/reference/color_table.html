@@ -5,11 +5,11 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Display Frequency Table with Colored Cell Backgrounds — color_table"><meta name="description" content="Creates a formatted table display of frequency data with cell backgrounds
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Display Frequency Table with Colored Cell Backgrounds — color_table"><meta name="description" content='Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
 colored according to observed frequencies or their residuals from a loglinear model.
-This is an S3 generic function with methods for different input types."><meta property="og:description" content="Creates a formatted table display of frequency data with cell backgrounds
+This is an S3 generic function with methods for different input types.'><meta property="og:description" content='Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
 colored according to observed frequencies or their residuals from a loglinear model.
-This is an S3 generic function with methods for different input types."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
+This is an S3 generic function with methods for different input types.'><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -55,7 +55,7 @@ This is an S3 generic function with methods for different input types."><meta pr
     </div>
 
     <div class="ref-description section level2">
-    <p>Creates a formatted table display of frequency data with cell backgrounds
+    <p>Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
 colored according to observed frequencies or their residuals from a loglinear model.
 This is an S3 generic function with methods for different input types.</p>
     </div>
@@ -73,7 +73,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -89,7 +89,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -105,7 +105,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -123,7 +123,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -139,7 +139,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -200,7 +200,7 @@ residuals. The background colors are computed by interpolation using
 <dt id="arg-legend">legend<a class="anchor" aria-label="anchor" href="#arg-legend"></a></dt>
 <dd><p>Controls display of shading interpretation note:
 <code>TRUE</code> or <code>"note"</code> (default) adds a source note explaining the shading;
-<code>FALSE</code> suppresses the note.</p></dd>
+<code>FALSE</code> (default) suppresses the note, but a message is printed in the console.</p></dd>
 
 
 <dt id="arg-margins">margins<a class="anchor" aria-label="anchor" href="#arg-margins"></a></dt>
