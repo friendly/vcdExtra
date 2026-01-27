@@ -68,6 +68,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span><span class="fu">color_table</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  formula <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -75,7 +76,6 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -84,6 +84,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span><span class="co"># S3 method for class 'ftable'</span></span>
 <span><span class="fu">color_table</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -91,7 +92,6 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -100,6 +100,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span><span class="co"># S3 method for class 'structable'</span></span>
 <span><span class="fu">color_table</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -107,7 +108,6 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -118,6 +118,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  <span class="va">x</span>,</span>
 <span>  formula <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  freq_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -125,7 +126,6 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -134,6 +134,7 @@ This is an S3 generic function with methods for different input types.</p>
 <span><span class="co"># S3 method for class 'matrix'</span></span>
 <span><span class="fu">color_table</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
+<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  shade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"residuals"</span>, <span class="st">"freq"</span>, <span class="st">"pearson"</span>, <span class="st">"deviance"</span><span class="op">)</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  expected <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -141,7 +142,6 @@ This is an S3 generic function with methods for different input types.</p>
 <span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  margins <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"freq"</span>, <span class="st">"residuals"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -156,7 +156,7 @@ This is an S3 generic function with methods for different input types.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A table, xtabs, matrix, ftable, structable, or data.frame object</p></dd>
+<dd><p>A <code>"table"</code>, <code>"xtabs"</code>, <code>"matrix"</code>, <code>"ftable"</code>, <code>"structable"</code>, or <code>"data.frame"</code> object</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -166,6 +166,12 @@ This is an S3 generic function with methods for different input types.</p>
 <dt id="arg-formula">formula<a class="anchor" aria-label="anchor" href="#arg-formula"></a></dt>
 <dd><p>Formula specifying a <code>row_vars ~ col_vars</code> layout (for multi-way tables) to
 make them "flat" as defined for <code><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">vcd::structable()</a></code> and <code><a href="https://rdrr.io/r/stats/ftable.html" class="external-link">stats::ftable()</a></code>.</p></dd>
+
+
+<dt id="arg-values">values<a class="anchor" aria-label="anchor" href="#arg-values"></a></dt>
+<dd><p>What values to display in cells: <code>"freq"</code> for observed frequencies (default),
+or <code>"residuals"</code> to display the residual values. When <code>values = "residuals"</code>, margins
+are suppressed since residuals don't have meaningful totals.</p></dd>
 
 
 <dt id="arg-shade">shade<a class="anchor" aria-label="anchor" href="#arg-shade"></a></dt>
@@ -184,11 +190,17 @@ as <code>x</code></p></dd>
 
 
 <dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
-<dd><p>Color palette function or vector. Default depends on shade type.</p></dd>
+<dd><p>Color palette function or vector for background colors. Default depends on shade
+type. When <code>shade = "freq"</code> the default is <code>palette = c("white", "firebrick")</code>; otherwise
+<code>c("#B2182B", "white", , "#2166AC")</code> ranging from red to blue for negative and positive
+residuals. The background colors are computed by interpolation using
+<code><a href="https://scales.r-lib.org/reference/col_numeric.html" class="external-link">scales::col_numeric()</a></code>.</p></dd>
 
 
 <dt id="arg-legend">legend<a class="anchor" aria-label="anchor" href="#arg-legend"></a></dt>
-<dd><p>Logical, show color legend/scale?</p></dd>
+<dd><p>Controls display of shading interpretation note:
+<code>TRUE</code> or <code>"note"</code> (default) adds a source note explaining the shading;
+<code>FALSE</code> suppresses the note.</p></dd>
 
 
 <dt id="arg-margins">margins<a class="anchor" aria-label="anchor" href="#arg-margins"></a></dt>
@@ -199,12 +211,6 @@ as <code>x</code></p></dd>
 <dd><p>Number of decimal places for displayed values</p></dd>
 
 
-<dt id="arg-values">values<a class="anchor" aria-label="anchor" href="#arg-values"></a></dt>
-<dd><p>What values to display in cells: <code>"freq"</code> for observed frequencies (default),
-or <code>"residuals"</code> to display the residual values. When <code>values = "residuals"</code>, margins
-are suppressed since residuals don't have meaningful totals.</p></dd>
-
-
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
 <dd><p>Optional table title</p></dd>
 
@@ -213,7 +219,8 @@ are suppressed since residuals don't have meaningful totals.</p></dd>
 <dd><p>Optional filename to save the table as an image. If provided,
 the table is saved using <code><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></code>. Supported formats include
 <code>.png</code>, <code>.svg</code>, <code>.pdf</code>, <code>.html</code>, <code>.rtf</code>, and <code>.docx</code>.
-The format is determined by the file extension.</p></dd>
+The file format is determined by the file extension. Other arguments can be passed
+to <code><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></code> via <code>...</code>.</p></dd>
 
 
 <dt id="arg-freq-col">freq_col<a class="anchor" aria-label="anchor" href="#arg-freq-col"></a></dt>
