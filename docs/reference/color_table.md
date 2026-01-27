@@ -14,6 +14,7 @@ color_table(x, ...)
 color_table(
   x,
   formula = NULL,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -21,7 +22,6 @@ color_table(
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -30,6 +30,7 @@ color_table(
 # S3 method for class 'ftable'
 color_table(
   x,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -37,7 +38,6 @@ color_table(
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -46,6 +46,7 @@ color_table(
 # S3 method for class 'structable'
 color_table(
   x,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -53,7 +54,6 @@ color_table(
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -64,6 +64,7 @@ color_table(
   x,
   formula = NULL,
   freq_col = NULL,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -71,7 +72,6 @@ color_table(
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -80,6 +80,7 @@ color_table(
 # S3 method for class 'matrix'
 color_table(
   x,
+  values = c("freq", "residuals"),
   shade = c("residuals", "freq", "pearson", "deviance"),
   model = NULL,
   expected = NULL,
@@ -87,7 +88,6 @@ color_table(
   legend = TRUE,
   margins = TRUE,
   digits = 0,
-  values = c("freq", "residuals"),
   title = NULL,
   filename = NULL,
   ...
@@ -101,7 +101,8 @@ color_table(x, ...)
 
 - x:
 
-  A table, xtabs, matrix, ftable, structable, or data.frame object
+  A `"table"`, `"xtabs"`, `"matrix"`, `"ftable"`, `"structable"`, or
+  `"data.frame"` object
 
 - ...:
 
@@ -113,6 +114,13 @@ color_table(x, ...)
   tables) to make them "flat" as defined for
   [`vcd::structable()`](https://rdrr.io/pkg/vcd/man/structable.html) and
   [`stats::ftable()`](https://rdrr.io/r/stats/ftable.html).
+
+- values:
+
+  What values to display in cells: `"freq"` for observed frequencies
+  (default), or `"residuals"` to display the residual values. When
+  `values = "residuals"`, margins are suppressed since residuals don't
+  have meaningful totals.
 
 - shade:
 
@@ -131,11 +139,19 @@ color_table(x, ...)
 
 - palette:
 
-  Color palette function or vector. Default depends on shade type.
+  Color palette function or vector for background colors. Default
+  depends on shade type. When `shade = "freq"` the default is
+  `palette = c("white", "firebrick")`; otherwise
+  `c("#B2182B", "white", , "#2166AC")` ranging from red to blue for
+  negative and positive residuals. The background colors are computed by
+  interpolation using
+  [`scales::col_numeric()`](https://scales.r-lib.org/reference/col_numeric.html).
 
 - legend:
 
-  Logical, show color legend/scale?
+  Controls display of shading interpretation note: `TRUE` or `"note"`
+  (default) adds a source note explaining the shading; `FALSE`
+  suppresses the note.
 
 - margins:
 
@@ -144,13 +160,6 @@ color_table(x, ...)
 - digits:
 
   Number of decimal places for displayed values
-
-- values:
-
-  What values to display in cells: `"freq"` for observed frequencies
-  (default), or `"residuals"` to display the residual values. When
-  `values = "residuals"`, margins are suppressed since residuals don't
-  have meaningful totals.
 
 - title:
 
@@ -162,7 +171,9 @@ color_table(x, ...)
   table is saved using
   [`gtsave`](https://gt.rstudio.com/reference/gtsave.html). Supported
   formats include `.png`, `.svg`, `.pdf`, `.html`, `.rtf`, and `.docx`.
-  The format is determined by the file extension.
+  The file format is determined by the file extension. Other arguments
+  can be passed to
+  [`gtsave`](https://gt.rstudio.com/reference/gtsave.html) via `...`.
 
 - freq_col:
 
