@@ -1,9 +1,9 @@
 # Display Frequency Table with Colored Cell Backgrounds
 
-Creates a formatted table display of frequency data with cell
-backgrounds colored according to observed frequencies or their residuals
-from a loglinear model. This is an S3 generic function with methods for
-different input types.
+Creates a formatted, semi-graphic "heatmap" table display of frequency
+data with cell backgrounds colored according to observed frequencies or
+their residuals from a loglinear model. This is an S3 generic function
+with methods for different input types.
 
 ## Usage
 
@@ -19,7 +19,7 @@ color_table(
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -35,7 +35,7 @@ color_table(
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -51,7 +51,7 @@ color_table(
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -69,7 +69,7 @@ color_table(
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -85,7 +85,7 @@ color_table(
   model = NULL,
   expected = NULL,
   palette = NULL,
-  legend = TRUE,
+  legend = FALSE,
   margins = TRUE,
   digits = 0,
   title = NULL,
@@ -150,8 +150,8 @@ color_table(x, ...)
 - legend:
 
   Controls display of shading interpretation note: `TRUE` or `"note"`
-  (default) adds a source note explaining the shading; `FALSE`
-  suppresses the note.
+  (default) adds a source note explaining the shading; `FALSE` (default)
+  suppresses the note, but a message is printed in the console.
 
 - margins:
 

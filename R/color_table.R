@@ -44,6 +44,12 @@
 #         hair should have Sex empty. Not sure whether nested row groups can be
 #         shown to look nested otherwise.
 #
+# 🚩TODO: Column spanner headings: When two or more variables are in the columns, the output
+#         is confusing and ugly. Examples:
+#     color_table(PreSex,  formula = MaritalStatus + Gender ~ PremaritalSex + ExtramaritalSex)
+#     color_table(PreSex,  formula = Gender + PremaritalSex + ExtramaritalSex ~  MaritalStatus)
+#         This can e handled using column spanners: https://gt.rstudio.com/reference/tab_spanner.html
+#         
 
 
 #' Display Frequency Table with Colored Cell Backgrounds
