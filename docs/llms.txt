@@ -2,7 +2,7 @@
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.9.1; documentation built for `pkgdown` 2026-01-26
+Version 0.9.1; documentation built for `pkgdown` 2026-01-28
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -52,7 +52,7 @@ The current development version (0.9.1) can be installed from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
 ``` R
- if (!require(remotes)) install.packages("remotes")C:\Dropbox\Documents\images\pryamids\BritishBeehive.png
+ if (!require(remotes)) install.packages("remotes")
  install.packages("vcdExtra", repos = c('https://friendly.r-universe.dev')
  # or
  remotes::install_github("friendly/vcdExtra", build_vignettes = TRUE)
