@@ -42,7 +42,9 @@
 #         Hair-Sex combinations that appear like "Black_Male" should be two
 #         columns for Hair and Sex, and the rows for the other cases of black
 #         hair should have Sex empty. Not sure whether nested row groups can be
-#         shown to look nested otherwise.
+#         shown to look nested otherwise. One solution would be to make the variables
+#         that define the rows into multiple columns, e.g., labeled "Hair", "Sex" for this
+#         example.
 #
 # 🚩TODO: Column spanner headings: When two or more variables are in the columns, the output
 #         is confusing and ugly. Examples:

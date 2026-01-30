@@ -17,6 +17,54 @@ Use `gt::tab_spanner_delim()` to automatically parse the underscore-delimited co
 - Creates nested spanner labels automatically
 - Coalesces identical values at each hierarchy level
 
+### MF notes
+
+Part of the problem here is that when there are more than two dimensions, flattening the data before passing
+to  `.color_table_impl()` loses information about what the `row_vars` and `col_vars` are, so this must
+be parsed from the combinations connected by the delimiter (`"_"`).  
+
+
+```r
+pre_st <- structable(PremaritalSex + ExtramaritalSex ~ MaritalStatus + Gender, 
+           data = PreSex)
+str(pre_st)
+```
+
+This gives a result that contains all the necessary information
+
+```
+ num [1:4, 1:4] 17 28 4 11 54 60 25 42 36 17 ...
+ - attr(*, "dnames")=List of 4
+  ..$ MaritalStatus  : chr [1:2] "Divorced" "Married"
+  ..$ Gender         : chr [1:2] "Women" "Men"
+  ..$ PremaritalSex  : chr [1:2] "Yes" "No"
+  ..$ ExtramaritalSex: chr [1:2] "Yes" "No"
+ - attr(*, "split_vertical")= logi [1:4] FALSE FALSE TRUE TRUE
+ - attr(*, "col.vars")=List of 2
+  ..$ PremaritalSex  : chr [1:2] "Yes" "No"
+  ..$ ExtramaritalSex: chr [1:2] "Yes" "No"
+ - attr(*, "row.vars")=List of 2
+  ..$ MaritalStatus: chr [1:2] "Divorced" "Married"
+  ..$ Gender       : chr [1:2] "Women" "Men"
+```
+
+Perhaps this could be handled by adding attributes `row_vars` and `col_vars` to what is passed as `x` to
+`.color_table_impl()`? 
+
+*Also note*: the output from `print(structable())` and `print(ftable())` print the variable names in the
+lines relevant to the column variables, but this takes a lot of horizontal space. Could these go
+in the first column, above the row labels, in the space that is otherwise blank?
+
+```
+                     PremaritalSex   Yes      No    
+                     ExtramaritalSex Yes  No Yes  No
+MaritalStatus Gender                                
+Divorced      Women                   17  54  36 214
+              Men                     28  60  17  68
+Married       Women                    4  25   4 322
+              Men                     11  42   4 130
+```
+
 ## Implementation Details
 
 ### Step 1: Detect Multi-Variable Columns
