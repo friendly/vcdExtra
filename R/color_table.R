@@ -206,7 +206,16 @@ color_table.table <- function(x,
         # Default: first variable as rows, remaining as columns
         st <- vcd::structable(x)
       }
+
+      # Extract variable structure BEFORE converting to matrix
+      col_vars <- attr(st, "col.vars")
+      row_vars <- attr(st, "row.vars")
+
       x_mat <- as.matrix(st)
+
+      # Attach as attributes to the matrix for use in .color_table_impl
+      attr(x_mat, "col_vars") <- col_vars
+      attr(x_mat, "row_vars") <- row_vars
     } else {
       stop("Package 'vcd' is required for multi-way tables.")
     }
@@ -288,8 +297,17 @@ color_table.structable <- function(x,
   shade <- match.arg(shade)
   if (shade == "pearson") shade <- "residuals"
 
+
+  # Extract variable structure BEFORE converting to matrix
+  col_vars <- attr(x, "col.vars")
+  row_vars <- attr(x, "row.vars")
+
   # Convert structable to matrix (flattened 2D form)
   x_mat <- as.matrix(x)
+
+  # Attach as attributes for use in .color_table_impl
+  attr(x_mat, "col_vars") <- col_vars
+  attr(x_mat, "row_vars") <- row_vars
 
   # structable loses the original structure, so we can only use 2D residuals
   .color_table_impl(x_mat,
@@ -731,12 +749,68 @@ color_table.default <- function(x, ...) {
       )
   }
 
-  # Add column spanner for the column variable name
-  gt_tbl <- gt_tbl |>
-    gt::tab_spanner(
-      label = cvar,
-      columns = dplyr::all_of(cnames)
-    )
+
+  # Check for multi-variable column structure (from structable attributes)
+  col_vars <- attr(x, "col_vars")
+  has_multi_col_vars <- !is.null(col_vars) && length(col_vars) > 1
+
+  if (has_multi_col_vars) {
+    # Build hierarchical column spanners from col_vars structure
+    col_var_names <- names(col_vars)
+    n_col_vars <- length(col_var_names)
+
+    # Exclude "Total" column from spanner processing if present
+    data_cnames <- if (show_margins) setdiff(cnames, "Total") else cnames
+
+    # Split composite column names (e.g., "Yes_Yes" -> c("Yes", "Yes"))
+    split_cnames <- strsplit(data_cnames, "_", fixed = TRUE)
+
+    # Build spanners from outermost (first col_var) to innermost (last col_var)
+    # The LAST col_var becomes the column labels, so we create spanners for all but the last
+    for (level in seq_len(n_col_vars - 1)) {
+      # Get the value at this level for each column
+      level_values <- sapply(split_cnames, `[`, level)
+
+      # Group consecutive columns with the same value
+      rle_result <- rle(level_values)
+
+      end_pos <- cumsum(rle_result$lengths)
+      start_pos <- c(1, end_pos[-length(end_pos)] + 1)
+
+      for (i in seq_along(rle_result$values)) {
+        group_cols <- data_cnames[start_pos[i]:end_pos[i]]
+        spanner_label <- rle_result$values[i]
+
+        gt_tbl <- gt_tbl |>
+          gt::tab_spanner(
+            label = spanner_label,
+            columns = dplyr::all_of(group_cols),
+            level = n_col_vars - level  # Higher level number = more outer
+          )
+      }
+    }
+
+    # Add variable name as the top-level spanner
+    gt_tbl <- gt_tbl |>
+      gt::tab_spanner(
+        label = col_var_names[1],
+        columns = dplyr::all_of(data_cnames),
+        level = n_col_vars
+      )
+
+    # Rename column labels to show only the innermost variable value
+    inner_labels <- sapply(split_cnames, function(x) x[length(x)])
+    rename_list <- stats::setNames(inner_labels, data_cnames)
+    gt_tbl <- gt_tbl |> gt::cols_label(.list = rename_list)
+
+  } else {
+    # Single column variable - use simple spanner with the variable name
+    gt_tbl <- gt_tbl |>
+      gt::tab_spanner(
+        label = cvar,
+        columns = dplyr::all_of(cnames)
+      )
+  }
 
   # Add title if provided
   if (!is.null(title)) {
