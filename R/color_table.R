@@ -46,7 +46,7 @@
 #         that define the rows into multiple columns, e.g., labeled "Hair", "Sex" for this
 #         example.
 #
-# 🚩TODO: Column spanner headings: When two or more variables are in the columns, the output
+# ✔️TODO: Column spanner headings: When two or more variables are in the columns, the output
 #         is confusing and ugly. Examples:
 #     color_table(PreSex,  formula = MaritalStatus + Gender ~ PremaritalSex + ExtramaritalSex)
 #     color_table(PreSex,  formula = Gender + PremaritalSex + ExtramaritalSex ~  MaritalStatus)
@@ -780,10 +780,14 @@ color_table.default <- function(x, ...) {
       for (i in seq_along(rle_result$values)) {
         group_cols <- data_cnames[start_pos[i]:end_pos[i]]
         spanner_label <- rle_result$values[i]
+        # Use a unique id to avoid collisions when the same label appears
+        # in multiple groups (e.g., "Yes" under both "Divorced" and "Married")
+        spanner_id <- paste0("spanner_l", level, "_", i)
 
         gt_tbl <- gt_tbl |>
           gt::tab_spanner(
             label = spanner_label,
+            id = spanner_id,
             columns = dplyr::all_of(group_cols),
             level = n_col_vars - level  # Higher level number = more outer
           )

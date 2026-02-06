@@ -1,12 +1,12 @@
 # Test script for column spanners feature
 # Run this after sourcing the updated color_table.R
 
-library(vcd)
+library(vcdExtra)
 library(gt)
 data(PreSex)
 
 # Source the updated function
-source("R/color_table.R")
+#source("R/color_table.R")
 
 # Test 1: Two column variables
 cat("\n=== Test 1: Two column variables ===\n")
@@ -14,7 +14,8 @@ cat("Formula: PremaritalSex + ExtramaritalSex ~ MaritalStatus\n\n")
 gt1 <- color_table(PreSex,
                    formula = PremaritalSex + ExtramaritalSex ~ MaritalStatus,
                    shade = "freq",
-                   title = "Two column vars: PremaritalSex x ExtramaritalSex")
+                   margins = FALSE,
+                   title = "Two column vars")
 print(gt1)
 
 # Test 2: Two column variables with margins
@@ -35,12 +36,14 @@ gt3 <- color_table(PreSex,
                    title = "Three column vars")
 print(gt3)
 
+# FIXED!
+
 # Test 4: Single column variable (should use old behavior)
 cat("\n=== Test 4: Single column variable (baseline) ===\n")
 gt4 <- color_table(PreSex,
                    formula = PremaritalSex ~ MaritalStatus + Gender,
                    shade = "freq",
-                   title = "Single column var - should work as before")
+                   title = "Single column var")
 print(gt4)
 
 # Test 5: Two column variables with residual shading
