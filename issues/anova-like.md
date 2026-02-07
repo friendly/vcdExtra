@@ -36,7 +36,7 @@ None of these provide association **strength** (effect size) measures.
 ### 1. `Anova.loglm()` -- partial association tests for loglm objects
 
 A `car::Anova` method for `loglm` objects that performs Type II tests
-by dropping each term and computing Delta-G^2.
+by dropping each term and computing Delta-G^2. 
 
 ```r
 Anova.loglm(mod, type = c("II", "III"))
@@ -62,7 +62,7 @@ B:C        3.42     3     0.331
 
 Note: registering a method for `car::Anova` requires either importing car or
 using a standalone function name (e.g., `LRanova()`), since it is a generic
-from the `car` package.
+from the `car` package. Easy to import the `car` generic.
 
 ### 2. `drop1.loglm()` -- single-term deletion tests
 
