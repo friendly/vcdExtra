@@ -330,6 +330,28 @@ However, they are based on a
 Hadley, which seems to provide some basic structure for constructing
 such displays of nested rectangles.
 
+## Some tidy stuff
+
+- The [infer package](https://infer.netlify.app/) has some interesting
+  stuff for CDA. The vignette [Tidy Chi-Squared Tests with
+  infer](https://infer.netlify.app/articles/chi_squared) expresses do a
+  Chisq test of independences as:
+
+&nbsp;
+
+    observed_indep_statistic <- gss |>
+      specify(college ~ finrela) |>
+      hypothesize(null = "independence") |>
+      calculate(stat = "Chisq")
+
+You can do simulation tests like this:
+
+    null_dist_sim <- gss |>
+      specify(college ~ finrela) |>
+      hypothesize(null = "independence") |>
+      generate(reps = 1000, type = "permute") |>
+      calculate(stat = "Chisq")
+
 ## References
 
 Friendly, M., & Meyer, D. (2016). *Discrete data analysis with R:

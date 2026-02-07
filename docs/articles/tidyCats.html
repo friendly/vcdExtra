@@ -78,7 +78,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2026-02-06</h4>
+            <h4 data-toc-skip class="date">2026-02-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/tidyCats.Rmd" class="external-link"><code>vignettes/tidyCats.Rmd</code></a></small>
       <div class="d-none name"><code>tidyCats.Rmd</code></div>
@@ -399,6 +399,25 @@ patterns of association.</p>
 <p>However, they are based on a <a href="https://github.com/hadley/productplots" class="external-link">productplots</a> package
 by Hadley, which seems to provide some basic structure for constructing
 such displays of nested rectangles.</p>
+</div>
+<div class="section level2">
+<h2 id="some-tidy-stuff">Some tidy stuff<a class="anchor" aria-label="anchor" href="#some-tidy-stuff"></a>
+</h2>
+<ul>
+<li>The <a href="https://infer.netlify.app/" class="external-link">infer package</a> has some
+interesting stuff for CDA. The vignette <a href="https://infer.netlify.app/articles/chi_squared" class="external-link">Tidy Chi-Squared
+Tests with infer</a> expresses do a Chisq test of independences as:</li>
+</ul>
+<pre><code><span><span class="va">observed_indep_statistic</span> <span class="op">&lt;-</span> <span class="va">gss</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">specify</span><span class="op">(</span><span class="va">college</span> <span class="op">~</span> <span class="va">finrela</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">hypothesize</span><span class="op">(</span>null <span class="op">=</span> <span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">calculate</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"Chisq"</span><span class="op">)</span></span></code></pre>
+<p>You can do simulation tests like this:</p>
+<pre><code><span><span class="va">null_dist_sim</span> <span class="op">&lt;-</span> <span class="va">gss</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">specify</span><span class="op">(</span><span class="va">college</span> <span class="op">~</span> <span class="va">finrela</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">hypothesize</span><span class="op">(</span>null <span class="op">=</span> <span class="st">"independence"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">generate</span><span class="op">(</span>reps <span class="op">=</span> <span class="fl">1000</span>, type <span class="op">=</span> <span class="st">"permute"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">calculate</span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"Chisq"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
