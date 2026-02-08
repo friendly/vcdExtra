@@ -162,3 +162,128 @@ coef.glmlist <- function(object, result=c("list", "matrix", "data.frame"),
 	as.data.frame(coef.matrix)
 }
 
+
+#' Extract Model Formulas from a glmlist or loglmlist
+#'
+#' Extracts the model formulas or bracket notation from each model in a
+#' \code{glmlist} or \code{loglmlist} object. This is useful for labeling
+#' models in summaries and plots.
+#'
+#' @param x A \code{glmlist} or \code{loglmlist} object
+#' @param type Type of output: \code{"brackets"} for loglinear bracket notation
+#'        (e.g., \code{"[AB] [C]"}), or \code{"formula"} for R formula notation.
+#'        For \code{glmlist} objects, only \code{"formula"} is meaningful.
+#' @param abbrev Logical or integer. If \code{TRUE} or a positive integer,
+#'        abbreviate factor names to that many characters (default 1 when \code{TRUE}).
+#'        Only applies to bracket notation.
+#' @param \dots Additional arguments passed to \code{loglin2string} (for \code{loglmlist})
+#'        such as \code{sep} and \code{collapse}.
+#'
+#' @return A named character vector with the model formulas or bracket notations.
+#'
+#' @details
+#' For \code{loglmlist} objects created by \code{\link{seq_loglm}}, the bracket
+#' notation is stored in the \code{model.string} component. For other \code{loglm}
+#' objects, it is constructed from the \code{margin} component using
+#' \code{\link{loglin2string}}.
+#'
+#' For \code{glmlist} objects, the formula is extracted using \code{formula()}.
+#'
+#' @seealso \code{\link{glmlist}}, \code{\link{loglmlist}}, \code{\link{loglin2string}},
+#'          \code{\link{LRstats}}
+#'
+#' @family glmlist functions
+#' @rdname glmlist
+#' @export
+#' @examples
+#' data(Titanic)
+#' # Sequential models of joint independence
+#' tit.joint <- seq_loglm(Titanic, type = "joint")
+#' get_models(tit.joint)
+#' get_models(tit.joint, type = "formula")
+#'
+#' # With abbreviated factor names
+#' get_models(tit.joint, abbrev = TRUE)
+#' get_models(tit.joint, abbrev = 2)
+#'
+get_models <- function(x, type = c("brackets", "formula"), abbrev = FALSE, ...) {
+  type <- match.arg(type)
+
+  if (inherits(x, "loglmlist")) {
+    if (type == "brackets") {
+      # Try to get model.string first (set by seq_loglm)
+      result <- sapply(x, function(mod) {
+        if (!is.null(mod$model.string)) {
+          mod$model.string
+        } else if (!is.null(mod$margin)) {
+          loglin2string(mod$margin, ...)
+        } else {
+          # Fallback to formula
+          deparse(formula(mod))
+        }
+      })
+
+      # Apply abbreviation if requested
+      if (!isFALSE(abbrev)) {
+        n <- if (isTRUE(abbrev)) 1 else as.integer(abbrev)
+        result <- .abbreviate_brackets(result, n)
+      }
+    } else {
+      # Formula type
+      result <- sapply(x, function(mod) {
+        if (!is.null(mod$call$formula)) {
+          deparse(mod$call$formula)
+        } else {
+          # Try to construct from margin
+          if (!is.null(mod$margin)) {
+            deparse(loglin2formula(mod$margin))
+          } else {
+            NA_character_
+          }
+        }
+      })
+    }
+  } else if (inherits(x, "glmlist")) {
+    # For glmlist, extract formulas
+    result <- sapply(x, function(mod) {
+      f <- formula(mod)
+      # Get just the RHS for cleaner display
+      if (type == "formula") {
+        deparse(f)
+      } else {
+        # Try to convert to bracket notation (limited support)
+        deparse(f[[3]])  # RHS only
+      }
+    })
+  } else {
+    stop("x must be a 'glmlist' or 'loglmlist' object")
+  }
+
+  names(result) <- names(x)
+  result
+}
+
+
+# Helper function to abbreviate factor names in bracket notation
+.abbreviate_brackets <- function(strings, n = 1) {
+  sapply(strings, function(s) {
+    # Extract content between brackets and abbreviate
+    # Pattern: match [content] or (content)
+    gsub("([\\[\\(])([^\\]\\)]+)([\\]\\)])", function(m) {
+      bracket_open <- substr(m, 1, 1)
+      bracket_close <- substr(m, nchar(m), nchar(m))
+      content <- substr(m, 2, nchar(m) - 1)
+
+      # Split by comma or nothing (for concatenated names)
+      if (grepl(",", content)) {
+        parts <- strsplit(content, ",\\s*")[[1]]
+        abbrev_parts <- abbreviate(parts, minlength = n)
+        paste0(bracket_open, paste(abbrev_parts, collapse = ","), bracket_close)
+      } else {
+        # Assume single letters or abbreviate the whole thing
+        paste0(bracket_open, abbreviate(content, minlength = n), bracket_close)
+      }
+    }, s, perl = TRUE)
+  }, USE.NAMES = FALSE)
+}
+
