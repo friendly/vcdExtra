@@ -48,3 +48,13 @@ Error in as.character(replacement) :
   cannot coerce type 'closure' to vector of type 'character'
 ```
 
+### Model notation
+
+Presently distinguished between models fit to margins, eg, "(Class) (Sex)", vs. to the full table "[Class,Sex,Age] [Survived]"
+Describe this in the documentation.
+
+## get_model()
+
+With this as a guide, would be useful to have a similar function, `get_model()` to get the same results for `loglm()` and
+`glm()` models. 
+

@@ -38,6 +38,7 @@ reference:
       - mutual
       - saturated
       - seq_loglm
+      - get_models
 
   - title: Other graphical methods
     desc: Other functions for visualizing contingency tables
@@ -129,6 +130,7 @@ reference:
       - Mice
       - Mobility
       - PhdPubs
+      - Reinis
       - ShakeWords
       - TV
       - Titanicp

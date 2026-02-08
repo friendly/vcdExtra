@@ -12,6 +12,7 @@ visualization method based on background shading of frequency tables.
 * Add `legend = "note"` to include a table note regarding what is shown.
 * Added `Reinis` data as an example of a higher-way table, 2^6
 * Make the default label for `seq_loglm()` models reflect the model type
+* Added `get_models()` for `loglmlist` and `glmlist` objects
 
 ## Version 0.9.0 (2026-01-17)
 

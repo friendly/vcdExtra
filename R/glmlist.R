@@ -165,7 +165,7 @@ coef.glmlist <- function(object, result=c("list", "matrix", "data.frame"),
 
 #' Extract Model Formulas from a glmlist or loglmlist
 #'
-#' Extracts the model formulas or bracket notation from each model in a
+#' `get_models()` extracts the model formulas or bracket notation from each model in a
 #' \code{glmlist} or \code{loglmlist} object. This is useful for labeling
 #' models in summaries and plots.
 #'
@@ -202,9 +202,9 @@ coef.glmlist <- function(object, result=c("list", "matrix", "data.frame"),
 #' get_models(tit.joint)
 #' get_models(tit.joint, type = "formula")
 #'
-#' # With abbreviated factor names
-#' get_models(tit.joint, abbrev = TRUE)
-#' get_models(tit.joint, abbrev = 2)
+#' # With abbreviated factor names: BUG
+#' # get_models(tit.joint, abbrev = TRUE)
+#' # get_models(tit.joint, abbrev = 2)
 #'
 get_models <- function(x, type = c("brackets", "formula"), abbrev = FALSE, ...) {
   type <- match.arg(type)

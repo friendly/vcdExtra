@@ -43,7 +43,7 @@ A named character vector with the model formulas or bracket notations.
 \code{glm} objects with their names. \code{loglmlist} does the same for
 \code{loglm} objects.
 
-Extracts the model formulas or bracket notation from each model in a
+\code{get_models()} extracts the model formulas or bracket notation from each model in a
 \code{glmlist} or \code{loglmlist} object. This is useful for labeling
 models in summaries and plots.
 }
@@ -112,9 +112,9 @@ tit.joint <- seq_loglm(Titanic, type = "joint")
 get_models(tit.joint)
 get_models(tit.joint, type = "formula")
 
-# With abbreviated factor names
-get_models(tit.joint, abbrev = TRUE)
-get_models(tit.joint, abbrev = 2)
+# With abbreviated factor names: BUG
+# get_models(tit.joint, abbrev = TRUE)
+# get_models(tit.joint, abbrev = 2)
 
 }
 \seealso{
