@@ -1,12 +1,17 @@
 ## Version 0.9.1 (2026-01-23)
 
+This is a major release of the package, adding facility to show observations in mosaic plots as jittered points and a new
+visualization method based on background shading of frequency tables.
+
 * Added `labeling_points()` for mosaic displays to show observed or expected frequencies as random points in the tiles
 * Changed defaults for `clip` and `margin` in `labeling_points()` to be more sensible [Thx: Achim Zeileis]
 * Added `color_table()` to display frequency tables with color shaded backgrounds to show patterns
 * Refactored `color_table()` as S3 methods, adding support for frequency data frames. Added file output, other formatting options
 * Print message for `color_table()` giving the model fit statistics.
 * Now provide `color_table(values =)` to display either the frequencies (default) or residuals in the table.
-* Add `legend = "note"` to include a table note regarding what is shown
+* Add `legend = "note"` to include a table note regarding what is shown.
+* Added `Reinis` data as an example of a higher-way table, 2^6
+* Make the default label for `seq_loglm()` models reflect the model type
 
 ## Version 0.9.0 (2026-01-17)
 

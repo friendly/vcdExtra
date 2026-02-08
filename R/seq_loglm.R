@@ -29,7 +29,8 @@
 #'          the original table for the purpose of fitting sequential marginal models.
 #' @param k conditioning variable(s) for `type` = `"joint"`, `"conditional"` or Markov chain order
 #'          for `type` = `"markov"`
-#' @param prefix prefix used to give names to the sequential models
+#' @param prefix prefix used to give names to the sequential models. If `NULL` (the default),
+#'          uses an abbreviation of `type`: `"joint"`, `"cond"`, `"mutual"`, `"markov"`, or `"sat"`.
 #' @param fitted argument passed to `loglm` to store the fitted values in the model objects
 #' @param \dots other arguments, passed down
 #'
@@ -58,8 +59,20 @@
 #'
 #' data(Titanic, package="datasets")
 #' # variables are in the order Class, Sex, Age, Survived
-#' tt <- seq_loglm(Titanic)
 #'
+#' # Models of joint independence
+#' tit.joint <- seq_loglm(Titanic, type = "joint")
+#'
+#' # compare the models
+#' LRstats(tit.joint)
+#'
+#' #' # Models of conditional independence
+#' tit.cond <- seq_loglm(Titanic, type = "conditional")
+#'
+#' # compare the models
+#' LRstats(tit.cond)
+#'
+
 #'
 #'
 #' @export seq_loglm
@@ -69,7 +82,7 @@ seq_loglm <- function(
 	marginals = 1:nf,  # which marginals to fit?
 	vorder = 1:nf,     # order of variables in the sequential models
 	k = NULL,          # conditioning variable(s) for "joint", "conditional" or order for "markov"
-	prefix = 'model',
+	prefix = NULL,
 	fitted = TRUE,     # keep fitted values?
 	...
 	)
@@ -85,6 +98,17 @@ seq_loglm <- function(
 	indices <- 1:nf
 
   type = match.arg(type)
+
+  # Set default prefix based on type if not specified
+  if (is.null(prefix)) {
+    prefix <- switch(type,
+      joint = "joint",
+      conditional = "cond",
+      mutual = "mutual",
+      markov = "markov",
+      saturated = "sat"
+    )
+  }
 #  models <- as.list(rep(NULL, length(marginals)))
   models <- list()
   for (i in marginals) {

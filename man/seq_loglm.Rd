@@ -10,7 +10,7 @@ seq_loglm(
   marginals = 1:nf,
   vorder = 1:nf,
   k = NULL,
-  prefix = "model",
+  prefix = NULL,
   fitted = TRUE,
   ...
 )
@@ -31,7 +31,8 @@ the original table for the purpose of fitting sequential marginal models.}
 \item{k}{conditioning variable(s) for \code{type} = \code{"joint"}, \code{"conditional"} or Markov chain order
 for \code{type} = \code{"markov"}}
 
-\item{prefix}{prefix used to give names to the sequential models}
+\item{prefix}{prefix used to give names to the sequential models. If \code{NULL} (the default),
+uses an abbreviation of \code{type}: \code{"joint"}, \code{"cond"}, \code{"mutual"}, \code{"markov"}, or \code{"sat"}.}
 
 \item{fitted}{argument passed to \code{loglm} to store the fitted values in the model objects}
 
@@ -71,7 +72,18 @@ uses \code{\link[stats]{loglin}}, and repairs the result to look like a
 
 data(Titanic, package="datasets")
 # variables are in the order Class, Sex, Age, Survived
-tt <- seq_loglm(Titanic)
+
+# Models of joint independence
+tit.joint <- seq_loglm(Titanic, type = "joint")
+
+# compare the models
+LRstats(tit.joint)
+
+#' # Models of conditional independence
+tit.cond <- seq_loglm(Titanic, type = "conditional")
+
+# compare the models
+LRstats(tit.cond)
 
 
 
