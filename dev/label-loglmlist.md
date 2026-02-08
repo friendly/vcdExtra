@@ -40,7 +40,9 @@ Perhaps an initial step would be to add a function `get_models(x, type = c("brac
 
 * added `get_model()` to R/glmlist.R
 
-Bug:
+### Bug:
+
+Using the `abbrev` argument generates an error:
 
 ```
 > get_models(tit.joint, abbrev = TRUE)
@@ -50,11 +52,15 @@ Error in as.character(replacement) :
 
 ### Model notation
 
-Presently distinguished between models fit to margins, eg, "(Class) (Sex)", vs. to the full table "[Class,Sex,Age] [Survived]"
+The notation used presently distinguished between models fit to margins, eg, "(Class) (Sex)", vs. to the full table "[Class,Sex,Age] [Survived]"
 Describe this in the documentation.
 
 ## get_model()
 
 With this as a guide, would be useful to have a similar function, `get_model()` to get the same results for `loglm()` and
 `glm()` models. 
+Note that in R/seq_mosaic.R sequential models automatically get a model formula as the plot `main = ` title.
+
+This suggests that `get_model()` should be a new file in `R/`, and then perhaps `get_models()` should be moved there. But
+let's do `R/get_model.R` first.
 

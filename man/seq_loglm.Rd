@@ -101,6 +101,7 @@ models, \code{\link{conditional}}, \code{\link{joint}},
 \code{\link{loglmlist}}
 
 Other loglinear models: 
+\code{\link{get_model}()},
 \code{\link{glmlist}()},
 \code{\link{joint}()}
 }

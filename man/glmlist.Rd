@@ -66,6 +66,18 @@ Any objects which do not inherit the appropriate class \code{glm} or
 In the \code{coef} method, coefficients from the different models are
 matched by name in the list of unique names across all models.
 
+\strong{Model notation}
+
+For \code{loglmlist} objects created by \code{\link{seq_loglm}}, the bracket
+notation distinguishes between models fit to marginal sub-tables and
+models fit to the full table. Parentheses are used for marginal
+sub-tables, e.g., \code{"(Class) (Sex)"}, while square brackets are used
+for the full table, e.g., \code{"[Class,Sex,Age] [Survived]"}.
+
+The \code{\link{get_models}} function extracts these model strings,
+and the \code{abbrev} argument can be used to abbreviate factor names
+for more compact display, e.g., \code{"[C,S,A] [S]"}.
+
 For \code{loglmlist} objects created by \code{\link{seq_loglm}}, the bracket
 notation is stored in the \code{model.string} component. For other \code{loglm}
 objects, it is constructed from the \code{margin} component using
@@ -112,9 +124,9 @@ tit.joint <- seq_loglm(Titanic, type = "joint")
 get_models(tit.joint)
 get_models(tit.joint, type = "formula")
 
-# With abbreviated factor names: BUG
-# get_models(tit.joint, abbrev = TRUE)
-# get_models(tit.joint, abbrev = 2)
+# With abbreviated factor names
+get_models(tit.joint, abbrev = TRUE)
+get_models(tit.joint, abbrev = 2)
 
 }
 \seealso{
@@ -135,6 +147,7 @@ Other glmlist functions:
 \code{\link{mosaic.glmlist}()}
 
 Other loglinear models: 
+\code{\link{get_model}()},
 \code{\link{joint}()},
 \code{\link{seq_loglm}()}
 

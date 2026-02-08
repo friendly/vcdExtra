@@ -114,6 +114,7 @@ e.g., \code{"[A,B] [A,C]"}.
 }
 \seealso{
 Other loglinear models: 
+\code{\link{get_model}()},
 \code{\link{glmlist}()},
 \code{\link{seq_loglm}()}
 }

@@ -13,6 +13,9 @@
 #' extraction, summary and plotting of model components, etc., perhaps using
 #' \code{\link[base]{lapply}} or similar.
 #'
+#' @details
+#'
+#'
 #' There exists a \code{\link[stats]{anova.glm}} method for `glmlist`
 #' objects.  Here, a `coef` method is also defined, collecting the
 #' coefficients from all models in a single object of type determined by
@@ -26,6 +29,18 @@
 #'
 #' In the `coef` method, coefficients from the different models are
 #' matched by name in the list of unique names across all models.
+#'
+#' **Model notation**
+#'
+#' For `loglmlist` objects created by \code{\link{seq_loglm}}, the bracket
+#' notation distinguishes between models fit to marginal sub-tables and
+#' models fit to the full table. Parentheses are used for marginal
+#' sub-tables, e.g., `"(Class) (Sex)"`, while square brackets are used
+#' for the full table, e.g., `"[Class,Sex,Age] [Survived]"`.
+#'
+#' The \code{\link{get_models}} function extracts these model strings,
+#' and the `abbrev` argument can be used to abbreviate factor names
+#' for more compact display, e.g., `"[C,S,A] [S]"`.
 #'
 #' @aliases glmlist loglmlist coef.glmlist
 #' @param \dots One or more model objects, as appropriate to the function, optionally assigned names as in \code{\link{list}}.
@@ -202,9 +217,9 @@ coef.glmlist <- function(object, result=c("list", "matrix", "data.frame"),
 #' get_models(tit.joint)
 #' get_models(tit.joint, type = "formula")
 #'
-#' # With abbreviated factor names: BUG
-#' # get_models(tit.joint, abbrev = TRUE)
-#' # get_models(tit.joint, abbrev = 2)
+#' # With abbreviated factor names
+#' get_models(tit.joint, abbrev = TRUE)
+#' get_models(tit.joint, abbrev = 2)
 #'
 get_models <- function(x, type = c("brackets", "formula"), abbrev = FALSE, ...) {
   type <- match.arg(type)
@@ -267,23 +282,29 @@ get_models <- function(x, type = c("brackets", "formula"), abbrev = FALSE, ...) 
 # Helper function to abbreviate factor names in bracket notation
 .abbreviate_brackets <- function(strings, n = 1) {
   sapply(strings, function(s) {
-    # Extract content between brackets and abbreviate
-    # Pattern: match [content] or (content)
-    gsub("([\\[\\(])([^\\]\\)]+)([\\]\\)])", function(m) {
-      bracket_open <- substr(m, 1, 1)
-      bracket_close <- substr(m, nchar(m), nchar(m))
-      content <- substr(m, 2, nchar(m) - 1)
+    # Find all bracketed terms: [content] or (content)
+    m <- gregexpr("([\\[\\(])([^\\]\\)]+)([\\]\\)])", s, perl = TRUE)
+    matches <- regmatches(s, m)[[1]]
 
-      # Split by comma or nothing (for concatenated names)
+    if (length(matches) == 0) return(s)
+
+    replacements <- sapply(matches, function(match) {
+      bracket_open <- substr(match, 1, 1)
+      bracket_close <- substr(match, nchar(match), nchar(match))
+      content <- substr(match, 2, nchar(match) - 1)
+
+      # Split by comma (for multi-factor terms like [Class,Sex])
       if (grepl(",", content)) {
         parts <- strsplit(content, ",\\s*")[[1]]
         abbrev_parts <- abbreviate(parts, minlength = n)
         paste0(bracket_open, paste(abbrev_parts, collapse = ","), bracket_close)
       } else {
-        # Assume single letters or abbreviate the whole thing
         paste0(bracket_open, abbreviate(content, minlength = n), bracket_close)
       }
-    }, s, perl = TRUE)
+    }, USE.NAMES = FALSE)
+
+    regmatches(s, m) <- list(replacements)
+    s
   }, USE.NAMES = FALSE)
 }
 
