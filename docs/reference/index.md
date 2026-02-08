@@ -16,6 +16,7 @@ and related displays to `glm` and `gnm` objects and 3D displays
 - [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`loglmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`coef(`*`<glmlist>`*`)`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   : Create a Model List Object
 - [`mosaic3d()`](https://friendly.github.io/vcdExtra/reference/mosaic3d.md)
   : 3D Mosaic Plots
@@ -47,6 +48,7 @@ Functions for constructing and manipulating loglinear models
 - [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`loglmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`coef(`*`<glmlist>`*`)`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   : Create a Model List Object
 - [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
   : Sequential Loglinear Models for an N-way Table
@@ -213,6 +215,8 @@ Some small data sets used in examples or in
   : Social Mobility data
 - [`PhdPubs`](https://friendly.github.io/vcdExtra/reference/PhdPubs.md)
   : Publications of PhD Candidates
+- [`Reinis`](https://friendly.github.io/vcdExtra/reference/Reinis.md) :
+  Risk Factors for Coronary Heart Disease
 - [`ShakeWords`](https://friendly.github.io/vcdExtra/reference/ShakeWords.md)
   : Shakespeare's Word Type Frequencies
 - [`TV`](https://friendly.github.io/vcdExtra/reference/TV.md) : TV

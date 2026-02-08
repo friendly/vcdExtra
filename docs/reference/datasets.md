@@ -93,53 +93,54 @@ Michael Friendly, with R-help from Curt Seeliger
 
 ``` r
 datasets("vcdExtra")
-#>              Item      class       dim
-#> 1        Abortion      table     2x2x2
-#> 2        Accident data.frame      80x5
-#> 3        AirCrash data.frame     439x5
-#> 4       Alligator data.frame      80x5
-#> 5        Asbestos      array       5x4
-#> 6        Bartlett      table     2x2x2
-#> 7            Burt data.frame      27x3
-#> 8          Caesar      table   3x2x2x2
-#> 9          Cancer      table     2x2x2
-#> 10     Cormorants data.frame     343x8
-#> 11 CrabSatellites data.frame     173x5
-#> 12  CyclingDeaths data.frame     208x2
-#> 13   DaytonSurvey data.frame      32x6
-#> 14        Depends      table        15
-#> 15      Detergent      table   2x2x2x3
-#> 16         Donner data.frame      90x5
-#> 17      Draft1970 data.frame     366x3
-#> 18 Draft1970table      table      12x3
-#> 19           Dyke      table 2x2x2x2x2
-#> 20      Fungicide      array   2x2x2x2
-#> 21            GSS data.frame       6x3
-#> 22       Geissler data.frame      90x4
-#> 23          Gilby      table       6x4
-#> 24          Glass data.frame      25x3
-#> 25   HairEyePlace      array     4x5x2
-#> 26       Hauser79 data.frame      25x3
-#> 27          Heart      table     2x2x3
-#> 28        Heckman      table 2x2x2x2x2
-#> 29     HospVisits      table       3x3
-#> 30     HouseTasks      table      13x4
-#> 31           Hoyt      table   4x3x7x2
-#> 32            ICU data.frame    200x22
-#> 33         JobSat      table       4x4
-#> 34     Mammograms      array       4x4
-#> 35         Mental data.frame      24x3
-#> 36           Mice data.frame      30x4
-#> 37       Mobility      table       5x5
-#> 38        PhdPubs data.frame     915x6
-#> 39     ShakeWords data.frame     100x2
-#> 40             TV      array    5x11x3
-#> 41       Titanicp data.frame    1309x6
-#> 42       Toxaemia data.frame      60x5
-#> 43        Vietnam data.frame      40x4
-#> 44       Vote1980 data.frame      28x4
-#> 45      WorkerSat data.frame       8x4
-#> 46    Yamaguchi87 data.frame      75x4
+#>              Item      class         dim
+#> 1        Abortion      table       2x2x2
+#> 2        Accident data.frame        80x5
+#> 3        AirCrash data.frame       439x5
+#> 4       Alligator data.frame        80x5
+#> 5        Asbestos      array         5x4
+#> 6        Bartlett      table       2x2x2
+#> 7            Burt data.frame        27x3
+#> 8          Caesar      table     3x2x2x2
+#> 9          Cancer      table       2x2x2
+#> 10     Cormorants data.frame       343x8
+#> 11 CrabSatellites data.frame       173x5
+#> 12  CyclingDeaths data.frame       208x2
+#> 13   DaytonSurvey data.frame        32x6
+#> 14        Depends      table          15
+#> 15      Detergent      table     2x2x2x3
+#> 16         Donner data.frame        90x5
+#> 17      Draft1970 data.frame       366x3
+#> 18 Draft1970table      table        12x3
+#> 19           Dyke      table   2x2x2x2x2
+#> 20      Fungicide      array     2x2x2x2
+#> 21            GSS data.frame         6x3
+#> 22       Geissler data.frame        90x4
+#> 23          Gilby      table         6x4
+#> 24          Glass data.frame        25x3
+#> 25   HairEyePlace      array       4x5x2
+#> 26       Hauser79 data.frame        25x3
+#> 27          Heart      table       2x2x3
+#> 28        Heckman      table   2x2x2x2x2
+#> 29     HospVisits      table         3x3
+#> 30     HouseTasks      table        13x4
+#> 31           Hoyt      table     4x3x7x2
+#> 32            ICU data.frame      200x22
+#> 33         JobSat      table         4x4
+#> 34     Mammograms      array         4x4
+#> 35         Mental data.frame        24x3
+#> 36           Mice data.frame        30x4
+#> 37       Mobility      table         5x5
+#> 38        PhdPubs data.frame       915x6
+#> 39         Reinis      table 2x2x2x2x2x2
+#> 40     ShakeWords data.frame       100x2
+#> 41             TV      array      5x11x3
+#> 42       Titanicp data.frame      1309x6
+#> 43       Toxaemia data.frame        60x5
+#> 44        Vietnam data.frame        40x4
+#> 45       Vote1980 data.frame        28x4
+#> 46      WorkerSat data.frame         8x4
+#> 47    Yamaguchi87 data.frame        75x4
 #>                                                    Title
 #> 1                                  Abortion Opinion Data
 #> 2             Traffic Accident Victims in France in 1958
@@ -179,14 +180,15 @@ datasets("vcdExtra")
 #> 36                                   Mice Depletion Data
 #> 37                                  Social Mobility data
 #> 38                        Publications of PhD Candidates
-#> 39                   Shakespeare's Word Type Frequencies
-#> 40                                       TV Viewing Data
-#> 41                             Passengers on the Titanic
-#> 42                        Toxaemia Symptoms in Pregnancy
-#> 43                 Student Opinion about the Vietnam War
-#> 44       Race and Politics in the 1980 Presidential Vote
-#> 45                              Worker Satisfaction Data
-#> 46              Occupational Mobility in Three Countries
+#> 39               Risk Factors for Coronary Heart Disease
+#> 40                   Shakespeare's Word Type Frequencies
+#> 41                                       TV Viewing Data
+#> 42                             Passengers on the Titanic
+#> 43                        Toxaemia Symptoms in Pregnancy
+#> 44                 Student Opinion about the Vietnam War
+#> 45       Race and Politics in the 1980 Presidential Vote
+#> 46                              Worker Satisfaction Data
+#> 47              Occupational Mobility in Three Countries
 # datasets(c("vcd", "vcdExtra"))
 datasets("datasets", maxTitle=50)
 #>                              Item      class     dim
@@ -419,9 +421,9 @@ datasets("vcdExtra")[,"Item"]
 #> [25] "HairEyePlace"   "Hauser79"       "Heart"          "Heckman"       
 #> [29] "HospVisits"     "HouseTasks"     "Hoyt"           "ICU"           
 #> [33] "JobSat"         "Mammograms"     "Mental"         "Mice"          
-#> [37] "Mobility"       "PhdPubs"        "ShakeWords"     "TV"            
-#> [41] "Titanicp"       "Toxaemia"       "Vietnam"        "Vote1980"      
-#> [45] "WorkerSat"      "Yamaguchi87"   
+#> [37] "Mobility"       "PhdPubs"        "Reinis"         "ShakeWords"    
+#> [41] "TV"             "Titanicp"       "Toxaemia"       "Vietnam"       
+#> [45] "Vote1980"       "WorkerSat"      "Yamaguchi87"   
 datasets("vcd")[,"Item"]
 #>  [1] "Arthritis"       "Baseball"        "BrokenMarriage"  "Bundesliga"     
 #>  [5] "Bundestag2005"   "Butterfly"       "CoalMiners"      "DanishWelfare"  

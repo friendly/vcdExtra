@@ -68,7 +68,7 @@ a variety of types of loglinear models.</p>
 <span>  marginals <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nf</span>,</span>
 <span>  vorder <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">nf</span>,</span>
 <span>  k <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  prefix <span class="op">=</span> <span class="st">"model"</span>,</span>
+<span>  prefix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fitted <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -104,7 +104,8 @@ for <code>type</code> = <code>"markov"</code></p></dd>
 
 
 <dt id="arg-prefix">prefix<a class="anchor" aria-label="anchor" href="#arg-prefix"></a></dt>
-<dd><p>prefix used to give names to the sequential models</p></dd>
+<dd><p>prefix used to give names to the sequential models. If <code>NULL</code> (the default),
+uses an abbreviation of <code>type</code>: <code>"joint"</code>, <code>"cond"</code>, <code>"mutual"</code>, <code>"markov"</code>, or <code>"sat"</code>.</p></dd>
 
 
 <dt id="arg-fitted">fitted<a class="anchor" aria-label="anchor" href="#arg-fitted"></a></dt>
@@ -167,7 +168,34 @@ models, <code><a href="loglin-utilities.html">conditional</a></code>, <code><a h
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Titanic</span>, package<span class="op">=</span><span class="st">"datasets"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># variables are in the order Class, Sex, Age, Survived</span></span></span>
-<span class="r-in"><span><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu">seq_loglm</span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Models of joint independence</span></span></span>
+<span class="r-in"><span><span class="va">tit.joint</span> <span class="op">&lt;-</span> <span class="fu">seq_loglm</span><span class="op">(</span><span class="va">Titanic</span>, type <span class="op">=</span> <span class="st">"joint"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># compare the models</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">tit.joint</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> joint.1 509.95 509.33   475.81  3  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> joint.2 478.75 479.14   412.60  3  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> joint.3 257.88 264.83   159.10  7  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> joint.4 833.36 858.28   671.96 15  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#' # Models of conditional independence</span></span></span>
+<span class="r-in"><span><span class="va">tit.cond</span> <span class="op">&lt;-</span> <span class="fu">seq_loglm</span><span class="op">(</span><span class="va">Titanic</span>, type <span class="op">=</span> <span class="st">"conditional"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># compare the models</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">tit.cond</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cond.1 509.95 509.33   475.81  3  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cond.2 478.75 479.14   412.60  3  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cond.3 500.87 508.60   400.09  6  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cond.4 760.13 777.72   608.73 20  &lt; 2.2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
