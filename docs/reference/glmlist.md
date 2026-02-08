@@ -3,6 +3,10 @@
 `glmlist` creates a `glmlist` object containing a list of fitted `glm`
 objects with their names. `loglmlist` does the same for `loglm` objects.
 
+`get_models()` extracts the model formulas or bracket notation from each
+model in a `glmlist` or `loglmlist` object. This is useful for labeling
+models in summaries and plots.
+
 ## Usage
 
 ``` r
@@ -12,14 +16,16 @@ loglmlist(...)
 
 # S3 method for class 'glmlist'
 coef(object, result = c("list", "matrix", "data.frame"), ...)
+
+get_models(x, type = c("brackets", "formula"), abbrev = FALSE, ...)
 ```
 
 ## Arguments
 
 - ...:
 
-  One or more model objects, as appropriate to the function, optionally
-  assigned names as in [`list`](https://rdrr.io/r/base/list.html).
+  Additional arguments passed to `loglin2string` (for `loglmlist`) such
+  as `sep` and `collapse`.
 
 - object:
 
@@ -29,10 +35,28 @@ coef(object, result = c("list", "matrix", "data.frame"), ...)
 
   type of the result to be returned
 
+- x:
+
+  A `glmlist` or `loglmlist` object
+
+- type:
+
+  Type of output: `"brackets"` for loglinear bracket notation (e.g.,
+  `"[AB] [C]"`), or `"formula"` for R formula notation. For `glmlist`
+  objects, only `"formula"` is meaningful.
+
+- abbrev:
+
+  Logical or integer. If `TRUE` or a positive integer, abbreviate factor
+  names to that many characters (default 1 when `TRUE`). Only applies to
+  bracket notation.
+
 ## Value
 
 An object of class `glmlist` `loglmlist`, just like a `list`, except
 that each model is given a `name` attribute.
+
+A named character vector with the model formulas or bracket notations.
 
 ## Details
 
@@ -54,6 +78,16 @@ are excluded, with a warning.
 In the `coef` method, coefficients from the different models are matched
 by name in the list of unique names across all models.
 
+For `loglmlist` objects created by
+[`seq_loglm`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md),
+the bracket notation is stored in the `model.string` component. For
+other `loglm` objects, it is constructed from the `margin` component
+using
+[`loglin2string`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md).
+
+For `glmlist` objects, the formula is extracted using
+[`formula()`](https://rdrr.io/r/stats/formula.html).
+
 ## See also
 
 The function [`llist`](https://rdrr.io/pkg/Hmisc/man/label.html) in
@@ -65,6 +99,10 @@ handles `glmlist objects`
 [`LRstats`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
 gives LR statistics and tests for a `glmlist` object.
 
+`glmlist`, `loglmlist`,
+[`loglin2string`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
+[`LRstats`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
+
 Other glmlist functions:
 [`Kway()`](https://friendly.github.io/vcdExtra/reference/Kway.md),
 [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md),
@@ -73,6 +111,11 @@ Other glmlist functions:
 Other loglinear models:
 [`joint()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
 [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
+
+Other glmlist functions:
+[`Kway()`](https://friendly.github.io/vcdExtra/reference/Kway.md),
+[`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md),
+[`mosaic.glmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md)
 
 ## Author
 
@@ -145,4 +188,22 @@ unlist(lapply(mods, deviance))
 res <- lapply(mods, residuals)
 boxplot(as.data.frame(res), main="Residuals from various models")
 
+
+data(Titanic)
+# Sequential models of joint independence
+tit.joint <- seq_loglm(Titanic, type = "joint")
+get_models(tit.joint)
+#>                      joint.1                      joint.2 
+#>                    "= Class"              "(Class) (Sex)" 
+#>                      joint.3                      joint.4 
+#>          "(Class,Sex) (Age)" "[Class,Sex,Age] [Survived]" 
+get_models(tit.joint, type = "formula")
+#>                     joint.1                     joint.2 
+#>                    "~Class"              "~Class + Sex" 
+#>                     joint.3                     joint.4 
+#>          "~Class:Sex + Age" "~Class:Sex:Age + Survived" 
+
+# With abbreviated factor names: BUG
+# get_models(tit.joint, abbrev = TRUE)
+# get_models(tit.joint, abbrev = 2)
 ```

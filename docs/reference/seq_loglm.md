@@ -13,7 +13,7 @@ seq_loglm(
   marginals = 1:nf,
   vorder = 1:nf,
   k = NULL,
-  prefix = "model",
+  prefix = NULL,
   fitted = TRUE,
   ...
 )
@@ -51,7 +51,9 @@ seq_loglm(
 
 - prefix:
 
-  prefix used to give names to the sequential models
+  prefix used to give names to the sequential models. If `NULL` (the
+  default), uses an abbreviation of `type`: `"joint"`, `"cond"`,
+  `"mutual"`, `"markov"`, or `"sat"`.
 
 - fitted:
 
@@ -122,7 +124,34 @@ Michael Friendly
 ``` r
 data(Titanic, package="datasets")
 # variables are in the order Class, Sex, Age, Survived
-tt <- seq_loglm(Titanic)
+
+# Models of joint independence
+tit.joint <- seq_loglm(Titanic, type = "joint")
+
+# compare the models
+LRstats(tit.joint)
+#> Likelihood summary table:
+#>            AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> joint.1 509.95 509.33   475.81  3  < 2.2e-16 ***
+#> joint.2 478.75 479.14   412.60  3  < 2.2e-16 ***
+#> joint.3 257.88 264.83   159.10  7  < 2.2e-16 ***
+#> joint.4 833.36 858.28   671.96 15  < 2.2e-16 ***
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#' # Models of conditional independence
+tit.cond <- seq_loglm(Titanic, type = "conditional")
+
+# compare the models
+LRstats(tit.cond)
+#> Likelihood summary table:
+#>           AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> cond.1 509.95 509.33   475.81  3  < 2.2e-16 ***
+#> cond.2 478.75 479.14   412.60  3  < 2.2e-16 ***
+#> cond.3 500.87 508.60   400.09  6  < 2.2e-16 ***
+#> cond.4 760.13 777.72   608.73 20  < 2.2e-16 ***
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 
 ```

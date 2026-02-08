@@ -2,6 +2,10 @@
 
 ## Version 0.9.1 (2026-01-23)
 
+This is a major release of the package, adding facility to show
+observations in mosaic plots as jittered points and a new visualization
+method based on background shading of frequency tables.
+
 - Added
   [`labeling_points()`](https://friendly.github.io/vcdExtra/reference/labeling_points.md)
   for mosaic displays to show observed or expected frequencies as random
@@ -22,7 +26,14 @@
   giving the model fit statistics.
 - Now provide `color_table(values =)` to display either the frequencies
   (default) or residuals in the table.
-- Add `legend = "note"` to include a table note regarding what is shown
+- Add `legend = "note"` to include a table note regarding what is shown.
+- Added `Reinis` data as an example of a higher-way table, 2^6
+- Make the default label for
+  [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
+  models reflect the model type
+- Added
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  for `loglmlist` and `glmlist` objects
 
 ## Version 0.9.0 (2026-01-17)
 

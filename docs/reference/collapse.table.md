@@ -60,12 +60,12 @@ t1 <- xtabs(counts ~ sex + age + education, data=data)
 structable(t1)
 #>                  age   a   b   c   d   e   f
 #> sex    education                            
-#> Male   low           114 121  93 106  80 114
-#>        med           107 100  97  86 104 103
-#>        high           89 105 114  96  91 108
-#> Female low           100  85 103 110 102  98
+#> Male   low           100  85 103 110 102  98
 #>        med           100  92  96 106 100 112
 #>        high           98 117 115  94  93 118
+#> Female low           121  93 106  80 114 107
+#>        med           100  97  86 104 103  89
+#>        high          105 114  96  91 108  98
 
 ##                  age   a   b   c   d   e   f
 ## sex    education                            
@@ -82,12 +82,12 @@ t2 <- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"))
 structable(t2)
 #>                  age   A   B   C
 #> sex    education                
-#> Male   low           235 199 194
-#>        med           207 183 207
-#>        high          194 210 199
-#> Female low           185 213 200
+#> Male   low           185 213 200
 #>        med           192 202 212
 #>        high          215 209 211
+#> Female low           214 186 221
+#>        med           197 190 192
+#>        high          219 187 206
 
 ##                  age   A   B   C
 ## sex    education                
@@ -105,10 +105,10 @@ t3 <- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"),
 structable(t3)
 #>                  age   A   B   C
 #> sex    education                
-#> Male   low           442 382 401
-#>        high          194 210 199
-#> Female low           377 415 412
+#> Male   low           377 415 412
 #>        high          215 209 211
+#> Female low           411 376 413
+#>        high          219 187 206
 
 ##                  age   A   B   C
 ## sex    education                
@@ -124,22 +124,22 @@ t4 <- collapse.table(t1,  education=1:3)
 structable(t4)
 #>                  age   a   b   c   d   e   f
 #> sex    education                            
-#> Male   1             114 121  93 106  80 114
-#>        2             107 100  97  86 104 103
-#>        3              89 105 114  96  91 108
-#> Female 1             100  85 103 110 102  98
+#> Male   1             100  85 103 110 102  98
 #>        2             100  92  96 106 100 112
 #>        3              98 117 115  94  93 118
+#> Female 1             121  93 106  80 114 107
+#>        2             100  97  86 104 103  89
+#>        3             105 114  96  91 108  98
 
 structable(t4)
 #>                  age   a   b   c   d   e   f
 #> sex    education                            
-#> Male   1             114 121  93 106  80 114
-#>        2             107 100  97  86 104 103
-#>        3              89 105 114  96  91 108
-#> Female 1             100  85 103 110 102  98
+#> Male   1             100  85 103 110 102  98
 #>        2             100  92  96 106 100 112
 #>        3              98 117 115  94  93 118
+#> Female 1             121  93 106  80 114 107
+#>        2             100  97  86 104 103  89
+#>        3             105 114  96  91 108  98
 ##                  age   a   b   c   d   e   f
 ## sex    education                            
 ## Male   1             119 101 109  85  99  93
