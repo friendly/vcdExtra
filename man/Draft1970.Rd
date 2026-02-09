@@ -15,7 +15,7 @@ A data frame with 366 observations on the following 3 variables.
 \source{
 Starr, N. (1997). Nonrandom Risk: The 1970 Draft Lottery,
 \emph{Journal of Statistics Education}, v.5, n.2
-\url{https://jse.amstat.org/v5n2/datasets.starr.html}
+\doi{10.1080/10691898.1997.11910534}
 }
 \description{
 This data set gives the results of the 1970 US draft lottery, in the form of

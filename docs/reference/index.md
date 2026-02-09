@@ -52,6 +52,8 @@ Functions for constructing and manipulating loglinear models
   : Create a Model List Object
 - [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
   : Sequential Loglinear Models for an N-way Table
+- [`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
+  : Extract Model Formula from a loglm or glm Object
 
 ## Other graphical methods
 

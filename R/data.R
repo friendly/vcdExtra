@@ -1053,7 +1053,7 @@ NULL
 #' <https://en.wikipedia.org/wiki/Draft_lottery_(1969)>
 #' @source Starr, N. (1997). Nonrandom Risk: The 1970 Draft Lottery,
 #' *Journal of Statistics Education*, v.5, n.2
-#' <https://jse.amstat.org/v5n2/datasets.starr.html>
+#' \doi{10.1080/10691898.1997.11910534}
 #' @keywords datasets
 #' @examples
 #'
@@ -1111,7 +1111,7 @@ NULL
 #'
 #' Starr, N. (1997). Nonrandom Risk: The 1970 Draft Lottery, *Journal of
 #' Statistics Education*, v.5, n.2
-#' <https://jse.amstat.org/v5n2/datasets.starr.html>
+#' \doi{10.1080/10691898.1997.11910534}
 #' @source This data is available in several forms, but the table version was
 #' obtained from
 #'

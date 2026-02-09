@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 0.9.1 (2026-01-23)
+## Version 0.9.1 (2026-02-08)
 
 This is a major release of the package, adding facility to show
 observations in mosaic plots as jittered points and a new visualization
@@ -33,7 +33,15 @@ method based on background shading of frequency tables.
   models reflect the model type
 - Added
   [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
-  for `loglmlist` and `glmlist` objects
+  to extract model formulas from `loglmlist` and `glmlist` objects
+- Added
+  [`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
+  to do the same for
+  [`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) and
+  [`glm()`](https://rdrr.io/r/stats/glm.html) objects
+- Fixed bug in
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  where the `abbrev` argument caused an error
 
 ## Version 0.9.0 (2026-01-17)
 
