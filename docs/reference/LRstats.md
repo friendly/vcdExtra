@@ -13,10 +13,24 @@ All `loglm` models have equivalent glm forms, but the `print` and
 LRstats(object, ...)
 
 # S3 method for class 'glmlist'
-LRstats(object, ..., saturated = NULL, sortby = NULL)
+LRstats(
+  object,
+  ...,
+  saturated = NULL,
+  sortby = NULL,
+  label = c("name", "formula"),
+  label.args = list()
+)
 
 # S3 method for class 'loglmlist'
-LRstats(object, ..., saturated = NULL, sortby = NULL)
+LRstats(
+  object,
+  ...,
+  saturated = NULL,
+  sortby = NULL,
+  label = c("name", "formula"),
+  label.args = list()
+)
 
 # Default S3 method
 LRstats(object, ..., saturated = NULL, sortby = NULL)
@@ -43,18 +57,33 @@ LRstats(object, ..., saturated = NULL, sortby = NULL)
   either a numeric or character string specifying the column in the
   result by which the rows are sorted (in decreasing order)
 
+- label:
+
+  character string specifying how to label the rows: `"name"` (default)
+  uses the model object names; `"formula"` uses model formulas or
+  bracket notation obtained from
+  [`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md).
+  Only available for `glmlist` and `loglmlist` objects.
+
+- label.args:
+
+  a list of additional arguments passed to
+  [`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  when `label = "formula"`. Useful arguments include `abbrev` (logical
+  or integer) to abbreviate factor names and `sep` to change the
+  separator in bracket notation.
+
 ## Value
 
 A data frame (also of class `anova`) with columns
-`c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")`. Row names are taken
-from the names of the model object(s).
+` c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")`. Row names are taken
+from the names of the model object(s) or their model formulas.
 
 ## Details
 
 `LRstats` provides a brief summary for one or more models fit to the
 same dataset for which `logLik` and `nobs` methods exist (e.g., `glm`
-and `loglm` models). %This implementation is experimental, and is
-subject to change.
+and `loglm` models).
 
 The function relies on residual degrees of freedom for the LR chisq test
 being available in the model object. This is true for objects inheriting
@@ -67,7 +96,8 @@ from `lm`, `glm`, `loglm`, `polr` and `negbin`.
 [`loglm`](https://rdrr.io/pkg/MASS/man/loglm.html),
 
 [`logLik.loglm`](https://friendly.github.io/vcdExtra/reference/logLik.loglm.md),
-[`modFit`](https://friendly.github.io/vcdExtra/reference/modFit.md)
+[`modFit`](https://friendly.github.io/vcdExtra/reference/modFit.md),
+[`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
 
 Other glmlist functions:
 [`Kway()`](https://friendly.github.io/vcdExtra/reference/Kway.md),
@@ -76,7 +106,7 @@ Other glmlist functions:
 
 ## Author
 
-Achim Zeileis
+Achim Zeileis, Michael Friendly
 
 ## Examples
 
@@ -100,7 +130,7 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore,
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
 
-# compare models
+# compare models using object names (default)
 LRstats(indep, coleff, roweff, linlin)
 #> Likelihood summary table:
 #>           AIC    BIC LR Chisq Df Pr(>Chisq)    
@@ -111,4 +141,46 @@ LRstats(indep, coleff, roweff, linlin)
 #> ---
 #> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
+# compare models in a glmlist, using formula labels
+mods <- glmlist(indep, coleff, roweff, linlin)
+LRstats(mods, label = "formula")
+#> Likelihood summary table:
+#>                                 AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> mental + ses                 209.59 220.19   47.418 15  3.155e-05 ***
+#> mental + ses + Rscore:ses    179.00 195.50    6.829 10     0.7415    
+#> mental + ses + mental:Cscore 174.45 188.59    6.281 12     0.9013    
+#> mental + ses + Rscore:Cscore 174.07 185.85    9.895 14     0.7698    
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+# loglmlist example with bracket notation labels
+data(Titanic)
+tit.joint <- seq_loglm(Titanic, type = "joint")
+LRstats(tit.joint)
+#> Likelihood summary table:
+#>            AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> joint.1 509.95 509.33   475.81  3  < 2.2e-16 ***
+#> joint.2 478.75 479.14   412.60  3  < 2.2e-16 ***
+#> joint.3 257.88 264.83   159.10  7  < 2.2e-16 ***
+#> joint.4 833.36 858.28   671.96 15  < 2.2e-16 ***
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LRstats(tit.joint, label = "formula")
+#> Likelihood summary table:
+#>                               AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> = Class                    509.95 509.33   475.81  3  < 2.2e-16 ***
+#> (Class) (Sex)              478.75 479.14   412.60  3  < 2.2e-16 ***
+#> (Class,Sex) (Age)          257.88 264.83   159.10  7  < 2.2e-16 ***
+#> [Class,Sex,Age] [Survived] 833.36 858.28   671.96 15  < 2.2e-16 ***
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
+#> Likelihood summary table:
+#>                AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> = Class     509.95 509.33   475.81  3  < 2.2e-16 ***
+#> (C) (S)     478.75 479.14   412.60  3  < 2.2e-16 ***
+#> (C,S) (A)   257.88 264.83   159.10  7  < 2.2e-16 ***
+#> [C,S,A] [S] 833.36 858.28   671.96 15  < 2.2e-16 ***
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 ```

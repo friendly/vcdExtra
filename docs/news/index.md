@@ -1,6 +1,16 @@
 # Changelog
 
+## Version 0.9.2
+
+- Added a `label = c("name", "formula")` argument to
+  [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
+  to provide for labeling models by their model formulas in the output
+  using
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md).
+
 ## Version 0.9.1 (2026-02-08)
+
+CRAN release: 2026-02-09
 
 This is a major release of the package, adding facility to show
 observations in mosaic plots as jittered points and a new visualization

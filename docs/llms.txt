@@ -2,7 +2,7 @@
 
 ## Extensions and additions to vcd: Visualizing Categorical Data
 
-Version 0.9.1; documentation built for `pkgdown` 2026-01-28
+Version 0.9.2; documentation built for `pkgdown` 2026-02-09
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -41,13 +41,13 @@ Data Analysis](https://friendly.github.io/psy6136/).
 
 ## Installation
 
-Get the released version (0.9.0) from CRAN:
+Get the released version (0.9.1) from CRAN:
 
 ``` R
  install.packages("vcdExtra")
 ```
 
-The current development version (0.9.1) can be installed from
+The current development version (0.9.2) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
@@ -159,9 +159,9 @@ vcdExtra::datasets("vcdExtra")[,1]
 ## [25] "HairEyePlace"   "Hauser79"       "Heart"          "Heckman"       
 ## [29] "HospVisits"     "HouseTasks"     "Hoyt"           "ICU"           
 ## [33] "JobSat"         "Mammograms"     "Mental"         "Mice"          
-## [37] "Mobility"       "PhdPubs"        "ShakeWords"     "TV"            
-## [41] "Titanicp"       "Toxaemia"       "Vietnam"        "Vote1980"      
-## [45] "WorkerSat"      "Yamaguchi87"
+## [37] "Mobility"       "PhdPubs"        "Reinis"         "ShakeWords"    
+## [41] "TV"             "Titanicp"       "Toxaemia"       "Vietnam"       
+## [45] "Vote1980"       "WorkerSat"      "Yamaguchi87"
 ```
 
 - a [collection of tutorial
