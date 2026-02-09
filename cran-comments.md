@@ -1,6 +1,7 @@
 ## Test environments
 * local Windows 10, R version 4.5.2 (2025-10-31 ucrt)
-* win-builder R Under development (unstable) (2026-02-08)
+* win-builder R version 4.5.2 (2025-10-31 ucrt)
+* win-builder R Under development (unstable) (2026-02-08 r89382 ucrt)
 
 
 ## R CMD check results
