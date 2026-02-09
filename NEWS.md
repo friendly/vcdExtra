@@ -1,4 +1,4 @@
-## Version 0.9.1 (2026-01-23)
+## Version 0.9.1 (2026-02-08)
 
 This is a major release of the package, adding facility to show observations in mosaic plots as jittered points and a new
 visualization method based on background shading of frequency tables.
@@ -14,6 +14,7 @@ visualization method based on background shading of frequency tables.
 * Make the default label for `seq_loglm()` models reflect the model type
 * Added `get_models()` to extract model formulas from `loglmlist` and `glmlist` objects
 * Added `get_model()` to do the same for `loglm()` and `glm()` objects
+* Fixed bug in `get_models()` where the `abbrev` argument caused an error
 
 ## Version 0.9.0 (2026-01-17)
 
