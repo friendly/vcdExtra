@@ -39,6 +39,7 @@ reference:
       - saturated
       - seq_loglm
       - get_models
+      - get_model
 
   - title: Other graphical methods
     desc: Other functions for visualizing contingency tables
