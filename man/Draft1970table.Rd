@@ -83,7 +83,7 @@ Fienberg, S. E. (1971), "Randomization and Social Affairs: The
 
 Starr, N. (1997). Nonrandom Risk: The 1970 Draft Lottery, \emph{Journal of
 Statistics Education}, v.5, n.2
-\url{https://jse.amstat.org/v5n2/datasets.starr.html}
+\doi{10.1080/10691898.1997.11910534}
 }
 \seealso{
 \code{\link{Draft1970}}
