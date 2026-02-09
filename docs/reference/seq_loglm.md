@@ -112,6 +112,7 @@ for descriptions of sequential models,
 [`loglmlist`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
 
 Other loglinear models:
+[`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md),
 [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md),
 [`joint()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md)
 
