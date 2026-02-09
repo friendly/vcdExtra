@@ -134,6 +134,15 @@ coefficients from all models in a single object of type determined by
 <code>loglm</code> are excluded, with a warning.</p>
 <p>In the <code>coef</code> method, coefficients from the different models are
 matched by name in the list of unique names across all models.</p>
+<p><strong>Model notation</strong></p>
+<p>For <code>loglmlist</code> objects created by <code><a href="seq_loglm.html">seq_loglm</a></code>, the bracket
+notation distinguishes between models fit to marginal sub-tables and
+models fit to the full table. Parentheses are used for marginal
+sub-tables, e.g., <code>"(Class) (Sex)"</code>, while square brackets are used
+for the full table, e.g., <code>"[Class,Sex,Age] [Survived]"</code>.</p>
+<p>The <code>get_models</code> function extracts these model strings,
+and the <code>abbrev</code> argument can be used to abbreviate factor names
+for more compact display, e.g., <code>"[C,S,A] [S]"</code>.</p>
 <p>For <code>loglmlist</code> objects created by <code><a href="seq_loglm.html">seq_loglm</a></code>, the bracket
 notation is stored in the <code>model.string</code> component. For other <code>loglm</code>
 objects, it is constructed from the <code>margin</code> component using
@@ -154,6 +163,7 @@ object.</p>
 <code><a href="LRstats.html">LRstats()</a></code>,
 <code><a href="mosaic.glmlist.html">mosaic.glmlist()</a></code></p>
 <p>Other loglinear models:
+<code><a href="get_model.html">get_model()</a></code>,
 <code><a href="loglin-utilities.html">joint()</a></code>,
 <code><a href="seq_loglm.html">seq_loglm()</a></code></p>
 <p>Other glmlist functions:
@@ -248,9 +258,13 @@ object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                     joint.3                     joint.4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          "~Class:Sex + Age" "~Class:Sex:Age + Survived" </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># With abbreviated factor names: BUG</span></span></span>
-<span class="r-in"><span><span class="co"># get_models(tit.joint, abbrev = TRUE)</span></span></span>
-<span class="r-in"><span><span class="co"># get_models(tit.joint, abbrev = 2)</span></span></span>
+<span class="r-in"><span><span class="co"># With abbreviated factor names</span></span></span>
+<span class="r-in"><span><span class="fu">get_models</span><span class="op">(</span><span class="va">tit.joint</span>, abbrev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       joint.1       joint.2       joint.3       joint.4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     "= Class"     "(C) (S)"   "(C,S) (A)" "[C,S,A] [S]" </span>
+<span class="r-in"><span><span class="fu">get_models</span><span class="op">(</span><span class="va">tit.joint</span>, abbrev <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           joint.1           joint.2           joint.3           joint.4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         "= Class"       "(Cl) (Sx)"    "(Cl,Sx) (Ag)" "[Cl,Sx,Ag] [Sr]" </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

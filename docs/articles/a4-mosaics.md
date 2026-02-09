@@ -545,8 +545,7 @@ Graphical Statistics*, *8*(3), 373–395.
 
 Friendly, M., & Kwan, E. (2003). Effect ordering for data displays.
 *Computational Statistics and Data Analysis*, *43*(4), 509–539.
-Retrieved from
-<http://authors.elsevier.com/sd/article/S0167947302002906>
+Retrieved from <https://doi.org/10.1016/S0167-9473(02)00290-6>
 
 Friendly, M., & Meyer, D. (2016). *Discrete data analysis with R:
 Visualization and modeling techniques for categorical and count data*.

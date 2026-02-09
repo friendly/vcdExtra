@@ -78,6 +78,19 @@ are excluded, with a warning.
 In the `coef` method, coefficients from the different models are matched
 by name in the list of unique names across all models.
 
+**Model notation**
+
+For `loglmlist` objects created by
+[`seq_loglm`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md),
+the bracket notation distinguishes between models fit to marginal
+sub-tables and models fit to the full table. Parentheses are used for
+marginal sub-tables, e.g., `"(Class) (Sex)"`, while square brackets are
+used for the full table, e.g., `"[Class,Sex,Age] [Survived]"`.
+
+The `get_models` function extracts these model strings, and the `abbrev`
+argument can be used to abbreviate factor names for more compact
+display, e.g., `"[C,S,A] [S]"`.
+
 For `loglmlist` objects created by
 [`seq_loglm`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md),
 the bracket notation is stored in the `model.string` component. For
@@ -109,6 +122,7 @@ Other glmlist functions:
 [`mosaic.glmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md)
 
 Other loglinear models:
+[`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md),
 [`joint()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
 [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
 
@@ -203,7 +217,11 @@ get_models(tit.joint, type = "formula")
 #>                     joint.3                     joint.4 
 #>          "~Class:Sex + Age" "~Class:Sex:Age + Survived" 
 
-# With abbreviated factor names: BUG
-# get_models(tit.joint, abbrev = TRUE)
-# get_models(tit.joint, abbrev = 2)
+# With abbreviated factor names
+get_models(tit.joint, abbrev = TRUE)
+#>       joint.1       joint.2       joint.3       joint.4 
+#>     "= Class"     "(C) (S)"   "(C,S) (A)" "[C,S,A] [S]" 
+get_models(tit.joint, abbrev = 2)
+#>           joint.1           joint.2           joint.3           joint.4 
+#>         "= Class"       "(Cl) (Sx)"    "(Cl,Sx) (Ag)" "[Cl,Sx,Ag] [Sr]" 
 ```
