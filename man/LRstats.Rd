@@ -9,9 +9,23 @@
 \usage{
 LRstats(object, ...)
 
-\method{LRstats}{glmlist}(object, ..., saturated = NULL, sortby = NULL)
+\method{LRstats}{glmlist}(
+  object,
+  ...,
+  saturated = NULL,
+  sortby = NULL,
+  label = c("name", "formula"),
+  label.args = list()
+)
 
-\method{LRstats}{loglmlist}(object, ..., saturated = NULL, sortby = NULL)
+\method{LRstats}{loglmlist}(
+  object,
+  ...,
+  saturated = NULL,
+  sortby = NULL,
+  label = c("name", "formula"),
+  label.args = list()
+)
 
 \method{LRstats}{default}(object, ..., saturated = NULL, sortby = NULL)
 }
@@ -26,11 +40,20 @@ deviance is not available)}
 
 \item{sortby}{either a numeric or character string specifying the column in
 the result by which the rows are sorted (in decreasing order)}
+
+\item{label}{character string specifying how to label the rows: \code{"name"}
+(default) uses the model object names; \code{"formula"} uses model formulas or
+bracket notation obtained from \code{\link{get_models}}.
+Only available for \code{glmlist} and \code{loglmlist} objects.}
+
+\item{label.args}{a list of additional arguments passed to \code{\link{get_models}}
+when \code{label = "formula"}. Useful arguments include \code{abbrev} (logical or integer)
+to abbreviate factor names and \code{sep} to change the separator in bracket notation.}
 }
 \value{
 A data frame (also of class \code{anova}) with columns
-\code{c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")}. Row names are taken
-from the names of the model object(s).
+\code{       c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")}. Row names are taken
+from the names of the model object(s) or their model formulas.
 }
 \description{
 For \code{glm} objects, the \code{print} and \code{summary} methods give too
@@ -43,8 +66,7 @@ model goodness of fit for a collection of models fit to the same data. All
 \details{
 \code{LRstats} provides a brief summary for one or more models fit to the
 same dataset for which \code{logLik} and \code{nobs} methods exist (e.g.,
-\code{glm} and \code{loglm} models). \%This implementation is experimental,
-and is subject to change.
+\code{glm} and \code{loglm} models).
 
 The function relies on residual degrees of freedom for the LR chisq test
 being available in the model object.  This is true for objects inheriting
@@ -66,16 +88,27 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore,
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
 
-# compare models
+# compare models using object names (default)
 LRstats(indep, coleff, roweff, linlin)
 
+# compare models in a glmlist, using formula labels
+mods <- glmlist(indep, coleff, roweff, linlin)
+LRstats(mods, label = "formula")
+
+# loglmlist example with bracket notation labels
+data(Titanic)
+tit.joint <- seq_loglm(Titanic, type = "joint")
+LRstats(tit.joint)
+LRstats(tit.joint, label = "formula")
+LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
 
 }
 \seealso{
 \code{\link[stats]{logLik}}, \code{\link[stats]{glm}},
 \code{\link[MASS]{loglm}},
 
-\code{\link{logLik.loglm}}, \code{\link{modFit}}
+\code{\link{logLik.loglm}}, \code{\link{modFit}},
+\code{\link{get_models}}
 
 Other glmlist functions: 
 \code{\link{Kway}()},
@@ -83,7 +116,7 @@ Other glmlist functions:
 \code{\link{mosaic.glmlist}()}
 }
 \author{
-Achim Zeileis
+Achim Zeileis, Michael Friendly
 }
 \concept{glmlist functions}
 \keyword{models}

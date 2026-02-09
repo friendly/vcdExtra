@@ -1,9 +1,7 @@
-# fixed buglet when deviance() returns a null
-# fixed bug: residual df calculated incorrectly
-#  but this now depends on objects having a df.residual component
-#  TRUE for lm, glm, polr, negbin objects
-
-# made generic, adding a glmlist method
+# ✔️DONE: fixed buglet when deviance() returns a null
+# ✔️DONE: fixed bug: residual df calculated incorrectly but this now depends on objects having a df.residual component. This is TRUE for lm, glm, polr, negbin objects
+# ✔️DONE: made generic, adding a glmlist method
+# ✔️DONE: Provide a `label` argument to allow use of symbolic formulas as labels for the models, via `get_models()`
 
 
 
@@ -18,29 +16,41 @@
 #'
 #' `LRstats` provides a brief summary for one or more models fit to the
 #' same dataset for which `logLik` and `nobs` methods exist (e.g.,
-#' `glm` and `loglm` models). %This implementation is experimental,
-#' and is subject to change.
+#' `glm` and `loglm` models).
 #'
 #' The function relies on residual degrees of freedom for the LR chisq test
 #' being available in the model object.  This is true for objects inheriting
 #' from `lm`, `glm`, `loglm`, `polr` and `negbin`.
 #'
 #' @aliases LRstats LRstats.glmlist LRstats.loglmlist LRstats.default
+#'
 #' @param object a fitted model object for which there exists a logLik method
-#' to extract the corresponding log-likelihood
+#'        to extract the corresponding log-likelihood
 #' @param \dots optionally more fitted model objects
 #' @param saturated saturated model log likelihood reference value (use 0 if
-#' deviance is not available)
+#'        deviance is not available)
 #' @param sortby either a numeric or character string specifying the column in
-#' the result by which the rows are sorted (in decreasing order)
+#'        the result by which the rows are sorted (in decreasing order)
+#' @param label character string specifying how to label the rows: `"name"`
+#'         (default) uses the model object names; `"formula"` uses model formulas or
+#'         bracket notation obtained from \code{\link{get_models}}.
+#'         Only available for \code{glmlist} and \code{loglmlist} objects.
+#' @param label.args a list of additional arguments passed to \code{\link{get_models}}
+#'         when `label = "formula"`. Useful arguments include `abbrev` (logical or integer)
+#'         to abbreviate factor names and `sep` to change the separator in bracket notation.
+#'
 #' @return A data frame (also of class `anova`) with columns
-#' `c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")`. Row names are taken
-#' from the names of the model object(s).
-#' @author Achim Zeileis
+#' `       c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")`. Row names are taken
+#'         from the names of the model object(s) or their model formulas.
+#'
+#' @author Achim Zeileis, Michael Friendly
+#'
 #' @seealso \code{\link[stats]{logLik}}, \code{\link[stats]{glm}},
 #' \code{\link[MASS]{loglm}},
 #'
-#' \code{\link{logLik.loglm}}, \code{\link{modFit}}
+#' \code{\link{logLik.loglm}}, \code{\link{modFit}},
+#' \code{\link{get_models}}
+#'
 #' @family glmlist functions
 #' @keywords models
 #' @examples
@@ -59,9 +69,19 @@
 #' linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
 #'                 family = poisson, data = Mental)
 #'
-#' # compare models
+#' # compare models using object names (default)
 #' LRstats(indep, coleff, roweff, linlin)
 #'
+#' # compare models in a glmlist, using formula labels
+#' mods <- glmlist(indep, coleff, roweff, linlin)
+#' LRstats(mods, label = "formula")
+#'
+#' # loglmlist example with bracket notation labels
+#' data(Titanic)
+#' tit.joint <- seq_loglm(Titanic, type = "joint")
+#' LRstats(tit.joint)
+#' LRstats(tit.joint, label = "formula")
+#' LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
 #'
 #' @export
 LRstats <- function(object, ...) {
@@ -70,42 +90,54 @@ LRstats <- function(object, ...) {
 
 #' @rdname LRstats
 #' @export
-LRstats.glmlist <- function(object, ..., saturated = NULL, sortby=NULL)
-{
+LRstats.glmlist <- function(object, ..., saturated = NULL, sortby = NULL,
+                            label = c("name", "formula"), label.args = list()) {
+    label <- match.arg(label)
     ns <- sapply(object, function(x) length(x$residuals))
     if (any(ns != ns[1L]))
         stop("models were not all fitted to the same size of dataset")
     nmodels <- length(object)
     if (nmodels == 1)
-        return(LRstats.default(object[[1L]], saturated=saturated))
+        return(LRstats.default(object[[1L]], saturated = saturated))
 
-    rval <- lapply(object, LRstats.default, saturated=saturated)
+    rval <- lapply(object, LRstats.default, saturated = saturated)
     rval <- do.call(rbind, rval)
-		if (!is.null(sortby)) {
-			rval <- rval[order(rval[,sortby], decreasing=TRUE),]
-			}
-		rval
+
+    if (label == "formula") {
+        rownames(rval) <- do.call(get_models, c(list(x = object), label.args))
+    }
+
+    if (!is.null(sortby)) {
+        rval <- rval[order(rval[, sortby], decreasing = TRUE), ]
+    }
+    rval
 }
 
 # could just do LRstats.loglmlist <- LRstats.glmlist
 
 #' @rdname LRstats
 #' @export
-LRstats.loglmlist <- function(object, ..., saturated = NULL, sortby=NULL)
-{
-	ns <- sapply(object, function(x) length(x$residuals))
-	if (any(ns != ns[1L]))
-		stop("models were not all fitted to the same size of dataset")
-	nmodels <- length(object)
-	if (nmodels == 1)
-		return(LRstats.default(object[[1L]], saturated=saturated))
+LRstats.loglmlist <- function(object, ..., saturated = NULL, sortby = NULL,
+                              label = c("name", "formula"), label.args = list()) {
+    label <- match.arg(label)
+    ns <- sapply(object, function(x) length(x$residuals))
+    if (any(ns != ns[1L]))
+        stop("models were not all fitted to the same size of dataset")
+    nmodels <- length(object)
+    if (nmodels == 1)
+        return(LRstats.default(object[[1L]], saturated = saturated))
 
-	rval <- lapply(object, LRstats.default, saturated=saturated)
-	rval <- do.call(rbind, rval)
-	if (!is.null(sortby)) {
-		rval <- rval[order(rval[,sortby], decreasing=TRUE),]
-	}
-	rval
+    rval <- lapply(object, LRstats.default, saturated = saturated)
+    rval <- do.call(rbind, rval)
+
+    if (label == "formula") {
+        rownames(rval) <- do.call(get_models, c(list(x = object), label.args))
+    }
+
+    if (!is.null(sortby)) {
+        rval <- rval[order(rval[, sortby], decreasing = TRUE), ]
+    }
+    rval
 }
 
 #' @rdname LRstats

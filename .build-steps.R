@@ -1,12 +1,15 @@
 # keep rgl from popping up windows
 Sys.setenv(RGL_USE_NULL = TRUE)
 
+# devtools::build_vignettes()
+# remotes::install_local(".", build_vignettes = TRUE, force=TRUE)
+#
+# The README.Rmd references the vignettes, so they must be installed
+devtools::install(build_vignettes = TRUE)
 
 # Build the pkgdown site
 pkgdown::build_site()
 
-devtools::build_vignettes()
-remotes::install_local(".", build_vignettes = TRUE, force=TRUE)
 
 # to copy the vignettes to `inst/doc`:
 tools::buildVignettes(dir = ".", tangle=TRUE)
