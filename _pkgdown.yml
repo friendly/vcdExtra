@@ -44,6 +44,8 @@ reference:
   - title: Other graphical methods
     desc: Other functions for visualizing contingency tables
     contents:
+      - assoc_graph
+      - plot.assoc_graph
       - color_table
       - mcaplot
 

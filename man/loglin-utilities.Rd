@@ -114,8 +114,10 @@ e.g., \code{"[A,B] [A,C]"}.
 }
 \seealso{
 Other loglinear models: 
+\code{\link{assoc_graph}()},
 \code{\link{get_model}()},
 \code{\link{glmlist}()},
+\code{\link{plot.assoc_graph}()},
 \code{\link{seq_loglm}()}
 }
 \concept{loglinear models}

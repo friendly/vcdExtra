@@ -96,8 +96,10 @@ Other glmlist functions:
 \code{\link{mosaic.glmlist}()}
 
 Other loglinear models: 
+\code{\link{assoc_graph}()},
 \code{\link{get_model}()},
 \code{\link{joint}()},
+\code{\link{plot.assoc_graph}()},
 \code{\link{seq_loglm}()}
 }
 \author{

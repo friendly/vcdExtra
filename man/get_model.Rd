@@ -26,16 +26,19 @@ such as \code{sep} and \code{collapse}.}
 }
 \value{
 For \code{get_model()}: a character string with the model formula or bracket notation.
-For \code{get_models()}: a named character vector with the model formulas or bracket notations.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    For `get_models()`: a named character vector with the model formulas or bracket notations.
+}\if{html}{\out{</div>}}
 }
 \description{
 \code{get_model()} extracts the model formula or bracket notation from a single
 \code{loglm} or \code{glm} object.
+}
+\details{
 \code{get_models()} does the same for each model in a
 \code{loglmlist} or \code{glmlist} object.
 These are useful for labeling models in summaries and plots.
-}
-\details{
+
 For \code{loglm} objects created by \code{\link{seq_loglm}}, the bracket
 notation is stored in the \code{model.string} component. For other \code{loglm}
 objects, it is constructed from the \code{margin} component using
@@ -85,8 +88,10 @@ Other glmlist functions:
 \code{\link{mosaic.glmlist}()}
 
 Other loglinear models: 
+\code{\link{assoc_graph}()},
 \code{\link{glmlist}()},
 \code{\link{joint}()},
+\code{\link{plot.assoc_graph}()},
 \code{\link{seq_loglm}()}
 }
 \concept{glmlist functions}
