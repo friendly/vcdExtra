@@ -1,9 +1,7 @@
 # Extract Model Formulas from Model Objects or Model Lists
 
 `get_model()` extracts the model formula or bracket notation from a
-single `loglm` or `glm` object. `get_models()` does the same for each
-model in a `loglmlist` or `glmlist` object. These are useful for
-labeling models in summaries and plots.
+single `loglm` or `glm` object.
 
 ## Usage
 
@@ -40,10 +38,15 @@ get_models(x, type = c("brackets", "formula"), abbrev = FALSE, ...)
 ## Value
 
 For `get_model()`: a character string with the model formula or bracket
-notation. For `get_models()`: a named character vector with the model
-formulas or bracket notations.
+notation.
+
+        For `get_models()`: a named character vector with the model formulas or bracket notations.
 
 ## Details
+
+`get_models()` does the same for each model in a `loglmlist` or
+`glmlist` object. These are useful for labeling models in summaries and
+plots.
 
 For `loglm` objects created by
 [`seq_loglm`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md),
@@ -82,8 +85,10 @@ Other glmlist functions:
 [`mosaic.glmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md)
 
 Other loglinear models:
+[`assoc_graph()`](https://friendly.github.io/vcdExtra/reference/assoc_graph.md),
 [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md),
 [`joint()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
+[`plot.assoc_graph()`](https://friendly.github.io/vcdExtra/reference/plot.assoc_graph.md),
 [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
 
 ## Examples

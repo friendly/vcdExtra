@@ -72,8 +72,10 @@ Other glmlist functions:
 [`mosaic.glmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md)
 
 Other loglinear models:
+[`assoc_graph()`](https://friendly.github.io/vcdExtra/reference/assoc_graph.md),
 [`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md),
 [`joint()`](https://friendly.github.io/vcdExtra/reference/loglin-utilities.md),
+[`plot.assoc_graph()`](https://friendly.github.io/vcdExtra/reference/plot.assoc_graph.md),
 [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
 
 ## Author

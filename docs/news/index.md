@@ -14,6 +14,8 @@
   and
   [`get_models()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
   together
+- Added \`assoc_graph() and a plot method for association graphs of
+  loglinear models.
 
 ## Version 0.9.1 (2026-02-08)
 

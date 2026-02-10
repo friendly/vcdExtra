@@ -58,6 +58,11 @@ Functions for constructing and manipulating loglinear models
 
 Other functions for visualizing contingency tables
 
+- [`assoc_graph()`](https://friendly.github.io/vcdExtra/reference/assoc_graph.md)
+  [`print(`*`<assoc_graph>`*`)`](https://friendly.github.io/vcdExtra/reference/assoc_graph.md)
+  : Association Graph for a Loglinear Model
+- [`plot(`*`<assoc_graph>`*`)`](https://friendly.github.io/vcdExtra/reference/plot.assoc_graph.md)
+  : Plot an Association Graph
 - [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
   : Display Frequency Table with Colored Cell Backgrounds
 - [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)

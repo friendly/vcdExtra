@@ -81,7 +81,7 @@ str(artdf)
 (tab <- table(sample(head(letters), 20, replace=TRUE)))
 #> 
 #> a b c d e f 
-#> 2 5 5 2 1 5 
+#> 2 4 6 2 1 5 
 expand.table(tab, var.names="letter")
 #>    letter
 #> 1       a
@@ -90,7 +90,7 @@ expand.table(tab, var.names="letter")
 #> 4       b
 #> 5       b
 #> 6       b
-#> 7       b
+#> 7       c
 #> 8       c
 #> 9       c
 #> 10      c

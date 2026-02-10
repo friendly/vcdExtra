@@ -6,14 +6,8 @@
     }
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Extract Model Formulas from Model Objects or Model Lists — get_model"><meta name="description" content="get_model() extracts the model formula or bracket notation from a single
-loglm or glm object.
-get_models() does the same for each model in a
-loglmlist or glmlist object.
-These are useful for labeling models in summaries and plots."><meta property="og:description" content="get_model() extracts the model formula or bracket notation from a single
-loglm or glm object.
-get_models() does the same for each model in a
-loglmlist or glmlist object.
-These are useful for labeling models in summaries and plots."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
+loglm or glm object."><meta property="og:description" content="get_model() extracts the model formula or bracket notation from a single
+loglm or glm object."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -60,10 +54,7 @@ These are useful for labeling models in summaries and plots."><meta property="og
 
     <div class="ref-description section level2">
     <p><code>get_model()</code> extracts the model formula or bracket notation from a single
-<code>loglm</code> or <code>glm</code> object.
-<code>get_models()</code> does the same for each model in a
-<code>loglmlist</code> or <code>glmlist</code> object.
-These are useful for labeling models in summaries and plots.</p>
+<code>loglm</code> or <code>glm</code> object.</p>
     </div>
 
     <div class="section level2">
@@ -101,12 +92,15 @@ such as <code>sep</code> and <code>collapse</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>For <code>get_model()</code>: a character string with the model formula or bracket notation.
-For <code>get_models()</code>: a named character vector with the model formulas or bracket notations.</p>
+    <p>For <code>get_model()</code>: a character string with the model formula or bracket notation.</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>    For <span class="st">`</span><span class="at">get_models()</span><span class="st">`</span><span class="sc">:</span> a named character vector with the model formulas or bracket notations.</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>For <code>loglm</code> objects created by <code><a href="seq_loglm.html">seq_loglm</a></code>, the bracket
+    <p><code>get_models()</code> does the same for each model in a
+<code>loglmlist</code> or <code>glmlist</code> object.
+These are useful for labeling models in summaries and plots.</p>
+<p>For <code>loglm</code> objects created by <code><a href="seq_loglm.html">seq_loglm</a></code>, the bracket
 notation is stored in the <code>model.string</code> component. For other <code>loglm</code>
 objects, it is constructed from the <code>margin</code> component using
 <code><a href="loglin-utilities.html">loglin2string</a></code>.</p>
@@ -131,8 +125,10 @@ for more compact display, e.g., <code>"[C,S,A] [S]"</code>.</p>
 <code><a href="glmlist.html">glmlist()</a></code>,
 <code><a href="mosaic.glmlist.html">mosaic.glmlist()</a></code></p>
 <p>Other loglinear models:
+<code><a href="assoc_graph.html">assoc_graph()</a></code>,
 <code><a href="glmlist.html">glmlist()</a></code>,
 <code><a href="loglin-utilities.html">joint()</a></code>,
+<code><a href="plot.assoc_graph.html">plot.assoc_graph()</a></code>,
 <code><a href="seq_loglm.html">seq_loglm()</a></code></p></div>
     </div>
 
