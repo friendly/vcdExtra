@@ -4,7 +4,6 @@
 \alias{glmlist}
 \alias{loglmlist}
 \alias{coef.glmlist}
-\alias{get_models}
 \title{Create a Model List Object}
 \usage{
 glmlist(...)
@@ -12,40 +11,21 @@ glmlist(...)
 loglmlist(...)
 
 \method{coef}{glmlist}(object, result = c("list", "matrix", "data.frame"), ...)
-
-get_models(x, type = c("brackets", "formula"), abbrev = FALSE, ...)
 }
 \arguments{
-\item{\dots}{Additional arguments passed to \code{loglin2string} (for \code{loglmlist})
-such as \code{sep} and \code{collapse}.}
+\item{\dots}{One or more model objects, as appropriate to the function, optionally assigned names as in \code{\link{list}}.}
 
 \item{object}{a \code{"glmlist"} object}
 
 \item{result}{type of the result to be returned}
-
-\item{x}{A \code{glmlist} or \code{loglmlist} object}
-
-\item{type}{Type of output: \code{"brackets"} for loglinear bracket notation
-(e.g., \code{"[AB] [C]"}), or \code{"formula"} for R formula notation.
-For \code{glmlist} objects, only \code{"formula"} is meaningful.}
-
-\item{abbrev}{Logical or integer. If \code{TRUE} or a positive integer,
-abbreviate factor names to that many characters (default 1 when \code{TRUE}).
-Only applies to bracket notation.}
 }
 \value{
 An object of class \code{glmlist} \code{loglmlist}, just like a \code{list}, except that each model is given a \code{name} attribute.
-
-A named character vector with the model formulas or bracket notations.
 }
 \description{
 \code{glmlist} creates a \code{glmlist} object containing a list of fitted
 \code{glm} objects with their names. \code{loglmlist} does the same for
 \code{loglm} objects.
-
-\code{get_models()} extracts the model formulas or bracket notation from each model in a
-\code{glmlist} or \code{loglmlist} object. This is useful for labeling
-models in summaries and plots.
 }
 \details{
 The intention is to provide object classes to facilitate model comparison,
@@ -65,25 +45,6 @@ Any objects which do not inherit the appropriate class \code{glm} or
 
 In the \code{coef} method, coefficients from the different models are
 matched by name in the list of unique names across all models.
-
-\strong{Model notation}
-
-For \code{loglmlist} objects created by \code{\link{seq_loglm}}, the bracket
-notation distinguishes between models fit to marginal sub-tables and
-models fit to the full table. Parentheses are used for marginal
-sub-tables, e.g., \code{"(Class) (Sex)"}, while square brackets are used
-for the full table, e.g., \code{"[Class,Sex,Age] [Survived]"}.
-
-The \code{\link{get_models}} function extracts these model strings,
-and the \code{abbrev} argument can be used to abbreviate factor names
-for more compact display, e.g., \code{"[C,S,A] [S]"}.
-
-For \code{loglmlist} objects created by \code{\link{seq_loglm}}, the bracket
-notation is stored in the \code{model.string} component. For other \code{loglm}
-objects, it is constructed from the \code{margin} component using
-\code{\link{loglin2string}}.
-
-For \code{glmlist} objects, the formula is extracted using \code{formula()}.
 }
 \examples{
 
@@ -118,16 +79,6 @@ unlist(lapply(mods, deviance))
 res <- lapply(mods, residuals)
 boxplot(as.data.frame(res), main="Residuals from various models")
 
-data(Titanic)
-# Sequential models of joint independence
-tit.joint <- seq_loglm(Titanic, type = "joint")
-get_models(tit.joint)
-get_models(tit.joint, type = "formula")
-
-# With abbreviated factor names
-get_models(tit.joint, abbrev = TRUE)
-get_models(tit.joint, abbrev = 2)
-
 }
 \seealso{
 The function \code{\link[Hmisc]{llist}} in package \code{Hmisc} is
@@ -138,23 +89,16 @@ The function \code{\link[stats]{anova.glm}} also handles \verb{glmlist objects}
 \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
 object.
 
-\code{\link{glmlist}}, \code{\link{loglmlist}}, \code{\link{loglin2string}},
-\code{\link{LRstats}}
-
 Other glmlist functions: 
 \code{\link{Kway}()},
 \code{\link{LRstats}()},
+\code{\link{get_model}()},
 \code{\link{mosaic.glmlist}()}
 
 Other loglinear models: 
 \code{\link{get_model}()},
 \code{\link{joint}()},
 \code{\link{seq_loglm}()}
-
-Other glmlist functions: 
-\code{\link{Kway}()},
-\code{\link{LRstats}()},
-\code{\link{mosaic.glmlist}()}
 }
 \author{
 Michael Friendly; \code{coef} method by John Fox

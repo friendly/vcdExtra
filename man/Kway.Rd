@@ -99,6 +99,7 @@ deprecated), \code{\link{LRstats}}
 
 Other glmlist functions: 
 \code{\link{LRstats}()},
+\code{\link{get_model}()},
 \code{\link{glmlist}()},
 \code{\link{mosaic.glmlist}()}
 }

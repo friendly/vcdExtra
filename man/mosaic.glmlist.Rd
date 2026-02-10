@@ -156,6 +156,7 @@ Other mosaic plots:
 Other glmlist functions: 
 \code{\link{Kway}()},
 \code{\link{LRstats}()},
+\code{\link{get_model}()},
 \code{\link{glmlist}()}
 }
 \author{

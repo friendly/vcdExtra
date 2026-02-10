@@ -2,6 +2,7 @@
 
 * Added a `label = c("name", "formula")` argument to `LRstats()` to provide for labeling models by their model formulas in the output using `get_models()`.
 * Handle list (...) of models with formula labels more flexibly in `LRstats()`
+* Document `get_model()` and `get_models()` together
 
 
 ## Version 0.9.1 (2026-02-08)

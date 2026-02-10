@@ -120,6 +120,7 @@ LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
 
 Other glmlist functions: 
 \code{\link{Kway}()},
+\code{\link{get_model}()},
 \code{\link{glmlist}()},
 \code{\link{mosaic.glmlist}()}
 }
