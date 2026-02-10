@@ -6,9 +6,14 @@
   [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
   to provide for labeling models by their model formulas in the output
   using
-  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md).
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/get_model.md).
 - Handle list (…) of models with formula labels more flexibly in
   [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
+- Document
+  [`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
+  and
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
+  together
 
 ## Version 0.9.1 (2026-02-08)
 
@@ -44,7 +49,7 @@ method based on background shading of frequency tables.
   [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
   models reflect the model type
 - Added
-  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
   to extract model formulas from `loglmlist` and `glmlist` objects
 - Added
   [`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
@@ -52,7 +57,7 @@ method based on background shading of frequency tables.
   [`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) and
   [`glm()`](https://rdrr.io/r/stats/glm.html) objects
 - Fixed bug in
-  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
   where the `abbrev` argument caused an error
 
 ## Version 0.9.0 (2026-01-17)

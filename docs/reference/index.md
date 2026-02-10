@@ -16,7 +16,6 @@ and related displays to `glm` and `gnm` objects and 3D displays
 - [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`loglmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`coef(`*`<glmlist>`*`)`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
-  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   : Create a Model List Object
 - [`mosaic3d()`](https://friendly.github.io/vcdExtra/reference/mosaic3d.md)
   : 3D Mosaic Plots
@@ -48,12 +47,12 @@ Functions for constructing and manipulating loglinear models
 - [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`loglmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   [`coef(`*`<glmlist>`*`)`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
-  [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
   : Create a Model List Object
 - [`seq_loglm()`](https://friendly.github.io/vcdExtra/reference/seq_loglm.md)
   : Sequential Loglinear Models for an N-way Table
 - [`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
-  : Extract Model Formula from a loglm or glm Object
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
+  : Extract Model Formulas from Model Objects or Model Lists
 
 ## Other graphical methods
 

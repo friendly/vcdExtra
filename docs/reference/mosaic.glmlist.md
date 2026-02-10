@@ -142,6 +142,7 @@ Other mosaic plots:
 Other glmlist functions:
 [`Kway()`](https://friendly.github.io/vcdExtra/reference/Kway.md),
 [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md),
+[`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md),
 [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
 
 ## Author

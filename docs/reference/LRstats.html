@@ -130,13 +130,13 @@ the result by which the rows are sorted (in decreasing order)</p></dd>
 <dt id="arg-label">label<a class="anchor" aria-label="anchor" href="#arg-label"></a></dt>
 <dd><p>character string specifying how to label the rows: <code>"name"</code>
 (default) uses the model object names; <code>"formula"</code> uses model formulas or
-bracket notation obtained from <code><a href="glmlist.html">get_models</a></code> (for <code>glmlist</code>
+bracket notation obtained from <code><a href="get_model.html">get_models</a></code> (for <code>glmlist</code>
 and <code>loglmlist</code> objects) or <code><a href="get_model.html">get_model</a></code> (for individual
 model objects passed to the default method).</p></dd>
 
 
 <dt id="arg-label-args">label.args<a class="anchor" aria-label="anchor" href="#arg-label-args"></a></dt>
-<dd><p>a list of additional arguments passed to <code><a href="glmlist.html">get_models</a></code>
+<dd><p>a list of additional arguments passed to <code><a href="get_model.html">get_models</a></code>
 when <code>label = "formula"</code>. Useful arguments include <code>abbrev</code> (logical or integer)
 to abbreviate factor names and <code>sep</code> to change the separator in bracket notation.</p></dd>
 
@@ -161,9 +161,10 @@ from <code>lm</code>, <code>glm</code>, <code>loglm</code>, <code>polr</code> an
     <div class="dont-index"><p><code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></code>,
 <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></code>,</p>
 <p><code><a href="logLik.loglm.html">logLik.loglm</a></code>, <code><a href="modFit.html">modFit</a></code>,
-<code><a href="glmlist.html">get_models</a></code>, <code><a href="get_model.html">get_model</a></code></p>
+<code><a href="get_model.html">get_models</a></code>, <code><a href="get_model.html">get_model</a></code></p>
 <p>Other glmlist functions:
 <code><a href="Kway.html">Kway()</a></code>,
+<code><a href="get_model.html">get_model()</a></code>,
 <code><a href="glmlist.html">glmlist()</a></code>,
 <code><a href="mosaic.glmlist.html">mosaic.glmlist()</a></code></p></div>
     </div>

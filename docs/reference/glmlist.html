@@ -7,15 +7,9 @@
   };
 </script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Create a Model List Object — glmlist"><meta name="description" content="glmlist creates a glmlist object containing a list of fitted
 glm objects with their names. loglmlist does the same for
-loglm objects.
-get_models() extracts the model formulas or bracket notation from each model in a
-glmlist or loglmlist object. This is useful for labeling
-models in summaries and plots."><meta property="og:description" content="glmlist creates a glmlist object containing a list of fitted
+loglm objects."><meta property="og:description" content="glmlist creates a glmlist object containing a list of fitted
 glm objects with their names. loglmlist does the same for
-loglm objects.
-get_models() extracts the model formulas or bracket notation from each model in a
-glmlist or loglmlist object. This is useful for labeling
-models in summaries and plots."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
+loglm objects."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -64,9 +58,6 @@ models in summaries and plots."><meta property="og:image" content="https://frien
     <p><code>glmlist</code> creates a <code>glmlist</code> object containing a list of fitted
 <code>glm</code> objects with their names. <code>loglmlist</code> does the same for
 <code>loglm</code> objects.</p>
-<p><code>get_models()</code> extracts the model formulas or bracket notation from each model in a
-<code>glmlist</code> or <code>loglmlist</code> object. This is useful for labeling
-models in summaries and plots.</p>
     </div>
 
     <div class="section level2">
@@ -76,9 +67,7 @@ models in summaries and plots.</p>
 <span><span class="fu">loglmlist</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'glmlist'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="st">"matrix"</span>, <span class="st">"data.frame"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">get_models</span><span class="op">(</span><span class="va">x</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"brackets"</span>, <span class="st">"formula"</span><span class="op">)</span>, abbrev <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">object</span>, result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="st">"matrix"</span>, <span class="st">"data.frame"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -86,8 +75,7 @@ models in summaries and plots.</p>
 
 
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to <code>loglin2string</code> (for <code>loglmlist</code>)
-such as <code>sep</code> and <code>collapse</code>.</p></dd>
+<dd><p>One or more model objects, as appropriate to the function, optionally assigned names as in <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code>.</p></dd>
 
 
 <dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
@@ -97,27 +85,10 @@ such as <code>sep</code> and <code>collapse</code>.</p></dd>
 <dt id="arg-result">result<a class="anchor" aria-label="anchor" href="#arg-result"></a></dt>
 <dd><p>type of the result to be returned</p></dd>
 
-
-<dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A <code>glmlist</code> or <code>loglmlist</code> object</p></dd>
-
-
-<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>Type of output: <code>"brackets"</code> for loglinear bracket notation
-(e.g., <code>"[AB] [C]"</code>), or <code>"formula"</code> for R formula notation.
-For <code>glmlist</code> objects, only <code>"formula"</code> is meaningful.</p></dd>
-
-
-<dt id="arg-abbrev">abbrev<a class="anchor" aria-label="anchor" href="#arg-abbrev"></a></dt>
-<dd><p>Logical or integer. If <code>TRUE</code> or a positive integer,
-abbreviate factor names to that many characters (default 1 when <code>TRUE</code>).
-Only applies to bracket notation.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An object of class <code>glmlist</code> <code>loglmlist</code>, just like a <code>list</code>, except that each model is given a <code>name</code> attribute.</p>
-<p>A named character vector with the model formulas or bracket notations.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -134,20 +105,6 @@ coefficients from all models in a single object of type determined by
 <code>loglm</code> are excluded, with a warning.</p>
 <p>In the <code>coef</code> method, coefficients from the different models are
 matched by name in the list of unique names across all models.</p>
-<p><strong>Model notation</strong></p>
-<p>For <code>loglmlist</code> objects created by <code><a href="seq_loglm.html">seq_loglm</a></code>, the bracket
-notation distinguishes between models fit to marginal sub-tables and
-models fit to the full table. Parentheses are used for marginal
-sub-tables, e.g., <code>"(Class) (Sex)"</code>, while square brackets are used
-for the full table, e.g., <code>"[Class,Sex,Age] [Survived]"</code>.</p>
-<p>The <code>get_models</code> function extracts these model strings,
-and the <code>abbrev</code> argument can be used to abbreviate factor names
-for more compact display, e.g., <code>"[C,S,A] [S]"</code>.</p>
-<p>For <code>loglmlist</code> objects created by <code><a href="seq_loglm.html">seq_loglm</a></code>, the bracket
-notation is stored in the <code>model.string</code> component. For other <code>loglm</code>
-objects, it is constructed from the <code>margin</code> component using
-<code><a href="loglin-utilities.html">loglin2string</a></code>.</p>
-<p>For <code>glmlist</code> objects, the formula is extracted using <code><a href="https://rdrr.io/r/stats/formula.html" class="external-link">formula()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -156,20 +113,15 @@ similar, but perplexingly more general.</p>
 <p>The function <code><a href="https://rdrr.io/r/stats/anova.glm.html" class="external-link">anova.glm</a></code> also handles <code>glmlist objects</code></p>
 <p><code><a href="LRstats.html">LRstats</a></code> gives LR statistics and tests for a <code>glmlist</code>
 object.</p>
-<p><code>glmlist</code>, <code>loglmlist</code>, <code><a href="loglin-utilities.html">loglin2string</a></code>,
-<code><a href="LRstats.html">LRstats</a></code></p>
 <p>Other glmlist functions:
 <code><a href="Kway.html">Kway()</a></code>,
 <code><a href="LRstats.html">LRstats()</a></code>,
+<code><a href="get_model.html">get_model()</a></code>,
 <code><a href="mosaic.glmlist.html">mosaic.glmlist()</a></code></p>
 <p>Other loglinear models:
 <code><a href="get_model.html">get_model()</a></code>,
 <code><a href="loglin-utilities.html">joint()</a></code>,
-<code><a href="seq_loglm.html">seq_loglm()</a></code></p>
-<p>Other glmlist functions:
-<code><a href="Kway.html">Kway()</a></code>,
-<code><a href="LRstats.html">LRstats()</a></code>,
-<code><a href="mosaic.glmlist.html">mosaic.glmlist()</a></code></p></div>
+<code><a href="seq_loglm.html">seq_loglm()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -243,28 +195,6 @@ object.</p>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mods</span>, <span class="va">residuals</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Residuals from various models"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="glmlist-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Sequential models of joint independence</span></span></span>
-<span class="r-in"><span><span class="va">tit.joint</span> <span class="op">&lt;-</span> <span class="fu"><a href="seq_loglm.html">seq_loglm</a></span><span class="op">(</span><span class="va">Titanic</span>, type <span class="op">=</span> <span class="st">"joint"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">get_models</span><span class="op">(</span><span class="va">tit.joint</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      joint.1                      joint.2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    "= Class"              "(Class) (Sex)" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      joint.3                      joint.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          "(Class,Sex) (Age)" "[Class,Sex,Age] [Survived]" </span>
-<span class="r-in"><span><span class="fu">get_models</span><span class="op">(</span><span class="va">tit.joint</span>, type <span class="op">=</span> <span class="st">"formula"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     joint.1                     joint.2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    "~Class"              "~Class + Sex" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     joint.3                     joint.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          "~Class:Sex + Age" "~Class:Sex:Age + Survived" </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># With abbreviated factor names</span></span></span>
-<span class="r-in"><span><span class="fu">get_models</span><span class="op">(</span><span class="va">tit.joint</span>, abbrev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       joint.1       joint.2       joint.3       joint.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     "= Class"     "(C) (S)"   "(C,S) (A)" "[C,S,A] [S]" </span>
-<span class="r-in"><span><span class="fu">get_models</span><span class="op">(</span><span class="va">tit.joint</span>, abbrev <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           joint.1           joint.2           joint.3           joint.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         "= Class"       "(Cl) (Sx)"    "(Cl,Sx) (Ag)" "[Cl,Sx,Ag] [Sr]" </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
