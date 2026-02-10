@@ -74,11 +74,11 @@
 #' data(DaytonSurvey)
 #'
 #' # Mutual independence + sex*race: one edge only
-#' mod.GR <- glm(Freq ~ . + sex*race, data = DaytonSurvey, family = poisson)
-#' assoc_graph(mod.GR)
-#' plot(assoc_graph(mod.GR), main = "Mutual indep. + [GR]")
+#' mod.SR <- glm(Freq ~ . + sex*race, data = DaytonSurvey, family = poisson)
+#' assoc_SRaph(mod.SR)
+#' plot(assoc_SRaph(mod.SR), main = "Mutual indep. + [SR]")
 #'
-#' # [AM][AC][MC][AR][AG][RG]: {race, gender} indep {marijuana, cig} | alcohol
+#' # [AM][AC][MC][AR][AS][RS]: {race, Sender} indep {marijuana, ciS} | alcohol
 #' mod.cond <- glm(Freq ~ (cigarette + alcohol + marijuana)^2 +
 #'                         (alcohol + sex + race)^2,
 #'                 data = DaytonSurvey, family = poisson)
@@ -86,7 +86,7 @@
 #' plot(assoc_graph(mod.cond),
 #'      groups = list(c("cigarette", "alcohol", "marijuana"),
 #'                    c("sex", "race")),
-#'      main = "{R,G} indep {M,C} | A")
+#'      main = "{R,S} indep {M,C} | A")
 #'
 assoc_graph <- function(x, ...) {
   UseMethod("assoc_graph")
