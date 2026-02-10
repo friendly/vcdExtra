@@ -7,6 +7,8 @@
   to provide for labeling models by their model formulas in the output
   using
   [`get_models()`](https://friendly.github.io/vcdExtra/reference/glmlist.md).
+- Handle list (…) of models with formula labels more flexibly in
+  [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
 
 ## Version 0.9.1 (2026-02-08)
 
