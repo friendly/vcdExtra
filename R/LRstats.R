@@ -33,8 +33,9 @@
 #'        the result by which the rows are sorted (in decreasing order)
 #' @param label character string specifying how to label the rows: `"name"`
 #'         (default) uses the model object names; `"formula"` uses model formulas or
-#'         bracket notation obtained from \code{\link{get_models}}.
-#'         Only available for \code{glmlist} and \code{loglmlist} objects.
+#'         bracket notation obtained from \code{\link{get_models}} (for \code{glmlist}
+#'         and \code{loglmlist} objects) or \code{\link{get_model}} (for individual
+#'         model objects passed to the default method).
 #' @param label.args a list of additional arguments passed to \code{\link{get_models}}
 #'         when `label = "formula"`. Useful arguments include `abbrev` (logical or integer)
 #'         to abbreviate factor names and `sep` to change the separator in bracket notation.
@@ -49,7 +50,7 @@
 #' \code{\link[MASS]{loglm}},
 #'
 #' \code{\link{logLik.loglm}}, \code{\link{modFit}},
-#' \code{\link{get_models}}
+#' \code{\link{get_models}}, \code{\link{get_model}}
 #'
 #' @family glmlist functions
 #' @keywords models
@@ -142,8 +143,11 @@ LRstats.loglmlist <- function(object, ..., saturated = NULL, sortby = NULL,
 
 #' @rdname LRstats
 #' @export
-LRstats.default <- function(object, ..., saturated = NULL, sortby=NULL)
+LRstats.default <- function(object, ..., saturated = NULL, sortby = NULL,
+                            label = c("name", "formula"), label.args = list())
 {
+  label <- match.arg(label)
+
   ## interface methods for logLik() and nobs()
   ## - use S4 methods if loaded
   ## - use residuals() if nobs() is not available
@@ -192,7 +196,15 @@ LRstats.default <- function(object, ..., saturated = NULL, sortby=NULL)
   ## setup ANOVA-style matrix
   rval <- matrix(rep(NA, 5 * nmodels), ncol = 5)
   colnames(rval) <- c("AIC", "BIC", "LR Chisq", "Df", "Pr(>Chisq)")
-  rownames(rval) <- as.character(sapply(match.call(), deparse)[-1L])[1:nmodels]
+
+  if (label == "formula") {
+    rownames(rval) <- sapply(objects, function(mod) {
+      do.call(get_model, c(list(x = mod), label.args))
+    })
+  } else {
+    rownames(rval) <- as.character(sapply(match.call(), deparse)[-1L])[1:nmodels]
+  }
+
   rval[,1] <- -2 * ll + 2 * par
   rval[,2] <- -2 * ll + log(ns) * par
   rval[,3] <- -2 * (ll - saturated)

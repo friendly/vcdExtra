@@ -27,7 +27,14 @@ LRstats(object, ...)
   label.args = list()
 )
 
-\method{LRstats}{default}(object, ..., saturated = NULL, sortby = NULL)
+\method{LRstats}{default}(
+  object,
+  ...,
+  saturated = NULL,
+  sortby = NULL,
+  label = c("name", "formula"),
+  label.args = list()
+)
 }
 \arguments{
 \item{object}{a fitted model object for which there exists a logLik method
@@ -43,8 +50,9 @@ the result by which the rows are sorted (in decreasing order)}
 
 \item{label}{character string specifying how to label the rows: \code{"name"}
 (default) uses the model object names; \code{"formula"} uses model formulas or
-bracket notation obtained from \code{\link{get_models}}.
-Only available for \code{glmlist} and \code{loglmlist} objects.}
+bracket notation obtained from \code{\link{get_models}} (for \code{glmlist}
+and \code{loglmlist} objects) or \code{\link{get_model}} (for individual
+model objects passed to the default method).}
 
 \item{label.args}{a list of additional arguments passed to \code{\link{get_models}}
 when \code{label = "formula"}. Useful arguments include \code{abbrev} (logical or integer)
@@ -108,7 +116,7 @@ LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
 \code{\link[MASS]{loglm}},
 
 \code{\link{logLik.loglm}}, \code{\link{modFit}},
-\code{\link{get_models}}
+\code{\link{get_models}}, \code{\link{get_model}}
 
 Other glmlist functions: 
 \code{\link{Kway}()},
