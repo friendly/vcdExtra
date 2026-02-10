@@ -33,7 +33,14 @@ LRstats(
 )
 
 # Default S3 method
-LRstats(object, ..., saturated = NULL, sortby = NULL)
+LRstats(
+  object,
+  ...,
+  saturated = NULL,
+  sortby = NULL,
+  label = c("name", "formula"),
+  label.args = list()
+)
 ```
 
 ## Arguments
@@ -62,8 +69,10 @@ LRstats(object, ..., saturated = NULL, sortby = NULL)
   character string specifying how to label the rows: `"name"` (default)
   uses the model object names; `"formula"` uses model formulas or
   bracket notation obtained from
-  [`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md).
-  Only available for `glmlist` and `loglmlist` objects.
+  [`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  (for `glmlist` and `loglmlist` objects) or
+  [`get_model`](https://friendly.github.io/vcdExtra/reference/get_model.md)
+  (for individual model objects passed to the default method).
 
 - label.args:
 
@@ -97,7 +106,8 @@ from `lm`, `glm`, `loglm`, `polr` and `negbin`.
 
 [`logLik.loglm`](https://friendly.github.io/vcdExtra/reference/logLik.loglm.md),
 [`modFit`](https://friendly.github.io/vcdExtra/reference/modFit.md),
-[`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+[`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md),
+[`get_model`](https://friendly.github.io/vcdExtra/reference/get_model.md)
 
 Other glmlist functions:
 [`Kway()`](https://friendly.github.io/vcdExtra/reference/Kway.md),
