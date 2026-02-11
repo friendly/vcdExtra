@@ -7,19 +7,27 @@ library(vcdExtra)
 
 data(DaytonSurvey)
 
-# Conditional independence model: {R,S} indep {M,C} | A
+# Conditional independence model: {M,C} indep {R,S} | A
+#
+# define groups for the model
 # [AM][AC][MC][AR][AS][RS]
 mod.cond <- glm(Freq ~ (cigarette + alcohol + marijuana)^2 +
                         (alcohol + sex + race)^2,
                 data = DaytonSurvey, family = poisson)
 
+# define groups for the model
+
+gps <- list(c("cigarette", "marijuana"),
+            "alcohol",
+             c("sex", "race"))
+
 ## 1. Unweighted (default) -- should be identical to Phase 1
 g0 <- assoc_graph(mod.cond)
 g0
 plot(g0,
-     groups = list(c("cigarette", "alcohol", "marijuana"),
-                   c("sex", "race")),
-     main = "Unweighted (default)")
+     groups = gps,
+     main = "Unweighted (default)",
+     layout = igraph::layout_nicely)
 
 
 ## 2. Partial chi-squared weights
@@ -29,8 +37,7 @@ g_chi
 stopifnot(all(igraph::E(g_chi)$weight > 0))
 
 plot(g_chi, edge.label = TRUE,
-     groups = list(c("cigarette", "alcohol", "marijuana"),
-                   c("sex", "race")),
+     groups = gps,
      main = "Partial chi-squared weights")
 
 
@@ -41,8 +48,7 @@ g_V
 stopifnot(all(igraph::E(g_V)$weight >= 0 & igraph::E(g_V)$weight <= 1))
 
 plot(g_V, edge.label = TRUE,
-     groups = list(c("cigarette", "alcohol", "marijuana"),
-                   c("sex", "race")),
+     groups = gps,
      main = "Cramer's V weights")
 
 
@@ -52,18 +58,15 @@ op <- par(mfrow = c(1, 3))
 layout_fixed <- igraph::layout_in_circle(g0)
 
 plot(g0, layout = layout_fixed,
-     groups = list(c("cigarette", "alcohol", "marijuana"),
-                   c("sex", "race")),
+     groups = gps,
      main = "Unweighted")
 
 plot(g_chi, layout = layout_fixed, edge.label = TRUE,
-     groups = list(c("cigarette", "alcohol", "marijuana"),
-                   c("sex", "race")),
+     groups = gps,
      main = "Chi-squared")
 
 plot(g_V, layout = layout_fixed, edge.label = TRUE,
-     groups = list(c("cigarette", "alcohol", "marijuana"),
-                   c("sex", "race")),
+     groups = gps,
      main = "Cramer's V")
 par(op)
 
