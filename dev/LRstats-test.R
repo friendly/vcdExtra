@@ -3,54 +3,6 @@
 
 library(vcdExtra)
 
-# --- Modified methods with label argument ---
-
-LRstats.glmlist <- function(object, ..., saturated = NULL, sortby = NULL,
-                            label = c("name", "formula"), abbrev = FALSE) {
-  label <- match.arg(label)
-  ns <- sapply(object, function(x) length(x$residuals))
-  if (any(ns != ns[1L]))
-    stop("models were not all fitted to the same size of dataset")
-  nmodels <- length(object)
-  if (nmodels == 1)
-    return(LRstats.default(object[[1L]], saturated = saturated))
-
-  rval <- lapply(object, LRstats.default, saturated = saturated)
-  rval <- do.call(rbind, rval)
-
-  if (label == "formula") {
-    rownames(rval) <- get_models(object, abbrev = abbrev)
-  }
-
-  if (!is.null(sortby)) {
-    rval <- rval[order(rval[, sortby], decreasing = TRUE), ]
-  }
-  rval
-}
-
-LRstats.loglmlist <- function(object, ..., saturated = NULL, sortby = NULL,
-                              label = c("name", "formula"), abbrev = FALSE) {
-  label <- match.arg(label)
-  ns <- sapply(object, function(x) length(x$residuals))
-  if (any(ns != ns[1L]))
-    stop("models were not all fitted to the same size of dataset")
-  nmodels <- length(object)
-  if (nmodels == 1)
-    return(LRstats.default(object[[1L]], saturated = saturated))
-
-  rval <- lapply(object, LRstats.default, saturated = saturated)
-  rval <- do.call(rbind, rval)
-
-  if (label == "formula") {
-    rownames(rval) <- get_models(object, abbrev = abbrev)
-  }
-
-  if (!is.null(sortby)) {
-    rval <- rval[order(rval[, sortby], decreasing = TRUE), ]
-  }
-  rval
-}
-
 # --- Examples ---
 
 cat("\n=== loglmlist: Sequential joint independence (Titanic) ===\n")

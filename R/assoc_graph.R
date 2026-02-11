@@ -86,7 +86,7 @@
 #' assoc_graph(mod.SR)
 #' plot(assoc_graph(mod.SR), main = "Mutual indep. + [SR]")
 #'
-#' # [AM][AC][MC][AR][AS][RS]: {race, Sender} indep {marijuana, ciS} | alcohol
+#' # [AM][AC][MC][AR][AS][RS]: {race, sex} indep {marijuana, cigs} | alcohol
 #' mod.cond <- glm(Freq ~ (cigarette + alcohol + marijuana)^2 +
 #'                         (alcohol + sex + race)^2,
 #'                 data = DaytonSurvey, family = poisson)
