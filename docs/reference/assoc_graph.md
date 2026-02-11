@@ -150,12 +150,15 @@ data(DaytonSurvey)
 
 # Mutual independence + sex*race: one edge only
 mod.SR <- glm(Freq ~ . + sex*race, data = DaytonSurvey, family = poisson)
-assoc_SRaph(mod.SR)
-#> Error in assoc_SRaph(mod.SR): could not find function "assoc_SRaph"
-plot(assoc_SRaph(mod.SR), main = "Mutual indep. + [SR]")
-#> Error in assoc_SRaph(mod.SR): could not find function "assoc_SRaph"
+assoc_graph(mod.SR)
+#> Association graph: 5 variables, 1 edges
+#> Variables: sex, race, cigarette, alcohol, marijuana 
+#> Edges: sex -- race 
+#> Model: [cigarette] [alcohol] [marijuana] [sex,race] 
+plot(assoc_graph(mod.SR), main = "Mutual indep. + [SR]")
 
-# [AM][AC][MC][AR][AS][RS]: {race, Sender} indep {marijuana, ciS} | alcohol
+
+# [AM][AC][MC][AR][AS][RS]: {race, sex} indep {marijuana, cigs} | alcohol
 mod.cond <- glm(Freq ~ (cigarette + alcohol + marijuana)^2 +
                         (alcohol + sex + race)^2,
                 data = DaytonSurvey, family = poisson)
@@ -165,8 +168,10 @@ assoc_graph(mod.cond)
 #> Edges: cigarette -- alcohol, cigarette -- marijuana, alcohol -- marijuana, alcohol -- sex, alcohol -- race, sex -- race 
 #> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] 
 plot(assoc_graph(mod.cond),
-     groups = list(c("cigarette", "alcohol", "marijuana"),
+     groups = list(c("cigarette", "marijuana"),
+                   "alcohol",
                    c("sex", "race")),
-     main = "{R,S} indep {M,C} | A")
+     main = "{Mar,Cig} indep of {Race,Sex} | Alc",
+     layout = igraph::layout_nicely)
 
 ```

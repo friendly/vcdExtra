@@ -186,12 +186,15 @@ John Wiley &amp; Sons, Chichester.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Mutual independence + sex*race: one edge only</span></span></span>
 <span class="r-in"><span><span class="va">mod.SR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">sex</span><span class="op">*</span><span class="va">race</span>, data <span class="op">=</span> <span class="va">DaytonSurvey</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">assoc_SRaph</span><span class="op">(</span><span class="va">mod.SR</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in assoc_SRaph(mod.SR):</span> could not find function "assoc_SRaph"</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">assoc_SRaph</span><span class="op">(</span><span class="va">mod.SR</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Mutual indep. + [SR]"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in assoc_SRaph(mod.SR):</span> could not find function "assoc_SRaph"</span>
+<span class="r-in"><span><span class="fu">assoc_graph</span><span class="op">(</span><span class="va">mod.SR</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Association graph: 5 variables, 1 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: sex, race, cigarette, alcohol, marijuana </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Edges: sex -- race </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: [cigarette] [alcohol] [marijuana] [sex,race] </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">assoc_graph</span><span class="op">(</span><span class="va">mod.SR</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Mutual indep. + [SR]"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="assoc_graph-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># [AM][AC][MC][AR][AS][RS]: {race, Sender} indep {marijuana, ciS} | alcohol</span></span></span>
+<span class="r-in"><span><span class="co"># [AM][AC][MC][AR][AS][RS]: {race, sex} indep {marijuana, cigs} | alcohol</span></span></span>
 <span class="r-in"><span><span class="va">mod.cond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="op">(</span><span class="va">cigarette</span> <span class="op">+</span> <span class="va">alcohol</span> <span class="op">+</span> <span class="va">marijuana</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>                        <span class="op">(</span><span class="va">alcohol</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">race</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>,</span></span>
 <span class="r-in"><span>                data <span class="op">=</span> <span class="va">DaytonSurvey</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span></span></span>
@@ -201,10 +204,12 @@ John Wiley &amp; Sons, Chichester.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Edges: cigarette -- alcohol, cigarette -- marijuana, alcohol -- marijuana, alcohol -- sex, alcohol -- race, sex -- race </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">assoc_graph</span><span class="op">(</span><span class="va">mod.cond</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>     groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cigarette"</span>, <span class="st">"alcohol"</span>, <span class="st">"marijuana"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>     groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cigarette"</span>, <span class="st">"marijuana"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   <span class="st">"alcohol"</span>,</span></span>
 <span class="r-in"><span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"race"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>     main <span class="op">=</span> <span class="st">"{R,S} indep {M,C} | A"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="assoc_graph-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>     main <span class="op">=</span> <span class="st">"{Mar,Cig} indep of {Race,Sex} | Alc"</span>,</span></span>
+<span class="r-in"><span>     layout <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_nicely.html" class="external-link">layout_nicely</a></span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="assoc_graph-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
