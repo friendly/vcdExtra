@@ -14,7 +14,12 @@ assoc_graph(x, ...)
 
 \method{assoc_graph}{loglm}(x, result = c("igraph", "matrix", "edge_list"), ...)
 
-\method{assoc_graph}{glm}(x, result = c("igraph", "matrix", "edge_list"), ...)
+\method{assoc_graph}{glm}(
+  x,
+  result = c("igraph", "matrix", "edge_list"),
+  measure = c("none", "chisq", "cramer"),
+  ...
+)
 
 \method{print}{assoc_graph}(x, ...)
 }
@@ -32,16 +37,25 @@ assoc_graph(x, ...)
 \item{result}{Type of result to return: \code{"igraph"} (default) returns an
 \code{\link[igraph:igraph-package]{igraph}} object; \code{"matrix"} returns the
 adjacency matrix; \code{"edge_list"} returns a two-column character matrix of edges.}
+
+\item{measure}{Type of association measure for edge weights (only for \code{glm} method):
+\code{"none"} (default) produces an unweighted graph;
+\code{"chisq"} computes partial chi-squared statistics (deviance change when each
+edge is removed from the model);
+\code{"cramer"} computes Cramer's V from the marginal two-way table for each edge.}
 }
 \value{
 Depending on \code{result}:
 \itemize{
 \item \code{"igraph"}: An \code{igraph} undirected graph object of class
 \code{c("assoc_graph", "igraph")}, with vertex names corresponding to
-the variable names.
-\item \code{"matrix"}: A symmetric adjacency matrix (0/1) with variable names as
-row and column names.
-\item \code{"edge_list"}: A two-column character matrix, each row an edge.
+the variable names. When \code{measure != "none"}, edge weights are
+stored as \code{E(g)$weight} and the measure name as \code{g$measure}.
+\item \code{"matrix"}: A symmetric adjacency matrix with variable names as
+row and column names. Contains 0/1 when unweighted, or association
+strength values when \code{measure} is specified.
+\item \code{"edge_list"}: When unweighted, a two-column character matrix (from, to).
+When \code{measure} is specified, a data frame with columns from, to, and weight.
 }
 }
 \description{
@@ -88,13 +102,33 @@ plot(assoc_graph(mod.SR), main = "Mutual indep. + [SR]")
 mod.cond <- glm(Freq ~ (cigarette + alcohol + marijuana)^2 +
                         (alcohol + sex + race)^2,
                 data = DaytonSurvey, family = poisson)
+
+# define groups for the model
+gps <- list(c("cigarette", "marijuana"),
+            "alcohol",
+            c("sex", "race"))
+
 assoc_graph(mod.cond)
 plot(assoc_graph(mod.cond),
-     groups = list(c("cigarette", "marijuana"),
-                   "alcohol",
-                   c("sex", "race")),
-     main = "{Mar,Cig} indep of {Race,Sex} | Alc",
-     layout = igraph::layout_nicely)
+     groups = gps,
+     layout = igraph::layout_nicely,
+     main = "{R,S} indep {M,C} | A")
+
+# Weighted graph: partial chi-squared
+g <- assoc_graph(mod.cond, measure = "chisq")
+g
+plot(g, edge.label = TRUE,
+     groups = gps,
+     layout = igraph::layout_nicely,
+     main = "Partial chi-squared weights")
+
+# Cramer's V (marginal)
+g2 <- assoc_graph(mod.cond, measure = "cramer")
+g2
+plot(g2, edge.label = TRUE,
+     groups = gps,
+     layout = igraph::layout_nicely,
+     main = "Cramer's V weights")
 
 }
 \references{
