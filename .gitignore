@@ -7,6 +7,6 @@ Rplots.pdf
 revdep/
 /doc/
 /Meta/
-
 # Claude Code local settings
 .claude/
+.DS_Store
