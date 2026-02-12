@@ -90,24 +90,33 @@
 #' mod.cond <- glm(Freq ~ (cigarette + alcohol + marijuana)^2 +
 #'                         (alcohol + sex + race)^2,
 #'                 data = DaytonSurvey, family = poisson)
+#'
+#' # define groups for the model
+#' gps <- list(c("cigarette", "marijuana"),
+#'             "alcohol",
+#'             c("sex", "race"))
+#'
 #' assoc_graph(mod.cond)
 #' plot(assoc_graph(mod.cond),
-#'      groups = list(c("cigarette", "alcohol", "marijuana"),
-#'                    c("sex", "race")),
+#'      groups = gps,
+#'      layout = igraph::layout_nicely,
 #'      main = "{R,S} indep {M,C} | A")
 #'
 #' # Weighted graph: partial chi-squared
 #' g <- assoc_graph(mod.cond, measure = "chisq")
 #' g
 #' plot(g, edge.label = TRUE,
-#'      groups = list(c("cigarette", "alcohol", "marijuana"),
-#'                    c("sex", "race")),
+#'      groups = gps,
+#'      layout = igraph::layout_nicely,
 #'      main = "Partial chi-squared weights")
 #'
 #' # Cramer's V (marginal)
 #' g2 <- assoc_graph(mod.cond, measure = "cramer")
 #' g2
-#' plot(g2, edge.label = TRUE, main = "Cramer's V weights")
+#' plot(g2, edge.label = TRUE,
+#'      groups = gps,
+#'      layout = igraph::layout_nicely,
+#'      main = "Cramer's V weights")
 #'
 assoc_graph <- function(x, ...) {
   UseMethod("assoc_graph")
