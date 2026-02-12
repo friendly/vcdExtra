@@ -69,7 +69,7 @@ LRstats(
   character string specifying how to label the rows: `"name"` (default)
   uses the model object names; `"formula"` uses model formulas or
   bracket notation obtained from
-  [`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  [`get_models`](https://friendly.github.io/vcdExtra/reference/get_model.md)
   (for `glmlist` and `loglmlist` objects) or
   [`get_model`](https://friendly.github.io/vcdExtra/reference/get_model.md)
   (for individual model objects passed to the default method).
@@ -77,7 +77,7 @@ LRstats(
 - label.args:
 
   a list of additional arguments passed to
-  [`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md)
+  [`get_models`](https://friendly.github.io/vcdExtra/reference/get_model.md)
   when `label = "formula"`. Useful arguments include `abbrev` (logical
   or integer) to abbreviate factor names and `sep` to change the
   separator in bracket notation.
@@ -106,11 +106,12 @@ from `lm`, `glm`, `loglm`, `polr` and `negbin`.
 
 [`logLik.loglm`](https://friendly.github.io/vcdExtra/reference/logLik.loglm.md),
 [`modFit`](https://friendly.github.io/vcdExtra/reference/modFit.md),
-[`get_models`](https://friendly.github.io/vcdExtra/reference/glmlist.md),
+[`get_models`](https://friendly.github.io/vcdExtra/reference/get_model.md),
 [`get_model`](https://friendly.github.io/vcdExtra/reference/get_model.md)
 
 Other glmlist functions:
 [`Kway()`](https://friendly.github.io/vcdExtra/reference/Kway.md),
+[`get_model()`](https://friendly.github.io/vcdExtra/reference/get_model.md),
 [`glmlist()`](https://friendly.github.io/vcdExtra/reference/glmlist.md),
 [`mosaic.glmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md)
 

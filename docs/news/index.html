@@ -51,9 +51,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.2" id="version-092">Version 0.9.2<a class="anchor" aria-label="anchor" href="#version-092"></a></h2>
-<ul><li>Added a <code>label = c("name", "formula")</code> argument to <code><a href="../reference/LRstats.html">LRstats()</a></code> to provide for labeling models by their model formulas in the output using <code><a href="../reference/glmlist.html">get_models()</a></code>.</li>
+<ul><li>Added a <code>label = c("name", "formula")</code> argument to <code><a href="../reference/LRstats.html">LRstats()</a></code> to provide for labeling models by their model formulas in the output using <code><a href="../reference/get_model.html">get_models()</a></code>.</li>
 <li>Handle list (…) of models with formula labels more flexibly in <code><a href="../reference/LRstats.html">LRstats()</a></code>
 </li>
+<li>Document <code><a href="../reference/get_model.html">get_model()</a></code> and <code><a href="../reference/get_model.html">get_models()</a></code> together</li>
+<li>Added `assoc_graph() and a plot method for association graphs of loglinear models.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.1" id="version-091-2026-02-08">Version 0.9.1 (2026-02-08)<a class="anchor" aria-label="anchor" href="#version-091-2026-02-08"></a></h2><p class="text-muted">CRAN release: 2026-02-09</p>
@@ -67,9 +69,9 @@
 <li>Add <code>legend = "note"</code> to include a table note regarding what is shown.</li>
 <li>Added <code>Reinis</code> data as an example of a higher-way table, 2^6</li>
 <li>Make the default label for <code><a href="../reference/seq_loglm.html">seq_loglm()</a></code> models reflect the model type</li>
-<li>Added <code><a href="../reference/glmlist.html">get_models()</a></code> to extract model formulas from <code>loglmlist</code> and <code>glmlist</code> objects</li>
+<li>Added <code><a href="../reference/get_model.html">get_models()</a></code> to extract model formulas from <code>loglmlist</code> and <code>glmlist</code> objects</li>
 <li>Added <code><a href="../reference/get_model.html">get_model()</a></code> to do the same for <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> objects</li>
-<li>Fixed bug in <code><a href="../reference/glmlist.html">get_models()</a></code> where the <code>abbrev</code> argument caused an error</li>
+<li>Fixed bug in <code><a href="../reference/get_model.html">get_models()</a></code> where the <code>abbrev</code> argument caused an error</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.0" id="version-090-2026-01-17">Version 0.9.0 (2026-01-17)<a class="anchor" aria-label="anchor" href="#version-090-2026-01-17"></a></h2><p class="text-muted">CRAN release: 2026-01-21</p>
