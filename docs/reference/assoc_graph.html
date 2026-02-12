@@ -74,7 +74,12 @@ given the other variables.</p>
 <span><span class="fu">assoc_graph</span><span class="op">(</span><span class="va">x</span>, result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"igraph"</span>, <span class="st">"matrix"</span>, <span class="st">"edge_list"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'glm'</span></span>
-<span><span class="fu">assoc_graph</span><span class="op">(</span><span class="va">x</span>, result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"igraph"</span>, <span class="st">"matrix"</span>, <span class="st">"edge_list"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">assoc_graph</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"igraph"</span>, <span class="st">"matrix"</span>, <span class="st">"edge_list"</span><span class="op">)</span>,</span>
+<span>  measure <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"chisq"</span>, <span class="st">"cramer"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'assoc_graph'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -101,15 +106,26 @@ given the other variables.</p>
 <code><a href="https://r.igraph.org/reference/aaa-igraph-package.html" class="external-link">igraph</a></code> object; <code>"matrix"</code> returns the
 adjacency matrix; <code>"edge_list"</code> returns a two-column character matrix of edges.</p></dd>
 
+
+<dt id="arg-measure">measure<a class="anchor" aria-label="anchor" href="#arg-measure"></a></dt>
+<dd><p>Type of association measure for edge weights (only for <code>glm</code> method):
+<code>"none"</code> (default) produces an unweighted graph;
+<code>"chisq"</code> computes partial chi-squared statistics (deviance change when each
+edge is removed from the model);
+<code>"cramer"</code> computes Cramer's V from the marginal two-way table for each edge.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Depending on <code>result</code>:</p><ul><li><p><code>"igraph"</code>: An <code>igraph</code> undirected graph object of class
 <code>c("assoc_graph", "igraph")</code>, with vertex names corresponding to
-the variable names.</p></li>
-<li><p><code>"matrix"</code>: A symmetric adjacency matrix (0/1) with variable names as
-row and column names.</p></li>
-<li><p><code>"edge_list"</code>: A two-column character matrix, each row an edge.</p></li>
+the variable names. When <code>measure != "none"</code>, edge weights are
+stored as <code>E(g)$weight</code> and the measure name as <code>g$measure</code>.</p></li>
+<li><p><code>"matrix"</code>: A symmetric adjacency matrix with variable names as
+row and column names. Contains 0/1 when unweighted, or association
+strength values when <code>measure</code> is specified.</p></li>
+<li><p><code>"edge_list"</code>: When unweighted, a two-column character matrix (from, to).
+When <code>measure</code> is specified, a data frame with columns from, to, and weight.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -198,18 +214,50 @@ John Wiley &amp; Sons, Chichester.</p>
 <span class="r-in"><span><span class="va">mod.cond</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="op">(</span><span class="va">cigarette</span> <span class="op">+</span> <span class="va">alcohol</span> <span class="op">+</span> <span class="va">marijuana</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>                        <span class="op">(</span><span class="va">alcohol</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">race</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>,</span></span>
 <span class="r-in"><span>                data <span class="op">=</span> <span class="va">DaytonSurvey</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># define groups for the model</span></span></span>
+<span class="r-in"><span><span class="va">gps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cigarette"</span>, <span class="st">"marijuana"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            <span class="st">"alcohol"</span>,</span></span>
+<span class="r-in"><span>            <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"race"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">assoc_graph</span><span class="op">(</span><span class="va">mod.cond</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Association graph: 5 variables, 6 edges</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: cigarette, alcohol, marijuana, sex, race </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Edges: cigarette -- alcohol, cigarette -- marijuana, alcohol -- marijuana, alcohol -- sex, alcohol -- race, sex -- race </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">assoc_graph</span><span class="op">(</span><span class="va">mod.cond</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>     groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cigarette"</span>, <span class="st">"marijuana"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                   <span class="st">"alcohol"</span>,</span></span>
-<span class="r-in"><span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"race"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>     main <span class="op">=</span> <span class="st">"{Mar,Cig} indep of {Race,Sex} | Alc"</span>,</span></span>
-<span class="r-in"><span>     layout <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_nicely.html" class="external-link">layout_nicely</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>     groups <span class="op">=</span> <span class="va">gps</span>,</span></span>
+<span class="r-in"><span>     layout <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_nicely.html" class="external-link">layout_nicely</a></span>,</span></span>
+<span class="r-in"><span>     main <span class="op">=</span> <span class="st">"{R,S} indep {M,C} | A"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="assoc_graph-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Weighted graph: partial chi-squared</span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">assoc_graph</span><span class="op">(</span><span class="va">mod.cond</span>, measure <span class="op">=</span> <span class="st">"chisq"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Association graph: 5 variables, 6 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: cigarette, alcohol, marijuana, sex, race </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Edges: cigarette -- alcohol (185.28), cigarette -- marijuana (494.9), alcohol -- marijuana (89.54), alcohol -- sex (1.5), alcohol -- race (8.28), sex -- race (0.26) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Measure: chisq </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, edge.label <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>     groups <span class="op">=</span> <span class="va">gps</span>,</span></span>
+<span class="r-in"><span>     layout <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_nicely.html" class="external-link">layout_nicely</a></span>,</span></span>
+<span class="r-in"><span>     main <span class="op">=</span> <span class="st">"Partial chi-squared weights"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="assoc_graph-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cramer's V (marginal)</span></span></span>
+<span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">assoc_graph</span><span class="op">(</span><span class="va">mod.cond</span>, measure <span class="op">=</span> <span class="st">"cramer"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g2</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Association graph: 5 variables, 6 edges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: cigarette, alcohol, marijuana, sex, race </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Edges: cigarette -- alcohol (0.45), cigarette -- marijuana (0.53), alcohol -- marijuana (0.34), alcohol -- sex (0.03), alcohol -- race (0.07), sex -- race (0.02) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Measure: cramer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g2</span>, edge.label <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>     groups <span class="op">=</span> <span class="va">gps</span>,</span></span>
+<span class="r-in"><span>     layout <span class="op">=</span> <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_nicely.html" class="external-link">layout_nicely</a></span>,</span></span>
+<span class="r-in"><span>     main <span class="op">=</span> <span class="st">"Cramer's V weights"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="assoc_graph-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
