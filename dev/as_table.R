@@ -1,17 +1,18 @@
 #' Convert frequency or case form data into table form
 #' 
-#' Converts object (`obj`) in frequency or case form into table form. `freq`
-#' must be supplied if `obj` is in frequency form.
+#' Converts object (`obj`) in frequency or case form into table form. The 
+#' column containing the frequencies (`freq`) must be supplied if `obj` is in 
+#' frequency form.
 #' 
 #' @param obj object to be converted to table form
-#' @param freq If `obj` is in frequency form, this is the name of the frequency column. Leave as `NULL` if `obj` is in case form.
-#' @param dims A list of table dimensions. If not specified, all variables apart from `freq` will be used as dimensions
+#' @param freq If `obj` is in frequency form, this is the name of the frequency column. Leave as `NULL` if `obj` is in any other form.
+#' @param dims A character vector of dimensions. If not specified, all variables apart from `freq` will be used as dimensions
 #' @return object in table form
 #' 
 #' @details
-#' If `obj` was in table form to begin with, it is simply returned to the user
-#' as-is.
-#' 
+#' If `obj` was in table form to begin with, it is returned to the user as-is
+#' unless dimensions were specified (in which case it returns a table with
+#' entries summed over excluded dimensions).
 #' 
 #' @examples
 #' \dontrun{
@@ -22,6 +23,7 @@
 #' 
 #' as_table(freqForm, freq = "Freq") # frequency -> table form
 #' as_table(freqForm) # Warned if forgot freq
+#' as_table(tidy_freqForm, freq = "n") # frequency (tibble) -> table form
 #' as_table(caseForm) # case form -> table form
 #' 
 #' # For specific dimensions
@@ -33,13 +35,22 @@
 
 as_table <- function(obj, freq = NULL, dims = NULL){
   
-  # If user supplied a table already, return it back to them
-  if (length(intersect("table", class(obj))) > 0){
-    return(obj) 
+  # If user supplied a table or array, return it back to them
+  if (length(intersect(c("table", "array"), class(obj))) > 0){
+    
+    tab <- as.table(obj) # Handle arrays
+    
+    # To include dimensions if specified
+    if (!is.null(dims)){
+      tab <- margin.table(tab, margin = dims)
+    }
+    
+    return(tab)
   }
   
+  
   # If obj is a tibble, convert to data frame
-  if (length(intersect("tbl", class(obj))) > 0){
+  else if (length(intersect("tbl", class(obj))) > 0){
     obj <- as.data.frame(obj)
   }
   
@@ -54,7 +65,7 @@ as_table <- function(obj, freq = NULL, dims = NULL){
     cols <- cols[cols != freq] # Remove freq column
     tab <- xtabs(reformulate(cols, response = freq), data = obj) # freq ~ cols
   }
-  else { # If freq NOT supplied by user, then... (case form)
+  else { # If freq NOT supplied by user, and not array, then... (case form)
     tab <- xtabs(reformulate(cols), data = obj)
     
     # Check if user forgot to supply freq, warn if they potentially forgot
