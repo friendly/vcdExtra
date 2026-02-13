@@ -16,6 +16,9 @@
   together
 - Added \`assoc_graph() and a plot method for association graphs of
   loglinear models.
+- Added edge weights to
+  [`assoc_graph()`](https://friendly.github.io/vcdExtra/reference/assoc_graph.md)
+  representing partial G^2 or Cramer’s V
 
 ## Version 0.9.1 (2026-02-08)
 
