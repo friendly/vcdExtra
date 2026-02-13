@@ -83,13 +83,15 @@
 <h2 id="extensions-and-additions-to-vcd-visualizing-categorical-data">Extensions and additions to vcd: Visualizing Categorical Data<a class="anchor" aria-label="anchor" href="#extensions-and-additions-to-vcd-visualizing-categorical-data"></a>
 </h2>
 <!-- Version 0.8-6 -->
-<p>Version 0.9.2; documentation built for <code>pkgdown</code> 2026-02-09</p>
-<p>This package provides additional data sets, documentation, and many functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>. The functions here use the “strucplot” framework (Meyer et-al., 2006), which is a natural conceptual system for implementing visualization and other displays for <em>n</em>-way frequency tables which have a nested, hierarchical structure in <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>. [This can be compared to the “productplots” framework in <a href="https://CRAN.R-project.org/package=productplots" class="external-link">producplots</a>, and the defunct <code>ggmosaic</code> package]</p>
+<p>Version 0.9.2; documentation built for <code>pkgdown</code> 2026-02-13</p>
+<p>This package provides additional data sets, documentation, and many functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>.</p>
+<p>The functions here use the “strucplot” framework (Meyer et-al., 2006), which is a lovely, natural conceptual system for implementing visualization and other displays for <em>n</em>-way frequency tables which have a nested, hierarchical structure in <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>. [This can be compared to the “productplots” framework in <a href="https://CRAN.R-project.org/package=productplots" class="external-link">producplots</a>, and the defunct <code>ggmosaic</code> package]</p>
 <p><code>vcdExtra</code> also adds extensions to modeling functions for models fit using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, using the construct <code><a href="reference/glmlist.html">glmlist()</a></code> to construct a list of related models which can be summarized (via <code><a href="reference/LRstats.html">LRstats()</a></code>) and graphed (via <code><a href="reference/mosaic.glmlist.html">mosaic.glmlist()</a></code>)</p>
 <p><code>vcdExtra</code> is a support package for the book <a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835" class="external-link"><em>Discrete Data Analysis with R</em></a> (DDAR) by Michael Friendly and David Meyer. There is also a <a href="http://ddar.datavis.ca" class="external-link">web site for DDAR</a> with all figures and code samples from the book. It is also used in my graduate course, <a href="https://friendly.github.io/psy6136/" class="external-link">Psy 6136: Categorical Data Analysis</a>.</p>
+<p>A more general goal of <code>vcdExtra</code> is to contribute to the wider topics of <em>thinking about, analyzing and visualizing categorical data</em>, extending this beyond the scope of our book. In this sense, it continues to be a love letter 💌 to CDA.</p>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="id_-installation">📂 Installation<a class="anchor" aria-label="anchor" href="#id_-installation"></a>
 </h2>
 <p>Get the released version (0.9.1) from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
@@ -113,33 +115,34 @@
 <li><p>A companion package, <a href="https://friendly.github.io/nestedLogit/" class="external-link"><code>nestedLogit</code></a>, for fitting nested dichotomy logistic regression models for a polytomous response.</p></li>
 </ul>
 </div>
-<div class="section level4">
-<h4 id="vcdextra-highlights">vcdExtra Highlights<a class="anchor" aria-label="anchor" href="#vcdextra-highlights"></a>
-</h4>
-<div class="section level5">
-<h5 id="mosaic-plot-extensions">mosaic plot extensions<a class="anchor" aria-label="anchor" href="#mosaic-plot-extensions"></a>
-</h5>
+</div>
+</div>
+<div class="section level2">
+<h2 id="id_-vcdextra-highlights">💡 vcdExtra Highlights<a class="anchor" aria-label="anchor" href="#id_-vcdextra-highlights"></a>
+</h2>
+<p>What’s in the box?</p>
+<div class="section level3">
+<h3 id="mosaic-plot-extensions">Mosaic plot extensions<a class="anchor" aria-label="anchor" href="#mosaic-plot-extensions"></a>
+</h3>
 <ul>
 <li><p>The method <code><a href="reference/mosaic.glm.html">mosaic.glm()</a></code> extends the <code>mosaic.loglm()</code> method in the vcd package to this wider class of models, e.g., models for ordinal factors, which can’t be handled with <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>. This method also works for the generalized <em>nonlinear</em> models fit with the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package, including models for square tables and models with multiplicative associations (RC models).</p></li>
 <li><p><code><a href="reference/mosaic3d.html">mosaic3d()</a></code> introduces a 3D generalization of mosaic displays using the <a href="https://CRAN.R-project.org/package=rgl" class="external-link">rgl</a> package.</p></li>
+<li><p>A new “labeling” method, <code><a href="reference/labeling_points.html">labeling_points()</a></code> for mosaic plots allows you to show the observed or expected frequencies in cells as point symbols, thereby showing the data or model in a dot-density representation. This goes back to an old paper, Friendly(1995), where I describe visual and conceptual models for categorical data with a physical analog of gas molecules in chambers.</p></li>
 </ul>
 </div>
-<div class="section level5">
-<h5 id="model-extensions">model extensions<a class="anchor" aria-label="anchor" href="#model-extensions"></a>
-</h5>
+<div class="section level3">
+<h3 id="model-extensions">Model extensions<a class="anchor" aria-label="anchor" href="#model-extensions"></a>
+</h3>
 <ul>
 <li><p>A new class, <code>glmlist</code>, is introduced for working with collections of glm objects, e.g., <code><a href="reference/Kway.html">Kway()</a></code> for fitting all K-way models from a basic marginal model, and <code><a href="reference/LRstats.html">LRstats()</a></code> for brief statistical summaries of goodness-of-fit for a collection of models.</p></li>
 <li><p>Similarly, for loglinear models fit using <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, the function <code><a href="reference/seq_loglm.html">seq_loglm()</a></code> fits a series of sequential models to the 1-, 2-, … <em>n</em>-way marginal tables, corresponding to a variety of types of models for joint, conditional, mutual, … independence. It returns an object of class <code>loglmlist</code>, each of which is a class <code>loglm</code> object. The function <code><a href="reference/seq_mosaic.html">seq_mosaic()</a></code> generates the mosaic plots and other plots in the <code><a href="https://rdrr.io/pkg/vcd/man/strucplot.html" class="external-link">vcd::strucplot()</a></code> framework.</p></li>
 <li><p>For <strong>square tables</strong> with ordered factors, <code><a href="reference/Crossings.html">Crossings()</a></code> supplements the specification of terms in model formulas using <code><a href="https://rdrr.io/pkg/gnm/man/Symm.html" class="external-link">gnm::Symm()</a></code>, <code><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">gnm::Diag()</a></code>, <code>gnm::Topo(),</code> etc. in the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package.</p></li>
 </ul>
 </div>
-</div>
-<div class="section level4">
-<h4 id="other-additions">Other additions<a class="anchor" aria-label="anchor" href="#other-additions"></a>
-</h4>
-<ul>
-<li>many new data sets; use <code>datasets("vcdExtra")</code> to see a list with titles and descriptions. The vignette, <code><a href="articles/datasets.html">vignette("datasets", package="vcdExtra")</a></code> provides a classification of these according to methods of analysis.</li>
-</ul>
+<div class="section level3">
+<h3 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a>
+</h3>
+<p>Beyond the wide range of **datasets* in the <code>vcd</code> package, this <code>vcdExtra</code> package includes many new data sets, that I’ve found useful for illustrating various ideas, models, methods and visualization. Use <code>datasets("vcdExtra")</code> to see a list with titles and descriptions. The vignette, <code><a href="articles/datasets.html">vignette("datasets", package="vcdExtra")</a></code> provides a classification of these according to methods of analysis.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vcdExtra</span><span class="fu">::</span><span class="fu"><a href="reference/datasets.html">datasets</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
 <span><span class="co">##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     </span></span>
@@ -154,9 +157,11 @@
 <span><span class="co">## [37] "Mobility"       "PhdPubs"        "Reinis"         "ShakeWords"    </span></span>
 <span><span class="co">## [41] "TV"             "Titanicp"       "Toxaemia"       "Vietnam"       </span></span>
 <span><span class="co">## [45] "Vote1980"       "WorkerSat"      "Yamaguchi87"</span></span></code></pre></div>
-<ul>
-<li>a <a href="https://cran.r-project.org/web/packages/vcdExtra/vignettes/" class="external-link">collection of tutorial vignettes</a>. In the installed package, they can be viewed using <code>browseVignettes(package = "vcdExtra")</code>;</li>
-</ul>
+</div>
+<div class="section level3">
+<h3 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+</h3>
+<p>A <a href="https://cran.r-project.org/web/packages/vcdExtra/vignettes/" class="external-link">collection of <strong>tutorial vignettes</strong></a>. In the installed package, they can be viewed using <code>browseVignettes(package = "vcdExtra")</code>;</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vigns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/getVignetteInfo.html" class="external-link">getVignetteInfo</a></span><span class="op">(</span><span class="st">"vcdExtra"</span><span class="op">)</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"File"</span>, <span class="st">"Title"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">vigns</span><span class="op">$</span><span class="va">Title</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"["</span>, <span class="va">vigns</span><span class="op">$</span><span class="va">Title</span>, <span class="st">"](https://friendly.github.io/vcdExtra/articles/"</span>,</span>
@@ -211,12 +216,25 @@
 </tbody>
 </table>
 <ul>
-<li><p>there is also a set of simple demonstration files illustrating analysis of datasets with more detail than provided in their individual help files. Use <code>demo(package = "vcdExtra")</code> to see the list and `demo(“occStatus”) to run the analysis for this example.</p></li>
-<li><p>a few useful utility functions for manipulating categorical data sets and working with models for categorical data: <code><a href="reference/loglin-utilities.html">joint()</a></code>, <code><a href="reference/loglin-utilities.html">conditional()</a></code>, <code><a href="reference/loglin-utilities.html">mutual()</a></code>, <code><a href="reference/loglin-utilities.html">saturated()</a></code>.</p></li>
+<li><p>there is also a set of simple <strong>demonstration files</strong> illustrating analysis of datasets with more detail than provided in their individual help files. Use <code>demo(package = "vcdExtra")</code> to see the list and run <code>demo("occStatus") to run the analysis for this example, or</code>demo(“mental-glm”)` for another one.</p></li>
+<li><p>a few useful <strong>utility functions</strong> for manipulating categorical data sets and working with models for categorical data: <code><a href="reference/loglin-utilities.html">joint()</a></code>, <code><a href="reference/loglin-utilities.html">conditional()</a></code>, <code><a href="reference/loglin-utilities.html">mutual()</a></code>, <code><a href="reference/loglin-utilities.html">saturated()</a></code>. These make it easier to specify <code>loglm()</code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> models representing a statistical concept, like conditional association, rather than figuring out a formula like <code>[AC] [BC]</code> for a 3-way table or <code>[AD] [BD] [CD]</code> for a 4-way table.</p></li>
 <li><p>A re-implementation of <code><a href="https://rdrr.io/pkg/vcd/man/woolf_test.html" class="external-link">vcd::woolf_test()</a></code> extends the analysis of homogeneity of odds ratios in 2 x 2 x R x C tables to provide tests for differences among the R strata rows and C strata columns.</p></li>
-<li><p>A collection of demo files illustrating analysis of other datasets and models. Run <code>demo(package = "vcdExtra")</code> to see them, and, for example, <code>demo("mental-glm", package = "vcdExtra")</code> to run <code>demo("demo/mental-glm.R")</code> in your R console.</p></li>
-<li><p>A new function, <code><a href="reference/color_table.html">color_table()</a></code> provides semi-graphic tables of frequency tables or residuals from a loglinear model.</p></li>
 </ul>
+</div>
+<div class="section level3">
+<h3 id="recent-work">Recent work<a class="anchor" aria-label="anchor" href="#recent-work"></a>
+</h3>
+<div class="section level4">
+<h4 id="visual-tables">Visual tables<a class="anchor" aria-label="anchor" href="#visual-tables"></a>
+</h4>
+<p>A new function, <code><a href="reference/color_table.html">color_table()</a></code> provides semi-graphic tables of frequency tables or residuals from a loglinear model. The essential idea is to use background shading of cells in the table to show patterns not discernible in purely numeric tables.</p>
+</div>
+<div class="section level4">
+<h4 id="association-graphs">Association graphs<a class="anchor" aria-label="anchor" href="#association-graphs"></a>
+</h4>
+<p>I’m now experimenting with using graphical association representations of models in conjunction with the other methods, and ways of specifying models here. <code><a href="reference/assoc_graph.html">assoc_graph()</a></code> Association graphs represent variables as nodes and their partial associations between pairs of variables as edges. They are useful for understanding If two variables are not connected by an edge, they are conditionally independent given the other variables in the model.</p>
+<p>How can we use this in practice, to understand a model, or how well it fits a given dataset?</p>
+<p>There is now (rudimentary) a <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method for association graphs which allows edges to be weighted by a measure of the strength of association between variables: partial <span class="math inline">\(G^2\)</span> or Cramer’s V. Still very much a WIP.</p>
 </div>
 </div>
 </div>
@@ -376,6 +394,7 @@
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
+<p>Friendly, M. (1995). Conceptual and Visual Models for Categorical Data. <em>The American Statistician</em>, <strong>49</strong>, 153–160. <a href="http://www.datavis.ca/papers/amstat95.pdf" class="external-link uri">http://www.datavis.ca/papers/amstat95.pdf</a></p>
 <p>Friendly, M. &amp; Meyer, D. (2016). <em>Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data</em>. Boca Raton, FL: Chapman &amp; Hall/CRC.</p>
 <p>Meyer, D., Zeileis, A., &amp; Hornik, K. (2006). The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd. <em>Journal of Statistical Software</em>, <strong>17</strong>(3), 1–48. <a href="http://www.jstatsoft.org/v17/i03/" class="external-link uri">http://www.jstatsoft.org/v17/i03/</a></p>
 </div>
