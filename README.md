@@ -26,7 +26,7 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.2; documentation built for `pkgdown` 2026-02-09
+Version 0.9.2; documentation built for `pkgdown` 2026-02-13
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -34,10 +34,12 @@ functions designed to extend the
 Categorical Data* and the [gnm](https://CRAN.R-project.org/package=gnm)
 package for *Generalized Nonlinear Models*. In particular, `vcdExtra`
 extends mosaic, assoc and sieve plots from vcd to handle `glm()` and
-`gnm()` models and adds a 3D version in `mosaic3d()`. The functions here
-use the “strucplot” framework (Meyer et-al., 2006), which is a natural
-conceptual system for implementing visualization and other displays for
-*n*-way frequency tables which have a nested, hierarchical structure in
+`gnm()` models and adds a 3D version in `mosaic3d()`.
+
+The functions here use the “strucplot” framework (Meyer et-al., 2006),
+which is a lovely, natural conceptual system for implementing
+visualization and other displays for *n*-way frequency tables which have
+a nested, hierarchical structure in
 [vcd](https://CRAN.R-project.org/package=vcd). \[This can be compared to
 the “productplots” framework in
 [producplots](https://CRAN.R-project.org/package=productplots), and the
@@ -56,7 +58,12 @@ for DDAR](http://ddar.datavis.ca) with all figures and code samples from
 the book. It is also used in my graduate course, [Psy 6136: Categorical
 Data Analysis](https://friendly.github.io/psy6136/).
 
-## Installation
+A more general goal of `vcdExtra` is to contribute to the wider topics
+of *thinking about, analyzing and visualizing categorical data*,
+extending this beyond the scope of our book. In this sense, it continues
+to be a love letter 💌 to CDA.
+
+## 📂 Installation
 
 Get the released version (0.9.1) from CRAN:
 
@@ -104,9 +111,11 @@ packages.
   [`nestedLogit`](https://friendly.github.io/nestedLogit/), for fitting
   nested dichotomy logistic regression models for a polytomous response.
 
-#### vcdExtra Highlights
+## 💡 vcdExtra Highlights
 
-##### mosaic plot extensions
+What’s in the box?
+
+### Mosaic plot extensions
 
 - The method `mosaic.glm()` extends the `mosaic.loglm()` method in the
   vcd package to this wider class of models, e.g., models for ordinal
@@ -119,7 +128,14 @@ packages.
 - `mosaic3d()` introduces a 3D generalization of mosaic displays using
   the [rgl](https://CRAN.R-project.org/package=rgl) package.
 
-##### model extensions
+- A new “labeling” method, `labeling_points()` for mosaic plots allows
+  you to show the observed or expected frequencies in cells as point
+  symbols, thereby showing the data or model in a dot-density
+  representation. This goes back to an old paper, Friendly(1995), where
+  I describe visual and conceptual models for categorical data with a
+  physical analog of gas molecules in chambers.
+
+### Model extensions
 
 - A new class, `glmlist`, is introduced for working with collections of
   glm objects, e.g., `Kway()` for fitting all K-way models from a basic
@@ -139,12 +155,14 @@ packages.
   `gnm::Diag()`, `gnm::Topo(),` etc. in the
   [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-#### Other additions
+### Datasets
 
-- many new data sets; use `datasets("vcdExtra")` to see a list with
-  titles and descriptions. The vignette,
-  `vignette("datasets", package="vcdExtra")` provides a classification
-  of these according to methods of analysis.
+Beyond the wide range of \*\*datasets\* in the `vcd` package, this
+`vcdExtra` package includes many new data sets, that I’ve found useful
+for illustrating various ideas, models, methods and visualization. Use
+`datasets("vcdExtra")` to see a list with titles and descriptions. The
+vignette, `vignette("datasets", package="vcdExtra")` provides a
+classification of these according to methods of analysis.
 
 ``` r
 vcdExtra::datasets("vcdExtra")[,1]
@@ -162,10 +180,12 @@ vcdExtra::datasets("vcdExtra")[,1]
 ## [45] "Vote1980"       "WorkerSat"      "Yamaguchi87"
 ```
 
-- a [collection of tutorial
-  vignettes](https://cran.r-project.org/web/packages/vcdExtra/vignettes/).
-  In the installed package, they can be viewed using
-  `browseVignettes(package = "vcdExtra")`;
+### Vignettes
+
+A [collection of **tutorial
+vignettes**](https://cran.r-project.org/web/packages/vcdExtra/vignettes/).
+In the installed package, they can be viewed using
+`browseVignettes(package = "vcdExtra")`;
 
 ``` r
 vigns <- as.data.frame(tools::getVignetteInfo("vcdExtra")[,c("File", "Title")])
@@ -186,26 +206,51 @@ vigns |> knitr::kable()
 | datasets.Rmd | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html) |
 | tidyCats.Rmd | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) |
 
-- there is also a set of simple demonstration files illustrating
+- there is also a set of simple **demonstration files** illustrating
   analysis of datasets with more detail than provided in their
   individual help files. Use `demo(package = "vcdExtra")` to see the
-  list and \`demo(“occStatus”) to run the analysis for this example.
+  list and run
+  `demo("occStatus") to run the analysis for this example, or`demo(“mental-glm”)\`
+  for another one.
 
-- a few useful utility functions for manipulating categorical data sets
-  and working with models for categorical data: `joint()`,
-  `conditional()`, `mutual()`, `saturated()`.
+- a few useful **utility functions** for manipulating categorical data
+  sets and working with models for categorical data: `joint()`,
+  `conditional()`, `mutual()`, `saturated()`. These make it easier to
+  specify `loglm()` and `glm()` models representing a statistical
+  concept, like conditional association, rather than figuring out a
+  formula like `[AC] [BC]` for a 3-way table or `[AD] [BD] [CD]` for a
+  4-way table.
 
 - A re-implementation of `vcd::woolf_test()` extends the analysis of
   homogeneity of odds ratios in 2 x 2 x R x C tables to provide tests
   for differences among the R strata rows and C strata columns.
 
-- A collection of demo files illustrating analysis of other datasets and
-  models. Run `demo(package = "vcdExtra")` to see them, and, for
-  example, `demo("mental-glm", package = "vcdExtra")` to run
-  `demo("demo/mental-glm.R")` in your R console.
+### Recent work
 
-- A new function, `color_table()` provides semi-graphic tables of
-  frequency tables or residuals from a loglinear model.
+#### Visual tables
+
+A new function, `color_table()` provides semi-graphic tables of
+frequency tables or residuals from a loglinear model. The essential idea
+is to use background shading of cells in the table to show patterns not
+discernible in purely numeric tables.
+
+#### Association graphs
+
+I’m now experimenting with using graphical association representations
+of models in conjunction with the other methods, and ways of specifying
+models here. `assoc_graph()` Association graphs represent variables as
+nodes and their partial associations between pairs of variables as
+edges. They are useful for understanding If two variables are not
+connected by an edge, they are conditionally independent given the other
+variables in the model.
+
+How can we use this in practice, to understand a model, or how well it
+fits a given dataset?
+
+There is now (rudimentary) a `plot()` method for association graphs
+which allows edges to be weighted by a measure of the strength of
+association between variables: partial $G^2$ or Cramer’s V. Still very
+much a WIP.
 
 ## Examples
 
@@ -438,6 +483,10 @@ anova(indep, linlin, roweff, test = "Chisq")
 ```
 
 ## References
+
+Friendly, M. (1995). Conceptual and Visual Models for Categorical Data.
+*The American Statistician*, **49**, 153–160.
+<http://www.datavis.ca/papers/amstat95.pdf>
 
 Friendly, M. & Meyer, D. (2016). *Discrete Data Analysis with R:
 Visualization and Modeling Techniques for Categorical and Count Data*.
