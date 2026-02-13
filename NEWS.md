@@ -4,7 +4,7 @@
 * Handle list (...) of models with formula labels more flexibly in `LRstats()`
 * Document `get_model()` and `get_models()` together
 * Added `assoc_graph() and a plot method for association graphs of loglinear models.
-
+* Added edge weights to `assoc_graph()` representing partial G^2 or Cramer's V
 
 ## Version 0.9.1 (2026-02-08)
 
