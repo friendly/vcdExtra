@@ -80,27 +80,27 @@ str(artdf)
 # 1D case
 (tab <- table(sample(head(letters), 20, replace=TRUE)))
 #> 
-#> b c d e f 
-#> 4 6 3 3 4 
+#> a b c d e f 
+#> 1 5 5 2 4 3 
 expand.table(tab, var.names="letter")
 #>    letter
-#> 1       b
+#> 1       a
 #> 2       b
 #> 3       b
 #> 4       b
-#> 5       c
-#> 6       c
+#> 5       b
+#> 6       b
 #> 7       c
 #> 8       c
 #> 9       c
 #> 10      c
-#> 11      d
+#> 11      c
 #> 12      d
 #> 13      d
 #> 14      e
 #> 15      e
 #> 16      e
-#> 17      f
+#> 17      e
 #> 18      f
 #> 19      f
 #> 20      f

@@ -17,7 +17,12 @@ assoc_graph(x, result = c("igraph", "matrix", "edge_list"), ...)
 assoc_graph(x, result = c("igraph", "matrix", "edge_list"), ...)
 
 # S3 method for class 'glm'
-assoc_graph(x, result = c("igraph", "matrix", "edge_list"), ...)
+assoc_graph(
+  x,
+  result = c("igraph", "matrix", "edge_list"),
+  measure = c("none", "chisq", "cramer"),
+  ...
+)
 
 # S3 method for class 'assoc_graph'
 print(x, ...)
@@ -51,18 +56,30 @@ print(x, ...)
   object; `"matrix"` returns the adjacency matrix; `"edge_list"` returns
   a two-column character matrix of edges.
 
+- measure:
+
+  Type of association measure for edge weights (only for `glm` method):
+  `"none"` (default) produces an unweighted graph; `"chisq"` computes
+  partial chi-squared statistics (deviance change when each edge is
+  removed from the model); `"cramer"` computes Cramer's V from the
+  marginal two-way table for each edge.
+
 ## Value
 
 Depending on `result`:
 
 - `"igraph"`: An `igraph` undirected graph object of class
   `c("assoc_graph", "igraph")`, with vertex names corresponding to the
-  variable names.
+  variable names. When `measure != "none"`, edge weights are stored as
+  `E(g)$weight` and the measure name as `g$measure`.
 
-- `"matrix"`: A symmetric adjacency matrix (0/1) with variable names as
-  row and column names.
+- `"matrix"`: A symmetric adjacency matrix with variable names as row
+  and column names. Contains 0/1 when unweighted, or association
+  strength values when `measure` is specified.
 
-- `"edge_list"`: A two-column character matrix, each row an edge.
+- `"edge_list"`: When unweighted, a two-column character matrix (from,
+  to). When `measure` is specified, a data frame with columns from, to,
+  and weight.
 
 ## Details
 
@@ -162,16 +179,48 @@ plot(assoc_graph(mod.SR), main = "Mutual indep. + [SR]")
 mod.cond <- glm(Freq ~ (cigarette + alcohol + marijuana)^2 +
                         (alcohol + sex + race)^2,
                 data = DaytonSurvey, family = poisson)
+
+# define groups for the model
+gps <- list(c("cigarette", "marijuana"),
+            "alcohol",
+            c("sex", "race"))
+
 assoc_graph(mod.cond)
 #> Association graph: 5 variables, 6 edges
 #> Variables: cigarette, alcohol, marijuana, sex, race 
 #> Edges: cigarette -- alcohol, cigarette -- marijuana, alcohol -- marijuana, alcohol -- sex, alcohol -- race, sex -- race 
 #> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] 
 plot(assoc_graph(mod.cond),
-     groups = list(c("cigarette", "marijuana"),
-                   "alcohol",
-                   c("sex", "race")),
-     main = "{Mar,Cig} indep of {Race,Sex} | Alc",
-     layout = igraph::layout_nicely)
+     groups = gps,
+     layout = igraph::layout_nicely,
+     main = "{R,S} indep {M,C} | A")
+
+
+# Weighted graph: partial chi-squared
+g <- assoc_graph(mod.cond, measure = "chisq")
+g
+#> Association graph: 5 variables, 6 edges
+#> Variables: cigarette, alcohol, marijuana, sex, race 
+#> Edges: cigarette -- alcohol (185.28), cigarette -- marijuana (494.9), alcohol -- marijuana (89.54), alcohol -- sex (1.5), alcohol -- race (8.28), sex -- race (0.26) 
+#> Measure: chisq 
+#> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] 
+plot(g, edge.label = TRUE,
+     groups = gps,
+     layout = igraph::layout_nicely,
+     main = "Partial chi-squared weights")
+
+
+# Cramer's V (marginal)
+g2 <- assoc_graph(mod.cond, measure = "cramer")
+g2
+#> Association graph: 5 variables, 6 edges
+#> Variables: cigarette, alcohol, marijuana, sex, race 
+#> Edges: cigarette -- alcohol (0.45), cigarette -- marijuana (0.53), alcohol -- marijuana (0.34), alcohol -- sex (0.03), alcohol -- race (0.07), sex -- race (0.02) 
+#> Measure: cramer 
+#> Model: [cigarette,alcohol,marijuana] [alcohol,sex,race] 
+plot(g2, edge.label = TRUE,
+     groups = gps,
+     layout = igraph::layout_nicely,
+     main = "Cramer's V weights")
 
 ```
