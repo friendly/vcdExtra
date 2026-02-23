@@ -12,8 +12,8 @@ background for showing frequencies as dot-densities in mosaics and related displ
 * Show mosaics with size ~ {observed, expected} frequencies, with points ~ {observed, expected}
 
 * This suggests another `vcd::shading()` function: `shading_marimekko()`. Not residual-based. It simply uses
-a collection of distinct colors for the 2nd, 3rd, ... variables split to show the sub-categories.   This
-is what is done in the {ggmosaic} package. 
+a collection of distinct colors for the 2nd, 3rd, ... variables split to show where the the sub-categories are
+in the next dimension. This is what is done in the {ggmosaic} package. 
 
 The current {vcd} implementation is contained in "C:\Dropbox\R\packages\vcd\R\shadings.R"
 This would be useful for mosaic plots only showing the successive splits by factors,
