@@ -31,6 +31,8 @@
 #' as_caseform(arrayDat) # array -> case form
 #' }
 #' 
+#' @importFrom dplyr as_tibble
+#' 
 #' @export
 
 as_caseform <- function(obj, freq = "Freq", dims = NULL, tidy = TRUE){
