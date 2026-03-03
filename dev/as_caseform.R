@@ -17,21 +17,30 @@
 #' just like \code{expand.dft()}. Converts `obj` to a table using 
 #' \code{as_table()} before converting to case form.
 #' 
+#' @importFrom dplyr as_tibble
+#' 
 #' @examples
-#' \dontrun{
-#' data("HairEyeColor")
+#' library(vcdExtra)
+#' 
+#' data("HairEyeColor", package = "vcdExtra")
+#' 
 #' freqForm <- as.data.frame(HairEyeColor) # Generate frequency form data
-#' tidy_freqForm <- as_tibble(HairEyeColor) # Generate tidy frequency form data
+#' tidy_freqForm <- dplyr::as_tibble(HairEyeColor) # Generate tidy frequency form data
 #' tableForm <- as_table(HairEyeColor) # Generate table form data
 #' arrayDat <- as_array(HairEyeColor) # Generate an array
 #' 
-#' as_caseform(freqForm) # frequency -> case form
-#' as_caseform(tidy_freqForm, freq = "n") # frequency form (tibble) -> case form
-#' as_caseform(tableForm, dims = c("Hair", "Eye")) # Optionally specify dims
-#' as_caseform(arrayDat) # array -> case form
-#' }
+#' # Frequency form -> case form
+#' as_caseform(freqForm) |> str()
 #' 
-#' @importFrom dplyr as_tibble
+#' # Frequency form (tibble) -> case form
+#' as_caseform(tidy_freqForm, freq = "n") |> str()
+#' 
+#' # Array -> case form
+#' as_caseform(arrayDat) |> str()
+#' 
+#' # Optionally specify dims
+#' as_caseform(tableForm, dims = c("Hair", "Eye")) |> str()
+#'
 #' 
 #' @export
 
@@ -40,7 +49,7 @@ as_caseform <- function(obj, freq = "Freq", dims = NULL, tidy = TRUE){
   tab <- expand.dft(as_table(obj, freq = freq, dims = dims), freq = freq)
   
   if (tidy){
-    tab <- as_tibble(tab)
+    tab <- dplyr::as_tibble(tab)
   }
   
   return(tab)

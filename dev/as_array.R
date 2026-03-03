@@ -13,19 +13,30 @@
 #' Unclasses the \code{as_table()} function to return an object in array form.
 #' 
 #' @examples
-#' \dontrun{
+#' library(vcdExtra)
+#' 
+#' data("HairEyeColor", package = "vcdExtra")
+#' 
 #' freqForm <- as.data.frame(HairEyeColor) # Generate frequency form data
 #' tidy_freqForm <- as_tibble(HairEyeColor) # Generate tidy frequency form data
 #' caseForm <- expand.dft(freqForm) # Generate case form data
 #' 
-#' as_array(freqForm, freq = "Freq") # frequency form -> array
-#' as_array(freqForm) # Warned if forgot freq
-#' as_array(caseForm) # case form -> array
-#' as_table(tidy_freqForm, freq = "n") # frequency (tibble) form -> array
+#' # Frequency form -> array form
+#' as_array(freqForm, freq = "Freq") |> str()
+#' 
+#' # Warned if forgot to specify freq
+#' as_array(freqForm) |> str()
+#' 
+#' # Case form -> array form
+#' as_array(caseForm) |> str()
+#' 
+#' # Frequency (tibble) form -> array form
+#' as_table(tidy_freqForm, freq = "n") |> str()
 #' 
 #' # For specific dimensions
-#' as_array(tidy_freqForm, freq = "n", dims = c("Hair", "Eye"))
-#' }
+#' as_array(tidy_freqForm, freq = "n", dims = c("Hair", "Eye")) |> str()
+#' 
+#' 
 #' @export
 
 as_array <- function(obj, freq = NULL, dims = NULL){
