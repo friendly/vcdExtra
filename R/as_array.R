@@ -12,13 +12,15 @@
 #' @details
 #' Unclasses the \code{as_table()} function to return an object in array form.
 #' 
+#' @author Gavin M. Klorfine
+#' 
 #' @examples
 #' library(vcdExtra)
 #' 
 #' data("HairEyeColor", package = "vcdExtra")
 #' 
 #' freqForm <- as.data.frame(HairEyeColor) # Generate frequency form data
-#' tidy_freqForm <- as_tibble(HairEyeColor) # Generate tidy frequency form data
+#' tidy_freqForm <- dplyr::as_tibble(HairEyeColor) # Generate tidy frequency form data
 #' caseForm <- expand.dft(freqForm) # Generate case form data
 #' 
 #' # Frequency form -> array form
@@ -31,7 +33,7 @@
 #' as_array(caseForm) |> str()
 #' 
 #' # Frequency (tibble) form -> array form
-#' as_table(tidy_freqForm, freq = "n") |> str()
+#' as_array(tidy_freqForm, freq = "n") |> str()
 #' 
 #' # For specific dimensions
 #' as_array(tidy_freqForm, freq = "n", dims = c("Hair", "Eye")) |> str()

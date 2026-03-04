@@ -17,6 +17,8 @@
 #' just like \code{expand.dft()}. Converts `obj` to a table using 
 #' \code{as_table()} before converting to case form.
 #' 
+#' @author Gavin M. Klorfine
+#' 
 #' @importFrom dplyr as_tibble
 #' 
 #' @examples

@@ -16,7 +16,9 @@
 #' Converts `obj` to a table using \code{as_table()} before converting to
 #' frequency form
 #' 
-#' @importFrom dplyr as_tibble.
+#' @author Gavin M. Klorfine
+#' 
+#' @importFrom dplyr as_tibble
 #' 
 #' @examples
 #' library(vcdExtra)

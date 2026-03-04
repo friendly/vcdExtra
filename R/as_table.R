@@ -18,7 +18,10 @@
 #' or numerical vector of table dimensions is supplied to `prop`, proportions 
 #' will be marginalized across the specified dimensions.
 #' 
+#' @author Gavin M. Klorfine
+#' 
 #' @importFrom stats reformulate xtabs
+#' @importFrom methods is
 #' 
 #' @examples
 #' library(vcdExtra)
@@ -26,7 +29,7 @@
 #' data("HairEyeColor", package = "vcdExtra")
 #' 
 #' freqForm <- as.data.frame(HairEyeColor) # Generate frequency form data
-#' tidy_freqForm <- as_tibble(HairEyeColor) # Generate tidy frequency form data
+#' tidy_freqForm <- dplyr::as_tibble(HairEyeColor) # Generate tidy frequency form data
 #' caseForm <- expand.dft(freqForm) # Generate case form data
 #' 
 #' # Frequency form -> table form
@@ -67,7 +70,8 @@
 as_table <- function(obj, freq = NULL, dims = NULL, prop = NULL){
   
   # If user supplied a table or array, remember that
-  if (length(intersect(c("table", "array"), class(obj))) > 0){
+  tab_or_array <- FALSE
+  if (is(obj, "table") || is(obj, "array")){
     
     tab <- as.table(obj) # Handle arrays
     
@@ -79,7 +83,7 @@ as_table <- function(obj, freq = NULL, dims = NULL, prop = NULL){
     tab_or_array <- TRUE
   }
   # If obj is a tibble, convert to data frame
-  else if (length(intersect("tbl", class(obj))) > 0){
+  else if (is(obj, "table")){
     obj <- as.data.frame(obj)
   }
   
@@ -90,24 +94,26 @@ as_table <- function(obj, freq = NULL, dims = NULL, prop = NULL){
     cols <- colnames(obj)
   }
   
-  if (!is.null(freq)){  # If freq supplied by user, then... (freq form)
-    cols <- cols[cols != freq] # Remove freq column
-    tab <- xtabs(reformulate(cols, response = freq), data = obj) # freq ~ cols
-  }
-  else if (is.null(freq) && !tab_or_array){ # If freq NOT supplied by user, and not array, then... (case form)
-    tab <- xtabs(reformulate(cols), data = obj)
-    
-    # Check if user forgot to supply freq, warn if they potentially forgot
-    common <- c("n", "freq", "frequency", "count")
-    if (length(intersect(tolower(colnames(obj)), common)) > 0){
-      warning("Ensure a value for 'freq' was supplied if your data was in frequency form.")
+  if (!tab_or_array){ # If not a table or array...
+    if (!is.null(freq)){  # If freq supplied by user, then... (freq form)
+      cols <- cols[cols != freq] # Remove freq column
+      tab <- xtabs(reformulate(cols, response = freq), data = obj) # freq ~ cols
+    }
+    else if (is.null(freq)){ # If freq NOT supplied by user, and not array, then... (case form)
+      tab <- xtabs(reformulate(cols), data = obj)
+      
+      # Check if user forgot to supply freq, warn if they potentially forgot
+      common <- c("n", "freq", "frequency", "count")
+      if (length(intersect(tolower(colnames(obj)), common)) > 0){
+        warning("Ensure a value for 'freq' was supplied if your data was in frequency form.")
+      }
     }
   }
   
   
   if (!is.null(prop)){ # If user wants proportions
     
-    if (class(prop) == "logical" && prop == TRUE){ # If margins not specified
+    if (is(prop, "logical") && prop == TRUE){ # If margins not specified
       tab <- prop.table(tab)
     }
     else if (is.character(prop) || is.numeric(prop)){ # If proportions are to be marginal
