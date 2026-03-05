@@ -27,7 +27,7 @@ Unclasses the \code{as_table()} function to return an object in array form.
 \examples{
 library(vcdExtra)
 
-data("HairEyeColor", package = "vcdExtra")
+data("HairEyeColor")
 
 freqForm <- as.data.frame(HairEyeColor) # Generate frequency form data
 tidy_freqForm <- dplyr::as_tibble(HairEyeColor) # Generate tidy frequency form data

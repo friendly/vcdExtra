@@ -23,7 +23,7 @@
 #' @examples
 #' library(vcdExtra)
 #' 
-#' data("HairEyeColor", package = "vcdExtra")
+#' data("HairEyeColor")
 #' 
 #' freqForm <- as.data.frame(HairEyeColor) # Generate frequency form data
 #' tableForm <- as_table(HairEyeColor) # Generate table form data

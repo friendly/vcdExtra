@@ -26,7 +26,7 @@
 #' @examples
 #' library(vcdExtra)
 #' 
-#' data("HairEyeColor", package = "vcdExtra")
+#' data("HairEyeColor")
 #' 
 #' freqForm <- as.data.frame(HairEyeColor) # Generate frequency form data
 #' tidy_freqForm <- dplyr::as_tibble(HairEyeColor) # Generate tidy frequency form data
