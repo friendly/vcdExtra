@@ -43,12 +43,16 @@ The methods [`xtabs()`](https://rdrr.io/r/stats/xtabs.html),
 described in that vignette allow conversion from one form to another.
 Tidy equivalents might be:
 
-- `as_table()`, `as_matrix()`, `as_array()` to convert from any form to
-  table/array form
+- [`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md),
+  `as_matrix()`,
+  [`as_array()`](https://friendly.github.io/vcdExtra/reference/as_array.md)
+  to convert from any form to table/array form
 
-- Similarly, perhaps `as_caseform()`, `as_freqform()` to convert to
-  those. There is already `as.data.frame(table)` to convert to frequency
-  form, and
+- Similarly, perhaps
+  [`as_caseform()`](https://friendly.github.io/vcdExtra/reference/as_caseform.md),
+  [`as_freqform()`](https://friendly.github.io/vcdExtra/reference/as_freqform.md)
+  to convert to those. There is already `as.data.frame(table)` to
+  convert to frequency form, and
   [`expand.dft()`](https://friendly.github.io/vcdExtra/reference/expand.dft.md)
   converts that to case form
 

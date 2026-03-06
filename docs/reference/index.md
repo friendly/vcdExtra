@@ -239,3 +239,16 @@ Some small data sets used in examples or in
   : Worker Satisfaction Data
 - [`Yamaguchi87`](https://friendly.github.io/vcdExtra/reference/Yamaguchi87.md)
   : Occupational Mobility in Three Countries
+
+## Conversions
+
+converting between table, freq, case, array forms
+
+- [`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md)
+  : Convert frequency or case form data into table form
+- [`as_array()`](https://friendly.github.io/vcdExtra/reference/as_array.md)
+  : Convert frequency, case, or table form data into an array
+- [`as_freqform()`](https://friendly.github.io/vcdExtra/reference/as_freqform.md)
+  : Convert any form (case or table form) into frequency form.
+- [`as_caseform()`](https://friendly.github.io/vcdExtra/reference/as_caseform.md)
+  : Convert frequency or table form into case form.
