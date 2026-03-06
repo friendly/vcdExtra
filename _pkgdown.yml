@@ -23,6 +23,7 @@ reference:
       - range3d
       - seq_mosaic
       - labeling_points
+      - pairs_diagonal_mosaic
 
   - title: Loglinear models
     desc: Functions for constructing and manipulating loglinear models
