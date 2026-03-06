@@ -32,9 +32,11 @@ dev_version <- getNamespaceVersion("vcdExtra")
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html) 
-[![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
 [![Follow on Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285FF&label=Follow%20on&color=0285FF)](https://bsky.app/profile/datavisFriendly.bsky.social)
 
+<!--
+[![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
+-->
 
 <!-- badges: end -->
 
@@ -151,7 +153,7 @@ specification of terms in model formulas using
 `gnm::Diag()`, 
 `gnm::Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-### Datasets
+### 🗃️ Datasets
 
 Beyond the wide range of **datasets* in the `vcd` package, this `vcdExtra` package includes many new data sets, that I've found useful for illustrating various ideas, models, methods and visualization. Use `datasets("vcdExtra")` to see a list with titles and descriptions.
 The vignette, `vignette("datasets", package="vcdExtra")` provides a classification of these
@@ -161,7 +163,7 @@ according to methods of analysis.
 vcdExtra::datasets("vcdExtra")[,1]
 ```
 
-### Vignettes
+### 📖 Vignettes
 
 A [collection of **tutorial vignettes**](https://cran.r-project.org/web/packages/vcdExtra/vignettes/). In the installed package, they can be viewed using `browseVignettes(package = "vcdExtra")`;
 
@@ -204,7 +206,7 @@ How can we use this in practice, to understand a model, or how well it fits a gi
 There is now (rudimentary) a `plot()` method for association graphs which allows edges to be weighted by a measure
 of the strength of association between variables: partial $G^2$ or Cramer's V. Still very much a WIP.
 
-## Examples
+## 📊 Examples
 
 These `README` examples provide simple illustrations of using some of the package functions in the
 context of loglinear models for frequency tables fit using `glm()`, including

@@ -8,6 +8,7 @@ Sys.setenv(RGL_USE_NULL = TRUE)
 devtools::install(build_vignettes = TRUE)
 
 # Build the pkgdown site
+# NB: Now handled in .github/workflows/pkgdown.yml
 pkgdown::build_site()
 
 

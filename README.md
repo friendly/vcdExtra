@@ -14,9 +14,12 @@ Commit](https://img.shields.io/github/last-commit/friendly/vcdExtra)](https://gi
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
 [![Follow on
 Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285FF&label=Follow%20on&color=0285FF)](https://bsky.app/profile/datavisFriendly.bsky.social)
+
+<!--
+[![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
+-->
 
 <!-- badges: end -->
 
@@ -26,7 +29,7 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.2; documentation built for `pkgdown` 2026-02-13
+Version 0.9.3; documentation built for `pkgdown` 2026-03-06
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -69,7 +72,7 @@ Get the released version (0.9.1) from CRAN:
 
      install.packages("vcdExtra")
 
-The current development version (0.9.2) can be installed from
+The current development version (0.9.3) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
@@ -155,7 +158,7 @@ What’s in the box?
   `gnm::Diag()`, `gnm::Topo(),` etc. in the
   [gnm](https://CRAN.R-project.org/package=gnm) package.
 
-### Datasets
+### 🗃️ Datasets
 
 Beyond the wide range of \*\*datasets\* in the `vcd` package, this
 `vcdExtra` package includes many new data sets, that I’ve found useful
@@ -180,7 +183,7 @@ vcdExtra::datasets("vcdExtra")[,1]
 ## [45] "Vote1980"       "WorkerSat"      "Yamaguchi87"
 ```
 
-### Vignettes
+### 📖 Vignettes
 
 A [collection of **tutorial
 vignettes**](https://cran.r-project.org/web/packages/vcdExtra/vignettes/).
@@ -252,7 +255,7 @@ which allows edges to be weighted by a measure of the strength of
 association between variables: partial $G^2$ or Cramer’s V. Still very
 much a WIP.
 
-## Examples
+## 📊 Examples
 
 These `README` examples provide simple illustrations of using some of
 the package functions in the context of loglinear models for frequency
