@@ -1,3 +1,7 @@
+## Version 0.9.3
+
+* Added tidy conversion functions: as_array(), as_caseform(), as_freqform, as_table() PR #22 [Thx: Gavin Klorfine]
+
 ## Version 0.9.2
 
 * Added a `label = c("name", "formula")` argument to `LRstats()` to provide for labeling models by their model formulas in the output using `get_models()`.

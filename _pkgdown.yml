@@ -75,6 +75,14 @@ reference:
       - qlogseries
       - rlogseries
 
+  - title: Conversions
+    desc: converting between table, freq, case, array forms
+    contents:
+      - as_table
+      - as_array
+      - as_freqform
+      - as_caseform
+
   - title: Utility
     desc: Utility functions in the package
     contents:
@@ -142,12 +150,4 @@ reference:
       - Vote1980
       - WorkerSat
       - Yamaguchi87
-
-  - title: Conversions
-    desc: converting between table, freq, case, array forms
-    contents:
-      - as_table
-      - as_array
-      - as_freqform
-      - as_caseform
 
