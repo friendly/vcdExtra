@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,6 +73,9 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9">
+<!--
+[![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
+-->
 <!-- badges: end -->
 <div class="section level1">
 <div class="page-header">
@@ -83,7 +86,7 @@
 <h2 id="extensions-and-additions-to-vcd-visualizing-categorical-data">Extensions and additions to vcd: Visualizing Categorical Data<a class="anchor" aria-label="anchor" href="#extensions-and-additions-to-vcd-visualizing-categorical-data"></a>
 </h2>
 <!-- Version 0.8-6 -->
-<p>Version 0.9.2; documentation built for <code>pkgdown</code> 2026-02-13</p>
+<p>Version 0.9.3; documentation built for <code>pkgdown</code> 2026-03-06</p>
 <p>This package provides additional data sets, documentation, and many functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>.</p>
 <p>The functions here use the “strucplot” framework (Meyer et-al., 2006), which is a lovely, natural conceptual system for implementing visualization and other displays for <em>n</em>-way frequency tables which have a nested, hierarchical structure in <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>. [This can be compared to the “productplots” framework in <a href="https://CRAN.R-project.org/package=productplots" class="external-link">producplots</a>, and the defunct <code>ggmosaic</code> package]</p>
 <p><code>vcdExtra</code> also adds extensions to modeling functions for models fit using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, using the construct <code><a href="reference/glmlist.html">glmlist()</a></code> to construct a list of related models which can be summarized (via <code><a href="reference/LRstats.html">LRstats()</a></code>) and graphed (via <code><a href="reference/mosaic.glmlist.html">mosaic.glmlist()</a></code>)</p>
@@ -95,7 +98,7 @@
 </h2>
 <p>Get the released version (0.9.1) from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
-<p>The current development version (0.9.2) can be installed from <a href="https://friendly.r-universe.dev/vcdExtra" class="external-link">R-universe</a> or directly from the <a href="https://github.com/friendly/vcdExtra" class="external-link">GitHub repo</a> via:</p>
+<p>The current development version (0.9.3) can be installed from <a href="https://friendly.r-universe.dev/vcdExtra" class="external-link">R-universe</a> or directly from the <a href="https://github.com/friendly/vcdExtra" class="external-link">GitHub repo</a> via:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">'https://friendly.r-universe.dev'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a> <span class="co"># or</span></span>
@@ -140,7 +143,7 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a>
+<h3 id="id_️-datasets">🗃️ Datasets<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-datasets"></a>
 </h3>
 <p>Beyond the wide range of **datasets* in the <code>vcd</code> package, this <code>vcdExtra</code> package includes many new data sets, that I’ve found useful for illustrating various ideas, models, methods and visualization. Use <code>datasets("vcdExtra")</code> to see a list with titles and descriptions. The vignette, <code><a href="articles/datasets.html">vignette("datasets", package="vcdExtra")</a></code> provides a classification of these according to methods of analysis.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -159,7 +162,7 @@
 <span><span class="co">## [45] "Vote1980"       "WorkerSat"      "Yamaguchi87"</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+<h3 id="id_-vignettes">📖 Vignettes<a class="anchor" aria-label="anchor" href="#id_-vignettes"></a>
 </h3>
 <p>A <a href="https://cran.r-project.org/web/packages/vcdExtra/vignettes/" class="external-link">collection of <strong>tutorial vignettes</strong></a>. In the installed package, they can be viewed using <code>browseVignettes(package = "vcdExtra")</code>;</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -239,7 +242,7 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+<h2 id="id_-examples">📊 Examples<a class="anchor" aria-label="anchor" href="#id_-examples"></a>
 </h2>
 <p>These <code>README</code> examples provide simple illustrations of using some of the package functions in the context of loglinear models for frequency tables fit using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>, including models for <em>structured associations</em> taking ordinality into account.</p>
 <div class="section level3">
@@ -441,7 +444,6 @@
 <li><a href="https://cran.r-project.org/package=vcdExtra" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/vcdExtra" alt="downloads"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-2.0.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat" alt="License"></a></li>
-<li><a href="https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://bsky.app/profile/datavisFriendly.bsky.social" class="external-link"><img src="https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&amp;logoColor=0285FF&amp;label=Follow%20on&amp;color=0285FF" alt="Follow on Bluesky"></a></li>
 </ul>
 </div>
