@@ -19,6 +19,12 @@ Given two ordered factors in a square, n x n frequency table,
 degrees of difficulty in crossing from one level to the next, as described
 by Goodman (1972).
 }
+\details{
+Instead of treating all mobility as equal, this model posits that the difficulty
+of moving between categories increases with the number of boundaries (or "crossings")
+that must be crossed, and that associations between categories decrease
+with their separation.
+}
 \examples{
 
 data(Hauser79)
@@ -37,6 +43,14 @@ hauser.CRdiag <- update(hauser.indep,
                         ~ . + Crossings(Father,Son) + Diag(Father,Son))
 LRstats(hauser.CRdiag)
 
+# what does Crossings do?
+cr <-with(Hauser79, Crossings(Father, Son))
+head(cr)
+Crossings levels
+matrix(cr[,1], nrow=5)
+matrix(cr[,2], nrow=5)
+matrix(cr[,3], nrow=5)
+matrix(cr[,4], nrow=5)
 
 }
 \references{
