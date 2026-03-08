@@ -21,7 +21,8 @@
 #' @author Gavin M. Klorfine
 #' 
 #' @seealso
-#' \code{\link{as_freqform}}, \code{\link{as_caseform}}, \code{\link{as_array}}
+#' \code{\link{as_freqform}}, \code{\link{as_caseform}}, \code{\link{as_array}},
+#' \code{\link{as_matrix}}
 #' 
 #' @importFrom stats reformulate xtabs
 #' @importFrom methods is

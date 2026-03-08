@@ -51,7 +51,7 @@ as_array(tidy_freqForm, freq = "n", dims = c("Hair", "Eye")) |> str()
 
 }
 \seealso{
-\code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_array}}
+\code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_caseform}}
 }
 \author{
 Gavin M. Klorfine

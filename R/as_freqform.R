@@ -19,7 +19,8 @@
 #' @author Gavin M. Klorfine
 #' 
 #' @seealso
-#' \code{\link{as_table}}, \code{\link{as_caseform}}, \code{\link{as_array}}
+#' \code{\link{as_table}}, \code{\link{as_caseform}}, \code{\link{as_array}},
+#' \code{\link{as_matrix}}
 #' 
 #' @importFrom dplyr as_tibble
 #' 
