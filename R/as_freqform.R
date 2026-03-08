@@ -13,10 +13,13 @@
 #' @return object in frequency form.
 #' 
 #' @details
-#' Converts `obj` to a table using \code{as_table()} before converting to
+#' Converts `obj` to a table using \code{\link{as_table()}} before converting to
 #' frequency form
 #' 
 #' @author Gavin M. Klorfine
+#' 
+#' @seealso
+#' \code{\link{as_table}}, \code{\link{as_caseform}}, \code{\link{as_array}}
 #' 
 #' @importFrom dplyr as_tibble
 #' 

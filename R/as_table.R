@@ -20,6 +20,9 @@
 #' 
 #' @author Gavin M. Klorfine
 #' 
+#' @seealso
+#' \code{\link{as_freqform}}, \code{\link{as_caseform}}, \code{\link{as_array}}
+#' 
 #' @importFrom stats reformulate xtabs
 #' @importFrom methods is
 #' 
