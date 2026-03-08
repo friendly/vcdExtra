@@ -46,7 +46,7 @@ LRstats(hauser.CRdiag)
 # what does Crossings do?
 cr <-with(Hauser79, Crossings(Father, Son))
 head(cr)
-Crossings levels
+# Crossings levels
 matrix(cr[,1], nrow=5)
 matrix(cr[,2], nrow=5)
 matrix(cr[,3], nrow=5)

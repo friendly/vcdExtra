@@ -74,6 +74,9 @@ as_table(freqForm, freq = "Freq", dims = c("Hair", "Eye"), prop = TRUE)
 
 
 }
+\seealso{
+\code{\link{as_freqform}}, \code{\link{as_caseform}}, \code{\link{as_array}}
+}
 \author{
 Gavin M. Klorfine
 }

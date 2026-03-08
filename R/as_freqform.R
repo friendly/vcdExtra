@@ -1,6 +1,6 @@
 #' Convert any form (case or table form) into frequency form.
 #' 
-#' A wrapper for \code{as.data.frame()} that is able to properly handle arrays.
+#' A wrapper for \code{\link[base]{as.data.frame}} that is able to properly handle arrays.
 #' Converts object (`obj`) in case or table form into frequency form. The 
 #' column containing the frequencies (`freq`) must be supplied if `obj` is 
 #' already in frequency form (and you are using this function to select
@@ -13,7 +13,7 @@
 #' @return object in frequency form.
 #' 
 #' @details
-#' Converts `obj` to a table using \code{\link{as_table()}} before converting to
+#' Converts `obj` to a table using \code{\link{as_table}} before converting to
 #' frequency form
 #' 
 #' @author Gavin M. Klorfine

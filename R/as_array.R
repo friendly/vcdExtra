@@ -10,7 +10,7 @@
 #' @return object in array form
 #' 
 #' @details
-#' Unclasses the \code{\link{as_table()}} function to return an object in array form.
+#' Unclasses the \code{\link{as_table}} function to return an object in array form.
 #' 
 #' @author Gavin M. Klorfine
 #' 

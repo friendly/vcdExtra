@@ -24,11 +24,11 @@ column containing the frequencies (\code{freq}) must be supplied if \code{obj} i
 frequency form. Returns a tibble if \code{tidy} is set to \code{TRUE}.
 }
 \details{
-A wrapper for \code{expand.dft()} that is able to handle arrays.
+A wrapper for \code{\link{expand.dft}} that is able to handle arrays.
 
 If a frequency column is not supplied, this function defaults to "Freq"
-just like \code{expand.dft()}. Converts \code{obj} to a table using
-\code{as_table()} before converting to case form.
+just like \code{\link{expand.dft}}. Converts \code{obj} to a table using
+\code{\link{as_table}} before converting to case form.
 }
 \examples{
 library(vcdExtra)
@@ -53,6 +53,10 @@ as_caseform(arrayDat) |> str()
 as_caseform(tableForm, dims = c("Hair", "Eye")) |> str()
 
 
+}
+\seealso{
+\code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_array}},
+\code{\link{expand.dft}}
 }
 \author{
 Gavin M. Klorfine

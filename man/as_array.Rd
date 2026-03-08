@@ -22,7 +22,7 @@ column containing the frequencies (\code{freq}) must be supplied if \code{obj} i
 frequency form.
 }
 \details{
-Unclasses the \code{as_table()} function to return an object in array form.
+Unclasses the \code{\link{as_table}} function to return an object in array form.
 }
 \examples{
 library(vcdExtra)
@@ -49,6 +49,9 @@ as_array(tidy_freqForm, freq = "n") |> str()
 as_array(tidy_freqForm, freq = "n", dims = c("Hair", "Eye")) |> str()
 
 
+}
+\seealso{
+\code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_array}}
 }
 \author{
 Gavin M. Klorfine

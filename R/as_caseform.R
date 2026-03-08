@@ -11,11 +11,11 @@
 #' @return object in case form.
 #' 
 #' @details
-#' A wrapper for \code{\link{expand.dft()}} that is able to handle arrays.
+#' A wrapper for \code{\link{expand.dft}} that is able to handle arrays.
 #' 
 #' If a frequency column is not supplied, this function defaults to "Freq"
-#' just like \code{\link{expand.dft()}}. Converts `obj` to a table using 
-#' \code{\link{as_table()}} before converting to case form.
+#' just like \code{\link{expand.dft}}. Converts `obj` to a table using 
+#' \code{\link{as_table}} before converting to case form.
 #' 
 #' @author Gavin M. Klorfine
 #' 

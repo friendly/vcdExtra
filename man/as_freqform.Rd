@@ -19,14 +19,14 @@ as_freqform(obj, freq = NULL, dims = NULL, tidy = TRUE)
 object in frequency form.
 }
 \description{
-A wrapper for \code{as.data.frame()} that is able to properly handle arrays.
+A wrapper for \code{\link[base]{as.data.frame}} that is able to properly handle arrays.
 Converts object (\code{obj}) in case or table form into frequency form. The
 column containing the frequencies (\code{freq}) must be supplied if \code{obj} is
 already in frequency form (and you are using this function to select
 dimensions). Returns a tibble if \code{tidy} is set to \code{TRUE}.
 }
 \details{
-Converts \code{obj} to a table using \code{as_table()} before converting to
+Converts \code{obj} to a table using \code{\link{as_table}} before converting to
 frequency form
 }
 \examples{
@@ -54,6 +54,9 @@ as_freqform(freqForm, freq = "Freq", dims = c("Hair", "Eye")) |> str()
 as_freqform(tableForm, dims = c("Hair", "Eye")) |> str()
 
 
+}
+\seealso{
+\code{\link{as_table}}, \code{\link{as_caseform}}, \code{\link{as_array}}
 }
 \author{
 Gavin M. Klorfine

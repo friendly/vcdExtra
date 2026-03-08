@@ -21,12 +21,12 @@ test_that("Tibble frequency form input returns a tibble", {
 })
 
 test_that("Frequency form input returns a tibble", {
-  ary <- as_freqform(freqForm, freq = "Freq")
+  ff <- as_freqform(freqForm, freq = "Freq")
   expect_s3_class(ff, "tbl")
 })
 
 test_that("Case form input returns a tibble", {
-  ary <- as_freqform(caseForm)
+  ff <- as_freqform(caseForm)
   expect_s3_class(ff, "tbl")
 })
 
