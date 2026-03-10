@@ -3,8 +3,8 @@
 #' An enhanced replacement for \code{\link[vcd]{pairs_diagonal_mosaic}} from the
 #' \pkg{vcd} package. This version fixes two bugs in the original (the
 #' \code{labeling} and \code{alternate_labels} arguments were hardcoded and
-#' ignored), changes the default labeling to \code{\link[vcd]{labeling_border}},
-#' and adds a \code{counts} convenience argument.
+#' ignored) and changes the default labeling to 
+#' \code{\link[vcd]{labeling_border}}.
 #'
 #' A companion \code{pairs.table} method is also provided that uses this
 #' improved function as the default diagonal panel.
@@ -26,10 +26,6 @@
 #'   Default is \code{\link[vcd]{labeling_border}} (no cell counts shown).
 #' @param alternate_labels Logical; whether to alternate label positions on
 #'   the axes. Default is \code{TRUE}.
-#' @param counts Controls cell-count display as a shortcut: \code{FALSE} forces
-#'   \code{labeling = labeling_border} (no counts); \code{TRUE} forces
-#'   \code{labeling = labeling_values} (show counts). When \code{NULL}
-#'   (default), the \code{labeling} argument is used as-is.
 #' @param ... Additional arguments passed to \code{\link[vcd]{mosaic}}.
 #'
 #' @details
@@ -43,6 +39,10 @@
 #' \code{labeling_values} inside the returned function, and (2)
 #' \code{alternate_labels} is similarly hardcoded to \code{TRUE}.  This version
 #' fixes both, making those arguments work as documented.
+#' 
+#' The default labeling scheme was changed from \code{\link[vcd]{labeling_values}} to 
+#' \code{\link[vcd]{labeling_border}}, so as to disable cell counts by default. To
+#' enable cell counts, use \code{\link[vcd]{labeling_values}}.
 #'
 #' @return A function of class \code{"grapcon_generator"} suitable for use as
 #'   the \code{diag_panel} argument in \code{\link[vcd]{pairs.table}}.
@@ -58,11 +58,8 @@
 #' # Default: no cell counts in diagonal panels
 #' pairs(pred_tab)
 #'
-#' # Turn off counts explicitly (same as default)
-#' pairs(pred_tab, diag_panel_args = list(counts = FALSE))
-#'
 #' # Show cell counts in diagonal panels
-#' pairs(pred_tab, diag_panel_args = list(counts = TRUE))
+#' pairs(pred_tab, diag_panel_args = list(labeling = labeling_values))
 #'
 #' # Use residual shading for off-diagonal panels
 #' pairs(pred_tab, gp = shading_Friendly)
@@ -78,12 +75,7 @@ pairs_diagonal_mosaic <- function(split_vertical = TRUE,
                                   fill = "grey",
                                   labeling = labeling_border,
                                   alternate_labels = TRUE,
-                                  counts = NULL,
                                   ...) {
-
-  if (!is.null(counts)) {
-    labeling <- if (counts) labeling_values else labeling_border
-  }
 
   function(x, i) {
     if (is.function(fill))
