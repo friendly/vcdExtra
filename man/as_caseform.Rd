@@ -56,7 +56,7 @@ as_caseform(tableForm, dims = c("Hair", "Eye")) |> str()
 }
 \seealso{
 \code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_array}},
-\code{\link{expand.dft}}
+\code{\link{as_matrix}}, \code{\link{expand.dft}}
 }
 \author{
 Gavin M. Klorfine
