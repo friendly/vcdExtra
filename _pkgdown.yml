@@ -83,6 +83,7 @@ reference:
       - as_array
       - as_freqform
       - as_caseform
+      - as_matrix
 
   - title: Utility
     desc: Utility functions in the package
