@@ -8,7 +8,7 @@
 \alias{color_table.data.frame}
 \alias{color_table.matrix}
 \alias{color_table.default}
-\title{Display Frequency Table with Colored Cell Backgrounds}
+\title{Smart Display of Frequency Table with Colored Cell Backgrounds}
 \usage{
 color_table(x, ...)
 
@@ -141,22 +141,25 @@ to \code{\link[gt]{gtsave}} via \code{...}.}
 A gt table object that can be further customized
 }
 \description{
-Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
-colored according to observed frequencies or their residuals from a loglinear model.
-This is an S3 generic function with methods for different input types.
+\code{color_table()} creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
+colored according to observed frequencies or their residuals from a loglinear model. The goal is to provide a
+"smart" tabular display of cross-classified frequency data, with some abilities to highlight possibly interesting
+patterns or unusual cells.
+This is an S3 generic function, providing methods for different input types: \code{"table"}, \code{"xtabs"}, \code{"matrix"}, \code{"ftable"}, \code{"structable"} or \code{"data.frame"}.
 }
 \details{
 This function provides a heatmap-style representation of a frequency table,
 where background coloring is used to visualize patterns and anomalies in the data.
-When shading by residuals (the default), cells with large positive residuals
+When shading by \emph{residuals} (the default), cells with large positive residuals
 (more observations than expected) are shaded red, while cells with large negative
 residuals (fewer than expected) are shaded blue. This makes it easy to identify
 cells that deviate substantially from what would be expected under a given model
 (by default, the independence model).
 
 For multi-way tables (3 or more dimensions), residuals are computed from the
-model of complete independence among all factors using \code{\link[MASS]{loglm}},
-unless you specify a model using the \code{model} or \code{expected} arguments.
+model of complete independence among all factors using \code{\link[MASS]{loglm}}.
+But you can specify a model using the \code{model} or \code{expected} arguments, in a way similar to that provided
+by \code{mosaic.glm()}.
 A message is printed showing the chi-squared statistic, degrees of freedom,
 and p-value for this test.
 

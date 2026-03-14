@@ -21,18 +21,33 @@ library(vcdExtra)
 ## Overview
 
 `color_table()` produces a `gt` table object with cell backgrounds shaded by
-observed frequencies or Pearson residuals from an independence model.
+observed frequencies or Pearson residuals from an independence (or user-supplied)
+model. The goal is a "smart" tabular display that makes patterns of association
+or unusual cells immediately visible.
 
-`gt` tables render natively in **HTML output** — just return the object from a
-chunk and knitr handles the rest via `gt`'s built-in `knit_print` method.
-For **PDF or Word output**, save the table as a `.png` image and include it with
-`knitr::include_graphics()` (see [PDF / Word output] below).
+When used interactively in RStudio, the returned `gt` object renders directly
+in the **Viewer** panel — no extra steps needed. However, using `color_table()`
+in R Markdown (`.Rmd`) or Quarto (`.qmd`) documents requires some special
+consideration because `gt` tables render natively only in **HTML output**. For
+**PDF or Word output**, the table must be saved as a PNG image and included with
+`knitr::include_graphics()`.
+
+The `knit_include()` helper in this package handles that branching automatically.
+Piping a `gt` table through `knit_include()` returns it unchanged for HTML output,
+and saves a PNG fallback for all other formats — so the same chunk knits correctly
+regardless of the output format.
 
 ---
 
 ## HTML output — return the gt object directly
 
-No `filename` argument is needed for HTML output.
+For documents that are compiled to HTML, `color_table()` renders natively: just return the object
+from a chunk and `knitr` handles it via `gt`'s built-in `knitr::knit_print()` method.
+No `filename` argument or extra wrapper is needed.
+
+The first example shades cells by Pearson residuals from the independence model
+(the default), making over- and under-represented Hair×Eye combinations
+immediately visible.
 
 ```{r html-basic}
 data(HairEyeColor)
@@ -41,9 +56,17 @@ HEC <- margin.table(HairEyeColor, 1:2)   # collapse over Sex
 color_table(HEC, title = "Hair \u00d7 Eye Color (residual shading)")
 ```
 
+For comparison, shading by raw frequencies (rather than residuals) gives a
+different picture — it highlights which combinations are simply most common,
+not which ones deviate from independence.
+
 ```{r html-freq}
 color_table(HEC, shade = "freq", title = "Hair \u00d7 Eye Color (frequency shading)")
 ```
+
+For a three-way table, a `formula` argument controls the layout: variables on
+the left of `~` become row groups, those on the right become column spanners.
+The legend note reproduces the chi-squared summary printed to the console.
 
 ```{r html-3way}
 color_table(HairEyeColor,
@@ -61,8 +84,8 @@ For non-HTML output, save the table as a PNG and include with
 `.rtf`, `.docx`. The `vwidth` and `vheight` arguments control the image
 viewport in pixels.
 
-The chunk below is shown for illustration (`eval=FALSE`); the HTML approach
-above is all that is needed when knitting to HTML.
+The chunk below is shown for illustration only (`eval=FALSE`); the HTML approach
+above is sufficient when knitting to HTML.
 
 ```{r pdf-basic, eval=FALSE}
 color_table(HEC,
@@ -76,57 +99,53 @@ knitr::include_graphics("color_table_hec.png")
 
 ---
 
-## Universal helper — works in any output format
+## Universal output — `knit_include()`
 
-This small wrapper branches on `knitr::is_html_output()` so the same source
-knits correctly to HTML, PDF, or Word without changes.
-
-```{r helper}
-include_color_table <- function(x, ..., file = "color_table_tmp",
-                                width = 600, height = 400) {
-  gt_obj <- color_table(x, ...)
-  if (knitr::is_html_output()) {
-    gt_obj
-  } else {
-    img <- paste0(file, ".png")
-    gt::gtsave(gt_obj, filename = img, vwidth = width, vheight = height)
-    knitr::include_graphics(img)
-  }
-}
-```
+`knit_include()` eliminates the need to branch on output format by hand.
+Pipe the `gt` object through it and the same chunk works correctly whether
+you are knitting to HTML, PDF, or Word.
 
 ```{r universal-demo}
-include_color_table(HEC,
-                    title  = "Hair \u00d7 Eye Color",
-                    file   = "color_table_universal",
-                    width  = 520,
-                    height = 300)
+color_table(HEC,
+            title = "Hair \u00d7 Eye Color") |>
+  knit_include(width = 520, height = 300)
 ```
+
+`knit_include()` also handles `htmlwidget` objects (plotly, DT, leaflet, …)
+the same way — HTML output gets the interactive widget, PDF/Word output gets
+a screenshot. Any other class is passed through unchanged, so it is safe to
+use in a pipe on any object.
 
 ---
 
 ## More examples
 
-### Display residual values in cells
+### Displaying residual values in cells
+
+Setting `values = "residuals"` replaces the cell frequencies with the
+Pearson residual values themselves. This is useful when the exact magnitude
+of each deviation matters, not just its direction. Row and column totals are
+suppressed automatically because residuals do not have meaningful marginal sums.
 
 ```{r residuals-display}
-include_color_table(HEC,
-                    values = "residuals",
-                    title  = "Hair \u00d7 Eye \u2014 Pearson residuals",
-                    file   = "color_table_resid",
-                    width  = 520,
-                    height = 280)
+color_table(HEC,
+            values = "residuals",
+            title  = "Hair \u00d7 Eye \u2014 Pearson residuals") |>
+  knit_include(width = 520, height = 280)
 ```
 
 ### Multi-way table: PreSex data
 
+The `PreSex` data cross-classifies four variables. Here `MaritalStatus` is
+placed on rows and the two sexual-attitude variables form nested column spanners,
+making the interaction structure easy to read. The legend note records the
+goodness-of-fit for the complete-independence model.
+
 ```{r presex}
 data(PreSex, package = "vcd")
-include_color_table(PreSex,
-                    formula = MaritalStatus ~ PremaritalSex + ExtramaritalSex,
-                    legend  = TRUE,
-                    title   = "Pre/Extra-marital Sex by Marital Status",
-                    file    = "color_table_presex",
-                    width   = 520,
-                    height  = 300)
+color_table(PreSex,
+            formula = MaritalStatus ~ PremaritalSex + ExtramaritalSex,
+            legend  = TRUE,
+            title   = "Pre/Extra-marital Sex by Marital Status") |>
+  knit_include(width = 520, height = 300)
 ```

@@ -1,22 +1,24 @@
 #' Include an HTML-renderable object in any knitr output format
 #'
-#' A pipe-friendly helper for objects that render natively in HTML output
-#' (RStudio Viewer, HTML documents) but need an image fallback for PDF, Word,
-#' and other non-HTML formats.
+#' A pipe-friendly helper in Rmarkdown, Quarto, and other documents for objects that render natively in HTML output
+#' (RStudio Viewer, HTML documents) but need a convenient image fallback for PDF, Word,
+#' and other non-HTML formats. It was designed to solve a problem in rendering the result of `color_table()`,
+#' and then generalized to provide for other similar cases.
 #'
-#' Supported classes:
-#'   - `gt_tbl`     (gt package)       -- saved via \code{\link[gt]{gtsave}}
-#'   - `htmlwidget` (htmlwidgets family: plotly, DT, leaflet, dygraphs, ...)
+#' Supported classes (handled internally) solve this problem by saving the image to a file and then inserting it in the document
+#' using `knitr::include_graphics()`:
+#'   - `"gt_tbl"`     (gt package)       -- saved via \code{\link[gt]{gtsave}}
+#'   - `"htmlwidget"` (htmlwidgets family: plotly, DT, leaflet, dygraphs, ...)
 #'                                     -- saved via
 #'                                        \code{\link[htmlwidgets]{saveWidget}}
 #'                                        + \code{\link[webshot2]{webshot}}
 #'
-#' Packages that handle cross-format output natively (flextable, kableExtra,
-#' huxtable) do NOT need this helper.
+#' Packages that handle cross-format output natively (\pkg{flextable}, \pkg{kableExtra},
+#' \pkg{huxtable}) do NOT need this helper.
 #'
 #' For any other class, \code{x} is returned as-is in all output formats and
 #' knitr's normal printing applies.  This means the function is safe to use in
-#' a pipe on any object: it only intervenes when it knows how to help.
+#' a pipe on any object: it only intervenes when it knows how to help!
 #'
 #' @param x       Any R object. Specialised handling for \code{gt_tbl} and
 #'                \code{htmlwidget}; all other classes are passed through

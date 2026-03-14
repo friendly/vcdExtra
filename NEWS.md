@@ -1,6 +1,6 @@
 ## Version 0.9.3
 
-* Added tidy conversion functions: as_array(), as_caseform(), as_freqform, as_table() PR #22 [Thx: Gavin Klorfine]
+* Added tidy conversion functions: `as_array()`, `as_caseform()`, `as_freqform`, `as_table()` PR #22 [Thx: Gavin Klorfine]
 * Fixed bug in `mcaplot()` coming from `ca::cacoords(): "non-conformable arguments"
 
 ## Version 0.9.2
