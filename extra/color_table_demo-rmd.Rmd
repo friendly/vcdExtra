@@ -1,0 +1,143 @@
+---
+title: "Using color_table() in Rmarkdown"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE
+)
+library(vcdExtra)
+```
+
+## Overview
+
+`color_table()` produces a `gt` table object with cell backgrounds shaded by
+observed frequencies or Pearson residuals from an independence model.
+
+**Rendering in documents:**
+`gt` tables render natively in **HTML** output (just return the object).
+For **PDF** or **Word** output, save the table as an image first, then include
+it with `knitr::include_graphics()`.
+
+A convenience wrapper at the bottom of this document handles both cases
+automatically.
+
+---
+
+## HTML output — return the gt object directly
+
+For HTML output, no `filename` argument is needed. Simply return the `gt`
+object and knitr renders it via gt's built-in `knit_print` method.
+
+```{r html-basic}
+# Works as-is for HTML output
+data(HairEyeColor)
+HEC <- margin.table(HairEyeColor, 1:2)  # collapse over Sex
+
+color_table(HEC, title = "Hair × Eye Color (residual shading)")
+```
+
+```{r html-freq}
+# Shade by frequency instead of residuals
+color_table(HEC, shade = "freq", title = "Hair × Eye Color (frequency shading)")
+```
+
+```{r html-3way}
+# 3-way table with a formula to specify the layout
+color_table(HairEyeColor,
+            formula  = Eye ~ Hair + Sex,
+            legend   = TRUE,
+            title    = "Hair × Eye × Sex (complete independence residuals)")
+```
+
+---
+
+## PDF / Word output — save image, then include it
+
+For non-HTML formats, save the table as a PNG (or SVG for sharper output) and
+include it with `knitr::include_graphics()`.  The chunk option
+`out.width` controls the display size.
+Note: `gt::gtsave()` supports `.png`, `.pdf`, `.html`, `.rtf`, and `.docx` — not `.svg`.
+
+```{r pdf-basic, out.width = "70%", fig.cap = "Hair × Eye Color shaded by residuals"}
+color_table(HEC,
+            title    = "Hair × Eye Color",
+            filename = "color_table_hec.png")
+
+knitr::include_graphics("color_table_hec.png")
+```
+
+
+---
+
+## Easier universal approach — branch on output format
+
+The helper below picks the right strategy automatically, so the same source
+works for both HTML and PDF/Word knits.
+
+```{r helper}
+#' Render a color_table result in any knitr output format
+#'
+#' @param x      Object accepted by color_table()
+#' @param file   Base filename (without extension) for the saved image.
+#'               Used only when the output is not HTML.
+#' @param width  Image viewport width in pixels (non-HTML only)
+#' @param height Image viewport height in pixels (non-HTML only)
+#' @param ...    Additional arguments forwarded to color_table()
+include_color_table <- function(x, ..., file = "color_table_tmp",
+                                width = 600, height = 400) {
+  gt_obj <- color_table(x, ...)
+
+  if (knitr::is_html_output()) {
+    # HTML: gt renders natively
+    gt_obj
+  } else {
+    # PDF / Word / etc.: save as PNG and include
+    img <- paste0(file, ".png")
+    gt::gtsave(gt_obj, filename = img, vwidth = width, vheight = height)
+    knitr::include_graphics(img)
+  }
+}
+```
+
+```{r universal-demo, out.width = "65%", fig.cap = "Hair × Eye Color — works in HTML and PDF"}
+include_color_table(HEC,
+                    title  = "Hair × Eye Color",
+                    file   = "color_table_universal",
+                    width  = 520,
+                    height = 300)
+```
+
+---
+
+## More examples
+
+```{r residuals-display, out.width = "65%", fig.cap = "Residual values shown in cells"}
+include_color_table(HEC,
+                    values = "residuals",
+                    title  = "Hair × Eye — Pearson residuals",
+                    file   = "color_table_resid",
+                    width  = 520,
+                    height = 280)
+```
+
+```{r presex}
+data(PreSex, package = "vcd")
+include_color_table(PreSex,
+                    formula = MaritalStatus ~ PremaritalSex + ExtramaritalSex,
+                    legend  = TRUE,
+                    title   = "Pre/Extra-marital Sex by Marital Status",
+                    file    = "color_table_presex",
+                    width   = 520,
+                    height  = 300)
+```
