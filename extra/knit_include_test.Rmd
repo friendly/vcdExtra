@@ -1,0 +1,66 @@
+---
+title: "knit_include() test"
+output:
+  html_document:
+    toc: true
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+devtools::load_all(quiet = TRUE)
+source("knit_include.R")
+
+data(HairEyeColor)
+HEC <- margin.table(HairEyeColor, 1:2)
+```
+
+## gt_tbl via color_table()
+
+```{r gt-basic}
+color_table(HEC, title = "Hair \u00d7 Eye Color") |>
+  knit_include()
+```
+
+```{r gt-freq}
+color_table(HEC, shade = "freq", title = "Hair \u00d7 Eye (frequency shading)") |>
+  knit_include()
+```
+
+## htmlwidget — DT::datatable()
+
+```{r dt-basic}
+DT::datatable(as.data.frame(HEC),
+              caption  = "Hair \u00d7 Eye Color frequencies",
+              rownames = FALSE,
+              options  = list(pageLength = 8, dom = "t")) |>
+  knit_include(width = 500, height = 350)
+```
+
+## htmlwidget — plotly
+
+```{r plotly-bar}
+library(plotly)
+
+hec_df <- as.data.frame(HEC)
+
+plot_ly(hec_df,
+        x      = ~Hair,
+        y      = ~Freq,
+        color  = ~Eye,
+        type   = "bar") |>
+  layout(barmode = "group",
+         title   = "Hair \u00d7 Eye Color counts") |>
+  knit_include(width = 700, height = 450)
+```
+
+## Unknown class — passes through unchanged
+
+`knit_include()` only intervenes for `gt_tbl` and `htmlwidget`. Any other object
+is returned as-is so knitr's normal printing applies, just as if the pipe were
+not there.
+
+```{r passthrough}
+# lm summary prints normally in HTML and PDF alike
+lm(mpg ~ wt, data = mtcars) |> knit_include()
+```

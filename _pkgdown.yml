@@ -54,6 +54,7 @@ reference:
       - assoc_graph
       - plot.assoc_graph
       - color_table
+      - knit_include
       - mcaplot
 
 
