@@ -7,6 +7,12 @@ template:
   params:
     bootswatch: cosmo
 
+articles:
+  - title: "color_table"
+    desc: "Heatmap-style display of frequency tables"
+    contents:
+      - color_table
+
 reference:
 
   - title: Mosaics

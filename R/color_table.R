@@ -13,7 +13,7 @@
 #         Future enhancement: could extend `margins` to accept a list for custom styling.
 #
 # ✔️DONE: Add filename arg, which if not NULL saves the `gt` result as an image via gt::gtsave().
-#         Supports .png, .svg, .pdf, .html, .rtf, .docx formats. Additional args passed via `...`.
+#         Supports .png, .pdf, .html, .rtf, .docx formats. Additional args passed via `...`.
 #
 # ✔️DONE: Refactored as S3 generic with methods for table, xtabs, ftable, structable, data.frame, matrix.
 #         The .color_table_impl() internal function handles the core gt table building.
@@ -90,24 +90,42 @@
 #' **Use in documents**
 #'
 #' In R Markdown (\code{.Rmd}) or Quarto (\code{.qmd}) documents, \pkg{gt} tables
-#' may not render correctly in all output formats. The \code{filename} argument
-#' provides a workaround: save the table as an image, then include it using
-#' \code{\link[knitr]{include_graphics}}. For example:
+#' render natively in \strong{HTML output} — simply return the \code{gt} object from
+#' a chunk and knitr renders it automatically via \pkg{gt}'s built-in
+#' \code{knit_print} method. No \code{filename} argument is needed.
+#'
+#' For \strong{PDF or Word output}, \pkg{gt} does not render natively. Use the
+#' \code{filename} argument to save the table as a \code{.png} image, then include
+#' it with \code{\link[knitr]{include_graphics}}:
 #'
 #' \preformatted{
 #'     color_table(my_table, filename = "my_table.png")
 #'     knitr::include_graphics("my_table.png")
 #' }
 #'
-#' For higher quality output, \code{.svg} format is recommended. You can control
-#' the image dimensions using the \code{vwidth} and \code{vheight} arguments
-#' (passed via \code{...}).
+#' The \code{vwidth} and \code{vheight} arguments (passed via \code{...}) control
+#' the image viewport size in pixels.  Supported save formats are
+#' \code{.png}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
 #'
-#' If you need a caption for cross-referencing (especially in Quarto or R Markdown),
-#' you can use `gt::tab_caption()`
+#' For documents that target \strong{multiple output formats}, a small helper that
+#' branches on \code{\link[knitr]{is_html_output}} avoids duplicating code:
+#'
 #' \preformatted{
-#'      gt_object |> tab_caption(caption = "Table 1: Pattern of Association in MyTable")
-#'  }
+#'     gt_obj <- color_table(my_table)
+#'     if (knitr::is_html_output()) {
+#'       gt_obj
+#'     } else {
+#'       gt::gtsave(gt_obj, "my_table.png")
+#'       knitr::include_graphics("my_table.png")
+#'     }
+#' }
+#'
+#' If you need a caption or cross-reference label, use \code{gt::tab_caption()}
+#' on the returned object:
+#' \preformatted{
+#'     color_table(my_table) |>
+#'       gt::tab_caption("Table 1: Pattern of association in MyTable")
+#' }
 #'
 #' @return A gt table object that can be further customized
 #'
@@ -169,7 +187,7 @@ color_table <- function(x, ...) {
 #' @param title Optional table title
 #' @param filename Optional filename to save the table as an image. If provided,
 #'        the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
-#'        \code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
+#'        \code{.png}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
 #'        The file format is determined by the file extension. Other arguments can be passed
 #'        to \code{\link[gt]{gtsave}} via `...`.
 #' @export

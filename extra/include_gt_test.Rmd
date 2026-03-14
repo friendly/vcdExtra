@@ -1,0 +1,56 @@
+---
+title: "include_gt() test"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+devtools::load_all(quiet = TRUE)
+```
+
+```{r define}
+include_gt <- function(gt_obj,
+                       file   = tempfile("gt_", tmpdir = "."),
+                       width  = 600,
+                       height = 400,
+                       ...) {
+  if (knitr::is_html_output()) {
+    gt_obj
+  } else {
+    img <- paste0(file, ".png")
+    gt::gtsave(gt_obj, filename = img, vwidth = width, vheight = height, ...)
+    knitr::include_graphics(img)
+  }
+}
+```
+
+```{r basic}
+data(HairEyeColor)
+HEC <- margin.table(HairEyeColor, 1:2)
+
+color_table(HEC, title = "Hair \u00d7 Eye Color") |>
+  include_gt()
+```
+
+```{r freq-shading}
+color_table(HEC, shade = "freq", title = "Frequency shading") |>
+  include_gt()
+```
+
+```{r plain-gt}
+# Works on any gt object
+as.data.frame(HEC) |>
+  gt::gt() |>
+  gt::tab_header(title = "Hair \u00d7 Eye (plain gt)") |>
+  include_gt()
+```
+
+```{r three-way}
+color_table(HairEyeColor,
+            formula = Eye ~ Hair + Sex,
+            legend  = TRUE,
+            title   = "3-way: Eye ~ Hair + Sex") |>
+  include_gt()
+```

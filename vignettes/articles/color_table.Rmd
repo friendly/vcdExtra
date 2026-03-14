@@ -1,0 +1,132 @@
+---
+title: "Using color_table() in R Markdown"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+package: vcdExtra
+output:
+  rmarkdown::html_vignette:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo    = TRUE,
+  message = FALSE,
+  warning = FALSE
+)
+options(rmarkdown.html_vignette.check_title = FALSE)
+library(vcdExtra)
+```
+
+## Overview
+
+`color_table()` produces a `gt` table object with cell backgrounds shaded by
+observed frequencies or Pearson residuals from an independence model.
+
+`gt` tables render natively in **HTML output** — just return the object from a
+chunk and knitr handles the rest via `gt`'s built-in `knit_print` method.
+For **PDF or Word output**, save the table as a `.png` image and include it with
+`knitr::include_graphics()` (see [PDF / Word output] below).
+
+---
+
+## HTML output — return the gt object directly
+
+No `filename` argument is needed for HTML output.
+
+```{r html-basic}
+data(HairEyeColor)
+HEC <- margin.table(HairEyeColor, 1:2)   # collapse over Sex
+
+color_table(HEC, title = "Hair \u00d7 Eye Color (residual shading)")
+```
+
+```{r html-freq}
+color_table(HEC, shade = "freq", title = "Hair \u00d7 Eye Color (frequency shading)")
+```
+
+```{r html-3way}
+color_table(HairEyeColor,
+            formula = Eye ~ Hair + Sex,
+            legend  = TRUE,
+            title   = "Hair \u00d7 Eye \u00d7 Sex (complete independence residuals)")
+```
+
+---
+
+## PDF / Word output — save image, then include it
+
+For non-HTML output, save the table as a PNG and include with
+`knitr::include_graphics()`. Supported formats: `.png`, `.pdf`, `.html`,
+`.rtf`, `.docx`. The `vwidth` and `vheight` arguments control the image
+viewport in pixels.
+
+The chunk below is shown for illustration (`eval=FALSE`); the HTML approach
+above is all that is needed when knitting to HTML.
+
+```{r pdf-basic, eval=FALSE}
+color_table(HEC,
+            title    = "Hair \u00d7 Eye Color",
+            filename = "color_table_hec.png",
+            vwidth   = 520,
+            vheight  = 300)
+
+knitr::include_graphics("color_table_hec.png")
+```
+
+---
+
+## Universal helper — works in any output format
+
+This small wrapper branches on `knitr::is_html_output()` so the same source
+knits correctly to HTML, PDF, or Word without changes.
+
+```{r helper}
+include_color_table <- function(x, ..., file = "color_table_tmp",
+                                width = 600, height = 400) {
+  gt_obj <- color_table(x, ...)
+  if (knitr::is_html_output()) {
+    gt_obj
+  } else {
+    img <- paste0(file, ".png")
+    gt::gtsave(gt_obj, filename = img, vwidth = width, vheight = height)
+    knitr::include_graphics(img)
+  }
+}
+```
+
+```{r universal-demo}
+include_color_table(HEC,
+                    title  = "Hair \u00d7 Eye Color",
+                    file   = "color_table_universal",
+                    width  = 520,
+                    height = 300)
+```
+
+---
+
+## More examples
+
+### Display residual values in cells
+
+```{r residuals-display}
+include_color_table(HEC,
+                    values = "residuals",
+                    title  = "Hair \u00d7 Eye \u2014 Pearson residuals",
+                    file   = "color_table_resid",
+                    width  = 520,
+                    height = 280)
+```
+
+### Multi-way table: PreSex data
+
+```{r presex}
+data(PreSex, package = "vcd")
+include_color_table(PreSex,
+                    formula = MaritalStatus ~ PremaritalSex + ExtramaritalSex,
+                    legend  = TRUE,
+                    title   = "Pre/Extra-marital Sex by Marital Status",
+                    file    = "color_table_presex",
+                    width   = 520,
+                    height  = 300)
+```
