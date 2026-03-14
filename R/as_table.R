@@ -4,11 +4,11 @@
 #' column containing the frequencies (`freq`) must be supplied if `obj` is in 
 #' frequency form. Optionally returns a table of proportions with (optionally) specified margins.
 #' 
-#' @param obj object to be converted to table form
+#' @param obj Object to be converted to table form.
 #' @param freq If `obj` is in frequency form, this is the name of the frequency column. Leave as `NULL` if `obj` is in any other form.
-#' @param dims A character vector of dimensions. If not specified, all variables apart from `freq` will be used as dimensions
-#' @param prop If set to TRUE, returns a table of proportions. May also be set to a character or numeric vector of margins.
-#' @return object in table form
+#' @param dims A character vector of dimensions. If not specified, all variables apart from `freq` will be used as dimensions.
+#' @param prop If set to `TRUE`, returns a table of proportions (that sum to 1). May also be set to a character or numeric vector of dimensions to be used as margins from which proportions will be computed.
+#' @return Object in table form.
 #' 
 #' @details
 #' If `obj` was in table form to begin with, it is returned to the user as-is
