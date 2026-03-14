@@ -82,6 +82,13 @@ by Goodman (1972).</p>
 matrix of <code>n*n</code> rows and <code>n-1</code> columns.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Instead of treating all mobility as equal, this model posits that the difficulty
+of moving between categories increases with the number of boundaries (or "crossings")
+that must be crossed, and that associations between categories decrease
+with their separation.</p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Goodman, L. (1972).  Some multiplicative models for the analysis
 of cross-classified data. In: <em>Proceedings of the Sixth Berkeley
@@ -102,42 +109,7 @@ functions for frequency tables;
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Hauser79</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># display table</span></span></span>
-<span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="op">~</span><span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>, data<span class="op">=</span><span class="va">Hauser79</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Son UpNM LoNM  UpM  LoM Farm</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Father                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> UpNM       1414  521  302  643   40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> LoNM        724  524  254  703   48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> UpM         798  648  856 1676  108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> LoM         756  914  771 3325  237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Farm        409  357  441 1611 1832</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hauser.indep</span> <span class="op">&lt;-</span> <span class="fu">gnm</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>,</span></span>
-<span class="r-in"><span>                    data<span class="op">=</span><span class="va">Hauser79</span>,</span></span>
-<span class="r-in"><span>                    family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hauser.CR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>,</span></span>
-<span class="r-in"><span>                    <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">hauser.CR</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CR 318.63 334.47   89.914 12  5.131e-14 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hauser.CRdiag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>,</span></span>
-<span class="r-in"><span>                        <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">hauser.CRdiag</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CRdiag 298.95 318.45   64.237  9   2.03e-10 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

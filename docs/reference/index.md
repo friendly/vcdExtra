@@ -27,6 +27,9 @@ and related displays to `glm` and `gnm` objects and 3D displays
   : Sequential Mosaics and Strucplots for an N-way Table
 - [`labeling_points()`](https://friendly.github.io/vcdExtra/reference/labeling_points.md)
   : Labeling Function for Mosaic Displays Using Points
+- [`pairs_diagonal_mosaic()`](https://friendly.github.io/vcdExtra/reference/pairs_diagonal_mosaic.md)
+  [`pairs(`*`<table>`*`)`](https://friendly.github.io/vcdExtra/reference/pairs_diagonal_mosaic.md)
+  : Diagonal Panel Function for Pairs Plots of Contingency Tables
 
 ## Loglinear models
 
