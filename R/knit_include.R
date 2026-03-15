@@ -54,6 +54,8 @@
 #' }
 #'
 #' @importFrom knitr is_html_output include_graphics
+#' @importFrom webshot2 webshot
+#' @importFrom htmlwidgets saveWidget
 #' @export
 knit_include <- function(x,
                          file   = tempfile("ki_", tmpdir = "."),

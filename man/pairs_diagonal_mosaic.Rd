@@ -51,7 +51,7 @@ the axes. Default is \code{TRUE}.}
 \code{labeling = labeling_values} (show counts). When \code{NULL}
 (default), the \code{labeling} argument is used as-is.}
 
-\item{...}{Additional arguments passed to \code{vcd:::pairs.table}.}
+\item{...}{Additional arguments passed to the \pkg{vcd} \code{pairs.table} method.}
 
 \item{x}{A contingency table (object of class \code{"table"}).}
 
@@ -88,7 +88,8 @@ fixes both, making those arguments work as documented.
 \code{pairs.table} is an S3 method for \code{\link[graphics]{pairs}} that
 overrides the version in \pkg{vcd} solely to change the default
 \code{diag_panel} to the improved \code{pairs_diagonal_mosaic} defined in
-this package. All actual rendering is delegated to \code{vcd:::pairs.table}.
+this package. All actual rendering is delegated to the \pkg{vcd} implementation,
+retrieved via \code{utils::getFromNamespace()} to avoid a \code{:::} check NOTE.
 }
 \examples{
 data(Hoyt, package = "vcdExtra")

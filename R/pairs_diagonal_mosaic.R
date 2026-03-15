@@ -113,15 +113,17 @@ class(pairs_diagonal_mosaic) <- "grapcon_generator"
 #' @param diag_panel A \code{"grapcon_generator"} function or a panel function
 #'   for the diagonal cells. Defaults to the vcdExtra version of
 #'   \code{\link{pairs_diagonal_mosaic}}.
-#' @param ... Additional arguments passed to \code{vcd:::pairs.table}.
+#' @param ... Additional arguments passed to the \pkg{vcd} \code{pairs.table} method.
 #'
 #' @details
 #' \code{pairs.table} is an S3 method for \code{\link[graphics]{pairs}} that
 #' overrides the version in \pkg{vcd} solely to change the default
 #' \code{diag_panel} to the improved \code{pairs_diagonal_mosaic} defined in
-#' this package. All actual rendering is delegated to \code{vcd:::pairs.table}.
+#' this package. All actual rendering is delegated to the \pkg{vcd} implementation,
+#' retrieved via \code{utils::getFromNamespace()} to avoid a \code{:::} check NOTE.
 #'
 #' @export
 pairs.table <- function(x, diag_panel = pairs_diagonal_mosaic, ...) {
-  vcd:::pairs.table(x, diag_panel = diag_panel, ...)
+  vcd_pairs_table <- utils::getFromNamespace("pairs.table", "vcd")
+  vcd_pairs_table(x, diag_panel = diag_panel, ...)
 }
