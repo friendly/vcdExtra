@@ -13,7 +13,7 @@
 #         Future enhancement: could extend `margins` to accept a list for custom styling.
 #
 # ✔️DONE: Add filename arg, which if not NULL saves the `gt` result as an image via gt::gtsave().
-#         Supports .png, .svg, .pdf, .html, .rtf, .docx formats. Additional args passed via `...`.
+#         Supports .png, .pdf, .html, .rtf, .docx formats. Additional args passed via `...`.
 #
 # ✔️DONE: Refactored as S3 generic with methods for table, xtabs, ftable, structable, data.frame, matrix.
 #         The .color_table_impl() internal function handles the core gt table building.
@@ -50,15 +50,17 @@
 #         is confusing and ugly. Examples:
 #     color_table(PreSex,  formula = MaritalStatus + Gender ~ PremaritalSex + ExtramaritalSex)
 #     color_table(PreSex,  formula = Gender + PremaritalSex + ExtramaritalSex ~  MaritalStatus)
-#         This can e handled using column spanners: https://gt.rstudio.com/reference/tab_spanner.html
-#         
+#         This can be handled using column spanners: https://gt.rstudio.com/reference/tab_spanner.html
+#
 
 
-#' Display Frequency Table with Colored Cell Backgrounds
+#' Smart Display of Frequency Table with Colored Cell Backgrounds
 #'
-#' Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
-#' colored according to observed frequencies or their residuals from a loglinear model.
-#' This is an S3 generic function with methods for different input types.
+#' `color_table()` creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
+#' colored according to observed frequencies or their residuals from a loglinear model. The goal is to provide a
+#' "smart" tabular display of cross-classified frequency data, with some abilities to highlight possibly interesting
+#' patterns or unusual cells.
+#' This is an S3 generic function, providing methods for different input types: `"table"`, `"xtabs"`, `"matrix"`, `"ftable"`, `"structable"` or `"data.frame"`.
 #'
 #' @param x A `"table"`, `"xtabs"`, `"matrix"`, `"ftable"`, `"structable"`, or `"data.frame"` object
 #' @param ... Additional arguments passed to methods
@@ -66,15 +68,16 @@
 #' @details
 #' This function provides a heatmap-style representation of a frequency table,
 #' where background coloring is used to visualize patterns and anomalies in the data.
-#' When shading by residuals (the default), cells with large positive residuals
+#' When shading by _residuals_ (the default), cells with large positive residuals
 #' (more observations than expected) are shaded red, while cells with large negative
 #' residuals (fewer than expected) are shaded blue. This makes it easy to identify
 #' cells that deviate substantially from what would be expected under a given model
 #' (by default, the independence model).
 #'
 #' For multi-way tables (3 or more dimensions), residuals are computed from the
-#' model of complete independence among all factors using \code{\link[MASS]{loglm}},
-#' unless you specify a model using the `model` or `expected` arguments.
+#' model of complete independence among all factors using \code{\link[MASS]{loglm}}.
+#' But you can specify a model using the `model` or `expected` arguments, in a way similar to that provided
+#' by `mosaic.glm()`.
 #' A message is printed showing the chi-squared statistic, degrees of freedom,
 #' and p-value for this test.
 #'
@@ -90,24 +93,42 @@
 #' **Use in documents**
 #'
 #' In R Markdown (\code{.Rmd}) or Quarto (\code{.qmd}) documents, \pkg{gt} tables
-#' may not render correctly in all output formats. The \code{filename} argument
-#' provides a workaround: save the table as an image, then include it using
-#' \code{\link[knitr]{include_graphics}}. For example:
+#' render natively in \strong{HTML output} — simply return the \code{gt} object from
+#' a chunk and knitr renders it automatically via \pkg{gt}'s built-in
+#' \code{knit_print} method. No \code{filename} argument is needed.
+#'
+#' For \strong{PDF or Word output}, \pkg{gt} does not render natively. Use the
+#' \code{filename} argument to save the table as a \code{.png} image, then include
+#' it with \code{\link[knitr]{include_graphics}}:
 #'
 #' \preformatted{
 #'     color_table(my_table, filename = "my_table.png")
 #'     knitr::include_graphics("my_table.png")
 #' }
 #'
-#' For higher quality output, \code{.svg} format is recommended. You can control
-#' the image dimensions using the \code{vwidth} and \code{vheight} arguments
-#' (passed via \code{...}).
+#' The \code{vwidth} and \code{vheight} arguments (passed via \code{...}) control
+#' the image viewport size in pixels.  Supported save formats are
+#' \code{.png}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
 #'
-#' If you need a caption for cross-referencing (especially in Quarto or R Markdown),
-#' you can use `gt::tab_caption()`
+#' For documents that target \strong{multiple output formats}, a small helper that
+#' branches on \code{\link[knitr]{is_html_output}} avoids duplicating code:
+#'
 #' \preformatted{
-#'      gt_object |> tab_caption(caption = "Table 1: Pattern of Association in MyTable")
-#'  }
+#'     gt_obj <- color_table(my_table)
+#'     if (knitr::is_html_output()) {
+#'       gt_obj
+#'     } else {
+#'       gt::gtsave(gt_obj, "my_table.png")
+#'       knitr::include_graphics("my_table.png")
+#'     }
+#' }
+#'
+#' If you need a caption or cross-reference label, use \code{gt::tab_caption()}
+#' on the returned object:
+#' \preformatted{
+#'     color_table(my_table) |>
+#'       gt::tab_caption("Table 1: Pattern of association in MyTable")
+#' }
 #'
 #' @return A gt table object that can be further customized
 #'
@@ -169,7 +190,7 @@ color_table <- function(x, ...) {
 #' @param title Optional table title
 #' @param filename Optional filename to save the table as an image. If provided,
 #'        the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
-#'        \code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
+#'        \code{.png}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
 #'        The file format is determined by the file extension. Other arguments can be passed
 #'        to \code{\link[gt]{gtsave}} via `...`.
 #' @export

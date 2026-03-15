@@ -6,6 +6,9 @@
   as_freqform, as_table() PR
   [\#22](https://github.com/friendly/vcdExtra/issues/22) \[Thx: Gavin
   Klorfine\]
+- Fixed bug in
+  [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
+  coming from \`ca::cacoords(): “non-conformable arguments”
 
 ## Version 0.9.2
 

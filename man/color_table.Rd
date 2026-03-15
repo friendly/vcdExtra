@@ -8,7 +8,7 @@
 \alias{color_table.data.frame}
 \alias{color_table.matrix}
 \alias{color_table.default}
-\title{Display Frequency Table with Colored Cell Backgrounds}
+\title{Smart Display of Frequency Table with Colored Cell Backgrounds}
 \usage{
 color_table(x, ...)
 
@@ -131,7 +131,7 @@ residuals. The background colors are computed by interpolation using
 
 \item{filename}{Optional filename to save the table as an image. If provided,
 the table is saved using \code{\link[gt]{gtsave}}. Supported formats include
-\code{.png}, \code{.svg}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
+\code{.png}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
 The file format is determined by the file extension. Other arguments can be passed
 to \code{\link[gt]{gtsave}} via \code{...}.}
 
@@ -141,22 +141,25 @@ to \code{\link[gt]{gtsave}} via \code{...}.}
 A gt table object that can be further customized
 }
 \description{
-Creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
-colored according to observed frequencies or their residuals from a loglinear model.
-This is an S3 generic function with methods for different input types.
+\code{color_table()} creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
+colored according to observed frequencies or their residuals from a loglinear model. The goal is to provide a
+"smart" tabular display of cross-classified frequency data, with some abilities to highlight possibly interesting
+patterns or unusual cells.
+This is an S3 generic function, providing methods for different input types: \code{"table"}, \code{"xtabs"}, \code{"matrix"}, \code{"ftable"}, \code{"structable"} or \code{"data.frame"}.
 }
 \details{
 This function provides a heatmap-style representation of a frequency table,
 where background coloring is used to visualize patterns and anomalies in the data.
-When shading by residuals (the default), cells with large positive residuals
+When shading by \emph{residuals} (the default), cells with large positive residuals
 (more observations than expected) are shaded red, while cells with large negative
 residuals (fewer than expected) are shaded blue. This makes it easy to identify
 cells that deviate substantially from what would be expected under a given model
 (by default, the independence model).
 
 For multi-way tables (3 or more dimensions), residuals are computed from the
-model of complete independence among all factors using \code{\link[MASS]{loglm}},
-unless you specify a model using the \code{model} or \code{expected} arguments.
+model of complete independence among all factors using \code{\link[MASS]{loglm}}.
+But you can specify a model using the \code{model} or \code{expected} arguments, in a way similar to that provided
+by \code{mosaic.glm()}.
 A message is printed showing the chi-squared statistic, degrees of freedom,
 and p-value for this test.
 
@@ -172,24 +175,42 @@ Otherwise, a fallback based on relative luminance (ITU-R BT.709) is used.
 \strong{Use in documents}
 
 In R Markdown (\code{.Rmd}) or Quarto (\code{.qmd}) documents, \pkg{gt} tables
-may not render correctly in all output formats. The \code{filename} argument
-provides a workaround: save the table as an image, then include it using
-\code{\link[knitr]{include_graphics}}. For example:
+render natively in \strong{HTML output} — simply return the \code{gt} object from
+a chunk and knitr renders it automatically via \pkg{gt}'s built-in
+\code{knit_print} method. No \code{filename} argument is needed.
+
+For \strong{PDF or Word output}, \pkg{gt} does not render natively. Use the
+\code{filename} argument to save the table as a \code{.png} image, then include
+it with \code{\link[knitr]{include_graphics}}:
 
 \preformatted{
     color_table(my_table, filename = "my_table.png")
     knitr::include_graphics("my_table.png")
 }
 
-For higher quality output, \code{.svg} format is recommended. You can control
-the image dimensions using the \code{vwidth} and \code{vheight} arguments
-(passed via \code{...}).
+The \code{vwidth} and \code{vheight} arguments (passed via \code{...}) control
+the image viewport size in pixels.  Supported save formats are
+\code{.png}, \code{.pdf}, \code{.html}, \code{.rtf}, and \code{.docx}.
 
-If you need a caption for cross-referencing (especially in Quarto or R Markdown),
-you can use \code{gt::tab_caption()}
+For documents that target \strong{multiple output formats}, a small helper that
+branches on \code{\link[knitr]{is_html_output}} avoids duplicating code:
+
 \preformatted{
-     gt_object |> tab_caption(caption = "Table 1: Pattern of Association in MyTable")
- }
+    gt_obj <- color_table(my_table)
+    if (knitr::is_html_output()) {
+      gt_obj
+    } else {
+      gt::gtsave(gt_obj, "my_table.png")
+      knitr::include_graphics("my_table.png")
+    }
+}
+
+If you need a caption or cross-reference label, use \code{gt::tab_caption()}
+on the returned object:
+\preformatted{
+    color_table(my_table) |>
+      gt::tab_caption("Table 1: Pattern of association in MyTable")
+}
 }
 \section{Methods (by class)}{
 \itemize{
