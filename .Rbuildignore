@@ -14,6 +14,7 @@ Rplots.pdf
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^vignettes/articles$
 ^vignettes-old/$
 ^vignettes-new/$
 README.*

@@ -71,7 +71,11 @@ mcaplot <- function(obj,
 
   if(!requireNamespace("ca", quietly=TRUE)) stop("The ca package is required")
 	if(!inherits(obj, "mjca")) stop("Only defined for mjca objects")
-	coords <- cacoord(obj, type=map, rows=FALSE)
+
+	# nd=obj$nd ensures the number of coordinate dimensions matches obj$sv,
+	# preventing a non-conformable error in rsc %*% diag(sv) inside cacoord()
+	# when colcoord/rowcoord have more dimensions than the mjca sv vector.
+	coords <- cacoord(obj, type=map, rows=FALSE, dim=seq_len(obj$nd))
 	coords <- data.frame(coords, obj$factors)     # extract factor names & levels
 	nlev <- obj$levels.n
 	nfac <- length(nlev)

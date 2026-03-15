@@ -4,10 +4,10 @@
 #' `Crossings` creates an n-1 column matrix corresponding to different
 #' degrees of difficulty in crossing from one level to the next, as described
 #' by Goodman (1972).
-#' 
-#' Instead of treating all mobility as equal, this model posits that the difficulty 
-#' of moving between categories increases with the number of boundaries (or "crossings") 
-#' that must be crossed, and that associations between categories decrease 
+#'
+#' Instead of treating all mobility as equal, this model posits that the difficulty
+#' of moving between categories increases with the number of boundaries (or "crossings")
+#' that must be crossed, and that associations between categories decrease
 #' with their separation.
 #'
 #'
@@ -45,11 +45,11 @@
 #' hauser.CRdiag <- update(hauser.indep,
 #'                         ~ . + Crossings(Father,Son) + Diag(Father,Son))
 #' LRstats(hauser.CRdiag)
-#' 
+#'
 #' # what does Crossings do?
-#' cr <-with(Hauser79, Crossings(Father, Son))
+#' cr <- with(Hauser79, Crossings(Father, Son))
 #' head(cr)
-#' Crossings levels
+#' # Show the codings for varying Crossings levels
 #' matrix(cr[,1], nrow=5)
 #' matrix(cr[,2], nrow=5)
 #' matrix(cr[,3], nrow=5)
