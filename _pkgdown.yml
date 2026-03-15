@@ -11,7 +11,7 @@ articles:
   - title: "color_table"
     desc: "Heatmap-style display of frequency tables"
     contents:
-      - color_table
+      - articles/color_table
 
 reference:
 

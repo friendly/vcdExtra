@@ -14,7 +14,6 @@ pairs_diagonal_mosaic(
   fill = "grey",
   labeling = labeling_border,
   alternate_labels = TRUE,
-  counts = NULL,
   ...
 )
 
@@ -46,11 +45,6 @@ Default is \code{\link[vcd]{labeling_border}} (no cell counts shown).}
 \item{alternate_labels}{Logical; whether to alternate label positions on
 the axes. Default is \code{TRUE}.}
 
-\item{counts}{Controls cell-count display as a shortcut: \code{FALSE} forces
-\code{labeling = labeling_border} (no counts); \code{TRUE} forces
-\code{labeling = labeling_values} (show counts). When \code{NULL}
-(default), the \code{labeling} argument is used as-is.}
-
 \item{...}{Additional arguments passed to the \pkg{vcd} \code{pairs.table} method.}
 
 \item{x}{A contingency table (object of class \code{"table"}).}
@@ -67,8 +61,8 @@ the \code{diag_panel} argument in \code{\link[vcd]{pairs.table}}.
 An enhanced replacement for \code{\link[vcd]{pairs_diagonal_mosaic}} from the
 \pkg{vcd} package. This version fixes two bugs in the original (the
 \code{labeling} and \code{alternate_labels} arguments were hardcoded and
-ignored), changes the default labeling to \code{\link[vcd]{labeling_border}},
-and adds a \code{counts} convenience argument.
+ignored) and changes the default labeling to
+\code{\link[vcd]{labeling_border}}.
 }
 \details{
 A companion \code{pairs.table} method is also provided that uses this
@@ -85,6 +79,10 @@ The original \code{vcd::pairs_diagonal_mosaic} has two bugs: (1) the
 \code{alternate_labels} is similarly hardcoded to \code{TRUE}.  This version
 fixes both, making those arguments work as documented.
 
+The default labeling scheme was changed from \code{\link[vcd]{labeling_values}} to
+\code{\link[vcd]{labeling_border}}, so as to disable cell counts by default. To
+enable cell counts, use \code{\link[vcd]{labeling_values}}.
+
 \code{pairs.table} is an S3 method for \code{\link[graphics]{pairs}} that
 overrides the version in \pkg{vcd} solely to change the default
 \code{diag_panel} to the improved \code{pairs_diagonal_mosaic} defined in
@@ -98,11 +96,8 @@ pred_tab <- margin.table(Hoyt, c("Rank", "Occupation", "Sex"))
 # Default: no cell counts in diagonal panels
 pairs(pred_tab)
 
-# Turn off counts explicitly (same as default)
-pairs(pred_tab, diag_panel_args = list(counts = FALSE))
-
 # Show cell counts in diagonal panels
-pairs(pred_tab, diag_panel_args = list(counts = TRUE))
+pairs(pred_tab, diag_panel_args = list(labeling = labeling_values))
 
 # Use residual shading for off-diagonal panels
 pairs(pred_tab, gp = shading_Friendly)
