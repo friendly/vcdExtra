@@ -21,7 +21,9 @@ file.copy(dir("vignettes", full.names=TRUE), "inst/doc", overwrite=TRUE)
 devtools::check()
 devtools::check_win_release()
 devtools::check_win_devel()
-devtools::check_rhub()
+
+#devtools::check_rhub()
+rhub::rhub_check(platforms = c("linux", "macos", "macos-arm64", "windows"))
 
 #args = c('--resave-data','--compact-vignettes=both')
 devtools::build()
