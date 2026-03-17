@@ -185,18 +185,18 @@ indep <- glm(Freq ~ mental+ses,
 long.labels <- list(set_varnames = c(mental="Mental Health Status",
                                      ses="Parent SES"))
 mosaic(indep,
+       formula = ~ses + mental,
        residuals_type="rstandard",
        labeling_args = long.labels,
        labeling=labeling_residuals)
-#> Warning: no formula provided, assuming ~ses + mental
 
 
 # or, show as a sieve diagram
 mosaic(indep,
+       formula = ~ses + mental,
        labeling_args = long.labels,
        panel=sieve,
        gp=shading_Friendly)
-#> Warning: no formula provided, assuming ~ses + mental
 
 
 # fit linear x linear (uniform) association.  Use integer scores for rows/cols
@@ -207,13 +207,13 @@ linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
 
 mosaic(linlin,
+       formula = ~ses + mental,
        residuals_type="rstandard",
        labeling_args = long.labels,
        labeling=labeling_residuals,
        suppress=1,
        gp=shading_Friendly,
        main="Lin x Lin model")
-#> Warning: no formula provided, assuming ~ses + mental
 
 
 ##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)
@@ -224,6 +224,7 @@ RC1model <- gnm(Freq ~ ses + mental + Mult(ses, mental),
                 family = poisson, data = Mental)
 
 mosaic(RC1model,
+       formula = ~ses + mental,
        residuals_type="rstandard",
        labeling_args = long.labels,
        labeling=labeling_residuals,
@@ -235,7 +236,6 @@ mosaic(RC1model,
 #> Running start-up iterations..
 #> Running main iterations........
 #> Done
-#> Warning: no formula provided, assuming ~ses + mental
 
 
  ############# UCB Admissions data, fit using glm()

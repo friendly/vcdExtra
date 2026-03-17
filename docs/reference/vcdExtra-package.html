@@ -218,18 +218,18 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                                      ses="Parent SES"))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(indep,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-4.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # or, show as a sieve diagram</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(indep,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        panel=sieve,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-5.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # fit linear x linear (uniform) association.  Use integer scores for rows/cols</span>
@@ -241,13 +241,13 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 family = poisson, data = Mental)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(linlin,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        suppress=1,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        main="Lin x Lin model")</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-6.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; ##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)</span>
@@ -258,6 +258,7 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 family = poisson, data = Mental)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ mosaic(RC1model,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
@@ -269,7 +270,6 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running start-up iterations..</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running main iterations........</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Done</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-7.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt;  ############# UCB Admissions data, fit using glm()</span>
