@@ -2,6 +2,9 @@
 
 ## Version 0.9.3
 
+This bundle brings quite a few enhancements, improvements in
+documentation and bug fixes
+
 - Added tidy conversion functions:
   [`as_array()`](https://friendly.github.io/vcdExtra/reference/as_array.md),
   [`as_caseform()`](https://friendly.github.io/vcdExtra/reference/as_caseform.md),
