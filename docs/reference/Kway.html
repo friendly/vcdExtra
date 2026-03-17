@@ -22,18 +22,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a1-creating.html">1. Creating and manipulating frequency tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a2-tests.html">2. Tests of Independence</a></li>
-    <li><a class="dropdown-item" href="../articles/a3-loglinear.html">3. Loglinear Models</a></li>
-    <li><a class="dropdown-item" href="../articles/a4-mosaics.html">4. Mosaic plots</a></li>
-    <li><a class="dropdown-item" href="../articles/a5-demo-housing.html">5. Demo - Housing Data</a></li>
-    <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
-    <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -46,7 +35,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Fit All K-way Models in a GLM</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/Kway.R" class="external-link"><code>R/Kway.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/Kway.R" class="external-link"><code>R/Kway.R</code></a></small>
       <div class="d-none name"><code>Kway.Rd</code></div>
     </div>
 
@@ -153,19 +142,21 @@ deprecated), <code><a href="LRstats.html">LRstats</a></code></p>
 <span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 240.88 242.46   41.380 35     0.2121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 245.02 254.52   35.524 30     0.2241</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 251.34 273.51   25.846 22     0.2584</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 254.08 282.58   20.584 18     0.3009</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 236.80 238.38   36.264 35     0.4095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 246.07 255.57   35.529 30     0.2239</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 249.95 272.12   23.415 22     0.3786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 255.58 284.08   21.038 18     0.2775</span>
 <span class="r-in"><span><span class="va">mods4</span> <span class="op">&lt;-</span> <span class="fu">Kway</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">+</span> <span class="va">C</span> <span class="op">+</span> <span class="va">D</span>, data<span class="op">=</span><span class="va">df</span>, family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mods4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 240.88 242.46   41.380 35     0.2121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 245.57 256.66   34.074 29     0.2366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 253.27 284.94   15.774 16     0.4688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 263.64 314.31    2.142  4     0.7097</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 269.50 326.50    0.000  0     1.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.0 236.80 238.39   36.264 35     0.4095    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.1 248.03 259.12   35.495 29     0.1887    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.2 259.77 291.44   21.233 16     0.1697    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.3 268.75 319.43    6.215  4     0.1837    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> kway.4 270.54 327.54    0.000  0     &lt;2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># JobSatisfaction data</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">JobSatisfaction</span>, package<span class="op">=</span><span class="st">"vcd"</span><span class="op">)</span></span></span>
@@ -180,7 +171,7 @@ deprecated), <code><a href="LRstats.html">LRstats</a></code></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> JobSat.2  63.541  64.097    0.065  1     0.7989    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> JobSat.3  65.476  66.111    0.000  0     1.0000    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">modSat</span>, test<span class="op">=</span><span class="st">"Chisq"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analysis of Deviance Table</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -196,7 +187,7 @@ deprecated), <code><a href="LRstats.html">LRstats</a></code></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3         1      0.065  3  117.932   &lt;2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4         0      0.000  1    0.065   0.7989    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Rochdale data: very sparse, in table form</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Rochdale</span>, package<span class="op">=</span><span class="st">"vcd"</span><span class="op">)</span></span></span>

@@ -28,18 +28,7 @@ Brand X or Brand M in a blind trial."><meta property="og:image" content="https:/
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a1-creating.html">1. Creating and manipulating frequency tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a2-tests.html">2. Tests of Independence</a></li>
-    <li><a class="dropdown-item" href="../articles/a3-loglinear.html">3. Loglinear Models</a></li>
-    <li><a class="dropdown-item" href="../articles/a4-mosaics.html">4. Mosaic plots</a></li>
-    <li><a class="dropdown-item" href="../articles/a5-demo-housing.html">5. Demo - Housing Data</a></li>
-    <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
-    <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -52,7 +41,7 @@ Brand X or Brand M in a blind trial."><meta property="og:image" content="https:/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Detergent Preference Data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Detergent.Rd</code></div>
     </div>
 
@@ -87,7 +76,7 @@ chi-square for preference testing in multidimensional problems.
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Detergent</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># basic mosaic plot</span></span></span>
-<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">Detergent</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">Detergent</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Detergent-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span></span>
@@ -116,7 +105,7 @@ chi-square for preference testing in multidimensional problems.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Temperature:Water_softness  2 52.830  6.0991   0.04738 *  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> M_User:Water_softness       2 57.854  1.0751   0.58418    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># model for Preference as a response</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">det.mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm</a></span><span class="op">(</span><span class="op">~</span> <span class="va">Preference</span> <span class="op">+</span> <span class="op">(</span><span class="va">Temperature</span> <span class="op">*</span> <span class="va">M_User</span> <span class="op">*</span> <span class="va">Water_softness</span><span class="op">)</span>,</span></span>
@@ -129,7 +118,7 @@ chi-square for preference testing in multidimensional problems.
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       X^2 df     P(&gt; X^2)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood Ratio 32.82562 11 0.0005615017</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pearson          32.46939 11 0.0006410272</span>
-<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">det.mod0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">det.mod0</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Detergent-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>

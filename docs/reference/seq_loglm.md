@@ -140,7 +140,7 @@ LRstats(tit.joint)
 #> joint.3 257.88 264.83   159.10  7  < 2.2e-16 ***
 #> joint.4 833.36 858.28   671.96 15  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 #' # Models of conditional independence
 tit.cond <- seq_loglm(Titanic, type = "conditional")
@@ -154,7 +154,7 @@ LRstats(tit.cond)
 #> cond.3 500.87 508.60   400.09  6  < 2.2e-16 ***
 #> cond.4 760.13 777.72   608.73 20  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 ```

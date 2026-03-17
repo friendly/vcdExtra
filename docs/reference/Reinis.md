@@ -93,7 +93,7 @@ LRstats(Reinis.gmodels)
 #> kway.5  416.05  552.05     0.39  1     0.5300    
 #> kway.6  417.65  555.82     0.00  0     <2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Sequential tests for k vs k+1 way effects
 anova(Reinis.gmodels, test = "Chisq")
@@ -186,7 +186,7 @@ anova(Reinis.gmodels, test = "Chisq")
 #> 6         1       0.39  6     8.79   0.1860    
 #> 7         0       0.00  1     0.39   0.5300    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Fit sequential models of joint independence
 Reinis.seqjoint <- seq_loglm(Reinis, type = "joint", prefix="joint")
@@ -200,7 +200,7 @@ LRstats(Reinis.seqjoint)
 #> joint.5 280.68 305.60    67.76 15  1.116e-08 ***
 #> joint.6 397.57 468.82    41.92 31   0.091126 .  
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Fit sequential models of conditional independence
 Reinis.seqcond <- seq_loglm(Reinis, type = "conditional", prefix = "cond")
@@ -214,5 +214,5 @@ LRstats(Reinis.seqcond)
 #> cond.5  936.14  950.80   737.22 22  < 2.2e-16 ***
 #> cond.6 1147.51 1173.42   833.86 52  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```

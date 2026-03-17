@@ -97,6 +97,7 @@ if (require("ggplot2")) {
     geom_vline(xintercept=c(4.5, 9.5)))
 }
 #> Loading required package: ggplot2
+#> Warning: package 'ggplot2' was built under R version 4.5.2
 
 #> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
@@ -121,7 +122,7 @@ if (requireNamespace("car"))
 #> density       47.266  2  5.450e-11 ***
 #> tree_health    0.070  1    0.79199    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # plot fitted effects
 if (requireNamespace("effects"))

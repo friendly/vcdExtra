@@ -67,7 +67,9 @@ Other functions for visualizing contingency tables
 - [`plot(`*`<assoc_graph>`*`)`](https://friendly.github.io/vcdExtra/reference/plot.assoc_graph.md)
   : Plot an Association Graph
 - [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
-  : Display Frequency Table with Colored Cell Backgrounds
+  : Smart Display of Frequency Table with Colored Cell Backgrounds
+- [`knit_include()`](https://friendly.github.io/vcdExtra/reference/knit_include.md)
+  : Include an HTML-renderable object in any knitr output format
 - [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
   : Simple and enhanced plot of MCA solutions
 

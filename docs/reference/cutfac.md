@@ -78,15 +78,18 @@ plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)),
   xlab = "Number of hospital stays", main = "hospital")
 }
 #> Loading required package: AER
+#> Warning: package 'AER' was built under R version 4.5.2
 #> Loading required package: lmtest
 #> Loading required package: zoo
+#> Warning: package 'zoo' was built under R version 4.5.2
 #> 
-#> Attaching package: ‘zoo’
-#> The following objects are masked from ‘package:base’:
+#> Attaching package: 'zoo'
+#> The following objects are masked from 'package:base':
 #> 
 #>     as.Date, as.Date.numeric
 #> Loading required package: sandwich
 #> Loading required package: survival
+#> Warning: package 'survival' was built under R version 4.5.2
 
 
 

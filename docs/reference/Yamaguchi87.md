@@ -120,7 +120,7 @@ anova(yama.indep)
 #> Father   4   3859.2        66      23419 < 2.2e-16 ***
 #> Country  2  14231.1        64       9188 < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 mosaic(yama.indep, ~Son+Father, main="[S][F] ignoring country")
 
@@ -153,7 +153,7 @@ anova(yama.noRC)
 #> Son:Country     8   1062.9        56       8125 < 2.2e-16 ***
 #> Father:Country  8   2533.8        48       5592 < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 mosaic(yama.noRC, ~~Country + Son + Father, condvars="Country",
        labeling_args=largs,
@@ -181,7 +181,7 @@ anova(yama.quasi)
 #> Father:Country             8   2533.8        48       5592 < 2.2e-16 ***
 #> Country:Diag(Son, Father) 15   4255.3        33       1336 < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 mosaic(yama.quasi, ~Son + Father, main="Quasi [S][F]")
 

@@ -60,12 +60,12 @@ t1 <- xtabs(counts ~ sex + age + education, data=data)
 structable(t1)
 #>                  age   a   b   c   d   e   f
 #> sex    education                            
-#> Male   low            82 107  98  77  98  91
-#>        med           111  92  95  99 102  95
-#>        high          109 110 105 105 107 114
-#> Female low           113  96  97 110 103  91
-#>        med           116 118 106 113  93 101
-#>        high           97  97 101 110  98 108
+#> Male   low            92 106  83  87  93  92
+#>        med           102  89 105  83  95 101
+#>        high           98  93  88 112 112  89
+#> Female low            99 114 113  97 103  97
+#>        med            95  92  96 103  98 107
+#>        high          103 104  82  89  91 102
 
 ##                  age   a   b   c   d   e   f
 ## sex    education                            
@@ -82,12 +82,12 @@ t2 <- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"))
 structable(t2)
 #>                  age   A   B   C
 #> sex    education                
-#> Male   low           189 175 189
-#>        med           203 194 197
-#>        high          219 210 221
-#> Female low           209 207 194
-#>        med           234 219 194
-#>        high          194 211 206
+#> Male   low           198 170 185
+#>        med           191 188 196
+#>        high          191 200 201
+#> Female low           213 210 200
+#>        med           187 199 205
+#>        high          207 171 193
 
 ##                  age   A   B   C
 ## sex    education                
@@ -105,10 +105,10 @@ t3 <- collapse.table(t1, age=c("A", "A", "B", "B", "C", "C"),
 structable(t3)
 #>                  age   A   B   C
 #> sex    education                
-#> Male   low           392 369 386
-#>        high          219 210 221
-#> Female low           443 426 388
-#>        high          194 211 206
+#> Male   low           389 358 381
+#>        high          191 200 201
+#> Female low           400 409 405
+#>        high          207 171 193
 
 ##                  age   A   B   C
 ## sex    education                
@@ -124,22 +124,22 @@ t4 <- collapse.table(t1,  education=1:3)
 structable(t4)
 #>                  age   a   b   c   d   e   f
 #> sex    education                            
-#> Male   1              82 107  98  77  98  91
-#>        2             111  92  95  99 102  95
-#>        3             109 110 105 105 107 114
-#> Female 1             113  96  97 110 103  91
-#>        2             116 118 106 113  93 101
-#>        3              97  97 101 110  98 108
+#> Male   1              92 106  83  87  93  92
+#>        2             102  89 105  83  95 101
+#>        3              98  93  88 112 112  89
+#> Female 1              99 114 113  97 103  97
+#>        2              95  92  96 103  98 107
+#>        3             103 104  82  89  91 102
 
 structable(t4)
 #>                  age   a   b   c   d   e   f
 #> sex    education                            
-#> Male   1              82 107  98  77  98  91
-#>        2             111  92  95  99 102  95
-#>        3             109 110 105 105 107 114
-#> Female 1             113  96  97 110 103  91
-#>        2             116 118 106 113  93 101
-#>        3              97  97 101 110  98 108
+#> Male   1              92 106  83  87  93  92
+#>        2             102  89 105  83  95 101
+#>        3              98  93  88 112 112  89
+#> Female 1              99 114 113  97 103  97
+#>        2              95  92  96 103  98 107
+#>        3             103 104  82  89  91 102
 ##                  age   a   b   c   d   e   f
 ## sex    education                            
 ## Male   1             119 101 109  85  99  93

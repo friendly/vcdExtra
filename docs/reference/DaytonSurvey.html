@@ -26,18 +26,7 @@ alcohol, cigarettes and marijuana."><meta property="og:image" content="https://f
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a1-creating.html">1. Creating and manipulating frequency tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a2-tests.html">2. Tests of Independence</a></li>
-    <li><a class="dropdown-item" href="../articles/a3-loglinear.html">3. Loglinear Models</a></li>
-    <li><a class="dropdown-item" href="../articles/a4-mosaics.html">4. Mosaic plots</a></li>
-    <li><a class="dropdown-item" href="../articles/a5-demo-housing.html">5. Demo - Housing Data</a></li>
-    <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
-    <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -50,7 +39,7 @@ alcohol, cigarettes and marijuana."><meta property="og:image" content="https://f
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Dayton Student Survey on Substance Use</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>DaytonSurvey.Rd</code></div>
     </div>
 
@@ -141,7 +130,7 @@ http://www.stat.ufl.edu/~aa/cda/Thompson_manual.pdf</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> race       1  1926.11        26     1325.9 &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex:race   1     0.79        25     1325.1    0.3746    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># all two-way terms</span></span></span>
 <span class="r-in"><span><span class="va">mod.all2way</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">.</span><span class="op">^</span><span class="fl">2</span>, data<span class="op">=</span><span class="va">DaytonSurvey</span>, family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span></span>
@@ -173,7 +162,7 @@ http://www.stat.ufl.edu/~aa/cda/Thompson_manual.pdf</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> marijuana:race       1     3.39        17       16.2  0.065758 .  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sex:race             1     0.84        16       15.3  0.359722    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compare models</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">mod.0</span>, <span class="va">mod.GR</span>, <span class="va">mod.all2way</span><span class="op">)</span></span></span>
@@ -183,7 +172,7 @@ http://www.stat.ufl.edu/~aa/cda/Thompson_manual.pdf</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mod.GR      1475.38 1485.64  1325.14 25     &lt;2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mod.all2way  183.58  207.03    15.34 16     0.4999    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># collapse over sex and race</span></span></span>
 <span class="r-in"><span><span class="va">Dayton.ACM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">cigarette</span><span class="op">+</span><span class="va">alcohol</span><span class="op">+</span><span class="va">marijuana</span>,</span></span>

@@ -91,7 +91,7 @@ anova(mod.GR, test = "Chisq")
 #> race       1  1926.11        26     1325.9 < 2.2e-16 ***
 #> sex:race   1     0.79        25     1325.1    0.3746    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # all two-way terms
 mod.all2way <- glm(Freq ~ .^2, data=DaytonSurvey, family=poisson)
@@ -123,7 +123,7 @@ anova(mod.all2way, test = "Chisq")
 #> marijuana:race       1     3.39        17       16.2  0.065758 .  
 #> sex:race             1     0.84        16       15.3  0.359722    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # compare models
 LRstats(mod.0, mod.GR, mod.all2way)
@@ -133,7 +133,7 @@ LRstats(mod.0, mod.GR, mod.all2way)
 #> mod.GR      1475.38 1485.64  1325.14 25     <2e-16 ***
 #> mod.all2way  183.58  207.03    15.34 16     0.4999    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # collapse over sex and race
 Dayton.ACM <- aggregate(Freq ~ cigarette+alcohol+marijuana,

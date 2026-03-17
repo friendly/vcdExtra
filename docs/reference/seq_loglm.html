@@ -26,18 +26,7 @@ a variety of types of loglinear models."><meta property="og:image" content="http
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a1-creating.html">1. Creating and manipulating frequency tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a2-tests.html">2. Tests of Independence</a></li>
-    <li><a class="dropdown-item" href="../articles/a3-loglinear.html">3. Loglinear Models</a></li>
-    <li><a class="dropdown-item" href="../articles/a4-mosaics.html">4. Mosaic plots</a></li>
-    <li><a class="dropdown-item" href="../articles/a5-demo-housing.html">5. Demo - Housing Data</a></li>
-    <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
-    <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -50,7 +39,7 @@ a variety of types of loglinear models."><meta property="og:image" content="http
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Sequential Loglinear Models for an N-way Table</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/seq_loglm.R" class="external-link"><code>R/seq_loglm.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/seq_loglm.R" class="external-link"><code>R/seq_loglm.R</code></a></small>
       <div class="d-none name"><code>seq_loglm.Rd</code></div>
     </div>
 
@@ -184,7 +173,7 @@ models, <code><a href="loglin-utilities.html">conditional</a></code>, <code><a h
 <span class="r-out co"><span class="r-pr">#&gt;</span> joint.3 257.88 264.83   159.10  7  &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> joint.4 833.36 858.28   671.96 15  &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#' # Models of conditional independence</span></span></span>
 <span class="r-in"><span><span class="va">tit.cond</span> <span class="op">&lt;-</span> <span class="fu">seq_loglm</span><span class="op">(</span><span class="va">Titanic</span>, type <span class="op">=</span> <span class="st">"conditional"</span><span class="op">)</span></span></span>
@@ -198,7 +187,7 @@ models, <code><a href="loglin-utilities.html">conditional</a></code>, <code><a h
 <span class="r-out co"><span class="r-pr">#&gt;</span> cond.3 500.87 508.60   400.09  6  &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cond.4 760.13 777.72   608.73 20  &lt; 2.2e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>

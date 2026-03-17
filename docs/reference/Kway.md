@@ -110,19 +110,21 @@ mods3 <- Kway(Freq ~ A + B + C, data=df, family=poisson)
 LRstats(mods3)
 #> Likelihood summary table:
 #>           AIC    BIC LR Chisq Df Pr(>Chisq)
-#> kway.0 240.88 242.46   41.380 35     0.2121
-#> kway.1 245.02 254.52   35.524 30     0.2241
-#> kway.2 251.34 273.51   25.846 22     0.2584
-#> kway.3 254.08 282.58   20.584 18     0.3009
+#> kway.0 236.80 238.38   36.264 35     0.4095
+#> kway.1 246.07 255.57   35.529 30     0.2239
+#> kway.2 249.95 272.12   23.415 22     0.3786
+#> kway.3 255.58 284.08   21.038 18     0.2775
 mods4 <- Kway(Freq ~ A + B + C + D, data=df, family=poisson)
 LRstats(mods4)
 #> Likelihood summary table:
-#>           AIC    BIC LR Chisq Df Pr(>Chisq)
-#> kway.0 240.88 242.46   41.380 35     0.2121
-#> kway.1 245.57 256.66   34.074 29     0.2366
-#> kway.2 253.27 284.94   15.774 16     0.4688
-#> kway.3 263.64 314.31    2.142  4     0.7097
-#> kway.4 269.50 326.50    0.000  0     1.0000
+#>           AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> kway.0 236.80 238.39   36.264 35     0.4095    
+#> kway.1 248.03 259.12   35.495 29     0.1887    
+#> kway.2 259.77 291.44   21.233 16     0.1697    
+#> kway.3 268.75 319.43    6.215  4     0.1837    
+#> kway.4 270.54 327.54    0.000  0     <2e-16 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
@@ -137,7 +139,7 @@ LRstats(modSat)
 #> JobSat.2  63.541  64.097    0.065  1     0.7989    
 #> JobSat.3  65.476  66.111    0.000  0     1.0000    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 anova(modSat, test="Chisq")
 #> Analysis of Deviance Table
 #> 
@@ -153,7 +155,7 @@ anova(modSat, test="Chisq")
 #> 3         1      0.065  3  117.932   <2e-16 ***
 #> 4         0      0.000  1    0.065   0.7989    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Rochdale data: very sparse, in table form
 data(Rochdale, package="vcd")

@@ -2,13 +2,27 @@
 
 ## Version 0.9.3
 
-- Added tidy conversion functions: as_array(), as_caseform(),
-  as_freqform, as_table() PR
-  [\#22](https://github.com/friendly/vcdExtra/issues/22) \[Thx: Gavin
+- Added tidy conversion functions:
+  [`as_array()`](https://friendly.github.io/vcdExtra/reference/as_array.md),
+  [`as_caseform()`](https://friendly.github.io/vcdExtra/reference/as_caseform.md),
+  `as_freqform`,
+  [`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md)
+  PR [\#22](https://github.com/friendly/vcdExtra/issues/22) \[Thx: Gavin
   Klorfine\]
 - Fixed bug in
   [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
   coming from \`ca::cacoords(): “non-conformable arguments”
+- Expanded documentation of
+  [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
+  to give better advice on how to use this in Rmd or qmd documents.
+- Added: `knitr_include()` as a general solution to using `gt`, `DT`,
+  `plotly`, … outputs in non-HTML documents.
+- Added
+  [`pairs_diagonal_mosaic()`](https://friendly.github.io/vcdExtra/reference/pairs_diagonal_mosaic.md),
+  overriding the {vcd} version to give more flexibility in printing the
+  cell values in the diagonal cells. PR
+  [\#24](https://github.com/friendly/vcdExtra/issues/24) \[Thx: Gavin
+  Klorfine\]
 
 ## Version 0.9.2
 
