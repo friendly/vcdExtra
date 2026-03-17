@@ -126,12 +126,14 @@
 #' long.labels <- list(set_varnames = c(mental="Mental Health Status",
 #'                                      ses="Parent SES"))
 #' mosaic(indep,
+#'        formula = ~ses + mental,
 #'        residuals_type="rstandard",
 #'        labeling_args = long.labels,
 #'        labeling=labeling_residuals)
 #'
 #' # or, show as a sieve diagram
 #' mosaic(indep,
+#'        formula = ~ses + mental,
 #'        labeling_args = long.labels,
 #'        panel=sieve,
 #'        gp=shading_Friendly)
@@ -144,6 +146,7 @@
 #'                 family = poisson, data = Mental)
 #'
 #' mosaic(linlin,
+#'        formula = ~ses + mental,
 #'        residuals_type="rstandard",
 #'        labeling_args = long.labels,
 #'        labeling=labeling_residuals,
@@ -159,6 +162,7 @@
 #'                 family = poisson, data = Mental)
 #'
 #' mosaic(RC1model,
+#'        formula = ~ses + mental,
 #'        residuals_type="rstandard",
 #'        labeling_args = long.labels,
 #'        labeling=labeling_residuals,

@@ -1,54 +1,41 @@
 # keep rgl from popping up windows
 Sys.setenv(RGL_USE_NULL = TRUE)
 
-# devtools::build_vignettes()
-# remotes::install_local(".", build_vignettes = TRUE, force=TRUE)
-#
-# The README.Rmd references the vignettes, so they must be installed
+# The README.Rmd references the vignettes, so they must be installed first
 devtools::install(build_vignettes = TRUE)
 
-# Build the pkgdown site
-# NB: Now handled in .github/workflows/pkgdown.yml
-pkgdown::build_site()
+# build the README.md if it is older than README.Rmd
+if (!file.exists("README.md") || file.mtime("README.Rmd") > file.mtime("README.md")) {
+  devtools::build_readme()
+}
 
-
-# to copy the vignettes to `inst/doc`:
-tools::buildVignettes(dir = ".", tangle=TRUE)
-dir.create("inst/doc")
-file.copy(dir("vignettes", full.names=TRUE), "inst/doc", overwrite=TRUE)
-
-# Check package
-devtools::check()
-devtools::check_win_release()
-devtools::check_win_devel()
-
-#devtools::check_rhub()
-rhub::rhub_check(platforms = c("linux", "macos", "macos-arm64", "windows"))
-
-#args = c('--resave-data','--compact-vignettes=both')
-devtools::build()
-
-# then, test with win builder
-devtools::check_win_devel()
-
-devtools::check_rhub()
-
-# spellcheck
+# spellcheck -- fix any issues before running remote checks
 (words <- devtools::spell_check())
 words$word
 
+# Check package locally
+devtools::check()
+
+# Check on win-builder (CRAN's Windows servers)
+devtools::check_win_release()
+devtools::check_win_devel()
+
+# Check on R-hub (Linux, macOS, Windows R-devel)
+#devtools::check_rhub()
+rhub::rhub_check(platforms = c("linux", "macos-arm64", "windows"))   # removed: "macos"
 
 # reverse dependencies
 devtools::revdep()
 # [1] "aplore3" "catdata" "gnm"     "iarm"    "jmv"
 
-if (!require("revdepcheck")) remotes::install_github("r-lib/revdepcheck")
-revdepcheck::revdep_reset()
-revdepcheck::revdep_check(num_workers = 4)
+# revdepcheck::revdep_reset()
+# revdepcheck::revdep_check(num_workers = 4)
 
-# build the pkgdown site
+# To run revdep check in the background
+rstudioapi::jobRunScript(".revdep_run.R")
+
+# build the pkgdown site (also triggered automatically by GHA on push to master)
 pkgdown::build_site()
 
 # submit to cran
 devtools::release()
-

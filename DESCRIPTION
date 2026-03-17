@@ -61,7 +61,8 @@ Suggests:
     purrr, 
     readxl, 
     stringr, 
-    tidyr (>= 1.3.0)
+    tidyr (>= 1.3.0),
+    rgl
 Imports:
     MASS,
     grDevices,
@@ -71,7 +72,6 @@ Imports:
     dplyr,
     ca,
     igraph,
-    rgl,
     colorspace,
     gt,
     scales,
