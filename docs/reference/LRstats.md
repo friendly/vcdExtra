@@ -130,7 +130,7 @@ LRstats(indep)
 #>          AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> indep 209.59 220.19   47.418 15  3.155e-05 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
 
@@ -150,7 +150,7 @@ LRstats(indep, coleff, roweff, linlin)
 #> roweff 174.45 188.59    6.281 12     0.9013    
 #> linlin 174.07 185.85    9.895 14     0.7698    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # compare models in a glmlist, using formula labels
 mods <- glmlist(indep, coleff, roweff, linlin)
@@ -162,7 +162,7 @@ LRstats(mods, label = "formula")
 #> mental + ses + mental:Cscore 174.45 188.59    6.281 12     0.9013    
 #> mental + ses + Rscore:Cscore 174.07 185.85    9.895 14     0.7698    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # loglmlist example with bracket notation labels
 data(Titanic)
@@ -175,7 +175,7 @@ LRstats(tit.joint)
 #> joint.3 257.88 264.83   159.10  7  < 2.2e-16 ***
 #> joint.4 833.36 858.28   671.96 15  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 LRstats(tit.joint, label = "formula")
 #> Likelihood summary table:
 #>                               AIC    BIC LR Chisq Df Pr(>Chisq)    
@@ -184,7 +184,7 @@ LRstats(tit.joint, label = "formula")
 #> (Class,Sex) (Age)          257.88 264.83   159.10  7  < 2.2e-16 ***
 #> [Class,Sex,Age] [Survived] 833.36 858.28   671.96 15  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
 #> Likelihood summary table:
 #>                AIC    BIC LR Chisq Df Pr(>Chisq)    
@@ -193,5 +193,5 @@ LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
 #> (C,S) (A)   257.88 264.83   159.10  7  < 2.2e-16 ***
 #> [C,S,A] [S] 833.36 858.28   671.96 15  < 2.2e-16 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 ```

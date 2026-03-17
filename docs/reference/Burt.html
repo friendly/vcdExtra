@@ -39,7 +39,7 @@ multiple correspondence analysis) applied to categorical data."><meta property="
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Burt (1950) Data on Hair, Eyes, Head and Stature</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Burt.Rd</code></div>
     </div>
 
@@ -94,13 +94,13 @@ population.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Burt</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Eyes</span> <span class="op">+</span> <span class="va">Head</span> <span class="op">+</span> <span class="va">Stature</span>, data<span class="op">=</span><span class="va">Burt</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Eyes</span> <span class="op">+</span> <span class="va">Head</span> <span class="op">+</span> <span class="va">Stature</span>, data<span class="op">=</span><span class="va">Burt</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(predvars, data, env):</span> object 'Hair' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#or</span></span></span>
 <span class="r-in"><span><span class="va">burt.tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Eyes</span> <span class="op">+</span> <span class="va">Head</span> <span class="op">+</span> <span class="va">Stature</span>, data<span class="op">=</span><span class="va">Burt</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(predvars, data, env):</span> object 'Freq' not found</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">burt.tab</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">burt.tab</span>, shade<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'burt.tab' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

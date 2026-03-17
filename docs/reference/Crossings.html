@@ -41,7 +41,7 @@ by Goodman (1972)."><meta property="og:image" content="https://friendly.github.i
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Crossings Interaction of Factors</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/Crossings.R" class="external-link"><code>R/Crossings.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/Crossings.R" class="external-link"><code>R/Crossings.R</code></a></small>
       <div class="d-none name"><code>Crossings.Rd</code></div>
     </div>
 
@@ -101,7 +101,7 @@ functions for frequency tables;
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Hauser79</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># display table</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">structable</a></span><span class="op">(</span><span class="op">~</span><span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>, data<span class="op">=</span><span class="va">Hauser79</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="op">~</span><span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>, data<span class="op">=</span><span class="va">Hauser79</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Son UpNM LoNM  UpM  LoM Farm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Father                             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> UpNM       1414  521  302  643   40</span>
@@ -110,7 +110,7 @@ functions for frequency tables;
 <span class="r-out co"><span class="r-pr">#&gt;</span> LoM         756  914  771 3325  237</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Farm        409  357  441 1611 1832</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hauser.indep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gnm/man/gnm.html" class="external-link">gnm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>,</span></span>
+<span class="r-in"><span><span class="va">hauser.indep</span> <span class="op">&lt;-</span> <span class="fu">gnm</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>,</span></span>
 <span class="r-in"><span>                    data<span class="op">=</span><span class="va">Hauser79</span>,</span></span>
 <span class="r-in"><span>                    family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -121,16 +121,16 @@ functions for frequency tables;
 <span class="r-out co"><span class="r-pr">#&gt;</span>              AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CR 318.63 334.47   89.914 12  5.131e-14 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hauser.CRdiag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>,</span></span>
-<span class="r-in"><span>                        <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/gnm/man/Diag.html" class="external-link">Diag</a></span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                        <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">hauser.CRdiag</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CRdiag 298.95 318.45   64.237  9   2.03e-10 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># what does Crossings do?</span></span></span>
 <span class="r-in"><span><span class="va">cr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Hauser79</span>, <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>, <span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>

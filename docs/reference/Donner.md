@@ -135,7 +135,7 @@ anova(mod2, test="Chisq")
 #> sex      1   6.7274        87     111.13 0.009494 **
 #> age:sex  1   0.4003        86     110.73 0.526922   
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (mod3 <- glm(survived ~ poly(age,2) * sex, data=Donner, family=binomial))
 #> 
@@ -167,7 +167,7 @@ anova(mod3, test="Chisq")
 #> sex               1   8.0908        86    106.731 0.004449 **
 #> poly(age, 2):sex  2   8.9321        84     97.799 0.011492 * 
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 LRstats(glmlist(mod1, mod2, mod3))
 #> Likelihood summary table:
 #>         AIC    BIC LR Chisq Df Pr(>Chisq)  
@@ -175,7 +175,7 @@ LRstats(glmlist(mod1, mod2, mod3))
 #> mod2 118.73 128.73  110.727 86    0.03755 *
 #> mod3 109.80 124.80   97.799 84    0.14408  
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # plot fitted probabilities from mod2 and mod3
 # idea from: http://www.ling.upenn.edu/~joseff/rstudy/summer2010_ggplot2_intro.html

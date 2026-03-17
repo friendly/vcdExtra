@@ -28,7 +28,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/HEAD/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/master/DESCRIPTION)
 
 Friendly M (2026). *vcdExtra: 'vcd' Extensions and Additions*. R package
 version 0.9.3, <https://friendly.github.io/vcdExtra/>.
