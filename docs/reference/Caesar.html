@@ -41,7 +41,7 @@ Infection (three levels)."><meta property="og:image" content="https://friendly.g
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Risk Factors for Infection in Caesarian Births</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/data.R" class="external-link"><code>R/data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>Caesar.Rd</code></div>
     </div>
 
@@ -83,7 +83,7 @@ frequency data frame with other variables.</p></div>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Caesar</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">#display table;  note that there are quite a few 0 cells</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">structable</a></span><span class="op">(</span><span class="va">Caesar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="va">Caesar</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Risk    Yes     No   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Planned Yes No Yes No</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Infection Antibiotics                      </span>
@@ -111,13 +111,13 @@ frequency data frame with other variables.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood Ratio 85.10955 14 3.156586e-12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pearson               NaN 14          NaN</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">Caesar.mod0</span>, main<span class="op">=</span><span class="st">"Baseline model"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">Caesar.mod0</span>, main<span class="op">=</span><span class="st">"Baseline model"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Caesar-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Illustrate handling structural zeros</span></span></span>
 <span class="r-in"><span><span class="va">zeros</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">+</span> <span class="op">(</span><span class="va">Caesar</span> <span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">zeros</span><span class="op">[</span><span class="fl">1</span>,,<span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">structable</a></span><span class="op">(</span><span class="va">zeros</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="va">zeros</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Risk    Yes     No   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Planned Yes No Yes No</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Infection Antibiotics                      </span>
@@ -155,7 +155,7 @@ frequency data frame with other variables.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model 2   78.89068  9   6.218866         5         0.2855</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Saturated  0.00000  0  78.890682         9         0.0000</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span> <span class="op">(</span><span class="va">Caesar.mod0s</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">mosaic</span> <span class="op">(</span><span class="va">Caesar.mod0s</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, p):</span> object 'zeros' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># what terms to add?</span></span></span>
@@ -170,7 +170,7 @@ frequency data frame with other variables.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Infection:Antibiotics  2  72.187 36.922 9.603e-09 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Infection:Planned      2 107.742  1.368    0.5047    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># add Association of Infection:Antibiotics</span></span></span>
 <span class="r-in"><span><span class="va">Caesar.mod1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">Caesar.mod0</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="va">Infection</span><span class="op">:</span><span class="va">Antibiotics</span><span class="op">)</span></span></span>
@@ -187,7 +187,7 @@ frequency data frame with other variables.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model 2   48.18709 12   36.92246         2              0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Saturated  0.00000  0   48.18709        12              0</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">Caesar.mod1</span>,</span></span>
+<span class="r-in"><span><span class="fu">mosaic</span><span class="op">(</span><span class="va">Caesar.mod1</span>,</span></span>
 <span class="r-in"><span>       gp<span class="op">=</span><span class="va">shading_Friendly</span>,</span></span>
 <span class="r-in"><span>       main<span class="op">=</span><span class="st">"Adding Infection:Antibiotics"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Caesar-2.png" alt="" width="700" height="433"></span>

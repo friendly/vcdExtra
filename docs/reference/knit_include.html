@@ -41,7 +41,7 @@ and then generalized to provide for other similar cases."><meta property="og:ima
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Include an HTML-renderable object in any knitr output format</h1>
-      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/HEAD/R/knit_include.R" class="external-link"><code>R/knit_include.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/R/knit_include.R" class="external-link"><code>R/knit_include.R</code></a></small>
       <div class="d-none name"><code>knit_include.Rd</code></div>
     </div>
 
@@ -123,10 +123,10 @@ a pipe on any object: it only intervenes when it knows how to help!</p>
 <span class="r-in"><span><span class="fu"><a href="color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>, title <span class="op">=</span> <span class="st">"Hair x Eye Color"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knit_include</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## DT htmlwidget</span></span></span>
-<span class="r-in"><span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html" class="external-link">datatable</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knit_include</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">900</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">DT</span><span class="fu">::</span><span class="fu">datatable</span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knit_include</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">900</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## plotly htmlwidget</span></span></span>
-<span class="r-in"><span><span class="fu">plotly</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plotly/man/plot_ly.html" class="external-link">plot_ly</a></span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">wt</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">mpg</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knit_include</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plotly</span><span class="fu">::</span><span class="fu">plot_ly</span><span class="op">(</span><span class="va">mtcars</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">wt</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">mpg</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knit_include</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Any other object passes through unchanged</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knit_include</span><span class="op">(</span><span class="op">)</span></span></span>
