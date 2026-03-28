@@ -37,6 +37,7 @@
 #' 
 #' @examples
 #' data("HairEyeColor") # Table form data
+#' str(HairEyeColor)
 #' 
 #' collapse_levels(
 #'   HairEyeColor,                 # Dataset
@@ -56,6 +57,7 @@
 #' data("Hoyt", package = "vcdExtra")
 #' ff_Hoyt <- as_freqform(Hoyt)
 #' names(ff_Hoyt)[length(ff_Hoyt)] <- "n"
+#' str(ff_Hoyt)
 #' 
 #' collapse_levels(
 #'   ff_Hoyt,
