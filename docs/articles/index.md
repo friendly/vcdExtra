@@ -1,6 +1,8 @@
 # Articles
 
-### All vignettes
+### Tutorials
+
+Vignettes introducing the package
 
 - [1. Creating and manipulating frequency
   tables](https://friendly.github.io/vcdExtra/articles/a1-creating.md):
@@ -20,3 +22,10 @@
   analysis](https://friendly.github.io/vcdExtra/articles/datasets.md):
 - [tidyCat: Tidy Methods For Categorical Data
   Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.md):
+
+### Other
+
+Additional articles
+
+- [Using color_table() in R
+  Markdown](https://friendly.github.io/vcdExtra/articles/color_table.md):

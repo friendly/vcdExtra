@@ -26,18 +26,7 @@ for a generalized nonlinear model fitted with gnm."><meta property="og:image" co
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a1-creating.html">1. Creating and manipulating frequency tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a2-tests.html">2. Tests of Independence</a></li>
-    <li><a class="dropdown-item" href="../articles/a3-loglinear.html">3. Loglinear Models</a></li>
-    <li><a class="dropdown-item" href="../articles/a4-mosaics.html">4. Mosaic plots</a></li>
-    <li><a class="dropdown-item" href="../articles/a5-demo-housing.html">5. Demo - Housing Data</a></li>
-    <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
-    <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -231,18 +220,18 @@ to this plot method, setting the panel argument accordingly.</p>
 <span class="r-in"><span><span class="va">long.labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>set_varnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mental<span class="op">=</span><span class="st">"Mental Health Status"</span>,</span></span>
 <span class="r-in"><span>                                     ses<span class="op">=</span><span class="st">"Parent SES"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">indep</span>,</span></span>
+<span class="r-in"><span>       formula <span class="op">=</span> <span class="op">~</span><span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span>,</span></span>
 <span class="r-in"><span>       residuals_type<span class="op">=</span><span class="st">"rstandard"</span>,</span></span>
 <span class="r-in"><span>       labeling_args <span class="op">=</span> <span class="va">long.labels</span>,</span></span>
 <span class="r-in"><span>       labeling<span class="op">=</span><span class="va">labeling_residuals</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="mosaic.glm-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># or, show as a sieve diagram</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">indep</span>,</span></span>
+<span class="r-in"><span>       formula <span class="op">=</span> <span class="op">~</span><span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span>,</span></span>
 <span class="r-in"><span>       labeling_args <span class="op">=</span> <span class="va">long.labels</span>,</span></span>
 <span class="r-in"><span>       panel<span class="op">=</span><span class="va">sieve</span>,</span></span>
 <span class="r-in"><span>       gp<span class="op">=</span><span class="va">shading_Friendly</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="mosaic.glm-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># fit linear x linear (uniform) association.  Use integer scores for rows/cols</span></span></span>
@@ -253,13 +242,13 @@ to this plot method, setting the panel argument accordingly.</p>
 <span class="r-in"><span>                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">linlin</span>,</span></span>
+<span class="r-in"><span>       formula <span class="op">=</span> <span class="op">~</span><span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span>,</span></span>
 <span class="r-in"><span>       residuals_type<span class="op">=</span><span class="st">"rstandard"</span>,</span></span>
 <span class="r-in"><span>       labeling_args <span class="op">=</span> <span class="va">long.labels</span>,</span></span>
 <span class="r-in"><span>       labeling<span class="op">=</span><span class="va">labeling_residuals</span>,</span></span>
 <span class="r-in"><span>       suppress<span class="op">=</span><span class="fl">1</span>,</span></span>
 <span class="r-in"><span>       gp<span class="op">=</span><span class="va">shading_Friendly</span>,</span></span>
 <span class="r-in"><span>       main<span class="op">=</span><span class="st">"Lin x Lin model"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="mosaic.glm-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)</span></span></span>
@@ -270,6 +259,7 @@ to this plot method, setting the panel argument accordingly.</p>
 <span class="r-in"><span>                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic</a></span><span class="op">(</span><span class="va">RC1model</span>,</span></span>
+<span class="r-in"><span>       formula <span class="op">=</span> <span class="op">~</span><span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span>,</span></span>
 <span class="r-in"><span>       residuals_type<span class="op">=</span><span class="st">"rstandard"</span>,</span></span>
 <span class="r-in"><span>       labeling_args <span class="op">=</span> <span class="va">long.labels</span>,</span></span>
 <span class="r-in"><span>       labeling<span class="op">=</span><span class="va">labeling_residuals</span>,</span></span>
@@ -281,7 +271,6 @@ to this plot method, setting the panel argument accordingly.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running start-up iterations..</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running main iterations........</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Done</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="mosaic.glm-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span> <span class="co">############# UCB Admissions data, fit using glm()</span></span></span>

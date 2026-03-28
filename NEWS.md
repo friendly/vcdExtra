@@ -1,7 +1,12 @@
 ## Version 0.9.3
 
+This bundle brings quite a few enhancements, improvements in documentation and bug fixes
+
 * Added tidy conversion functions: `as_array()`, `as_caseform()`, `as_freqform`, `as_table()` PR #22 [Thx: Gavin Klorfine]
 * Fixed bug in `mcaplot()` coming from `ca::cacoords(): "non-conformable arguments"
+* Expanded documentation of `color_table()` to give better advice on how to use this in Rmd or qmd documents.
+* Added: `knitr_include()` as a general solution to using `gt`, `DT`, `plotly`, ... outputs in non-HTML documents.
+* Added `pairs_diagonal_mosaic()`, overriding the {vcd} version to give more flexibility in printing the cell values in the diagonal cells. PR #24 [Thx: Gavin Klorfine]
 
 ## Version 0.9.2
 

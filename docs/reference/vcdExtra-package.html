@@ -22,18 +22,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a1-creating.html">1. Creating and manipulating frequency tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a2-tests.html">2. Tests of Independence</a></li>
-    <li><a class="dropdown-item" href="../articles/a3-loglinear.html">3. Loglinear Models</a></li>
-    <li><a class="dropdown-item" href="../articles/a4-mosaics.html">4. Mosaic plots</a></li>
-    <li><a class="dropdown-item" href="../articles/a5-demo-housing.html">5. Demo - Housing Data</a></li>
-    <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
-    <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -229,18 +218,18 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                                      ses="Parent SES"))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(indep,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-4.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # or, show as a sieve diagram</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(indep,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        panel=sieve,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-5.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; # fit linear x linear (uniform) association.  Use integer scores for rows/cols</span>
@@ -252,13 +241,13 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 family = poisson, data = Mental)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; mosaic(linlin,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        suppress=1,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        gp=shading_Friendly,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        main="Lin x Lin model")</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-6.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt; ##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)</span>
@@ -269,6 +258,7 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+                 family = poisson, data = Mental)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+ mosaic(RC1model,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        formula = ~ses + mental,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        residuals_type="rstandard",</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling_args = long.labels,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl+        labeling=labeling_residuals,</span>
@@ -280,7 +270,6 @@ strucplot framework.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running start-up iterations..</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running main iterations........</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Done</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no formula provided, assuming ~ses + mental</span>
 <span class="r-plt img"><img src="vcdExtra-package-7.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> msc.gl&gt;  ############# UCB Admissions data, fit using glm()</span>

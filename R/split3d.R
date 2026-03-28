@@ -45,7 +45,6 @@
 #'
 #' \code{\link[rgl]{shapelist3d}} for the plotting of lists of `shape3d`
 #' objects.
-#' @importFrom rgl translate3d
 #' @concept 3D
 #' @keywords dplot
 #' @examples

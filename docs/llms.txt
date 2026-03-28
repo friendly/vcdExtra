@@ -586,7 +586,9 @@ Other functions for visualizing contingency tables
 - [`plot(`*`<assoc_graph>`*`)`](https://friendly.github.io/vcdExtra/reference/plot.assoc_graph.md)
   : Plot an Association Graph
 - [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
-  : Display Frequency Table with Colored Cell Backgrounds
+  : Smart Display of Frequency Table with Colored Cell Backgrounds
+- [`knit_include()`](https://friendly.github.io/vcdExtra/reference/knit_include.md)
+  : Include an HTML-renderable object in any knitr output format
 - [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
   : Simple and enhanced plot of MCA solutions
 
@@ -777,7 +779,9 @@ Some small data sets used in examples or in
 
 # Articles
 
-### All vignettes
+### Tutorials
+
+Vignettes introducing the package
 
 - [1. Creating and manipulating frequency
   tables](https://friendly.github.io/vcdExtra/articles/a1-creating.md):
@@ -797,3 +801,10 @@ Some small data sets used in examples or in
   analysis](https://friendly.github.io/vcdExtra/articles/datasets.md):
 - [tidyCat: Tidy Methods For Categorical Data
   Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.md):
+
+### Other
+
+Additional articles
+
+- [Using color_table() in R
+  Markdown](https://friendly.github.io/vcdExtra/articles/color_table.md):

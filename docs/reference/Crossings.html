@@ -28,18 +28,7 @@ by Goodman (1972)."><meta property="og:image" content="https://friendly.github.i
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a1-creating.html">1. Creating and manipulating frequency tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a2-tests.html">2. Tests of Independence</a></li>
-    <li><a class="dropdown-item" href="../articles/a3-loglinear.html">3. Loglinear Models</a></li>
-    <li><a class="dropdown-item" href="../articles/a4-mosaics.html">4. Mosaic plots</a></li>
-    <li><a class="dropdown-item" href="../articles/a5-demo-housing.html">5. Demo - Housing Data</a></li>
-    <li><a class="dropdown-item" href="../articles/a6-mobility.html">6. Mobility tables</a></li>
-    <li><a class="dropdown-item" href="../articles/a7-continuous.html">7. Continuous predictors</a></li>
-    <li><a class="dropdown-item" href="../articles/datasets.html">Datasets for categorical data analysis</a></li>
-    <li><a class="dropdown-item" href="../articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></li>
-  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../articles/index.html">Articles</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -109,7 +98,81 @@ functions for frequency tables;
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Hauser79</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># display table</span></span></span>
+<span class="r-in"><span><span class="fu">structable</span><span class="op">(</span><span class="op">~</span><span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>, data<span class="op">=</span><span class="va">Hauser79</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Son UpNM LoNM  UpM  LoM Farm</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Father                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UpNM       1414  521  302  643   40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LoNM        724  524  254  703   48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UpM         798  648  856 1676  108</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LoM         756  914  771 3325  237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Farm        409  357  441 1611 1832</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">hauser.indep</span> <span class="op">&lt;-</span> <span class="fu">gnm</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">Father</span> <span class="op">+</span> <span class="va">Son</span>,</span></span>
+<span class="r-in"><span>                    data<span class="op">=</span><span class="va">Hauser79</span>,</span></span>
+<span class="r-in"><span>                    family<span class="op">=</span><span class="va">poisson</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">hauser.CR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>,</span></span>
+<span class="r-in"><span>                    <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">hauser.CR</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CR 318.63 334.47   89.914 12  5.131e-14 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">hauser.CRdiag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/update.html" class="external-link">update</a></span><span class="op">(</span><span class="va">hauser.indep</span>,</span></span>
+<span class="r-in"><span>                        <span class="op">~</span> <span class="va">.</span> <span class="op">+</span> <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span> <span class="op">+</span> <span class="fu">Diag</span><span class="op">(</span><span class="va">Father</span>,<span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="LRstats.html">LRstats</a></span><span class="op">(</span><span class="va">hauser.CRdiag</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hauser.CRdiag 298.95 318.45   64.237  9   2.03e-10 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># what does Crossings do?</span></span></span>
+<span class="r-in"><span><span class="va">cr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Hauser79</span>, <span class="fu">Crossings</span><span class="op">(</span><span class="va">Father</span>, <span class="va">Son</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cr</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          C1 C2 C3 C4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UpNMUpNM  0  0  0  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UpNMLoNM  1  0  0  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UpNMUpM   1  1  0  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UpNMLoM   1  1  1  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UpNMFarm  1  1  1  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LoNMUpNM  1  0  0  0</span>
+<span class="r-in"><span><span class="co"># Show the codings for varying Crossings levels</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">cr</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, nrow<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4] [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0    1    1    1    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    1    0    0    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    1    0    0    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    1    0    0    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    1    0    0    0    0</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">cr</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, nrow<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4] [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0    0    1    1    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    0    0    1    1    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    1    1    0    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    1    1    0    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    1    1    0    0    0</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">cr</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span>, nrow<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4] [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0    0    0    1    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    0    0    0    1    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    0    0    0    1    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    1    1    1    0    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    1    1    1    0    0</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">cr</span><span class="op">[</span>,<span class="fl">4</span><span class="op">]</span>, nrow<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4] [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0    0    0    0    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    0    0    0    0    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    0    0    0    0    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    0    0    0    0    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    1    1    1    1    0</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

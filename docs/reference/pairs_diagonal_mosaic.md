@@ -3,10 +3,9 @@
 An enhanced replacement for
 [`pairs_diagonal_mosaic`](https://rdrr.io/pkg/vcd/man/panel_pairs_diagonal.html)
 from the vcd package. This version fixes two bugs in the original (the
-`labeling` and `alternate_labels` arguments were hardcoded and ignored),
-changes the default labeling to
-[`labeling_border`](https://rdrr.io/pkg/vcd/man/labeling_border.html),
-and adds a `counts` convenience argument.
+`labeling` and `alternate_labels` arguments were hardcoded and ignored)
+and changes the default labeling to
+[`labeling_border`](https://rdrr.io/pkg/vcd/man/labeling_border.html).
 
 ## Usage
 
@@ -20,7 +19,6 @@ pairs_diagonal_mosaic(
   fill = "grey",
   labeling = labeling_border,
   alternate_labels = TRUE,
-  counts = NULL,
   ...
 )
 
@@ -74,16 +72,9 @@ pairs(x, diag_panel = pairs_diagonal_mosaic, ...)
   Logical; whether to alternate label positions on the axes. Default is
   `TRUE`.
 
-- counts:
-
-  Controls cell-count display as a shortcut: `FALSE` forces
-  `labeling = labeling_border` (no counts); `TRUE` forces
-  `labeling = labeling_values` (show counts). When `NULL` (default), the
-  `labeling` argument is used as-is.
-
 - ...:
 
-  Additional arguments passed to `vcd:::pairs.table`.
+  Additional arguments passed to the vcd `pairs.table` method.
 
 - x:
 
@@ -117,11 +108,19 @@ to `labeling_values` inside the returned function, and (2)
 `alternate_labels` is similarly hardcoded to `TRUE`. This version fixes
 both, making those arguments work as documented.
 
+The default labeling scheme was changed from
+[`labeling_values`](https://rdrr.io/pkg/vcd/man/labeling_border.html) to
+[`labeling_border`](https://rdrr.io/pkg/vcd/man/labeling_border.html),
+so as to disable cell counts by default. To enable cell counts, use
+[`labeling_values`](https://rdrr.io/pkg/vcd/man/labeling_border.html).
+
 `pairs.table` is an S3 method for
 [`pairs`](https://rdrr.io/r/graphics/pairs.html) that overrides the
 version in vcd solely to change the default `diag_panel` to the improved
 `pairs_diagonal_mosaic` defined in this package. All actual rendering is
-delegated to `vcd:::pairs.table`.
+delegated to the vcd implementation, retrieved via
+[`utils::getFromNamespace()`](https://rdrr.io/r/utils/getFromNamespace.html)
+to avoid a `:::` check NOTE.
 
 ## See also
 
@@ -140,12 +139,8 @@ pred_tab <- margin.table(Hoyt, c("Rank", "Occupation", "Sex"))
 pairs(pred_tab)
 
 
-# Turn off counts explicitly (same as default)
-pairs(pred_tab, diag_panel_args = list(counts = FALSE))
-
-
 # Show cell counts in diagonal panels
-pairs(pred_tab, diag_panel_args = list(counts = TRUE))
+pairs(pred_tab, diag_panel_args = list(labeling = labeling_values))
 
 
 # Use residual shading for off-diagonal panels

@@ -216,18 +216,18 @@ example(mosaic.glm)
 #> msc.gl+                                      ses="Parent SES"))
 #> 
 #> msc.gl> mosaic(indep,
+#> msc.gl+        formula = ~ses + mental,
 #> msc.gl+        residuals_type="rstandard",
 #> msc.gl+        labeling_args = long.labels,
 #> msc.gl+        labeling=labeling_residuals)
-#> Warning: no formula provided, assuming ~ses + mental
 
 #> 
 #> msc.gl> # or, show as a sieve diagram
 #> msc.gl> mosaic(indep,
+#> msc.gl+        formula = ~ses + mental,
 #> msc.gl+        labeling_args = long.labels,
 #> msc.gl+        panel=sieve,
 #> msc.gl+        gp=shading_Friendly)
-#> Warning: no formula provided, assuming ~ses + mental
 
 #> 
 #> msc.gl> # fit linear x linear (uniform) association.  Use integer scores for rows/cols
@@ -239,13 +239,13 @@ example(mosaic.glm)
 #> msc.gl+                 family = poisson, data = Mental)
 #> 
 #> msc.gl> mosaic(linlin,
+#> msc.gl+        formula = ~ses + mental,
 #> msc.gl+        residuals_type="rstandard",
 #> msc.gl+        labeling_args = long.labels,
 #> msc.gl+        labeling=labeling_residuals,
 #> msc.gl+        suppress=1,
 #> msc.gl+        gp=shading_Friendly,
 #> msc.gl+        main="Lin x Lin model")
-#> Warning: no formula provided, assuming ~ses + mental
 
 #> 
 #> msc.gl> ##  Goodman Row-Column association model fits even better (deviance 3.57, df 8)
@@ -256,6 +256,7 @@ example(mosaic.glm)
 #> msc.gl+                 family = poisson, data = Mental)
 #> msc.gl+ 
 #> msc.gl+ mosaic(RC1model,
+#> msc.gl+        formula = ~ses + mental,
 #> msc.gl+        residuals_type="rstandard",
 #> msc.gl+        labeling_args = long.labels,
 #> msc.gl+        labeling=labeling_residuals,
@@ -267,7 +268,6 @@ example(mosaic.glm)
 #> Running start-up iterations..
 #> Running main iterations........
 #> Done
-#> Warning: no formula provided, assuming ~ses + mental
 
 #> 
 #> msc.gl>  ############# UCB Admissions data, fit using glm()

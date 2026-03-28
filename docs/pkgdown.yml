@@ -9,9 +9,10 @@ articles:
   a5-demo-housing: a5-demo-housing.html
   a6-mobility: a6-mobility.html
   a7-continuous: a7-continuous.html
+  articles/color_table: color_table.html
   datasets: datasets.html
   tidyCats: tidyCats.html
-last_built: 2026-03-14T16:21Z
+last_built: 2026-03-17T17:00Z
 urls:
   reference: https://friendly.github.io/vcdExtra/reference
   article: https://friendly.github.io/vcdExtra/articles

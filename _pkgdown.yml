@@ -8,10 +8,23 @@ template:
     bootswatch: cosmo
 
 articles:
-  - title: "color_table"
-    desc: "Heatmap-style display of frequency tables"
+  - title: "Tutorials"
+    desc: "Vignettes introducing the package"
     contents:
-      - color_table
+      - a1-creating
+      - a2-tests
+      - a3-loglinear
+      - a4-mosaics
+      - a5-demo-housing
+      - a6-mobility
+      - a7-continuous
+      - datasets
+      - tidyCats
+
+  - title: "Other"
+    desc: "Additional articles"
+    contents:
+      - articles/color_table
 
 reference:
 

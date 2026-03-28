@@ -1,9 +1,13 @@
-# Display Frequency Table with Colored Cell Backgrounds
+# Smart Display of Frequency Table with Colored Cell Backgrounds
 
-Creates a formatted, semi-graphic "heatmap" table display of frequency
-data with cell backgrounds colored according to observed frequencies or
-their residuals from a loglinear model. This is an S3 generic function
-with methods for different input types.
+`color_table()` creates a formatted, semi-graphic "heatmap" table
+display of frequency data with cell backgrounds colored according to
+observed frequencies or their residuals from a loglinear model. The goal
+is to provide a "smart" tabular display of cross-classified frequency
+data, with some abilities to highlight possibly interesting patterns or
+unusual cells. This is an S3 generic function, providing methods for
+different input types: `"table"`, `"xtabs"`, `"matrix"`, `"ftable"`,
+`"structable"` or `"data.frame"`.
 
 ## Usage
 
@@ -170,10 +174,10 @@ color_table(x, ...)
   Optional filename to save the table as an image. If provided, the
   table is saved using
   [`gtsave`](https://gt.rstudio.com/reference/gtsave.html). Supported
-  formats include `.png`, `.svg`, `.pdf`, `.html`, `.rtf`, and `.docx`.
-  The file format is determined by the file extension. Other arguments
-  can be passed to
-  [`gtsave`](https://gt.rstudio.com/reference/gtsave.html) via `...`.
+  formats include `.png`, `.pdf`, `.html`, `.rtf`, and `.docx`. The file
+  format is determined by the file extension. Other arguments can be
+  passed to [`gtsave`](https://gt.rstudio.com/reference/gtsave.html) via
+  `...`.
 
 - freq_col:
 
@@ -187,7 +191,7 @@ A gt table object that can be further customized
 
 This function provides a heatmap-style representation of a frequency
 table, where background coloring is used to visualize patterns and
-anomalies in the data. When shading by residuals (the default), cells
+anomalies in the data. When shading by *residuals* (the default), cells
 with large positive residuals (more observations than expected) are
 shaded red, while cells with large negative residuals (fewer than
 expected) are shaded blue. This makes it easy to identify cells that
@@ -196,10 +200,12 @@ deviate substantially from what would be expected under a given model
 
 For multi-way tables (3 or more dimensions), residuals are computed from
 the model of complete independence among all factors using
-[`loglm`](https://rdrr.io/pkg/MASS/man/loglm.html), unless you specify a
-model using the `model` or `expected` arguments. A message is printed
-showing the chi-squared statistic, degrees of freedom, and p-value for
-this test.
+[`loglm`](https://rdrr.io/pkg/MASS/man/loglm.html). But you can specify
+a model using the `model` or `expected` arguments, in a way similar to
+that provided by
+[`mosaic.glm()`](https://friendly.github.io/vcdExtra/reference/mosaic.glm.md).
+A message is printed showing the chi-squared statistic, degrees of
+freedom, and p-value for this test.
 
 **Contrast shading**
 
@@ -214,25 +220,42 @@ BT.709) is used.
 
 **Use in documents**
 
-In R Markdown (`.Rmd`) or Quarto (`.qmd`) documents, gt tables may not
-render correctly in all output formats. The `filename` argument provides
-a workaround: save the table as an image, then include it using
-[`include_graphics`](https://rdrr.io/pkg/knitr/man/include_graphics.html).
-For example:
+In R Markdown (`.Rmd`) or Quarto (`.qmd`) documents, gt tables render
+natively in **HTML output** — simply return the `gt` object from a chunk
+and knitr renders it automatically via gt's built-in `knit_print`
+method. No `filename` argument is needed.
+
+For **PDF or Word output**, gt does not render natively. Use the
+`filename` argument to save the table as a `.png` image, then include it
+with
+[`include_graphics`](https://rdrr.io/pkg/knitr/man/include_graphics.html):
 
         color_table(my_table, filename = "my_table.png")
         knitr::include_graphics("my_table.png")
 
-For higher quality output, `.svg` format is recommended. You can control
-the image dimensions using the `vwidth` and `vheight` arguments (passed
-via `...`).
+The `vwidth` and `vheight` arguments (passed via `...`) control the
+image viewport size in pixels. Supported save formats are `.png`,
+`.pdf`, `.html`, `.rtf`, and `.docx`.
 
-If you need a caption for cross-referencing (especially in Quarto or R
-Markdown), you can use
+For documents that target **multiple output formats**, a small helper
+that branches on
+[`is_html_output`](https://rdrr.io/pkg/knitr/man/output_type.html)
+avoids duplicating code:
+
+        gt_obj <- color_table(my_table)
+        if (knitr::is_html_output()) {
+          gt_obj
+        } else {
+          gt::gtsave(gt_obj, "my_table.png")
+          knitr::include_graphics("my_table.png")
+        }
+
+If you need a caption or cross-reference label, use
 [`gt::tab_caption()`](https://gt.rstudio.com/reference/tab_caption.html)
+on the returned object:
 
-         gt_object |> tab_caption(caption = "Table 1: Pattern of Association in MyTable")
-     
+        color_table(my_table) |>
+          gt::tab_caption("Table 1: Pattern of association in MyTable")
 
 ## Methods (by class)
 

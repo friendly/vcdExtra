@@ -1,41 +1,54 @@
 ## Test environments
 * local Windows 10, R version 4.5.2 (2025-10-31 ucrt)
 * win-builder R version 4.5.2 (2025-10-31 ucrt)
-* win-builder R Under development (unstable) (2026-02-08 r89382 ucrt)
-
+* win-builder R Under development (unstable) (2026-03-16 r89642 ucrt)
+* R-hub: linux (R-devel), windows (R-devel), macos-arm64 (R-devel)
 
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs
 
-## Version 0.9.1 (2026-02-08)
+The use of `rgl` triggered harmless warnings on headless rhub machines. This was resolved
+by moving `rgl` from "Depends:" to "Suggests:" because it was only used in one function
+and was suitably trapped there. See below.
 
-This is a major release of the package, adding facility to show observations in mosaic plots as jittered points and a new
-visualization method based on background shading of frequency tables.
+### Previous rhub WARNING (resolved)
+An earlier rhub run produced:
+  `checking whether package 'vcdExtra' can be installed ... WARNING`
+  `Warning: 'rgl.init' failed, will use the null device.`
 
-* Added `labeling_points()` for mosaic displays to show observed or expected frequencies as random points in the tiles
-* Changed defaults for `clip` and `margin` in `labeling_points()` to be more sensible [Thx: Achim Zeileis]
-* Added `color_table()` to display frequency tables with color shaded backgrounds to show patterns
-* Refactored `color_table()` as S3 methods, adding support for frequency data frames. Added file output, other formatting options
-* Print message for `color_table()` giving the model fit statistics.
-* Now provide `color_table(values =)` to display either the frequencies (default) or residuals in the table.
-* Add `legend = "note"` to include a table note regarding what is shown.
-* Added `Reinis` data as an example of a higher-way table, 2^6
-* Make the default label for `seq_loglm()` models reflect the model type
-* Added `get_models()` to extract model formulas from `loglmlist` and `glmlist` objects
-* Added `get_model()` to do the same for `loglm()` and `glm()` objects
-* Fixed bug in `get_models()` where the `abbrev` argument caused an error
+This was caused by `rgl` being listed in `Imports`, which forced it to load
+(and attempt to initialise an OpenGL display) on headless CI runners. Fixed
+by moving `rgl` to `Suggests`, since `mosaic3d()` is the only function that
+uses it and already guards its use with `requireNamespace("rgl")`.
+
+## Version 0.9.3
+
+This bundle brings quite a few enhancements, improvements in documentation and bug fixes
+
+* Added tidy conversion functions: `as_array()`, `as_caseform()`, `as_freqform`, `as_table()` PR #22 [Thx: Gavin Klorfine]
+* Fixed bug in `mcaplot()` coming from `ca::cacoords(): "non-conformable arguments"
+* Expanded documentation of `color_table()` to give better advice on how to use this in Rmd or qmd documents.
+* Added: `knit_include()` as a general solution to using `gt`, `DT`, `plotly`, ... outputs in non-HTML documents.
+* Added `pairs_diagonal_mosaic()`, overriding the {vcd} version to give more flexibility in printing the cell values in the diagonal cells. PR #24 [Thx: Gavin Klorfine]
+
+## Version 0.9.2
+
+* Added a `label = c("name", "formula")` argument to `LRstats()` to provide for labeling models by their model formulas in the output using `get_models()`.
+* Handle list (...) of models with formula labels more flexibly in `LRstats()`
+* Document `get_model()` and `get_models()` together
+* Added `assoc_graph() and a plot method for association graphs of loglinear models.
+* Added edge weights to `assoc_graph()` representing partial G^2 or Cramer's V
 
 # reverse dependencies
 
 > devtools::revdep()
- [1] "aplore3"            "catdata"            "genridge"           "gnm"                "heplots"
- [6] "iarm"               "jmv"                "junco"              "public.ctn0094data" "reappraised"
-
+ [1] "aplore3"            "CASIdata"           "catdata"            "genridge"          
+ [5] "gnm"                "heplots"            "iarm"               "jmv"               
+ [9] "junco"              "public.ctn0094data"
+ 
 > revdepcheck::revdep_check(num_workers = 4)
 
-## revdepcheck results
-
-We checked 10 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 9 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 0 new problems
  * We failed to check 0 packages

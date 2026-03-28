@@ -27,3 +27,4 @@ README.*
 ^.claude$
 ^\.github$
 ^dev$
+.revdep_run.R
