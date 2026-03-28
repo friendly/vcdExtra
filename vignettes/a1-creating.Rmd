@@ -617,6 +617,46 @@ Art.df <- expand.dft(Art.tab)
 str(Art.df)
 ```
 
+### Tidy conversions
+
+To make conversions more intuitive, `vcdExtra` includes tidy conversion
+functions `as_table()`, `as_matrix()`, `as_array()`, `as_freqform()`, and `as_caseform()` to easily convert any form to the form of the function's
+namesake (i.e., `as_table()` converts any form into table form). Arguments in
+these functions are of similar format, with conversions *from* frequency form
+requiring the column containing frequencies to be specified via the `freq`
+argument. Likewise, `dims` (dimensions) may be specified, with output summing
+over excluded variables.
+
+***Example***: 
+Convert the `GSStab` in table form to a `data.frame` in frequency form.
+```{r, tidyconvert-ex1}
+# tidy = TRUE (default) returns a tibble
+GSS.ff <- as_freqform(GSStab, tidy = FALSE)
+GSS.ff
+```
+
+***Example***: 
+Convert the `GSStab` data in frequency form (`GSS.ff`) back to table form.
+```{r, tidyconvert-ex2}
+as_table(GSS.ff, freq = "Freq") # When present, freq column must be specified
+```
+
+***Example***: Convert the `Arthritis` data in case form to a 3-way table of
+`Treatment` $\times$ `Sex` $\times$ `Improved`.
+```{r, tidyconvert-ex3}
+tidy_Art.tab <- as_table(Arthritis, dims = c("Treatment", "Sex", "Improved"))
+str(tidy_Art.tab)
+
+ftable(tidy_Art.tab)
+```
+
+***Example***: Convert the `Arthritis` data in table form (`tidy_Art.tab`) back 
+to a `data.frame` in case form, with factors `Treatment`, `Sex` and `Improved`.
+```{r, tidyconvert-ex4}
+tidy_Art.df <- as_caseform(tidy_Art.tab, tidy = FALSE)
+str(tidy_Art.df)
+```
+
 ## A complex example {#sec:complex}
 
 If you've followed so far, you're ready for a more complicated example.
