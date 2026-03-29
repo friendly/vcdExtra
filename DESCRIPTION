@@ -62,7 +62,7 @@ Suggests:
     readxl, 
     stringr, 
     tidyr (>= 1.3.0),
-    factoextra
+    factoextra,
     rgl
 Imports:
     MASS,
