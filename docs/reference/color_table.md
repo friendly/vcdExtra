@@ -213,7 +213,7 @@ For cells with dark background colors, black text can be difficult to
 read. This function automatically selects white or black text for each
 cell based on which provides better contrast against the background
 color. If the colorspace package is available,
-[`contrast_ratio`](https://colorspace.R-Forge.R-project.org/reference/contrast_ratio.html)
+[`contrast_ratio`](https://rdrr.io/pkg/colorspace/man/contrast_ratio.html)
 is used to determine the optimal text color according to WCAG 2.1
 guidelines. Otherwise, a fallback based on relative luminance (ITU-R
 BT.709) is used.
