@@ -1,3 +1,7 @@
+## Version 0.9.4
+
+* suppressWarnings() from ca:mcja() in mcaplot() examples
+
 ## Version 0.9.3
 
 This bundle brings quite a few enhancements, improvements in documentation and bug fixes
