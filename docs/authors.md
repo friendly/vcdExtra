@@ -31,12 +31,12 @@ Source:
 [`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/master/DESCRIPTION)
 
 Friendly M (2026). *vcdExtra: 'vcd' Extensions and Additions*. R package
-version 0.9.3, <https://friendly.github.io/vcdExtra/>.
+version 0.9.4, <https://friendly.github.io/vcdExtra/>.
 
     @Manual{,
       title = {vcdExtra: 'vcd' Extensions and Additions},
       author = {Michael Friendly},
       year = {2026},
-      note = {R package version 0.9.3},
+      note = {R package version 0.9.4},
       url = {https://friendly.github.io/vcdExtra/},
     }

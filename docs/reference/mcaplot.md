@@ -121,19 +121,12 @@ Michael Friendly
 ``` r
 require(ca)
 data(Titanic)
-titanic.mca <- mjca(Titanic)
-#> Warning: 'as.is' should be specified by the caller; using TRUE
-#> Warning: 'as.is' should be specified by the caller; using TRUE
-#> Warning: 'as.is' should be specified by the caller; using TRUE
-#> Warning: 'as.is' should be specified by the caller; using TRUE
+titanic.mca <- suppressWarnings(mjca(Titanic))     # ca pkg uses old version of expand.dft()
 mcaplot(titanic.mca, legend=TRUE, legend.pos="topleft")
 
 
 data(HairEyeColor)
-haireye.mca <- mjca(HairEyeColor)
-#> Warning: 'as.is' should be specified by the caller; using TRUE
-#> Warning: 'as.is' should be specified by the caller; using TRUE
-#> Warning: 'as.is' should be specified by the caller; using TRUE
+haireye.mca <- suppressWarnings(mjca(HairEyeColor))
 mcaplot(haireye.mca, legend=TRUE, cex.lab=1.3)
 
 
