@@ -33,7 +33,7 @@ A data frame with 439 observations on the following 5 variables.
 ## Source
 
 Originally from David McCandless,
-<https://informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/>,
+<https://web.archive.org/web/2024/https://informationisbeautiful.net/visualizations/plane-truth-every-single-commercial-plane-crash-visualized/>,
 with the data at
 <https://docs.google.com/spreadsheets/d/1OvDq4_BtbR6nSnnHnjD5hVC3HQ-ulZPGbo0RDGbzM3Q/edit?usp=drive_web>,
 downloaded April 14, 2015.
