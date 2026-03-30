@@ -23,7 +23,7 @@
 #' \code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_array}},
 #' \code{\link{as_matrix}}, \code{\link{expand.dft}}
 #' 
-#' @importFrom dplyr as_tibble
+#' @importFrom dplyr as_tibble is.tbl
 #' 
 #' @examples
 #' library(vcdExtra)
@@ -52,11 +52,21 @@
 
 as_caseform <- function(obj, freq = "Freq", dims = NULL, tidy = TRUE){
   
-  tab <- expand.dft(as_table(obj, freq = freq, dims = dims), freq = freq)
+  if ((dplyr::is.tbl(obj) || is.data.frame(obj)))
+    freqs <- obj[[freq]]
+  else
+    freqs <- as.numeric(obj)
   
-  if (tidy){
-    tab <- dplyr::as_tibble(tab)
-  }
+  if (any(freqs %% 1 != 0))
+    stop("Frequency column contains decimal values.")
+  if (any(freqs < 0))
+    stop("Frequency column contains negative values.")
   
-  return(tab)
+  tab <- as_table(obj, freq = freq, dims = dims)
+  cf <- expand.dft(tab, freq = freq)
+  
+  if (tidy)
+    cf <- dplyr::as_tibble(cf)
+  
+  return(cf)
 }

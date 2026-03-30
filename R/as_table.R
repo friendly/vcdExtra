@@ -87,7 +87,7 @@ as_table <- function(obj, freq = NULL, dims = NULL, prop = NULL){
     tab_or_array <- TRUE
   }
   # If obj is a tibble, convert to data frame
-  else if (is(obj, "table")){
+  else if (is(obj, "tbl")){
     obj <- as.data.frame(obj)
   }
   
