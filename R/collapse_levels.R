@@ -32,7 +32,7 @@
 #'
 #' @importFrom methods is
 #' @importFrom rlang set_names .data
-#' @importFrom dplyr as_tibble summarise
+#' @importFrom dplyr as_tibble summarise all_of
 #' @importFrom forcats fct_collapse
 #' 
 #' @examples
@@ -123,7 +123,9 @@ collapse_levels <- function(x, freq = "Freq", ...){
   
   
   # Combine duplicate rows
-  coll_x <- coll_x |> dplyr::summarise(Freq = sum(.data[[freq]]), .by = -all_of(freq))
+  groups = setdiff(names(coll_x), freq)
+  coll_x <- coll_x |> 
+    dplyr::summarise(Freq = sum(.data[[freq]]), .by = dplyr::all_of(groups))
   
   
   # Return the user a collapsed object of same type as their input

@@ -23,7 +23,7 @@
 #' \code{\link{as_table}}, \code{\link{as_caseform}}, \code{\link{as_array}},
 #' \code{\link{as_matrix}}
 #' 
-#' @importFrom dplyr as_tibble rename
+#' @importFrom dplyr as_tibble rename all_of
 #' 
 #' @examples
 #' library(vcdExtra)
@@ -49,7 +49,7 @@
 #' 
 #' as_freqform(tableForm, dims = c("Hair", "Eye")) |> str()
 #' 
-#' #' #-----For proportions-----#
+#' #-----For proportions-----#
 #' 
 #' as_freqform(tableForm, prop = TRUE) |> head() # print only Sex == Male rows
 #' 
@@ -80,7 +80,7 @@ as_freqform <- function(obj, freq = NULL, dims = NULL, prop = NULL, tidy = TRUE)
     freq <- "Freq"
   
   if (!is.null(prop))
-    tab <- tab |> dplyr::rename("Prop" = all_of(freq))
+    tab <- tab |> dplyr::rename("Prop" = dplyr::all_of(freq))
   
   return(tab)
 }

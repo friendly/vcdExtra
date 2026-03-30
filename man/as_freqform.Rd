@@ -55,7 +55,7 @@ as_freqform(freqForm, freq = "Freq", dims = c("Hair", "Eye")) |> str()
 
 as_freqform(tableForm, dims = c("Hair", "Eye")) |> str()
 
-#' #-----For proportions-----#
+#-----For proportions-----#
 
 as_freqform(tableForm, prop = TRUE) |> head() # print only Sex == Male rows
 
