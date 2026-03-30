@@ -79,11 +79,11 @@ points, arrows, etc.)
 
 require(ca)
 data(Titanic)
-titanic.mca <- mjca(Titanic)
+titanic.mca <- suppressWarnings(mjca(Titanic))     # ca pkg uses old version of expand.dft()
 mcaplot(titanic.mca, legend=TRUE, legend.pos="topleft")
 
 data(HairEyeColor)
-haireye.mca <- mjca(HairEyeColor)
+haireye.mca <- suppressWarnings(mjca(HairEyeColor))
 mcaplot(haireye.mca, legend=TRUE, cex.lab=1.3)
 
 
