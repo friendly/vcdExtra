@@ -81,6 +81,7 @@ collapse_levels <- function(x, freq = "Freq", ...){
   
   argms <- list(...)
   x_class <- NULL
+  cf <- FALSE
   
   if (is(x, "array"))
     x_class <- "array"
@@ -91,9 +92,13 @@ collapse_levels <- function(x, freq = "Freq", ...){
   else if (is(x, "tbl"))
     x_class <- "tbl"
   
-  
   # Convert to data frame. Preserve new frequency column
-  coll_x <- as_freqform(x, freq = freq, tidy = FALSE)
+  if (!(freq %in% names(x)) && (is(x, "data.frame") || is(x, "tbl"))) { # For case form data
+    coll_x <- as_freqform(x, tidy = FALSE)
+    cf <- TRUE  # Save that data is case form
+  }
+  else
+    coll_x <- as_freqform(x, freq = freq, tidy = FALSE)
   freq <- "Freq"
   
   
@@ -132,6 +137,11 @@ collapse_levels <- function(x, freq = "Freq", ...){
     else if (x_class == "tbl")
       coll_x <- dplyr::as_tibble(coll_x)
   }
+  
+  if (cf && x_class == "tbl")
+    coll_x <- as_caseform(coll_x)
+  else if (cf && is(x, "data.frame")) 
+    coll_x <- as_caseform(coll_x, tidy = FALSE)
   
   return (coll_x)
 }
