@@ -4,9 +4,18 @@
 #' specified dimensions (`dims`). The column containing the frequencies (`freq`) 
 #' must be supplied if `obj` is in frequency form.
 #' 
-#' @param obj Object to be converted into a matrix
-#' @param freq If `obj` is in frequency form, this is the name of the frequency column. Leave as `NULL` if `obj` is in any other form.
-#' @param dims A character vector of dimensions. If not specified, all variables apart from `freq` will be used as dimensions.
+#' @param obj 
+#'  Object to be converted into a matrix.
+#' @param freq 
+#'  If `obj` is in frequency form, this is the name of the frequency column. 
+#'  Leave as `NULL` if `obj` is in any other form.
+#' @param dims 
+#'  A character vector of dimensions. If not specified, all variables apart from 
+#'  `freq` will be used as dimensions.
+#' @param prop 
+#'  If set to `TRUE`, returns a matrix of proportions (that sum to 1). May also 
+#'  be set to a character or numeric vector of dimensions to be used as margins 
+#'  from which proportions will be computed.
 #' @return Object in matrix form.
 #' 
 #' @details
@@ -31,23 +40,34 @@
 #' arrayDat <- as_array(HairEyeColor) # Generate an array
 #' 
 #' # Table form -> matrix
-#' as_matrix(HairEyeColor, dims = c("Hair","Eye")) |> str()
+#' as_matrix(HairEyeColor, dims = c("Hair", "Sex")) |> str()
 #' 
 #' # Frequency form -> matrix
-#' as_matrix(freqForm, freq = "Freq", dims = c("Hair","Eye")) |> str()
+#' as_matrix(freqForm, freq = "Freq", dims = c("Hair", "Sex")) |> str()
 #' 
 #' # Case form -> matrix form
-#' as_matrix(caseForm, dims = c("Hair", "Eye")) |> str()
+#' as_matrix(caseForm, dims = c("Hair", "Sex")) |> str()
 #' 
 #' # Frequency (tibble) form -> matrix form
-#' as_matrix(tidy_freqForm, freq = "n", dims = c("Hair", "Eye")) |> str()
+#' as_matrix(tidy_freqForm, freq = "n", dims = c("Hair", "Sex")) |> str()
+#' 
+#' #-----For proportions-----#
+#' 
+#' # Proportions relative to grand total
+#' as_matrix(HairEyeColor, dims = c("Hair", "Sex"), prop = TRUE)
+#' 
+#' # Marginalize proportions along "Sex" (i.e., male proportions sum to 1, 
+#' # female proportions sum to 1)
+#' as_matrix(HairEyeColor, dims = c("Hair", "Sex"), prop = "Sex")
+#' 
+#' as_matrix(HairEyeColor, dims = c("Hair", "Sex"), prop = 2) # Same as above
 #' 
 #' 
 #' @export
 
-as_matrix <- function(obj, freq = NULL, dims = NULL){
+as_matrix <- function(obj, freq = NULL, dims = NULL, prop = NULL){
   
-  tab <- as_array(obj, freq = freq, dims = dims)
+  tab <- as_array(obj, freq = freq, dims = dims, prop = prop)
   
   if (length(dim(tab)) == 2){ # If number of dimensions equal 2
     return(as.matrix(tab))
