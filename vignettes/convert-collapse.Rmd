@@ -115,6 +115,11 @@ I decided to arbitrarily collapse these as follows:
 1. `Shades`, comprising all levels that begin with `"white"`, `"grey"`, `"dark"`, `"light"`, and `"fair"`.
 1. `Rainbows`, comprising all other levels.
 
+Note that when working with real data, arbitrary decisions involving the
+collapsing of variable levels are a *VERY* bad idea. Collapses should be
+grounded in strong, data-driven justification. Arbitrary collapsing is employed
+in this vignette purely for pedagogical and illustrative purposes.
+
 ```{r overcoll_ex2}
 collapsed.star_case <- collapse_levels(
   collapsed.star_case,
@@ -235,12 +240,23 @@ star_freqform <- as_freqform(collapsed.star_case)
 str(star_freqform)
 ```
 
+Note that if one would like a data frame instead of a tibble, an argument of
+`tidy = FALSE` needs to be provided. Naturally, this `tidy` argument is present 
+only in functions `as_freqform()` and `as_caseform()`.
+
+***Example***:
+Convert the `collapsed.star_case` data into a data frame in frequency form.
+
+```{r overconv-ex2}
+as_freqform(collapsed.star_case, tidy = FALSE) |> str()
+```
+
 ***Example***:
 Convert the frequency form data, `star_freqform`, into table form. Name this
 data `star_tab`. Because we are converting *from* frequency form, the
 `freq = "frequency column name"` argument must be supplied.
 
-```{r overconv-ex2}
+```{r overconv-ex3}
 star_tab <- as_table(star_freqform, freq = "Freq")
 
 str(star_tab)
@@ -250,7 +266,7 @@ str(star_tab)
 Convert the table form data, `star_tab`, into an array. Name this
 data `star_array`.
 
-```{r overconv-ex3}
+```{r overconv-ex4}
 star_array <- as_array(star_tab)
 
 class(star_array)
@@ -259,13 +275,15 @@ str(star_array)
 
 To convert to a matrix, one also needs to specify row and column dimensions.
 This is done using the `dims = c("dim1", "dim2", ..., "dim_n")` argument, which
-works by summing over the dimensions excluded from this call.
+works by summing over the dimensions excluded from this call. The first provided
+dimension is taken as the row dimension, with the second dimension taken as the 
+column dimension.
 
 ***Example***:
 Convert the array form data, `star_array`, into a matrix with dimensions
 `"hair_color"` and `"eye_color"`. Name this data `star_mat`.
 
-```{r overconv-ex4}
+```{r overconv-ex5}
 star_mat <- as_matrix(star_array, dims = c("hair_color", "eye_color"))
 
 class(star_mat)
@@ -279,7 +297,7 @@ functions.
 Convert the table form data, `star_tab`, into frequency form with dimensions
 `"hair_color"` and `"eye_color"`.
 
-```{r overconv-ex5}
+```{r overconv-ex6}
 as_freqform(star_tab, dims = c("hair_color", "eye_color")) |> str()
 ```
 
@@ -330,5 +348,66 @@ Taking `collapse_levels()` and the tidy conversion functions together, one now
 has an intuitive framework for manipulating categorical data.
 
 ***Example***:
-Starting with the initial `star_case` data, collapse variable levels (according
-to the end result of the previous examples), 
+The `starwars` data also has a variable named `homeworld`, specifying the planet
+that a given character was from. The below code does the following: 
+
+1. Create data `home_star` from dataset `starwars`. The new data includes both `homeworld` and the previous variables of interest (`hair_color`, `eye_color`, and `skin_color`). Missing values are then omitted.
+1. Sort `homeworld` alphabetically.
+1. Collapse the first half of the sorted `homeworld`s into a level named `abc`.
+1. Collapse the second half of the sorted `homeworld`s into a level named `xyz`.
+1. Collapse `eye_color` according to the previous `Abnormal`, `Normal`, and `"unknown"` conventions.
+1. Convert the collapsed data into a table with dimensions `homeworld` and 
+`eye_color`. Call this table `tab.home_star` and plot the result in a mosaic 
+display.
+1. Convert `tab.home_star` into a matrix of proportions (relative to the grand total).
+
+```{r tt-ex1}
+home_star <- starwars |>
+  dplyr::select(c("hair_color", "skin_color", "eye_color", "homeworld")) |> 
+  tidyr::drop_na()
+
+# Sort unique levels of homeworld
+lvls <- home_star$homeworld |> unique() |> sort()
+lvls
+
+# Collapse variable levels
+collapsed.home_star <- collapse_levels(
+  home_star,
+  homeworld = list(
+    abc = lvls[1:(length(lvls)/2)],
+    xyz = lvls[(length(lvls)/2 + 1):length(lvls)]
+  ),
+  eye_color = list(
+    Normal = c("blue", "brown", "blue-gray", "hazel", "dark"), 
+    Abnormal = c(
+      "yellow", "red", "orange", "black", "pink", "red, blue", "gold", 
+      "green, yellow", "white"
+    )
+  )
+)
+# Convert to table of dimensions 'homeworld' and 'eye_color'
+tab.home_star <- as_table(collapsed.home_star, dims = c("homeworld", "eye_color"))
+
+# Plot as mosaic display
+mosaic(tab.home_star, shading = TRUE, gp = shading_Friendly)
+
+# Convert table into matrix of proportions. Note argument 'dims' was not supplied
+# as we already know that there are exactly 2 dimensions.
+as_matrix(tab.home_star, prop = TRUE)
+```
+
+Thus, this constitutes a pipeline for working with categorical data:
+
+1. Gather data and clean it.
+1. Collapse levels when substantively necessary.
+1. Convert forms, select dimensions, and/or take proportions if necessary.
+
+```{r ttpipeline, eval=FALSE}
+dataset |>                             # Gather the data
+  select(...) |> drop_na() |> ... |>   # Clean the data
+  collapse_levels(...) |>              # Collapse levels as necessary
+  as_form(...)   # Convert forms, select dimensions, take proportions
+```
+
+When viewed this way, these functions appear to be the start of a grammar of
+categorical data analysis.
