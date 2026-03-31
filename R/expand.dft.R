@@ -49,7 +49,7 @@
 #' expand.table(tab, var.names="letter")
 #' 
 #' 
-#' @export
+#' @export expand.dft
 expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
 {
   #  allow: a table object, or a data frame in frequency form
@@ -92,5 +92,6 @@ expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
 }
 
 # make this a synonym
-#' @export
+#' @usage expand.table(x, var.names = NULL, freq = "Freq", ...)
+#' @export expand.table
 expand.table <- expand.dft
