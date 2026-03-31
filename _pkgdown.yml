@@ -97,7 +97,7 @@ reference:
       - rlogseries
 
   - title: Conversions
-    desc: converting between table, freq, case, array forms
+    desc: Converting between table, freq, case, array, and matrix forms
     contents:
       - as_table
       - as_array
@@ -110,6 +110,7 @@ reference:
     contents:
       - datasets
       - blogits
+      - collapse_levels
       - collapse.table
       - cutfac
       - expand.dft
