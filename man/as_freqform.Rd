@@ -9,13 +9,18 @@ as_freqform(obj, freq = NULL, dims = NULL, prop = NULL, tidy = TRUE)
 \arguments{
 \item{obj}{Object to be converted to frequency form.}
 
-\item{freq}{If \code{obj} is already in frequency form, this is the name of the frequency column. If \code{obj} is in any other form, do not supply an argument (see "Details").}
+\item{freq}{If \code{obj} is already in frequency form, this is the name of the frequency
+column. If \code{obj} is in any other form, do not supply an argument (see "Details").}
 
-\item{dims}{A character vector of dimensions. If not specified, all variables apart from \code{freq} will be used as dimensions.}
+\item{dims}{A character vector of dimensions. If not specified, all variables apart from
+\code{freq} will be used as dimensions.}
 
-\item{prop}{If set to \code{TRUE}, the resulting "frequency" column will contain proportions (that sum to 1). May also be set to a character or numeric vector of dimensions to be used as margins from which proportions will be computed. The resulting "frequency" column is renamed to "Prop."}
+\item{prop}{If set to \code{TRUE}, the resulting "frequency" column will contain proportions
+(that sum to 1). May also be set to a character or numeric vector of
+dimensions to be used as margins from which proportions will be computed.
+The resulting "frequency" column is renamed to "Prop."}
 
-\item{tidy}{Returns a tibble if set to \code{TRUE.}}
+\item{tidy}{Returns a tibble if set to \code{TRUE}.}
 }
 \value{
 Object in frequency form.

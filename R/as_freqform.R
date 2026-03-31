@@ -6,11 +6,21 @@
 #' already in frequency form (and you are using this function to select
 #' dimensions). Returns a tibble if `tidy` is set to `TRUE`.
 #' 
-#' @param obj Object to be converted to frequency form.
-#' @param freq If `obj` is already in frequency form, this is the name of the frequency column. If `obj` is in any other form, do not supply an argument (see "Details").
-#' @param dims A character vector of dimensions. If not specified, all variables apart from `freq` will be used as dimensions.
-#' @param prop If set to `TRUE`, the resulting "frequency" column will contain proportions (that sum to 1). May also be set to a character or numeric vector of dimensions to be used as margins from which proportions will be computed. The resulting "frequency" column is renamed to "Prop."
-#' @param tidy Returns a tibble if set to `TRUE.`
+#' @param obj 
+#'  Object to be converted to frequency form.
+#' @param freq 
+#'  If `obj` is already in frequency form, this is the name of the frequency 
+#'  column. If `obj` is in any other form, do not supply an argument (see "Details").
+#' @param dims 
+#'  A character vector of dimensions. If not specified, all variables apart from 
+#'  `freq` will be used as dimensions.
+#' @param prop 
+#'  If set to `TRUE`, the resulting "frequency" column will contain proportions 
+#'  (that sum to 1). May also be set to a character or numeric vector of 
+#'  dimensions to be used as margins from which proportions will be computed. 
+#'  The resulting "frequency" column is renamed to "Prop."
+#' @param tidy 
+#'  Returns a tibble if set to `TRUE`.
 #' @return Object in frequency form.
 #' 
 #' @details

@@ -7,13 +7,15 @@
 as_caseform(obj, freq = "Freq", dims = NULL, tidy = TRUE)
 }
 \arguments{
-\item{obj}{object to be converted to case form}
+\item{obj}{Object to be converted to case form.}
 
-\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column. If \code{obj} is in any other form, do not supply an argument (see "Details")}
+\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column. If
+\code{obj} is in any other form, do not supply an argument (see "Details").}
 
-\item{dims}{A character vector of dimensions. If not specified, all variables apart from \code{freq} will be used as dimensions}
+\item{dims}{A character vector of dimensions. If not specified, all variables apart from
+\code{freq} will be used as dimensions.}
 
-\item{tidy}{returns a tibble if set to TRUE}
+\item{tidy}{Returns a tibble if set to \code{TRUE}.}
 }
 \value{
 object in case form.

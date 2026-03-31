@@ -9,11 +9,15 @@ as_table(obj, freq = NULL, dims = NULL, prop = NULL)
 \arguments{
 \item{obj}{Object to be converted to table form.}
 
-\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column. Leave as \code{NULL} if \code{obj} is in any other form.}
+\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column.
+Leave as \code{NULL} if \code{obj} is in any other form.}
 
-\item{dims}{A character vector of dimensions. If not specified, all variables apart from \code{freq} will be used as dimensions.}
+\item{dims}{A character vector of dimensions. If not specified, all variables apart from
+\code{freq} will be used as dimensions.}
 
-\item{prop}{If set to \code{TRUE}, returns a table of proportions (that sum to 1). May also be set to a character or numeric vector of dimensions to be used as margins from which proportions will be computed.}
+\item{prop}{If set to \code{TRUE}, returns a table of proportions (that sum to 1). May also
+be set to a character or numeric vector of dimensions to be used as margins
+from which proportions will be computed.}
 }
 \value{
 Object in table form.

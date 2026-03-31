@@ -4,10 +4,16 @@
 #' column containing the frequencies (`freq`) must be supplied if `obj` is in 
 #' frequency form. Returns a tibble if `tidy` is set to `TRUE`.
 #' 
-#' @param obj object to be converted to case form
-#' @param freq If `obj` is in frequency form, this is the name of the frequency column. If `obj` is in any other form, do not supply an argument (see "Details")
-#' @param dims A character vector of dimensions. If not specified, all variables apart from `freq` will be used as dimensions
-#' @param tidy returns a tibble if set to TRUE
+#' @param obj 
+#'  Object to be converted to case form.
+#' @param freq 
+#'  If `obj` is in frequency form, this is the name of the frequency column. If 
+#'  `obj` is in any other form, do not supply an argument (see "Details").
+#' @param dims 
+#'  A character vector of dimensions. If not specified, all variables apart from 
+#'  `freq` will be used as dimensions.
+#' @param tidy 
+#'  Returns a tibble if set to `TRUE`.
 #' @return object in case form.
 #' 
 #' @details
