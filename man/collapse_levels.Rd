@@ -32,6 +32,9 @@ First converts the object \code{x} into a frequency form data frame. Then,
 Next, duplicate rows (an artefact of collapsing) are aggregated via
 \code{\link[dplyr]{summarise}}. Last, the frequency form data frame is
 converted back into the initial form of object \code{x}.
+
+The exceptions to this are objects in case form, which are passed directly
+to \code{\link[forcats]{fct_collapse}} (and duplicate rows are not aggregated).
 }
 \examples{
 data("HairEyeColor") # Table form data

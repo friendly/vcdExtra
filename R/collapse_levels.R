@@ -20,6 +20,9 @@
 #' Next, duplicate rows (an artefact of collapsing) are aggregated via
 #' \code{\link[dplyr]{summarise}}. Last, the frequency form data frame is
 #' converted back into the initial form of object \code{x}.
+#' 
+#' The exceptions to this are objects in case form, which are passed directly
+#' to \code{\link[forcats]{fct_collapse}} (and duplicate rows are not aggregated).
 #'
 #' @author Gavin M. Klorfine
 #'
@@ -91,16 +94,24 @@ collapse_levels <- function(x, freq = "Freq", ...){
     x_class <- "table"
   else if (is(x, "tbl"))
     x_class <- "tbl"
+  else if (is(x, "data.frame"))
+    x_class <- "data.frame"
   
-  # Convert to data frame. Preserve new frequency column
-  if (!(freq %in% names(x)) && (is(x, "data.frame") || is(x, "tbl"))) { # For case form data
-    coll_x <- as_freqform(x, tidy = FALSE)
-    cf <- TRUE  # Save that data is case form
+  # Handle case form data
+  if (!(freq %in% names(x)) && (is(x, "data.frame") || is(x, "tbl"))) {
+    for (i in 1:length(argms)) {
+      var <- names(argms)[i]
+      x[[var]] <- forcats::fct_collapse(
+        x[[var]], 
+        !!!rlang::set_names(argms[[i]], names(argms[[i]]))
+      )
+    }
+    return(x)
   }
-  else
+  else # If not case form, convert to data frame
     coll_x <- as_freqform(x, freq = freq, tidy = FALSE)
-  freq <- "Freq"
   
+  freq <- "Freq"
   
   fact_lvls <- list() # Initialize list
   
@@ -121,12 +132,10 @@ collapse_levels <- function(x, freq = "Freq", ...){
     fact_lvls <- list() # Reset list for the next factor
   }
   
-  
   # Combine duplicate rows
   groups = setdiff(names(coll_x), freq)
   coll_x <- coll_x |> 
     dplyr::summarise(Freq = sum(.data[[freq]]), .by = dplyr::all_of(groups))
-  
   
   # Return the user a collapsed object of same type as their input
   if (!is.null(x_class)){
@@ -139,11 +148,5 @@ collapse_levels <- function(x, freq = "Freq", ...){
     else if (x_class == "tbl")
       coll_x <- dplyr::as_tibble(coll_x)
   }
-  
-  if (cf && x_class == "tbl")
-    coll_x <- as_caseform(coll_x)
-  else if (cf && is(x, "data.frame")) 
-    coll_x <- as_caseform(coll_x, tidy = FALSE)
-  
   return (coll_x)
 }
