@@ -7,16 +7,20 @@
 as_table(obj, freq = NULL, dims = NULL, prop = NULL)
 }
 \arguments{
-\item{obj}{object to be converted to table form}
+\item{obj}{Object to be converted to table form.}
 
-\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column. Leave as \code{NULL} if \code{obj} is in any other form.}
+\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column.
+Leave as \code{NULL} if \code{obj} is in any other form.}
 
-\item{dims}{A character vector of dimensions. If not specified, all variables apart from \code{freq} will be used as dimensions}
+\item{dims}{A character vector of dimensions. If not specified, all variables apart from
+\code{freq} will be used as dimensions.}
 
-\item{prop}{If set to TRUE, returns a table of proportions. May also be set to a character or numeric vector of margins.}
+\item{prop}{If set to \code{TRUE}, returns a table of proportions (that sum to 1). May also
+be set to a character or numeric vector of dimensions to be used as margins
+from which proportions will be computed.}
 }
 \value{
-object in table form
+Object in table form.
 }
 \description{
 Converts object (\code{obj}) in frequency or case form into table form. The
@@ -73,6 +77,10 @@ as_table(freqForm, freq = "Freq", prop = c(1, 3)) |> head(c(4,4,1)) # Same as ab
 as_table(freqForm, freq = "Freq", dims = c("Hair", "Eye"), prop = TRUE)
 
 
+}
+\seealso{
+\code{\link{as_freqform}}, \code{\link{as_caseform}}, \code{\link{as_array}},
+\code{\link{as_matrix}}
 }
 \author{
 Gavin M. Klorfine

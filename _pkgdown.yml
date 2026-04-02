@@ -12,6 +12,7 @@ articles:
     desc: "Vignettes introducing the package"
     contents:
       - a1-creating
+      - a1a-convert-collapse
       - a2-tests
       - a3-loglinear
       - a4-mosaics
@@ -97,18 +98,20 @@ reference:
       - rlogseries
 
   - title: Conversions
-    desc: converting between table, freq, case, array forms
+    desc: Converting between table, freq, case, array, and matrix forms
     contents:
       - as_table
       - as_array
       - as_freqform
       - as_caseform
+      - as_matrix
 
   - title: Utility
     desc: Utility functions in the package
     contents:
       - datasets
       - blogits
+      - collapse_levels
       - collapse.table
       - cutfac
       - expand.dft

@@ -4,22 +4,32 @@
 #' column containing the frequencies (`freq`) must be supplied if `obj` is in 
 #' frequency form. Returns a tibble if `tidy` is set to `TRUE`.
 #' 
-#' @param obj object to be converted to case form
-#' @param freq If `obj` is in frequency form, this is the name of the frequency column. If `obj` is in any other form, do not supply an argument (see "Details")
-#' @param dims A character vector of dimensions. If not specified, all variables apart from `freq` will be used as dimensions
-#' @param tidy returns a tibble if set to TRUE
+#' @param obj 
+#'  Object to be converted to case form.
+#' @param freq 
+#'  If `obj` is in frequency form, this is the name of the frequency column. If 
+#'  `obj` is in any other form, do not supply an argument (see "Details").
+#' @param dims 
+#'  A character vector of dimensions. If not specified, all variables apart from 
+#'  `freq` will be used as dimensions.
+#' @param tidy 
+#'  Returns a tibble if set to `TRUE`.
 #' @return object in case form.
 #' 
 #' @details
-#' A wrapper for \code{expand.dft()} that is able to handle arrays.
+#' A wrapper for \code{\link{expand.dft}} that is able to handle arrays.
 #' 
 #' If a frequency column is not supplied, this function defaults to "Freq"
-#' just like \code{expand.dft()}. Converts `obj` to a table using 
-#' \code{as_table()} before converting to case form.
+#' just like \code{\link{expand.dft}}. Converts `obj` to a table using 
+#' \code{\link{as_table}} before converting to case form.
 #' 
 #' @author Gavin M. Klorfine
 #' 
-#' @importFrom dplyr as_tibble
+#' @seealso
+#' \code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_array}},
+#' \code{\link{as_matrix}}, \code{\link{expand.dft}}
+#' 
+#' @importFrom dplyr as_tibble is.tbl
 #' 
 #' @examples
 #' library(vcdExtra)
@@ -48,11 +58,21 @@
 
 as_caseform <- function(obj, freq = "Freq", dims = NULL, tidy = TRUE){
   
-  tab <- expand.dft(as_table(obj, freq = freq, dims = dims), freq = freq)
+  if ((dplyr::is.tbl(obj) || is.data.frame(obj)))
+    freqs <- obj[[freq]]
+  else
+    freqs <- as.numeric(obj)
   
-  if (tidy){
-    tab <- dplyr::as_tibble(tab)
-  }
+  if (any(freqs %% 1 != 0))
+    stop("Frequency column contains decimal values.")
+  if (any(freqs < 0))
+    stop("Frequency column contains negative values.")
   
-  return(tab)
+  tab <- as_table(obj, freq = freq, dims = dims)
+  cf <- expand.dft(tab, freq = freq)
+  
+  if (tidy)
+    cf <- dplyr::as_tibble(cf)
+  
+  return(cf)
 }

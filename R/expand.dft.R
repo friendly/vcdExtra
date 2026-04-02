@@ -27,8 +27,12 @@
 #' @return A data frame containing the factors in the table and as many
 #' observations as are represented by the total of the `freq` variable.
 #' @author Mark Schwarz
-#' @seealso \code{\link[utils]{type.convert}},
-#' \code{\link[gnm]{expandCategorical}}
+#' @seealso
+#' \code{\link[utils]{type.convert}},
+#' \code{\link[gnm]{expandCategorical}}, \code{\link{as_caseform}},
+#' \code{\link{as_table}}, \code{\link{as_freqform}},
+#' \code{\link{as_array}}, \code{\link{as_matrix}}
+#' 
 #' @references Originally posted on R-Help, Jan 20, 2009,
 #' http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html
 #' 
@@ -49,7 +53,7 @@
 #' expand.table(tab, var.names="letter")
 #' 
 #' 
-#' @export
+#' @export expand.dft
 expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
 {
   #  allow: a table object, or a data frame in frequency form
@@ -92,5 +96,6 @@ expand.dft <- function(x, var.names = NULL, freq = "Freq", ...)
 }
 
 # make this a synonym
-#' @export
+#' @usage expand.table(x, var.names = NULL, freq = "Freq", ...)
+#' @export expand.table
 expand.table <- expand.dft

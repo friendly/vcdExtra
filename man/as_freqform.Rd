@@ -4,29 +4,36 @@
 \alias{as_freqform}
 \title{Convert any form (case or table form) into frequency form.}
 \usage{
-as_freqform(obj, freq = NULL, dims = NULL, tidy = TRUE)
+as_freqform(obj, freq = NULL, dims = NULL, prop = NULL, tidy = TRUE)
 }
 \arguments{
-\item{obj}{object to be converted to frequency form}
+\item{obj}{Object to be converted to frequency form.}
 
-\item{freq}{If \code{obj} is already in frequency form, this is the name of the frequency column. If \code{obj} is in any other form, do not supply an argument (see "Details")}
+\item{freq}{If \code{obj} is already in frequency form, this is the name of the frequency
+column. If \code{obj} is in any other form, do not supply an argument (see "Details").}
 
-\item{dims}{A character vector of dimensions. If not specified, all variables apart from \code{freq} will be used as dimensions}
+\item{dims}{A character vector of dimensions. If not specified, all variables apart from
+\code{freq} will be used as dimensions.}
 
-\item{tidy}{returns a tibble if set to TRUE}
+\item{prop}{If set to \code{TRUE}, the resulting "frequency" column will contain proportions
+(that sum to 1). May also be set to a character or numeric vector of
+dimensions to be used as margins from which proportions will be computed.
+The resulting "frequency" column is renamed to "Prop."}
+
+\item{tidy}{Returns a tibble if set to \code{TRUE}.}
 }
 \value{
-object in frequency form.
+Object in frequency form.
 }
 \description{
-A wrapper for \code{as.data.frame()} that is able to properly handle arrays.
+A wrapper for \code{\link[base]{as.data.frame}} that is able to properly handle arrays.
 Converts object (\code{obj}) in case or table form into frequency form. The
 column containing the frequencies (\code{freq}) must be supplied if \code{obj} is
 already in frequency form (and you are using this function to select
 dimensions). Returns a tibble if \code{tidy} is set to \code{TRUE}.
 }
 \details{
-Converts \code{obj} to a table using \code{as_table()} before converting to
+Converts \code{obj} to a table using \code{\link{as_table}} before converting to
 frequency form
 }
 \examples{
@@ -53,7 +60,27 @@ as_freqform(freqForm, freq = "Freq", dims = c("Hair", "Eye")) |> str()
 
 as_freqform(tableForm, dims = c("Hair", "Eye")) |> str()
 
+#-----For proportions-----#
 
+as_freqform(tableForm, prop = TRUE) |> head() # print only Sex == Male rows
+
+# Marginalize proportions along "Sex" (i.e., male proportions sum to 1, female proportions sum to 1)
+as_freqform(tableForm, prop = "Sex") |> head()
+
+as_freqform(tableForm, prop = 3) |> head() # Same as above
+
+# Marginalize proportions along multiple variables
+as_freqform(tableForm, prop = c("Hair", "Sex")) |> head()
+
+as_freqform(tableForm, prop = c(1, 3)) |> head() # Same as above
+
+# Using dims and prop arguments in tandem
+as_freqform(tableForm, dims = c("Hair", "Eye"), prop = TRUE)
+
+}
+\seealso{
+\code{\link{as_table}}, \code{\link{as_caseform}}, \code{\link{as_array}},
+\code{\link{as_matrix}}
 }
 \author{
 Gavin M. Klorfine
