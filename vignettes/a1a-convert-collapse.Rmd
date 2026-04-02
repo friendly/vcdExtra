@@ -1,11 +1,11 @@
 ---
-title: "Steps Toward Tidy Categorical Data Analysis"
+title: "1a. Steps Toward Tidy Categorical Data Analysis"
 subtitle: "May the Forms Be with You: Novel Functions to Intuitively Convert Among Forms and Collapse Variable Levels Presented Using the `starwars` Data."
 author: "Gavin M. Klorfine"
 output: rmarkdown::html_vignette
 package: vcdExtra
 vignette: >
-  %\VignetteIndexEntry{Steps Toward Tidy Categorical Data Analysis}
+  %\VignetteIndexEntry{1a. Steps Toward Tidy Categorical Data Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -32,13 +32,20 @@ library(tidyr)
 
 # Overview
 
+While R provides many intuitive facilities for the manipulation of continuous
+variables (such as those in the 
+[`tidyverse`](https://CRAN.R-project.org/package=tidyverse) collection of 
+packages), it somewhat lacks the equivalent for categorical data. Two such areas
+include the collapsing of variable levels (e.g., combining hair 
+colours of "Brown" and "Black" into a "Dark" category) and the conversion
+between forms of categorical data (e.g., from a `table` of entries to a 
+`data.frame` containing frequencies for each combination of variable levels).
+
 ## Tidy Collapsing
 
-When trying to collapse levels of a variable in a dataset (e.g., combining hair 
-colours of "Brown" and "Black" into a "Dark" category), R had somewhat lacked
-simple facilities for doing this. In fact, it was often the case that one would 
-need to first convert amongst forms, "collapse" their data, aggregate the 
-duplicate rows, and finally convert back to the initial form.
+In R, when trying to collapse levels of a variable in a dataset (e.g., combining 
+hair colours of "Brown" and "Black" into a "Dark" category), it was often the 
+case that one would need to first convert amongst forms, "collapse" their data, aggregate the duplicate rows, and finally convert back to the initial form.
 
 `collapse_levels()` simplifies this process, allowing for the intuitive 
 collapsing of variable levels for datasets of any form. One just needs to ensure 
@@ -219,12 +226,20 @@ object):
 
 Instead, one may simply use `as_table(X)` to convert to table form, 
 `as_freqform(X)` to convert to frequency form, and `as_caseform(X)` to convert 
-to case form. Additionally, there are functions `as_array(X)` and `as_matrix(X)`
+to case form. These are illustrated in the network (node/edge) diagram below:
+
+<p>
+<img align="center" src="fig/convnetwork.png" height="400">
+</p>
+
+Additionally, there are functions `as_array(X)` and `as_matrix(X)`
 for converting to those respective types.
 
 Like `collapse_levels()`, the single thing to keep in mind when employing these functions is the following:
 when your object `X` is in frequency form, an argument of 
-`freq = "your frequency column name"` must be supplied.
+`freq = "your frequency column name"` must be supplied. Besides this, the rote
+memory work of having to remember which function to use to convert form X to
+form Y is now completely removed.
 
 Functionality of these "tidy" conversion functions are demonstrated below
 using the `collapsed.star_case` data from the most recent example (i.e., the 
