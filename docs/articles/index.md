@@ -6,6 +6,8 @@ Vignettes introducing the package
 
 - [1. Creating and manipulating frequency
   tables](https://friendly.github.io/vcdExtra/articles/a1-creating.md):
+- [1a. Steps Toward Tidy Categorical Data
+  Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.md):
 - [2. Tests of
   Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.md):
 - [3. Loglinear

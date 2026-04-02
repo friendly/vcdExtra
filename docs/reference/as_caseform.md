@@ -14,22 +14,22 @@ as_caseform(obj, freq = "Freq", dims = NULL, tidy = TRUE)
 
 - obj:
 
-  object to be converted to case form
+  Object to be converted to case form.
 
 - freq:
 
   If `obj` is in frequency form, this is the name of the frequency
   column. If `obj` is in any other form, do not supply an argument (see
-  "Details")
+  "Details").
 
 - dims:
 
   A character vector of dimensions. If not specified, all variables
-  apart from `freq` will be used as dimensions
+  apart from `freq` will be used as dimensions.
 
 - tidy:
 
-  returns a tibble if set to TRUE
+  Returns a tibble if set to `TRUE`.
 
 ## Value
 
@@ -38,15 +38,23 @@ object in case form.
 ## Details
 
 A wrapper for
-[`expand.dft()`](https://friendly.github.io/vcdExtra/reference/expand.dft.md)
+[`expand.dft`](https://friendly.github.io/vcdExtra/reference/expand.dft.md)
 that is able to handle arrays.
 
 If a frequency column is not supplied, this function defaults to "Freq"
 just like
-[`expand.dft()`](https://friendly.github.io/vcdExtra/reference/expand.dft.md).
+[`expand.dft`](https://friendly.github.io/vcdExtra/reference/expand.dft.md).
 Converts `obj` to a table using
-[`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md)
+[`as_table`](https://friendly.github.io/vcdExtra/reference/as_table.md)
 before converting to case form.
+
+## See also
+
+[`as_table`](https://friendly.github.io/vcdExtra/reference/as_table.md),
+[`as_freqform`](https://friendly.github.io/vcdExtra/reference/as_freqform.md),
+[`as_array`](https://friendly.github.io/vcdExtra/reference/as_array.md),
+[`as_matrix`](https://friendly.github.io/vcdExtra/reference/as_matrix.md),
+[`expand.dft`](https://friendly.github.io/vcdExtra/reference/expand.dft.md)
 
 ## Author
 

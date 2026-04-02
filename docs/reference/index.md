@@ -115,7 +115,7 @@ Logseries distributions
 
 ## Conversions
 
-converting between table, freq, case, array forms
+Converting between table, freq, case, array, and matrix forms
 
 - [`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md)
   : Convert frequency or case form data into table form
@@ -125,6 +125,8 @@ converting between table, freq, case, array forms
   : Convert any form (case or table form) into frequency form.
 - [`as_caseform()`](https://friendly.github.io/vcdExtra/reference/as_caseform.md)
   : Convert frequency or table form into case form.
+- [`as_matrix()`](https://friendly.github.io/vcdExtra/reference/as_matrix.md)
+  : Convert frequency, case, or table form data into a matrix.
 
 ## Utility
 
@@ -134,6 +136,8 @@ Utility functions in the package
   : Information on Data Sets in Packages
 - [`blogits()`](https://friendly.github.io/vcdExtra/reference/blogits.md)
   : Bivariate Logits and Log Odds Ratio
+- [`collapse_levels()`](https://friendly.github.io/vcdExtra/reference/collapse_levels.md)
+  : Collapse the levels of a dataset
 - [`collapse.table()`](https://friendly.github.io/vcdExtra/reference/collapse.table.md)
   : Collapse Levels of a Table
 - [`cutfac()`](https://friendly.github.io/vcdExtra/reference/cutfac.md)

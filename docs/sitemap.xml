@@ -1,6 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://friendly.github.io/vcdExtra/404.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/articles/a1-creating.html</loc></url>
+<url><loc>https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/articles/a2-tests.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/articles/a3-loglinear.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/articles/a4-mosaics.html</loc></url>
@@ -71,10 +72,12 @@
 <url><loc>https://friendly.github.io/vcdExtra/reference/as_array.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/as_caseform.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/as_freqform.html</loc></url>
+<url><loc>https://friendly.github.io/vcdExtra/reference/as_matrix.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/as_table.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/assoc_graph.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/blogits.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/collapse.table.html</loc></url>
+<url><loc>https://friendly.github.io/vcdExtra/reference/collapse_levels.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/color_table.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/cutfac.html</loc></url>
 <url><loc>https://friendly.github.io/vcdExtra/reference/datasets.html</loc></url>
