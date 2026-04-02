@@ -12,6 +12,7 @@ articles:
     desc: "Vignettes introducing the package"
     contents:
       - a1-creating
+      - a1a-convert-collapse
       - a2-tests
       - a3-loglinear
       - a4-mosaics
