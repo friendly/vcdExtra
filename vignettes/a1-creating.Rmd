@@ -506,6 +506,11 @@ The `vcdExtra::Titanicp` data set contains information on 1309 passengers on the
 including `sibsp`, the number of (0:8) siblings or spouses aboard, and `parch` (0:6), the
 number of parents or children aboard, but the table is quite sparse.
 
+```{r titanicSAVE, include=FALSE, echo=FALSE}
+# Save unmodified Titanicp data for collapse_levels() example
+saveDat <- Titanicp
+```
+
 ```{r titanicp1}
 table(Titanicp$sibsp, Titanicp$parch)
 ```
@@ -543,6 +548,51 @@ or grouping categories according to their frequency:
 *    `forcats::fct_collapse()`: Collapse factor levels into manually defined groups.
 *    `forcats::fct_recode()`: Change factor levels by hand.
 
+## Collapsing table levels: `collapse_levels()`
+
+As seen in the previous section, collapsing variables from datasets in frequency 
+or case form (in R) is not as intuitive/easy as it should be. Thus, the
+`collapse_levels()` function was written to easily collapse variables contained
+in datasets of *any form*.
+
+Note that when your object `X` is in frequency form, an argument of 
+`freq = "your frequency column name"` must be supplied. This argument defaults
+to a value of `freq = "Freq"`.
+
+The use of this function is illustrated below using the same `Titanicp` data.
+
+***Example***
+First, factorize the `sibsp` and `parch` variables. Then collapse variables into
+categories of `0`, `1`, and `2+`.
+
+```{r titanicLOAD, include=FALSE, echo=FALSE}
+# Load unmodified Titanicp data for collapse_levels() example
+Titanicp <- saveDat
+```
+
+```{r collapse_level-ex1}
+str(Titanicp) # The original dataset
+
+Titanicp <- within(Titanicp, {
+  parchF <- factor(parch)
+  sibspF <- factor(sibsp)
+})
+
+Titanicp <- collapse_levels(
+  Titanicp,
+  parchF = list(
+    "2+" = c("2", "3", "4", "5", "6", "9")
+  ),
+  sibspF = list(
+    "2+" = c("2", "3", "4", "5", "8")
+  )
+)
+
+table(Titanicp$sibspF, Titanicp$parchF)
+```
+
+For a more thorough overview of `collapse_levels()`, see
+[1a. Steps Toward Tidy Categorical Data Analysis](a1a-convert-collapse.html).
 
 ## Converting among frequency tables and data frames
 
@@ -625,7 +675,8 @@ namesake (i.e., `as_table()` converts any form into table form). Arguments in
 these functions are of similar format, with conversions *from* frequency form
 requiring the column containing frequencies to be specified via the `freq`
 argument. Likewise, `dims` (dimensions) may be specified, with output summing
-over excluded variables.
+over excluded variables. For a more thorough overview of these functions, see
+[1a. Steps Toward Tidy Categorical Data Analysis](a1a-convert-collapse.html).
 
 ***Example***: 
 Convert the `GSStab` in table form to a `data.frame` in frequency form.
