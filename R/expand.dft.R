@@ -29,9 +29,9 @@
 #' @author Mark Schwarz
 #' @seealso
 #' \code{\link[utils]{type.convert}},
-#' \code{\link[gnm]{expandCategorical}}, \code{\link{as_caseform()}},
-#' \code{\link{as_table()}}, \code{\link{as_freqform()}},
-#' \code{\link{as_array()}}, \code{\link{as_matrix()}}
+#' \code{\link[gnm]{expandCategorical}}, \code{\link{as_caseform}},
+#' \code{\link{as_table}}, \code{\link{as_freqform}},
+#' \code{\link{as_array}}, \code{\link{as_matrix}}
 #' 
 #' @references Originally posted on R-Help, Jan 20, 2009,
 #' http://tolstoy.newcastle.edu.au/R/e6/help/09/01/1873.html
