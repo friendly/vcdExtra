@@ -21,11 +21,15 @@
 #' table with one or more of its factors collapsed or rearranged into other
 #' levels.
 #' @author Michael Friendly
-#' @seealso \code{\link{expand.dft}} expands a frequency data frame to case
-#' form.
+#' @seealso 
+#' \code{\link{expand.dft}} and \code{\link{as_caseform}}: expands a frequency 
+#' data frame to case form.
 #' 
 #' \code{\link[base]{margin.table}} "collapses" a table in a different way, by
 #' summing over table dimensions.
+#' 
+#' \code{\link{collapse_levels}} collapses in the same manner as 
+#' \code{collapse.table} but also works for frequency and case form data.
 #' @keywords manip attribute
 #' @examples
 #' 
