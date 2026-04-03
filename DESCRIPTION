@@ -1,8 +1,8 @@
 Package: vcdExtra
 Type: Package
 Title: 'vcd' Extensions and Additions
-Version: 0.9.4
-Date: 2026-03-29
+Version: 0.9.5
+Date: 2026-04-02
 Language: en-US
 Authors@R: c(
             person(given = "Michael", family = "Friendly", 
@@ -32,7 +32,7 @@ Authors@R: c(
                    email = "daniel.sabanesbove@gmail.com"),
             person(given = "Matt", family = "Kumar", role="ctb"),
             person(given = "Shuguang", family = "Sun", role="ctb"),
-            person(given = "Gavin", family = "Klorfine", role = "ctb")
+            person(given = "Gavin", family = "Klorfine", role = "aut")
             )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 4.1.0), vcd, gnm (>= 1.0-3)

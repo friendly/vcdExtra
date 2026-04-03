@@ -1,6 +1,19 @@
+## Version 0.9.5
+
+This is a major release of the package, completing work on a sizeable collection of tidy tools
+for manipulating categorical data in various forms
+
+* Added a general `collapse_levels()` function that can collapse levels of variables belonging to data sets of any form. [GK]
+* Added as_matrix() to the set of as_*() conversion functions. [GK]
+* Added `prop` arguments to applicable as_*() conversion functions to easily convert counts to proportions (either relative 
+  to the grand total count or to specified margins). [GK]
+* Added vignette on tidy operations (convert, collapsing) [GK]
+* Gavin Klorfine (@gklorfine) becomes a package author
+
+
 ## Version 0.9.4
 
-* suppressWarnings() from ca:mcja() in mcaplot() examples
+* suppressWarnings() from `ca:mcja()` in `mcaplot()` examples
 
 ## Version 0.9.3
 
