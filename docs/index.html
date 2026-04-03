@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@
 <h2 id="extensions-and-additions-to-vcd-visualizing-categorical-data">Extensions and additions to vcd: Visualizing Categorical Data<a class="anchor" aria-label="anchor" href="#extensions-and-additions-to-vcd-visualizing-categorical-data"></a>
 </h2>
 <!-- Version 0.8-6 -->
-<p>Version 0.9.3; documentation built for <code>pkgdown</code> 2026-03-06</p>
+<p>Version 0.9.5; documentation built for <code>pkgdown</code> 2026-04-02</p>
 <p>This package provides additional data sets, documentation, and many functions designed to extend the <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a> package for <em>Visualizing Categorical Data</em> and the <a href="https://CRAN.R-project.org/package=gnm" class="external-link">gnm</a> package for <em>Generalized Nonlinear Models</em>. In particular, <code>vcdExtra</code> extends mosaic, assoc and sieve plots from vcd to handle <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code>gnm()</code> models and adds a 3D version in <code><a href="reference/mosaic3d.html">mosaic3d()</a></code>.</p>
 <p>The functions here use the “strucplot” framework (Meyer et-al., 2006), which is a lovely, natural conceptual system for implementing visualization and other displays for <em>n</em>-way frequency tables which have a nested, hierarchical structure in <a href="https://CRAN.R-project.org/package=vcd" class="external-link">vcd</a>. [This can be compared to the “productplots” framework in <a href="https://CRAN.R-project.org/package=productplots" class="external-link">producplots</a>, and the defunct <code>ggmosaic</code> package]</p>
 <p><code>vcdExtra</code> also adds extensions to modeling functions for models fit using <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code>, using the construct <code><a href="reference/glmlist.html">glmlist()</a></code> to construct a list of related models which can be summarized (via <code><a href="reference/LRstats.html">LRstats()</a></code>) and graphed (via <code><a href="reference/mosaic.glmlist.html">mosaic.glmlist()</a></code>)</p>
@@ -83,9 +83,9 @@
 <div class="section level2">
 <h2 id="id_-installation">📂 Installation<a class="anchor" aria-label="anchor" href="#id_-installation"></a>
 </h2>
-<p>Get the released version (0.9.1) from CRAN:</p>
+<p>Get the released version (0.9.3) from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>)</span></code></pre></div>
-<p>The current development version (0.9.3) can be installed from <a href="https://friendly.r-universe.dev/vcdExtra" class="external-link">R-universe</a> or directly from the <a href="https://github.com/friendly/vcdExtra" class="external-link">GitHub repo</a> via:</p>
+<p>The current development version (0.9.5) can be installed from <a href="https://friendly.r-universe.dev/vcdExtra" class="external-link">R-universe</a> or directly from the <a href="https://github.com/friendly/vcdExtra" class="external-link">GitHub repo</a> via:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(remotes)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">"vcdExtra"</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">'https://friendly.r-universe.dev'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a> <span class="co"># or</span></span>
@@ -172,34 +172,38 @@
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a1-creating.html">1. Creating and manipulating frequency tables</a></td>
 </tr>
 <tr class="even">
+<td align="left">a1a-convert-collapse.Rmd</td>
+<td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.html">1a. Steps Toward Tidy Categorical Data Analysis</a></td>
+</tr>
+<tr class="odd">
 <td align="left">a2-tests.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a2-tests.html">2. Tests of Independence</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">a3-loglinear.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a3-loglinear.html">3. Loglinear Models</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">a4-mosaics.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a4-mosaics.html">4. Mosaic plots</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">a5-demo-housing.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html">5. Demo - Housing Data</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">a6-mobility.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a6-mobility.html">6. Mobility tables</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">a7-continuous.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/a7-continuous.html">7. Continuous predictors</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">datasets.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/datasets.html">Datasets for categorical data analysis</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">tidyCats.Rmd</td>
 <td align="left"><a href="https://friendly.github.io/vcdExtra/articles/tidyCats.html">tidyCat: Tidy Methods For Categorical Data Analysis</a></td>
 </tr>
@@ -418,6 +422,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Michael Friendly <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-3237-0941" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Gavin Klorfine <br><small class="roles"> Author </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -440,7 +445,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Michael Friendly.</p>
+  <p>Developed by Michael Friendly, Gavin Klorfine.</p>
 </div>
 
 <div class="pkgdown-footer-right">
