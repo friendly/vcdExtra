@@ -168,3 +168,17 @@ test_that("5x3x3 schema, ordinal variables", {
   expected <- get_sas_results(6L)
   expect_equal(result, expected, tolerance = 1e-3)
 })
+
+test_that("CMHTest based on xtabs() can give overall df and p-value", {
+  ord_tab <- xtabs(~ TRTP + SEX + AGEGR1, data = data)
+  result <- CMHtest(ord_tab, types = "rmeans", overall = TRUE)
+  expect_true(is.finite(result$ALL$table["rmeans", "Df", drop = TRUE][[1]]))
+  expect_true(is.finite(result$ALL$table["rmeans", "Prob", drop = TRUE][[1]]))
+})
+
+test_that("CMHTest can give overall df and p-value with multiple types", {
+  ord_tab <- xtabs(~ TRTP + SEX + AGEGR1, data = data)
+  result <- CMHtest(ord_tab, types = c("rmeans", "cmeans"), overall = TRUE)
+  expect_true(all(is.finite(unlist(result$ALL$table[, "Df", drop = TRUE]))))
+  expect_true(all(is.finite(unlist(result$ALL$table[, "Prob", drop = TRUE]))))
+})
