@@ -10,3 +10,4 @@ revdep/
 # Claude Code local settings
 .claude/
 .DS_Store
+.positai

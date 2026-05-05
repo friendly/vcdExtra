@@ -12,16 +12,22 @@
 # Bulletin of the Ecological Society of America, 85(3),
 # https://esapubs.org/bulletin/backissues/085-3/bulletinjuly2004_2column.htm#tools1
 #
-# Implemented by Scott Chamberlain  in https://recology.info/2012/01/logistic-regression-barplot-fig/
-# This is really just a sketch of what I'm after, for one particular version of how to do this.
-#
-# See: How I did this is DDAR was much nicer for the Donner and other examples. Note that the use of facets or color in such examples
+# See: How I did this in DDAR Ch. 7 was much nicer for the Donner and other examples. Note that the use of facets or color in such examples
 #    give what I call `conditional plots`, where `geom_smooth(family=binomial)` gives predicted values and CIs for the data _within_ each group,
 #    rather than for an overall model fitted to all the data.
 #    Code for all examples is in: http://ddar.datavis.ca/pages/Rcode/ch07.R
+#    Sample plots: Fig 7.7, 7.8 Arthritis data;
 #
 # See: "C:\Dropbox\Documents\VCDR\ch07\R\donner1.R" for all the Donner examples
 #
+# See also: vcd::binreg_plot() does something very similar using {grid} graphics. Main arg is a fitted model.
+#     "C:\Dropbox\Documents\VCDR\ch07\R\binregplot-MF.R" contains a bunch of examples
+#
+# See also: popbio::logi.hist.plot(), https://www.rdocumentation.org/packages/popbio/versions/2.8/topics/logi.hist.plot
+#     MF improved code in "C:\Dropbox\Documents\VCDR\functions\logi.hist.plot.R"
+#
+# Implemented below by Scott Chamberlain  in https://recology.info/2012/01/logistic-regression-barplot-fig/
+# This is really just a sketch of what I'm after, for one particular version of how to do this.
 #
 # TODO: Make into a proper, general function so that it takes args x=, y=, data=
 # TODO: Get variable labels from data (if labeled) or args xlab=, ylab=
