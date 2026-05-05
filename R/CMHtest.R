@@ -486,7 +486,12 @@ CMHtest3 <- function(object, types = c("cor", "rmeans", "cmeans", "general")) {
   V.list <- lapply(object, function(s) s$V)
   A.list <- lapply(object, function(s) s$A)
   nt <- sapply(lapply(object, function(s) s$n), sum)
-  Df <- object[[1]]$table[, "Df"]
+
+  tab1 <- object[[1]]$table
+  Df <- stats::setNames(
+    tab1[, "Df"],
+    rownames(tab1)
+  )
 
   if (length(types) == 1 && types == "ALL") {
     types <- c("general", "rmeans", "cmeans", "cor")
