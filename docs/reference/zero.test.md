@@ -72,6 +72,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 # synthetic tests
 zero.test(rpois(100, 1))
 #> Score test for zero inflation

@@ -125,6 +125,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 data(Titanic, package="datasets")
 # variables are in the order Class, Sex, Age, Survived
 

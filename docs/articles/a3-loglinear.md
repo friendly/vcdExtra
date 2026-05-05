@@ -19,18 +19,18 @@ Assume we have a 3-way contingency table based on variables A, B, and C.
 The possible different forms of loglinear models for a 3-way table are
 shown in the table below. @(tab:loglin-3way) The **Model formula**
 column shows how to express each model for
-[`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) in R. [¹](#fn1) In
-the **Interpretation** column, the symbol “\\\perp\\” is to be read as
-“is independent of,” and “\\\\\|\\\\” means “conditional on,” or
-“adjusting for,” or just “given”.
+[`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html) in R. [^1] In the
+**Interpretation** column, the symbol “\\\perp\\” is to be read as “is
+independent of,” and “\\\\\|\\\\” means “conditional on,” or “adjusting
+for,” or just “given”.
 
-| **Model**                | **Model formula**  | **Symbol**             | **Interpretation**       |
-|:-------------------------|:-------------------|:-----------------------|:-------------------------|
-| Mutual independence      | `~A + B + C`       | \\\[A\]\[B\]\[C\]\\    | \\A \perp B \perp C\\    |
-| Joint independence       | `~A*B + C`         | \\\[AB\]\[C\]\\        | \\(A \\ B) \perp C\\     |
-| Conditional independence | `~(A+B)*C`         | \\\[AC\]\[BC\]\\       | \\(A \perp B) \\\|\\ C\\ |
-| All two-way associations | `~A*B + A*C + B*C` | \\\[AB\]\[AC\]\[BC\]\\ | homogeneous association  |
-| Saturated model          | `~A*B*C`           | \\\[ABC\]\\            | 3-way association        |
+| **Model** | **Model formula** | **Symbol** | **Interpretation** |
+|:---|:---|:---|:---|
+| Mutual independence | `~A + B + C` | \\\[A\]\[B\]\[C\]\\ | \\A \perp B \perp C\\ |
+| Joint independence | `~A*B + C` | \\\[AB\]\[C\]\\ | \\(A \\ B) \perp C\\ |
+| Conditional independence | `~(A+B)*C` | \\\[AC\]\[BC\]\\ | \\(A \perp B) \\\|\\ C\\ |
+| All two-way associations | `~A*B + A*C + B*C` | \\\[AB\]\[AC\]\[BC\]\\ | homogeneous association |
+| Saturated model | `~A*B*C` | \\\[ABC\]\\ | 3-way association |
 
 For example, the formula `~A + B + C` specifies the model of *mutual
 independence* with no associations among the three factors. In standard
@@ -71,6 +71,7 @@ For example, we can fit the model of mutual independence among hair
 color, eye color and sex in `HairEyeColor` as
 
 ``` r
+
 library(MASS)
 ## Independence model of hair and eye color and sex.  
 hec.1 <- loglm(~Hair+Eye+Sex, data=HairEyeColor)
@@ -88,6 +89,7 @@ Similarly, the models of conditional independence and joint independence
 are specified as
 
 ``` r
+
 ## Conditional independence
 hec.2 <- loglm(~(Hair + Eye) * Sex, data=HairEyeColor)
 hec.2
@@ -101,6 +103,7 @@ hec.2
 ```
 
 ``` r
+
 ## Joint independence model.  
 hec.3 <- loglm(~Hair*Eye + Sex, data=HairEyeColor)
 hec.3
@@ -118,6 +121,7 @@ fit. A set of models can be compared using the
 [`anova()`](https://rdrr.io/r/stats/anova.html) function.
 
 ``` r
+
 anova(hec.1, hec.2, hec.3)
 ## LR tests for hierarchical log-linear models
 ## 
@@ -153,6 +157,7 @@ health status and parents’ socioeconomic status (SES), where both of
 these variables are ordered factors.
 
 ``` r
+
 data(Mental, package = "vcdExtra")
 str(Mental)
 ## 'data.frame':    24 obs. of  3 variables:
@@ -175,6 +180,7 @@ either for the row variable
 or both (\`\`uniform association’’ model).
 
 ``` r
+
 indep <- glm(Freq ~ mental + ses, family = poisson, data = Mental)  # independence model
 ```
 
@@ -182,6 +188,7 @@ To fit more parsimonious models than general association, we can define
 numeric scores for the row and column categories
 
 ``` r
+
 # Use integer scores for rows/cols 
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental) 
@@ -193,6 +200,7 @@ replace a factor variable with its numeric equivalent in the model
 formula for the association term.
 
 ``` r
+
 # column effects model (ses)
 coleff <- glm(Freq ~ mental + ses + Rscore:ses, family = poisson, data = Mental)
 
@@ -210,6 +218,7 @@ statistics for a set of models, collected into a *glmlist* object.
 Smaller is better for AIC and BIC.
 
 ``` r
+
 # compare models using AIC, BIC, etc
 vcdExtra::LRstats(glmlist(indep, roweff, coleff, linlin))
 ## Likelihood summary table:
@@ -230,6 +239,7 @@ of uniform association, to those that allow only one of row effects or
 column effects.
 
 ``` r
+
 anova(indep, linlin, coleff, test="Chisq")  
 ## Analysis of Deviance Table
 ## 
@@ -260,6 +270,7 @@ The model of linear by linear association seems best on all accounts.
 For comparison, one might try the CMH tests on these data:
 
 ``` r
+
 CMHtest(xtabs(Freq~ses+mental, data=Mental))
 ## Cochran-Mantel-Haenszel Statistics for ses by mental 
 ## 
@@ -283,7 +294,7 @@ of generalized linear models with a log link, this can be expressed as
 
 where the row-multiplicative effect parameters \\\gamma_i\\ and
 corresponding column parameters \\\delta_j\\ are estimated from the
-data.% [²](#fn2)
+data.% [^2]
 
 Similarly, the RC(2) model adds two multiplicative terms to the
 independence model,
@@ -301,6 +312,7 @@ several such terms.
 and compare these with the independence model.
 
 ``` r
+
 RC1 <- gnm(Freq ~ mental + ses + Mult(mental,ses), data=Mental, 
              family=poisson, verbose=FALSE)
 RC2 <- gnm(Freq ~ mental+ses + instances(Mult(mental,ses),2), data=Mental, 
@@ -326,14 +338,12 @@ Goodman, L. A. (1979). Simple models for the analysis of association in
 cross-classifications having ordered categories. *Journal of the
 American Statistical Association*, *74*, 537–552.
 
-------------------------------------------------------------------------
-
-1.  For [`glm()`](https://rdrr.io/r/stats/glm.html), or
+[^1]: For [`glm()`](https://rdrr.io/r/stats/glm.html), or
     [`gnm()`](https://rdrr.io/pkg/gnm/man/gnm.html), with the data in
     the form of a frequency data.frame, the same model is specified in
     the form `glm(Freq` \\\sim\\ `..., family="poisson")`, where `Freq`
     is the name of the cell frequency variable and `...` specifies the
     *Model formula*.
 
-2.  This is similar in spirit to a correspondence analysis with a single
-    dimension, but as a statistical model.
+[^2]: This is similar in spirit to a correspondence analysis with a
+    single dimension, but as a statistical model.

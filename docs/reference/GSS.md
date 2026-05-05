@@ -28,6 +28,7 @@ Agresti, A. *Categorical Data Analysis*, 2nd E., John Wiley & Sons,
 ## Examples
 
 ``` r
+
 data(GSS)
 str(GSS)
 #> 'data.frame':    6 obs. of  3 variables:

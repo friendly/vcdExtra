@@ -63,6 +63,7 @@ Achim Zeileis
 ## Examples
 
 ``` r
+
 if (require(AER)) {
 data("NMES1988", package="AER")
 nmes <- NMES1988[, c(1, 6:8, 13, 15, 18)]

@@ -36,6 +36,7 @@ Oxford University Press, p. 57.
 ## Examples
 
 ``` r
+
 data(Dyke)
 
 # independence model

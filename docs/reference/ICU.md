@@ -136,6 +136,7 @@ Statistical Association*, 83, 348-356.
 ## Examples
 
 ``` r
+
 data(ICU)
 # remove redundant variables (race, coma)
 ICU1 <- ICU[,-c(4,20)]

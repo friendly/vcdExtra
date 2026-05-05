@@ -9,6 +9,7 @@ dependencies declared in 4983 packages listed on CRAN on January 17,
 The format is a one-way frequency table of counts of packages with 0, 1,
 2, ... dependencies.
 
+
      table' int [1:15(1d)] 986 1347 993 685 375 298 155 65 32 19 ...
      - attr(*, "dimnames")=List of 1
      ..$ Depends: chr [1:15] "0" "1" "2" "3" ...
@@ -21,6 +22,7 @@ Using code from
 ## Examples
 
 ``` r
+
 data(Depends)
 plot(Depends,
      xlab="Number of Dependencies",

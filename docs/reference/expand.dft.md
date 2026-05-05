@@ -69,6 +69,7 @@ Mark Schwarz
 ## Examples
 
 ``` r
+
 library(vcd)
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 art

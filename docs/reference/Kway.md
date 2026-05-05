@@ -98,6 +98,7 @@ Michael Friendly and Heather Turner
 ## Examples
 
 ``` r
+
 ## artificial data
 factors <- expand.grid(A=factor(1:3),
                        B=factor(1:2),

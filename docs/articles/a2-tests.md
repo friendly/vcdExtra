@@ -14,6 +14,7 @@ options for the quantities that can be shown in each cell.
 Recall the GSS data used earlier.
 
 ``` r
+
 # Agresti (2002), table 3.11, p. 106
 GSS <- data.frame(
   expand.grid(sex = c("female", "male"), 
@@ -31,6 +32,7 @@ Generate a cross-table showing cell frequency and the cell contribution
 to \\\chi^2\\.
 
 ``` r
+
 # 2-Way Cross Tabulation
 library(gmodels)
 CrossTable(GSStab, prop.t=FALSE, prop.r=FALSE, prop.c=FALSE)
@@ -80,6 +82,7 @@ statistic. Optionally, the \\p\\-value can be derived via Monte Carlo
 simulation.
 
 ``` r
+
 (HairEye <- margin.table(HairEyeColor, c(1, 2)))
 ##        Eye
 ## Hair    Brown Blue Hazel Green
@@ -113,6 +116,7 @@ For tables larger than \\2 \times 2\\ the method can be computationally
 intensive (or can fail) if the frequencies are not small.
 
 ``` r
+
 fisher.test(GSStab)
 ## 
 ##  Fisher's Exact Test for Count Data
@@ -127,6 +131,7 @@ generates an error for the `HairEye` data with \\n\\=592 total
 frequency.
 
 ``` r
+
 fisher.test(HairEye)
 ## Error in `fisher.test()`:
 ## ! FEXACT error 6 (f5xact).  LDKEY=618 is too small for this problem: kval=238045028.
@@ -146,6 +151,7 @@ The `UCBAdmissions` serves as an example of a \\2 \times 2 \times 6\\
 table, with `Dept` as the stratifying variable.
 
 ``` r
+
 # UC Berkeley Student Admissions
 mantelhaen.test(UCBAdmissions)
 ## 
@@ -172,6 +178,7 @@ tested by using
 in `vcd`.
 
 ``` r
+
 oddsratio(UCBAdmissions, log=FALSE)
 ##  odds ratios for Admit and Gender by Dept 
 ## 
@@ -216,6 +223,7 @@ quarter circle whose radius is proportional to \\\sqrt{n\_{ij}}\\, so
 that its area is proportional to the cell frequency.
 
 ``` r
+
 UCB <- aperm(UCBAdmissions, c(2, 1, 3))
 dimnames(UCB)[[2]] <- c("Yes", "No")
 names(dimnames(UCB)) <- c("Sex", "Admit?", "Department")
@@ -229,6 +237,7 @@ significantly different from 1. The following lines produce
 (**ref?**)(fig:fourfold1).
 
 ``` r
+
 col <- c("#99CCFF", "#6699CC", "#F9AFAF", "#6666A0", "#FF0000", "#000080")
 fourfold(UCB, mfrow=c(2,3), color=col)
 ```
@@ -252,6 +261,7 @@ conditional subtable. The following gives a display (not shown) similar
 to (**ref?**)(fig:fourfold1).
 
 ``` r
+
 cotabplot(UCB, panel = cotab_fourfold)
 ```
 
@@ -272,6 +282,7 @@ where the heights of the highlighted conditional probabilities do not
 align. The excess of females admitted in Dept A stands out here.
 
 ``` r
+
 doubledecker(Admit ~ Dept + Gender, data=UCBAdmissions[2:1,,])
 ```
 
@@ -292,6 +303,7 @@ Finally, the there is a
 for the log odds ratio. (**ref?**)(fig:oddsratio) is produced by:
 
 ``` r
+
 plot(lor, 
      xlab="Department", 
      ylab="Log Odds Ratio (Admit | Gender)")
@@ -313,15 +325,14 @@ tests of association may be obtained by taking ordinality into account,
 using row and or column scores to test for linear trends or differences
 in row or column means.
 
-More general versions of the CMH tests (Landis etal., 1978) (Landis,
-Heyman, and Koch 1978) are provided by assigning numeric scores to the
-row and/or column variables. For example, with two ordinal factors
-(assumed to be equally spaced), assigning integer scores, `1:R` and
-`1:C` tests the linear \\\times\\ linear component of association. This
-is statistically equivalent to the Pearson correlation between the
-integer-scored table variables, with \\\chi^2 = (n-1) r^2\\, with only 1
-\\df\\ rather than \\(R-1)\times(C-1)\\ for the test of general
-association.
+More general versions of the CMH tests (Landis etal., 1978) (Landis et
+al. 1978) are provided by assigning numeric scores to the row and/or
+column variables. For example, with two ordinal factors (assumed to be
+equally spaced), assigning integer scores, `1:R` and `1:C` tests the
+linear \\\times\\ linear component of association. This is statistically
+equivalent to the Pearson correlation between the integer-scored table
+variables, with \\\chi^2 = (n-1) r^2\\, with only 1 \\df\\ rather than
+\\(R-1)\times(C-1)\\ for the test of general association.
 
 When only one table variable is ordinal, these general CMH tests are
 analogous to an ANOVA, testing whether the row mean scores or column
@@ -339,6 +350,7 @@ Recall the \\4 \times 4\\ table, `JobSat` introduced in
 @ref(sec:creating),
 
 ``` r
+
 JobSat
 ##         satisfaction
 ## income   VeryD LittleD ModerateS VeryS
@@ -353,6 +365,7 @@ midpoints of the `income` categories as row scores gives the following
 results:
 
 ``` r
+
 CMHtest(JobSat, rscores=c(7.5,20,32.5,60))
 ## Cochran-Mantel-Haenszel Statistics for income by satisfaction 
 ## 
@@ -385,6 +398,7 @@ a two-way \\r \times c\\ table. It won’t work with `GSS` in frequency
 form, but by now you should know how to convert.
 
 ``` r
+
 assocstats(GSStab)
 ##                     X^2 df P(> X^2)
 ## Likelihood Ratio 7.0026  2 0.030158
@@ -401,6 +415,7 @@ comparison of concordant and discordant pairs of observations in the
 case-form equivalent of a two-way table.
 
 ``` r
+
 GKgamma(JobSat)
 ## gamma        : 0.221 
 ## std. error   : 0.117 
@@ -418,6 +433,7 @@ its asymptotic standard error (ASE). A
 objects provides confidence intervals.
 
 ``` r
+
 data(SexualFun, package = "vcd")
 (K <- Kappa(SexualFun))
 ##             value     ASE     z
@@ -442,6 +458,7 @@ proportion of the shaded areas of the diagonal rectangles, using weights
 from the main diagonal.
 
 ``` r
+
 agree <- agreementplot(SexualFun, main="Is sex fun?")
 ```
 
@@ -451,6 +468,7 @@ data.](a2-tests_files/figure-html/agreesex-1.png)
 Agreement plot for the `SexualFun` data.
 
 ``` r
+
 unlist(agree)
 ##          Bangdiwala Bangdiwala_Weighted            weights1            weights2 
 ##           0.1464624           0.4981723           1.0000000           0.8888889
@@ -470,7 +488,7 @@ package gives one implementation. For an \\r \times c\\ table, the
 method provides a breakdown of the Pearson \\\chi^2\\ for association in
 up to \\M = \min(r-1, c-1)\\ dimensions, and finds scores for the row
 (\\x\_{im}\\) and column (\\y\_{jm}\\) categories such that the
-observations have the maximum possible correlations.% [¹](#fn1)
+observations have the maximum possible correlations.% [^1]
 
 Here, we carry out a simple correspondence analysis of the `HairEye`
 data. The printed results show that nearly 99% of the association
@@ -478,6 +496,7 @@ between hair color and eye color can be accounted for in 2 dimensions,
 of which the first dimension accounts for 90%.
 
 ``` r
+
 library(ca)
 ca(HairEye)
 ## 
@@ -515,6 +534,7 @@ most of the association is accounted for by the ordering of both hair
 color and eye color along Dimension 1, a dark to light dimension.
 
 ``` r
+
 plot(ca(HairEye), main="Hair Color and Eye Color")
 ```
 
@@ -525,8 +545,8 @@ Correspondence analysis plot for the `HairEye` data
 
 ## References
 
-Agresti, Alan. 2002. *Categorical Data Analysis*. 2nd ed. Hoboken, New
-Jersey: John Wiley & Sons.
+Agresti, Alan. 2002. *Categorical Data Analysis*. 2nd ed. John Wiley &
+Sons.
 
 Bangdiwala, Shrikant I. 1987. “Using SAS Software Graphical Procedures
 for the Observer Agreement Chart.” *Proceedings of the SAS User’s Group
@@ -539,9 +559,7 @@ Landis, R. J., E. R. Heyman, and G. G. Koch. 1978. “Average Partial
 Association in Three-Way Contingency Tables: A Review and Discussion of
 Alternative Tests,” *International Statistical Review* 46: 237–54.
 
-------------------------------------------------------------------------
-
-1.  Related methods are the non-parametric CMH tests using assumed
+[^1]: Related methods are the non-parametric CMH tests using assumed
     row/column scores (@ref(sec:CMH), the analogous
     [`glm()`](https://rdrr.io/r/stats/glm.html) model-based methods
     (@ref(sec:CMH), and the more general RC models which can be fit

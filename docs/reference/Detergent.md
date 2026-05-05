@@ -32,6 +32,7 @@ testing in multidimensional problems. *Chemical Engineering Progress*,
 ## Examples
 
 ``` r
+
 data(Detergent)
 
 # basic mosaic plot

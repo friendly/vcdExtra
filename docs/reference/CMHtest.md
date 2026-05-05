@@ -215,6 +215,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 data(JobSat, package="vcdExtra")
 CMHtest(JobSat)
 #> Cochran-Mantel-Haenszel Statistics for income by satisfaction 

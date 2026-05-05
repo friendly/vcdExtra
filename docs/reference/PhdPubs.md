@@ -53,6 +53,7 @@ subsequently found at <https://www.stata-press.com/data/lf2/couart2.dta>
 ## Examples
 
 ``` r
+
 data(PhdPubs)
 # very uninformative
 hist(PhdPubs$articles,

@@ -48,6 +48,7 @@ data as a data frame.
 ## Examples
 
 ``` r
+
 data(Hoyt)
 
 # display the table

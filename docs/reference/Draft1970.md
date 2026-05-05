@@ -55,6 +55,7 @@ Draft Lottery," *Science*, 171, 255-261.
 ## Examples
 
 ``` r
+
 data(Draft1970)
 
 # scatterplot

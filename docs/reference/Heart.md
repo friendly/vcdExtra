@@ -22,6 +22,7 @@ A 3-dimensional array resulting from cross-tabulating 3 variables for
 ## Examples
 
 ``` r
+
 data(Heart)
 str(Heart)
 #>  'table' num [1:2, 1:2, 1:3] 254 759 431 10283 158 ...

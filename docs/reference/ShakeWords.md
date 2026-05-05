@@ -39,6 +39,7 @@ that appear more than 100 times, not listed in this data set.
 ## Examples
 
 ``` r
+
 data(ShakeWords)
 str(ShakeWords)
 #> 'data.frame':    100 obs. of  2 variables:

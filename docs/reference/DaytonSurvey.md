@@ -65,6 +65,7 @@ Categorical Data*, http://www.stat.ufl.edu/~aa/cda/Thompson_manual.pdf
 ## Examples
 
 ``` r
+
 data(DaytonSurvey)
 
 # mutual independence

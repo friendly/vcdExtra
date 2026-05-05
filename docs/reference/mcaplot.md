@@ -119,6 +119,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 require(ca)
 data(Titanic)
 titanic.mca <- suppressWarnings(mjca(Titanic))     # ca pkg uses old version of expand.dft()

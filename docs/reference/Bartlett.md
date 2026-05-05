@@ -36,6 +36,7 @@ Royal Statistical Society*, Supplement, 1935, 2, 248-252.
 ## Examples
 
 ``` r
+
 data(Bartlett)
 
 # measures of association

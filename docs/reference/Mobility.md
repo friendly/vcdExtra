@@ -8,11 +8,11 @@ and their sons.
 A 2-dimensional array resulting from cross-tabulating 2 variables for
 19912 observations. The variable names and their levels are:
 
-|     |                       |                                                          |
-|-----|-----------------------|----------------------------------------------------------|
-| No  | Name                  | Levels                                                   |
-| 1   | `Son's_Occupation`    | `"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"` |
-| 2   | `Father's_Occupation` | `"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"` |
+|  |  |  |
+|----|----|----|
+| No | Name | Levels |
+| 1 | `Son's_Occupation` | `"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"` |
+| 2 | `Father's_Occupation` | `"UpNonMan", "LoNonMan", "UpManual", "LoManual", "Farm"` |
 
 ## Source
 
@@ -35,6 +35,7 @@ for other examples of mobility data.
 ## Examples
 
 ``` r
+
 data(Mobility)
 Mobility
 #>               Father_Occupation

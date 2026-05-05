@@ -44,6 +44,7 @@ Friendly, M. *Visualizing Categorical Data*, Cary, NC: SAS Institute,
 ## Examples
 
 ``` r
+
 data(Mental)
 str(Mental)
 #> 'data.frame':    24 obs. of  3 variables:

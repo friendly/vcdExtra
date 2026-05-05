@@ -42,6 +42,7 @@ independence model (the default), making over- and under-represented
 Hair×Eye combinations immediately visible.
 
 ``` r
+
 data(HairEyeColor)
 HEC <- margin.table(HairEyeColor, 1:2)   # collapse over Sex
 
@@ -58,6 +59,7 @@ a different picture — it highlights which combinations are simply most
 common, not which ones deviate from independence.
 
 ``` r
+
 color_table(HEC, shade = "freq", title = "Hair \u00d7 Eye Color (frequency shading)")
 ```
 
@@ -69,6 +71,7 @@ become column spanners. The legend note reproduces the chi-squared
 summary printed to the console.
 
 ``` r
+
 color_table(HairEyeColor,
             formula = Eye ~ Hair + Sex,
             legend  = TRUE,
@@ -93,6 +96,7 @@ The chunk below is shown for illustration only (`eval=FALSE`); the HTML
 approach above is sufficient when knitting to HTML.
 
 ``` r
+
 color_table(HEC,
             title    = "Hair \u00d7 Eye Color",
             filename = "color_table_hec.png",
@@ -112,6 +116,7 @@ object through it and the same chunk works correctly whether you are
 knitting to HTML, PDF, or Word.
 
 ``` r
+
 color_table(HEC,
             title = "Hair \u00d7 Eye Color") |>
   knit_include(width = 520, height = 300)
@@ -141,6 +146,7 @@ column totals are suppressed automatically because residuals do not have
 meaningful marginal sums.
 
 ``` r
+
 color_table(HEC,
             values = "residuals",
             title  = "Hair \u00d7 Eye \u2014 Pearson residuals") |>
@@ -161,6 +167,7 @@ legend note records the goodness-of-fit for the complete-independence
 model.
 
 ``` r
+
 data(PreSex, package = "vcd")
 color_table(PreSex,
             formula = MaritalStatus ~ PremaritalSex + ExtramaritalSex,

@@ -85,6 +85,7 @@ Michael Friendly; `coef` method by John Fox
 ## Examples
 
 ``` r
+
 data(Mental)
 indep <- glm(Freq ~ mental+ses,
                 family = poisson, data = Mental)

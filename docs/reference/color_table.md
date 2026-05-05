@@ -230,6 +230,7 @@ For **PDF or Word output**, gt does not render natively. Use the
 with
 [`include_graphics`](https://rdrr.io/pkg/knitr/man/include_graphics.html):
 
+
         color_table(my_table, filename = "my_table.png")
         knitr::include_graphics("my_table.png")
 
@@ -242,6 +243,7 @@ that branches on
 [`is_html_output`](https://rdrr.io/pkg/knitr/man/output_type.html)
 avoids duplicating code:
 
+
         gt_obj <- color_table(my_table)
         if (knitr::is_html_output()) {
           gt_obj
@@ -253,6 +255,7 @@ avoids duplicating code:
 If you need a caption or cross-reference label, use
 [`gt::tab_caption()`](https://gt.rstudio.com/reference/tab_caption.html)
 on the returned object:
+
 
         color_table(my_table) |>
           gt::tab_caption("Table 1: Pattern of association in MyTable")

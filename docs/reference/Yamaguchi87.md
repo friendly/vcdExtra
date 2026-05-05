@@ -68,6 +68,7 @@ mobility tables. *American Sociological Review*, 57 (June), 380-395.
 ## Examples
 
 ``` r
+
 data(Yamaguchi87)
 # reproduce Table 1
 structable(~ Father + Son + Country, Yamaguchi87)

@@ -35,6 +35,7 @@ with levels None \< Some \< Marked. Excluding `Age`, this represents a
 `Improved`, but in case form.
 
 ``` r
+
 names(Arthritis)      # show the variables
 ## [1] "ID"        "Treatment" "Sex"       "Age"       "Improved"
 
@@ -73,6 +74,7 @@ a vector. The example below, from (Agresti, 2002) gives results for the
 identification.
 
 ``` r
+
 # Agresti (2002), table 3.11, p. 106
 GSS <- data.frame(
   expand.grid(sex = c("female", "male"), 
@@ -111,6 +113,7 @@ table is `length(dimnames(X))`, and the table sizes are given by
 ***Example***: The `HairEyeColor` is stored in table form in `vcd`.
 
 ``` r
+
 str(HairEyeColor)                      # show the structure
 ##  'table' num [1:4, 1:4, 1:2] 32 53 10 3 11 50 10 30 10 25 ...
 ##  - attr(*, "dimnames")=List of 3
@@ -132,6 +135,7 @@ giving the variable names and category labels. Note that, by default,
 supplied by *columns* in the result, unless you specify `byrow=TRUE`.
 
 ``` r
+
 # A 4 x 4 table  Agresti (2002, Table 2.8, p. 57) Job Satisfaction
 JobSat <- matrix(c( 1, 2, 1, 0, 
                     3, 3, 6, 1, 
@@ -157,6 +161,7 @@ functions are happier with tables than matrices. You can coerce it to a
 table with [`as.table()`](https://rdrr.io/r/base/table.html),
 
 ``` r
+
 JobSat <- as.table(JobSat)
 str(JobSat)
 ##  'table' num [1:4, 1:4] 1 2 1 0 3 3 6 1 10 10 ...
@@ -180,6 +185,7 @@ assign numeric values to `income` as the middle of their ranges, and
 treat `satisfaction` as equally spaced with integer scores.
 
 ``` r
+
 dimnames(JobSat)$income <- c(7.5,20,32.5,60)
 dimnames(JobSat)$satisfaction <- 1:4
 ```
@@ -193,6 +199,7 @@ re-order eye colors by indexing. Again
 [`str()`](https://rdrr.io/r/utils/str.html) is your friend.
 
 ``` r
+
 HairEyeColor <- HairEyeColor[, c(1,3,4,2), ]
 str(HairEyeColor)
 ##  'table' num [1:4, 1:4, 1:2] 32 53 10 3 10 25 7 5 3 15 ...
@@ -216,6 +223,7 @@ By default the `Improved` will be ordered alphabetically: `Marked`,
 useful.
 
 ``` r
+
 Arthritis <- read.csv("arthritis.txt",header=TRUE)
 Arthritis$Improved <- ordered(Arthritis$Improved, 
                               levels=c("None", "Some", "Marked")
@@ -232,6 +240,7 @@ to be a contingency table in array form, so we convert using
 [`xtabs()`](https://rdrr.io/r/stats/xtabs.html).
 
 ``` r
+
 data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 mosaic(art, gp = shading_max, split_vertical = TRUE, main="Arthritis: [Treatment] [Improved]")
@@ -265,9 +274,10 @@ the labels for the variables or levels. This is easy when the data are
 in table form: [`aperm()`](https://rdrr.io/r/base/aperm.html) permutes
 the dimensions, and assigning to `names` and `dimnames` changes variable
 names and level labels respectively. We will use the following version
-of `UCBAdmissions` in @ref(sec:mantel) below. [¹](#fn1)
+of `UCBAdmissions` in @ref(sec:mantel) below. [^1]
 
 ``` r
+
 UCB <- aperm(UCBAdmissions, c(2, 1, 3))
 dimnames(UCB)[[2]] <- c("Yes", "No")
 names(dimnames(UCB)) <- c("Sex", "Admit?", "Department")
@@ -291,6 +301,7 @@ variables assigned to the rows and columns of a two-way display can be
 specified by a model formula.
 
 ``` r
+
 structable(HairEyeColor)                   # show the table: default
 ##              Eye Brown Hazel Green Blue
 ## Hair  Sex                              
@@ -318,6 +329,7 @@ with [`mosaic()`](https://rdrr.io/pkg/vcd/man/mosaic.html) (not shown
 here).
 
 ``` r
+
 HSE < - structable(Hair+Sex ~ Eye, HairEyeColor)   # save structable object
 mosaic(HSE)                                        # plot it
 ```
@@ -334,6 +346,7 @@ marginal frequencies using
 For these examples, create some categorical vectors:
 
 ``` r
+
  n=500
  A <- factor(sample(c("a1","a2"), n, rep=TRUE))
  B <- factor(sample(c("b1","b2"), n, rep=TRUE))
@@ -344,6 +357,7 @@ For these examples, create some categorical vectors:
 These lines illustrate `table`-related functions:
 
 ``` r
+
 # 2-Way Frequency Table
 attach(mydata)
 mytable <- table(A,B)   # A will be rows, B will be columns
@@ -387,6 +401,7 @@ this case, you can use the
 to print the results more attractively.
 
 ``` r
+
 # 3-Way Frequency Table
 mytable <- table(A, B, C)
 ftable(mytable)
@@ -412,6 +427,7 @@ matrix. The result is a contingency table in array format, whose
 dimensions are determined by the terms on the right side of the formula.
 
 ``` r
+
 # 3-Way Frequency Table
 mytable <- xtabs(~A+B+C, data=mydata)
 
@@ -436,6 +452,7 @@ to be a vector of frequencies (useful if the data have already been
 tabulated in frequency form).
 
 ``` r
+
 (GSStab <- xtabs(count ~ sex + party, data=GSS))
 ##         party
 ## sex      dem indep rep
@@ -479,6 +496,7 @@ represents a \\2^5\\ table giving the frequencies of reported use
 high school seniors, also classified by sex and race.
 
 ``` r
+
 data("DaytonSurvey", package="vcdExtra")
 str(DaytonSurvey)
 ## 'data.frame':    32 obs. of  6 variables:
@@ -504,6 +522,7 @@ to [`aggregate()`](https://rdrr.io/r/stats/aggregate.html) gives the
 factors to be retained in the new frequency data frame, `Dayton.ACM.df`.
 
 ``` r
+
 # data in frequency form
 # collapse over sex and race
 Dayton.ACM.df <- aggregate(Freq ~ cigarette+alcohol+marijuana, 
@@ -534,6 +553,7 @@ wrapper for [`apply()`](https://rdrr.io/r/base/apply.html) using the
 giving `Dayton.tab`.
 
 ``` r
+
 # in table form
 Dayton.tab <- xtabs(Freq ~ cigarette+alcohol+marijuana+sex+race, 
                     data=DaytonSurvey)
@@ -556,6 +576,7 @@ elements in this new table are the column sums for `Dayton.tab` shown by
 above.
 
 ``` r
+
 # collapse over sex and race
 Dayton.ACM.tab <- apply(Dayton.tab, MARGIN=1:3, FUN=sum)
 Dayton.ACM.tab <- margin.table(Dayton.tab, 1:3)   # same result
@@ -577,6 +598,7 @@ unmentioned factors, and
 the function to be applied to each piece.
 
 ``` r
+
 library(plyr)
 Dayton.ACM.df <- plyr::ddply(DaytonSurvey, 
                              .(cigarette, alcohol, marijuana), 
@@ -609,6 +631,7 @@ function in `vcdExtra` was designed for this purpose.
 random counts from a Poisson distribution with mean of 100.
 
 ``` r
+
 # create some sample data in frequency form
 sex <- c("Male", "Female")
 age <- c("10-19", "20-29",  "30-39", "40-49", "50-59", "60-69")
@@ -635,6 +658,7 @@ the arguments, levels of `age` and `education` given the same label are
 summed in the resulting smaller table.
 
 ``` r
+
 # collapse age to 3 levels, education to 2 levels
 t2 <- collapse.table(t1, 
          age=c("10-29", "10-29",  "30-49", "30-49", "50-69", "50-69"),
@@ -665,6 +689,7 @@ including `sibsp`, the number of (0:8) siblings or spouses aboard, and
 is quite sparse.
 
 ``` r
+
 table(Titanicp$sibsp, Titanicp$parch)
 ##    
 ##       0   1   2   3   4   5   6   9
@@ -681,6 +706,7 @@ For purposes of analysis, we might want to collapse both of these to the
 levels `0, 1, 2+`. Here’s how:
 
 ``` r
+
 library(dplyr)
 Titanicp <- Titanicp |>
   mutate(sibspF = case_match(sibsp,
@@ -742,6 +768,7 @@ data.
 collapse variables into categories of `0`, `1`, and `2+`.
 
 ``` r
+
 str(Titanicp) # The original dataset
 ## 'data.frame':    1309 obs. of  6 variables:
 ##  $ pclass  : Factor w/ 3 levels "1st","2nd","3rd": 1 1 1 1 1 1 1 1 1 1 ...
@@ -797,16 +824,17 @@ another.
 
 For example, a contingency table in table form (an object of
 `class(table)`) can be converted to a data.frame with
-[`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html).
-[²](#fn2) The resulting `data.frame` contains columns representing the
-classifying factors and the table entries (as a column named by the
-`responseName` argument, defaulting to `Freq`. This is the inverse of
+[`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html). [^2] The
+resulting `data.frame` contains columns representing the classifying
+factors and the table entries (as a column named by the `responseName`
+argument, defaulting to `Freq`. This is the inverse of
 [`xtabs()`](https://rdrr.io/r/stats/xtabs.html).
 
 ***Example***: Convert the `GSStab` in table form to a data.frame in
 frequency form.
 
 ``` r
+
 as.data.frame(GSStab)
 ##      sex party Freq
 ## 1 female   dem  279
@@ -821,9 +849,10 @@ as.data.frame(GSStab)
 table of `Treatment` \\\times\\ `Sex` \\\times\\ `Improved`. Note the
 use of [`with()`](https://rdrr.io/r/base/with.html) to avoid having to
 use `Arthritis\$Treatment` etc. within the call to
-[`table()`](https://rdrr.io/r/base/table.html).% [³](#fn3)
+[`table()`](https://rdrr.io/r/base/table.html).% [^3]
 
 ``` r
+
 Art.tab <- with(Arthritis, table(Treatment, Sex, Improved))
 str(Art.tab)
 ##  'table' int [1:2, 1:2, 1:3] 19 6 10 7 7 5 0 2 6 16 ...
@@ -856,6 +885,7 @@ back to a `data.frame` in case form, with factors `Treatment`, `Sex` and
 `Improved`.
 
 ``` r
+
 Art.df <- expand.dft(Art.tab)
 str(Art.df)
 ## 'data.frame':    84 obs. of  3 variables:
@@ -888,6 +918,7 @@ Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.md).
 frequency form.
 
 ``` r
+
 # tidy = TRUE (default) returns a tibble
 GSS.ff <- as_freqform(GSStab, tidy = FALSE)
 GSS.ff
@@ -904,6 +935,7 @@ GSS.ff
 back to table form.
 
 ``` r
+
 as_table(GSS.ff, freq = "Freq") # When present, freq column must be specified
 ##         party
 ## sex      dem indep rep
@@ -915,6 +947,7 @@ as_table(GSS.ff, freq = "Freq") # When present, freq column must be specified
 table of `Treatment` \\\times\\ `Sex` \\\times\\ `Improved`.
 
 ``` r
+
 tidy_Art.tab <- as_table(Arthritis, dims = c("Treatment", "Sex", "Improved"))
 str(tidy_Art.tab)
 ##  'xtabs' int [1:2, 1:2, 1:3] 19 6 10 7 7 5 0 2 6 16 ...
@@ -938,6 +971,7 @@ ftable(tidy_Art.tab)
 `Treatment`, `Sex` and `Improved`.
 
 ``` r
+
 tidy_Art.df <- as_caseform(tidy_Art.tab, tidy = FALSE)
 str(tidy_Art.df)
 ## 'data.frame':    84 obs. of  3 variables:
@@ -956,6 +990,7 @@ stored in the `doc/extdata` directory of `vcdExtra`, can be read as
 follows:
 
 ``` r
+
 tv.data<-read.table(system.file("extdata","tv.dat", package="vcdExtra"))
 head(tv.data,5)
 ##   V1 V2 V3 V4 V5
@@ -970,6 +1005,7 @@ For a local file, just use
 [`read.table()`](https://rdrr.io/r/utils/read.table.html) in this form:
 
 ``` r
+
 tv.data<-read.table("C:/R/data/tv.dat")
 ```
 
@@ -1002,6 +1038,7 @@ the
     any observations were out of order.\]
 
 ``` r
+
 TV <- array(tv.data[,5], dim=c(5,11,5,3))                                        
 dimnames(TV) <- list(c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
                      c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
@@ -1020,6 +1057,7 @@ this same operation with
 [`xtabs()`](https://rdrr.io/r/stats/xtabs.html):
 
 ``` r
+
 TV <- xtabs(V5 ~ ., data=tv.data)
 dimnames(TV) <- list(Day = c("Monday","Tuesday","Wednesday","Thursday","Friday"), 
                      Time = c("8:00","8:15","8:30","8:45","9:00","9:15","9:30",         
@@ -1034,9 +1072,10 @@ dim(TV)
 But this 4-way table is too large and awkward to work with. Among the
 networks, Fox and Other occur infrequently. We can also cut it down to a
 3-way table by considering only viewers who persist with the current
-station. [⁴](#fn4)
+station. [^4]
 
 ``` r
+
 TV2 <- TV[,,1:3,]      # keep only ABC, CBS, NBC
 TV2 <- TV2[,,,3]       # keep only Persist -- now a 3 way table
 structable(TV2)
@@ -1068,6 +1107,7 @@ of `Time`, and finally, [`xtabs()`](https://rdrr.io/r/stats/xtabs.html)
 to give a new, collapsed frequency table.
 
 ``` r
+
 TV.df <- as.data.frame.table(TV2)
 levels(TV.df$Time) <- c(rep("8:00", 2),
                         rep("8:30", 2),
@@ -1106,6 +1146,7 @@ We’ve come this far, so we might as well show a mosaic display. This is
 analogous to that used by Hartigan & Kleiner (1984).
 
 ``` r
+
 mosaic(TV3, shade = TRUE,
        labeling = labeling_border(rot_labels = c(0, 0, 0, 90)))
 ```
@@ -1136,19 +1177,17 @@ Jersey: John Wiley & Sons.
 Hartigan, J. A., & Kleiner, B. (1984). A mosaic of television ratings.
 *The American Statistician*, *38*, 32–35.
 
-------------------------------------------------------------------------
-
-1.  Changing `Admit` to `Admit?` might be useful for display purposes,
+[^1]: Changing `Admit` to `Admit?` might be useful for display purposes,
     but is dangerous— because it is then difficult to use that variable
     name in a model formula. See @ref(sec:tips) for options
     `labeling_args` and `set_labels`to change variable and level names
     for displays in the `strucplot` framework.
 
-2.  Because R is object-oriented, this is actually a short-hand for the
-    function
+[^2]: Because R is object-oriented, this is actually a short-hand for
+    the function
     [`as.data.frame.table()`](https://rdrr.io/r/base/table.html).
 
-3.  [`table()`](https://rdrr.io/r/base/table.html) does not allow a
+[^3]: [`table()`](https://rdrr.io/r/base/table.html) does not allow a
     `data` argument to provide an environment in which the table
     variables are to be found. In the examples in @ref(sec:table) I used
     `attach(mydata)` for this purpose, but
@@ -1158,6 +1197,6 @@ Hartigan, J. A., & Kleiner, B. (1984). A mosaic of television ratings.
     [`table()`](https://rdrr.io/r/base/table.html) expression in a
     temporary environment of the data.
 
-4.  This relies on the fact that that indexing an array drops dimensions
-    of length 1 by default, using the argument `drop=TRUE`; the result
-    is coerced to the lowest possible dimension.
+[^4]: This relies on the fact that that indexing an array drops
+    dimensions of length 1 by default, using the argument `drop=TRUE`;
+    the result is coerced to the lowest possible dimension.

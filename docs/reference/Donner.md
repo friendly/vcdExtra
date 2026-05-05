@@ -71,6 +71,7 @@ Sleuth2(adults only) provide similar data sets.
 ## Examples
 
 ``` r
+
 # conditional density plots
 op <- par(mfrow=c(1,2), cex.lab=1.5)
 cdplot(factor(survived) ~ age,

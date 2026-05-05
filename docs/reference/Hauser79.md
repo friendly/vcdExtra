@@ -64,6 +64,7 @@ Data Analysis*, Bingley, UK: Emerald.
 ## Examples
 
 ``` r
+
 data(Hauser79)
 str(Hauser79)
 #> 'data.frame':    25 obs. of  3 variables:

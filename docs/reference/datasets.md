@@ -92,6 +92,7 @@ Michael Friendly, with R-help from Curt Seeliger
 ## Examples
 
 ``` r
+
 datasets("vcdExtra")
 #>              Item      class         dim
 #> 1        Abortion      table       2x2x2
@@ -306,7 +307,7 @@ datasets("datasets", maxTitle=50)
 #> 3                    Sales Data with Leading Indicator
 #> 4                            Biochemical Oxygen Demand
 #> 5                Carbon Dioxide Uptake in Grass Plants
-#> 6       Weight versus age of chicks on different diets
+#> 6       Weight Versus Age of Chicks on Different Diets
 #> 7                                 Elisa assay of DNase
 #> 8   Daily Closing Prices of Major European Stock Indic
 #> 9                        Determination of Formaldehyde

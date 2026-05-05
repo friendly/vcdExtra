@@ -55,6 +55,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 # create some sample data in table form
 sex <- c("Male", "Female")
 age <- letters[1:6]

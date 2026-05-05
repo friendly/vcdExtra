@@ -84,6 +84,7 @@ package by Mikis Stasinopoulos.
 ## Examples
 
 ``` r
+
 XL <-expand.grid(x=1:5, p=c(0.33, 0.66, 0.99))
 lgs.df <- data.frame(XL, prob=dlogseries(XL[,"x"], XL[,"p"]))
 lgs.df$p = factor(lgs.df$p)

@@ -70,6 +70,7 @@ response measures rate.
 ## Examples
 
 ``` r
+
 data(Cormorants)
 str(Cormorants)
 #> 'data.frame':    343 obs. of  8 variables:

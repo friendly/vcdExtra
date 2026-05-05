@@ -42,6 +42,7 @@ Here I load the `starwars` data and select the variables of interest.
 For simplicity, I then remove rows containing `NA` values.
 
 ``` r
+
 data("starwars", package = "dplyr")
 
 star_case <- starwars |>
@@ -59,6 +60,7 @@ First, taking a look at the levels of variable `hair_color`, there are
 many ways one might want to collapse these categories:
 
 ``` r
+
 unique(star_case$hair_color)
 ##  [1] "blond"         "none"          "brown"         "brown, grey"  
 ##  [5] "black"         "auburn, white" "auburn, grey"  "white"        
@@ -82,6 +84,7 @@ Here is how to do this using
 [`collapse_levels()`](https://friendly.github.io/vcdExtra/reference/collapse_levels.md):
 
 ``` r
+
 collapsed.star_case <- collapse_levels(
   star_case,             # The dataset
   hair_color = list(     # Assign the variable to be collapsed to a list
@@ -105,6 +108,7 @@ unique(collapsed.star_case$hair_color)
 Second, one might also want to collapse levels of variable `skin_color`:
 
 ``` r
+
 unique(star_case$skin_color)
 ##  [1] "fair"                "white"               "light"              
 ##  [4] "unknown"             "green"               "pale"               
@@ -133,6 +137,7 @@ employed in this vignette purely for pedagogical and illustrative
 purposes.
 
 ``` r
+
 collapsed.star_case <- collapse_levels(
   collapsed.star_case,
   skin_color = list(
@@ -160,6 +165,7 @@ unique(collapsed.star_case$skin_color)
 Third, one may also want to collapse levels of variable `eye_color`:
 
 ``` r
+
 unique(star_case$eye_color)
 ##  [1] "blue"          "yellow"        "brown"         "blue-gray"    
 ##  [5] "hazel"         "red"           "orange"        "black"        
@@ -177,6 +183,7 @@ follows:
 3.  Keep `unknown` as-is.
 
 ``` r
+
 collapsed.star_case <- collapse_levels(
   collapsed.star_case,
   eye_color = list(
@@ -219,6 +226,7 @@ correspond to a \\3 \times 3 \times 3\\ contingency table:
 3.  Variable `eye_color` kept as-is.
 
 ``` r
+
 collapsed.star_case <- collapse_levels(
   collapsed.star_case,
   hair_color = list(    # First variable
@@ -285,6 +293,7 @@ table).
 form. Name this data `star_freqform`.
 
 ``` r
+
 star_freqform <- as_freqform(collapsed.star_case)
 
 str(star_freqform)
@@ -306,6 +315,7 @@ and
 in frequency form.
 
 ``` r
+
 as_freqform(collapsed.star_case, tidy = FALSE) |> str()
 ## 'data.frame':    27 obs. of  4 variables:
 ##  $ hair_color: Factor w/ 3 levels "Dark","Light",..: 1 2 3 1 2 3 1 2 3 1 ...
@@ -320,6 +330,7 @@ frequency form, the `freq = "frequency column name"` argument must be
 supplied.
 
 ``` r
+
 star_tab <- as_table(star_freqform, freq = "Freq")
 
 str(star_tab)
@@ -335,6 +346,7 @@ str(star_tab)
 Name this data `star_array`.
 
 ``` r
+
 star_array <- as_array(star_tab)
 
 class(star_array)
@@ -360,6 +372,7 @@ with dimensions `"hair_color"` and `"eye_color"`. Name this data
 `star_mat`.
 
 ``` r
+
 star_mat <- as_matrix(star_array, dims = c("hair_color", "eye_color"))
 
 class(star_mat)
@@ -378,6 +391,7 @@ conversion functions.
 form with dimensions `"hair_color"` and `"eye_color"`.
 
 ``` r
+
 as_freqform(star_tab, dims = c("hair_color", "eye_color")) |> str()
 ## tibble [9 × 3] (S3: tbl_df/tbl/data.frame)
 ##  $ hair_color: Factor w/ 3 levels "Dark","Light",..: 1 2 3 1 2 3 1 2 3
@@ -398,12 +412,13 @@ Note that
 is the only of the tidy conversion functions to not include a `prop`
 argument. Also,
 [`as_caseform()`](https://friendly.github.io/vcdExtra/reference/as_caseform.md)
-will not convert proportional data.[¹](#fn1)
+will not convert proportional data.[^1]
 
 ***Example***: Convert `star_mat` into a table of proportions that are
 relative to the grand total.
 
 ``` r
+
 star_mat # To view the original
 ##           eye_color
 ## hair_color Abnormal Normal unknown
@@ -423,6 +438,7 @@ as_table(star_mat, prop = TRUE)
 relative to the marginal sums of `hair_color`.
 
 ``` r
+
 as_table(star_mat, prop = "hair_color")
 ##           eye_color
 ## hair_color   Abnormal     Normal    unknown
@@ -437,6 +453,7 @@ Since these are the only two dimensions, cell proportions will all be
 equal to \\1.0\\ (except for cells where no data exists).
 
 ``` r
+
 as_table(star_mat, prop = c("hair_color", "eye_color"))
 ##           eye_color
 ## hair_color Abnormal Normal unknown
@@ -474,6 +491,7 @@ below code does the following:
     the grand total).
 
 ``` r
+
 home_star <- starwars |>
   dplyr::select(c("hair_color", "skin_color", "eye_color", "homeworld")) |> 
   tidyr::drop_na()
@@ -520,6 +538,7 @@ mosaic(tab.home_star, shading = TRUE, gp = shading_Friendly)
 
 ``` r
 
+
 # Convert table into matrix of proportions. Note argument 'dims' was not supplied
 # as we already know that there are exactly 2 dimensions.
 as_matrix(tab.home_star, prop = TRUE)
@@ -548,8 +567,6 @@ dataset |>                             # Gather the data
 When viewed this way, these functions appear to be the start of a
 grammar of categorical data analysis.
 
-------------------------------------------------------------------------
-
-1.  This was a deliberate choice, as once proportions are relative to
+[^1]: This was a deliberate choice, as once proportions are relative to
     margins, it becomes unclear how to convert these proportions back to
     the original entries.

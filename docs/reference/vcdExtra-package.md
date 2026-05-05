@@ -155,6 +155,7 @@ Maintainer: Michael Friendly
 ## Examples
 
 ``` r
+
 example(mosaic.glm)
 #> 
 #> msc.gl> library(vcdExtra)

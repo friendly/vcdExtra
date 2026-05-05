@@ -31,6 +31,7 @@ become more dangerous for cyclists? *Significance*, 10(6), 46–48.
 ## Examples
 
 ``` r
+
 data(CyclingDeaths)
 
 plot(deaths ~ date, data=CyclingDeaths,

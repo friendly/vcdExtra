@@ -114,6 +114,7 @@ Michael Friendly
 
 ``` r
 
+
 data(birthwt, package="MASS")
 # how to do this without attach?
 attach(birthwt)

@@ -54,6 +54,7 @@ Michael Friendly and Heather Turner
 ## Examples
 
 ``` r
+
 data(Hauser79)
 # display table
 structable(~Father + Son, data=Hauser79)

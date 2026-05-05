@@ -39,6 +39,7 @@ data recorded as a frequency data frame with other variables.
 ## Examples
 
 ``` r
+
 data(Caesar)
 #display table;  note that there are quite a few 0 cells
 structable(Caesar)

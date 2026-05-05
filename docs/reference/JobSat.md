@@ -9,6 +9,7 @@ by Agresti (2002) for an example.
 A 4 x 4 contingency table of `income` by `satisfaction`, with the
 following structure:
 
+
       table [1:4, 1:4] 1 2 1 0 3 3 6 1 10 10 ...
       - attr(*, "dimnames")=List of 2
       ..$ income      : chr [1:4] "< 15k" "15-25k" "25-40k" "> 40k"
@@ -28,6 +29,7 @@ models should take ordinality into account.
 ## Examples
 
 ``` r
+
 data(JobSat)
 assocstats(JobSat)
 #>                     X^2 df P(> X^2)

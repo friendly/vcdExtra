@@ -56,6 +56,7 @@ Press.
 ## Examples
 
 ``` r
+
 # examples
 data(Accident)
 head(Accident)

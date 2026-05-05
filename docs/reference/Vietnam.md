@@ -63,6 +63,7 @@ Cary, NC, Example 7.9.
 ## Examples
 
 ``` r
+
 data(Vietnam)
 ## maybe str(Vietnam) ; plot(Vietnam) ...
 ```

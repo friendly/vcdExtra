@@ -169,6 +169,7 @@ vignette,
 provides a classification of these according to methods of analysis.
 
 ``` r
+
 vcdExtra::datasets("vcdExtra")[,1]
 ##  [1] "Abortion"       "Accident"       "AirCrash"       "Alligator"     
 ##  [5] "Asbestos"       "Bartlett"       "Burt"           "Caesar"        
@@ -192,24 +193,25 @@ In the installed package, they can be viewed using
 `browseVignettes(package = "vcdExtra")`;
 
 ``` r
+
 vigns <- as.data.frame(tools::getVignetteInfo("vcdExtra")[,c("File", "Title")])
 vigns$Title <- paste0("[", vigns$Title, "](https://friendly.github.io/vcdExtra/articles/",
                       tools::file_path_sans_ext(vigns$File), ".html)")
 vigns |> knitr::kable()
 ```
 
-| File                     | Title                                                                                                                     |
-|:-------------------------|:--------------------------------------------------------------------------------------------------------------------------|
-| a1-creating.Rmd          | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html)            |
+| File | Title |
+|:---|:---|
+| a1-creating.Rmd | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html) |
 | a1a-convert-collapse.Rmd | [1a. Steps Toward Tidy Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.html) |
-| a2-tests.Rmd             | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html)                                    |
-| a3-loglinear.Rmd         | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html)                                     |
-| a4-mosaics.Rmd           | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html)                                           |
-| a5-demo-housing.Rmd      | [5. Demo - Housing Data](https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html)                               |
-| a6-mobility.Rmd          | [6. Mobility tables](https://friendly.github.io/vcdExtra/articles/a6-mobility.html)                                       |
-| a7-continuous.Rmd        | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html)                               |
-| datasets.Rmd             | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html)                      |
-| tidyCats.Rmd             | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html)         |
+| a2-tests.Rmd | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html) |
+| a3-loglinear.Rmd | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html) |
+| a4-mosaics.Rmd | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html) |
+| a5-demo-housing.Rmd | [5. Demo - Housing Data](https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html) |
+| a6-mobility.Rmd | [6. Mobility tables](https://friendly.github.io/vcdExtra/articles/a6-mobility.html) |
+| a7-continuous.Rmd | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html) |
+| datasets.Rmd | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html) |
+| tidyCats.Rmd | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) |
 
 - there is also a set of simple **demonstration files** illustrating
   analysis of datasets with more detail than provided in their
@@ -288,6 +290,7 @@ The questions are:
 - How can I take the ordinal nature of the factors into account?
 
 ``` r
+
 data(Mental)
 str(Mental)
 ## 'data.frame':    24 obs. of  3 variables:
@@ -317,6 +320,7 @@ ordinality into account.
 provides a compact summary of fit statistics for one or more models.
 
 ``` r
+
 indep <- glm(Freq ~ mental + ses,
              family = poisson, data = Mental)
 LRstats(indep)
@@ -332,6 +336,7 @@ is the mosaic method for `glm` objects. The default mosaic display for
 these data:
 
 ``` r
+
 mosaic(indep)
 ```
 
@@ -349,6 +354,7 @@ independence. That is, the unit square is first split by `ses`, then by
 `mental` within each level of `ses`.
 
 ``` r
+
 # labels for table factors
 long.labels <- list(set_varnames = c(mental="Mental Health Status", 
                                      ses="Parent SES"))
@@ -377,6 +383,7 @@ between the frequency-weighted scores, carried out using
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md).
 
 ``` r
+
 CMHtest(Mental.tab)
 ## Cochran-Mantel-Haenszel Statistics for ses by mental 
 ## 
@@ -393,6 +400,7 @@ variable. Similarly for the numeric version of `mental`, giving
 `Rscore`.
 
 ``` r
+
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
 ```
@@ -405,6 +413,7 @@ ratio) is sufficient to account for all association, and is also called
 the model of “uniform association”.)
 
 ``` r
+
 # fit linear x linear (uniform) association.  Use integer scores for rows/cols 
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
@@ -427,6 +436,7 @@ degree of freedom, compared to the `(r-1)*(c-1) = 15` degrees of freedom
 for general association.
 
 ``` r
+
 anova(linlin, test="Chisq")
 ## Analysis of Deviance Table
 ## 
@@ -452,6 +462,7 @@ Other models are possible between the independence model,
 easy to specify, as addition of terms to the independence model.
 
 ``` r
+
 # use update.glm method to fit other models
 
 linlin <- update(indep, . ~ . + Rscore:Cscore)
@@ -474,6 +485,7 @@ the AIC and BIC statistics, the `linlin` model is the best, combining
 parsimony and goodness of fit.
 
 ``` r
+
 LRstats(indep, linlin, roweff, coleff, rowcol)
 ## Likelihood summary table:
 ##           AIC    BIC LR Chisq Df Pr(>Chisq)    
@@ -489,6 +501,7 @@ LRstats(indep, linlin, roweff, coleff, rowcol)
 The `anova.glm()` function gives tests of nested models.
 
 ``` r
+
 anova(indep, linlin, roweff, test = "Chisq")
 ## Analysis of Deviance Table
 ## 

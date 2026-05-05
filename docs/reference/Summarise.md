@@ -76,6 +76,7 @@ Achim Zeileis
 ## Examples
 
 ``` r
+
 data(Mental)
 indep <- glm(Freq ~ mental+ses,
                 family = poisson, data = Mental)
