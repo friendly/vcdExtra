@@ -4,14 +4,20 @@
 \alias{as_array}
 \title{Convert frequency, case, or table form data into an array}
 \usage{
-as_array(obj, freq = NULL, dims = NULL)
+as_array(obj, freq = NULL, dims = NULL, prop = NULL)
 }
 \arguments{
-\item{obj}{object to be converted to an array}
+\item{obj}{Object to be converted to an array.}
 
-\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column. Leave as \code{NULL} if \code{obj} is in any other form.}
+\item{freq}{If \code{obj} is in frequency form, this is the name of the frequency column.
+Leave as \code{NULL} if \code{obj} is in any other form.}
 
-\item{dims}{A character vector of dimensions. If not specified, all variables apart from \code{freq} will be used as dimensions}
+\item{dims}{A character vector of dimensions. If not specified, all variables apart from
+\code{freq} will be used as dimensions.}
+
+\item{prop}{If set to \code{TRUE}, returns an array of proportions (that sum to 1). May also
+be set to a character or numeric vector of dimensions to be used as margins
+from which proportions will be computed.}
 }
 \value{
 object in array form
@@ -22,7 +28,7 @@ column containing the frequencies (\code{freq}) must be supplied if \code{obj} i
 frequency form.
 }
 \details{
-Unclasses the \code{as_table()} function to return an object in array form.
+Unclasses the \code{\link{as_table}} function to return an object in array form.
 }
 \examples{
 library(vcdExtra)
@@ -48,7 +54,29 @@ as_array(tidy_freqForm, freq = "n") |> str()
 # For specific dimensions
 as_array(tidy_freqForm, freq = "n", dims = c("Hair", "Eye")) |> str()
 
+#-----For proportions-----#
 
+as_array(freqForm, freq = "Freq", prop = TRUE) |> # proportions relative to grand total
+  head(c(4,4,1)) 
+
+# Marginalize proportions along "Sex" (i.e., male proportions sum to 1, female proportions sum to 1)
+as_array(freqForm, freq = "Freq", prop = "Sex") |> head(c(4,4,1))
+
+as_array(freqForm, freq = "Freq", prop = 3) |> head(c(4,4,1)) # Same as above
+
+# Marginalize proportions along multiple variables
+as_array(freqForm, freq = "Freq", prop = c("Hair", "Sex")) |> head(c(4,4,1))
+
+as_array(freqForm, freq = "Freq", prop = c(1, 3)) |> head(c(4,4,1)) # Same as above
+
+# Using dims and prop arguments in tandem
+as_array(freqForm, freq = "Freq", dims = c("Hair", "Eye"), prop = TRUE)
+
+
+}
+\seealso{
+\code{\link{as_table}}, \code{\link{as_freqform}}, \code{\link{as_caseform}},
+\code{\link{as_matrix}}
 }
 \author{
 Gavin M. Klorfine

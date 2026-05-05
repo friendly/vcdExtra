@@ -17,7 +17,7 @@ frequency form. Returns a tibble if tidy is set to TRUE."><meta property="og:ima
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,19 +59,21 @@ frequency form. Returns a tibble if <code>tidy</code> is set to <code>TRUE</code
 
 
 <dl><dt id="arg-obj">obj<a class="anchor" aria-label="anchor" href="#arg-obj"></a></dt>
-<dd><p>object to be converted to case form</p></dd>
+<dd><p>Object to be converted to case form.</p></dd>
 
 
 <dt id="arg-freq">freq<a class="anchor" aria-label="anchor" href="#arg-freq"></a></dt>
-<dd><p>If <code>obj</code> is in frequency form, this is the name of the frequency column. If <code>obj</code> is in any other form, do not supply an argument (see "Details")</p></dd>
+<dd><p>If <code>obj</code> is in frequency form, this is the name of the frequency column. If
+<code>obj</code> is in any other form, do not supply an argument (see "Details").</p></dd>
 
 
 <dt id="arg-dims">dims<a class="anchor" aria-label="anchor" href="#arg-dims"></a></dt>
-<dd><p>A character vector of dimensions. If not specified, all variables apart from <code>freq</code> will be used as dimensions</p></dd>
+<dd><p>A character vector of dimensions. If not specified, all variables apart from
+<code>freq</code> will be used as dimensions.</p></dd>
 
 
 <dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
-<dd><p>returns a tibble if set to TRUE</p></dd>
+<dd><p>Returns a tibble if set to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -80,10 +82,15 @@ frequency form. Returns a tibble if <code>tidy</code> is set to <code>TRUE</code
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>A wrapper for <code><a href="expand.dft.html">expand.dft()</a></code> that is able to handle arrays.</p>
+    <p>A wrapper for <code><a href="expand.dft.html">expand.dft</a></code> that is able to handle arrays.</p>
 <p>If a frequency column is not supplied, this function defaults to "Freq"
-just like <code><a href="expand.dft.html">expand.dft()</a></code>. Converts <code>obj</code> to a table using
-<code><a href="as_table.html">as_table()</a></code> before converting to case form.</p>
+just like <code><a href="expand.dft.html">expand.dft</a></code>. Converts <code>obj</code> to a table using
+<code><a href="as_table.html">as_table</a></code> before converting to case form.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="as_table.html">as_table</a></code>, <code><a href="as_freqform.html">as_freqform</a></code>, <code><a href="as_array.html">as_array</a></code>,
+<code><a href="as_matrix.html">as_matrix</a></code>, <code><a href="expand.dft.html">expand.dft</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -136,7 +143,7 @@ just like <code><a href="expand.dft.html">expand.dft()</a></code>. Converts <cod
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Michael Friendly.</p>
+  <p>Developed by Michael Friendly, Gavin Klorfine.</p>
 </div>
 
 <div class="pkgdown-footer-right">

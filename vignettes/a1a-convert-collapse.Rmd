@@ -1,0 +1,428 @@
+---
+title: "1a. Steps Toward Tidy Categorical Data Analysis"
+subtitle: "May the Forms Be with You: Novel Functions to Intuitively Convert Among Forms and Collapse Variable Levels Presented Using the `starwars` Data."
+author: "Gavin M. Klorfine"
+output: rmarkdown::html_vignette
+package: vcdExtra
+vignette: >
+  %\VignetteIndexEntry{1a. Steps Toward Tidy Categorical Data Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.height = 6,
+  fig.width = 7,
+  dev = "png",
+  comment = "##"
+)
+
+library(vcdExtra)
+library(dplyr)
+library(tidyr)
+```
+
+<p>
+<img align="right" src="fig/formhex.png" height="200">
+</p>
+
+# Overview
+
+While R provides many intuitive facilities for the manipulation of continuous
+variables (such as those in the 
+[`tidyverse`](https://CRAN.R-project.org/package=tidyverse) collection of 
+packages), it somewhat lacks the equivalent for categorical data. Two such areas
+include the collapsing of variable levels (e.g., combining hair 
+colours of "Brown" and "Black" into a "Dark" category) and the conversion
+between forms of categorical data (e.g., from a `table` of entries to a 
+`data.frame` containing frequencies for each combination of variable levels).
+
+## Tidy Collapsing
+
+In R, when trying to collapse levels of a variable in a dataset (e.g., combining 
+hair colours of "Brown" and "Black" into a "Dark" category), it was often the 
+case that one would need to first convert amongst forms, "collapse" their data, aggregate the duplicate rows, and finally convert back to the initial form.
+
+`collapse_levels()` simplifies this process, allowing for the intuitive 
+collapsing of variable levels for datasets of any form. One just needs to ensure 
+that an argument of `freq = "the frequency column name"` is supplied when the
+inputted dataset is in frequency form.
+
+Functionality of `collapse_levels()` is demonstrated below 
+using the `starwars` data from the 
+[`dplyr`](https://CRAN.R-project.org/package=dplyr) package. This dataset
+contains case form data on various characters in the Star Wars franchise.
+Variables considered in this vignette are a character's `hair_color`, 
+`skin_color`, and `eye_color`. Taken as is, this would correspond to an 
+$11 \times 28 \times 15$ contingency table... Time to collapse!
+
+Here I load the `starwars` data and select the variables of interest. For
+simplicity, I then remove rows containing `NA` values.
+
+```{r overoll_loadselect}
+data("starwars", package = "dplyr")
+
+star_case <- starwars |>
+  dplyr::select(c("hair_color", "skin_color", "eye_color")) |> 
+  tidyr::drop_na()
+
+str(star_case)
+```
+
+First, taking a look at the levels of variable `hair_color`, there are many
+ways one might want to collapse these categories:
+
+```{r overcoll_hairunique}
+unique(star_case$hair_color)
+```
+
+***Example***:
+Likely the most natural of these ways is the following:
+
+1. Collapse different spellings of `"blond"` (i.e., `"blond"` and `"blonde"` become `Blonde`).
+1. Collapse different shades of `"brown"` (i.e., `"brown"` and `"brown, grey"` become `Brown`).
+1. Collapse different shades of `"auburn"` (i.e., `"auburn, white"`, `"auburn, grey"`, and `"auburn"` become `Auburn`).
+1. Keep `"none"` as-is.
+1. Keep `"white"` as-is.
+1. Keep `"grey"` as-is.
+1. Keep `"Black"` as-is.
+
+Here is how to do this using `collapse_levels()`:
+
+```{r overcoll_ex1}
+collapsed.star_case <- collapse_levels(
+  star_case,             # The dataset
+  hair_color = list(     # Assign the variable to be collapsed to a list
+    
+    # Format the list as NewLevel = c("old1", "old2", ..., "oldn")
+    Blonde = c("blond", "blonde"), 
+    Brown = c("brown", "brown, grey"),
+    Auburn = c("auburn, white", "auburn, grey", "auburn")
+  )
+)
+str(collapsed.star_case)
+unique(collapsed.star_case$hair_color)
+```
+
+Second, one might also want to collapse levels of variable `skin_color`:
+
+```{r overcoll_skinunique}
+unique(star_case$skin_color)
+```
+
+***Example***:
+I decided to arbitrarily collapse these as follows:
+
+1. Keep `"none"` as-is. 
+1. Keep`"unknown"` as-is.
+1. `Shades`, comprising all levels that begin with `"white"`, `"grey"`, `"dark"`, `"light"`, and `"fair"`.
+1. `Rainbows`, comprising all other levels.
+
+Note that when working with real data, arbitrary decisions involving the
+collapsing of variable levels are a *VERY* bad idea. Collapses should be
+grounded in strong, data-driven justification. Arbitrary collapsing is employed
+in this vignette purely for pedagogical and illustrative purposes.
+
+```{r overcoll_ex2}
+collapsed.star_case <- collapse_levels(
+  collapsed.star_case,
+  skin_color = list(
+    Shades = c(
+      "fair", "white", "light", "dark", "grey", "grey, red", 
+      "grey, blue", "white, blue", "grey, green, yellow", "fair, green, yellow"
+    ), 
+    Rainbows = c(
+      "green", "pale", "metal", "brown mottle", "brown", "mottled green", 
+      "orange", "blue, grey", "red", "blue", "yellow", "tan", "silver, red",
+      "green, grey", "red, blue, white", "brown, white"
+    )
+  )
+)
+str(collapsed.star_case)
+unique(collapsed.star_case$skin_color)
+```
+
+Third, one may also want to collapse levels of variable `eye_color`:
+
+```{r overcoll_eyeunique}
+unique(star_case$eye_color)
+```
+
+***Example***:
+Again, I decided to arbitrarily collapse these as follows:
+
+1. `Normal`, with levels of typical human eye color (i.e., `"blue"`, `"blue-gray"`, `"brown"`, `"hazel"`, and `"dark"`).
+1. `Abnormal`, with levels of eye colours that would be abnormal for humans (e.g., `"red"`, `"pink"`, `"gold"`, etc.).
+1. Keep `unknown` as-is.
+
+```{r overcoll_ex3}
+collapsed.star_case <- collapse_levels(
+  collapsed.star_case,
+  eye_color = list(
+    Normal = c("blue", "brown", "blue-gray", "hazel", "dark"), 
+    Abnormal = c(
+      "yellow", "red", "orange", "black", "pink", "red, blue", "gold", 
+      "green, yellow", "white"
+    )
+  )
+)
+str(collapsed.star_case)
+unique(collapsed.star_case$eye_color)
+```
+
+In addition, one may want (and is able) to collapse levels of multiple variables
+in a single call to `collapse_levels()`.
+
+***Example***:
+To illustrate this (and to provide an easy working example for the following 
+"Tidy Conversions" section), the `collapsed.star_case` data is arbitrarily 
+collapsed as follows to correspond to a $3 \times 3 \times 3$ contingency table:
+
+1. Variable `hair_color`:
+    a. `Dark` corresponding to levels `"Brown"`, `"black"`, and `"Auburn"`.
+    b. `Light` corresponding to levels `"Blonde"`, `"white"`, and `"grey"`.
+    c. Keep `"none"` as-is.
+1. Variable `skin_color`:
+    a. `Other` corresponding to levels `"none"` and `"unknown"`.
+    b. Keep `Rainbows` as-is.
+    c. Keep `Shades` as-is.
+1. Variable `eye_color` kept as-is.
+
+```{r overcoll_ex4}
+collapsed.star_case <- collapse_levels(
+  collapsed.star_case,
+  hair_color = list(    # First variable
+    Dark = c("Brown", "black", "Auburn"),
+    Light = c("Blonde", "white", "grey")
+  ),
+  skin_color = list(    # Second variable
+    Other = c("none", "unknown")
+  )
+)
+unique(collapsed.star_case$hair_color)
+unique(collapsed.star_case$skin_color)
+str(collapsed.star_case)
+```
+
+## Tidy Conversions
+
+Until now, converting amongst forms of categorical data in R has been somewhat
+onerous. As outlined in 
+[1. Creating and manipulating frequency tables]( a1-creating.html), 
+the below table shows the typical process for converting among forms 
+(`A`, `B`, and `C`  represent categorical variables, `X` represents an R data 
+object):
+
+| **From this**    |                     | **To this**          |                   |
+|:-----------------|:--------------------|:---------------------|-------------------|
+|	                 |    _Case form_      | _Frequency form_     | _Table form_      |
+|	_Case form_      |   noop              | `xtabs(~A+B)`        |  `table(A,B)`     |
+|	_Frequency form_ |  `expand.dft(X)`    | noop                 | `xtabs(count~A+B)`|
+|	_Table form_     |  `expand.dft(X)`    | `as.data.frame(X)`   |  noop             |
+
+Instead, one may simply use `as_table(X)` to convert to table form, 
+`as_freqform(X)` to convert to frequency form, and `as_caseform(X)` to convert 
+to case form. These are illustrated in the network (node/edge) diagram below:
+
+<p>
+<img align="center" src="fig/convnetwork.png" height="400">
+</p>
+
+Additionally, there are functions `as_array(X)` and `as_matrix(X)`
+for converting to those respective types.
+
+Like `collapse_levels()`, the single thing to keep in mind when employing these functions is the following:
+when your object `X` is in frequency form, an argument of 
+`freq = "your frequency column name"` must be supplied. Besides this, the rote
+memory work of having to remember which function to use to convert form X to
+form Y is now completely removed.
+
+Functionality of these "tidy" conversion functions are demonstrated below
+using the `collapsed.star_case` data from the most recent example (i.e., the 
+data corresponding to a $3 \times 3 \times 3$ contingency table).
+
+***Example***:
+Convert the `collapsed.star_case` data into frequency form. Name this data
+`star_freqform`.
+
+```{r overconv-ex1}
+star_freqform <- as_freqform(collapsed.star_case)
+
+str(star_freqform)
+```
+
+Note that if one would like a data frame instead of a tibble, an argument of
+`tidy = FALSE` needs to be provided. Naturally, this `tidy` argument is present 
+only in functions `as_freqform()` and `as_caseform()`.
+
+***Example***:
+Convert the `collapsed.star_case` data into a data frame in frequency form.
+
+```{r overconv-ex2}
+as_freqform(collapsed.star_case, tidy = FALSE) |> str()
+```
+
+***Example***:
+Convert the frequency form data, `star_freqform`, into table form. Name this
+data `star_tab`. Because we are converting *from* frequency form, the
+`freq = "frequency column name"` argument must be supplied.
+
+```{r overconv-ex3}
+star_tab <- as_table(star_freqform, freq = "Freq")
+
+str(star_tab)
+```
+
+***Example***:
+Convert the table form data, `star_tab`, into an array. Name this
+data `star_array`.
+
+```{r overconv-ex4}
+star_array <- as_array(star_tab)
+
+class(star_array)
+str(star_array)
+```
+
+To convert to a matrix, one also needs to specify row and column dimensions.
+This is done using the `dims = c("dim1", "dim2", ..., "dim_n")` argument, which
+works by summing over the dimensions excluded from this call. The first provided
+dimension is taken as the row dimension, with the second dimension taken as the 
+column dimension.
+
+***Example***:
+Convert the array form data, `star_array`, into a matrix with dimensions
+`"hair_color"` and `"eye_color"`. Name this data `star_mat`.
+
+```{r overconv-ex5}
+star_mat <- as_matrix(star_array, dims = c("hair_color", "eye_color"))
+
+class(star_mat)
+str(star_mat)
+```
+
+Note that the `dims` argument works the same way for all other tidy conversion
+functions.
+
+***Example***:
+Convert the table form data, `star_tab`, into frequency form with dimensions
+`"hair_color"` and `"eye_color"`.
+
+```{r overconv-ex6}
+as_freqform(star_tab, dims = c("hair_color", "eye_color")) |> str()
+```
+
+#### Proportions
+
+The last piece of these conversion functions is the `prop` argument, allowing
+users to convert cells/frequencies to proportions. Calculated proportions may 
+either be relative to the grand total (`prop = TRUE`) or to one or more margins
+(`prop = c("margin1", "margin2", ... "margin_n")`). 
+
+Note that `as_caseform()` is the only of the tidy conversion functions to not 
+include a `prop` argument. Also, `as_caseform()` will not convert proportional
+data.^[This was a deliberate choice, as once proportions are relative to
+margins, it becomes unclear how to convert these proportions back to
+the original entries.]
+
+***Example***:
+Convert `star_mat` into a table of proportions that are relative to the grand 
+total.
+
+```{r propconv-ex1}
+star_mat # To view the original
+
+as_table(star_mat, prop = TRUE)
+```
+
+***Example***:
+Convert `star_mat` into a table of proportions that are relative to the marginal
+sums of `hair_color`.
+
+```{r propconv-ex2}
+as_table(star_mat, prop = "hair_color")
+```
+
+***Example***:
+Convert `star_mat` into a table of proportions that are relative to the marginal
+sums of both `hair_color` and `eye_color`. Since these are the only two
+dimensions, cell proportions will all be equal to $1.0$ (except for cells where
+no data exists).
+
+```{r propconv-ex3}
+as_table(star_mat, prop = c("hair_color", "eye_color"))
+```
+
+# Taken Together
+
+Taking `collapse_levels()` and the tidy conversion functions together, one now
+has an intuitive framework for manipulating categorical data.
+
+***Example***:
+The `starwars` data also has a variable named `homeworld`, specifying the planet
+that a given character was from. The below code does the following: 
+
+1. Create data `home_star` from dataset `starwars`. The new data includes both `homeworld` and the previous variables of interest (`hair_color`, `eye_color`, and `skin_color`). Missing values are then omitted.
+1. Sort `homeworld` alphabetically.
+1. Collapse the first half of the sorted `homeworld`s into a level named `abc`.
+1. Collapse the second half of the sorted `homeworld`s into a level named `xyz`.
+1. Collapse `eye_color` according to the previous `Abnormal`, `Normal`, and `"unknown"` conventions.
+1. Convert the collapsed data into a table with dimensions `homeworld` and 
+`eye_color`. Call this table `tab.home_star` and plot the result in a mosaic 
+display.
+1. Convert `tab.home_star` into a matrix of proportions (relative to the grand total).
+
+```{r tt-ex1}
+home_star <- starwars |>
+  dplyr::select(c("hair_color", "skin_color", "eye_color", "homeworld")) |> 
+  tidyr::drop_na()
+
+# Sort unique levels of homeworld
+lvls <- home_star$homeworld |> unique() |> sort()
+lvls
+
+# Collapse variable levels
+collapsed.home_star <- collapse_levels(
+  home_star,
+  homeworld = list(
+    abc = lvls[1:(length(lvls)/2)],
+    xyz = lvls[(length(lvls)/2 + 1):length(lvls)]
+  ),
+  eye_color = list(
+    Normal = c("blue", "brown", "blue-gray", "hazel", "dark"), 
+    Abnormal = c(
+      "yellow", "red", "orange", "black", "pink", "red, blue", "gold", 
+      "green, yellow", "white"
+    )
+  )
+)
+# Convert to table of dimensions 'homeworld' and 'eye_color'
+tab.home_star <- as_table(collapsed.home_star, dims = c("homeworld", "eye_color"))
+
+# Plot as mosaic display
+mosaic(tab.home_star, shading = TRUE, gp = shading_Friendly)
+
+# Convert table into matrix of proportions. Note argument 'dims' was not supplied
+# as we already know that there are exactly 2 dimensions.
+as_matrix(tab.home_star, prop = TRUE)
+```
+
+Thus, this constitutes a pipeline for working with categorical data:
+
+1. Gather data and clean it.
+1. Collapse levels when substantively necessary.
+1. Convert forms, select dimensions, and/or take proportions if necessary.
+
+```{r ttpipeline, eval=FALSE}
+dataset |>                             # Gather the data
+  select(...) |> drop_na() |> ... |>   # Clean the data
+  collapse_levels(...) |>              # Collapse levels as necessary
+  as_form(...)   # Convert forms, select dimensions, take proportions
+```
+
+When viewed this way, these functions appear to be the start of a grammar of
+categorical data analysis.

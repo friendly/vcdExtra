@@ -55,7 +55,12 @@ Boca Raton, FL: Chapman & Hall/CRC. <http://ddar.datavis.ca>.
 ## See also
 
 [`type.convert`](https://rdrr.io/r/utils/type.convert.html),
-[`expandCategorical`](https://rdrr.io/pkg/gnm/man/expandCategorical.html)
+[`expandCategorical`](https://rdrr.io/pkg/gnm/man/expandCategorical.html),
+[`as_caseform`](https://friendly.github.io/vcdExtra/reference/as_caseform.md),
+[`as_table`](https://friendly.github.io/vcdExtra/reference/as_table.md),
+[`as_freqform`](https://friendly.github.io/vcdExtra/reference/as_freqform.md),
+[`as_array`](https://friendly.github.io/vcdExtra/reference/as_array.md),
+[`as_matrix`](https://friendly.github.io/vcdExtra/reference/as_matrix.md)
 
 ## Author
 

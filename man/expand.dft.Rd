@@ -58,7 +58,9 @@ Raton, FL: Chapman & Hall/CRC. \url{http://ddar.datavis.ca}.
 }
 \seealso{
 \code{\link[utils]{type.convert}},
-\code{\link[gnm]{expandCategorical}}
+\code{\link[gnm]{expandCategorical}}, \code{\link{as_caseform}},
+\code{\link{as_table}}, \code{\link{as_freqform}},
+\code{\link{as_array}}, \code{\link{as_matrix}}
 }
 \author{
 Mark Schwarz

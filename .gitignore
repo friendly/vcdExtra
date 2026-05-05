@@ -11,3 +11,4 @@ revdep/
 .claude/
 .DS_Store
 .positai
+inst/doc

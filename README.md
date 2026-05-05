@@ -29,7 +29,7 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 
 <!-- Version 0.8-6 -->
 
-Version 0.9.3; documentation built for `pkgdown` 2026-03-06
+Version 0.9.5; documentation built for `pkgdown` 2026-04-02
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -68,11 +68,11 @@ to be a love letter 💌 to CDA.
 
 ## 📂 Installation
 
-Get the released version (0.9.1) from CRAN:
+Get the released version (0.9.3) from CRAN:
 
      install.packages("vcdExtra")
 
-The current development version (0.9.3) can be installed from
+The current development version (0.9.5) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
@@ -200,6 +200,7 @@ vigns |> knitr::kable()
 | File | Title |
 |:---|:---|
 | a1-creating.Rmd | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html) |
+| a1a-convert-collapse.Rmd | [1a. Steps Toward Tidy Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.html) |
 | a2-tests.Rmd | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html) |
 | a3-loglinear.Rmd | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html) |
 | a4-mosaics.Rmd | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html) |

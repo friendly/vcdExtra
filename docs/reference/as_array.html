@@ -17,7 +17,7 @@ frequency form."><meta property="og:image" content="https://friendly.github.io/v
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ frequency form.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_array</span><span class="op">(</span><span class="va">obj</span>, freq <span class="op">=</span> <span class="cn">NULL</span>, dims <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as_array</span><span class="op">(</span><span class="va">obj</span>, freq <span class="op">=</span> <span class="cn">NULL</span>, dims <span class="op">=</span> <span class="cn">NULL</span>, prop <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -59,15 +59,23 @@ frequency form.</p>
 
 
 <dl><dt id="arg-obj">obj<a class="anchor" aria-label="anchor" href="#arg-obj"></a></dt>
-<dd><p>object to be converted to an array</p></dd>
+<dd><p>Object to be converted to an array.</p></dd>
 
 
 <dt id="arg-freq">freq<a class="anchor" aria-label="anchor" href="#arg-freq"></a></dt>
-<dd><p>If <code>obj</code> is in frequency form, this is the name of the frequency column. Leave as <code>NULL</code> if <code>obj</code> is in any other form.</p></dd>
+<dd><p>If <code>obj</code> is in frequency form, this is the name of the frequency column.
+Leave as <code>NULL</code> if <code>obj</code> is in any other form.</p></dd>
 
 
 <dt id="arg-dims">dims<a class="anchor" aria-label="anchor" href="#arg-dims"></a></dt>
-<dd><p>A character vector of dimensions. If not specified, all variables apart from <code>freq</code> will be used as dimensions</p></dd>
+<dd><p>A character vector of dimensions. If not specified, all variables apart from
+<code>freq</code> will be used as dimensions.</p></dd>
+
+
+<dt id="arg-prop">prop<a class="anchor" aria-label="anchor" href="#arg-prop"></a></dt>
+<dd><p>If set to <code>TRUE</code>, returns an array of proportions (that sum to 1). May also
+be set to a character or numeric vector of dimensions to be used as margins
+from which proportions will be computed.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -76,7 +84,12 @@ frequency form.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Unclasses the <code><a href="as_table.html">as_table()</a></code> function to return an object in array form.</p>
+    <p>Unclasses the <code><a href="as_table.html">as_table</a></code> function to return an object in array form.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="as_table.html">as_table</a></code>, <code><a href="as_freqform.html">as_freqform</a></code>, <code><a href="as_caseform.html">as_caseform</a></code>,
+<code><a href="as_matrix.html">as_matrix</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -139,6 +152,77 @@ frequency form.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ Eye : chr [1:4] "Blue" "Brown" "Green" "Hazel"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "call")= language xtabs(formula = reformulate(cols, response = freq), data = obj)</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#-----For proportions-----#</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">as_array</span><span class="op">(</span><span class="va">freqForm</span>, freq <span class="op">=</span> <span class="st">"Freq"</span>, prop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># proportions relative to grand total</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> , , Sex = Male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Eye</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hair          Brown       Blue       Hazel       Green</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Black 0.054054054 0.01858108 0.016891892 0.005067568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Brown 0.089527027 0.08445946 0.042229730 0.025337838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Red   0.016891892 0.01689189 0.011824324 0.011824324</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Blond 0.005067568 0.05067568 0.008445946 0.013513514</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Marginalize proportions along "Sex" (i.e., male proportions sum to 1, female proportions sum to 1)</span></span></span>
+<span class="r-in"><span><span class="fu">as_array</span><span class="op">(</span><span class="va">freqForm</span>, freq <span class="op">=</span> <span class="st">"Freq"</span>, prop <span class="op">=</span> <span class="st">"Sex"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> , , Sex = Male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Eye</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hair         Brown       Blue      Hazel      Green</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Black 0.11469534 0.03942652 0.03584229 0.01075269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Brown 0.18996416 0.17921147 0.08960573 0.05376344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Red   0.03584229 0.03584229 0.02508961 0.02508961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Blond 0.01075269 0.10752688 0.01792115 0.02867384</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">as_array</span><span class="op">(</span><span class="va">freqForm</span>, freq <span class="op">=</span> <span class="st">"Freq"</span>, prop <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># Same as above</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> , , Sex = Male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Eye</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hair         Brown       Blue      Hazel      Green</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Black 0.11469534 0.03942652 0.03584229 0.01075269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Brown 0.18996416 0.17921147 0.08960573 0.05376344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Red   0.03584229 0.03584229 0.02508961 0.02508961</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Blond 0.01075269 0.10752688 0.01792115 0.02867384</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Marginalize proportions along multiple variables</span></span></span>
+<span class="r-in"><span><span class="fu">as_array</span><span class="op">(</span><span class="va">freqForm</span>, freq <span class="op">=</span> <span class="st">"Freq"</span>, prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hair"</span>, <span class="st">"Sex"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> , , Sex = Male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Eye</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hair         Brown      Blue     Hazel      Green</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Black 0.57142857 0.1964286 0.1785714 0.05357143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Brown 0.37062937 0.3496503 0.1748252 0.10489510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Red   0.29411765 0.2941176 0.2058824 0.20588235</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Blond 0.06521739 0.6521739 0.1086957 0.17391304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">as_array</span><span class="op">(</span><span class="va">freqForm</span>, freq <span class="op">=</span> <span class="st">"Freq"</span>, prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># Same as above</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> , , Sex = Male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Eye</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hair         Brown      Blue     Hazel      Green</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Black 0.57142857 0.1964286 0.1785714 0.05357143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Brown 0.37062937 0.3496503 0.1748252 0.10489510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Red   0.29411765 0.2941176 0.2058824 0.20588235</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Blond 0.06521739 0.6521739 0.1086957 0.17391304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using dims and prop arguments in tandem</span></span></span>
+<span class="r-in"><span><span class="fu">as_array</span><span class="op">(</span><span class="va">freqForm</span>, freq <span class="op">=</span> <span class="st">"Freq"</span>, dims <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Hair"</span>, <span class="st">"Eye"</span><span class="op">)</span>, prop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Eye</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hair         Brown       Blue      Hazel       Green</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Black 0.11486486 0.03378378 0.02533784 0.008445946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Brown 0.20101351 0.14189189 0.09121622 0.048986486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Red   0.04391892 0.02871622 0.02364865 0.023648649</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Blond 0.01182432 0.15878378 0.01689189 0.027027027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"call")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> xtabs(formula = reformulate(cols, response = freq), data = obj)</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -147,7 +231,7 @@ frequency form.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Michael Friendly.</p>
+  <p>Developed by Michael Friendly, Gavin Klorfine.</p>
 </div>
 
 <div class="pkgdown-footer-right">

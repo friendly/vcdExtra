@@ -709,14 +709,75 @@ The [`forcats`](https://CRAN.R-project.org/package=forcats) package
 provides a collection of functions for reordering the levels of a factor
 or grouping categories according to their frequency:
 
-- `forcats::fct_reorder()`: Reorder a factor by another variable.
-- `forcats::fct_infreq()`: Reorder a factor by the frequency of values.
-- `forcats::fct_relevel()`: Change the order of a factor by hand.
-- `forcats::fct_lump()`: Collapse the least/most frequent values of a
-  factor into “other”.
-- `forcats::fct_collapse()`: Collapse factor levels into manually
-  defined groups.
-- `forcats::fct_recode()`: Change factor levels by hand.
+- [`forcats::fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html):
+  Reorder a factor by another variable.
+- [`forcats::fct_infreq()`](https://forcats.tidyverse.org/reference/fct_inorder.html):
+  Reorder a factor by the frequency of values.
+- [`forcats::fct_relevel()`](https://forcats.tidyverse.org/reference/fct_relevel.html):
+  Change the order of a factor by hand.
+- [`forcats::fct_lump()`](https://forcats.tidyverse.org/reference/fct_lump.html):
+  Collapse the least/most frequent values of a factor into “other”.
+- [`forcats::fct_collapse()`](https://forcats.tidyverse.org/reference/fct_collapse.html):
+  Collapse factor levels into manually defined groups.
+- [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html):
+  Change factor levels by hand.
+
+### Collapsing table levels: `collapse_levels()`
+
+As seen in the previous section, collapsing variables from datasets in
+frequency or case form (in R) is not as intuitive/easy as it should be.
+Thus, the
+[`collapse_levels()`](https://friendly.github.io/vcdExtra/reference/collapse_levels.md)
+function was written to easily collapse variables contained in datasets
+of *any form*.
+
+Note that when your object `X` is in frequency form, an argument of
+`freq = "your frequency column name"` must be supplied. This argument
+defaults to a value of `freq = "Freq"`.
+
+The use of this function is illustrated below using the same `Titanicp`
+data.
+
+***Example*** First, factorize the `sibsp` and `parch` variables. Then
+collapse variables into categories of `0`, `1`, and `2+`.
+
+``` r
+str(Titanicp) # The original dataset
+## 'data.frame':    1309 obs. of  6 variables:
+##  $ pclass  : Factor w/ 3 levels "1st","2nd","3rd": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ survived: Factor w/ 2 levels "died","survived": 2 2 1 1 1 2 2 1 2 1 ...
+##  $ sex     : Factor w/ 2 levels "female","male": 1 2 1 2 1 2 1 2 1 2 ...
+##  $ age     : num  29 0.917 2 30 25 ...
+##  $ sibsp   : num  0 1 1 1 1 0 1 0 2 0 ...
+##  $ parch   : num  0 2 2 2 2 0 0 0 0 0 ...
+
+Titanicp <- within(Titanicp, {
+  parchF <- factor(parch)
+  sibspF <- factor(sibsp)
+})
+
+Titanicp <- collapse_levels(
+  Titanicp,
+  parchF = list(
+    "2+" = c("2", "3", "4", "5", "6", "9")
+  ),
+  sibspF = list(
+    "2+" = c("2", "3", "4", "5", "8")
+  )
+)
+
+table(Titanicp$sibspF, Titanicp$parchF)
+##     
+##        0   1  2+
+##   0  790  52  49
+##   1  183  90  46
+##   2+  29  28  42
+```
+
+For a more thorough overview of
+[`collapse_levels()`](https://friendly.github.io/vcdExtra/reference/collapse_levels.md),
+see [1a. Steps Toward Tidy Categorical Data
+Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.md).
 
 ### Converting among frequency tables and data frames
 
@@ -797,6 +858,88 @@ back to a `data.frame` in case form, with factors `Treatment`, `Sex` and
 ``` r
 Art.df <- expand.dft(Art.tab)
 str(Art.df)
+## 'data.frame':    84 obs. of  3 variables:
+##  $ Treatment: chr  "Placebo" "Placebo" "Placebo" "Placebo" ...
+##  $ Sex      : chr  "Female" "Female" "Female" "Female" ...
+##  $ Improved : chr  "None" "None" "None" "None" ...
+```
+
+#### Tidy conversions
+
+To make conversions more intuitive, `vcdExtra` includes tidy conversion
+functions
+[`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md),
+[`as_matrix()`](https://friendly.github.io/vcdExtra/reference/as_matrix.md),
+[`as_array()`](https://friendly.github.io/vcdExtra/reference/as_array.md),
+[`as_freqform()`](https://friendly.github.io/vcdExtra/reference/as_freqform.md),
+and
+[`as_caseform()`](https://friendly.github.io/vcdExtra/reference/as_caseform.md)
+to easily convert any form to the form of the function’s namesake (i.e.,
+[`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md)
+converts any form into table form). Arguments in these functions are of
+similar format, with conversions *from* frequency form requiring the
+column containing frequencies to be specified via the `freq` argument.
+Likewise, `dims` (dimensions) may be specified, with output summing over
+excluded variables. For a more thorough overview of these functions, see
+[1a. Steps Toward Tidy Categorical Data
+Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.md).
+
+***Example***: Convert the `GSStab` in table form to a `data.frame` in
+frequency form.
+
+``` r
+# tidy = TRUE (default) returns a tibble
+GSS.ff <- as_freqform(GSStab, tidy = FALSE)
+GSS.ff
+##      sex party Freq
+## 1 female   dem  279
+## 2   male   dem  165
+## 3 female indep   73
+## 4   male indep   47
+## 5 female   rep  225
+## 6   male   rep  191
+```
+
+***Example***: Convert the `GSStab` data in frequency form (`GSS.ff`)
+back to table form.
+
+``` r
+as_table(GSS.ff, freq = "Freq") # When present, freq column must be specified
+##         party
+## sex      dem indep rep
+##   female 279    73 225
+##   male   165    47 191
+```
+
+***Example***: Convert the `Arthritis` data in case form to a 3-way
+table of `Treatment` \\\times\\ `Sex` \\\times\\ `Improved`.
+
+``` r
+tidy_Art.tab <- as_table(Arthritis, dims = c("Treatment", "Sex", "Improved"))
+str(tidy_Art.tab)
+##  'xtabs' int [1:2, 1:2, 1:3] 19 6 10 7 7 5 0 2 6 16 ...
+##  - attr(*, "dimnames")=List of 3
+##   ..$ Treatment: chr [1:2] "Placebo" "Treated"
+##   ..$ Sex      : chr [1:2] "Female" "Male"
+##   ..$ Improved : chr [1:3] "None" "Some" "Marked"
+##  - attr(*, "call")= language xtabs(formula = reformulate(cols), data = obj)
+
+ftable(tidy_Art.tab)
+##                  Improved None Some Marked
+## Treatment Sex                             
+## Placebo   Female            19    7      6
+##           Male              10    0      1
+## Treated   Female             6    5     16
+##           Male               7    2      5
+```
+
+***Example***: Convert the `Arthritis` data in table form
+(`tidy_Art.tab`) back to a `data.frame` in case form, with factors
+`Treatment`, `Sex` and `Improved`.
+
+``` r
+tidy_Art.df <- as_caseform(tidy_Art.tab, tidy = FALSE)
+str(tidy_Art.df)
 ## 'data.frame':    84 obs. of  3 variables:
 ##  $ Treatment: chr  "Placebo" "Placebo" "Placebo" "Placebo" ...
 ##  $ Sex      : chr  "Female" "Female" "Female" "Female" ...

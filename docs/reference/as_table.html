@@ -17,7 +17,7 @@ frequency form. Optionally returns a table of proportions with (optionally) spec
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,24 +59,28 @@ frequency form. Optionally returns a table of proportions with (optionally) spec
 
 
 <dl><dt id="arg-obj">obj<a class="anchor" aria-label="anchor" href="#arg-obj"></a></dt>
-<dd><p>object to be converted to table form</p></dd>
+<dd><p>Object to be converted to table form.</p></dd>
 
 
 <dt id="arg-freq">freq<a class="anchor" aria-label="anchor" href="#arg-freq"></a></dt>
-<dd><p>If <code>obj</code> is in frequency form, this is the name of the frequency column. Leave as <code>NULL</code> if <code>obj</code> is in any other form.</p></dd>
+<dd><p>If <code>obj</code> is in frequency form, this is the name of the frequency column.
+Leave as <code>NULL</code> if <code>obj</code> is in any other form.</p></dd>
 
 
 <dt id="arg-dims">dims<a class="anchor" aria-label="anchor" href="#arg-dims"></a></dt>
-<dd><p>A character vector of dimensions. If not specified, all variables apart from <code>freq</code> will be used as dimensions</p></dd>
+<dd><p>A character vector of dimensions. If not specified, all variables apart from
+<code>freq</code> will be used as dimensions.</p></dd>
 
 
 <dt id="arg-prop">prop<a class="anchor" aria-label="anchor" href="#arg-prop"></a></dt>
-<dd><p>If set to TRUE, returns a table of proportions. May also be set to a character or numeric vector of margins.</p></dd>
+<dd><p>If set to <code>TRUE</code>, returns a table of proportions (that sum to 1). May also
+be set to a character or numeric vector of dimensions to be used as margins
+from which proportions will be computed.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>object in table form</p>
+    <p>Object in table form.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -86,6 +90,11 @@ entries summed over excluded dimensions). When <code>prop</code> is set to <code
 returned table will have proportions that sum to one, whereas if a character
 or numerical vector of table dimensions is supplied to <code>prop</code>, proportions
 will be marginalized across the specified dimensions.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="as_freqform.html">as_freqform</a></code>, <code><a href="as_caseform.html">as_caseform</a></code>, <code><a href="as_array.html">as_array</a></code>,
+<code><a href="as_matrix.html">as_matrix</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -224,7 +233,7 @@ will be marginalized across the specified dimensions.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Michael Friendly.</p>
+  <p>Developed by Michael Friendly, Gavin Klorfine.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -15,7 +15,7 @@ as_table(obj, freq = NULL, dims = NULL, prop = NULL)
 
 - obj:
 
-  object to be converted to table form
+  Object to be converted to table form.
 
 - freq:
 
@@ -25,16 +25,17 @@ as_table(obj, freq = NULL, dims = NULL, prop = NULL)
 - dims:
 
   A character vector of dimensions. If not specified, all variables
-  apart from `freq` will be used as dimensions
+  apart from `freq` will be used as dimensions.
 
 - prop:
 
-  If set to TRUE, returns a table of proportions. May also be set to a
-  character or numeric vector of margins.
+  If set to `TRUE`, returns a table of proportions (that sum to 1). May
+  also be set to a character or numeric vector of dimensions to be used
+  as margins from which proportions will be computed.
 
 ## Value
 
-object in table form
+Object in table form.
 
 ## Details
 
@@ -45,6 +46,13 @@ with entries summed over excluded dimensions). When `prop` is set to
 whereas if a character or numerical vector of table dimensions is
 supplied to `prop`, proportions will be marginalized across the
 specified dimensions.
+
+## See also
+
+[`as_freqform`](https://friendly.github.io/vcdExtra/reference/as_freqform.md),
+[`as_caseform`](https://friendly.github.io/vcdExtra/reference/as_caseform.md),
+[`as_array`](https://friendly.github.io/vcdExtra/reference/as_array.md),
+[`as_matrix`](https://friendly.github.io/vcdExtra/reference/as_matrix.md)
 
 ## Author
 

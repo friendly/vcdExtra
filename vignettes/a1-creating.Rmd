@@ -506,6 +506,11 @@ The `vcdExtra::Titanicp` data set contains information on 1309 passengers on the
 including `sibsp`, the number of (0:8) siblings or spouses aboard, and `parch` (0:6), the
 number of parents or children aboard, but the table is quite sparse.
 
+```{r titanicSAVE, include=FALSE, echo=FALSE}
+# Save unmodified Titanicp data for collapse_levels() example
+saveDat <- Titanicp
+```
+
 ```{r titanicp1}
 table(Titanicp$sibsp, Titanicp$parch)
 ```
@@ -543,6 +548,51 @@ or grouping categories according to their frequency:
 *    `forcats::fct_collapse()`: Collapse factor levels into manually defined groups.
 *    `forcats::fct_recode()`: Change factor levels by hand.
 
+## Collapsing table levels: `collapse_levels()`
+
+As seen in the previous section, collapsing variables from datasets in frequency 
+or case form (in R) is not as intuitive/easy as it should be. Thus, the
+`collapse_levels()` function was written to easily collapse variables contained
+in datasets of *any form*.
+
+Note that when your object `X` is in frequency form, an argument of 
+`freq = "your frequency column name"` must be supplied. This argument defaults
+to a value of `freq = "Freq"`.
+
+The use of this function is illustrated below using the same `Titanicp` data.
+
+***Example***
+First, factorize the `sibsp` and `parch` variables. Then collapse variables into
+categories of `0`, `1`, and `2+`.
+
+```{r titanicLOAD, include=FALSE, echo=FALSE}
+# Load unmodified Titanicp data for collapse_levels() example
+Titanicp <- saveDat
+```
+
+```{r collapse_level-ex1}
+str(Titanicp) # The original dataset
+
+Titanicp <- within(Titanicp, {
+  parchF <- factor(parch)
+  sibspF <- factor(sibsp)
+})
+
+Titanicp <- collapse_levels(
+  Titanicp,
+  parchF = list(
+    "2+" = c("2", "3", "4", "5", "6", "9")
+  ),
+  sibspF = list(
+    "2+" = c("2", "3", "4", "5", "8")
+  )
+)
+
+table(Titanicp$sibspF, Titanicp$parchF)
+```
+
+For a more thorough overview of `collapse_levels()`, see
+[1a. Steps Toward Tidy Categorical Data Analysis](a1a-convert-collapse.html).
 
 ## Converting among frequency tables and data frames
 
@@ -615,6 +665,47 @@ in case form, with factors
 ```{r, convert-ex3}
 Art.df <- expand.dft(Art.tab)
 str(Art.df)
+```
+
+### Tidy conversions
+
+To make conversions more intuitive, `vcdExtra` includes tidy conversion
+functions `as_table()`, `as_matrix()`, `as_array()`, `as_freqform()`, and `as_caseform()` to easily convert any form to the form of the function's
+namesake (i.e., `as_table()` converts any form into table form). Arguments in
+these functions are of similar format, with conversions *from* frequency form
+requiring the column containing frequencies to be specified via the `freq`
+argument. Likewise, `dims` (dimensions) may be specified, with output summing
+over excluded variables. For a more thorough overview of these functions, see
+[1a. Steps Toward Tidy Categorical Data Analysis](a1a-convert-collapse.html).
+
+***Example***: 
+Convert the `GSStab` in table form to a `data.frame` in frequency form.
+```{r, tidyconvert-ex1}
+# tidy = TRUE (default) returns a tibble
+GSS.ff <- as_freqform(GSStab, tidy = FALSE)
+GSS.ff
+```
+
+***Example***: 
+Convert the `GSStab` data in frequency form (`GSS.ff`) back to table form.
+```{r, tidyconvert-ex2}
+as_table(GSS.ff, freq = "Freq") # When present, freq column must be specified
+```
+
+***Example***: Convert the `Arthritis` data in case form to a 3-way table of
+`Treatment` $\times$ `Sex` $\times$ `Improved`.
+```{r, tidyconvert-ex3}
+tidy_Art.tab <- as_table(Arthritis, dims = c("Treatment", "Sex", "Improved"))
+str(tidy_Art.tab)
+
+ftable(tidy_Art.tab)
+```
+
+***Example***: Convert the `Arthritis` data in table form (`tidy_Art.tab`) back 
+to a `data.frame` in case form, with factors `Treatment`, `Sex` and `Improved`.
+```{r, tidyconvert-ex4}
+tidy_Art.df <- as_caseform(tidy_Art.tab, tidy = FALSE)
+str(tidy_Art.df)
 ```
 
 ## A complex example {#sec:complex}

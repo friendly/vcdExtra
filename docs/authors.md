@@ -23,20 +23,21 @@
 
 - **Shuguang Sun**. Contributor.
 
-- **Gavin Klorfine**. Contributor.
+- **Gavin Klorfine**. Author.
 
 ## Citation
 
 Source:
 [`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/master/DESCRIPTION)
 
-Friendly M (2026). *vcdExtra: 'vcd' Extensions and Additions*. R package
-version 0.9.4, <https://friendly.github.io/vcdExtra/>.
+Friendly M, Klorfine G (2026). *vcdExtra: 'vcd' Extensions and
+Additions*. R package version 0.9.5,
+<https://friendly.github.io/vcdExtra/>.
 
     @Manual{,
       title = {vcdExtra: 'vcd' Extensions and Additions},
-      author = {Michael Friendly},
+      author = {Michael Friendly and Gavin Klorfine},
       year = {2026},
-      note = {R package version 0.9.4},
+      note = {R package version 0.9.5},
       url = {https://friendly.github.io/vcdExtra/},
     }

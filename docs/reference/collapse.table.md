@@ -37,10 +37,16 @@ corresponding dimension of the table.
 ## See also
 
 [`expand.dft`](https://friendly.github.io/vcdExtra/reference/expand.dft.md)
+and
+[`as_caseform`](https://friendly.github.io/vcdExtra/reference/as_caseform.md):
 expands a frequency data frame to case form.
 
 [`margin.table`](https://rdrr.io/r/base/marginSums.html) "collapses" a
 table in a different way, by summing over table dimensions.
+
+[`collapse_levels`](https://friendly.github.io/vcdExtra/reference/collapse_levels.md)
+collapses in the same manner as `collapse.table` but also works for
+frequency and case form data.
 
 ## Author
 
