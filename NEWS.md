@@ -1,3 +1,7 @@
+## Version 0.9.6
+
+* Fixed bug in `CMHtest` which previously suppressed `Df` and `Prob` (p-value) for the overall population results.
+
 ## Version 0.9.5
 
 This is a major release of the package, completing work on a sizeable collection of tidy tools

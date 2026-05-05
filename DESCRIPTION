@@ -29,7 +29,8 @@ Authors@R: c(
                    email = "d.firth@warwick.ac.uk"),
             person(given = "Daniel", family = "Sabanes Bove", 
                    role="ctb",
-                   email = "daniel.sabanesbove@gmail.com"),
+                   email = "daniel@rconis.com",
+                   comment = c(ORCID = "0000-0002-0176-9239")),
             person(given = "Matt", family = "Kumar", role="ctb"),
             person(given = "Shuguang", family = "Sun", role="ctb"),
             person(given = "Gavin", family = "Klorfine", role = "aut")
