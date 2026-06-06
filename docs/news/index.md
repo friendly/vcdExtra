@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 0.9.6
+
+- Fix [@aliases](https://github.com/aliases) for roxygen 8.0.0
+- Make some
+  [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
+  examples visible in documentation
+
 ## Version 0.9.5
 
 This is a major release of the package, completing work on a sizable
