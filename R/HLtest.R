@@ -25,8 +25,7 @@
 #' frequencies.
 #' 
 #' 
-#' @aliases HosmerLemeshow HLtest plot.HLtest print.HLtest rootogram.HLtest
-#' summary.HLtest
+#' @aliases HosmerLemeshow HLtest plot.HLtest print.HLtest rootogram.HLtest summary.HLtest
 #' @param model A `glm` model object in the `binomial` family
 #' @param g Number of groups used to partition the fitted values for the GOF
 #' test.

@@ -118,11 +118,11 @@ LRstats(tit.joint, label = "formula", label.args = list(abbrev = TRUE))
 \code{\link{logLik.loglm}}, \code{\link{modFit}},
 \code{\link{get_models}}, \code{\link{get_model}}
 
-Other glmlist functions: 
-\code{\link{Kway}()},
-\code{\link{get_model}()},
-\code{\link{glmlist}()},
-\code{\link{mosaic.glmlist}()}
+Other glmlist functions:
+\code{\link[=Kway]{Kway()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=mosaic.glmlist]{mosaic.glmlist()}}
 }
 \author{
 Achim Zeileis, Michael Friendly

@@ -51,12 +51,7 @@
 #' describing the loglinear model in the shorthand bracket notation,
 #' e.g., `"[A,B] [A,C]"`.
 #'
-#' @aliases loglin-utilities conditional joint loglin2formula loglin2string
-#'          markov mutual saturated
-#'
-#'
-#' models of joint independence, of some factors wrt one or more other factors
-#'
+#' @aliases loglin-utilities conditional joint loglin2formula loglin2string markov mutual saturated
 #' @param nf number of factors for which to generate model
 #' @param table a contingency table used for factor names, typically the output from \code{\link[base]{table}}
 #' @param factors names of factors used in the model when `table` is not specified

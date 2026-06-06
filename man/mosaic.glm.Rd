@@ -236,9 +236,9 @@ anova(berk.glm1, berk.glm3, test="Chisq")
 \code{\link[stats]{glm}}, \code{\link[gnm]{gnm}},
 \code{\link[vcd]{plot.loglm}}, \code{\link[vcd]{mosaic}}
 
-Other mosaic plots: 
-\code{\link{mosaic.glmlist}()},
-\code{\link{mosaic3d}()}
+Other mosaic plots:
+\code{\link[=mosaic.glmlist]{mosaic.glmlist()}},
+\code{\link[=mosaic3d]{mosaic3d()}}
 }
 \author{
 Heather Turner, Michael Friendly, with help from Achim Zeileis

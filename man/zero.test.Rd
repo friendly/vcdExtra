@@ -61,11 +61,11 @@ Statistics - Theory and Methods} \strong{39} (11) 2008-2030.
 DOI: 10.1080/03610920902948228
 }
 \seealso{
-Other association tests: 
-\code{\link{CMHtest}()},
-\code{\link{GKgamma}()},
-\code{\link{HLtest}()},
-\code{\link{woolf_test}()}
+Other association tests:
+\code{\link[=CMHtest]{CMHtest()}},
+\code{\link[=GKgamma]{GKgamma()}},
+\code{\link[=HLtest]{HLtest()}},
+\code{\link[=woolf_test]{woolf_test()}}
 }
 \author{
 Michael Friendly

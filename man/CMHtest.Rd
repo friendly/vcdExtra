@@ -209,11 +209,11 @@ Cochran-Mantel-Haenszel chi-squared test of the null that two nominal
 variables are conditionally independent in each stratum, assuming that there
 is no three-way interaction
 
-Other association tests: 
-\code{\link{GKgamma}()},
-\code{\link{HLtest}()},
-\code{\link{woolf_test}()},
-\code{\link{zero.test}()}
+Other association tests:
+\code{\link[=GKgamma]{GKgamma()}},
+\code{\link[=HLtest]{HLtest()}},
+\code{\link[=woolf_test]{woolf_test()}},
+\code{\link[=zero.test]{zero.test()}}
 }
 \author{
 Michael Friendly

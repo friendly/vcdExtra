@@ -55,11 +55,11 @@ American Statistical Association}, 58, 310-364.
 \seealso{
 \code{\link[vcd]{assocstats}}, \link[vcd]{Kappa}
 
-Other association tests: 
-\code{\link{CMHtest}()},
-\code{\link{HLtest}()},
-\code{\link{woolf_test}()},
-\code{\link{zero.test}()}
+Other association tests:
+\code{\link[=CMHtest]{CMHtest()}},
+\code{\link[=HLtest]{HLtest()}},
+\code{\link[=woolf_test]{woolf_test()}},
+\code{\link[=zero.test]{zero.test()}}
 }
 \author{
 Michael Friendly; original version by Laura Thompson

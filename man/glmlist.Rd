@@ -89,18 +89,18 @@ The function \code{\link[stats]{anova.glm}} also handles \verb{glmlist objects}
 \code{\link{LRstats}} gives LR statistics and tests for a \code{glmlist}
 object.
 
-Other glmlist functions: 
-\code{\link{Kway}()},
-\code{\link{LRstats}()},
-\code{\link{get_model}()},
-\code{\link{mosaic.glmlist}()}
+Other glmlist functions:
+\code{\link[=Kway]{Kway()}},
+\code{\link[=LRstats]{LRstats()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=mosaic.glmlist]{mosaic.glmlist()}}
 
-Other loglinear models: 
-\code{\link{assoc_graph}()},
-\code{\link{get_model}()},
-\code{\link{joint}()},
-\code{\link{plot.assoc_graph}()},
-\code{\link{seq_loglm}()}
+Other loglinear models:
+\code{\link[=assoc_graph]{assoc_graph()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=joint]{joint()}},
+\code{\link[=plot.assoc_graph]{plot.assoc_graph()}},
+\code{\link[=seq_loglm]{seq_loglm()}}
 }
 \author{
 Michael Friendly; \code{coef} method by John Fox

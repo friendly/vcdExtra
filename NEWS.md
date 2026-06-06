@@ -1,6 +1,6 @@
 ## Version 0.9.5
 
-This is a major release of the package, completing work on a sizeable collection of tidy tools
+This is a major release of the package, completing work on a sizable collection of tidy tools
 for manipulating categorical data in various forms
 
 * Added a general `collapse_levels()` function that can collapse levels of variables belonging to data sets of any form. [GK]

@@ -228,7 +228,6 @@ on the returned object:
 
 }}
 \examples{
-\dontrun{
 # Basic usage with 2-way table - shade by residuals from independence
 data(HairEyeColor)
 HEC <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
@@ -243,6 +242,7 @@ color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
 # Display residual values in cells instead of frequencies
 color_table(HEC, values = "residuals")
 
+\dontrun{
 # From a data.frame in frequency form (2-way)
 hec_df <- as.data.frame(HEC)
 color_table(hec_df)

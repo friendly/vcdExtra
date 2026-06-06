@@ -133,7 +133,6 @@
 #' @return A gt table object that can be further customized
 #'
 #' @examples
-#' \dontrun{
 #' # Basic usage with 2-way table - shade by residuals from independence
 #' data(HairEyeColor)
 #' HEC <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
@@ -148,6 +147,7 @@
 #' # Display residual values in cells instead of frequencies
 #' color_table(HEC, values = "residuals")
 #'
+#' \dontrun{
 #' # From a data.frame in frequency form (2-way)
 #' hec_df <- as.data.frame(HEC)
 #' color_table(hec_df)

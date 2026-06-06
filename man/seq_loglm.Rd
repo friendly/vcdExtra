@@ -100,12 +100,12 @@ models, \code{\link{conditional}}, \code{\link{joint}},
 
 \code{\link{loglmlist}}
 
-Other loglinear models: 
-\code{\link{assoc_graph}()},
-\code{\link{get_model}()},
-\code{\link{glmlist}()},
-\code{\link{joint}()},
-\code{\link{plot.assoc_graph}()}
+Other loglinear models:
+\code{\link[=assoc_graph]{assoc_graph()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=joint]{joint()}},
+\code{\link[=plot.assoc_graph]{plot.assoc_graph()}}
 }
 \author{
 Michael Friendly

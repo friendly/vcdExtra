@@ -62,11 +62,11 @@ plot(g, groups = list(c("A", "B"), c("C", "D")),
 \seealso{
 \code{\link{assoc_graph}}, \code{\link[igraph]{plot.igraph}}
 
-Other loglinear models: 
-\code{\link{assoc_graph}()},
-\code{\link{get_model}()},
-\code{\link{glmlist}()},
-\code{\link{joint}()},
-\code{\link{seq_loglm}()}
+Other loglinear models:
+\code{\link[=assoc_graph]{assoc_graph()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=joint]{joint()}},
+\code{\link[=seq_loglm]{seq_loglm()}}
 }
 \concept{loglinear models}

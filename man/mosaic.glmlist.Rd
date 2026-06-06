@@ -149,15 +149,15 @@ available as \code{vignette("strucplot", package="vcd")}.
 \code{\link[vcd]{strucplot}}, for the many parameters that control the
 details of mosaic plots.
 
-Other mosaic plots: 
-\code{\link{mosaic.glm}()},
-\code{\link{mosaic3d}()}
+Other mosaic plots:
+\code{\link[=mosaic.glm]{mosaic.glm()}},
+\code{\link[=mosaic3d]{mosaic3d()}}
 
-Other glmlist functions: 
-\code{\link{Kway}()},
-\code{\link{LRstats}()},
-\code{\link{get_model}()},
-\code{\link{glmlist}()}
+Other glmlist functions:
+\code{\link[=Kway]{Kway()}},
+\code{\link[=LRstats]{LRstats()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=glmlist]{glmlist()}}
 }
 \author{
 Michael Friendly

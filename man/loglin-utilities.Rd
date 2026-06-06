@@ -9,16 +9,6 @@
 \alias{markov}
 \alias{mutual}
 \alias{saturated}
-\alias{models}
-\alias{of}
-\alias{independence,}
-\alias{some}
-\alias{factors}
-\alias{wrt}
-\alias{one}
-\alias{or}
-\alias{more}
-\alias{other}
 \title{Loglinear Model Utilities}
 \source{
 Code from Henrique Dallazuanna, \href{mailto:wwwhsd@gmail.com}{wwwhsd@gmail.com}, R-help 7-4-2013
@@ -113,11 +103,11 @@ describing the loglinear model in the shorthand bracket notation,
 e.g., \code{"[A,B] [A,C]"}.
 }
 \seealso{
-Other loglinear models: 
-\code{\link{assoc_graph}()},
-\code{\link{get_model}()},
-\code{\link{glmlist}()},
-\code{\link{plot.assoc_graph}()},
-\code{\link{seq_loglm}()}
+Other loglinear models:
+\code{\link[=assoc_graph]{assoc_graph()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=plot.assoc_graph]{plot.assoc_graph()}},
+\code{\link[=seq_loglm]{seq_loglm()}}
 }
 \concept{loglinear models}

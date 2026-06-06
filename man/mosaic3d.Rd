@@ -171,9 +171,9 @@ fitting loglinear models
 
 \code{\link[rgl]{play3d}}, \code{\link[rgl]{movie3d}} for what you can do with a 3D mosaic plot
 
-Other mosaic plots: 
-\code{\link{mosaic.glm}()},
-\code{\link{mosaic.glmlist}()}
+Other mosaic plots:
+\code{\link[=mosaic.glm]{mosaic.glm()}},
+\code{\link[=mosaic.glmlist]{mosaic.glmlist()}}
 }
 \author{
 Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis

@@ -97,11 +97,11 @@ LRstats(modRoch)
 \code{\link{glmlist}}, \code{\link{Summarise}} (soon to be
 deprecated), \code{\link{LRstats}}
 
-Other glmlist functions: 
-\code{\link{LRstats}()},
-\code{\link{get_model}()},
-\code{\link{glmlist}()},
-\code{\link{mosaic.glmlist}()}
+Other glmlist functions:
+\code{\link[=LRstats]{LRstats()}},
+\code{\link[=get_model]{get_model()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=mosaic.glmlist]{mosaic.glmlist()}}
 }
 \author{
 Michael Friendly and Heather Turner

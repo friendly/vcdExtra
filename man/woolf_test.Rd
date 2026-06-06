@@ -129,10 +129,10 @@ Woolf, B. (1955). On estimating the relation between blood group and disease.
 \seealso{
 \code{\link[stats]{mantelhaen.test}}, \code{\link[DescTools]{BreslowDayTest}}
 
-Other association tests: 
-\code{\link{CMHtest}()},
-\code{\link{GKgamma}()},
-\code{\link{HLtest}()},
-\code{\link{zero.test}()}
+Other association tests:
+\code{\link[=CMHtest]{CMHtest()}},
+\code{\link[=GKgamma]{GKgamma()}},
+\code{\link[=HLtest]{HLtest()}},
+\code{\link[=zero.test]{zero.test()}}
 }
 \concept{association tests}

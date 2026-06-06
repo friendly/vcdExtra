@@ -147,11 +147,11 @@ John Wiley & Sons, Chichester.
 \code{\link{saturated}}, \code{\link{loglin2string}}, \code{\link{seq_loglm}},
 \code{\link{plot.assoc_graph}}
 
-Other loglinear models: 
-\code{\link{get_model}()},
-\code{\link{glmlist}()},
-\code{\link{joint}()},
-\code{\link{plot.assoc_graph}()},
-\code{\link{seq_loglm}()}
+Other loglinear models:
+\code{\link[=get_model]{get_model()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=joint]{joint()}},
+\code{\link[=plot.assoc_graph]{plot.assoc_graph()}},
+\code{\link[=seq_loglm]{seq_loglm()}}
 }
 \concept{loglinear models}

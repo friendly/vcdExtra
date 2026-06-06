@@ -81,18 +81,18 @@ get_models(tit.joint, abbrev = 2)
 \code{\link{loglin2string}}, \code{\link{LRstats}},
 \code{\link{seq_mosaic}}
 
-Other glmlist functions: 
-\code{\link{Kway}()},
-\code{\link{LRstats}()},
-\code{\link{glmlist}()},
-\code{\link{mosaic.glmlist}()}
+Other glmlist functions:
+\code{\link[=Kway]{Kway()}},
+\code{\link[=LRstats]{LRstats()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=mosaic.glmlist]{mosaic.glmlist()}}
 
-Other loglinear models: 
-\code{\link{assoc_graph}()},
-\code{\link{glmlist}()},
-\code{\link{joint}()},
-\code{\link{plot.assoc_graph}()},
-\code{\link{seq_loglm}()}
+Other loglinear models:
+\code{\link[=assoc_graph]{assoc_graph()}},
+\code{\link[=glmlist]{glmlist()}},
+\code{\link[=joint]{joint()}},
+\code{\link[=plot.assoc_graph]{plot.assoc_graph()}},
+\code{\link[=seq_loglm]{seq_loglm()}}
 }
 \concept{glmlist functions}
 \concept{loglinear models}
