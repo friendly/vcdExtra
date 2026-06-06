@@ -1,3 +1,8 @@
+## Version 0.9.6
+
+* Fix @aliases for roxygen 8.0.0
+* Make some `color_table()` examples visible in documentation
+
 ## Version 0.9.5
 
 This is a major release of the package, completing work on a sizable collection of tidy tools
