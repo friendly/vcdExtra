@@ -2,7 +2,7 @@
 
 ## Version 0.9.5
 
-This is a major release of the package, completing work on a sizeable
+This is a major release of the package, completing work on a sizable
 collection of tidy tools for manipulating categorical data in various
 forms
 
