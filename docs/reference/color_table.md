@@ -278,26 +278,14 @@ on the returned object:
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
 # Basic usage with 2-way table - shade by residuals from independence
 data(HairEyeColor)
 HEC <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
 color_table(HEC)
+#> Shading based on residuals from model of independence,
+#>  X^2 = 138.29, df = 9, p = 2.325e-25 
 
-# Shade by frequencies instead (no message printed)
-color_table(HEC, shade = "freq")
 
-# 3-way table - using a formula to specify layout
-color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
+  
 
-# Display residual values in cells instead of frequencies
-color_table(HEC, values = "residuals")
-
-# From a data.frame in frequency form (2-way)
-hec_df <- as.data.frame(HEC)
-color_table(hec_df)
-
-# Save table as an image file
-color_table(HEC, filename = "hair_eye_table.png")
-} # }
 ```
