@@ -46,11 +46,20 @@ for retrospective studies, *Biometrics*, 32(3), 409-416.
 
 data(Fungicide)
 # loddsratio was moved to vcd; requires vcd_1.3-3+
-if (FALSE) { # \dontrun{
 fung.lor <- loddsratio(Fungicide, correct=TRUE)
 fung.lor
+#> log odds ratios for group and outcome by sex, strain 
+#> 
+#>    strain
+#> sex         1          2
+#>   M -1.584400 -0.8668107
+#>   F -1.426131 -0.8543105
 confint(fung.lor)
-} # }
+#>         2.5 %     97.5 %
+#> M:1 -2.966783 -0.2020162
+#> F:1 -3.142095  0.2898333
+#> M:2 -2.104615  0.3709934
+#> F:2 -2.847243  1.1386222
 
 # visualize odds ratios in fourfold plots
 cotabplot(Fungicide, panel=cotab_fourfold)

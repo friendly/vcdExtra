@@ -119,10 +119,12 @@ seq_mosaic(Titanic, type="mutual")
 
 
 
-# other panel functions and options: presently BUGGED
-if (FALSE) { # \dontrun{
+# other panel functions and options
 seq_mosaic(Titanic, type="mutual", panel=sieve,
    gp=shading_Friendly, labeling=labeling_values)
-} # }
+
+
+
+
 
 ```
