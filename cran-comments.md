@@ -8,17 +8,8 @@ There are no ERRORs or WARNINGs or NOTEs
 
 The use of `rgl` triggered harmless warnings on headless rhub machines. This was resolved
 by moving `rgl` from "Depends:" to "Suggests:" because it was only used in one function
-and was suitably trapped there. See below.
+and was suitably trapped there. 
 
-### Previous rhub WARNING (resolved)
-An earlier rhub run produced:
-  `checking whether package 'vcdExtra' can be installed ... WARNING`
-  `Warning: 'rgl.init' failed, will use the null device.`
-
-This was caused by `rgl` being listed in `Imports`, which forced it to load
-(and attempt to initialise an OpenGL display) on headless CI runners. Fixed
-by moving `rgl` to `Suggests`, since `mosaic3d()` is the only function that
-uses it and already guards its use with `requireNamespace("rgl")`.
 
 ## Version 0.9.6
 
@@ -52,10 +43,10 @@ for manipulating categorical data in various forms
  [5] "gnm"                "heplots"            "iarm"               "jmv"               
  [9] "junco"              "public.ctn0094data"
  
-> revdepcheck::revdep_check(num_workers = 4)
+* `revdepcheck::revdep_check()` could not be run due to an incompatibility between
+`revdepcheck` 1.0.0.9002 and `gmailr` 3.0.0 (`mime` is no longer exported by
+`gmailr`). The 10 reverse dependencies were checked manually using
 
-We checked 9 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
-
- * We saw 0 new problems
- * We failed to check 0 packages
+* `devtools::check_reverse_dependencies()` / `rcmdcheck::rcmdcheck()`, and no new
+problems were introduced by this release.
 
