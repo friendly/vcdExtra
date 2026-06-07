@@ -128,10 +128,15 @@ Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="exter
 <span class="r-plt img"><img src="Toxaemia-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># log odds ratios for urea and hypertension, by class and smoke</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">LOR</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/loddsratio.html" class="external-link">loddsratio</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/aperm.html" class="external-link">aperm</a></span><span class="op">(</span><span class="va">tox.tab</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">LOR</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> log odds ratios for urea and hyper by smoke, class </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> smoke         1          2         3         4        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0    1.526791  1.4619602 1.5805648 1.3135126 1.003623</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1-19 1.071024  0.8640134 1.3736951 1.3426023 1.034754</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   20+  2.448539 -1.1457908 0.7442513 0.8846854 2.018727</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
