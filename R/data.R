@@ -2848,10 +2848,8 @@ NULL
 #' mosaic(~hyper + urea, data=tox.tab, shade=TRUE)
 #'
 #' # log odds ratios for urea and hypertension, by class and smoke
-#' \dontrun{
 #' LOR <-loddsratio(aperm(tox.tab))
 #' LOR
-#' }
 #'
 #'
 NULL
