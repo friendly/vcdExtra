@@ -5,7 +5,7 @@
 #' If two variables are not connected by an edge, they are conditionally independent
 #' given the other variables.
 #'
-#' @param x An object specifying the model. Can be:
+#' @param x An object specifying the model. This can be:
 #'   \itemize{
 #'     \item A \code{list} of character vectors (a margin/generating class list, as produced by
 #'           \code{\link{joint}}, \code{\link{conditional}}, etc.)
