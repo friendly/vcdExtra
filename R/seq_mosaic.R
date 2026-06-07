@@ -50,11 +50,9 @@
 #' seq_mosaic(Titanic, type="condit")
 #' seq_mosaic(Titanic, type="mutual")
 #'
-#' # other panel functions and options: presently BUGGED
-#' \dontrun{
+#' # other panel functions and options
 #' seq_mosaic(Titanic, type="mutual", panel=sieve,
 #'    gp=shading_Friendly, labeling=labeling_values)
-#' }
 #'
 #'
 #' @export seq_mosaic

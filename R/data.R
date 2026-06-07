@@ -1286,11 +1286,9 @@ NULL
 #'
 #' data(Fungicide)
 #' # loddsratio was moved to vcd; requires vcd_1.3-3+
-#' \dontrun{
 #' fung.lor <- loddsratio(Fungicide, correct=TRUE)
 #' fung.lor
 #' confint(fung.lor)
-#' }
 #'
 #' # visualize odds ratios in fourfold plots
 #' cotabplot(Fungicide, panel=cotab_fourfold)
