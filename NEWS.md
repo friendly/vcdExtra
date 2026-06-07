@@ -1,5 +1,7 @@
 ## Version 0.9.6
 
+This is a cumulative release of a number of small enhancements to the package since the last CRAN version
+
 * Fix @aliases for roxygen 8.0.0
 * Make some `color_table()` examples visible in documentation
 

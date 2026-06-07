@@ -1,7 +1,6 @@
 ## Test environments
 * local Windows 10, R version 4.5.2 (2025-10-31 ucrt)
-* win-builder R version 4.5.2 (2025-10-31 ucrt)
-* win-builder R Under development (unstable) (2026-03-16 r89642 ucrt)
+* win-builder R Under development (unstable) (2026-06-06 r90114 ucrt)
 * R-hub: linux (R-devel), windows (R-devel), macos-arm64 (R-devel)
 
 ## R CMD check results
@@ -21,23 +20,30 @@ This was caused by `rgl` being listed in `Imports`, which forced it to load
 by moving `rgl` to `Suggests`, since `mosaic3d()` is the only function that
 uses it and already guards its use with `requireNamespace("rgl")`.
 
-## Version 0.9.3
+## Version 0.9.6
 
-This bundle brings quite a few enhancements, improvements in documentation and bug fixes
+This is a cumulative release of a number of small enhancements to the package since the last CRAN version
 
-* Added tidy conversion functions: `as_array()`, `as_caseform()`, `as_freqform`, `as_table()` PR #22 [Thx: Gavin Klorfine]
-* Fixed bug in `mcaplot()` coming from `ca::cacoords(): "non-conformable arguments"
-* Expanded documentation of `color_table()` to give better advice on how to use this in Rmd or qmd documents.
-* Added: `knit_include()` as a general solution to using `gt`, `DT`, `plotly`, ... outputs in non-HTML documents.
-* Added `pairs_diagonal_mosaic()`, overriding the {vcd} version to give more flexibility in printing the cell values in the diagonal cells. PR #24 [Thx: Gavin Klorfine]
+* Fix @aliases for roxygen 8.0.0
+* Make some `color_table()` examples visible in documentation
 
-## Version 0.9.2
+## Version 0.9.5
 
-* Added a `label = c("name", "formula")` argument to `LRstats()` to provide for labeling models by their model formulas in the output using `get_models()`.
-* Handle list (...) of models with formula labels more flexibly in `LRstats()`
-* Document `get_model()` and `get_models()` together
-* Added `assoc_graph() and a plot method for association graphs of loglinear models.
-* Added edge weights to `assoc_graph()` representing partial G^2 or Cramer's V
+This is a major release of the package, completing work on a sizable collection of tidy tools
+for manipulating categorical data in various forms
+
+* Added a general `collapse_levels()` function that can collapse levels of variables belonging to data sets of any form. [GK]
+* Added as_matrix() to the set of as_*() conversion functions. [GK]
+* Added `prop` arguments to applicable as_*() conversion functions to easily convert counts to proportions (either relative 
+  to the grand total count or to specified margins). [GK]
+* Added vignette on tidy operations (convert, collapsing) [GK]
+* Gavin Klorfine (@gklorfine) becomes a package author
+
+
+## Version 0.9.4
+
+* suppressWarnings() from `ca:mcja()` in `mcaplot()` examples
+
 
 # reverse dependencies
 
