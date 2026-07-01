@@ -40,7 +40,7 @@ dev_version <- getNamespaceVersion("vcdExtra")
 
 <!-- badges: end -->
 
-# vcdExtra <img src="man/figures/logo.png" style="float:right; height:200px;" />
+# vcdExtra <img src="man/figures/logo.png" align="right" height="200px" />
 ## Extensions and additions to vcd: Visualizing Categorical Data 
 
 <!-- Version 0.8-6 -->
