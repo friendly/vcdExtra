@@ -16,7 +16,6 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![Follow on
 Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285FF&label=Follow%20on&color=0285FF)](https://bsky.app/profile/datavisFriendly.bsky.social)
-<img src="man/figures/logo.png" align="right" height="200px" />
 
 <!--
 [![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
@@ -24,9 +23,11 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 
 <!-- badges: end -->
 
-# vcdExtra
+# vcdExtra <img src="man/figures/logo.png" align="right" height="200px" /><br><sub>Extensions and additions to vcd: Visualizing Categorical Data</sub>
 
+<!--
 ## Extensions and additions to vcd: Visualizing Categorical Data
+-->
 
 <!-- Version 0.8-6 -->
 
