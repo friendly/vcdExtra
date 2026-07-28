@@ -24,7 +24,7 @@ assoc_graph(x, ...)
 \method{print}{assoc_graph}(x, ...)
 }
 \arguments{
-\item{x}{An object specifying the model. Can be:
+\item{x}{An object specifying the model. This can be:
 \itemize{
 \item A \code{list} of character vectors (a margin/generating class list, as produced by
 \code{\link{joint}}, \code{\link{conditional}}, etc.)

@@ -163,6 +163,17 @@ by \code{mosaic.glm()}.
 A message is printed showing the chi-squared statistic, degrees of freedom,
 and p-value for this test.
 
+\strong{Multi-variable row and column labels}
+
+When \code{formula} specifies more than one variable on either side, \code{color_table()}
+avoids concatenated labels like \code{"Black_Male"}. Multiple column variables
+(e.g. \code{formula = Eye ~ Hair + Sex}) are shown using \code{\link[gt:tab_spanner]{gt::tab_spanner()}}
+headings that group columns under their outer variable(s). Multiple row
+variables (e.g. \code{formula = Hair + Sex ~ Eye}) are shown as separate stub
+columns, one per row variable, using \code{gt}'s multi-column stub support
+(\code{rowname_col} accepting a vector of column names), with repeated values
+left blank. The two can be combined in the same table.
+
 \strong{Contrast shading}
 
 For cells with dark background colors, black text can be difficult to read.
@@ -241,6 +252,15 @@ color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
 
 # Display residual values in cells instead of frequencies
 color_table(HEC, values = "residuals")
+
+# Multiple row variables - shown as separate stub columns ("Class", "Sex")
+# instead of concatenated labels like "1st_Male"
+data(Titanic)
+color_table(Titanic, formula = Class + Sex ~ Survived)
+
+# Multiple row AND column variables together: row-variable stub columns
+# combined with column spanners
+color_table(Titanic, formula = Class + Sex ~ Age + Survived, legend = TRUE)
 
 \dontrun{
 # From a data.frame in frequency form (2-way)
