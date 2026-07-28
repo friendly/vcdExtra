@@ -47,22 +47,16 @@
 #         logic below, using the `row_vars` attribute (attached by the S3 methods but
 #         previously unused).
 #
-# 🚩TODO: [HARD] `formula`'s row/col assignment is NOT reliably `row_vars ~ col_vars` as
-#         documented -- it depends on `vcd::structable()`'s own splitting logic, which appears
-#         to rebalance which variables end up as rows vs columns rather than strictly honoring
-#         which side of `~` they're on. `stats::ftable()`, by contrast, always keeps LHS
-#         variables as rows. For "balanced" formulas (equal variable counts on each side, e.g.
-#         `Class + Sex ~ Age + Survived` on Titanic) structable and ftable agree, matching the
-#         documented convention. But for unbalanced formulas (e.g.
-#         `Class + Sex + Age ~ Survived`), structable puts only 2 of the 3 LHS variables in the
-#         rows (Class, Age) and moves Sex to the columns alongside Survived, while ftable keeps
-#         all 3 LHS variables (Class, Sex, Age) as rows. See the ftable/structable comparison at
-#         the bottom of dev/color_table/test-multi-col-stubs.R for the concrete example and
-#         actual output of both. Needs investigation: either make color_table() assign rows/cols
-#         by formula side directly (matching ftable, ignoring structable's rebalancing) or
-#         clearly document structable's actual behavior so users can predict the output. Until
-#         resolved, don't assume `formula = lhs ~ rhs` reliably puts `lhs` variables in the rows
-#         once there are 3+ variables split unevenly across `~`.
+# ✔️DONE: Resolved the apparent `formula` row/col inconsistency flagged earlier. The convention
+#         is `col_vars ~ row_vars` (LHS = columns, RHS = rows) -- the opposite of what was
+#         originally documented. Systematically compared `vcd::structable()` vs `stats::ftable()`
+#         across every 2-vs-1 split of `HairEyeColor` and every 2-vs-2 and 3-vs-1 split of
+#         `Titanic` (see dev/color_table/formula-row-col-comparison.R): when both are called the
+#         same way `color_table()` calls them (`formula` first, `data =` named), they agree in
+#         every case on `col_vars ~ row_vars`. The earlier-seen disagreement (in
+#         dev/color_table/test-multi-col-stubs.R) came from an ad-hoc comparison call with `data`
+#         positional before `formula` -- not a real inconsistency between the two functions.
+#         Roxygen docs (`@param formula`, `@details`, `@examples`) updated to match.
 #
 # ✔️TODO: Column spanner headings: When two or more variables are in the columns, the output
 #         is confusing and ugly. Examples:
@@ -101,14 +95,19 @@
 #'
 #' **Multi-variable row and column labels**
 #'
-#' When `formula` specifies more than one variable on either side, `color_table()`
-#' avoids concatenated labels like `"Black_Male"`. Multiple column variables
-#' (e.g. `formula = Eye ~ Hair + Sex`) are shown using [gt::tab_spanner()]
-#' headings that group columns under their outer variable(s). Multiple row
-#' variables (e.g. `formula = Hair + Sex ~ Eye`) are shown as separate stub
-#' columns, one per row variable, using `gt`'s multi-column stub support
-#' (`rowname_col` accepting a vector of column names), with repeated values
-#' left blank. The two can be combined in the same table.
+#' `formula` follows the `col_vars ~ row_vars` convention used by
+#' [vcd::structable()] and [stats::ftable()] (confirmed to agree between the
+#' two across many row/col splits of `HairEyeColor` and `Titanic` -- see
+#' `dev/color_table/formula-row-col-comparison.R`). When `formula` specifies
+#' more than one variable on either side, `color_table()` avoids concatenated
+#' labels like `"Black_Male"`. Multiple column variables (on the left of `~`,
+#' e.g. `formula = Class + Sex + Age ~ Survived`) are shown using
+#' [gt::tab_spanner()] headings that group columns under their outer
+#' variable(s). Multiple row variables (on the right of `~`, e.g.
+#' `formula = Survived ~ Class + Sex`) are shown as separate stub columns, one
+#' per row variable, using `gt`'s multi-column stub support (`rowname_col`
+#' accepting a vector of column names), with repeated values left blank. The
+#' two can be combined in the same table.
 #'
 #' **Contrast shading**
 #'
@@ -170,19 +169,21 @@
 #' # Shade by frequencies instead (no message printed)
 #' color_table(HEC, shade = "freq")
 #'
-#' # 3-way table - using a formula to specify layout
+#' # 3-way table - using a formula to specify layout (col_vars ~ row_vars):
+#' # Eye is the single column variable, Hair and Sex are row variables shown
+#' # as separate stub columns
 #' color_table(HairEyeColor, formula = Eye ~ Hair + Sex)
 #'
 #' # Display residual values in cells instead of frequencies
 #' color_table(HEC, values = "residuals")
 #'
-#' # Multiple row variables - shown as separate stub columns ("Class", "Sex")
-#' # instead of concatenated labels like "1st_Male"
+#' # Multiple column variables - shown using nested spanner headings instead
+#' # of concatenated column labels
 #' data(Titanic)
 #' color_table(Titanic, formula = Class + Sex ~ Survived)
 #'
-#' # Multiple row AND column variables together: row-variable stub columns
-#' # combined with column spanners
+#' # Multiple row AND column variables together: column spanners (Class, Sex)
+#' # combined with row-variable stub columns (Age, Survived)
 #' color_table(Titanic, formula = Class + Sex ~ Age + Survived, legend = TRUE)
 #'
 #' \dontrun{
@@ -203,7 +204,7 @@ color_table <- function(x, ...) {
 }
 
 #' @describeIn color_table Method for table objects (including result of xtabs)
-#' @param formula Formula specifying a `row_vars ~ col_vars` layout (for multi-way tables) to
+#' @param formula Formula specifying a `col_vars ~ row_vars` layout (for multi-way tables) to
 #'        make them "flat" as defined for `vcd::structable()` and `stats::ftable()`.
 #' @param values What values to display in cells: `"freq"` for observed frequencies (default),
 #'   or `"residuals"` to display the residual values. When `values = "residuals"`, margins

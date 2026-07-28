@@ -68,15 +68,33 @@ not which ones deviate from independence.
 color_table(HEC, shade = "freq", title = "Hair \u00d7 Eye Color (frequency shading)")
 ```
 
-For a three-way table, a `formula` argument controls the layout: variables on
-the left of `~` become row groups, those on the right become column spanners.
-The legend note reproduces the chi-squared summary printed to the console.
+For a three-way table, a `formula` argument controls the layout, following the
+`col_vars ~ row_vars` convention used by `vcd::structable()` and
+`stats::ftable()`: variable(s) on the **left** of `~` become the column
+category (or nested column spanners, if there's more than one), and
+variable(s) on the **right** become the row category (or separate row-label
+columns, if there's more than one). The legend note reproduces the
+chi-squared summary printed to the console.
+
+Here `Eye` is the single column variable, and `Hair` and `Sex` are two row
+variables \u2014 shown as two separate stub columns instead of concatenated labels
+like "Black_Male":
 
 ```{r html-3way}
 color_table(HairEyeColor,
             formula = Eye ~ Hair + Sex,
             legend  = TRUE,
             title   = "Hair \u00d7 Eye \u00d7 Sex (complete independence residuals)")
+```
+
+Swapping the formula around puts `Hair` and `Sex` on the columns instead,
+shown as nested spanner headings, with `Eye` as the single row variable:
+
+```{r html-3way-spanner}
+color_table(HairEyeColor,
+            formula = Hair + Sex ~ Eye,
+            legend  = TRUE,
+            title   = "Hair \u00d7 Sex as column spanners, Eye as rows")
 ```
 
 ---
@@ -140,10 +158,11 @@ color_table(HEC,
 
 ### Multi-way table: PreSex data
 
-The `PreSex` data cross-classifies four variables. Here `MaritalStatus` is
-placed on rows and the two sexual-attitude variables form nested column spanners,
-making the interaction structure easy to read. The legend note records the
-goodness-of-fit for the complete-independence model.
+The `PreSex` data cross-classifies four variables. Here `MaritalStatus` is the
+single column variable, and the two sexual-attitude variables (`PremaritalSex`,
+`ExtramaritalSex`) are row variables, shown as separate stub columns rather
+than concatenated labels — making the interaction structure easy to read. The
+legend note records the goodness-of-fit for the complete-independence model.
 
 ```{r presex}
 data(PreSex, package = "vcd")
@@ -152,4 +171,19 @@ color_table(PreSex,
             legend  = TRUE,
             title   = "Pre/Extra-marital Sex by Marital Status") |>
   knit_include(width = 520, height = 300)
+```
+
+### Row and column variables together: Titanic data
+
+Column spanners and row-label columns can appear in the same table. Here
+`Class` and `Sex` (left of `~`) form nested column spanners, while `Age` and
+`Survived` (right of `~`) are shown as two separate row-stub columns:
+
+```{r titanic-combined}
+data(Titanic)
+color_table(Titanic,
+            formula = Class + Sex ~ Age + Survived,
+            legend  = TRUE,
+            title   = "Titanic: Class × Sex as column spanners, Age × Survived as row stubs") |>
+  knit_include(width = 620, height = 380)
 ```
