@@ -16,9 +16,9 @@ The format is:
 ## Source
 
 This data set was taken from
-[`housetasks`](https://rdrr.io/pkg/factoextra/man/housetasks.html), a 13
-x 4 data.frame. In this table version, the rows and columns were sorted
-alphabetically (and a typo was corrected).
+[`housetasks`](https://rpkgs.datanovia.com/factoextra/reference/housetasks.html),
+a 13 x 4 data.frame. In this table version, the rows and columns were
+sorted alphabetically (and a typo was corrected).
 
 ## Examples
 

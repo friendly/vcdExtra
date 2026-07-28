@@ -31,13 +31,13 @@ Source:
 [`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/master/DESCRIPTION)
 
 Friendly M, Klorfine G (2026). *vcdExtra: 'vcd' Extensions and
-Additions*. R package version 0.9.6,
+Additions*. R package version 0.9.7,
 <https://friendly.github.io/vcdExtra/>.
 
     @Manual{,
       title = {vcdExtra: 'vcd' Extensions and Additions},
       author = {Michael Friendly and Gavin Klorfine},
       year = {2026},
-      note = {R package version 0.9.6},
+      note = {R package version 0.9.7},
       url = {https://friendly.github.io/vcdExtra/},
     }

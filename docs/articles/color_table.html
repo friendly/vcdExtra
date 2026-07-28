@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2026-06-07</h4>
+            <h4 data-toc-skip class="date">2026-07-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/articles/color_table.Rmd" class="external-link"><code>vignettes/articles/color_table.Rmd</code></a></small>
       <div class="d-none name"><code>color_table.Rmd</code></div>
@@ -1144,9 +1144,17 @@ most common, not which ones deviate from independence.</p>
 </table>
 </div>
 <p>For a three-way table, a <code>formula</code> argument controls the
-layout: variables on the left of <code>~</code> become row groups, those
-on the right become column spanners. The legend note reproduces the
-chi-squared summary printed to the console.</p>
+layout, following the <code>col_vars ~ row_vars</code> convention used
+by <code><a href="https://rdrr.io/pkg/vcd/man/structable.html" class="external-link">vcd::structable()</a></code> and <code><a href="https://rdrr.io/r/stats/ftable.html" class="external-link">stats::ftable()</a></code>:
+variable(s) on the <strong>left</strong> of <code>~</code> become the
+column category (or nested column spanners, if there’s more than one),
+and variable(s) on the <strong>right</strong> become the row category
+(or separate row-label columns, if there’s more than one). The legend
+note reproduces the chi-squared summary printed to the console.</p>
+<p>Here <code>Eye</code> is the single column variable, and
+<code>Hair</code> and <code>Sex</code> are two row variables 014 shown
+as two separate stub columns instead of concatenated labels like
+“Black_Male”:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>,</span>
 <span>            formula <span class="op">=</span> <span class="va">Eye</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span>,</span>
@@ -1606,10 +1614,10 @@ chi-squared summary printed to the console.</p>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Hair × Eye × Sex (complete independence residuals)</td>
+<td colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Hair × Eye × Sex (complete independence residuals)</td>
     </tr>
 <tr class="gt_col_headings gt_spanner_row">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="a::stub"></th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="2" scope="colgroup" id="a::stub"></th>
       <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4" scope="colgroup" id="Eye">
         <div class="gt_column_spanner">Eye</div>
       </th>
@@ -1624,7 +1632,8 @@ chi-squared summary printed to the console.</p>
 </thead>
 <tbody class="gt_table_body">
 <tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Black_Male</th>
+<th id="stub_1_1" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">Black</th>
+<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Male</th>
 <td headers="stub_1_1 Brown" class="gt_row gt_center" style="background-color: #B5C2E0; color: #000000;">32</td>
 <td headers="stub_1_1 Blue" class="gt_row gt_center" style="background-color: #F6D0CC; color: #000000;">11</td>
 <td headers="stub_1_1 Hazel" class="gt_row gt_center" style="background-color: #EEF0F8; color: #000000;">10</td>
@@ -1632,15 +1641,16 @@ chi-squared summary printed to the console.</p>
 <td headers="stub_1_1 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 56</td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Black_Female</th>
-<td headers="stub_1_2 Brown" class="gt_row gt_center" style="background-color: #B0BEDE; color: #000000;">36</td>
-<td headers="stub_1_2 Blue" class="gt_row gt_center" style="background-color: #F0BAB5; color: #000000;"> 9</td>
-<td headers="stub_1_2 Hazel" class="gt_row gt_center" style="background-color: #F9DBD8; color: #000000;"> 5</td>
-<td headers="stub_1_2 Green" class="gt_row gt_center" style="background-color: #F7D2CE; color: #000000;"> 2</td>
-<td headers="stub_1_2 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 52</td>
+<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Female</th>
+<td headers="stub_1_2 stub_2" class="gt_row gt_center" style="background-color: #B0BEDE; color: #000000;">36</td>
+<td headers="stub_1_2 Brown" class="gt_row gt_center" style="background-color: #F0BAB5; color: #000000;"> 9</td>
+<td headers="stub_1_2 Blue" class="gt_row gt_center" style="background-color: #F9DBD8; color: #000000;"> 5</td>
+<td headers="stub_1_2 Hazel" class="gt_row gt_center" style="background-color: #F7D2CE; color: #000000;"> 2</td>
+<td headers="stub_1_2 Green" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 52</td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Brown_Male</th>
+<th id="stub_1_3" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">Brown</th>
+<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Male</th>
 <td headers="stub_1_3 Brown" class="gt_row gt_center" style="background-color: #F5F7FB; color: #000000;">53</td>
 <td headers="stub_1_3 Blue" class="gt_row gt_center" style="background-color: #FBFCFD; color: #000000;">50</td>
 <td headers="stub_1_3 Hazel" class="gt_row gt_center" style="background-color: #EBEEF6; color: #000000;">25</td>
@@ -1648,15 +1658,16 @@ chi-squared summary printed to the console.</p>
 <td headers="stub_1_3 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">143</td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Brown_Female</th>
-<td headers="stub_1_4 Brown" class="gt_row gt_center" style="background-color: #DFE4F2; color: #000000;">66</td>
-<td headers="stub_1_4 Blue" class="gt_row gt_center" style="background-color: #EEB3AE; color: #000000;">34</td>
-<td headers="stub_1_4 Hazel" class="gt_row gt_center" style="background-color: #E5E9F4; color: #000000;">29</td>
-<td headers="stub_1_4 Green" class="gt_row gt_center" style="background-color: #FDEFEE; color: #000000;">14</td>
-<td headers="stub_1_4 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">143</td>
+<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Female</th>
+<td headers="stub_1_4 stub_2" class="gt_row gt_center" style="background-color: #DFE4F2; color: #000000;">66</td>
+<td headers="stub_1_4 Brown" class="gt_row gt_center" style="background-color: #EEB3AE; color: #000000;">34</td>
+<td headers="stub_1_4 Blue" class="gt_row gt_center" style="background-color: #E5E9F4; color: #000000;">29</td>
+<td headers="stub_1_4 Hazel" class="gt_row gt_center" style="background-color: #FDEFEE; color: #000000;">14</td>
+<td headers="stub_1_4 Green" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">143</td>
 </tr>
 <tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Red_Male</th>
+<th id="stub_1_5" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">Red</th>
+<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Male</th>
 <td headers="stub_1_5 Brown" class="gt_row gt_center" style="background-color: #FCECEB; color: #000000;">10</td>
 <td headers="stub_1_5 Blue" class="gt_row gt_center" style="background-color: #FCEEED; color: #000000;">10</td>
 <td headers="stub_1_5 Hazel" class="gt_row gt_center" style="background-color: #ECEFF7; color: #000000;"> 7</td>
@@ -1664,15 +1675,16 @@ chi-squared summary printed to the console.</p>
 <td headers="stub_1_5 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 34</td>
 </tr>
 <tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Red_Female</th>
-<td headers="stub_1_6 Brown" class="gt_row gt_center" style="background-color: #F2F4F9; color: #000000;">16</td>
-<td headers="stub_1_6 Blue" class="gt_row gt_center" style="background-color: #F6CFCB; color: #000000;"> 7</td>
-<td headers="stub_1_6 Hazel" class="gt_row gt_center" style="background-color: #F4F6FA; color: #000000;"> 7</td>
-<td headers="stub_1_6 Green" class="gt_row gt_center" style="background-color: #DBE1F0; color: #000000;"> 7</td>
-<td headers="stub_1_6 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 37</td>
+<th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Female</th>
+<td headers="stub_1_6 stub_2" class="gt_row gt_center" style="background-color: #F2F4F9; color: #000000;">16</td>
+<td headers="stub_1_6 Brown" class="gt_row gt_center" style="background-color: #F6CFCB; color: #000000;"> 7</td>
+<td headers="stub_1_6 Blue" class="gt_row gt_center" style="background-color: #F4F6FA; color: #000000;"> 7</td>
+<td headers="stub_1_6 Hazel" class="gt_row gt_center" style="background-color: #DBE1F0; color: #000000;"> 7</td>
+<td headers="stub_1_6 Green" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 37</td>
 </tr>
 <tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Blond_Male</th>
+<th id="stub_1_7" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">Blond</th>
+<th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Male</th>
 <td headers="stub_1_7 Brown" class="gt_row gt_center" style="background-color: #E3928C; color: #000000;"> 3</td>
 <td headers="stub_1_7 Blue" class="gt_row gt_center" style="background-color: #D4DBED; color: #000000;">30</td>
 <td headers="stub_1_7 Hazel" class="gt_row gt_center" style="background-color: #F8D8D5; color: #000000;"> 5</td>
@@ -1680,15 +1692,16 @@ chi-squared summary printed to the console.</p>
 <td headers="stub_1_7 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 46</td>
 </tr>
 <tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Blond_Female</th>
-<td headers="stub_1_8 Brown" class="gt_row gt_center" style="background-color: #E28F89; color: #000000;"> 4</td>
-<td headers="stub_1_8 Blue" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;">64</td>
-<td headers="stub_1_8 Hazel" class="gt_row gt_center" style="background-color: #F6D1CD; color: #000000;"> 5</td>
-<td headers="stub_1_8 Green" class="gt_row gt_center" style="background-color: #F8F9FC; color: #000000;"> 8</td>
-<td headers="stub_1_8 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 81</td>
+<th id="stub_1_8" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Female</th>
+<td headers="stub_1_8 stub_2" class="gt_row gt_center" style="background-color: #E28F89; color: #000000;"> 4</td>
+<td headers="stub_1_8 Brown" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;">64</td>
+<td headers="stub_1_8 Blue" class="gt_row gt_center" style="background-color: #F6D1CD; color: #000000;"> 5</td>
+<td headers="stub_1_8 Hazel" class="gt_row gt_center" style="background-color: #F8F9FC; color: #000000;"> 8</td>
+<td headers="stub_1_8 Green" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 81</td>
 </tr>
 <tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;">Total</th>
+<th id="stub_1_9" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;; border-right-width: 1px">Total</th>
+<th id="stub_1_9" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;"></th>
 <td headers="stub_1_9 Brown" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">220</td>
 <td headers="stub_1_9 Blue" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">215</td>
 <td headers="stub_1_9 Hazel" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">93</td>
@@ -1697,46 +1710,20 @@ chi-squared summary printed to the console.</p>
 </tr>
 </tbody>
 <tfoot><tr class="gt_sourcenotes">
-<td class="gt_sourcenote" colspan="6">Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0</td>
+<td class="gt_sourcenote" colspan="7">Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0</td>
     </tr></tfoot>
 </table>
 </div>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="pdf-word-output-save-image-then-include-it">PDF / Word output — save image, then include it<a class="anchor" aria-label="anchor" href="#pdf-word-output-save-image-then-include-it"></a>
-</h2>
-<p>For non-HTML output, save the table as a PNG and include with
-<code><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">knitr::include_graphics()</a></code>. Supported formats:
-<code>.png</code>, <code>.pdf</code>, <code>.html</code>,
-<code>.rtf</code>, <code>.docx</code>. The <code>vwidth</code> and
-<code>vheight</code> arguments control the image viewport in pixels.</p>
-<p>The chunk below is shown for illustration only
-(<code>eval=FALSE</code>); the HTML approach above is sufficient when
-knitting to HTML.</p>
+<p>Swapping the formula around puts <code>Hair</code> and
+<code>Sex</code> on the columns instead, shown as nested spanner
+headings, with <code>Eye</code> as the single row variable:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
-<span>            title    <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color"</span>,</span>
-<span>            filename <span class="op">=</span> <span class="st">"color_table_hec.png"</span>,</span>
-<span>            vwidth   <span class="op">=</span> <span class="fl">520</span>,</span>
-<span>            vheight  <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"color_table_hec.png"</span><span class="op">)</span></span></code></pre></div>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="universal-output-knit_include">Universal output — <code>knit_include()</code><a class="anchor" aria-label="anchor" href="#universal-output-knit_include"></a>
-</h2>
-<p><code><a href="../reference/knit_include.html">knit_include()</a></code> eliminates the need to branch on output
-format by hand. Pipe the <code>gt</code> object through it and the same
-chunk works correctly whether you are knitting to HTML, PDF, or
-Word.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
-<span>            title <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Shading based on residuals from model of independence,</span></span>
-<span><span class="co">##  X^2 = 138.29, df = 9, p = 2.325e-25</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>,</span>
+<span>            formula <span class="op">=</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span> <span class="op">~</span> <span class="va">Eye</span>,</span>
+<span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            title   <span class="op">=</span> <span class="st">"Hair \u00d7 Sex as column spanners, Eye as rows"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
+<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0</span></span></code></pre>
 <div id="kgufivjubq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#kgufivjubq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -2189,89 +2176,143 @@ Word.</p>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Hair × Eye Color</td>
+<td colspan="10" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Hair × Sex as column spanners, Eye as rows</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th rowspan="1" colspan="1" scope="col"></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="8" scope="colgroup" id="Hair">
+        <div class="gt_column_spanner">Hair</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" scope="col"></th>
     </tr>
 <tr class="gt_col_headings gt_spanner_row">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="a::stub"></th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4" scope="colgroup" id="Eye">
-        <div class="gt_column_spanner">Eye</div>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_1">
+        <div class="gt_column_spanner">Black</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_2">
+        <div class="gt_column_spanner">Brown</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_3">
+        <div class="gt_column_spanner">Red</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_4">
+        <div class="gt_column_spanner">Blond</div>
       </th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-style: italic;" scope="col" id="Total">Total</th>
     </tr>
 <tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Brown">Brown</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Blue">Blue</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Hazel">Hazel</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Green">Green</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Black_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Black_Female">Female</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Brown_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Brown_Female">Female</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Red_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Red_Female">Female</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Blond_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Blond_Female">Female</th>
     </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Black</th>
-<td headers="stub_1_1 Brown" class="gt_row gt_center" style="background-color: #839CCB; color: #000000;"> 68</td>
-<td headers="stub_1_1 Blue" class="gt_row gt_center" style="background-color: #E9A29C; color: #000000;">20</td>
-<td headers="stub_1_1 Hazel" class="gt_row gt_center" style="background-color: #FDF0EF; color: #000000;">15</td>
-<td headers="stub_1_1 Green" class="gt_row gt_center" style="background-color: #F3C3BF; color: #000000;"> 5</td>
-<td headers="stub_1_1 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">108</td>
+<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Brown</th>
+<td headers="stub_1_1 Black_Male" class="gt_row gt_center" style="background-color: #B5C2E0; color: #000000;">32</td>
+<td headers="stub_1_1 Black_Female" class="gt_row gt_center" style="background-color: #B0BEDE; color: #000000;">36</td>
+<td headers="stub_1_1 Brown_Male" class="gt_row gt_center" style="background-color: #F5F7FB; color: #000000;">53</td>
+<td headers="stub_1_1 Brown_Female" class="gt_row gt_center" style="background-color: #DFE4F2; color: #000000;">66</td>
+<td headers="stub_1_1 Red_Male" class="gt_row gt_center" style="background-color: #FCECEB; color: #000000;">10</td>
+<td headers="stub_1_1 Red_Female" class="gt_row gt_center" style="background-color: #F2F4F9; color: #000000;">16</td>
+<td headers="stub_1_1 Blond_Male" class="gt_row gt_center" style="background-color: #E3928C; color: #000000;"> 3</td>
+<td headers="stub_1_1 Blond_Female" class="gt_row gt_center" style="background-color: #E28F89; color: #000000;"> 4</td>
+<td headers="stub_1_1 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">220</td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Brown</th>
-<td headers="stub_1_2 Brown" class="gt_row gt_center" style="background-color: #DDE2F1; color: #000000;">119</td>
-<td headers="stub_1_2 Blue" class="gt_row gt_center" style="background-color: #F3C4BF; color: #000000;">84</td>
-<td headers="stub_1_2 Hazel" class="gt_row gt_center" style="background-color: #D9E0EF; color: #000000;">54</td>
-<td headers="stub_1_2 Green" class="gt_row gt_center" style="background-color: #FDF4F3; color: #000000;">29</td>
-<td headers="stub_1_2 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">286</td>
+<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Blue</th>
+<td headers="stub_1_2 Black_Male" class="gt_row gt_center" style="background-color: #F6D0CC; color: #000000;">11</td>
+<td headers="stub_1_2 Black_Female" class="gt_row gt_center" style="background-color: #F0BAB5; color: #000000;"> 9</td>
+<td headers="stub_1_2 Brown_Male" class="gt_row gt_center" style="background-color: #FBFCFD; color: #000000;">50</td>
+<td headers="stub_1_2 Brown_Female" class="gt_row gt_center" style="background-color: #EEB3AE; color: #000000;">34</td>
+<td headers="stub_1_2 Red_Male" class="gt_row gt_center" style="background-color: #FCEEED; color: #000000;">10</td>
+<td headers="stub_1_2 Red_Female" class="gt_row gt_center" style="background-color: #F6CFCB; color: #000000;"> 7</td>
+<td headers="stub_1_2 Blond_Male" class="gt_row gt_center" style="background-color: #D4DBED; color: #000000;">30</td>
+<td headers="stub_1_2 Blond_Female" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;">64</td>
+<td headers="stub_1_2 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">215</td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Red</th>
-<td headers="stub_1_3 Brown" class="gt_row gt_center" style="background-color: #FFFDFC; color: #000000;"> 26</td>
-<td headers="stub_1_3 Blue" class="gt_row gt_center" style="background-color: #F5CAC6; color: #000000;">17</td>
-<td headers="stub_1_3 Hazel" class="gt_row gt_center" style="background-color: #E7EBF5; color: #000000;">14</td>
-<td headers="stub_1_3 Green" class="gt_row gt_center" style="background-color: #BFCAE4; color: #000000;">14</td>
-<td headers="stub_1_3 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 71</td>
+<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Hazel</th>
+<td headers="stub_1_3 Black_Male" class="gt_row gt_center" style="background-color: #EEF0F8; color: #000000;">10</td>
+<td headers="stub_1_3 Black_Female" class="gt_row gt_center" style="background-color: #F9DBD8; color: #000000;"> 5</td>
+<td headers="stub_1_3 Brown_Male" class="gt_row gt_center" style="background-color: #EBEEF6; color: #000000;">25</td>
+<td headers="stub_1_3 Brown_Female" class="gt_row gt_center" style="background-color: #E5E9F4; color: #000000;">29</td>
+<td headers="stub_1_3 Red_Male" class="gt_row gt_center" style="background-color: #ECEFF7; color: #000000;"> 7</td>
+<td headers="stub_1_3 Red_Female" class="gt_row gt_center" style="background-color: #F4F6FA; color: #000000;"> 7</td>
+<td headers="stub_1_3 Blond_Male" class="gt_row gt_center" style="background-color: #F8D8D5; color: #000000;"> 5</td>
+<td headers="stub_1_3 Blond_Female" class="gt_row gt_center" style="background-color: #F6D1CD; color: #000000;"> 5</td>
+<td headers="stub_1_3 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 93</td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Blond</th>
-<td headers="stub_1_4 Brown" class="gt_row gt_center" style="background-color: #C54B4B; color: #FFFFFF;">  7</td>
-<td headers="stub_1_4 Blue" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;">94</td>
-<td headers="stub_1_4 Hazel" class="gt_row gt_center" style="background-color: #F1BBB6; color: #000000;">10</td>
-<td headers="stub_1_4 Green" class="gt_row gt_center" style="background-color: #EEF1F8; color: #000000;">16</td>
-<td headers="stub_1_4 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">127</td>
+<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Green</th>
+<td headers="stub_1_4 Black_Male" class="gt_row gt_center" style="background-color: #FAE2E0; color: #000000;"> 3</td>
+<td headers="stub_1_4 Black_Female" class="gt_row gt_center" style="background-color: #F7D2CE; color: #000000;"> 2</td>
+<td headers="stub_1_4 Brown_Male" class="gt_row gt_center" style="background-color: #FCFDFE; color: #000000;">15</td>
+<td headers="stub_1_4 Brown_Female" class="gt_row gt_center" style="background-color: #FDEFEE; color: #000000;">14</td>
+<td headers="stub_1_4 Red_Male" class="gt_row gt_center" style="background-color: #D3DBED; color: #000000;"> 7</td>
+<td headers="stub_1_4 Red_Female" class="gt_row gt_center" style="background-color: #DBE1F0; color: #000000;"> 7</td>
+<td headers="stub_1_4 Blond_Male" class="gt_row gt_center" style="background-color: #F0F3F9; color: #000000;"> 8</td>
+<td headers="stub_1_4 Blond_Female" class="gt_row gt_center" style="background-color: #F8F9FC; color: #000000;"> 8</td>
+<td headers="stub_1_4 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 64</td>
 </tr>
 <tr>
 <th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;">Total</th>
-<td headers="stub_1_5 Brown" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">220</td>
-<td headers="stub_1_5 Blue" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">215</td>
-<td headers="stub_1_5 Hazel" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">93</td>
-<td headers="stub_1_5 Green" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">64</td>
+<td headers="stub_1_5 Black_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">56</td>
+<td headers="stub_1_5 Black_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">52</td>
+<td headers="stub_1_5 Brown_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">143</td>
+<td headers="stub_1_5 Brown_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">143</td>
+<td headers="stub_1_5 Red_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">34</td>
+<td headers="stub_1_5 Red_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">37</td>
+<td headers="stub_1_5 Blond_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">46</td>
+<td headers="stub_1_5 Blond_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">81</td>
 <td headers="stub_1_5 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">592</td>
 </tr>
 </tbody>
+<tfoot><tr class="gt_sourcenotes">
+<td class="gt_sourcenote" colspan="10">Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0</td>
+    </tr></tfoot>
 </table>
 </div>
-<p><code><a href="../reference/knit_include.html">knit_include()</a></code> also handles <code>htmlwidget</code>
-objects (plotly, DT, leaflet, …) the same way — HTML output gets the
-interactive widget, PDF/Word output gets a screenshot. Any other class
-is passed through unchanged, so it is safe to use in a pipe on any
-object.</p>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="more-examples">More examples<a class="anchor" aria-label="anchor" href="#more-examples"></a>
+<h2 id="pdf-word-output-save-image-then-include-it">PDF / Word output — save image, then include it<a class="anchor" aria-label="anchor" href="#pdf-word-output-save-image-then-include-it"></a>
 </h2>
-<div class="section level3">
-<h3 id="displaying-residual-values-in-cells">Displaying residual values in cells<a class="anchor" aria-label="anchor" href="#displaying-residual-values-in-cells"></a>
-</h3>
-<p>Setting <code>values = "residuals"</code> replaces the cell
-frequencies with the Pearson residual values themselves. This is useful
-when the exact magnitude of each deviation matters, not just its
-direction. Row and column totals are suppressed automatically because
-residuals do not have meaningful marginal sums.</p>
+<p>For non-HTML output, save the table as a PNG and include with
+<code><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">knitr::include_graphics()</a></code>. Supported formats:
+<code>.png</code>, <code>.pdf</code>, <code>.html</code>,
+<code>.rtf</code>, <code>.docx</code>. The <code>vwidth</code> and
+<code>vheight</code> arguments control the image viewport in pixels.</p>
+<p>The chunk below is shown for illustration only
+(<code>eval=FALSE</code>); the HTML approach above is sufficient when
+knitting to HTML.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
+<span>            title    <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color"</span>,</span>
+<span>            filename <span class="op">=</span> <span class="st">"color_table_hec.png"</span>,</span>
+<span>            vwidth   <span class="op">=</span> <span class="fl">520</span>,</span>
+<span>            vheight  <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"color_table_hec.png"</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="universal-output-knit_include">Universal output — <code>knit_include()</code><a class="anchor" aria-label="anchor" href="#universal-output-knit_include"></a>
+</h2>
+<p><code><a href="../reference/knit_include.html">knit_include()</a></code> eliminates the need to branch on output
+format by hand. Pipe the <code>gt</code> object through it and the same
+chunk works correctly whether you are knitting to HTML, PDF, or
+Word.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
-<span>            values <span class="op">=</span> <span class="st">"residuals"</span>,</span>
-<span>            title  <span class="op">=</span> <span class="st">"Hair \u00d7 Eye \u2014 Pearson residuals"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">280</span><span class="op">)</span></span></code></pre></div>
+<span>            title <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Shading based on residuals from model of independence,</span></span>
 <span><span class="co">##  X^2 = 138.29, df = 9, p = 2.325e-25</span></span></code></pre>
 <div id="txvafbsnay" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -2726,13 +2767,14 @@ residuals do not have meaningful marginal sums.</p>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Hair × Eye — Pearson residuals</td>
+<td colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Hair × Eye Color</td>
     </tr>
 <tr class="gt_col_headings gt_spanner_row">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="a::stub"></th>
       <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4" scope="colgroup" id="Eye">
         <div class="gt_column_spanner">Eye</div>
       </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-style: italic;" scope="col" id="Total">Total</th>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Brown">Brown</th>
@@ -2744,53 +2786,72 @@ residuals do not have meaningful marginal sums.</p>
 <tbody class="gt_table_body">
 <tr>
 <th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Black</th>
-<td headers="stub_1_1 Brown" class="gt_row gt_center" style="background-color: #839CCB; color: #000000;"> 4.40</td>
-<td headers="stub_1_1 Blue" class="gt_row gt_center" style="background-color: #E9A29C; color: #000000;">-3.07</td>
-<td headers="stub_1_1 Hazel" class="gt_row gt_center" style="background-color: #FDF0EF; color: #000000;">-0.48</td>
-<td headers="stub_1_1 Green" class="gt_row gt_center" style="background-color: #F3C3BF; color: #000000;">-1.95</td>
+<td headers="stub_1_1 Brown" class="gt_row gt_center" style="background-color: #839CCB; color: #000000;"> 68</td>
+<td headers="stub_1_1 Blue" class="gt_row gt_center" style="background-color: #E9A29C; color: #000000;">20</td>
+<td headers="stub_1_1 Hazel" class="gt_row gt_center" style="background-color: #FDF0EF; color: #000000;">15</td>
+<td headers="stub_1_1 Green" class="gt_row gt_center" style="background-color: #F3C3BF; color: #000000;"> 5</td>
+<td headers="stub_1_1 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">108</td>
 </tr>
 <tr>
 <th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Brown</th>
-<td headers="stub_1_2 Brown" class="gt_row gt_center" style="background-color: #DDE2F1; color: #000000;"> 1.23</td>
-<td headers="stub_1_2 Blue" class="gt_row gt_center" style="background-color: #F3C4BF; color: #000000;">-1.95</td>
-<td headers="stub_1_2 Hazel" class="gt_row gt_center" style="background-color: #D9E0EF; color: #000000;"> 1.35</td>
-<td headers="stub_1_2 Green" class="gt_row gt_center" style="background-color: #FDF4F3; color: #000000;">-0.35</td>
+<td headers="stub_1_2 Brown" class="gt_row gt_center" style="background-color: #DDE2F1; color: #000000;">119</td>
+<td headers="stub_1_2 Blue" class="gt_row gt_center" style="background-color: #F3C4BF; color: #000000;">84</td>
+<td headers="stub_1_2 Hazel" class="gt_row gt_center" style="background-color: #D9E0EF; color: #000000;">54</td>
+<td headers="stub_1_2 Green" class="gt_row gt_center" style="background-color: #FDF4F3; color: #000000;">29</td>
+<td headers="stub_1_2 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">286</td>
 </tr>
 <tr>
 <th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Red</th>
-<td headers="stub_1_3 Brown" class="gt_row gt_center" style="background-color: #FFFDFC; color: #000000;">-0.07</td>
-<td headers="stub_1_3 Blue" class="gt_row gt_center" style="background-color: #F5CAC6; color: #000000;">-1.73</td>
-<td headers="stub_1_3 Hazel" class="gt_row gt_center" style="background-color: #E7EBF5; color: #000000;"> 0.85</td>
-<td headers="stub_1_3 Green" class="gt_row gt_center" style="background-color: #BFCAE4; color: #000000;"> 2.28</td>
+<td headers="stub_1_3 Brown" class="gt_row gt_center" style="background-color: #FFFDFC; color: #000000;"> 26</td>
+<td headers="stub_1_3 Blue" class="gt_row gt_center" style="background-color: #F5CAC6; color: #000000;">17</td>
+<td headers="stub_1_3 Hazel" class="gt_row gt_center" style="background-color: #E7EBF5; color: #000000;">14</td>
+<td headers="stub_1_3 Green" class="gt_row gt_center" style="background-color: #BFCAE4; color: #000000;">14</td>
+<td headers="stub_1_3 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 71</td>
 </tr>
 <tr>
 <th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Blond</th>
-<td headers="stub_1_4 Brown" class="gt_row gt_center" style="background-color: #C54B4B; color: #FFFFFF;">-5.85</td>
-<td headers="stub_1_4 Blue" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;"> 7.05</td>
-<td headers="stub_1_4 Hazel" class="gt_row gt_center" style="background-color: #F1BBB6; color: #000000;">-2.23</td>
-<td headers="stub_1_4 Green" class="gt_row gt_center" style="background-color: #EEF1F8; color: #000000;"> 0.61</td>
+<td headers="stub_1_4 Brown" class="gt_row gt_center" style="background-color: #C54B4B; color: #FFFFFF;">  7</td>
+<td headers="stub_1_4 Blue" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;">94</td>
+<td headers="stub_1_4 Hazel" class="gt_row gt_center" style="background-color: #F1BBB6; color: #000000;">10</td>
+<td headers="stub_1_4 Green" class="gt_row gt_center" style="background-color: #EEF1F8; color: #000000;">16</td>
+<td headers="stub_1_4 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">127</td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;">Total</th>
+<td headers="stub_1_5 Brown" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">220</td>
+<td headers="stub_1_5 Blue" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">215</td>
+<td headers="stub_1_5 Hazel" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">93</td>
+<td headers="stub_1_5 Green" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">64</td>
+<td headers="stub_1_5 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">592</td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><code><a href="../reference/knit_include.html">knit_include()</a></code> also handles <code>htmlwidget</code>
+objects (plotly, DT, leaflet, …) the same way — HTML output gets the
+interactive widget, PDF/Word output gets a screenshot. Any other class
+is passed through unchanged, so it is safe to use in a pipe on any
+object.</p>
+<hr>
 </div>
+<div class="section level2">
+<h2 id="more-examples">More examples<a class="anchor" aria-label="anchor" href="#more-examples"></a>
+</h2>
 <div class="section level3">
-<h3 id="multi-way-table-presex-data">Multi-way table: PreSex data<a class="anchor" aria-label="anchor" href="#multi-way-table-presex-data"></a>
+<h3 id="displaying-residual-values-in-cells">Displaying residual values in cells<a class="anchor" aria-label="anchor" href="#displaying-residual-values-in-cells"></a>
 </h3>
-<p>The <code>PreSex</code> data cross-classifies four variables. Here
-<code>MaritalStatus</code> is placed on rows and the two sexual-attitude
-variables form nested column spanners, making the interaction structure
-easy to read. The legend note records the goodness-of-fit for the
-complete-independence model.</p>
+<p>Setting <code>values = "residuals"</code> replaces the cell
+frequencies with the Pearson residual values themselves. This is useful
+when the exact magnitude of each deviation matters, not just its
+direction. Row and column totals are suppressed automatically because
+residuals do not have meaningful marginal sums.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PreSex</span>, package <span class="op">=</span> <span class="st">"vcd"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">PreSex</span>,</span>
-<span>            formula <span class="op">=</span> <span class="va">MaritalStatus</span> <span class="op">~</span> <span class="va">PremaritalSex</span> <span class="op">+</span> <span class="va">ExtramaritalSex</span>,</span>
-<span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>            title   <span class="op">=</span> <span class="st">"Pre/Extra-marital Sex by Marital Status"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
-<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 270.14, df = 11, p = 0</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
+<span>            values <span class="op">=</span> <span class="st">"residuals"</span>,</span>
+<span>            title  <span class="op">=</span> <span class="st">"Hair \u00d7 Eye \u2014 Pearson residuals"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">280</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Shading based on residuals from model of independence,</span></span>
+<span><span class="co">##  X^2 = 138.29, df = 9, p = 2.325e-25</span></span></code></pre>
 <div id="orehalspkz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#orehalspkz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -3243,10 +3304,529 @@ complete-independence model.</p>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Pre/Extra-marital Sex by Marital Status</td>
+<td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Hair × Eye — Pearson residuals</td>
     </tr>
 <tr class="gt_col_headings gt_spanner_row">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="a::stub"></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4" scope="colgroup" id="Eye">
+        <div class="gt_column_spanner">Eye</div>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Brown">Brown</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Blue">Blue</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Hazel">Hazel</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Green">Green</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Black</th>
+<td headers="stub_1_1 Brown" class="gt_row gt_center" style="background-color: #839CCB; color: #000000;"> 4.40</td>
+<td headers="stub_1_1 Blue" class="gt_row gt_center" style="background-color: #E9A29C; color: #000000;">-3.07</td>
+<td headers="stub_1_1 Hazel" class="gt_row gt_center" style="background-color: #FDF0EF; color: #000000;">-0.48</td>
+<td headers="stub_1_1 Green" class="gt_row gt_center" style="background-color: #F3C3BF; color: #000000;">-1.95</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Brown</th>
+<td headers="stub_1_2 Brown" class="gt_row gt_center" style="background-color: #DDE2F1; color: #000000;"> 1.23</td>
+<td headers="stub_1_2 Blue" class="gt_row gt_center" style="background-color: #F3C4BF; color: #000000;">-1.95</td>
+<td headers="stub_1_2 Hazel" class="gt_row gt_center" style="background-color: #D9E0EF; color: #000000;"> 1.35</td>
+<td headers="stub_1_2 Green" class="gt_row gt_center" style="background-color: #FDF4F3; color: #000000;">-0.35</td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Red</th>
+<td headers="stub_1_3 Brown" class="gt_row gt_center" style="background-color: #FFFDFC; color: #000000;">-0.07</td>
+<td headers="stub_1_3 Blue" class="gt_row gt_center" style="background-color: #F5CAC6; color: #000000;">-1.73</td>
+<td headers="stub_1_3 Hazel" class="gt_row gt_center" style="background-color: #E7EBF5; color: #000000;"> 0.85</td>
+<td headers="stub_1_3 Green" class="gt_row gt_center" style="background-color: #BFCAE4; color: #000000;"> 2.28</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Blond</th>
+<td headers="stub_1_4 Brown" class="gt_row gt_center" style="background-color: #C54B4B; color: #FFFFFF;">-5.85</td>
+<td headers="stub_1_4 Blue" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;"> 7.05</td>
+<td headers="stub_1_4 Hazel" class="gt_row gt_center" style="background-color: #F1BBB6; color: #000000;">-2.23</td>
+<td headers="stub_1_4 Green" class="gt_row gt_center" style="background-color: #EEF1F8; color: #000000;"> 0.61</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section level3">
+<h3 id="multi-way-table-presex-data">Multi-way table: PreSex data<a class="anchor" aria-label="anchor" href="#multi-way-table-presex-data"></a>
+</h3>
+<p>The <code>PreSex</code> data cross-classifies four variables. Here
+<code>MaritalStatus</code> is the single column variable, and the two
+sexual-attitude variables (<code>PremaritalSex</code>,
+<code>ExtramaritalSex</code>) are row variables, shown as separate stub
+columns rather than concatenated labels — making the interaction
+structure easy to read. The legend note records the goodness-of-fit for
+the complete-independence model.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PreSex</span>, package <span class="op">=</span> <span class="st">"vcd"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">PreSex</span>,</span>
+<span>            formula <span class="op">=</span> <span class="va">MaritalStatus</span> <span class="op">~</span> <span class="va">PremaritalSex</span> <span class="op">+</span> <span class="va">ExtramaritalSex</span>,</span>
+<span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            title   <span class="op">=</span> <span class="st">"Pre/Extra-marital Sex by Marital Status"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
+<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 270.14, df = 11, p = 0</span></span></code></pre>
+<div id="cbwjcfdjag" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cbwjcfdjag table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cbwjcfdjag thead, #cbwjcfdjag tbody, #cbwjcfdjag tfoot, #cbwjcfdjag tr, #cbwjcfdjag td, #cbwjcfdjag th {
+  border-style: none;
+}
+
+#cbwjcfdjag p {
+  margin: 0;
+  padding: 0;
+}
+
+#cbwjcfdjag .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cbwjcfdjag .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cbwjcfdjag .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cbwjcfdjag .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cbwjcfdjag .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cbwjcfdjag .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cbwjcfdjag .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cbwjcfdjag .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cbwjcfdjag .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cbwjcfdjag .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cbwjcfdjag .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cbwjcfdjag .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cbwjcfdjag .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cbwjcfdjag .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cbwjcfdjag .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbwjcfdjag .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cbwjcfdjag .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cbwjcfdjag .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cbwjcfdjag .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbwjcfdjag .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cbwjcfdjag .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbwjcfdjag .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cbwjcfdjag .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbwjcfdjag .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cbwjcfdjag .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cbwjcfdjag .gt_left {
+  text-align: left;
+}
+
+#cbwjcfdjag .gt_center {
+  text-align: center;
+}
+
+#cbwjcfdjag .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cbwjcfdjag .gt_font_normal {
+  font-weight: normal;
+}
+
+#cbwjcfdjag .gt_font_bold {
+  font-weight: bold;
+}
+
+#cbwjcfdjag .gt_font_italic {
+  font-style: italic;
+}
+
+#cbwjcfdjag .gt_super {
+  font-size: 65%;
+}
+
+#cbwjcfdjag .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cbwjcfdjag .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cbwjcfdjag .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cbwjcfdjag .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cbwjcfdjag .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cbwjcfdjag .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cbwjcfdjag .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#cbwjcfdjag .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cbwjcfdjag div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Pre/Extra-marital Sex by Marital Status</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="2" scope="colgroup" id="a::stub"></th>
       <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="MaritalStatus">
         <div class="gt_column_spanner">MaritalStatus</div>
       </th>
@@ -3259,38 +3839,617 @@ complete-independence model.</p>
 </thead>
 <tbody class="gt_table_body">
 <tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Yes_Yes</th>
+<th id="stub_1_1" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">Yes</th>
+<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Yes</th>
 <td headers="stub_1_1 Divorced" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;"> 45</td>
 <td headers="stub_1_1 Married" class="gt_row gt_center" style="background-color: #F4F5FA; color: #000000;"> 15</td>
 <td headers="stub_1_1 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 60</td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Yes_No</th>
-<td headers="stub_1_2 Divorced" class="gt_row gt_center" style="background-color: #D8DFEF; color: #000000;">114</td>
-<td headers="stub_1_2 Married" class="gt_row gt_center" style="background-color: #EDAFAA; color: #000000;"> 67</td>
-<td headers="stub_1_2 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">181</td>
+<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">No</th>
+<td headers="stub_1_2 stub_2" class="gt_row gt_center" style="background-color: #D8DFEF; color: #000000;">114</td>
+<td headers="stub_1_2 Divorced" class="gt_row gt_center" style="background-color: #EDAFAA; color: #000000;"> 67</td>
+<td headers="stub_1_2 Married" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">181</td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">No_Yes</th>
+<th id="stub_1_3" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">No</th>
+<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Yes</th>
 <td headers="stub_1_3 Divorced" class="gt_row gt_center" style="background-color: #E6EAF4; color: #000000;"> 53</td>
 <td headers="stub_1_3 Married" class="gt_row gt_center" style="background-color: #DC807A; color: #000000;">  8</td>
 <td headers="stub_1_3 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 61</td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">No_No</th>
-<td headers="stub_1_4 Divorced" class="gt_row gt_center" style="background-color: #EEB3AE; color: #000000;">282</td>
-<td headers="stub_1_4 Married" class="gt_row gt_center" style="background-color: #AFBDDD; color: #000000;">452</td>
-<td headers="stub_1_4 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">734</td>
+<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">No</th>
+<td headers="stub_1_4 stub_2" class="gt_row gt_center" style="background-color: #EEB3AE; color: #000000;">282</td>
+<td headers="stub_1_4 Divorced" class="gt_row gt_center" style="background-color: #AFBDDD; color: #000000;">452</td>
+<td headers="stub_1_4 Married" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">734</td>
 </tr>
 <tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;">Total</th>
+<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;; border-right-width: 1px">Total</th>
+<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;"></th>
 <td headers="stub_1_5 Divorced" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">494</td>
 <td headers="stub_1_5 Married" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">542</td>
 <td headers="stub_1_5 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">1036</td>
 </tr>
 </tbody>
 <tfoot><tr class="gt_sourcenotes">
-<td class="gt_sourcenote" colspan="4">Shading based on residuals from model of complete independence, X^2 = 270.14, df = 11, p = 0</td>
+<td class="gt_sourcenote" colspan="5">Shading based on residuals from model of complete independence, X^2 = 270.14, df = 11, p = 0</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+<div class="section level3">
+<h3 id="row-and-column-variables-together-titanic-data">Row and column variables together: Titanic data<a class="anchor" aria-label="anchor" href="#row-and-column-variables-together-titanic-data"></a>
+</h3>
+<p>Column spanners and row-label columns can appear in the same table.
+Here <code>Class</code> and <code>Sex</code> (left of <code>~</code>)
+form nested column spanners, while <code>Age</code> and
+<code>Survived</code> (right of <code>~</code>) are shown as two
+separate row-stub columns:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">Titanic</span>,</span>
+<span>            formula <span class="op">=</span> <span class="va">Class</span> <span class="op">+</span> <span class="va">Sex</span> <span class="op">~</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Survived</span>,</span>
+<span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>            title   <span class="op">=</span> <span class="st">"Titanic: Class × Sex as column spanners, Age × Survived as row stubs"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">620</span>, height <span class="op">=</span> <span class="fl">380</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
+<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 1637.45, df = 25, p = 0</span></span></code></pre>
+<div id="fvsybhaagl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fvsybhaagl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#fvsybhaagl thead, #fvsybhaagl tbody, #fvsybhaagl tfoot, #fvsybhaagl tr, #fvsybhaagl td, #fvsybhaagl th {
+  border-style: none;
+}
+
+#fvsybhaagl p {
+  margin: 0;
+  padding: 0;
+}
+
+#fvsybhaagl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#fvsybhaagl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fvsybhaagl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fvsybhaagl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fvsybhaagl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fvsybhaagl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fvsybhaagl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fvsybhaagl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fvsybhaagl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#fvsybhaagl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#fvsybhaagl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fvsybhaagl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fvsybhaagl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fvsybhaagl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fvsybhaagl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fvsybhaagl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fvsybhaagl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fvsybhaagl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#fvsybhaagl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fvsybhaagl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fvsybhaagl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fvsybhaagl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fvsybhaagl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fvsybhaagl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fvsybhaagl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fvsybhaagl .gt_left {
+  text-align: left;
+}
+
+#fvsybhaagl .gt_center {
+  text-align: center;
+}
+
+#fvsybhaagl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fvsybhaagl .gt_font_normal {
+  font-weight: normal;
+}
+
+#fvsybhaagl .gt_font_bold {
+  font-weight: bold;
+}
+
+#fvsybhaagl .gt_font_italic {
+  font-style: italic;
+}
+
+#fvsybhaagl .gt_super {
+  font-size: 65%;
+}
+
+#fvsybhaagl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#fvsybhaagl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fvsybhaagl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fvsybhaagl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fvsybhaagl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fvsybhaagl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fvsybhaagl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#fvsybhaagl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#fvsybhaagl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="11" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Titanic: Class × Sex as column spanners, Age × Survived as row stubs</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th rowspan="1" colspan="1" scope="col"></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="8" scope="colgroup" id="Class">
+        <div class="gt_column_spanner">Class</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="1" scope="col"></th>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="2" scope="colgroup" id="a::stub"></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_1">
+        <div class="gt_column_spanner">1st</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_2">
+        <div class="gt_column_spanner">2nd</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_3">
+        <div class="gt_column_spanner">3rd</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="spanner_l1_4">
+        <div class="gt_column_spanner">Crew</div>
+      </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-style: italic;" scope="col" id="Total">Total</th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a1st_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a1st_Female">Female</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a2nd_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a2nd_Female">Female</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a3rd_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="a3rd_Female">Female</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Crew_Male">Male</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Crew_Female">Female</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">Child</th>
+<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">No</th>
+<td headers="stub_1_1 1st_Male" class="gt_row gt_center" style="background-color: #FBE6E4; color: #000000;">  0</td>
+<td headers="stub_1_1 1st_Female" class="gt_row gt_center" style="background-color: #FDF2F1; color: #000000;">  0</td>
+<td headers="stub_1_1 2nd_Male" class="gt_row gt_center" style="background-color: #FBE8E6; color: #000000;">  0</td>
+<td headers="stub_1_1 2nd_Female" class="gt_row gt_center" style="background-color: #FDF3F2; color: #000000;"> 0</td>
+<td headers="stub_1_1 3rd_Male" class="gt_row gt_center" style="background-color: #E2E7F3; color: #000000;"> 35</td>
+<td headers="stub_1_1 3rd_Female" class="gt_row gt_center" style="background-color: #D6DDEE; color: #000000;">17</td>
+<td headers="stub_1_1 Crew_Male" class="gt_row gt_center" style="background-color: #F8D6D3; color: #000000;">  0</td>
+<td headers="stub_1_1 Crew_Female" class="gt_row gt_center" style="background-color: #FCEAE8; color: #000000;"> 0</td>
+<td headers="stub_1_1 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">  52</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Yes</th>
+<td headers="stub_1_2 stub_2" class="gt_row gt_center" style="background-color: #FCFCFE; color: #000000;">  5</td>
+<td headers="stub_1_2 1st_Male" class="gt_row gt_center" style="background-color: #FFFEFE; color: #000000;">  1</td>
+<td headers="stub_1_2 1st_Female" class="gt_row gt_center" style="background-color: #E1E6F2; color: #000000;"> 11</td>
+<td headers="stub_1_2 2nd_Male" class="gt_row gt_center" style="background-color: #A1B3D8; color: #000000;">13</td>
+<td headers="stub_1_2 2nd_Female" class="gt_row gt_center" style="background-color: #F4F6FB; color: #000000;"> 13</td>
+<td headers="stub_1_2 3rd_Male" class="gt_row gt_center" style="background-color: #C6D0E7; color: #000000;">14</td>
+<td headers="stub_1_2 3rd_Female" class="gt_row gt_center" style="background-color: #FAE3E0; color: #000000;">  0</td>
+<td headers="stub_1_2 Crew_Male" class="gt_row gt_center" style="background-color: #FDF0EF; color: #000000;"> 0</td>
+<td headers="stub_1_2 Crew_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">  57</td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="rowgroup" rowspan="2" class="gt_row gt_center gt_stub" style="font-weight: bold;; border-right-width: 1px">Adult</th>
+<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">No</th>
+<td headers="stub_1_3 1st_Male" class="gt_row gt_center" style="background-color: #FAE1DE; color: #000000;">118</td>
+<td headers="stub_1_3 1st_Female" class="gt_row gt_center" style="background-color: #F5CCC8; color: #000000;">  4</td>
+<td headers="stub_1_3 2nd_Male" class="gt_row gt_center" style="background-color: #F9FAFC; color: #000000;">154</td>
+<td headers="stub_1_3 2nd_Female" class="gt_row gt_center" style="background-color: #F9DCD9; color: #000000;">13</td>
+<td headers="stub_1_3 3rd_Male" class="gt_row gt_center" style="background-color: #F3F5FA; color: #000000;">387</td>
+<td headers="stub_1_3 3rd_Female" class="gt_row gt_center" style="background-color: #FEF8F8; color: #000000;">89</td>
+<td headers="stub_1_3 Crew_Male" class="gt_row gt_center" style="background-color: #AFBDDD; color: #000000;">670</td>
+<td headers="stub_1_3 Crew_Female" class="gt_row gt_center" style="background-color: #EAA59F; color: #000000;"> 3</td>
+<td headers="stub_1_3 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">1438</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub" style="font-weight: bold;">Yes</th>
+<td headers="stub_1_4 stub_2" class="gt_row gt_center" style="background-color: #FCEBE9; color: #000000;"> 57</td>
+<td headers="stub_1_4 1st_Male" class="gt_row gt_center" style="background-color: #2166AC; color: #FFFFFF;">140</td>
+<td headers="stub_1_4 1st_Female" class="gt_row gt_center" style="background-color: #F4C8C3; color: #000000;"> 14</td>
+<td headers="stub_1_4 2nd_Male" class="gt_row gt_center" style="background-color: #92A7D1; color: #000000;">80</td>
+<td headers="stub_1_4 2nd_Female" class="gt_row gt_center" style="background-color: #F3C2BD; color: #000000;"> 75</td>
+<td headers="stub_1_4 3rd_Male" class="gt_row gt_center" style="background-color: #DEE3F1; color: #000000;">76</td>
+<td headers="stub_1_4 3rd_Female" class="gt_row gt_center" style="background-color: #FDF2F1; color: #000000;">192</td>
+<td headers="stub_1_4 Crew_Male" class="gt_row gt_center" style="background-color: #F7D5D2; color: #000000;">20</td>
+<td headers="stub_1_4 Crew_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;"> 654</td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;; border-right-width: 1px">Total</th>
+<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub" style="background-color: #D1FFBD; font-style: italic; font-weight: bold;"></th>
+<td headers="stub_1_5 1st_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">180</td>
+<td headers="stub_1_5 1st_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">145</td>
+<td headers="stub_1_5 2nd_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">179</td>
+<td headers="stub_1_5 2nd_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">106</td>
+<td headers="stub_1_5 3rd_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">510</td>
+<td headers="stub_1_5 3rd_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">196</td>
+<td headers="stub_1_5 Crew_Male" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">862</td>
+<td headers="stub_1_5 Crew_Female" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">23</td>
+<td headers="stub_1_5 Total" class="gt_row gt_center" style="background-color: #D1FFBD; font-style: italic;">2201</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_sourcenotes">
+<td class="gt_sourcenote" colspan="11">Shading based on residuals from model of complete independence, X^2 = 1637.45, df = 25, p = 0</td>
     </tr></tfoot>
 </table>
 </div>
@@ -3307,7 +4466,7 @@ complete-independence model.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

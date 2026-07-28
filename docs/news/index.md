@@ -1,6 +1,17 @@
 # Changelog
 
+## Version 0.9.7
+
+- [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
+  now displays multiple row variables as separate stub columns
+  (e.g. “Class”, “Sex”) instead of concatenated labels like “1st_Male”,
+  using `gt`’s multi-column stub support. Mirrors the existing
+  column-spanner display for multiple column variables, and the two can
+  be combined in the same table.
+
 ## Version 0.9.6
+
+CRAN release: 2026-06-07
 
 This is a cumulative release of a number of small enhancements to the
 package since the last CRAN version

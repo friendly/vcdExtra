@@ -114,7 +114,7 @@ color_table(x, ...)
 
 - formula:
 
-  Formula specifying a `row_vars ~ col_vars` layout (for multi-way
+  Formula specifying a `col_vars ~ row_vars` layout (for multi-way
   tables) to make them "flat" as defined for
   [`vcd::structable()`](https://rdrr.io/pkg/vcd/man/structable.html) and
   [`stats::ftable()`](https://rdrr.io/r/stats/ftable.html).
@@ -206,6 +206,25 @@ that provided by
 [`mosaic.glm()`](https://friendly.github.io/vcdExtra/reference/mosaic.glm.md).
 A message is printed showing the chi-squared statistic, degrees of
 freedom, and p-value for this test.
+
+**Multi-variable row and column labels**
+
+`formula` follows the `col_vars ~ row_vars` convention used by
+[`vcd::structable()`](https://rdrr.io/pkg/vcd/man/structable.html) and
+[`stats::ftable()`](https://rdrr.io/r/stats/ftable.html) (confirmed to
+agree between the two across many row/col splits of `HairEyeColor` and
+`Titanic` – see `dev/color_table/formula-row-col-comparison.R`). When
+`formula` specifies more than one variable on either side,
+`color_table()` avoids concatenated labels like `"Black_Male"`. Multiple
+column variables (on the left of `~`, e.g.
+`formula = Class + Sex + Age ~ Survived`) are shown using
+[`gt::tab_spanner()`](https://gt.rstudio.com/reference/tab_spanner.html)
+headings that group columns under their outer variable(s). Multiple row
+variables (on the right of `~`, e.g. `formula = Survived ~ Class + Sex`)
+are shown as separate stub columns, one per row variable, using `gt`'s
+multi-column stub support (`rowname_col` accepting a vector of column
+names), with repeated values left blank. The two can be combined in the
+same table.
 
 **Contrast shading**
 

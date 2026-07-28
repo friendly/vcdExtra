@@ -32,7 +32,7 @@ print(x, ...)
 
 - x:
 
-  An object specifying the model. Can be:
+  An object specifying the model. This can be:
 
   - A `list` of character vectors (a margin/generating class list, as
     produced by
