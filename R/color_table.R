@@ -47,6 +47,23 @@
 #         logic below, using the `row_vars` attribute (attached by the S3 methods but
 #         previously unused).
 #
+# 🚩TODO: [HARD] `formula`'s row/col assignment is NOT reliably `row_vars ~ col_vars` as
+#         documented -- it depends on `vcd::structable()`'s own splitting logic, which appears
+#         to rebalance which variables end up as rows vs columns rather than strictly honoring
+#         which side of `~` they're on. `stats::ftable()`, by contrast, always keeps LHS
+#         variables as rows. For "balanced" formulas (equal variable counts on each side, e.g.
+#         `Class + Sex ~ Age + Survived` on Titanic) structable and ftable agree, matching the
+#         documented convention. But for unbalanced formulas (e.g.
+#         `Class + Sex + Age ~ Survived`), structable puts only 2 of the 3 LHS variables in the
+#         rows (Class, Age) and moves Sex to the columns alongside Survived, while ftable keeps
+#         all 3 LHS variables (Class, Sex, Age) as rows. See the ftable/structable comparison at
+#         the bottom of dev/color_table/test-multi-col-stubs.R for the concrete example and
+#         actual output of both. Needs investigation: either make color_table() assign rows/cols
+#         by formula side directly (matching ftable, ignoring structable's rebalancing) or
+#         clearly document structable's actual behavior so users can predict the output. Until
+#         resolved, don't assume `formula = lhs ~ rhs` reliably puts `lhs` variables in the rows
+#         once there are 3+ variables split unevenly across `~`.
+#
 # ✔️TODO: Column spanner headings: When two or more variables are in the columns, the output
 #         is confusing and ugly. Examples:
 #     color_table(PreSex,  formula = MaritalStatus + Gender ~ PremaritalSex + ExtramaritalSex)

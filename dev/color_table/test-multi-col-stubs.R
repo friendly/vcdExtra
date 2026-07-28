@@ -53,7 +53,12 @@ color_table(HairEyeColor,
 color_table(HairEyeColor,
             formula = Hair + Sex ~ Eye,
             legend  = TRUE,
-            title   = "NEW: multi-row-var stub: Hair + Sex ~ Eye")
+            title   = "multi-col-var stub: Hair + Sex ~ Eye")
+
+color_table(HairEyeColor,
+            formula = Eye ~ Hair + Sex,
+            legend  = TRUE,
+            title   = "NEW: multi-row-var stub: Eye ~ Hair + Sex")
 
 # Same, shaded by frequency instead of residuals
 color_table(HairEyeColor,
@@ -101,3 +106,45 @@ color_table(Titanic,
 color_table(Titanic,
             formula = Survived ~ Class + Sex + Age,
             title   = "Pre-existing: 3 col vars as spanners: Survived ~ Class + Sex + Age")
+
+
+# Compare with ftable and vcd::structable
+# These are INCONSISTENT
+
+# gives: Class, Age as row vars; Sex, survived as columns
+structable(Titanic,
+  formula = Class + Sex + Age ~ Survived)
+#             Sex      Male     Female
+#             Survived   No Yes     No Yes
+# Class Age
+# 1st   Child             0   5      0   1
+#       Adult           118  57      4 140
+# 2nd   Child             0  11      0  13
+#       Adult           154  14     13  80
+# 3rd   Child            35  13     17  14
+#       Adult           387  75     89  76
+# Crew  Child             0   0      0   0
+#       Adult           670 192      3  20
+
+# gives: Class, Sex, Age as row vars; Survived as cols
+ftable(Titanic,
+  formula = Class + Sex + Age ~ Survived)
+
+#                    Survived  No Yes
+# Class Sex    Age
+# 1st   Male   Child            0   5
+#              Adult          118  57
+#       Female Child            0   1
+#              Adult            4 140
+# 2nd   Male   Child            0  11
+#              Adult          154  14
+#       Female Child            0  13
+#              Adult           13  80
+# 3rd   Male   Child           35  13
+#              Adult          387  75
+#       Female Child           17  14
+#              Adult           89  76
+# Crew  Male   Child            0   0
+#              Adult          670 192
+#       Female Child            0   0
+#              Adult            3  20
