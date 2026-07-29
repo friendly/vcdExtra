@@ -44,6 +44,27 @@ if(require(ca)){
   plot(ca(Mental.tab), main="Mental impairment & SES", lines=TRUE)
 }
 
+# fit linear x linear (uniform) association model, using integer scores
+# for rows/cols
+indep <- glm(Freq ~ mental + ses, family = poisson, data = Mental)
+Cscore <- as.numeric(Mental$ses)
+Rscore <- as.numeric(Mental$mental)
+
+linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
+              family = poisson, data = Mental)
+anova(linlin, test = "Chisq")
+
+# use update.glm method to fit other models
+linlin <- update(indep, . ~ . + Rscore:Cscore)
+roweff <- update(indep, . ~ . + mental:Cscore)
+coleff <- update(indep, . ~ . + Rscore:ses)
+rowcol <- update(indep, . ~ . + Rscore:ses + mental:Cscore)
+
+# compare models
+LRstats(indep, linlin, roweff, coleff, rowcol)
+
+# tests of nested models
+anova(indep, linlin, roweff, test = "Chisq")
 
 }
 \references{

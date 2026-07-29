@@ -9,6 +9,8 @@ are finished; sync back to the main list only if it's useful to see vcdExtra sta
 By far the messiest of the packages reviewed so far — uses `dev/`, `extra/`, *and* `issues/` as
 scratch folders.
 
+As these items are resolved, check them off as [X]
+
 ## TODOs
 
 - [ ] **Breslow-Day test** — adapted from `DescTools::BreslowDayTest`, not yet exported/added to the
@@ -90,14 +92,23 @@ Identified, not yet deleted (held for manual review).
 - [ ] `extra/include_gt_test.{Rmd,html}`, `extra/knit_include_test.{Rmd,html}` — demo/test docs for
   shipped `knit_include()`.
 
-- [ ] **`R/summarise-old.R` (new)** — leftover from deprecating the lowercase `summarise()` generic
+- [X] **`R/summarise-old.R` (new)** — leftover from deprecating the lowercase `summarise()` generic
   (commits: "rename summarise -> summarise-old", "summarise() is now deprecated"). Sitting in
   `R/` rather than `dev/`, so it still ships as internal package code even though dead. Confirm
   nothing calls it, then either delete or move to `dev/`.
 
 ## Worked examples / infra (not classified)
 
-`extra/Asbestos.R`, `birthwt.R`, `housetasks.R`, `mental-ex.R`, `titanicp-recode.R`, `sim*.R`,
-`vgam-lvplot-ex.R`, `dev/gRbase-example-AI.R`, `dev/Butterfly-ex.R`, `dev/presex-examples.R`, plus
-`extra/datasets/` (looks like active infra for the pkgdown dataset table, same pattern as
-candisc's `make-datasets.R`).
+- [X] `extra/Asbestos.R`, `housetasks.R`,  -> moved to `data-raw/`
+- [X] `dev/presex-examples.R` -> `dev/color_table/`
+- [X] `extra/datasets/` (active infra for the pkgdown dataset table, keep for reference)
+- [X] `extra/mental-ex.R` (lines 29-57: linlin/roweff/coleff/rowcol model comparison) -> examples
+  added to the `Mental` dataset docs in `R/data.R` (mosaic plot call omitted)
+
+`birthwt.R`, `titanicp-recode.R`, `sim*.R`,
+`vgam-lvplot-ex.R`, `dev/gRbase-example-AI.R`, `dev/Butterfly-ex.R`
+
+## New work
+
+- an initial sketch of a novel 2x2 diplay for CMHtest, `dev/CMH-2x2.md`.
+
