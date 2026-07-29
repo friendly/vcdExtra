@@ -11,6 +11,15 @@ scratch folders.
 
 As these items are resolved, check them off as [X]
 
+## `vcd` package migration (2026-07-29)
+
+David Meyer (maintainer of `vcd`) migrated its repo off R-Forge (going end-of-life) to Codeberg:
+https://codeberg.org/davidjohannesmeyer/vcd (git-based). Once officially made a contributor
+there, consider replicating/moving some of the `vcd`-enhancing work currently living in
+`vcdExtra` over to that repo directly — e.g. the `shading_marimekko()` idea below, which extends
+a function in `vcd` itself rather than in `vcdExtra`. Local copy of `vcd` source at
+`C:\Dropbox\R\packages\vcd`.
+
 ## TODOs
 
 - [ ] **Breslow-Day test** — adapted from `DescTools::BreslowDayTest`, not yet exported/added to the
@@ -26,7 +35,8 @@ As these items are resolved, check them off as [X]
 
 - [ ] **New shading idea**: `shading_marimekko()` — a non-residual-based mosaic shading using distinct
   colors per split (like `ggmosaic`), sketched in `dev/vcdExtra-new.md`; would extend a function
-  in the separate `vcd` package (`C:\Dropbox\R\packages\vcd\R\shadings.R`).
+  in the separate `vcd` package (`C:\Dropbox\R\packages\vcd\R\shadings.R`). Candidate for
+  contributing directly to `vcd`'s new Codeberg repo instead of `vcdExtra` — see note above.
 
 - [ ] **Vignette on `labeling_points()`** — the function shipped (v0.9.1) but the planned vignette
   illustrating dot-density mosaics (per `dev/vcdExtra-new.md`) was never written.
@@ -46,8 +56,10 @@ As these items are resolved, check them off as [X]
 
 - [ ] **Draft vignette not promoted**: `extra/vignettes-new/demo-occStatus.Rmd` ("Occupational
   Status") doesn't exist in the real `vignettes/` folder.
+  
 - [ ] `R/mosaic3d.R` — 5 live `# TODO/FIXME` comments in the source: formula interface, zero-margin
   handling, alpha transparency for side walls, an interline-gap kludge, passing `labeling_args`.
+  
 - [ ] `R/CMHtest.R` — 2 live TODOs in the source: better p-value printing, determining/labeling score
   types (integer vs midrank).
 
@@ -61,8 +73,11 @@ As these items are resolved, check them off as [X]
   CI already exists via `.github/`), but several items look still open (test coverage, error
   messages, new vignettes). Treat as a standing backlog reference rather than itemized here.
 
-- [ ] Not read in full, still unverified: `issues/anova-like.md`, `issues/assocstats.md`,
-  `issues/vcd-extensions.Rmd` (688KB — unclear if draft vignette or notes).
+- [X] `issues/vcd-extensions.Rmd` was an early draft of ways to extend CDA. It mentions a CRAN Task View,
+  tidyCDA enhancements, woolf_test and other topics. Keep for future reference.
+
+- [ ] Not read in full, still unverified: `issues/anova-like.md`, `issues/assocstats.md`
+
 
 ## Clean-up candidates
 
@@ -111,7 +126,7 @@ Identified, not yet deleted (held for manual review).
 
 ## New work
 
-- an initial sketch of a novel 2x2 diplay for CMHtest, `dev/CMH-2x2.md`.
+- an initial sketch of a novel 2x2 display for CMHtest, `dev/CMH-2x2.md`.
 
 ## Documentation
 
