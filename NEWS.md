@@ -4,6 +4,9 @@
   "Sex") instead of concatenated labels like "1st_Male", using `gt`'s multi-column stub support.
   Mirrors the existing column-spanner display for multiple column variables, and the two can be
   combined in the same table.
+* Added more worked examples to the `Mental` dataset documentation
+* General package clean-up: removed stale pre-roxygen and superseded `dev`/`extra` files, and
+  reorganized `color_table()`/`assoc_graph()` development notes into their own subfolders
 
 ## Version 0.9.6
 
