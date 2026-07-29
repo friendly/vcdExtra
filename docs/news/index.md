@@ -13,6 +13,9 @@
   `dev`/`extra` files, and reorganized
   [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)/[`assoc_graph()`](https://friendly.github.io/vcdExtra/reference/assoc_graph.md)
   development notes into their own subfolders
+- Now reference new work on tidy methods (`as_*()` methods,
+  [`collapse_levels()`](https://friendly.github.io/vcdExtra/reference/collapse_levels.md),
+  …) in the tidyCats vignette
 
 ## Version 0.9.6
 

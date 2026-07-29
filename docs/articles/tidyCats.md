@@ -2,7 +2,13 @@
 
 ![](fig/tidyCat-logo.png)
 
-> Frequency tables need some Tidy Love ❤️
+> **Note**: This vignette was an initial statement of the problem of
+> “tidy” methods for categorical data analysis. Much of this has now
+> been accomplished by the work of Gavin Klorfine. It is described in
+> the vignette, [Steps Toward Tidy Categorical Data
+> Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.html).
+
+## Frequency tables need some Tidy Love ❤️
 
 Tidy methods for quantitative data & models have advanced considerably,
 but there hasn’t been much development of similar ideas for “categorical
