@@ -7,6 +7,7 @@
 * Added more worked examples to the `Mental` dataset documentation
 * General package clean-up: removed stale pre-roxygen and superseded `dev`/`extra` files, and
   reorganized `color_table()`/`assoc_graph()` development notes into their own subfolders
+* Now reference new work on tidy methods (`as_*()` methods, `collapse_levels()`, ...) in the tidyCats vignette
 
 ## Version 0.9.6
 

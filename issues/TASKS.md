@@ -104,11 +104,19 @@ Identified, not yet deleted (held for manual review).
 - [X] `extra/datasets/` (active infra for the pkgdown dataset table, keep for reference)
 - [X] `extra/mental-ex.R` (lines 29-57: linlin/roweff/coleff/rowcol model comparison) -> examples
   added to the `Mental` dataset docs in `R/data.R` (mosaic plot call omitted)
+- [X] `birthwt.R`, retained; could be used an an example of collapsing levels with `dplyr`
 
-`birthwt.R`, `titanicp-recode.R`, `sim*.R`,
+`titanicp-recode.R`, `sim*.R`,
 `vgam-lvplot-ex.R`, `dev/gRbase-example-AI.R`, `dev/Butterfly-ex.R`
 
 ## New work
 
 - an initial sketch of a novel 2x2 diplay for CMHtest, `dev/CMH-2x2.md`.
+
+## Documentation
+
+- [X] `vignettes/tidyCats.Rmd` — added a note at the top pointing readers to
+  `a1a-convert-collapse.Rmd` ("Steps Toward Tidy Categorical Data Analysis"), since Gavin
+  Klorfine's `as_*()`/`collapse_levels()` work has now accomplished much of what this vignette
+  originally proposed.
 
