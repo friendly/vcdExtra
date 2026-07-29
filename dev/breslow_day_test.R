@@ -205,6 +205,7 @@ breslow_day_test <- function(x, OR = NA, correct = FALSE, decompose = FALSE) {
 
   STATISTIC <- if (correct) res$X2.tarone else res$X2
   PARAMETER <- k - 1L
+  PVAL <- 1 - pchisq(STATISTIC, PARAMETER)
   names(STATISTIC) <- "X-squared"
   names(PARAMETER) <- "df"
 
@@ -214,7 +215,7 @@ breslow_day_test <- function(x, OR = NA, correct = FALSE, decompose = FALSE) {
   structure(list(
     statistic   = STATISTIC,
     parameter   = PARAMETER,
-    p.value     = 1 - pchisq(STATISTIC, PARAMETER),
+    p.value     = PVAL,
     method      = METHOD,
     data.name   = DNAME,
     or_vars     = or_vars,
