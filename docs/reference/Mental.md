@@ -72,4 +72,61 @@ if(require(ca)){
 }
 
 
+# fit linear x linear (uniform) association model, using integer scores
+# for rows/cols
+indep <- glm(Freq ~ mental + ses, family = poisson, data = Mental)
+Cscore <- as.numeric(Mental$ses)
+Rscore <- as.numeric(Mental$mental)
+
+linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
+              family = poisson, data = Mental)
+anova(linlin, test = "Chisq")
+#> Analysis of Deviance Table
+#> 
+#> Model: poisson, link: log
+#> 
+#> Response: Freq
+#> 
+#> Terms added sequentially (first to last)
+#> 
+#> 
+#>               Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
+#> NULL                             23    217.400              
+#> mental         3  113.525        20    103.875 < 2.2e-16 ***
+#> ses            5   56.457        15     47.418 6.543e-11 ***
+#> Rscore:Cscore  1   37.523        14      9.895 9.035e-10 ***
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+# use update.glm method to fit other models
+linlin <- update(indep, . ~ . + Rscore:Cscore)
+roweff <- update(indep, . ~ . + mental:Cscore)
+coleff <- update(indep, . ~ . + Rscore:ses)
+rowcol <- update(indep, . ~ . + Rscore:ses + mental:Cscore)
+
+# compare models
+LRstats(indep, linlin, roweff, coleff, rowcol)
+#> Likelihood summary table:
+#>           AIC    BIC LR Chisq Df Pr(>Chisq)    
+#> indep  209.59 220.19   47.418 15  3.155e-05 ***
+#> linlin 174.07 185.85    9.895 14     0.7698    
+#> roweff 174.45 188.59    6.281 12     0.9013    
+#> coleff 179.00 195.50    6.829 10     0.7415    
+#> rowcol 179.22 198.07    3.045  8     0.9315    
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+# tests of nested models
+anova(indep, linlin, roweff, test = "Chisq")
+#> Analysis of Deviance Table
+#> 
+#> Model 1: Freq ~ mental + ses
+#> Model 2: Freq ~ mental + ses + Rscore:Cscore
+#> Model 3: Freq ~ mental + ses + mental:Cscore
+#>   Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
+#> 1        15     47.418                          
+#> 2        14      9.895  1   37.523 9.035e-10 ***
+#> 3        12      6.281  2    3.614    0.1641    
+#> ---
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 ```
