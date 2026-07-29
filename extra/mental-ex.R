@@ -13,26 +13,30 @@ indep <- glm(Freq ~ mental+ses,
 LRstats(indep)
 
 # labels for table factors
-long.labels <- list(set_varnames = c(mental="Mental Health Status", 
+long.labels <- list(set_varnames = c(mental="Mental Health Status",
                                      ses="Parent SES"))
 
 mosaic(indep,
        residuals_type="rstandard",
-       labeling_args = long.labels, 
+       labeling_args = long.labels,
        labeling=labeling_residuals)
 
 
-# fit linear x linear (uniform) association.  Use integer scores for rows/cols 
+# Models for Ordered Factors
+# -- tests for ordinality
+CMHtest(Freq ~ ses + mental, data=Mental)
+
+# fit linear x linear (uniform) association.  Use integer scores for rows/cols
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
 
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
               family = poisson, data = Mental)
 mosaic(linlin, ~ ses + mental,
-       residuals_type="rstandard", 
-       labeling_args = long.labels, 
-       labeling=labeling_residuals, 
-       suppress=1, 
+       residuals_type="rstandard",
+       labeling_args = long.labels,
+       labeling=labeling_residuals,
+       suppress=1,
        gp=shading_Friendly,
        main="Lin x Lin model")
 
