@@ -19,7 +19,8 @@ scratch folders.
 - [ ] **Hurdle-model test/methods** — adapted from `pscl::hurdletest`; unclear final intent, not
   shipped. Files: `dev/hurdletest.R`, `dev/hurdle-methods.R`, `dev/hurdle-test.R`
 
-- [ ] **Log-histogram plot** — no NEWS mention, not shipped. File: `dev/loghistplot.R`
+- [ ] **Log-histogram plot** — no NEWS mention, not shipped. This is an idea to display logistic regression fits
+  with histograms of the 0/1 values at bottom/top. File: `dev/loghistplot.R`
 
 - [ ] **New shading idea**: `shading_marimekko()` — a non-residual-based mosaic shading using distinct
   colors per split (like `ggmosaic`), sketched in `dev/vcdExtra-new.md`; would extend a function
