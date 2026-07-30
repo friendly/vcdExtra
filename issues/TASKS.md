@@ -50,6 +50,12 @@ vcdExtra-only. Confirmed via `library(vcdExtra)`'s own startup message ("Registe
 overwritten by 'vcdExtra': `pairs.table`, `print.Kappa`"; "masked from 'package:vcd':
 `pairs_diagonal_mosaic`, `woolf_test`") plus each file's own roxygen documentation.
 
+**Note (2026-07-30)**: the Codeberg `vcd` repo doesn't use roxygen at all — docs are hand-written
+`.Rd` files. Any PR moving one of these over needs a corresponding `man/*.Rd` submitted alongside
+the `R/*.R` file, not just the roxygen-commented source; the `.Rd` would need to be hand-written
+(or roxygen-generated locally then treated as the deliverable, since roxygen itself won't be part
+of `vcd`'s build).
+
 - [ ] **`R/woolf_test.R`** — `woolf_test()` supersedes `vcd::woolf_test()`, adding a `decompose`
   option: for a 2×2×R×C table, decomposes the overall homogeneity test into row effects, column
   effects, and residual (interaction), analogous to a two-way ANOVA. The function's own docs call
@@ -68,10 +74,18 @@ overwritten by 'vcdExtra': `pairs.table`, `print.Kappa`"; "masked from 'package:
 
 ## TODOs
 
-- [ ] **Breslow-Day test** — adapted from `DescTools::BreslowDayTest`, not yet exported/added to the
-  package. Still unshipped even after the pull brought in commit `0fc3d3d implement
-  dev/breslow_day_test.R` (that commit updated the dev script itself, not `R/`).
-  Files: `dev/BreslowDayTest.R`, `dev/breslow_day_test.R`
+- [X] **Breslow-Day test** — shipped 2026-07-30 as `breslow_day_test()`, adapted from
+  `DescTools::BreslowDayTest`. How: verified numerically against `DescTools::BreslowDayTest()`
+  (`dev/test-breslow_day_test.R`, incl. its `decompose = TRUE` row/col/residual breakdown
+  matching `woolf_test()`'s structure) before shipping; along the way fixed a stray `names`
+  attribute bug that was masquerading as a precision issue. Added attribution (Michael Höhle's
+  original algorithm, via Andri Signorell's `DescTools`, GPL (>= 2)) and an `@author` tag; moved
+  `dev/breslow_day_test.R` → `R/breslow_day_test.R` (`git mv`); ran `devtools::document()`; added
+  to `_pkgdown.yml`'s Statistical tests section; added a `NEWS.md` entry; fixed an unrelated
+  `R CMD check` NOTE found along the way (`data-raw` missing from `.Rbuildignore`); deleted the
+  now-redundant raw `dev/BreslowDayTest.R` reference copy. Formal `testthat` coverage deliberately
+  deferred — `dev/test-breslow_day_test.R` stands in as the verification record for now.
+  See the general step-by-step process this followed, noted in `TASKS-all.md`.
 
 - [ ] **Hurdle-model test/methods** — adapted from `pscl::hurdletest`; unclear final intent, not
   shipped. Files: `dev/hurdletest.R`, `dev/hurdle-methods.R`, `dev/hurdle-test.R`
@@ -132,8 +146,8 @@ Identified, not yet deleted (held for manual review).
 - [X] `issues/CMHtest/` (`CMH-test-fix.R`, `CMHtest-new.R`, `CMHtest-old.R`, `CMHtest_issue.Rmd`) —
   `CMHtest.R` shipped long ago. -> Leave these for now
 
-- [ ] `issues/data-roxygenize.R`, `issues/fix_roxy.R`, `issues/fix_roxygen_items.R` — one-time roxygen
-  migration scripts.
+- [X] `issues/data-roxygenize.R`, `issues/fix_roxy.R`, `issues/fix_roxygen_items.R` — one-time
+  roxygen migration scripts. Moved to `issues/roxygenize/` (2026-07-30) — keep for reference.
 
 - [ ] `issues/mcaplot-debug.R`, `issues/mjca-cacoord-bug.Rmd` — `mcaplot()` bugs fixed per NEWS
   v0.9.3/0.9.4.
@@ -181,23 +195,6 @@ Identified, not yet deleted (held for manual review).
   Klorfine's `as_*()`/`collapse_levels()` work has now accomplished much of what this vignette
   originally proposed.
 
-## Codeberg issue draft: migrate back to vcd
-
-Drafted 2026-07-30 for the `vcd` Codeberg repo (https://codeberg.org/davidjohannesmeyer/vcd),
-covering the three confirmed function overrides above. Saved here so it can be copy/pasted back
-into the Codeberg issue editor.
-
----
-
-There are a number of functions in `vcdExtra` that supersede or extend a same-named function in `vcd`. These are candidates for PRs to the new Codeberg repo instead of staying vcdExtra-only. I'm asking to clarify what I might do here.
-
-Confirmed via `library(vcdExtra)`'s own startup message ("Registered S3 methods overwritten by 'vcdExtra': `pairs.table`, `print.Kappa`"; "masked from 'package:vcd': `pairs_diagonal_mosaic`, `woolf_test`") plus each file's own roxygen documentation.
-
-- **[`R/woolf_test.R`](https://github.com/friendly/vcdExtra/blob/master/R/woolf_test.R)** — `woolf_test()` supersedes `vcd::woolf_test()`, adding a `decompose` option: for a 2×2×R×C table, decomposes the overall homogeneity test into row effects, column effects, and residual (interaction), analogous to a two-way ANOVA. This is actually a novel extension... appears not to exist in the existing literature. My grad student, Gavin Klorfine, is studying this via simulation for his MA project, so it would be good to be clear about where this should live, be maintained, ...
-- **[`R/pairs_diagonal_mosaic.R`](https://github.com/friendly/vcdExtra/blob/master/R/pairs_diagonal_mosaic.R)** — `pairs_diagonal_mosaic()` is "an enhanced replacement for `vcd::pairs_diagonal_mosaic()`": fixes two bugs where the original hardcoded/ignored its `labeling` and `alternate_labels` arguments, and changes the default labeling scheme from `labeling_values` to `labeling_border` (so cell counts are off by default). Also provides a companion `pairs.table()` S3 method using this fixed version as the default diagonal panel — this is what overwrites `vcd`'s `pairs.table` method.
-- **[`R/print.Kappa.R`](https://github.com/friendly/vcdExtra/blob/master/R/print.Kappa.R)** — `print.Kappa()` is "a replacement for the `print.Kappa` method in `vcd`," adding display of `z` values and an optional `CI` argument for confidence intervals, neither present in `vcd`'s version.
-
----
 
 ## Build gotcha: `README.md` / `devtools::build_readme()`
 
