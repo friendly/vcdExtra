@@ -1,6 +1,6 @@
 # vcdExtra _(Extensions and additions to vcd: Visualizing Categorical Data)
 
-Version 0.9.6; documentation built for `pkgdown` 2026-07-01
+Version 0.9.7; documentation built for `pkgdown` 2026-07-30
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -52,7 +52,7 @@ Get the released version (0.9.6) from CRAN:
  install.packages("vcdExtra")
 ```
 
-The current development version (0.9.6) can be installed from
+The current development version (0.9.7) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
