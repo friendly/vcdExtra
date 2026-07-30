@@ -11,14 +11,26 @@ scratch folders.
 
 As these items are resolved, check them off as [X]
 
-## `vcd` package migration (2026-07-29)
+## `vcd` package migration (2026-07-29, updated 2026-07-30)
 
 David Meyer (maintainer of `vcd`) migrated its repo off R-Forge (going end-of-life) to Codeberg:
-https://codeberg.org/davidjohannesmeyer/vcd (git-based). Once officially made a contributor
-there, consider replicating/moving some of the `vcd`-enhancing work currently living in
-`vcdExtra` over to that repo directly — e.g. the `shading_marimekko()` idea below, which extends
-a function in `vcd` itself rather than in `vcdExtra`. Local copy of `vcd` source at
-`C:\Dropbox\R\packages\vcd`.
+https://codeberg.org/davidjohannesmeyer/vcd (git-based). **This is now the authoritative source
+for `vcd`** — the local copy at `C:\Dropbox\R\packages\vcd` is stale and shouldn't be treated as
+current. Now a collaborator there. Codeberg runs on **Forgejo** (a GitHub-like forge), so the
+workflow is close to GitHub's:
+
+- Add an SSH key under Account Settings → SSH/GPG Keys (can reuse the existing GitHub key), or use
+  HTTPS with a personal access token (no plain password auth, same as GitHub).
+- As a collaborator, direct push access to `davidjohannesmeyer/vcd` should work — no fork needed:
+  `git clone git@codeberg.org:davidjohannesmeyer/vcd.git`.
+- From there it's normal git — branch, commit, push; open a PR from the web UI's "New Pull
+  Request" button if direct pushes to `main` aren't allowed.
+- Optional: `tea` is the official Forgejo/Gitea CLI (like GitHub's `gh`), for PR/issue management
+  from the terminal — not required, the web UI covers the same ground.
+
+Once comfortable with that workflow, consider replicating/moving some of the `vcd`-enhancing work
+currently living in `vcdExtra` over to that repo directly — e.g. the `shading_marimekko()` idea
+below, which extends a function in `vcd` itself rather than in `vcdExtra`.
 
 ## TODOs
 
