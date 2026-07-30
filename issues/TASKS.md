@@ -15,9 +15,19 @@ As these items are resolved, check them off as [X]
 
 David Meyer (maintainer of `vcd`) migrated its repo off R-Forge (going end-of-life) to Codeberg:
 https://codeberg.org/davidjohannesmeyer/vcd (git-based). **This is now the authoritative source
-for `vcd`** — the local copy at `C:\Dropbox\R\packages\vcd` is stale and shouldn't be treated as
-current. Now a collaborator there. Codeberg runs on **Forgejo** (a GitHub-like forge), so the
-workflow is close to GitHub's:
+for `vcd`.**
+
+Cloned fresh to `C:\Dropbox\R\projects\vcd` (2026-07-30) — `main` branch, SSH auth confirmed
+working (reused the existing GitHub SSH key, added to Codeberg account settings), collaborator
+access confirmed. Opens directly via `vcd.Rproj`.
+
+Two stale copies to be aware of, both superseded, neither touched further:
+- `C:\Dropbox\R\packages\vcd` — an extracted package/tarball dump (no `.git`), not a dev checkout.
+- `C:\Dropbox\R\projects\vcd-svn-old-2016` — an old R-Forge-era **SVN** checkout (has `.svn`),
+  found unexpectedly already sitting at the `projects\vcd` path and renamed aside to make room for
+  the fresh git clone.
+
+Codeberg runs on **Forgejo** (a GitHub-like forge), so the workflow is close to GitHub's:
 
 - Add an SSH key under Account Settings → SSH/GPG Keys (can reuse the existing GitHub key), or use
   HTTPS with a personal access token (no plain password auth, same as GitHub).
@@ -31,6 +41,30 @@ workflow is close to GitHub's:
 Once comfortable with that workflow, consider replicating/moving some of the `vcd`-enhancing work
 currently living in `vcdExtra` over to that repo directly — e.g. the `shading_marimekko()` idea
 below, which extends a function in `vcd` itself rather than in `vcdExtra`.
+
+## Migrate back to vcd
+
+Functions in `vcdExtra` that supersede or extend a same-named function in `vcd` (`vcd` being
+otherwise inactive) — candidates for PRs to the new Codeberg repo instead of staying
+vcdExtra-only. Confirmed via `library(vcdExtra)`'s own startup message ("Registered S3 methods
+overwritten by 'vcdExtra': `pairs.table`, `print.Kappa`"; "masked from 'package:vcd':
+`pairs_diagonal_mosaic`, `woolf_test`") plus each file's own roxygen documentation.
+
+- [ ] **`R/woolf_test.R`** — `woolf_test()` supersedes `vcd::woolf_test()`, adding a `decompose`
+  option: for a 2×2×R×C table, decomposes the overall homogeneity test into row effects, column
+  effects, and residual (interaction), analogous to a two-way ANOVA. The function's own docs call
+  this decomposition "a novel extension... appears [not to exist] in the existing literature."
+
+- [ ] **`R/pairs_diagonal_mosaic.R`** — `pairs_diagonal_mosaic()` is "an enhanced replacement for
+  `vcd::pairs_diagonal_mosaic()`": fixes two bugs where the original hardcoded/ignored its
+  `labeling` and `alternate_labels` arguments, and changes the default labeling scheme from
+  `labeling_values` to `labeling_border` (so cell counts are off by default). Also provides a
+  companion `pairs.table()` S3 method using this fixed version as the default diagonal panel —
+  this is what overwrites `vcd`'s `pairs.table` method.
+
+- [ ] **`R/print.Kappa.R`** — `print.Kappa()` is "a replacement for the `print.Kappa` method in
+  `vcd`," adding display of `z` values and an optional `CI` argument for confidence intervals,
+  neither present in `vcd`'s version.
 
 ## TODOs
 
@@ -95,8 +129,8 @@ below, which extends a function in `vcd` itself rather than in `vcdExtra`.
 
 Identified, not yet deleted (held for manual review).
 
-- [ ] `issues/CMHtest/` (`CMH-test-fix.R`, `CMHtest-new.R`, `CMHtest-old.R`, `CMHtest_issue.Rmd`) —
-  `CMHtest.R` shipped long ago.
+- [X] `issues/CMHtest/` (`CMH-test-fix.R`, `CMHtest-new.R`, `CMHtest-old.R`, `CMHtest_issue.Rmd`) —
+  `CMHtest.R` shipped long ago. -> Leave these for now
 
 - [ ] `issues/data-roxygenize.R`, `issues/fix_roxy.R`, `issues/fix_roxygen_items.R` — one-time roxygen
   migration scripts.
@@ -109,7 +143,7 @@ Identified, not yet deleted (held for manual review).
 - [ ] `dev/labeling_points-test.R` — `labeling_points()` shipped (keep `-plan.md`, referenced by the
   vignette TODO above).
 
-- [ ] `extra/vignettes-new/mobility.Rmd` — superseded, `a6-mobility.Rmd` already shipped in
+- [X] `extra/vignettes-new/mobility.Rmd` — superseded, `a6-mobility.Rmd` already shipped in
   `vignettes/`.
 
 - [ ] `dev/color_table/color_table-plan.md`, `color_table.md` and `dev/assoc_graph/assoc-graph.md`,
@@ -146,4 +180,63 @@ Identified, not yet deleted (held for manual review).
   `a1a-convert-collapse.Rmd` ("Steps Toward Tidy Categorical Data Analysis"), since Gavin
   Klorfine's `as_*()`/`collapse_levels()` work has now accomplished much of what this vignette
   originally proposed.
+
+## Codeberg issue draft: migrate back to vcd
+
+Drafted 2026-07-30 for the `vcd` Codeberg repo (https://codeberg.org/davidjohannesmeyer/vcd),
+covering the three confirmed function overrides above. Saved here so it can be copy/pasted back
+into the Codeberg issue editor.
+
+---
+
+There are a number of functions in `vcdExtra` that supersede or extend a same-named function in `vcd`. These are candidates for PRs to the new Codeberg repo instead of staying vcdExtra-only. I'm asking to clarify what I might do here.
+
+Confirmed via `library(vcdExtra)`'s own startup message ("Registered S3 methods overwritten by 'vcdExtra': `pairs.table`, `print.Kappa`"; "masked from 'package:vcd': `pairs_diagonal_mosaic`, `woolf_test`") plus each file's own roxygen documentation.
+
+- **[`R/woolf_test.R`](https://github.com/friendly/vcdExtra/blob/master/R/woolf_test.R)** — `woolf_test()` supersedes `vcd::woolf_test()`, adding a `decompose` option: for a 2×2×R×C table, decomposes the overall homogeneity test into row effects, column effects, and residual (interaction), analogous to a two-way ANOVA. This is actually a novel extension... appears not to exist in the existing literature. My grad student, Gavin Klorfine, is studying this via simulation for his MA project, so it would be good to be clear about where this should live, be maintained, ...
+- **[`R/pairs_diagonal_mosaic.R`](https://github.com/friendly/vcdExtra/blob/master/R/pairs_diagonal_mosaic.R)** — `pairs_diagonal_mosaic()` is "an enhanced replacement for `vcd::pairs_diagonal_mosaic()`": fixes two bugs where the original hardcoded/ignored its `labeling` and `alternate_labels` arguments, and changes the default labeling scheme from `labeling_values` to `labeling_border` (so cell counts are off by default). Also provides a companion `pairs.table()` S3 method using this fixed version as the default diagonal panel — this is what overwrites `vcd`'s `pairs.table` method.
+- **[`R/print.Kappa.R`](https://github.com/friendly/vcdExtra/blob/master/R/print.Kappa.R)** — `print.Kappa()` is "a replacement for the `print.Kappa` method in `vcd`," adding display of `z` values and an optional `CI` argument for confidence intervals, neither present in `vcd`'s version.
+
+---
+
+## Build gotcha: `README.md` / `devtools::build_readme()`
+
+Found 2026-07-30: the pkgdown site's homepage showed a stale "Version 0.9.6; documentation built
+for `pkgdown` 2026-07-01" (from `README.md`) even right after a successful pkgdown GHA build. Root
+cause: pkgdown copies `README.md` as-is — it does **not** re-knit `README.Rmd` — so a stale
+committed `README.md` stays stale no matter how many times the site rebuilds. `README.Rmd`'s
+version/date line is dynamic (`` `r getNamespaceVersion("vcdExtra")` ``, `` `r Sys.Date()` ``), so
+it only updates when someone re-knits it locally and commits the result.
+
+`.build-steps.R` already has the right shape for this — install with vignettes, then rebuild the
+README if stale:
+```r
+# The README.Rmd references the vignettes, so they must be installed first
+devtools::install(build_vignettes = TRUE)
+
+# build the README.md if it is older than README.Rmd
+if (!file.exists("README.md") || file.mtime("README.Rmd") > file.mtime("README.md")) {
+  devtools::build_readme()
+}
+```
+
+**However**: reproduced on 2026-07-30 (fresh `Rscript` sessions) that `devtools::build_readme()`
+*still fails* even right after `devtools::install(build_vignettes = TRUE)`, with:
+```
+Error in `$<-.data.frame`(...) : replacement has 1 row, data has 0
+```
+from the `vignettes` chunk in `README.Rmd` (`tools::getVignetteInfo("vcdExtra")` returns 0 rows in
+that context). Cause: `build_readme()` renders via `pkgload::load_all()` (a dev/source-loaded
+namespace) rather than the installed library, and `load_all()` doesn't populate the installed
+vignette index that `getVignetteInfo()` reads from — so the chunk sees 0 vignettes and crashes
+assigning a length-1 `paste0()` result onto a 0-row column.
+
+**Workaround that worked**: after `devtools::install(build_vignettes = TRUE)`, call
+`rmarkdown::render("README.Rmd")` **directly** instead of `devtools::build_readme()`.
+
+- [ ] Worth checking whether this is new (a `devtools`/`pkgload` version change) or has always been
+  broken and `.build-steps.R` simply hasn't been run end-to-end recently.
+- [ ] Consider hardening the `vignettes` chunk in `README.Rmd` itself (e.g. skip/guard when
+  `nrow(vigns) == 0`) so it degrades gracefully instead of crashing the whole render, regardless of
+  which tool renders it.
 
