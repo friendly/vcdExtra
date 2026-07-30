@@ -40,8 +40,11 @@ dev_version <- getNamespaceVersion("vcdExtra")
 
 <!-- badges: end -->
 
-# vcdExtra <img src="man/figures/logo.png" style="float:right; height:200px;" />
-## Extensions and additions to vcd: Visualizing Categorical Data 
+# vcdExtra <img src="man/figures/logo.png" align="right" height="200px" /><br><sub>Extensions and additions to vcd: Visualizing Categorical Data</sub>
+
+<!--
+## Extensions and additions to vcd: Visualizing Categorical Data
+-->
 
 <!-- Version 0.8-6 -->
 Version `r getNamespaceVersion("vcdExtra")`; documentation built for `pkgdown` `r Sys.Date()`
