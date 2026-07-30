@@ -1,8 +1,6 @@
-# vcdExtra
+# vcdExtra _(Extensions and additions to vcd: Visualizing Categorical Data)
 
-## Extensions and additions to vcd: Visualizing Categorical Data
-
-Version 0.9.6; documentation built for `pkgdown` 2026-06-05
+Version 0.9.6; documentation built for `pkgdown` 2026-07-01
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -48,7 +46,7 @@ to be a love letter 💌 to CDA.
 
 ## 📂 Installation
 
-Get the released version (0.9.3) from CRAN:
+Get the released version (0.9.6) from CRAN:
 
 ``` R
  install.packages("vcdExtra")
