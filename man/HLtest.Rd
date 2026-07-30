@@ -103,6 +103,7 @@ statistics for use in the development of logistic regression models.
 Other association tests:
 \code{\link[=CMHtest]{CMHtest()}},
 \code{\link[=GKgamma]{GKgamma()}},
+\code{\link[=breslow_day_test]{breslow_day_test()}},
 \code{\link[=woolf_test]{woolf_test()}},
 \code{\link[=zero.test]{zero.test()}}
 }

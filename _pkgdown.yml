@@ -75,6 +75,7 @@ reference:
   - title: Statistical tests
     desc: Statistical tests for categorical data
     contents:
+      - breslow_day_test
       - CMHtest
       - GKgamma
       - print.GKgamma

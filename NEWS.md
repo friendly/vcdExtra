@@ -8,6 +8,10 @@
 * General package clean-up: removed stale pre-roxygen and superseded `dev`/`extra` files, and
   reorganized `color_table()`/`assoc_graph()` development notes into their own subfolders
 * Now reference new work on tidy methods (`as_*()` methods, `collapse_levels()`, ...) in the tidyCats vignette
+* Added `breslow_day_test()` for the Breslow-Day test of homogeneity of odds ratios across strata
+  in 2x2xk tables, generalized to handle tables of any dimensionality, with an optional Tarone
+  correction and a `decompose` option (for 2x2xRxC tables) giving a `woolf_test()`-style
+  row/column/residual decomposition of the overall test
 
 ## Version 0.9.6
 

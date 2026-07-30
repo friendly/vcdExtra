@@ -58,6 +58,7 @@ American Statistical Association}, 58, 310-364.
 Other association tests:
 \code{\link[=CMHtest]{CMHtest()}},
 \code{\link[=HLtest]{HLtest()}},
+\code{\link[=breslow_day_test]{breslow_day_test()}},
 \code{\link[=woolf_test]{woolf_test()}},
 \code{\link[=zero.test]{zero.test()}}
 }

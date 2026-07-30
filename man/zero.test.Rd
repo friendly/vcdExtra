@@ -65,6 +65,7 @@ Other association tests:
 \code{\link[=CMHtest]{CMHtest()}},
 \code{\link[=GKgamma]{GKgamma()}},
 \code{\link[=HLtest]{HLtest()}},
+\code{\link[=breslow_day_test]{breslow_day_test()}},
 \code{\link[=woolf_test]{woolf_test()}}
 }
 \author{

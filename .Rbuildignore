@@ -27,6 +27,7 @@ README.*
 ^.claude$
 ^\.github$
 ^dev$
+^data-raw$
 .revdep_run.R
 ^\.positai$
 ^\.claude$

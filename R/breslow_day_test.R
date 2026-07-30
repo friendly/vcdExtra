@@ -1,3 +1,10 @@
+# The core algorithm (bd_internal(), below) closely follows the Breslow-Day/Tarone
+# implementation originally by Michael Hoehle, packaged as DescTools::BreslowDayTest() by
+# Andri Signorell (DescTools is GPL (>= 2), same license as this package):
+# https://github.com/AndriSignorell/DescTools/blob/master/R/Tests.r
+# Generalized here to handle tables of any dimensionality (not just 2x2xk) and to support
+# a Woolf-test-style decomposition for 2x2xRxC tables -- see woolf_test().
+
 #' Breslow-Day Test for Homogeneity of Odds Ratios
 #'
 #' Tests for homogeneity of odds ratios across strata in \eqn{2 \times 2 \times k}{2 x 2 x k}
@@ -82,6 +89,7 @@
 #' @importFrom stats mantelhaen.test pchisq
 #' @seealso [stats::mantelhaen.test()], [woolf_test()], [DescTools::BreslowDayTest()]
 #' @family association tests
+#' @author Andri Signorell, Michael Friendly (enhancements)
 #'
 #' @references
 #' Breslow, N. E. & Day, N. E. (1980). \emph{Statistical Methods in Cancer Research.
