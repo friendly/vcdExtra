@@ -1,3 +1,9 @@
+# Examples of collapsing levels of a factor
+#
+# -- Collapse the levels of `race`, `ptd` and ftv`
+# -- superceded by `collapse_levels()`
+# -- could be used an an example of doing such stuff with dplyr
+#
 data(birthwt, package="MASS")
 # how to do this without attach?
 attach(birthwt)
@@ -18,6 +24,6 @@ birthwt |>
          ftv = factor(ftv),
          levels(ftv)[-(1:2)] = "2+") |>
   mutate(low = factor(low),
-         ht = (ht > 0), 
+         ht = (ht > 0),
          ui = (ui > 0)) |>
   select(low, age, lwt, race, ht, ui, ftv)
