@@ -94,3 +94,55 @@ and only show the two 1-way margins.**
   `R/CMHtest.R`) and **`# TODO: determine score types (integer, midrank) for heading`** are
   existing nearby TODOs in the same function -- this display could reasonably land in the same pass
   as those, since it touches the same print method.
+
+## An LRstats/loglinear analog (verified 2026-07-31)
+
+The `Mental` dataset's own `@examples` in `R/data.R` (lines ~2478-2498) fit four Poisson GLMs --
+`indep`, `linlin` (+`Rscore:Cscore`), `roweff` (+`mental:Cscore`), `coleff` (+`Rscore:ses`) -- plus
+`rowcol` (both interaction terms together) and compare them with `LRstats()`. This is a real
+loglinear-model analog of the CMH 2x2 idea: each interaction term corresponds to treating a margin
+as general (its own factor/dummy effects) vs. ordered (a single score). Checked this by running the
+LR tests against `indep` and comparing to `CMHtest()` on the same data (`Freq ~ ses + mental`,
+ses=row, mental=column):
+
+| CMH cell (row:col) | CMH stat | LR test vs. `indep` | LR stat |
+|---|---|---|---|
+| `cor` (ord, ord)      | 37.156, df=1  | `linlin` (`Rscore:Cscore`)         | 37.523, df=1 |
+| `cmeans` (ord, gen)   | 40.666, df=3  | **`roweff`** (`mental:Cscore`)     | 41.137, df=3 |
+| `rmeans` (gen, ord)   | 40.297, df=5  | **`coleff`** (`Rscore:ses`)        | 40.589, df=5 |
+| `general` (gen, gen)  | 45.958, df=15 | fully saturated `mental*ses`       | 47.418, df=15 |
+
+Each pair lines up closely (same df, similar magnitude) -- expected, since CMH and LR tests are
+asymptotically equivalent ways of testing the same association hypotheses.
+
+**Two things worth flagging, both found by actually running it rather than assuming:**
+
+1. **Naming trap**: `roweff` (the model with `mental:Cscore`, i.e. the *column* variable `mental`
+   getting its own effect while `ses`'s contribution is a single score `Cscore`) matches CMH's
+   `cmeans`, not `rmeans` -- and `coleff` matches `rmeans`, not `cmeans`. The variable names in the
+   `R/data.R` example describe which score is being used, not which CMH cell they land in; they're
+   inverted from what the names suggest at first glance.
+
+2. **`rowcol` is not the LR analog of `general`.** Adding both interaction terms together only
+   gets to df=7 (`anova(indep, rowcol)`), not the full df=15 of general association -- there's a
+   1-df redundancy between the two term sets when combined, and even accounting for that, `rowcol`
+   is a genuinely different (more restrictive) "additive row + column effects" model, not the fully
+   saturated one. The real LR analog of `general` is the saturated model `mental*ses` (df=15,
+   matches CMH's `general` closely, see table above).
+
+   That said, `rowcol` turns out to be useful for something CMH's naive arithmetic can't do
+   cleanly: `anova(rowcol, saturated)` gives a **proper nested LR test for lack of fit beyond the
+   additive effects model** -- df=8 (same df as the CMH "corner" cell's `(R-2)(C-2)`, by
+   construction), LR-chisq=3.045, p=0.93. Unlike the CMH corner cell (`general - rmeans - cmeans +
+   cor`, an inclusion-exclusion combination of four different quadratic forms that isn't
+   guaranteed >= 0), this is a genuine deviance difference between nested models, so it's
+   **guaranteed non-negative**. The numeric value differs from the CMH corner's 2.150 (different
+   statistics, not the same quantity computed two ways), but this may be the more principled way to
+   get a "residual/interaction" cell if the experimental CMH corner cell doesn't pan out.
+
+**Suggestion**: if the `print.CMHtest(layout = "2x2")` corner cell turns out to be unreliable
+(negative, or just not trustworthy as a chi-square), this LR-based `rowcol`-vs-saturated residual
+test is a solid fallback for that specific cell, at the cost of needing to fit loglinear models
+rather than just reorganizing `CMHtest()`'s existing output.
+
+See `dev/CMH-2x2-LRstats.Rmd` for a runnable version of everything in this section.

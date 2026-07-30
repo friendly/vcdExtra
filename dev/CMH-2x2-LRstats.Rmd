@@ -1,0 +1,120 @@
+---
+title: "CMHtest 2x2 idea: an LRstats/loglinear analog"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, message = FALSE, warning = FALSE)
+```
+
+See `dev/CMH-2x2.md` for the design notes this supports. That file sketches reorganizing
+`CMHtest()`'s four statistics (`cor`, `rmeans`, `cmeans`, `general`) into a 2x2 layout crossing
+how the row/column variables are each treated -- general (nominal) vs. ordered (scored). This Rmd
+checks a loglinear-model analog of the same idea, using the model-comparison example already in
+`Mental`'s own `@examples` (`R/data.R`, ~lines 2478-2498).
+
+```{r load}
+library(vcdExtra)
+data(Mental)
+```
+
+## The CMH side
+
+```{r cmh}
+cmh <- CMHtest(Freq ~ ses + mental, data = Mental)
+print(cmh)
+```
+
+## The loglinear-model side
+
+Four association terms, each treating `ses` (row, 6 levels) and `mental` (column, 4 levels) as
+either its own factor (general/nominal) or via a single integer score (ordered):
+
+```{r models}
+indep <- glm(Freq ~ mental + ses, family = poisson, data = Mental)
+
+Cscore <- as.numeric(Mental$ses)     # a "row" score, despite the name
+Rscore <- as.numeric(Mental$mental)  # a "column" score, despite the name
+
+linlin <- update(indep, . ~ . + Rscore:Cscore)  # both ordered
+roweff <- update(indep, . ~ . + mental:Cscore)  # mental (col) general, ses (row) ordered
+coleff <- update(indep, . ~ . + Rscore:ses)     # ses (row) general, mental (col) ordered
+rowcol <- update(indep, . ~ . + Rscore:ses + mental:Cscore)  # both terms together
+
+LRstats(indep, linlin, roweff, coleff, rowcol)
+```
+
+**Note the naming trap**: `roweff` uses `mental:Cscore` -- i.e. `mental` (the *column* variable)
+keeps its own factor effects, while `ses` (row) is reduced to the single score `Cscore`. That
+structurally matches CMH's `cmeans` ("col mean scores differ" -- row ordered, col general), not
+`rmeans`, despite the name. `coleff` is the mirror image, matching `rmeans`. The variable names
+describe which *score* is used, not which CMH cell the model lands in.
+
+## Correspondence check
+
+LR tests of each model against `indep`, compared to the matching `CMHtest()` row:
+
+```{r compare}
+lr_test <- function(mod, label) {
+  a <- anova(indep, mod, test = "Chisq")
+  data.frame(model = label, LRchisq = round(a$Deviance[2], 3), df = a$Df[2],
+             p = signif(a[["Pr(>Chi)"]][2], 4))
+}
+
+saturated <- glm(Freq ~ mental * ses, family = poisson, data = Mental)
+
+lr_results <- rbind(
+  lr_test(linlin, "linlin"),
+  lr_test(roweff, "roweff"),
+  lr_test(coleff, "coleff"),
+  lr_test(saturated, "saturated (mental*ses)")
+)
+
+cmh_results <- data.frame(
+  cmh_type = c("cor", "cmeans", "rmeans", "general"),
+  cmh_chisq = cmh$table[c("cor", "cmeans", "rmeans", "general"), "Chisq"],
+  cmh_df = cmh$table[c("cor", "cmeans", "rmeans", "general"), "Df"]
+)
+
+cbind(cmh_results, lr_results[, -1])
+```
+
+Each pair lines up closely (same df, similar magnitude) -- expected, since CMH and LR tests are
+asymptotically equivalent ways of testing the same association hypotheses. `general` needs the
+**fully saturated** model, not `rowcol`.
+
+## `rowcol` is a different, more restrictive model -- not the analog of `general`
+
+```{r rowcol-df}
+anova(indep, rowcol, test = "Chisq")
+```
+
+Both interaction terms together only reach df=7, not the df=15 of full general association --
+there's a 1-df redundancy between the two term sets when combined. `rowcol` is a genuinely
+different ("additive row + column effects") model, not a shortcut to the saturated one.
+
+## A rigorous alternative to the CMH "corner" cell
+
+The experimental CMH corner cell (`general - rmeans - cmeans + cor`, see `CMH-2x2.md`) is an
+inclusion-exclusion combination of four different quadratic-form statistics -- algebraically
+consistent, but not guaranteed non-negative, and its chi-square distribution under the null is
+unverified. `rowcol` vs. the saturated model gives a proper **nested** LR test instead:
+
+```{r residual}
+anova(rowcol, saturated, test = "Chisq")
+```
+
+Same df as the CMH corner (`(R-2)(C-2) = 8` here) by construction, but a genuine deviance
+difference between nested models -- so it's guaranteed >= 0, unlike the CMH corner arithmetic.
+The numeric value (`r round(anova(rowcol, saturated)$Deviance[2], 3)`) differs from the CMH
+corner's value computed in `CMH-2x2.md` (2.150) -- these are different statistics that happen to
+share the same df, not the same quantity computed two ways.
+
+**Takeaway**: if the `print.CMHtest(layout = "2x2")` corner cell proves unreliable, this
+`rowcol`-vs-`saturated` residual test is a solid, principled fallback for that specific cell --
+at the cost of needing to fit loglinear models rather than just reorganizing `CMHtest()`'s
+existing output.
