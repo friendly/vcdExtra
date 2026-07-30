@@ -16,6 +16,14 @@
 - Now reference new work on tidy methods (`as_*()` methods,
   [`collapse_levels()`](https://friendly.github.io/vcdExtra/reference/collapse_levels.md),
   …) in the tidyCats vignette
+- Added
+  [`breslow_day_test()`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md)
+  for the Breslow-Day test of homogeneity of odds ratios across strata
+  in 2x2xk tables, generalized to handle tables of any dimensionality,
+  with an optional Tarone correction and a `decompose` option (for
+  2x2xRxC tables) giving a
+  [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)-style
+  row/column/residual decomposition of the overall test
 
 ## Version 0.9.6
 

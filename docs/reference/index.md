@@ -77,6 +77,9 @@ Other functions for visualizing contingency tables
 
 Statistical tests for categorical data
 
+- [`breslow_day_test()`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md)
+  [`print(`*`<breslow_day_test>`*`)`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md)
+  : Breslow-Day Test for Homogeneity of Odds Ratios
 - [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md)
   [`print(`*`<CMHtest>`*`)`](https://friendly.github.io/vcdExtra/reference/CMHtest.md)
   : Generalized Cochran-Mantel-Haenszel Tests

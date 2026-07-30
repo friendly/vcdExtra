@@ -167,6 +167,7 @@ Other association tests:
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),
 [`GKgamma()`](https://friendly.github.io/vcdExtra/reference/GKgamma.md),
 [`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md),
+[`breslow_day_test()`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md),
 [`zero.test()`](https://friendly.github.io/vcdExtra/reference/zero.test.md)
 
 ## Examples

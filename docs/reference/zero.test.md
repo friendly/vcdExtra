@@ -63,6 +63,7 @@ Other association tests:
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),
 [`GKgamma()`](https://friendly.github.io/vcdExtra/reference/GKgamma.md),
 [`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md),
+[`breslow_day_test()`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md),
 [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
 
 ## Author
