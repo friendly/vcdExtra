@@ -114,16 +114,8 @@ print(
   treated (general/nominal vs. ordered/scored). `layout = "2x2"`
   requires all four of `cor`, `rmeans`, `cmeans`, `general` to be
   present in `x`; if `types` or `rscores`/`cscores = NULL` excluded any
-  of them, this falls back to `layout = "table"` with a warning. The
-  corner cell of the 2x2 display (`general - rmeans - cmeans + cor`, a
-  "diff of diffs") is algebraically consistent but its distribution as
-  chi-square(df) is **experimental/unverified** – these are four
-  different quadratic-form statistics, not a nested sequence of LR
-  tests, so the naive inclusion-exclusion combination is not guaranteed
-  to be non-negative in general (see `dev/CMH-2x2.md` for a worked
-  counter-example and a loglinear
-  [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)-based
-  alternative).
+  of them, this falls back to `layout = "table"` with a warning. See
+  **Details**.
 
 - stars:
 
@@ -213,6 +205,24 @@ presence of interactions.
 
 Note that strata combinations with insufficient data (less than 2
 observations) are automatically omitted from the analysis.
+
+### 2x2 layout
+
+`print.CMHtest(layout = "2x2")` is an attempt to provide an alternative
+view of these four statistics that may be more useful/understandable
+than the traditional flat 4-row table: it reorganizes them into a 2x2
+table crossing how the row and column variables are each treated
+(general/nominal vs. ordered/scored).
+
+The corner cell of this display (`general - rmeans - cmeans + cor`, a
+"diff of diffs") is algebraically consistent but its distribution as
+chi-square(df) is **experimental/unverified** – these are four different
+quadratic-form statistics, not a nested sequence of LR tests, so the
+naive inclusion-exclusion combination is not guaranteed to be
+non-negative in general (see `dev/CMH-2x2.md` for a worked
+counter-example and a loglinear
+[`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)-based
+alternative).
 
 ## References
 

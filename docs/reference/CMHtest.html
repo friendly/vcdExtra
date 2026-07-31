@@ -159,14 +159,7 @@ statistics into a 2x2 table crossing how the row and column variables are
 each treated (general/nominal vs. ordered/scored). <code>layout = "2x2"</code>
 requires all four of <code>cor</code>, <code>rmeans</code>, <code>cmeans</code>, <code>general</code> to be present in
 <code>x</code>; if <code>types</code> or <code>rscores</code>/<code>cscores = NULL</code> excluded any of them, this
-falls back to <code>layout = "table"</code> with a warning. The corner cell of the
-2x2 display (<code>general - rmeans - cmeans + cor</code>, a "diff of diffs") is
-algebraically consistent but its distribution as chi-square(df) is
-<strong>experimental/unverified</strong> – these are four different quadratic-form
-statistics, not a nested sequence of LR tests, so the naive
-inclusion-exclusion combination is not guaranteed to be non-negative in
-general (see <code>dev/CMH-2x2.md</code> for a worked counter-example and a loglinear
-<code><a href="LRstats.html">LRstats()</a></code>-based alternative).</p></dd>
+falls back to <code>layout = "table"</code> with a warning. See <strong>Details</strong>.</p></dd>
 
 
 <dt id="arg-stars">stars<a class="anchor" aria-label="anchor" href="#arg-stars"></a></dt>
@@ -244,6 +237,22 @@ variables and the strata and they will have low power in the presence of
 interactions.</p>
 <p>Note that strata combinations with insufficient data (less than 2
 observations) are automatically omitted from the analysis.</p>
+</div>
+
+<div class="section">
+<h3 id="-x-layout">2x2 layout<a class="anchor" aria-label="anchor" href="#-x-layout"></a></h3>
+
+
+<p><code>print.CMHtest(layout = "2x2")</code> is an attempt to provide an alternative view of these
+four statistics that may be more useful/understandable than the traditional flat 4-row
+table: it reorganizes them into a 2x2 table crossing how the row and column variables
+are each treated (general/nominal vs. ordered/scored).</p>
+<p>The corner cell of this display (<code>general - rmeans - cmeans + cor</code>, a "diff of diffs")
+is algebraically consistent but its distribution as chi-square(df) is
+<strong>experimental/unverified</strong> – these are four different quadratic-form statistics, not
+a nested sequence of LR tests, so the naive inclusion-exclusion combination is not
+guaranteed to be non-negative in general (see <code>dev/CMH-2x2.md</code> for a worked
+counter-example and a loglinear <code><a href="LRstats.html">LRstats()</a></code>-based alternative).</p>
 </div>
 
     </div>
