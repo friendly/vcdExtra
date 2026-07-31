@@ -12,10 +12,10 @@
 # See: https://onlinecourses.science.psu.edu/stat504/book/export/html/90
 # http://support.sas.com/documentation/cdl/en/statug/63033/HTML/default/viewer.htm#statug_freq_a0000000648.htm
 
-# DONE: this should be the main function, handling 2-way & higher-way tables
-#  With strata, use apply() or recursion over strata
-# DONE: With strata, calculate overall CMH tests controlling for strata
-# FIXED: rmeans and cmeans tests were labeled incorrectly
+# ✔️ DONE: this should be the main function, handling 2-way & higher-way tables
+#       With strata, use apply() or recursion over strata
+# ✔️ DONE: With strata, calculate overall CMH tests controlling for strata
+# ✔️ FIXED: rmeans and cmeans tests were labeled incorrectly
 
 #' Generalized Cochran-Mantel-Haenszel Tests
 #'
@@ -28,7 +28,7 @@
 #' @details
 #' For ordinal factors, more powerful tests than the test for general
 #' association (independence) are obtained by assigning scores to the row and
-#' column categories.
+#' column categories. 
 #'
 #' The standard \eqn{\chi^2} tests for association in a two-way table treat
 #' both table factors as nominal (unordered) categories. When one or both
@@ -71,20 +71,6 @@
 #' Note that strata combinations with insufficient data (less than 2
 #' observations) are automatically omitted from the analysis.
 #'
-#' ## 2x2 layout
-#'
-#' `print.CMHtest(layout = "2x2")` is an attempt to provide an alternative view of these
-#' four statistics that may be more useful/understandable than the traditional flat 4-row
-#' table: it reorganizes them into a 2x2 table crossing how the row and column variables
-#' are each treated (general/nominal vs. ordered/scored).
-#'
-#' The corner cell of this display (`general - rmeans - cmeans + cor`, a "diff of diffs")
-#' is algebraically consistent but its distribution as chi-square(df) is
-#' **experimental/unverified** -- these are four different quadratic-form statistics, not
-#' a nested sequence of LR tests, so the naive inclusion-exclusion combination is not
-#' guaranteed to be non-negative in general (see `dev/CMH-2x2.md` for a worked
-#' counter-example and a loglinear `LRstats()`-based alternative).
-#'
 #' @aliases CMHtest CMHtest.formula CMHtest.default Cochran Mantel Haenszel test print.CMHtest
 #' @param x A 2+ way contingency table in array form, or a class `"table"`
 #'          object with optional category labels specified in the dimnames(x) attribute.
@@ -116,7 +102,14 @@
 #'           each treated (general/nominal vs. ordered/scored). `layout = "2x2"`
 #'           requires all four of `cor`, `rmeans`, `cmeans`, `general` to be present in
 #'           `x`; if `types` or `rscores`/`cscores = NULL` excluded any of them, this
-#'           falls back to `layout = "table"` with a warning. See **Details**.
+#'           falls back to `layout = "table"` with a warning. The corner cell of the
+#'           2x2 display (`general - rmeans - cmeans + cor`, a "diff of diffs") is
+#'           algebraically consistent but its distribution as chi-square(df) is
+#'           **experimental/unverified** -- these are four different quadratic-form
+#'           statistics, not a nested sequence of LR tests, so the naive
+#'           inclusion-exclusion combination is not guaranteed to be non-negative in
+#'           general (see `dev/CMH-2x2.md` for a worked counter-example and a loglinear
+#'           `LRstats()`-based alternative).
 #' @param stars For `print.CMHtest()` with `layout = "2x2"`, logical: annotate
 #'           each cell with significance stars (`'***'`/`'**'`/`'*'` for p < .001/.01/.05)
 #'           based on its own (Chisq, Df). Default `FALSE`, matching `layout = "table"`'s
@@ -169,7 +162,6 @@
 #' Association*, 58, 690-700.
 #' @keywords htest
 #' @export
-#' @importFrom stats setNames
 #' @examples
 #'
 #' data(JobSat, package="vcdExtra")
@@ -568,6 +560,19 @@ cmh <- function(n, m, A, V, df) {
 # TODO: handle the printing of pvalues better
 # TODO: determine score types (integer, midrank) for heading
 
+# ------------------------------------------------------------------------
+# DEV DRAFT: merges the existing print.CMHtest() with the layout = "2x2"
+# prototype from dev/print-CMHtest-2x2.R (design notes in dev/CMH-2x2.md).
+# `layout = "table"` (the default) reproduces the original flat printout
+# unchanged, so this is a backward-compatible superset -- once tested here,
+# this whole file's print.CMHtest()/print_CMHtest_list() are meant to
+# replace the current versions in R/CMHtest.R.
+#
+# To try it: devtools::load_all() (or library(vcdExtra)), then
+# source("dev/CMHtest.R") to shadow the package's CMHtest()/print.CMHtest()
+# in the global environment. Run the if (FALSE) block at the bottom.
+# ------------------------------------------------------------------------
+
 #' @rdname CMHtest
 #' @export
 print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
@@ -694,8 +699,8 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
     ),
     nrow = 3, byrow = TRUE,
     dimnames = list(
-      c("row: general", "row: ordered", "diff (gen-ord)"),
-      c("col: general", "col: ordered", "diff (gen-ord)")
+      c("row: general", "row: ordered", "diff (gen−ord)"),
+      c("col: general", "col: ordered", "diff (gen−ord)")
     )
   )
 
@@ -720,4 +725,38 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
 # not a designed public entry point.
 print_CMHtest_list <- function(x, ...) {
   invisible(lapply(x, print.CMHtest, ...))
+}
+
+
+# ==============================================================================
+# Test cases -- guarded so this file can be `source()`d without side effects.
+# Run interactively after: devtools::load_all(); source("dev/CMHtest.R")
+# ==============================================================================
+if (FALSE) {
+
+  # --- Mental: 6 x 4, unequal R and C -----------------------------------------
+  data(Mental)
+  cmh_mental <- CMHtest(Freq ~ ses + mental, data = Mental)
+  print(cmh_mental)                  # unchanged default behavior
+  print(cmh_mental, layout = "2x2")  # new display, no stars (default)
+  print(cmh_mental, layout = "2x2", stars = TRUE)  # opt in to significance stars
+  print(cmh_mental, layout = "2x2", scale = TRUE)  # X^2/df instead of raw X^2
+
+  # --- MSPatients: 4 x 4 x 2 strata, square table, overall CMH ----------------
+  # CMHtest(..., overall = TRUE) returns a *list* of per-stratum CMHtest objects
+  # plus a combined one named "ALL".
+  data(MSPatients, package = "vcd")
+  cmh_ms <- CMHtest(MSPatients, overall = TRUE)  # list: 2 strata + "ALL"
+  print(cmh_ms)                                  # default list-print: all 3, layout = "table"
+  print_CMHtest_list(cmh_ms, layout = "2x2")                 # all 3, layout = "2x2"
+  print_CMHtest_list(cmh_ms, layout = "2x2", stars = TRUE)   # all 3, with stars
+
+  # ALL only, for isolated testing -- also exercises the CMHtest3() "list matrix"
+  # table quirk noted above (the overall-across-strata path): confirms the
+  # defensive unlist() in print.CMHtest() handles it.
+  print(cmh_ms$ALL, layout = "2x2")
+
+  # --- Fallback check: restrict types so not all four are available ----------
+  cmh_partial <- CMHtest(Freq ~ ses + mental, data = Mental, types = c("cor", "general"))
+  print(cmh_partial, layout = "2x2")  # should warn and fall back to layout = "table"
 }

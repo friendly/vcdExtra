@@ -33,6 +33,18 @@
 # TODO: Get variable labels from data (if labeled) or args xlab=, ylab=
 # TODO: Combine these functions in a more general way. An argument, `marginal = c("hist", "points")`
 
+# FIXME: I get errors / warning with the test case:
+# > source("C:/R/projects/vcdExtra/dev/loghistplot.R")
+# >   data(Donner, package = "vcdExtra")
+# >   loghistplot(Donner[,c("age","survived")])
+# Loading required package: ggplot2
+# Loading required package: gridExtra
+# Error in opts(panel.grid.major = theme_blank(), panel.grid.minor = theme_blank(),  : 
+#                 could not find function "opts"
+#               In addition: Warning message:
+#                 In geom_smooth(method = "glm", family = binomial, se = TRUE, colour = "black",  :
+#                                  Ignoring unknown parameters: `family`
+
 # Define the function
 loghistplot  <- function(data) {
 

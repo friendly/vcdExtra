@@ -67,7 +67,7 @@ Other functions for visualizing contingency tables
 - [`plot(`*`<assoc_graph>`*`)`](https://friendly.github.io/vcdExtra/reference/plot.assoc_graph.md)
   : Plot an Association Graph
 - [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
-  : Smart Display of Frequency Table with Colored Cell Backgrounds
+  : Smart Display of Frequency Tables with Colored Cell Backgrounds
 - [`knit_include()`](https://friendly.github.io/vcdExtra/reference/knit_include.md)
   : Include an HTML-renderable object in any knitr output format
 - [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
@@ -118,7 +118,7 @@ Logseries distributions
 
 ## Conversions
 
-Converting between table, freq, case, array, and matrix forms
+Tidy conversions between table, freq, case, array, and matrix forms
 
 - [`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md)
   : Convert frequency or case form data into table form

@@ -79,18 +79,95 @@ and only show the two 1-way margins.**
   `rmeans`/`cor` respectively -- see `R/CMHtest.R` lines ~427-430), the 2x2 layout can't be built;
   fall back to the existing flat table with a message, don't error.
 
-* **What to show in each cell**:
-  - The values of X^2 and their degrees of freedom, as above.
-  - Alternative worth trying: X^2 / df instead of raw X^2 -- normalizes for the very different df's
-    across cells (1 vs 3 vs 5 vs 15 here), giving a more comparable "strength of evidence per df"
-    reading. Probably better than raw X^2 for this specific display, since the whole point is
-    comparing cells that have different df.
+* **What to show in each cell**: implemented as a `scale = FALSE` argument (plain logical, same
+  reasoning as `stars` above) to `print.CMHtest()` in `dev/print-CMHtest-2x2.R`. Default shows
+  `X^2 (df)` per cell, as above. `scale = TRUE` shows `X^2/df` instead -- normalizes for the very
+  different df's across cells (1 vs 3 vs 5 vs 15 here), giving a more comparable "strength of
+  evidence per df" reading -- and in that mode the `(df)` is dropped from the cell text entirely
+  (it's no longer the divisor being displayed alongside the raw stat, so showing it would be
+  redundant/confusing); the heading note switches from "Cell values: X^2 (df)" to "Cell values:
+  X^2/df" accordingly. Significance stars, when `stars = TRUE`, are still computed from the
+  underlying raw (X^2, df) pair regardless of `scale`, since the p-value depends on the actual
+  chi-square statistic, not the ratio.
 
-* **Significance stars**: in this example all four core cells are highly significant, so stars
-  wouldn't discriminate -- need a second, less lopsided example (real or synthetic) to see whether
-  star thresholds are actually useful here before committing to a scheme.
+* **Significance stars**: made optional via a `stars = FALSE` argument (default off, matching
+  `layout = "table"`'s always-plain display) -- in the Mental example all four core cells are
+  highly significant, so stars clutter more than they discriminate. **Not** a `match.arg()`-style
+  enum like `layout`: `match.arg()` only accepts a logical `choices` vector like `c(FALSE, TRUE)`
+  by accident, when the caller leaves the arg at its default (its first check is
+  `identical(arg, choices)`, true only for the untouched default promise); an explicit
+  `stars = TRUE` call hits `is.character(arg)` and errors. So `stars` is just a plain logical
+  argument (`isTRUE(stars)`), not routed through `match.arg()`. Implemented in
+  `dev/print-CMHtest-2x2.R`. Still need a second, less lopsided example (real or synthetic) to
+  judge whether the star thresholds are useful when `stars = TRUE`.
+
+* **Strata**: `CMHtest(..., strata = ...)` (implicit for 3+ way tables) returns a *plain, unclassed
+  `list`* of per-stratum `"CMHtest"` objects, plus one named `"ALL"` when `overall = TRUE` -- e.g.
+  for `MSPatients` (4x4x2 strata), a list of length 3: `"Patients:Winnipeg"`,
+  `"Patients:New Orleans"`, `"ALL"`. Each *element* already carries class `"CMHtest"` (that's why
+  `print(cmh_ms)` with no extra args happens to print all three in `layout = "table"` -- R's default
+  list-printing dispatches `print()` on each classed element) but the outer list itself has no
+  class to dispatch on, so `print(cmh_ms, layout = "2x2")` can't work directly -- there's nowhere
+  for `layout`/`stars`/`scale` to be forwarded to the per-element `print.CMHtest()` calls. Since
+  each element is already a proper `"CMHtest"` object, no new class/method is needed -- just an
+  `lapply()` over `print.CMHtest()`: added `print_CMHtest_list(x, ...)` in
+  `dev/print-CMHtest-2x2.R`, which forwards `...` (layout, stars, scale, digits) to every stratum +
+  `"ALL"`. Each stratum's own heading (`"in stratum ..."` vs `"Overall tests..."`) already
+  distinguishes them, so no extra separator logic was needed.
 
 * **`# TODO: handle the printing of pvalues better`** (already noted at the top of
   `R/CMHtest.R`) and **`# TODO: determine score types (integer, midrank) for heading`** are
   existing nearby TODOs in the same function -- this display could reasonably land in the same pass
   as those, since it touches the same print method.
+
+## An LRstats/loglinear analog (verified 2026-07-31)
+
+The `Mental` dataset's own `@examples` in `R/data.R` (lines ~2478-2498) fit four Poisson GLMs --
+`indep`, `linlin` (+`Rscore:Cscore`), `roweff` (+`mental:Cscore`), `coleff` (+`Rscore:ses`) -- plus
+`rowcol` (both interaction terms together) and compare them with `LRstats()`. This is a real
+loglinear-model analog of the CMH 2x2 idea: each interaction term corresponds to treating a margin
+as general (its own factor/dummy effects) vs. ordered (a single score). Checked this by running the
+LR tests against `indep` and comparing to `CMHtest()` on the same data (`Freq ~ ses + mental`,
+ses=row, mental=column):
+
+| CMH cell (row:col) | CMH stat | LR test vs. `indep` | LR stat |
+|---|---|---|---|
+| `cor` (ord, ord)      | 37.156, df=1  | `linlin` (`Rscore:Cscore`)         | 37.523, df=1 |
+| `cmeans` (ord, gen)   | 40.666, df=3  | **`roweff`** (`mental:Cscore`)     | 41.137, df=3 |
+| `rmeans` (gen, ord)   | 40.297, df=5  | **`coleff`** (`Rscore:ses`)        | 40.589, df=5 |
+| `general` (gen, gen)  | 45.958, df=15 | fully saturated `mental*ses`       | 47.418, df=15 |
+
+Each pair lines up closely (same df, similar magnitude) -- expected, since CMH and LR tests are
+asymptotically equivalent ways of testing the same association hypotheses.
+
+**Two things worth flagging, both found by actually running it rather than assuming:**
+
+1. **Naming trap**: `roweff` (the model with `mental:Cscore`, i.e. the *column* variable `mental`
+   getting its own effect while `ses`'s contribution is a single score `Cscore`) matches CMH's
+   `cmeans`, not `rmeans` -- and `coleff` matches `rmeans`, not `cmeans`. The variable names in the
+   `R/data.R` example describe which score is being used, not which CMH cell they land in; they're
+   inverted from what the names suggest at first glance.
+
+2. **`rowcol` is not the LR analog of `general`.** Adding both interaction terms together only
+   gets to df=7 (`anova(indep, rowcol)`), not the full df=15 of general association -- there's a
+   1-df redundancy between the two term sets when combined, and even accounting for that, `rowcol`
+   is a genuinely different (more restrictive) "additive row + column effects" model, not the fully
+   saturated one. The real LR analog of `general` is the saturated model `mental*ses` (df=15,
+   matches CMH's `general` closely, see table above).
+
+   That said, `rowcol` turns out to be useful for something CMH's naive arithmetic can't do
+   cleanly: `anova(rowcol, saturated)` gives a **proper nested LR test for lack of fit beyond the
+   additive effects model** -- df=8 (same df as the CMH "corner" cell's `(R-2)(C-2)`, by
+   construction), LR-chisq=3.045, p=0.93. Unlike the CMH corner cell (`general - rmeans - cmeans +
+   cor`, an inclusion-exclusion combination of four different quadratic forms that isn't
+   guaranteed >= 0), this is a genuine deviance difference between nested models, so it's
+   **guaranteed non-negative**. The numeric value differs from the CMH corner's 2.150 (different
+   statistics, not the same quantity computed two ways), but this may be the more principled way to
+   get a "residual/interaction" cell if the experimental CMH corner cell doesn't pan out.
+
+**Suggestion**: if the `print.CMHtest(layout = "2x2")` corner cell turns out to be unreliable
+(negative, or just not trustworthy as a chi-square), this LR-based `rowcol`-vs-saturated residual
+test is a solid fallback for that specific cell, at the cost of needing to fit loglinear models
+rather than just reorganizing `CMHtest()`'s existing output.
+
+See `dev/CMH-2x2-LRstats.Rmd` for a runnable version of everything in this section.

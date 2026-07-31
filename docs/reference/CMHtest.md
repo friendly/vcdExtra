@@ -4,7 +4,8 @@ Provides generalized Cochran-Mantel-Haenszel tests of association of two
 possibly ordered factors, optionally stratified other factor(s). With
 strata, `CMHtest` calculates these tests for each level of the
 stratifying variables and also provides overall tests controlling for
-the strata.
+the strata. See **Details** for descriptions of what these entail and
+enhancements to this function.
 
 ## Usage
 
@@ -27,7 +28,14 @@ CMHtest(
 )
 
 # S3 method for class 'CMHtest'
-print(x, digits = max(getOption("digits") - 2, 3), ...)
+print(
+  x,
+  digits = max(getOption("digits") - 2, 3),
+  layout = c("table", "2x2"),
+  stars = FALSE,
+  scale = FALSE,
+  ...
+)
 ```
 
 ## Arguments
@@ -98,6 +106,30 @@ print(x, digits = max(getOption("digits") - 2, 3), ...)
 
   Digits to print.
 
+- layout:
+
+  For `print.CMHtest()`, one of `"table"` (default) for the traditional
+  flat 4-row printout, or `"2x2"` to reorganize the four CMH statistics
+  into a 2x2 table crossing how the row and column variables are each
+  treated (general/nominal vs. ordered/scored). `layout = "2x2"`
+  requires all four of `cor`, `rmeans`, `cmeans`, `general` to be
+  present in `x`; if `types` or `rscores`/`cscores = NULL` excluded any
+  of them, this falls back to `layout = "table"` with a warning. See
+  **Details**.
+
+- stars:
+
+  For `print.CMHtest()` with `layout = "2x2"`, logical: annotate each
+  cell with significance stars (`'***'`/`'**'`/`'*'` for p \<
+  .001/.01/.05) based on its own (Chisq, Df). Default `FALSE`, matching
+  `layout = "table"`'s plain display.
+
+- scale:
+
+  For `print.CMHtest()` with `layout = "2x2"`, logical: show `Chisq/Df`
+  instead of `Chisq (Df)` in each cell – normalizes for the very
+  different degrees of freedom across cells. Default `FALSE`.
+
 ## Value
 
 An object of class `"CMHtest"` , a list with the following 4 components:
@@ -137,28 +169,30 @@ tests of association may be obtained by taking ordinality into account
 using row and or column scores to test for linear trends or differences
 in row or column means.
 
-The CMH analysis for a two-way table produces generalized
-Cochran-Mantel-Haenszel statistics (Landis etal., 1978).
+The CMH analysis for a two-way table produces **generalized**
+Cochran-Mantel-Haenszel statistics (Landis etal., 1978):
 
-These include the CMH **correlation** statistic (`"cor"`), treating both
-factors as ordered. For a given statum, with equally spaced row and
-column scores, this CMH statistic reduces to \\(n-1) r^2\\, where \\r\\
-is the Pearson correlation between X and Y. With `"midrank"` scores,
-this CMH statistic is analogous to \\(n-1) r_S^2\\, using the Spearman
-rank correlation.
+- The CMH **correlation** statistic (`"cor"`), treating both factors as
+  ordered. For a given statum, with equally spaced row and column
+  scores, this CMH statistic reduces to \\(n-1) r^2\\, where \\r\\ is
+  the Pearson correlation between X and Y. With `"midrank"` scores, this
+  CMH statistic is analogous to \\(n-1) r_S^2\\, using the Spearman rank
+  correlation.
 
-The **ANOVA** (row mean scores and column mean scores) statistics, treat
-the columns and rows respectively as ordinal, and are sensitive to mean
-shifts over columns or rows. These are transforms of the \\F\\
-statistics from one-way ANOVAs with equally spaced scores and to
-Kruskal-Wallis tests with `"midrank"` scores.
+- The **ANOVA** (row mean scores and column mean scores) statistics,
+  treat the columns and rows respectively as ordinal, and are sensitive
+  to mean shifts over columns or rows. These are transforms of the \\F\\
+  statistics from one-way ANOVAs with equally spaced scores and to
+  Kruskal-Wallis tests with `"midrank"` scores.
 
-The CMH **general** association statistic treat both factors as
-unordered, and give a test closely related to the Pearson \\\chi^2\\
-test. When there is more than one stratum, the overall general CMH
-statistic gives a stratum-adjusted Pearson \\\chi^2\\, equivalent to
-what is calculated by
-[`mantelhaen.test`](https://rdrr.io/r/stats/mantelhaen.test.html).
+- The CMH **general** association statistic treat both factors as
+  unordered, and give a test closely related to the Pearson \\\chi^2\\
+  test. When there is more than one stratum, the overall general CMH
+  statistic gives a stratum-adjusted Pearson \\\chi^2\\, equivalent to
+  what is calculated by
+  [`mantelhaen.test`](https://rdrr.io/r/stats/mantelhaen.test.html).
+
+### Strata
 
 For a 3+ way table, one table of CMH tests is produced for each
 combination of the factors identified as `strata`. If `overall=TRUE`, an
@@ -171,6 +205,24 @@ presence of interactions.
 
 Note that strata combinations with insufficient data (less than 2
 observations) are automatically omitted from the analysis.
+
+### 2x2 layout
+
+`print.CMHtest(layout = "2x2")` is an attempt to provide an alternative
+view of these four statistics that may be more useful/understandable
+than the traditional flat 4-row table: it reorganizes them into a 2x2
+table crossing how the row and column variables are each treated
+(general/nominal vs. ordered/scored).
+
+The corner cell of this display (`general - rmeans - cmeans + cor`, a
+"diff of diffs") is algebraically consistent but its distribution as
+chi-square(df) is **experimental/unverified** – these are four different
+quadratic-form statistics, not a nested sequence of LR tests, so the
+naive inclusion-exclusion combination is not guaranteed to be
+non-negative in general (see `dev/CMH-2x2.md` for a worked
+counter-example and a loglinear
+[`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)-based
+alternative).
 
 ## References
 
@@ -500,6 +552,42 @@ CMHtest(Freq ~ attitude + memory | education + age, data = Punishment)
 #> cmeans  Col mean scores differ 3.0436  1 0.081055
 #> general    General association 3.0436  1 0.081055
 #> 
+#> 
+
+# 2x2 layout, reorganizing the four CMH statistics by how the row/column
+# variables are treated (general/nominal vs. ordered/scored)
+cmh_mental <- CMHtest(Freq ~ ses + mental, data = Mental)
+print(cmh_mental, layout = "2x2")
+#> Cochran-Mantel-Haenszel Statistics for ses by mental 
+#>  Row/column display: general (nominal) vs. ordered (scored)
+#>  Cell values: X^2 (df)
+#> 
+#>                col: general col: ordered diff (gen-ord)
+#> row: general    45.958 (15)   40.297 (5)    5.6609 (10)
+#> row: ordered     40.666 (3)   37.156 (1)     3.5106 (2)
+#> diff (gen-ord)  5.2914 (12)   3.1411 (4)     2.1503 (8)
+#> 
+print(cmh_mental, layout = "2x2", stars = TRUE)
+#> Cochran-Mantel-Haenszel Statistics for ses by mental 
+#>  Row/column display: general (nominal) vs. ordered (scored)
+#>  Cell values: X^2 (df)
+#> 
+#>                  col: general  col: ordered diff (gen-ord)
+#> row: general   45.958 (15)*** 40.297 (5)***    5.6609 (10)
+#> row: ordered    40.666 (3)*** 37.156 (1)***     3.5106 (2)
+#> diff (gen-ord)    5.2914 (12)    3.1411 (4)     2.1503 (8)
+#> 
+#> Signif. codes: '***' p<.001  '**' p<.01  '*' p<.05
+#> 
+print(cmh_mental, layout = "2x2", scale = TRUE)
+#> Cochran-Mantel-Haenszel Statistics for ses by mental 
+#>  Row/column display: general (nominal) vs. ordered (scored)
+#>  Cell values: X^2/df
+#> 
+#>                col: general col: ordered diff (gen-ord)
+#> row: general         3.0638       8.0593        0.56609
+#> row: ordered         13.555       37.156         1.7553
+#> diff (gen-ord)      0.44095      0.78527        0.26879
 #> 
 
 

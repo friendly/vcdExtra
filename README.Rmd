@@ -94,13 +94,16 @@ directly from the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 ### Overview
 
 The original purpose of this package was to serve as a sandbox for introducing extensions of
-mosaic plots and related graphical methods that apply to loglinear models fitted using `MASS::loglm()`,
-generalized linear models using `stats::glm()` and the related, generalized _nonlinear_ models fitted
+mosaic plots and related graphical methods from the [vcd package](https://codeberg.org/davidjohannesmeyer/vcd)
+that apply to loglinear models fitted using `MASS::loglm()`, 
+generalized linear models using `stats::glm()` and also to 
+the related, generalized _nonlinear_ models fitted
 with `gnm()` in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
 A related purpose was to fill in some holes in the analysis of
 categorical data in R, not provided in base R, [vcd](https://CRAN.R-project.org/package=vcd), 
-or other commonly used packages.
+or other commonly used packages. I now see `vcdExtra` as a leading edge of development
+of statistical and graphic methods for categorical data analysis (CDA) in R.
 
 ##### See also:
 <a href="https://www.routledge.com/Discrete-Data-Analysis-with-R-Visualization-and-Modeling-Techniques-for/Friendly-Meyer/p/book/9781498725835"><img src="man/figures/ddar-cover.png" style="height:100px;"/></a>&nbsp; &nbsp; &nbsp; 
@@ -155,6 +158,8 @@ specification of terms in model formulas using
 `gnm::Symm()`,
 `gnm::Diag()`, 
 `gnm::Topo(),` etc. in the [gnm](https://CRAN.R-project.org/package=gnm) package.
+
+
 
 ### 🗃️ Datasets
 

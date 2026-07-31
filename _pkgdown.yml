@@ -99,7 +99,7 @@ reference:
       - rlogseries
 
   - title: Conversions
-    desc: Converting between table, freq, case, array, and matrix forms
+    desc: Tidy conversions between table, freq, case, array, and matrix forms
     contents:
       - as_table
       - as_array
