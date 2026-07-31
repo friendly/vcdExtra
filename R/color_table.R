@@ -66,7 +66,7 @@
 #
 
 
-#' Smart Display of Frequency Table with Colored Cell Backgrounds
+#' Smart Display of Frequency Tables with Colored Cell Backgrounds
 #'
 #' `color_table()` creates a formatted, semi-graphic "heatmap" table display of frequency data with cell backgrounds
 #' colored according to observed frequencies or their residuals from a loglinear model. The goal is to provide a

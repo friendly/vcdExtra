@@ -8,7 +8,7 @@
 \alias{color_table.data.frame}
 \alias{color_table.matrix}
 \alias{color_table.default}
-\title{Smart Display of Frequency Table with Colored Cell Backgrounds}
+\title{Smart Display of Frequency Tables with Colored Cell Backgrounds}
 \usage{
 color_table(x, ...)
 
