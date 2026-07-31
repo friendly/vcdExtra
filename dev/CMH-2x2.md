@@ -79,16 +79,27 @@ and only show the two 1-way margins.**
   `rmeans`/`cor` respectively -- see `R/CMHtest.R` lines ~427-430), the 2x2 layout can't be built;
   fall back to the existing flat table with a message, don't error.
 
-* **What to show in each cell**:
-  - The values of X^2 and their degrees of freedom, as above.
-  - Alternative worth trying: X^2 / df instead of raw X^2 -- normalizes for the very different df's
-    across cells (1 vs 3 vs 5 vs 15 here), giving a more comparable "strength of evidence per df"
-    reading. Probably better than raw X^2 for this specific display, since the whole point is
-    comparing cells that have different df.
+* **What to show in each cell**: implemented as a `scale = FALSE` argument (plain logical, same
+  reasoning as `stars` above) to `print.CMHtest()` in `dev/print-CMHtest-2x2.R`. Default shows
+  `X^2 (df)` per cell, as above. `scale = TRUE` shows `X^2/df` instead -- normalizes for the very
+  different df's across cells (1 vs 3 vs 5 vs 15 here), giving a more comparable "strength of
+  evidence per df" reading -- and in that mode the `(df)` is dropped from the cell text entirely
+  (it's no longer the divisor being displayed alongside the raw stat, so showing it would be
+  redundant/confusing); the heading note switches from "Cell values: X^2 (df)" to "Cell values:
+  X^2/df" accordingly. Significance stars, when `stars = TRUE`, are still computed from the
+  underlying raw (X^2, df) pair regardless of `scale`, since the p-value depends on the actual
+  chi-square statistic, not the ratio.
 
-* **Significance stars**: in this example all four core cells are highly significant, so stars
-  wouldn't discriminate -- need a second, less lopsided example (real or synthetic) to see whether
-  star thresholds are actually useful here before committing to a scheme.
+* **Significance stars**: made optional via a `stars = FALSE` argument (default off, matching
+  `layout = "table"`'s always-plain display) -- in the Mental example all four core cells are
+  highly significant, so stars clutter more than they discriminate. **Not** a `match.arg()`-style
+  enum like `layout`: `match.arg()` only accepts a logical `choices` vector like `c(FALSE, TRUE)`
+  by accident, when the caller leaves the arg at its default (its first check is
+  `identical(arg, choices)`, true only for the untouched default promise); an explicit
+  `stars = TRUE` call hits `is.character(arg)` and errors. So `stars` is just a plain logical
+  argument (`isTRUE(stars)`), not routed through `match.arg()`. Implemented in
+  `dev/print-CMHtest-2x2.R`. Still need a second, less lopsided example (real or synthetic) to
+  judge whether the star thresholds are useful when `stars = TRUE`.
 
 * **`# TODO: handle the printing of pvalues better`** (already noted at the top of
   `R/CMHtest.R`) and **`# TODO: determine score types (integer, midrank) for heading`** are

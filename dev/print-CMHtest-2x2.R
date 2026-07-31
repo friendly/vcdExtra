@@ -13,8 +13,11 @@
 # bottom, or call print(cmh_result, layout = "2x2") directly.
 
 print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
-                           layout = c("table", "2x2"), ...) {
+                           layout = c("table", "2x2"), stars = FALSE,
+                           scale = FALSE, ...) {
   layout <- match.arg(layout)
+  stars <- isTRUE(stars)
+  scale <- isTRUE(scale)
 
   heading <- "Cochran-Mantel-Haenszel Statistics"
   if (!is.null(x$names)) {
@@ -83,7 +86,7 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
     if (is.na(q) || is.na(d) || q < 0 || d <= 0) return(NA_real_)
     pchisq(q, d, lower.tail = FALSE)
   }
-  stars <- function(p) {
+  sig_stars <- function(p) {
     if (is.na(p)) ""
     else if (p < .001) "***"
     else if (p < .01)  "**"
@@ -92,7 +95,12 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
   }
   cell <- function(q, d, flag_negative = FALSE) {
     note <- if (flag_negative && !is.na(q) && q < 0) " [invalid: negative]" else ""
-    sprintf("%.*f (df=%d)%s%s", digits, q, d, stars(pval(q, d)), note)
+    star <- if (stars) sig_stars(pval(q, d)) else ""
+    if (scale) {
+      sprintf("%.*f%s%s", digits, q / d, star, note)
+    } else {
+      sprintf("%.*f (%d)%s%s", digits, q, d, star, note)
+    }
   }
 
   # core 2x2
@@ -127,14 +135,18 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
   )
 
   cat(heading, "\n")
-  cat("\tRow/column display: general (nominal) vs. ordered (scored)\n\n")
+  cat("\tRow/column display: general (nominal) vs. ordered (scored)\n")
+  cat(if (scale) "\tCell values: X^2/df\n\n" else "\tCell values: X^2 (df)\n\n")
   print(as.data.frame(out), right = TRUE)
-  cat("\nSignif. codes: '***' p<.001  '**' p<.01  '*' p<.05\n")
-  cat("Corner cell (diff of diffs) is algebraically consistent but its distribution as\n")
-  cat("chi-square(df) is unverified, and isn't guaranteed to be >= 0 in general (these are\n")
-  cat("four different quadratic-form statistics, not a nested LR sequence) -- it just\n")
-  cat("happens to come out positive for this data. Treat as experimental (see\n")
-  cat("dev/CMH-2x2.md).\n\n")
+  if (stars) {
+    cat("\nSignif. codes: '***' p<.001  '**' p<.01  '*' p<.05\n")
+  }
+  cat("\n")
+  # cat("Corner cell (diff of diffs) is algebraically consistent but its distribution as\n")
+  # cat("chi-square(df) is unverified, and isn't guaranteed to be >= 0 in general (these are\n")
+  # cat("four different quadratic-form statistics, not a nested LR sequence) -- it just\n")
+  # cat("happens to come out positive for this data. Treat as experimental (see\n")
+  # cat("dev/CMH-2x2.md).\n\n")
 
   invisible(x)
 }
@@ -152,7 +164,9 @@ if (FALSE) {
   data(Mental)
   cmh_mental <- CMHtest(Freq ~ ses + mental, data = Mental)
   print(cmh_mental)                  # unchanged default behavior
-  print(cmh_mental, layout = "2x2")  # new display
+  print(cmh_mental, layout = "2x2")  # new display, no stars (default)
+  print(cmh_mental, layout = "2x2", stars = TRUE)  # opt in to significance stars
+  print(cmh_mental, layout = "2x2", scale = TRUE)  # X^2/df instead of raw X^2
 
   # --- MSPatients: 4 x 4 x 2 strata, square table, overall CMH ----------------
   # CMHtest(..., overall = TRUE) returns a *list* of per-stratum CMHtest objects
