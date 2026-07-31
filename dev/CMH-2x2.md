@@ -101,6 +101,20 @@ and only show the two 1-way margins.**
   `dev/print-CMHtest-2x2.R`. Still need a second, less lopsided example (real or synthetic) to
   judge whether the star thresholds are useful when `stars = TRUE`.
 
+* **Strata**: `CMHtest(..., strata = ...)` (implicit for 3+ way tables) returns a *plain, unclassed
+  `list`* of per-stratum `"CMHtest"` objects, plus one named `"ALL"` when `overall = TRUE` -- e.g.
+  for `MSPatients` (4x4x2 strata), a list of length 3: `"Patients:Winnipeg"`,
+  `"Patients:New Orleans"`, `"ALL"`. Each *element* already carries class `"CMHtest"` (that's why
+  `print(cmh_ms)` with no extra args happens to print all three in `layout = "table"` -- R's default
+  list-printing dispatches `print()` on each classed element) but the outer list itself has no
+  class to dispatch on, so `print(cmh_ms, layout = "2x2")` can't work directly -- there's nowhere
+  for `layout`/`stars`/`scale` to be forwarded to the per-element `print.CMHtest()` calls. Since
+  each element is already a proper `"CMHtest"` object, no new class/method is needed -- just an
+  `lapply()` over `print.CMHtest()`: added `print_CMHtest_list(x, ...)` in
+  `dev/print-CMHtest-2x2.R`, which forwards `...` (layout, stars, scale, digits) to every stratum +
+  `"ALL"`. Each stratum's own heading (`"in stratum ..."` vs `"Overall tests..."`) already
+  distinguishes them, so no extra separator logic was needed.
+
 * **`# TODO: handle the printing of pvalues better`** (already noted at the top of
   `R/CMHtest.R`) and **`# TODO: determine score types (integer, midrank) for heading`** are
   existing nearby TODOs in the same function -- this display could reasonably land in the same pass

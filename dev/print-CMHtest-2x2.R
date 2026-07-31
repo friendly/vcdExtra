@@ -151,6 +151,15 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
   invisible(x)
 }
 
+# CMHtest(..., overall = TRUE) (or any strata call) returns a plain, unclassed
+# list of per-stratum "CMHtest" objects (plus "ALL" when overall = TRUE) -- each
+# element already carries class "CMHtest", so printing all of them with the same
+# layout/stars/scale is just an lapply() over print.CMHtest(); the list itself
+# has no class to dispatch print(x, layout = "2x2") on directly.
+print_CMHtest_list <- function(x, ...) {
+  invisible(lapply(x, print.CMHtest, ...))
+}
+
 
 # ==============================================================================
 # Test cases -- guarded so this file can be `source()`d without side effects.
@@ -170,13 +179,17 @@ if (FALSE) {
 
   # --- MSPatients: 4 x 4 x 2 strata, square table, overall CMH ----------------
   # CMHtest(..., overall = TRUE) returns a *list* of per-stratum CMHtest objects
-  # plus a combined one named "ALL" -- that's the one to print here.
+  # plus a combined one named "ALL".
   data(MSPatients, package = "vcd")
-  cmh_ms <- CMHtest(MSPatients, overall = TRUE)$ALL
-  print(cmh_ms)
-  print(cmh_ms, layout = "2x2")
-  # Also exercises the CMHtest3() "list matrix" table quirk noted above (this is the
-  # overall-across-strata path) -- confirms the defensive unlist() handles it.
+  cmh_ms <- CMHtest(MSPatients, overall = TRUE)  # list: 2 strata + "ALL"
+  print(cmh_ms)                                  # default list-print: all 3, layout = "table"
+  print_CMHtest_list(cmh_ms, layout = "2x2")                 # all 3, layout = "2x2"
+  print_CMHtest_list(cmh_ms, layout = "2x2", stars = TRUE)   # all 3, with stars
+
+  # ALL only, for isolated testing -- also exercises the CMHtest3() "list matrix"
+  # table quirk noted above (the overall-across-strata path): confirms the
+  # defensive unlist() in print.CMHtest() handles it.
+  print(cmh_ms$ALL, layout = "2x2")
 
   # --- Fallback check: restrict types so not all four are available ----------
   cmh_partial <- CMHtest(Freq ~ ses + mental, data = Mental, types = c("cor", "general"))
