@@ -1,6 +1,6 @@
 # vcdExtra _(Extensions and additions to vcd: Visualizing Categorical Data)
 
-Version 0.9.7; documentation built for `pkgdown` 2026-07-30
+Version 0.9.7; documentation built for `pkgdown` 2026-07-31
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -67,16 +67,19 @@ the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
 The original purpose of this package was to serve as a sandbox for
 introducing extensions of mosaic plots and related graphical methods
-that apply to loglinear models fitted using
+from the [vcd package](https://codeberg.org/davidjohannesmeyer/vcd) that
+apply to loglinear models fitted using
 [`MASS::loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html), generalized
 linear models using [`stats::glm()`](https://rdrr.io/r/stats/glm.html)
-and the related, generalized *nonlinear* models fitted with `gnm()` in
-the [gnm](https://CRAN.R-project.org/package=gnm) package.
+and also to the related, generalized *nonlinear* models fitted with
+`gnm()` in the [gnm](https://CRAN.R-project.org/package=gnm) package.
 
 A related purpose was to fill in some holes in the analysis of
 categorical data in R, not provided in base R,
 [vcd](https://CRAN.R-project.org/package=vcd), or other commonly used
-packages.
+packages. I now see `vcdExtra` as a leading edge of development of
+statistical and graphic methods for categorical data analysis (CDA) in
+R.
 
 ##### See also:
 
