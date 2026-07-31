@@ -26,7 +26,14 @@ CMHtest(x, ...)
   ...
 )
 
-\method{print}{CMHtest}(x, digits = max(getOption("digits") - 2, 3), ...)
+\method{print}{CMHtest}(
+  x,
+  digits = max(getOption("digits") - 2, 3),
+  layout = c("table", "2x2"),
+  stars = FALSE,
+  scale = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A 2+ way contingency table in array form, or a class \code{"table"}
@@ -65,6 +72,30 @@ or \code{NULL} to exclude tests that depend on row scores.}
 \item{details}{logical.  Whether to include computational details in the result}
 
 \item{digits}{Digits to print.}
+
+\item{layout}{For \code{print.CMHtest()}, one of \code{"table"} (default) for the
+traditional flat 4-row printout, or \code{"2x2"} to reorganize the four CMH
+statistics into a 2x2 table crossing how the row and column variables are
+each treated (general/nominal vs. ordered/scored). \code{layout = "2x2"}
+requires all four of \code{cor}, \code{rmeans}, \code{cmeans}, \code{general} to be present in
+\code{x}; if \code{types} or \code{rscores}/\code{cscores = NULL} excluded any of them, this
+falls back to \code{layout = "table"} with a warning. The corner cell of the
+2x2 display (\code{general - rmeans - cmeans + cor}, a "diff of diffs") is
+algebraically consistent but its distribution as chi-square(df) is
+\strong{experimental/unverified} -- these are four different quadratic-form
+statistics, not a nested sequence of LR tests, so the naive
+inclusion-exclusion combination is not guaranteed to be non-negative in
+general (see \verb{dev/CMH-2x2.md} for a worked counter-example and a loglinear
+\code{LRstats()}-based alternative).}
+
+\item{stars}{For \code{print.CMHtest()} with \code{layout = "2x2"}, logical: annotate
+each cell with significance stars (\code{'***'}/\code{'**'}/\code{'*'} for p < .001/.01/.05)
+based on its own (Chisq, Df). Default \code{FALSE}, matching \code{layout = "table"}'s
+plain display.}
+
+\item{scale}{For \code{print.CMHtest()} with \code{layout = "2x2"}, logical: show
+\code{Chisq/Df} instead of \code{Chisq (Df)} in each cell -- normalizes for the very
+different degrees of freedom across cells. Default \code{FALSE}.}
 }
 \value{
 An object of class \code{"CMHtest"} , a list with the following 4 components:
@@ -85,7 +116,7 @@ Provides generalized Cochran-Mantel-Haenszel tests of association of two
 possibly ordered factors, optionally stratified other factor(s).  With
 strata, \code{CMHtest} calculates these tests for each level of the
 stratifying variables and also provides overall tests controlling for the
-strata.
+strata. See \strong{Details} for descriptions of what these entail and enhancements to this function.
 }
 \details{
 For ordinal factors, more powerful tests than the test for general
@@ -99,27 +130,27 @@ of association may be obtained by taking ordinality into account using row
 and or column scores to test for linear trends or differences in row or
 column means.
 
-The CMH analysis for a two-way table produces generalized
-Cochran-Mantel-Haenszel statistics (Landis etal., 1978).
-
-These include the CMH \strong{correlation} statistic (\code{"cor"}), treating
-both factors as ordered. For a given statum, with equally spaced row and
-column scores, this CMH statistic reduces to \eqn{(n-1) r^2}, where \eqn{r}
-is the Pearson correlation between X and Y. With \code{"midrank"} scores,
-this CMH statistic is analogous to \eqn{(n-1) r_S^2}, using the Spearman
-rank correlation.
-
-The \strong{ANOVA} (row mean scores and column mean scores) statistics, treat
-the columns and rows respectively as ordinal, and are sensitive to mean
-shifts over columns or rows. These are transforms of the \eqn{F} statistics
-from one-way ANOVAs with equally spaced scores and to Kruskal-Wallis tests
-with \code{"midrank"} scores.
-
-The CMH \strong{general} association statistic treat both factors as
-unordered, and give a test closely related to the Pearson \eqn{\chi^2} test.
-When there is more than one stratum, the overall general CMH statistic gives
-a stratum-adjusted Pearson \eqn{\chi^2}, equivalent to what is calculated by
-\code{\link[stats]{mantelhaen.test}}.
+The CMH analysis for a two-way table produces \strong{generalized}
+Cochran-Mantel-Haenszel statistics (Landis etal., 1978):
+\itemize{
+\item The CMH \strong{correlation} statistic (\code{"cor"}), treating both factors as
+ordered. For a given statum, with equally spaced row and column scores,
+this CMH statistic reduces to \eqn{(n-1) r^2}, where \eqn{r} is the
+Pearson correlation between X and Y. With \code{"midrank"} scores, this CMH
+statistic is analogous to \eqn{(n-1) r_S^2}, using the Spearman rank
+correlation.
+\item The \strong{ANOVA} (row mean scores and column mean scores) statistics,
+treat the columns and rows respectively as ordinal, and are sensitive to
+mean shifts over columns or rows. These are transforms of the \eqn{F}
+statistics from one-way ANOVAs with equally spaced scores and to
+Kruskal-Wallis tests with \code{"midrank"} scores.
+\item The CMH \strong{general} association statistic treat both factors as
+unordered, and give a test closely related to the Pearson \eqn{\chi^2}
+test. When there is more than one stratum, the overall general CMH
+statistic gives a stratum-adjusted Pearson \eqn{\chi^2}, equivalent to
+what is calculated by \code{\link[stats]{mantelhaen.test}}.
+}
+\subsection{Strata}{
 
 For a 3+ way table, one table of CMH tests is produced for each combination
 of the factors identified as \code{strata}. If \code{overall=TRUE}, an
@@ -132,6 +163,7 @@ interactions.
 
 Note that strata combinations with insufficient data (less than 2
 observations) are automatically omitted from the analysis.
+}
 }
 \examples{
 
@@ -164,6 +196,13 @@ CMHtest(Freq~ses + mental, data = Mental)
 CMHtest(Freq~right + left | gender, data = VisualAcuity)
 
 CMHtest(Freq ~ attitude + memory | education + age, data = Punishment)
+
+# 2x2 layout, reorganizing the four CMH statistics by how the row/column
+# variables are treated (general/nominal vs. ordered/scored)
+cmh_mental <- CMHtest(Freq ~ ses + mental, data = Mental)
+print(cmh_mental, layout = "2x2")
+print(cmh_mental, layout = "2x2", stars = TRUE)
+print(cmh_mental, layout = "2x2", scale = TRUE)
 
 
 # Stokes etal, Table 5.1, p 92: two unordered factors

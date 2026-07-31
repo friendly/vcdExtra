@@ -23,8 +23,9 @@
 #' possibly ordered factors, optionally stratified other factor(s).  With
 #' strata, `CMHtest` calculates these tests for each level of the
 #' stratifying variables and also provides overall tests controlling for the
-#' strata.
+#' strata. See **Details** for descriptions of what these entail and enhancements to this function.
 #'
+#' @details
 #' For ordinal factors, more powerful tests than the test for general
 #' association (independence) are obtained by assigning scores to the row and
 #' column categories.
@@ -36,27 +37,27 @@
 #' and or column scores to test for linear trends or differences in row or
 #' column means.
 #'
-#' The CMH analysis for a two-way table produces generalized
-#' Cochran-Mantel-Haenszel statistics (Landis etal., 1978).
+#' The CMH analysis for a two-way table produces **generalized**
+#' Cochran-Mantel-Haenszel statistics (Landis etal., 1978):
 #'
-#' These include the CMH **correlation** statistic (`"cor"`), treating
-#' both factors as ordered. For a given statum, with equally spaced row and
-#' column scores, this CMH statistic reduces to \eqn{(n-1) r^2}, where \eqn{r}
-#' is the Pearson correlation between X and Y. With `"midrank"` scores,
-#' this CMH statistic is analogous to \eqn{(n-1) r_S^2}, using the Spearman
-#' rank correlation.
+#' - The CMH **correlation** statistic (`"cor"`), treating both factors as
+#'   ordered. For a given statum, with equally spaced row and column scores,
+#'   this CMH statistic reduces to \eqn{(n-1) r^2}, where \eqn{r} is the
+#'   Pearson correlation between X and Y. With `"midrank"` scores, this CMH
+#'   statistic is analogous to \eqn{(n-1) r_S^2}, using the Spearman rank
+#'   correlation.
+#' - The **ANOVA** (row mean scores and column mean scores) statistics,
+#'   treat the columns and rows respectively as ordinal, and are sensitive to
+#'   mean shifts over columns or rows. These are transforms of the \eqn{F}
+#'   statistics from one-way ANOVAs with equally spaced scores and to
+#'   Kruskal-Wallis tests with `"midrank"` scores.
+#' - The CMH **general** association statistic treat both factors as
+#'   unordered, and give a test closely related to the Pearson \eqn{\chi^2}
+#'   test. When there is more than one stratum, the overall general CMH
+#'   statistic gives a stratum-adjusted Pearson \eqn{\chi^2}, equivalent to
+#'   what is calculated by \code{\link[stats]{mantelhaen.test}}.
 #'
-#' The **ANOVA** (row mean scores and column mean scores) statistics, treat
-#' the columns and rows respectively as ordinal, and are sensitive to mean
-#' shifts over columns or rows. These are transforms of the \eqn{F} statistics
-#' from one-way ANOVAs with equally spaced scores and to Kruskal-Wallis tests
-#' with `"midrank"` scores.
-#'
-#' The CMH **general** association statistic treat both factors as
-#' unordered, and give a test closely related to the Pearson \eqn{\chi^2} test.
-#' When there is more than one stratum, the overall general CMH statistic gives
-#' a stratum-adjusted Pearson \eqn{\chi^2}, equivalent to what is calculated by
-#' \code{\link[stats]{mantelhaen.test}}.
+#' ## Strata
 #'
 #' For a 3+ way table, one table of CMH tests is produced for each combination
 #' of the factors identified as `strata`. If `overall=TRUE`, an
@@ -95,6 +96,27 @@
 #' @param details logical.  Whether to include computational details in the result
 #' @param \dots Other arguments passed to default method.
 #' @param digits Digits to print.
+#' @param layout For `print.CMHtest()`, one of `"table"` (default) for the
+#'           traditional flat 4-row printout, or `"2x2"` to reorganize the four CMH
+#'           statistics into a 2x2 table crossing how the row and column variables are
+#'           each treated (general/nominal vs. ordered/scored). `layout = "2x2"`
+#'           requires all four of `cor`, `rmeans`, `cmeans`, `general` to be present in
+#'           `x`; if `types` or `rscores`/`cscores = NULL` excluded any of them, this
+#'           falls back to `layout = "table"` with a warning. The corner cell of the
+#'           2x2 display (`general - rmeans - cmeans + cor`, a "diff of diffs") is
+#'           algebraically consistent but its distribution as chi-square(df) is
+#'           **experimental/unverified** -- these are four different quadratic-form
+#'           statistics, not a nested sequence of LR tests, so the naive
+#'           inclusion-exclusion combination is not guaranteed to be non-negative in
+#'           general (see `dev/CMH-2x2.md` for a worked counter-example and a loglinear
+#'           `LRstats()`-based alternative).
+#' @param stars For `print.CMHtest()` with `layout = "2x2"`, logical: annotate
+#'           each cell with significance stars (`'***'`/`'**'`/`'*'` for p < .001/.01/.05)
+#'           based on its own (Chisq, Df). Default `FALSE`, matching `layout = "table"`'s
+#'           plain display.
+#' @param scale For `print.CMHtest()` with `layout = "2x2"`, logical: show
+#'           `Chisq/Df` instead of `Chisq (Df)` in each cell -- normalizes for the very
+#'           different degrees of freedom across cells. Default `FALSE`.
 #'
 #' @return An object of class `"CMHtest"` , a list with the following 4 components:
 #'
@@ -140,6 +162,7 @@
 #' Association*, 58, 690-700.
 #' @keywords htest
 #' @export
+#' @importFrom stats setNames
 #' @examples
 #'
 #' data(JobSat, package="vcdExtra")
@@ -171,6 +194,13 @@
 #' CMHtest(Freq~right + left | gender, data = VisualAcuity)
 #'
 #' CMHtest(Freq ~ attitude + memory | education + age, data = Punishment)
+#'
+#' # 2x2 layout, reorganizing the four CMH statistics by how the row/column
+#' # variables are treated (general/nominal vs. ordered/scored)
+#' cmh_mental <- CMHtest(Freq ~ ses + mental, data = Mental)
+#' print(cmh_mental, layout = "2x2")
+#' print(cmh_mental, layout = "2x2", stars = TRUE)
+#' print(cmh_mental, layout = "2x2", scale = TRUE)
 #'
 #'
 #' # Stokes etal, Table 5.1, p 92: two unordered factors
@@ -529,10 +559,17 @@ cmh <- function(n, m, A, V, df) {
 
 # DONE: incorporate stratum name in the heading
 # TODO: handle the printing of pvalues better
+# TODO: determine score types (integer, midrank) for heading
 
 #' @rdname CMHtest
 #' @export
-print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
+print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3),
+                           layout = c("table", "2x2"), stars = FALSE,
+                           scale = FALSE, ...) {
+  layout <- match.arg(layout)
+  stars <- isTRUE(stars)
+  scale <- isTRUE(scale)
+
   heading <- "Cochran-Mantel-Haenszel Statistics"
   if (!is.null(x$names)) {
     heading <- paste(heading, "for", paste(x$names, collapse = " by "))
@@ -547,25 +584,133 @@ print.CMHtest <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
       )
     )
   }
-  # TODO: determine score types (integer, midrank) for heading
 
-  df <- x$table
-  types <- rownames(df)
-  labels <- list(
-    cor = "Nonzero correlation",
-    rmeans = "Row mean scores differ",
-    cmeans = "Col mean scores differ",
-    general = "General association"
+  tbl <- x$table
+  types <- rownames(tbl)
+
+  if (layout == "2x2") {
+    required <- c("cor", "rmeans", "cmeans", "general")
+    if (!all(required %in% types)) {
+      warning("layout = '2x2' needs all of ", paste(required, collapse = ", "),
+              "; falling back to layout = 'table'. Missing: ",
+              paste(setdiff(required, types), collapse = ", "))
+      layout <- "table"
+    }
+  }
+
+  if (layout == "table") {
+    labels <- list(
+      cor = "Nonzero correlation",
+      rmeans = "Row mean scores differ",
+      cmeans = "Col mean scores differ",
+      general = "General association"
+    )
+    labels <- unlist(labels[types])
+    df <- data.frame(
+      "AltHypothesis" = as.character(labels),
+      tbl,
+      stringsAsFactors = FALSE
+    )
+    cat(heading, "\n\n")
+    print(df, digits = digits, ...)
+    cat("\n")
+    return(invisible(x))
+  }
+
+  # ---- layout == "2x2" -------------------------------------------------------
+
+  # NB: for multi-stratum results, CMHtest3()'s `table` (built above) is
+  # constructed via rbind() starting from an empty list(), which produces a
+  # "list matrix" -- each cell a length-1 list, not a plain double -- even
+  # though it prints identically to a normal numeric matrix. The original
+  # "table" layout above never noticed, since it just wraps the values in a
+  # data.frame; arithmetic on the raw values (needed here) breaks on that
+  # without unlisting first. Worth fixing at the source (CMHtest3() itself,
+  # e.g. `table <- matrix(nrow = 0, ncol = 3)` instead of `table <- list()`),
+  # but defending against it here too so this works with existing results.
+  Chisq <- setNames(as.numeric(unlist(tbl[, "Chisq"])), types)
+  Df    <- setNames(as.numeric(unlist(tbl[, "Df"])), types)
+
+  stat  <- function(type) unname(Chisq[type])
+  dfree <- function(type) unname(Df[type])
+
+  pval <- function(q, d) {
+    if (is.na(q) || is.na(d) || q < 0 || d <= 0) return(NA_real_)
+    pchisq(q, d, lower.tail = FALSE)
+  }
+  sig_stars <- function(p) {
+    if (is.na(p)) ""
+    else if (p < .001) "***"
+    else if (p < .01)  "**"
+    else if (p < .05)  "*"
+    else ""
+  }
+  cell <- function(q, d, flag_negative = FALSE) {
+    note <- if (flag_negative && !is.na(q) && q < 0) " [invalid: negative]" else ""
+    star <- if (stars) sig_stars(pval(q, d)) else ""
+    # `digits` means significant digits, as in print(df, digits = digits) for the
+    # "table" layout -- NOT decimal places. format() matches that semantics; a
+    # sprintf("%.*f", digits, ...) here would print `digits` decimal places instead,
+    # which for these X^2 values in the tens/hundreds is far more precision than
+    # the "table" layout shows for the same numbers.
+    valstr <- format(if (scale) q / d else q, digits = digits, nsmall = 0)
+    if (scale) {
+      sprintf("%s%s%s", valstr, star, note)
+    } else {
+      sprintf("%s (%d)%s%s", valstr, d, star, note)
+    }
+  }
+
+  # core 2x2
+  g  <- stat("general"); g_df  <- dfree("general")
+  rm <- stat("rmeans");  rm_df <- dfree("rmeans")
+  cm <- stat("cmeans");  cm_df <- dfree("cmeans")
+  cr <- stat("cor");     cr_df <- dfree("cor")
+
+  # margins: within a fixed column/row, general-treatment minus ordered-treatment
+  colgen_diff <- g - cm;  colgen_diff_df <- g_df - cm_df   # col: general;  row gen - row ord
+  colord_diff <- rm - cr; colord_diff_df <- rm_df - cr_df  # col: ordered;  row gen - row ord
+  rowgen_diff <- g - rm;  rowgen_diff_df <- g_df - rm_df   # row: general;  col gen - col ord
+  rowor_diff  <- cm - cr; rowor_diff_df  <- cm_df - cr_df  # row: ordered;  col gen - col ord
+
+  # corner: diff of diffs -- EXPERIMENTAL, see dev/CMH-2x2.md. Not guaranteed >= 0:
+  # these are four different quadratic forms, not a nested LR sequence, so the naive
+  # inclusion-exclusion combination can go negative (observed with MSPatients).
+  corner    <- g - rm - cm + cr
+  corner_df <- g_df - rm_df - cm_df + cr_df
+
+  out <- matrix(
+    c(
+      cell(g, g_df),                       cell(rm, rm_df),                     cell(rowgen_diff, rowgen_diff_df),
+      cell(cm, cm_df),                     cell(cr, cr_df),                     cell(rowor_diff, rowor_diff_df),
+      cell(colgen_diff, colgen_diff_df),   cell(colord_diff, colord_diff_df),   cell(corner, corner_df, flag_negative = TRUE)
+    ),
+    nrow = 3, byrow = TRUE,
+    dimnames = list(
+      c("row: general", "row: ordered", "diff (gen-ord)"),
+      c("col: general", "col: ordered", "diff (gen-ord)")
+    )
   )
-  labels <- unlist(labels[types]) # select the labels for the types
-  df <- data.frame(
-    "AltHypothesis" = as.character(labels),
-    df,
-    stringsAsFactors = FALSE
-  )
-  cat(heading, "\n\n")
-  print(df, digits = digits, ...)
+
+  cat(heading, "\n")
+  cat("\tRow/column display: general (nominal) vs. ordered (scored)\n")
+  cat(if (scale) "\tCell values: X^2/df\n\n" else "\tCell values: X^2 (df)\n\n")
+  print(as.data.frame(out), right = TRUE)
+  if (stars) {
+    cat("\nSignif. codes: '***' p<.001  '**' p<.01  '*' p<.05\n")
+  }
   cat("\n")
 
   invisible(x)
+}
+
+# CMHtest(..., overall = TRUE) (or any strata call) returns a plain, unclassed
+# list of per-stratum "CMHtest" objects (plus "ALL" when overall = TRUE) -- each
+# element already carries class "CMHtest", so printing all of them with the same
+# layout/stars/scale is just an lapply() over print.CMHtest(); the list itself
+# has no class to dispatch print(x, layout = "2x2") on directly. Not exported --
+# internal helper, since it's a workaround for the unclassed-list quirk above,
+# not a designed public entry point.
+print_CMHtest_list <- function(x, ...) {
+  invisible(lapply(x, print.CMHtest, ...))
 }
