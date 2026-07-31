@@ -118,7 +118,7 @@ Logseries distributions
 
 ## Conversions
 
-Converting between table, freq, case, array, and matrix forms
+Tidy conversions between table, freq, case, array, and matrix forms
 
 - [`as_table()`](https://friendly.github.io/vcdExtra/reference/as_table.md)
   : Convert frequency or case form data into table form
