@@ -24,6 +24,14 @@
   2x2xRxC tables) giving a
   [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)-style
   row/column/residual decomposition of the overall test
+- Added a `layout = "2x2"` display option to
+  [`print.CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),
+  reorganizing the four CMH statistics (`cor`, `rmeans`, `cmeans`,
+  `general`) into a 2x2 table crossing how the row and column variables
+  are each treated (general/nominal vs. ordered/scored), with optional
+  `stars` (significance stars) and `scale` (show `Chisq/Df` instead of
+  `Chisq (Df)`) arguments. Falls back to the existing flat table
+  display, with a warning, when not all four statistics are available
 
 ## Version 0.9.6
 

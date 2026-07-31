@@ -9,11 +9,11 @@
 possibly ordered factors, optionally stratified other factor(s).  With
 strata, CMHtest calculates these tests for each level of the
 stratifying variables and also provides overall tests controlling for the
-strata."><meta property="og:description" content="Provides generalized Cochran-Mantel-Haenszel tests of association of two
+strata. See Details for descriptions of what these entail and enhancements to this function."><meta property="og:description" content="Provides generalized Cochran-Mantel-Haenszel tests of association of two
 possibly ordered factors, optionally stratified other factor(s).  With
 strata, CMHtest calculates these tests for each level of the
 stratifying variables and also provides overall tests controlling for the
-strata."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
+strata. See Details for descriptions of what these entail and enhancements to this function."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -52,7 +52,7 @@ strata."><meta property="og:image" content="https://friendly.github.io/vcdExtra/
 possibly ordered factors, optionally stratified other factor(s).  With
 strata, <code>CMHtest</code> calculates these tests for each level of the
 stratifying variables and also provides overall tests controlling for the
-strata.</p>
+strata. See <strong>Details</strong> for descriptions of what these entail and enhancements to this function.</p>
     </div>
 
     <div class="section level2">
@@ -75,7 +75,14 @@ strata.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'CMHtest'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"table"</span>, <span class="st">"2x2"</span><span class="op">)</span>,</span>
+<span>  stars <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  scale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -144,6 +151,36 @@ or <code>NULL</code> to exclude tests that depend on row scores.</p></dd>
 <dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
 <dd><p>Digits to print.</p></dd>
 
+
+<dt id="arg-layout">layout<a class="anchor" aria-label="anchor" href="#arg-layout"></a></dt>
+<dd><p>For <code>print.CMHtest()</code>, one of <code>"table"</code> (default) for the
+traditional flat 4-row printout, or <code>"2x2"</code> to reorganize the four CMH
+statistics into a 2x2 table crossing how the row and column variables are
+each treated (general/nominal vs. ordered/scored). <code>layout = "2x2"</code>
+requires all four of <code>cor</code>, <code>rmeans</code>, <code>cmeans</code>, <code>general</code> to be present in
+<code>x</code>; if <code>types</code> or <code>rscores</code>/<code>cscores = NULL</code> excluded any of them, this
+falls back to <code>layout = "table"</code> with a warning. The corner cell of the
+2x2 display (<code>general - rmeans - cmeans + cor</code>, a "diff of diffs") is
+algebraically consistent but its distribution as chi-square(df) is
+<strong>experimental/unverified</strong> – these are four different quadratic-form
+statistics, not a nested sequence of LR tests, so the naive
+inclusion-exclusion combination is not guaranteed to be non-negative in
+general (see <code>dev/CMH-2x2.md</code> for a worked counter-example and a loglinear
+<code><a href="LRstats.html">LRstats()</a></code>-based alternative).</p></dd>
+
+
+<dt id="arg-stars">stars<a class="anchor" aria-label="anchor" href="#arg-stars"></a></dt>
+<dd><p>For <code>print.CMHtest()</code> with <code>layout = "2x2"</code>, logical: annotate
+each cell with significance stars (<code>'***'</code>/<code>'**'</code>/<code>'*'</code> for p &lt; .001/.01/.05)
+based on its own (Chisq, Df). Default <code>FALSE</code>, matching <code>layout = "table"</code>'s
+plain display.</p></dd>
+
+
+<dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
+<dd><p>For <code>print.CMHtest()</code> with <code>layout = "2x2"</code>, logical: show
+<code>Chisq/Df</code> instead of <code>Chisq (Df)</code> in each cell – normalizes for the very
+different degrees of freedom across cells. Default <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -177,24 +214,27 @@ factors of a two-way table are quantitative or ordinal, more powerful tests
 of association may be obtained by taking ordinality into account using row
 and or column scores to test for linear trends or differences in row or
 column means.</p>
-<p>The CMH analysis for a two-way table produces generalized
-Cochran-Mantel-Haenszel statistics (Landis etal., 1978).</p>
-<p>These include the CMH <strong>correlation</strong> statistic (<code>"cor"</code>), treating
-both factors as ordered. For a given statum, with equally spaced row and
-column scores, this CMH statistic reduces to \((n-1) r^2\), where \(r\)
-is the Pearson correlation between X and Y. With <code>"midrank"</code> scores,
-this CMH statistic is analogous to \((n-1) r_S^2\), using the Spearman
-rank correlation.</p>
-<p>The <strong>ANOVA</strong> (row mean scores and column mean scores) statistics, treat
-the columns and rows respectively as ordinal, and are sensitive to mean
-shifts over columns or rows. These are transforms of the \(F\) statistics
-from one-way ANOVAs with equally spaced scores and to Kruskal-Wallis tests
-with <code>"midrank"</code> scores.</p>
-<p>The CMH <strong>general</strong> association statistic treat both factors as
-unordered, and give a test closely related to the Pearson \(\chi^2\) test.
-When there is more than one stratum, the overall general CMH statistic gives
-a stratum-adjusted Pearson \(\chi^2\), equivalent to what is calculated by
-<code><a href="https://rdrr.io/r/stats/mantelhaen.test.html" class="external-link">mantelhaen.test</a></code>.</p>
+<p>The CMH analysis for a two-way table produces <strong>generalized</strong>
+Cochran-Mantel-Haenszel statistics (Landis etal., 1978):</p><ul><li><p>The CMH <strong>correlation</strong> statistic (<code>"cor"</code>), treating both factors as
+ordered. For a given statum, with equally spaced row and column scores,
+this CMH statistic reduces to \((n-1) r^2\), where \(r\) is the
+Pearson correlation between X and Y. With <code>"midrank"</code> scores, this CMH
+statistic is analogous to \((n-1) r_S^2\), using the Spearman rank
+correlation.</p></li>
+<li><p>The <strong>ANOVA</strong> (row mean scores and column mean scores) statistics,
+treat the columns and rows respectively as ordinal, and are sensitive to
+mean shifts over columns or rows. These are transforms of the \(F\)
+statistics from one-way ANOVAs with equally spaced scores and to
+Kruskal-Wallis tests with <code>"midrank"</code> scores.</p></li>
+<li><p>The CMH <strong>general</strong> association statistic treat both factors as
+unordered, and give a test closely related to the Pearson \(\chi^2\)
+test. When there is more than one stratum, the overall general CMH
+statistic gives a stratum-adjusted Pearson \(\chi^2\), equivalent to
+what is calculated by <code><a href="https://rdrr.io/r/stats/mantelhaen.test.html" class="external-link">mantelhaen.test</a></code>.</p></li>
+</ul><div class="section">
+<h3 id="strata">Strata<a class="anchor" aria-label="anchor" href="#strata"></a></h3>
+
+
 <p>For a 3+ way table, one table of CMH tests is produced for each combination
 of the factors identified as <code>strata</code>. If <code>overall=TRUE</code>, an
 additional table is calculated for the same two primary variables,
@@ -204,6 +244,8 @@ variables and the strata and they will have low power in the presence of
 interactions.</p>
 <p>Note that strata combinations with insufficient data (less than 2
 observations) are automatically omitted from the analysis.</p>
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -528,6 +570,42 @@ is no three-way interaction</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cmeans  Col mean scores differ 3.0436  1 0.081055</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> general    General association 3.0436  1 0.081055</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 2x2 layout, reorganizing the four CMH statistics by how the row/column</span></span></span>
+<span class="r-in"><span><span class="co"># variables are treated (general/nominal vs. ordered/scored)</span></span></span>
+<span class="r-in"><span><span class="va">cmh_mental</span> <span class="op">&lt;-</span> <span class="fu">CMHtest</span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">ses</span> <span class="op">+</span> <span class="va">mental</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">cmh_mental</span>, layout <span class="op">=</span> <span class="st">"2x2"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cochran-Mantel-Haenszel Statistics for ses by mental </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Row/column display: general (nominal) vs. ordered (scored)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Cell values: X^2 (df)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                col: general col: ordered diff (gen-ord)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row: general    45.958 (15)   40.297 (5)    5.6609 (10)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row: ordered     40.666 (3)   37.156 (1)     3.5106 (2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> diff (gen-ord)  5.2914 (12)   3.1411 (4)     2.1503 (8)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">cmh_mental</span>, layout <span class="op">=</span> <span class="st">"2x2"</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cochran-Mantel-Haenszel Statistics for ses by mental </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Row/column display: general (nominal) vs. ordered (scored)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Cell values: X^2 (df)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  col: general  col: ordered diff (gen-ord)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row: general   45.958 (15)*** 40.297 (5)***    5.6609 (10)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row: ordered    40.666 (3)*** 37.156 (1)***     3.5106 (2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> diff (gen-ord)    5.2914 (12)    3.1411 (4)     2.1503 (8)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes: '***' p&lt;.001  '**' p&lt;.01  '*' p&lt;.05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">cmh_mental</span>, layout <span class="op">=</span> <span class="st">"2x2"</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cochran-Mantel-Haenszel Statistics for ses by mental </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Row/column display: general (nominal) vs. ordered (scored)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Cell values: X^2/df</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                col: general col: ordered diff (gen-ord)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row: general         3.0638       8.0593        0.56609</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> row: ordered         13.555       37.156         1.7553</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> diff (gen-ord)      0.44095      0.78527        0.26879</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
