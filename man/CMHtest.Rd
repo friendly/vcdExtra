@@ -79,14 +79,7 @@ statistics into a 2x2 table crossing how the row and column variables are
 each treated (general/nominal vs. ordered/scored). \code{layout = "2x2"}
 requires all four of \code{cor}, \code{rmeans}, \code{cmeans}, \code{general} to be present in
 \code{x}; if \code{types} or \code{rscores}/\code{cscores = NULL} excluded any of them, this
-falls back to \code{layout = "table"} with a warning. The corner cell of the
-2x2 display (\code{general - rmeans - cmeans + cor}, a "diff of diffs") is
-algebraically consistent but its distribution as chi-square(df) is
-\strong{experimental/unverified} -- these are four different quadratic-form
-statistics, not a nested sequence of LR tests, so the naive
-inclusion-exclusion combination is not guaranteed to be non-negative in
-general (see \verb{dev/CMH-2x2.md} for a worked counter-example and a loglinear
-\code{LRstats()}-based alternative).}
+falls back to \code{layout = "table"} with a warning. See \strong{Details}.}
 
 \item{stars}{For \code{print.CMHtest()} with \code{layout = "2x2"}, logical: annotate
 each cell with significance stars (\code{'***'}/\code{'**'}/\code{'*'} for p < .001/.01/.05)
@@ -163,6 +156,21 @@ interactions.
 
 Note that strata combinations with insufficient data (less than 2
 observations) are automatically omitted from the analysis.
+}
+
+\subsection{2x2 layout}{
+
+\code{print.CMHtest(layout = "2x2")} is an attempt to provide an alternative view of these
+four statistics that may be more useful/understandable than the traditional flat 4-row
+table: it reorganizes them into a 2x2 table crossing how the row and column variables
+are each treated (general/nominal vs. ordered/scored).
+
+The corner cell of this display (\code{general - rmeans - cmeans + cor}, a "diff of diffs")
+is algebraically consistent but its distribution as chi-square(df) is
+\strong{experimental/unverified} -- these are four different quadratic-form statistics, not
+a nested sequence of LR tests, so the naive inclusion-exclusion combination is not
+guaranteed to be non-negative in general (see \verb{dev/CMH-2x2.md} for a worked
+counter-example and a loglinear \code{LRstats()}-based alternative).
 }
 }
 \examples{
