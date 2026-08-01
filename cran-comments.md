@@ -1,39 +1,33 @@
 ## Test environments
-* local Windows 10, R version 4.5.2 (2025-10-31 ucrt)
-* win-builder R Under development (unstable) (2026-06-06 r90114 ucrt)
-* R-hub: linux (R-devel), windows (R-devel), macos-arm64 (R-devel)
+* local Windows 11, R version 4.6.1 (2026-06-24 ucrt) 
+* win-builder R Under development (unstable) (2026-07-30 r90327 ucrt)
 
 ## R CMD check results
 There are no ERRORs or WARNINGs or NOTEs
 
-The use of `rgl` triggered harmless warnings on headless rhub machines. This was resolved
-by moving `rgl` from "Depends:" to "Suggests:" because it was only used in one function
-and was suitably trapped there. 
 
 
-## Version 0.9.6
+## Version 0.9.7
 
-This is a cumulative release of a number of small enhancements to the package since the last CRAN version
+This is a significant release, with a number of new features 
 
-* Fix @aliases for roxygen 8.0.0
-* Make some `color_table()` examples visible in documentation
+* `color_table()` now displays multiple row variables as separate stub columns (e.g. "Class",
+  "Sex") instead of concatenated labels like "1st_Male", using `gt`'s multi-column stub support.
+  Mirrors the existing column-spanner display for multiple column variables, and the two can be
+  combined in the same table.
+* Added more worked examples to the `Mental` dataset documentation
+* General package clean-up: removed stale pre-roxygen and superseded `dev`/`extra` files, and
+  reorganized `color_table()`/`assoc_graph()` development notes into their own subfolders
+* Now reference new work on tidy methods (`as_*()` methods, `collapse_levels()`, ...) in the tidyCats vignette
+* Added `breslow_day_test()` for the Breslow-Day test of homogeneity of odds ratios across strata
+  in 2x2xk tables, generalized to handle tables of any dimensionality, with an optional Tarone
+  correction and a `decompose` option (for 2x2xRxC tables) giving a `woolf_test()`-style
+  row/column/residual decomposition of the overall test
+* Added a `layout = "2x2"` display option to `print.CMHtest()`, reorganizing the four CMH statistics
+  (`cor`, `rmeans`, `cmeans`, `general`) into a 2x2 table crossing how the row and column variables are
+  each treated (general/nominal vs. ordered/scored). Falls back to the existing flat table
+  display, with a warning, when not all four statistics are available
 
-## Version 0.9.5
-
-This is a major release of the package, completing work on a sizable collection of tidy tools
-for manipulating categorical data in various forms
-
-* Added a general `collapse_levels()` function that can collapse levels of variables belonging to data sets of any form. [GK]
-* Added as_matrix() to the set of as_*() conversion functions. [GK]
-* Added `prop` arguments to applicable as_*() conversion functions to easily convert counts to proportions (either relative 
-  to the grand total count or to specified margins). [GK]
-* Added vignette on tidy operations (convert, collapsing) [GK]
-* Gavin Klorfine (@gklorfine) becomes a package author
-
-
-## Version 0.9.4
-
-* suppressWarnings() from `ca:mcja()` in `mcaplot()` examples
 
 
 # reverse dependencies
