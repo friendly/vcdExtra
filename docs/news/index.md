@@ -2,6 +2,8 @@
 
 ## Version 0.9.7
 
+This is a significant release, with a number of new features
+
 - [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
   now displays multiple row variables as separate stub columns
   (e.g. “Class”, “Sex”) instead of concatenated labels like “1st_Male”,
@@ -28,10 +30,9 @@
   [`print.CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),
   reorganizing the four CMH statistics (`cor`, `rmeans`, `cmeans`,
   `general`) into a 2x2 table crossing how the row and column variables
-  are each treated (general/nominal vs. ordered/scored), with optional
-  `stars` (significance stars) and `scale` (show `Chisq/Df` instead of
-  `Chisq (Df)`) arguments. Falls back to the existing flat table
-  display, with a warning, when not all four statistics are available
+  are each treated (general/nominal vs. ordered/scored). Falls back to
+  the existing flat table display, with a warning, when not all four
+  statistics are available
 
 ## Version 0.9.6
 
