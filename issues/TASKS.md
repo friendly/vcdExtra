@@ -186,7 +186,8 @@ Identified, not yet deleted (held for manual review).
 
 ## New work
 
-- an initial sketch of a novel 2x2 display for CMHtest, `dev/CMH-2x2.md`.
+- [X] an initial sketch of a novel 2x2 display for CMHtest, `dev/CMH-2x2.md`. Implemented in new print methods
+  for CMHtest().  
 
 ## Documentation
 

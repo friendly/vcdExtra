@@ -40,13 +40,14 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.7" id="version-097">Version 0.9.7<a class="anchor" aria-label="anchor" href="#version-097"></a></h2>
+<p>This is a significant release, with a number of new features</p>
 <ul><li>
 <code><a href="../reference/color_table.html">color_table()</a></code> now displays multiple row variables as separate stub columns (e.g. “Class”, “Sex”) instead of concatenated labels like “1st_Male”, using <code>gt</code>’s multi-column stub support. Mirrors the existing column-spanner display for multiple column variables, and the two can be combined in the same table.</li>
 <li>Added more worked examples to the <code>Mental</code> dataset documentation</li>
 <li>General package clean-up: removed stale pre-roxygen and superseded <code>dev</code>/<code>extra</code> files, and reorganized <code><a href="../reference/color_table.html">color_table()</a></code>/<code><a href="../reference/assoc_graph.html">assoc_graph()</a></code> development notes into their own subfolders</li>
 <li>Now reference new work on tidy methods (<code>as_*()</code> methods, <code><a href="../reference/collapse_levels.html">collapse_levels()</a></code>, …) in the tidyCats vignette</li>
 <li>Added <code><a href="../reference/breslow_day_test.html">breslow_day_test()</a></code> for the Breslow-Day test of homogeneity of odds ratios across strata in 2x2xk tables, generalized to handle tables of any dimensionality, with an optional Tarone correction and a <code>decompose</code> option (for 2x2xRxC tables) giving a <code><a href="../reference/woolf_test.html">woolf_test()</a></code>-style row/column/residual decomposition of the overall test</li>
-<li>Added a <code>layout = "2x2"</code> display option to <code><a href="../reference/CMHtest.html">print.CMHtest()</a></code>, reorganizing the four CMH statistics (<code>cor</code>, <code>rmeans</code>, <code>cmeans</code>, <code>general</code>) into a 2x2 table crossing how the row and column variables are each treated (general/nominal vs. ordered/scored), with optional <code>stars</code> (significance stars) and <code>scale</code> (show <code>Chisq/Df</code> instead of <code>Chisq (Df)</code>) arguments. Falls back to the existing flat table display, with a warning, when not all four statistics are available</li>
+<li>Added a <code>layout = "2x2"</code> display option to <code><a href="../reference/CMHtest.html">print.CMHtest()</a></code>, reorganizing the four CMH statistics (<code>cor</code>, <code>rmeans</code>, <code>cmeans</code>, <code>general</code>) into a 2x2 table crossing how the row and column variables are each treated (general/nominal vs. ordered/scored). Falls back to the existing flat table display, with a warning, when not all four statistics are available</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.6" id="version-096">Version 0.9.6<a class="anchor" aria-label="anchor" href="#version-096"></a></h2><p class="text-muted">CRAN release: 2026-06-07</p>

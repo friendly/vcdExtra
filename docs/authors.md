@@ -23,7 +23,7 @@
 
 - **Shuguang Sun**. Contributor.
 
-- **Gavin Klorfine**. Author.
+- **Gavin Klorfine**. Author. [](https://orcid.org/0009-0003-0395-4512)
 
 ## Citation
 
