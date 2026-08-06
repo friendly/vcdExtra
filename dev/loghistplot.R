@@ -33,41 +33,57 @@
 # TODO: Get variable labels from data (if labeled) or args xlab=, ylab=
 # TODO: Combine these functions in a more general way. An argument, `marginal = c("hist", "points")`
 
-# FIXME: I get errors / warning with the test case:
-# > source("C:/R/projects/vcdExtra/dev/loghistplot.R")
-# >   data(Donner, package = "vcdExtra")
-# >   loghistplot(Donner[,c("age","survived")])
-# Loading required package: ggplot2
-# Loading required package: gridExtra
-# Error in opts(panel.grid.major = theme_blank(), panel.grid.minor = theme_blank(),  : 
-#                 could not find function "opts"
-#               In addition: Warning message:
-#                 In geom_smooth(method = "glm", family = binomial, se = TRUE, colour = "black",  :
-#                                  Ignoring unknown parameters: `family`
-
 # Define the function
-loghistplot  <- function(data) {
+loghistplot  <- function(data, bins = 30) {
 
   require(ggplot2); require(gridExtra); require(grid) # load packages
+
+  if (length(bins) != 1L || !is.numeric(bins) || is.na(bins) ||
+      !is.finite(bins) || bins < 1 || bins != floor(bins)) {
+    stop("`bins` must be one positive whole number.", call. = FALSE)
+  }
 
   names(data) <- c('x','y') # rename columns
 
   # get min and max axis values
-  min_x <- min(data$x)
-  max_x <- max(data$x)
+  min_x <- min(0, data$x)
+  max_x <- max(0, data$x)
   min_y <- min(data$y)
   max_y <- max(data$y)
 
   # get bin numbers
-  bin_no <- max(hist(data$x)$counts) + 5
+  bin_width <- (max(data$x) - min(data$x)) / bins
+  hist_breaks <- seq(min(data$x), max(data$x), length.out = bins + 1)
+  hist_counts <- lapply(unique(data$y), function(y) {
+    hist(data$x[data$y == y], breaks = hist_breaks, right = FALSE,
+         include.lowest = TRUE, plot = FALSE)$counts
+  })
+  max_count <- max(unlist(hist_counts))
+  bin_no <- 4 * max_count
+
+  count_ticks <- pretty(c(0, max_count))
+  count_ticks <- count_ticks[count_ticks >= 0 & count_ticks <= max_count]
+  count_positions <- sort(c(count_ticks / bin_no,
+                            1 - count_ticks / bin_no))
+  count_labels <- round(bin_no * pmin(count_positions,
+                                      1 - count_positions))
 
   # create plots
   a <- ggplot(data, aes(x = x, y = y)) +
     theme_bw(base_size=16) +
     geom_smooth(method = "glm", method.args = list(family = "binomial"), 
                 se = TRUE, colour = 'black', linewidth = 1.5, alpha = 0.3) +
-    #     scale_y_continuous(limits=c(0,1), breaks=c(0,1)) +
-    scale_x_continuous(limits=c(min_x,max_x)) +
+    scale_y_continuous(
+      limits = c(0, 1),
+      breaks = seq(0, 1, by = 0.2),
+      expand = expansion(mult = 0),
+      sec.axis = dup_axis(
+        breaks = count_positions,
+        labels = count_labels,
+        name = "Count"
+      )
+    ) +
+    coord_cartesian(xlim = c(min_x, max_x)) +
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.background = element_blank(),
@@ -76,34 +92,53 @@ loghistplot  <- function(data) {
 
   b <- ggplot(data[data$y == unique(data$y)[1], ], aes(x = x)) +
     theme_bw(base_size=16) +
-    geom_histogram(fill = "grey") +
-    scale_y_continuous(limits=c(0,bin_no)) +
-    scale_x_continuous(limits=c(min_x,max_x)) +
+    geom_histogram(fill = "grey", binwidth = bin_width,
+                   boundary = min(data$x), closed = "left") +
+    scale_y_continuous(
+      limits = c(0, bin_no),
+      labels = function(z) rep("0.0", length(z)),
+      expand = expansion(mult = 0),
+      sec.axis = dup_axis(
+        breaks = count_ticks,
+        labels = count_ticks,
+        name = "Count"
+      )
+    ) +
+    coord_cartesian(xlim = c(min_x, max_x)) +
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
-          axis.text.y = element_blank(),
-          axis.text.x = element_blank(),
-          axis.ticks = element_blank(),
+          axis.text = element_text(colour = "transparent"),
+          axis.ticks = element_line(colour = "transparent"),
+          axis.title = element_text(colour = "transparent"),
           panel.border = element_blank(),
           panel.background = element_blank(),
           plot.background = element_blank()) +
-    labs(y='\n', x='\n')
+    labs(y = "Probability\n", x = "\nYour X Variable")
 
   c <- ggplot(data[data$y == unique(data$y)[2], ], aes(x = x)) +
     theme_bw(base_size=16) +
-    geom_histogram(fill = "grey") +
-    scale_y_continuous(trans='reverse') +
-    scale_y_continuous(trans='reverse', limits=c(bin_no,0)) +
-    scale_x_continuous(limits=c(min_x,max_x)) +
+    geom_histogram(fill = "grey", binwidth = bin_width,
+                   boundary = min(data$x), closed = "left") +
+    scale_y_reverse(
+      limits = c(bin_no, 0),
+      labels = function(z) rep("0.0", length(z)),
+      expand = expansion(mult = 0),
+      sec.axis = dup_axis(
+        breaks = count_ticks,
+        labels = count_ticks,
+        name = "Count"
+      )
+    ) +
+    coord_cartesian(xlim = c(min_x, max_x)) +
     theme(panel.grid.major = element_blank(), 
           panel.grid.minor = element_blank(),
-          axis.text.y = element_blank(), 
-          axis.text.x = element_blank(),
-          axis.ticks = element_blank(),
+          axis.text = element_text(colour = "transparent"),
+          axis.ticks = element_line(colour = "transparent"),
+          axis.title = element_text(colour = "transparent"),
           panel.border = element_blank(),
           panel.background = element_blank(),
           plot.background = element_blank()) +
-    labs(y='\n', x='\n')
+    labs(y = "Probability\n", x = "\nYour X Variable")
 
   grid.newpage()
   pushViewport(viewport(layout = grid.layout(1,1)))
