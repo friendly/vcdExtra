@@ -48,6 +48,9 @@ Draft Lottery," *Science*, 171, 255-261.
 
 <https://en.wikipedia.org/wiki/Draft_lottery_(1969)>
 
+Hanley, J. A., "US Selective Service Lotteries 1917-1975: Datasets,"
+<https://jhanley.biostat.mcgill.ca/DraftLotteries/>
+
 ## See also
 
 [`Draft1970table`](https://friendly.github.io/vcdExtra/reference/Draft1970table.md)
