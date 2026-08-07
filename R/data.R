@@ -1051,6 +1051,9 @@ NULL
 #' 1970 Draft Lottery," *Science*, 171, 255-261.
 #'
 #' <https://en.wikipedia.org/wiki/Draft_lottery_(1969)>
+#'
+#' Hanley, J. A., "US Selective Service Lotteries 1917-1975: Datasets,"
+#' <https://jhanley.biostat.mcgill.ca/DraftLotteries/>
 #' @source Starr, N. (1997). Nonrandom Risk: The 1970 Draft Lottery,
 #' *Journal of Statistics Education*, v.5, n.2
 #' \doi{10.1080/10691898.1997.11910534}

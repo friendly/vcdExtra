@@ -61,6 +61,9 @@ Fienberg, S. E. (1971), "Randomization and Social Affairs: The
 1970 Draft Lottery," \emph{Science}, 171, 255-261.
 
 \url{https://en.wikipedia.org/wiki/Draft_lottery_(1969)}
+
+Hanley, J. A., "US Selective Service Lotteries 1917-1975: Datasets,"
+\url{https://jhanley.biostat.mcgill.ca/DraftLotteries/}
 }
 \seealso{
 \code{\link{Draft1970table}}
