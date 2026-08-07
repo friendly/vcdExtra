@@ -2,6 +2,8 @@
 
 ## Version 0.9.7
 
+CRAN release: 2026-08-03
+
 This is a significant release, with a number of new features
 
 - [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
