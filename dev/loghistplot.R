@@ -46,8 +46,8 @@ loghistplot  <- function(data, bins = 30) {
   names(data) <- c('x','y') # rename columns
 
   # get min and max axis values
-  min_x <- min(0, data$x)
-  max_x <- max(0, data$x)
+  min_x <- min(data$x)
+  max_x <- max(data$x)
   min_y <- min(data$y)
   max_y <- max(data$y)
 
