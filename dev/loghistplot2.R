@@ -108,13 +108,18 @@ logist_plot <- function(x, ...) {
 #'   "hist", a histogram (default) or "points",jittered points
 #' @param bins number of histogram bins, for `marginal = "hist"`; default: 30
 #' @param xlab,ylab axis labels; default to the deparsed `x`/`y` expressions
+#' @param fit.color color of the fitted logistic curve and its confidence band; default: "lightblue"
+#' @param marg.color color of the marginal representation of x within each y group (histogram
+#'   fill, or point color for `marginal = "points"`); default: "lightpink", a pale pink
 #' @rdname logist_plot
 #' @export
 logist_plot.default <- function(x, y, marginal = c("hist", "points"),
-                                 bins = 30, xlab = NULL, ylab = NULL, ...) {
+                                 bins = 30, xlab = NULL, ylab = NULL,
+                                 fit.color = "lightblue", marg.color = "lightpink", ...) {
   xlab <- xlab %||% deparse(substitute(x))
   ylab <- ylab %||% deparse(substitute(y))
-  .logist_plot_impl(x, y, marginal = marginal, bins = bins, xlab = xlab, ylab = ylab)
+  .logist_plot_impl(x, y, marginal = marginal, bins = bins, xlab = xlab, ylab = ylab,
+                     fit.color = fit.color, marg.color = marg.color)
 }
 
 #' @param xvar,yvar which columns of `x` to use as predictor/response -- column name or
@@ -124,24 +129,28 @@ logist_plot.default <- function(x, y, marginal = c("hist", "points"),
 #' @export
 logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
                                     marginal = c("hist", "points"),
-                                    bins = 30, xlab = NULL, ylab = NULL, ...) {
+                                    bins = 30, xlab = NULL, ylab = NULL,
+                                    fit.color = "lightblue", marg.color = "lightpink", ...) {
   if (ncol(x) < 2L) {
     stop("`x` must have at least 2 columns.", call. = FALSE)
   }
   xcol <- if (is.numeric(xvar)) names(x)[xvar] else xvar
   ycol <- if (is.numeric(yvar)) names(x)[yvar] else yvar
   .logist_plot_impl(x[[xcol]], x[[ycol]], marginal = marginal, bins = bins,
-                     xlab = xlab %||% xcol, ylab = ylab %||% ycol)
+                     xlab = xlab %||% xcol, ylab = ylab %||% ycol,
+                     fit.color = fit.color, marg.color = marg.color)
 }
 
 #' @param data a data frame -- `formula` method only
 #' @rdname logist_plot
 #' @export
 logist_plot.formula <- function(x, data, marginal = c("hist", "points"),
-                                 bins = 30, xlab = NULL, ylab = NULL, ...) {
+                                 bins = 30, xlab = NULL, ylab = NULL,
+                                 fit.color = "lightblue", marg.color = "lightpink", ...) {
   mf <- stats::model.frame(x, data = data)
   .logist_plot_impl(mf[[2]], mf[[1]], marginal = marginal, bins = bins,
-                     xlab = xlab %||% names(mf)[2], ylab = ylab %||% names(mf)[1])
+                     xlab = xlab %||% names(mf)[2], ylab = ylab %||% names(mf)[1],
+                     fit.color = fit.color, marg.color = marg.color)
 }
 
 # ---- convenience wrappers (fixed marginal=) ------------------------------------------------
@@ -198,7 +207,8 @@ logist_point <- function(x, ...) {
 # The one real implementation, shared by all logist_plot() methods and by
 # logist_hist()/logist_point().
 .logist_plot_impl <- function(x, y, marginal = c("hist", "points"),
-                               bins = 30, xlab = NULL, ylab = NULL) {
+                               bins = 30, xlab = NULL, ylab = NULL,
+                               fit.color = "lightblue", marg.color = "lightpink") {
   marginal <- match.arg(marginal)
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("Package 'ggplot2' is required for logist_plot(). Please install it.", call. = FALSE)
@@ -216,7 +226,8 @@ logist_point <- function(x, ...) {
     ggplot2::theme_bw(base_size = 16) +
     ggplot2::geom_smooth(method = "glm", formula = y ~ x,
                           method.args = list(family = "binomial"),
-                          se = TRUE, colour = "black", linewidth = 1.5, alpha = 0.3) +
+                          se = TRUE, colour = fit.color, fill = fit.color,
+                          linewidth = 1.5, alpha = 0.3) +
     ggplot2::coord_cartesian(xlim = c(min_x, max_x)) +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank(),
@@ -226,8 +237,9 @@ logist_point <- function(x, ...) {
 
   if (marginal == "points") {
     p_main +
-      ggplot2::geom_point(alpha = 0.5, position = ggplot2::position_jitter(w = 0, h = 0.02)) +
-      ggplot2::scale_y_continuous(limits = c(0, 1))
+      ggplot2::geom_point(colour = marg.color, alpha = 0.5,
+                           position = ggplot2::position_jitter(w = 0, h = 0.02)) +
+      ggplot2::coord_cartesian(xlim = c(min_x, max_x), ylim = c(0, 1))
   } else {
     .check_bins(bins)
 
@@ -256,7 +268,7 @@ logist_point <- function(x, ...) {
     marginal_hist <- function(lev, reverse) {
       p <- ggplot2::ggplot(data[data$y == lev, ], ggplot2::aes(x = .data$x)) +
         ggplot2::theme_bw(base_size = 16) +
-        ggplot2::geom_histogram(fill = "grey", binwidth = bin_width,
+        ggplot2::geom_histogram(fill = marg.color, binwidth = bin_width,
                                  boundary = min_x, closed = "left") +
         ggplot2::coord_cartesian(xlim = c(min_x, max_x)) +
         ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
