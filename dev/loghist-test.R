@@ -1,24 +1,26 @@
-# Illustrates a real bug in dev/loghistplot2.R's logist_plot(): the roxygen docs claim
-# `y` can be "0/1, or a 2-level factor/character/logical", but only numeric 0/1 actually
-# works. Run this script top to bottom to see exactly where and why the others break.
+# Regression test for a bug in dev/loghistplot2.R's logist_plot(): the roxygen docs claim
+# `y` can be "0/1, or a 2-level factor/character/logical", but originally only numeric 0/1
+# actually worked. Run this script top to bottom to see the original failure mode and confirm
+# the fix (.to_binary01(), added 2026-08-08) resolves it for all four types.
 #
 # Root cause: ggplot2 treats any non-numeric y (factor, character, logical) as *discrete*.
-# `aes(y = .data$y)` sets no explicit `group=`, so ggplot2's implicit grouping splits
+# `aes(y = .data$y)` sets no explicit `group=`, so ggplot2's implicit grouping used to split
 # stat_smooth()'s calculation into one glm() fit PER DISTINCT y VALUE. Each such subset has
 # a *constant* y, which glm(family = binomial) rejects ("y values must be 0 <= y <= 1").
+# .to_binary01() now converts y to numeric 0/1 *before* it ever reaches ggplot(), so this
+# never triggers.
 #
-# A `ggplot` object is lazy: this only surfaces when the plot is actually rendered
-# (ggplot_build()/print()/ggsave()), not when logist_plot() merely constructs it -- so a
-# test that only checks `inherits(p, "ggplot")` (as in dev/loghist-test-basic-run.R-style
-# smoke tests) will NOT catch this. Every case below forces a real render.
+# A `ggplot` object is lazy: rendering errors only surface when the plot is actually built
+# (ggplot_build()/print()/ggsave()), not when logist_plot() merely constructs it -- so a test
+# that only checks `inherits(p, "ggplot")` will NOT catch this. Every case below forces a
+# real render.
 
 source(here::here("dev", "loghistplot2.R"))  # here package is already a declared dependency
 library(vcdExtra)
 data(Donner, package = "vcdExtra")
 
 x <- Donner$age
-y_numeric   <- Donner$survived                                  # 0/1 integer -- the only
-                                                                  # type that currently works
+y_numeric   <- Donner$survived                                  # 0/1 integer
 y_factor    <- factor(Donner$survived, labels = c("died", "survived"))
 y_character <- as.character(y_factor)
 y_logical   <- as.logical(Donner$survived)
@@ -46,24 +48,15 @@ for (nm in names(variants)) {
   render_check(nm, variants[[nm]], "hist")
 }
 
-# Expected results (confirmed 2026-08-08, ggplot2 3.6.x / vcdExtra dev/loghistplot2.R):
-#
-#   numeric,   points -> RENDER: OK
-#   numeric,   hist    -> RENDER: OK
-#   factor,    points -> RENDER WARNING: Failed to fit group 2 / y values must be 0 <= y <= 1
-#   factor,    hist    -> CONSTRUCT ERROR: Discrete value supplied to a continuous scale
-#   character, points -> RENDER WARNING: Failed to fit group 2 / y values must be 0 <= y <= 1
-#   character, hist    -> CONSTRUCT ERROR: Discrete value supplied to a continuous scale
-#   logical,   points -> RENDER WARNING: Failed to fit group 2 / y values must be 0 <= y <= 1
-#   logical,   hist    -> RENDER: OK  (misleading -- scale_y_continuous() happens to tolerate
-#                          logical->0/1 coercion, but the same implicit-grouping problem that
-#                          breaks "points" mode is still present in the shared p_main smooth
-#                          layer; it's very likely being swallowed inside cowplot's grob
-#                          capture rather than genuinely absent. Don't treat "hist" + logical
-#                          as safe on the strength of this result alone.)
-#
-# Fix (not yet applied here -- see dev/loghistplot2.R review notes): convert y to numeric
-# 0/1 up front in .logist_plot_impl(), right after .check_binary_y(), instead of passing
-# the raw factor/character/logical vector through to ggplot(). This also ties into the
-# separate event-direction/ordering issue noted in loghistplot2.R (.check_binary_y() uses
-# unique()-encounter order, so which level maps to 0 vs. 1 isn't currently controlled).
+# Expected: RENDER: OK for all 8 cases above (confirmed 2026-08-08, ggplot2 3.6.x).
+
+# Also confirm *which* level each type maps to 0 vs. 1 -- deterministic, not row-order
+# dependent (unlike the old .check_binary_y(), which used unique()-encounter order).
+cat("\n\n--- .to_binary01() level mapping (0 = first, 1 = second) ---\n")
+for (nm in names(variants)) {
+  bin <- .to_binary01(variants[[nm]])
+  cat(sprintf("%-9s levels: %s\n", nm, paste(bin$levels, collapse = " -> ")))
+}
+# Expected: numeric "0 -> 1" (pass-through); factor/character/logical all agree that
+# "died"/FALSE/0 -> 0 and "survived"/TRUE/1 -> 1, i.e. all four types encode the *same*
+# event direction for this dataset.

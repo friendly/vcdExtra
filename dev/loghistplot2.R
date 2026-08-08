@@ -103,6 +103,14 @@
 #   works reliably, contradicting the @param y doc. Fix is as Gavin describes above -- convert
 #   y to numeric 0/1 immediately after .check_binary_y(), before it ever reaches ggplot() --
 #   not yet applied.]
+#   [FIXED (Michael, 2026-08-08): .check_binary_y() replaced with .to_binary01(), which
+#   validates AND canonicalizes in one step (see its own comment for the level-ordering
+#   convention per type). .logist_plot_impl() converts data$y to numeric 0/1 immediately after
+#   building `data`, before anything reaches ggplot(). Re-run dev/loghist-test.R to confirm --
+#   all four y types now render cleanly in both marginal modes. This also fixes the row-order
+#   dependency in the next bullet below (level order no longer comes from unique()-encounter
+#   order), though the separate p_top/p_bottom naming-vs-rendered-direction question there is
+#   still open.]
 #
 # - Define which response value is the modeled event and use that same ordering for the fit
 #   and marginal plots. .check_binary_y() returns unique() order, so reordering rows can swap
@@ -284,13 +292,38 @@ logist_point <- function(x, ...) {
   }
 }
 
-.check_binary_y <- function(y) {
+# Validate and canonicalize a binary response to numeric 0/1, so ggplot2 never sees a
+# factor/character/logical y -- which it would treat as *discrete*, silently triggering
+# per-level grouping that breaks geom_smooth()'s glm() fit (see dev/loghist-test.R for the
+# exact failures this avoids). Which value becomes 1 (the modeled "event") is deterministic,
+# not dependent on row order:
+#   logical:   FALSE -> 0, TRUE -> 1
+#   factor:    the two observed levels, in their existing `levels()` order
+#   character: the two observed values, sorted alphabetically (lower -> 0, higher -> 1) --
+#              the same convention R itself uses for a factor's default (alphabetical) levels
+#   numeric:   must already be coded 0/1; any other numeric coding is rejected rather than
+#              guessed at
+.to_binary01 <- function(y) {
   uy <- unique(y[!is.na(y)])
   if (length(uy) != 2L) {
     stop("`y` must be binary (exactly 2 distinct values); found ", length(uy), ".",
          call. = FALSE)
   }
-  uy
+  levs <- if (is.logical(y)) {
+    c(FALSE, TRUE)
+  } else if (is.factor(y)) {
+    levels(y)[levels(y) %in% as.character(uy)]
+  } else if (is.numeric(y)) {
+    if (!setequal(uy, c(0, 1))) {
+      stop("numeric `y` must be coded 0/1; found ", paste(sort(uy), collapse = ", "), ".",
+           call. = FALSE)
+    }
+    c(0, 1)
+  } else {
+    sort(as.character(uy))
+  }
+  list(y01 = as.numeric(factor(as.character(y), levels = as.character(levs))) - 1,
+       levels = levs)
 }
 
 # The one real implementation, shared by all logist_plot() methods and by
@@ -301,7 +334,9 @@ logist_point <- function(x, ...) {
   marginal <- match.arg(marginal)
 
   data <- data.frame(x = x, y = y)
-  uy <- .check_binary_y(data$y)
+  bin <- .to_binary01(data$y)
+  data$y <- bin$y01
+  uy <- c(0, 1)
   xlab <- xlab %||% "x"
   ylab <- ylab %||% "y"
 
