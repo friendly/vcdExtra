@@ -46,10 +46,12 @@
 # - Renamed loop variables `a`, `b`, `c` (the last of which shadowed base::c()) to `p_main`,
 #   `p_top`, `p_bottom`.
 #
-# Kept, per discussion: the old loghistplot()/logpointplot() single-purpose functions are not
-# dropped -- reimplemented as thin convenience wrappers `logist_hist()` / `logist_point()` that
-# just call `logist_plot(..., marginal = "hist"/"points")`, so they inherit all three calling
-# conventions (vector/data.frame/formula) for free instead of duplicating the implementation.
+# Kept, per discussion: the *idea* behind the old loghistplot()/logpointplot() single-purpose
+# functions is not dropped -- they're reimplemented, and renamed, as thin convenience wrappers
+# `logist_hist()` / `logist_point()` that just call `logist_plot(..., marginal = "hist"/
+# "points")`, so they inherit all three calling conventions (vector/data.frame/formula) for
+# free instead of duplicating the implementation. The old names themselves are gone; nothing
+# in this file is still literally called loghistplot()/logpointplot().
 
 # ---- review notes ------------------------------------------------------------------------
 #
@@ -121,31 +123,58 @@
 #   method. NA/Inf x values make histogram setup fail; constant x gives invalid histogram
 #   bins. Validate equal lengths and numeric/finite x after applying one consistent NA policy,
 #   then either reject a zero-range predictor or provide a defined histogram fallback.
+#   [FIXED (Michael, 2026-08-08): .logist_plot_impl() now applies one policy for all calling
+#   conventions -- complete.cases() + is.finite(x) right after building `data`, and an explicit
+#   error if x has zero range (min_x == max_x). model.frame()'s own NA-dropping in the formula
+#   method still runs first, but re-filtering already-clean data afterward is a harmless no-op.]
+#
 # - The formula method silently ignores every predictor after the first because it passes only
 #   mf[[2]] and mf[[1]]. Reject formulas that do not contain exactly one response and one
 #   predictor. Also decide whether the promised `formula =` spelling should work: currently
 #   logist_plot(formula = y ~ x, data = d) fails because the generic requires an argument x.
+#   [FIXED (Michael, 2026-08-08): logist_plot.formula()'s first argument renamed from `x` to
+#   `formula` -- an S3 method's formals don't have to match the generic's names (verified this
+#   is legal and matches base R's own boxplot.formula()/lm() convention), so
+#   logist_plot(formula = y ~ x, data = d) now works, as does the existing positional form.
+#   Also added an explicit ncol(mf) != 2 check, so a multi-predictor formula now errors instead
+#   of silently dropping every predictor but the first.]
 #
 # - Validate xvar and yvar as single existing column names or valid positions before [[ ]]. An
 #   unknown name currently fails later with an unrelated differing-row-count message.
+#   [FIXED (Michael, 2026-08-08): logist_plot.data.frame() now validates xcol/ycol resolve to
+#   an existing column name before subsetting, erroring immediately with a clear message
+#   otherwise.]
 #
 # - The methods accept ... but do not forward or check it, so misspelled arguments are silently
 #   ignored. Either document a purpose for ..., pass it onward, or check that it is empty.
+#   [OPEN (Michael + Gavin to decide): three real options here -- (a) leave as-is (silently
+#   ignored), (b) error on any unconsumed ... to catch typos, or (c) actually forward ... into
+#   theme()/geom_point()/geom_histogram() for further customization. This changes the API
+#   surface, not a bug fix, so deliberately not decided unilaterally.]
 #
 # - p_main already has coord_cartesian(); the points branch adds a second coordinate system and
 #   reports that the first is being replaced on every call. Construct the coordinate once.
+#   [FIXED (Michael, 2026-08-08): removed coord_cartesian() from p_main's base construction;
+#   each branch now sets it exactly once (points: xlim+ylim together; hist: xlim, alongside the
+#   scale_y_continuous() it already adds). No more "replacing" message.]
 #
 # Documentation / tests
 #
 # - The compatibility comment says loghistplot()/logpointplot() were not dropped, but those
 #   names are not defined here; the new wrappers are logist_hist()/logist_point(). Clarify that
 #   this is a rename, or retain aliases if the old names were ever public.
+#   [FIXED (Michael, 2026-08-08): reworded the top-of-file comment to say explicitly that the
+#   old names are gone and this is a rename, not a preserved alias. The old names were never
+#   public (this file has never shipped in R/), so no alias is needed.]
 #
 # - If cowplot remains optional, do not wrap point-only examples in the cowplot availability
 #   check; otherwise those examples are skipped even though they need only ggplot2.
+#   [MOOT (Michael): cowplot is now a hard Imports (see dependency section above), so
+#   @examples no longer wraps in any availability check at all -- doesn't apply anymore.]
 #
 # - @seealso is not required for CRAN, but @seealso [vcd::binreg_plot()] would be useful. With
 #   no other help topic in this @family, the family tag currently adds no related-page links.
+#   [FIXED (Michael, 2026-08-08): added.]
 #
 # - Add tests for the three interfaces, both marginal modes, the omitted-marginal error,
 #   response encodings/event direction, row reordering, NA/Inf/constant x, column selection,
@@ -168,7 +197,8 @@
 #' `marginal=` fixed to `"hist"`/`"points"`, but otherwise accept the same `x`/`...` as
 #' `logist_plot()` -- i.e., they also work with a data frame or a formula.
 #'
-#' @param x a numeric predictor vector, a data frame, or a formula (`y ~ x`)
+#' @param x a numeric predictor vector or a data frame; see `formula` below for the
+#'   model-formula interface
 #' @param ... arguments passed to methods, or on to `logist_plot()` from `logist_hist()`/
 #'   `logist_point()`
 #'
@@ -176,6 +206,8 @@
 #' @author Gavin Klorfine, Michael Friendly
 #'
 #' @family logistic regression plots
+#'
+#' @seealso [vcd::binreg_plot()], a similar plot using `grid` graphics directly.
 #'
 #' @references
 #' Smart, S. M. et al. (2004). A New Means of Presenting the Results of Logistic Regression,
@@ -233,18 +265,32 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
   }
   xcol <- if (is.numeric(xvar)) names(x)[xvar] else xvar
   ycol <- if (is.numeric(yvar)) names(x)[yvar] else yvar
+  if (is.na(xcol) || !xcol %in% names(x)) {
+    stop("`xvar` does not identify an existing column of `x`.", call. = FALSE)
+  }
+  if (is.na(ycol) || !ycol %in% names(x)) {
+    stop("`yvar` does not identify an existing column of `x`.", call. = FALSE)
+  }
   .logist_plot_impl(x[[xcol]], x[[ycol]], marginal = marginal, bins = bins,
                      xlab = xlab %||% xcol, ylab = ylab %||% ycol,
                      fit.color = fit.color, marg.color = marg.color)
 }
 
+#' @param formula a model formula, `y ~ x` -- exactly one response and one predictor;
+#'   `formula` method only. The first argument may be passed positionally or as
+#'   `formula = y ~ x` (matching base R's `boxplot()`/`lm()` convention) -- unlike the other
+#'   methods, it is not named `x`
 #' @param data a data frame -- `formula` method only
 #' @rdname logist_plot
 #' @export
-logist_plot.formula <- function(x, data, marginal = c("hist", "points"),
+logist_plot.formula <- function(formula, data, marginal = c("hist", "points"),
                                  bins = 30, xlab = NULL, ylab = NULL,
                                  fit.color = "steelblue", marg.color = "orange", ...) {
-  mf <- stats::model.frame(x, data = data)
+  mf <- stats::model.frame(formula, data = data)
+  if (ncol(mf) != 2L) {
+    stop("`formula` must have exactly one response and one predictor (y ~ x); found ",
+         ncol(mf) - 1L, " predictor(s).", call. = FALSE)
+  }
   .logist_plot_impl(mf[[2]], mf[[1]], marginal = marginal, bins = bins,
                      xlab = xlab %||% names(mf)[2], ylab = ylab %||% names(mf)[1],
                      fit.color = fit.color, marg.color = marg.color)
@@ -334,6 +380,11 @@ logist_point <- function(x, ...) {
   marginal <- match.arg(marginal)
 
   data <- data.frame(x = x, y = y)
+  data <- data[stats::complete.cases(data) & is.finite(data$x), , drop = FALSE]
+  if (nrow(data) == 0L) {
+    stop("No complete observations remain after removing missing/non-finite `x` values.",
+         call. = FALSE)
+  }
   bin <- .to_binary01(data$y)
   data$y <- bin$y01
   uy <- c(0, 1)
@@ -342,6 +393,9 @@ logist_point <- function(x, ...) {
 
   min_x <- min(data$x)
   max_x <- max(data$x)
+  if (min_x == max_x) {
+    stop("`x` has zero range (all values are identical); cannot fit or bin.", call. = FALSE)
+  }
 
   p_main <- ggplot2::ggplot(data, ggplot2::aes(x = .data$x, y = .data$y)) +
     ggplot2::theme_bw(base_size = 16) +
@@ -349,7 +403,6 @@ logist_point <- function(x, ...) {
                           method.args = list(family = "binomial"),
                           se = TRUE, colour = fit.color, fill = fit.color,
                           linewidth = 1.5, alpha = 0.3) +
-    ggplot2::coord_cartesian(xlim = c(min_x, max_x)) +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank(),
                    panel.background = ggplot2::element_blank(),
@@ -384,7 +437,8 @@ logist_point <- function(x, ...) {
         breaks = seq(0, 1, by = 0.2),
         expand = ggplot2::expansion(mult = 0),
         sec.axis = ggplot2::dup_axis(breaks = count_positions, labels = count_labels, name = "Count")
-      )
+      ) +
+      ggplot2::coord_cartesian(xlim = c(min_x, max_x))
 
     marginal_hist <- function(lev, reverse) {
       p <- ggplot2::ggplot(data[data$y == lev, ], ggplot2::aes(x = .data$x)) +
