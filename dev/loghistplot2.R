@@ -57,15 +57,20 @@
 #
 # - This file is under dev/, so none of its functions or documentation are included in the
 #   package. Before release it needs to move to R/, be processed by roxygen2, and have tests.
+#
 # - Move ggplot2 from Suggests to Imports as ggplot2 (>= 3.4.0). Every execution path requires
 #   it, the function returns a ggplot object, and linewidth requires ggplot2 3.4.0 or newer.
 #   Keep the qualified ggplot2:: calls; once it is imported, the requireNamespace() guard is
 #   unnecessary.
+#
 # - Question for Michael: should cowplot be in Suggests or Imports? It is required only when a
 #   caller explicitly selects marginal = "hist", while marginal = "points" works without it.
 #   Use Suggests and keep the requireNamespace() guard if histogram mode is optional; use
 #   Imports and remove the guard if histogram mode should always be available. Either way,
 #   cowplot must be declared in DESCRIPTION or R CMD check reports a WARNING.
+#   [RESOLVED (Michael): both ggplot2 (>= 3.4.0) and cowplot moved to Imports in DESCRIPTION;
+#   both requireNamespace() guards removed below. .data now imported via
+#   @importFrom rlang .data, since it's used unqualified inside aes().]
 #
 # Interface / behavior
 #
@@ -75,14 +80,35 @@
 #   formals use marginal = c("hist", "points"), so match.arg() selects "hist" when marginal is
 #   omitted. If the no-default proposal is adopted, remove the marginal default from all three
 #   public methods and from .logist_plot_impl(), and remove "(default)" from @param marginal.
+#   [RESOLVED (Michael): keep the "hist" default as-is on logist_plot(); logist_hist()/
+#   logist_point() remain convenience wrappers, not the only way to skip specifying it.]
+#
 # - The documented factor/character/logical response support is not implemented reliably.
 #   Histogram mode errors on a discrete y scale, while point mode can draw points but fails
 #   one or more glm smooth groups. Convert the two response levels deterministically to 0/1;
 #   for numeric y, either require 0/1 or document and perform the same conversion.
+#   [CLARIFIED (2026-08-08), not yet fixed -- see dev/loghist-test.R for reproducible cases:
+#   ggplot2 treats any non-numeric y (factor/character/logical) as *discrete*. aes(y = .data$y)
+#   sets no explicit group=, so ggplot2's implicit grouping splits stat_smooth()'s calculation
+#   into one glm() fit PER DISTINCT y VALUE -- each such subset has a constant y, which
+#   glm(family = binomial) rejects ("y values must be 0 <= y <= 1"). That's the exact failure
+#   in "points" mode for all three non-numeric types ("Failed to fit group 2"). "hist" mode
+#   fails earlier for factor/character specifically: scale_y_continuous() on a discrete y
+#   aesthetic is a hard construction-time error ("Discrete value supplied to a continuous
+#   scale"). Logical is a confusing partial exception -- scale_y_continuous() tolerates
+#   logical->0/1 coercion, so "hist" + logical doesn't error the same way, but the same
+#   implicit-grouping problem is still present in the shared smooth layer; it's very likely
+#   being swallowed inside cowplot's grob capture rather than genuinely absent, so don't treat
+#   "hist" + logical as safe on that result alone. Bottom line: only numeric 0/1 currently
+#   works reliably, contradicting the @param y doc. Fix is as Gavin describes above -- convert
+#   y to numeric 0/1 immediately after .check_binary_y(), before it ever reaches ggplot() --
+#   not yet applied.]
+#
 # - Define which response value is the modeled event and use that same ordering for the fit
 #   and marginal plots. .check_binary_y() returns unique() order, so reordering rows can swap
 #   the two histograms. The p_top/p_bottom names are also opposite the rendered directions:
 #   the ordinary scale grows from the bottom and the reversed scale grows from the top.
+#
 # - Vector and data-frame calls retain incomplete cases, unlike model.frame() in the formula
 #   method. NA/Inf x values make histogram setup fail; constant x gives invalid histogram
 #   bins. Validate equal lengths and numeric/finite x after applying one consistent NA policy,
@@ -91,10 +117,13 @@
 #   mf[[2]] and mf[[1]]. Reject formulas that do not contain exactly one response and one
 #   predictor. Also decide whether the promised `formula =` spelling should work: currently
 #   logist_plot(formula = y ~ x, data = d) fails because the generic requires an argument x.
+#
 # - Validate xvar and yvar as single existing column names or valid positions before [[ ]]. An
 #   unknown name currently fails later with an unrelated differing-row-count message.
+#
 # - The methods accept ... but do not forward or check it, so misspelled arguments are silently
 #   ignored. Either document a purpose for ..., pass it onward, or check that it is empty.
+#
 # - p_main already has coord_cartesian(); the points branch adds a second coordinate system and
 #   reports that the first is being replaced on every call. Construct the coordinate once.
 #
@@ -103,10 +132,13 @@
 # - The compatibility comment says loghistplot()/logpointplot() were not dropped, but those
 #   names are not defined here; the new wrappers are logist_hist()/logist_point(). Clarify that
 #   this is a rename, or retain aliases if the old names were ever public.
+#
 # - If cowplot remains optional, do not wrap point-only examples in the cowplot availability
 #   check; otherwise those examples are skipped even though they need only ggplot2.
+#
 # - @seealso is not required for CRAN, but @seealso [vcd::binreg_plot()] would be useful. With
 #   no other help topic in this @family, the family tag currently adds no related-page links.
+#
 # - Add tests for the three interfaces, both marginal modes, the omitted-marginal error,
 #   response encodings/event direction, row reordering, NA/Inf/constant x, column selection,
 #   formula validation, labels/colors, optional dependencies, and successful plot building.
@@ -145,9 +177,6 @@
 #' @examples
 #' data(Donner, package = "vcdExtra")
 #'
-#' if (requireNamespace("ggplot2", quietly = TRUE) &&
-#'     requireNamespace("cowplot", quietly = TRUE)) {
-#'
 #' # three interfaces to the same underlying plot
 #' logist_plot(Donner$age, Donner$survived, marginal = "points")
 #' logist_plot(Donner[, c("age", "survived")], marginal = "hist")
@@ -156,8 +185,8 @@
 #' # convenience wrappers -- marginal= fixed, still get all calling conventions
 #' logist_point(survived ~ age, data = Donner)
 #' logist_hist(survived ~ age, data = Donner)
-#' }
 #'
+#' @importFrom rlang .data
 #' @export
 logist_plot <- function(x, ...) {
   UseMethod("logist_plot")
@@ -270,9 +299,6 @@ logist_point <- function(x, ...) {
                                bins = 30, xlab = NULL, ylab = NULL,
                                fit.color = "steelblue", marg.color = "orange") {
   marginal <- match.arg(marginal)
-  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop("Package 'ggplot2' is required for logist_plot(). Please install it.", call. = FALSE)
-  }
 
   data <- data.frame(x = x, y = y)
   uy <- .check_binary_y(data$y)
@@ -360,10 +386,6 @@ logist_point <- function(x, ...) {
     p_top <- marginal_hist(uy[1], reverse = FALSE)
     p_bottom <- marginal_hist(uy[2], reverse = TRUE)
 
-    if (!requireNamespace("cowplot", quietly = TRUE)) {
-      stop("Package 'cowplot' is required for `marginal = \"hist\"`. Please install it.",
-           call. = FALSE)
-    }
     cowplot::ggdraw() + cowplot::draw_plot(p_top) + cowplot::draw_plot(p_bottom) +
       cowplot::draw_plot(p_main)
   }
