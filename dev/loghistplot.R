@@ -31,9 +31,150 @@
 #
 # TODO: Make into a proper, general function so that it takes args x=, y=, data=
 # TODO: Get variable labels from data (if labeled) or args xlab=, ylab=
-# TODO: Combine these functions in a more general way. An argument, `marginal = c("hist", "points")`
+# [GK: DONE] TODO: Combine these functions in a more general way. An argument, `marginal = c("hist", "points")`
 
 # Define the function
+logist_plot <- function(data, marginal, bins=30) {
+  
+  require(ggplot2); require(gridExtra); require(grid) # load packages
+  
+  names(data) <- c('x','y') # rename columns
+  
+  # get min and max axis values
+  min_x <- min(data$x)
+  max_x <- max(data$x)
+  min_y <- min(data$y)
+  max_y <- max(data$y)
+  
+  if (marginal == "hist") {
+    
+    if (length(bins) != 1L || !is.numeric(bins) || is.na(bins) ||
+        !is.finite(bins) || bins < 1 || bins != floor(bins)) {
+      stop("`bins` must be one positive whole number.", call. = FALSE)
+    }
+    
+    # get bin numbers
+    bin_width <- (max(data$x) - min(data$x)) / bins
+    hist_breaks <- seq(min(data$x), max(data$x), length.out = bins + 1)
+    hist_counts <- lapply(unique(data$y), function(y) {
+      hist(data$x[data$y == y], breaks = hist_breaks, right = FALSE,
+           include.lowest = TRUE, plot = FALSE)$counts
+    })
+    max_count <- max(unlist(hist_counts))
+    bin_no <- 4 * max_count
+    
+    count_ticks <- pretty(c(0, max_count))
+    count_ticks <- count_ticks[count_ticks >= 0 & count_ticks <= max_count]
+    count_positions <- sort(c(count_ticks / bin_no,
+                              1 - count_ticks / bin_no))
+    count_labels <- round(bin_no * pmin(count_positions,
+                                        1 - count_positions))
+    
+    # create plots
+    a <- ggplot(data, aes(x = x, y = y)) +
+      theme_bw(base_size=16) +
+      geom_smooth(method = "glm", method.args = list(family = "binomial"), 
+                  se = TRUE, colour = 'black', linewidth = 1.5, alpha = 0.3) +
+      scale_y_continuous(
+        limits = c(0, 1),
+        breaks = seq(0, 1, by = 0.2),
+        expand = expansion(mult = 0),
+        sec.axis = dup_axis(
+          breaks = count_positions,
+          labels = count_labels,
+          name = "Count"
+        )
+      ) +
+      coord_cartesian(xlim = c(min_x, max_x)) +
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            plot.background = element_blank()) +
+      labs(y = "Probability\n", x = "\nYour X Variable")
+    
+    b <- ggplot(data[data$y == unique(data$y)[1], ], aes(x = x)) +
+      theme_bw(base_size=16) +
+      geom_histogram(fill = "grey", binwidth = bin_width,
+                     boundary = min(data$x), closed = "left") +
+      scale_y_continuous(
+        limits = c(0, bin_no),
+        labels = function(z) rep("0.0", length(z)),
+        expand = expansion(mult = 0),
+        sec.axis = dup_axis(
+          breaks = count_ticks,
+          labels = count_ticks,
+          name = "Count"
+        )
+      ) +
+      coord_cartesian(xlim = c(min_x, max_x)) +
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.text = element_text(colour = "transparent"),
+            axis.ticks = element_line(colour = "transparent"),
+            axis.title = element_text(colour = "transparent"),
+            panel.border = element_blank(),
+            panel.background = element_blank(),
+            plot.background = element_blank()) +
+      labs(y = "Probability\n", x = "\nYour X Variable")
+    
+    c <- ggplot(data[data$y == unique(data$y)[2], ], aes(x = x)) +
+      theme_bw(base_size=16) +
+      geom_histogram(fill = "grey", binwidth = bin_width,
+                     boundary = min(data$x), closed = "left") +
+      scale_y_reverse(
+        limits = c(bin_no, 0),
+        labels = function(z) rep("0.0", length(z)),
+        expand = expansion(mult = 0),
+        sec.axis = dup_axis(
+          breaks = count_ticks,
+          labels = count_ticks,
+          name = "Count"
+        )
+      ) +
+      coord_cartesian(xlim = c(min_x, max_x)) +
+      theme(panel.grid.major = element_blank(), 
+            panel.grid.minor = element_blank(),
+            axis.text = element_text(colour = "transparent"),
+            axis.ticks = element_line(colour = "transparent"),
+            axis.title = element_text(colour = "transparent"),
+            panel.border = element_blank(),
+            panel.background = element_blank(),
+            plot.background = element_blank()) +
+      labs(y = "Probability\n", x = "\nYour X Variable")
+    
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(1,1)))
+    
+    vpa_ <- viewport(width = 1, height = 1, x = 0.5, y = 0.5)
+    vpb_ <- viewport(width = 1, height = 1, x = 0.5, y = 0.5)
+    vpc_ <- viewport(width = 1, height = 1, x = 0.5, y = 0.5)
+    
+    print(b, vp = vpb_)
+    print(c, vp = vpc_)
+    print(a, vp = vpa_)
+  }
+  
+  else if (marginal == "points") {
+    
+    # create plots
+    ggplot(data, aes(x = x, y = y)) +
+      theme_bw(base_size=16) +
+      geom_point(alpha = 0.5, position = position_jitter(w=0, h=0.02)) +
+      geom_smooth(method = "glm", method.args = list(family = "binomial"), 
+                  se = TRUE, colour='black', size=1.5, alpha = 0.3) +
+      scale_x_continuous(limits=c(min_x,max_x)) +
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            plot.background = element_blank()) +
+      labs(y = "Probability\n", x = "\nYour X Variable")
+  }
+  
+  else {
+    stop('`marginal` must be either "hist" or "points"')
+  }
+}
+
 loghistplot  <- function(data, bins = 30) {
 
   require(ggplot2); require(gridExtra); require(grid) # load packages
@@ -191,5 +332,7 @@ if (FALSE) {
   loghistplot(Donner[,c("age","survived")])
   logpointplot(Donner[,c("age","survived")])
 
-
+  logist_plot(Donner[,c("age","survived")], marginal = "hist")
+  logist_plot(Donner[,c("age","survived")], marginal = "points")
+  
 }
