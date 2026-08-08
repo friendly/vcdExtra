@@ -51,6 +51,66 @@
 # just call `logist_plot(..., marginal = "hist"/"points")`, so they inherit all three calling
 # conventions (vector/data.frame/formula) for free instead of duplicating the implementation.
 
+# ---- review notes ------------------------------------------------------------------------
+#
+# Package integration / dependencies
+#
+# - This file is under dev/, so none of its functions or documentation are included in the
+#   package. Before release it needs to move to R/, be processed by roxygen2, and have tests.
+# - Move ggplot2 from Suggests to Imports as ggplot2 (>= 3.4.0). Every execution path requires
+#   it, the function returns a ggplot object, and linewidth requires ggplot2 3.4.0 or newer.
+#   Keep the qualified ggplot2:: calls; once it is imported, the requireNamespace() guard is
+#   unnecessary.
+# - Question for Michael: should cowplot be in Suggests or Imports? It is required only when a
+#   caller explicitly selects marginal = "hist", while marginal = "points" works without it.
+#   Use Suggests and keep the requireNamespace() guard if histogram mode is optional; use
+#   Imports and remove the guard if histogram mode should always be available. Either way,
+#   cowplot must be declared in DESCRIPTION or R CMD check reports a WARNING.
+#
+# Interface / behavior
+#
+# - Question for Michael: should logist_plot() require callers to choose "hist" or "points"
+#   explicitly? I had it as no default here, while logist_hist() and
+#   logist_point() make the choice for their callers. The current method and implementation
+#   formals use marginal = c("hist", "points"), so match.arg() selects "hist" when marginal is
+#   omitted. If the no-default proposal is adopted, remove the marginal default from all three
+#   public methods and from .logist_plot_impl(), and remove "(default)" from @param marginal.
+# - The documented factor/character/logical response support is not implemented reliably.
+#   Histogram mode errors on a discrete y scale, while point mode can draw points but fails
+#   one or more glm smooth groups. Convert the two response levels deterministically to 0/1;
+#   for numeric y, either require 0/1 or document and perform the same conversion.
+# - Define which response value is the modeled event and use that same ordering for the fit
+#   and marginal plots. .check_binary_y() returns unique() order, so reordering rows can swap
+#   the two histograms. The p_top/p_bottom names are also opposite the rendered directions:
+#   the ordinary scale grows from the bottom and the reversed scale grows from the top.
+# - Vector and data-frame calls retain incomplete cases, unlike model.frame() in the formula
+#   method. NA/Inf x values make histogram setup fail; constant x gives invalid histogram
+#   bins. Validate equal lengths and numeric/finite x after applying one consistent NA policy,
+#   then either reject a zero-range predictor or provide a defined histogram fallback.
+# - The formula method silently ignores every predictor after the first because it passes only
+#   mf[[2]] and mf[[1]]. Reject formulas that do not contain exactly one response and one
+#   predictor. Also decide whether the promised `formula =` spelling should work: currently
+#   logist_plot(formula = y ~ x, data = d) fails because the generic requires an argument x.
+# - Validate xvar and yvar as single existing column names or valid positions before [[ ]]. An
+#   unknown name currently fails later with an unrelated differing-row-count message.
+# - The methods accept ... but do not forward or check it, so misspelled arguments are silently
+#   ignored. Either document a purpose for ..., pass it onward, or check that it is empty.
+# - p_main already has coord_cartesian(); the points branch adds a second coordinate system and
+#   reports that the first is being replaced on every call. Construct the coordinate once.
+#
+# Documentation / tests
+#
+# - The compatibility comment says loghistplot()/logpointplot() were not dropped, but those
+#   names are not defined here; the new wrappers are logist_hist()/logist_point(). Clarify that
+#   this is a rename, or retain aliases if the old names were ever public.
+# - If cowplot remains optional, do not wrap point-only examples in the cowplot availability
+#   check; otherwise those examples are skipped even though they need only ggplot2.
+# - @seealso is not required for CRAN, but @seealso [vcd::binreg_plot()] would be useful. With
+#   no other help topic in this @family, the family tag currently adds no related-page links.
+# - Add tests for the three interfaces, both marginal modes, the omitted-marginal error,
+#   response encodings/event direction, row reordering, NA/Inf/constant x, column selection,
+#   formula validation, labels/colors, optional dependencies, and successful plot building.
+
 # ---- public generic + methods ------------------------------------------------------------
 
 #' Plot a fitted logistic regression with marginal distributions of the predictor
@@ -108,14 +168,14 @@ logist_plot <- function(x, ...) {
 #'   "hist", a histogram (default) or "points",jittered points
 #' @param bins number of histogram bins, for `marginal = "hist"`; default: 30
 #' @param xlab,ylab axis labels; default to the deparsed `x`/`y` expressions
-#' @param fit.color color of the fitted logistic curve and its confidence band; default: "lightblue"
+#' @param fit.color color of the fitted logistic curve and its confidence band; default: "steelblue"
 #' @param marg.color color of the marginal representation of x within each y group (histogram
-#'   fill, or point color for `marginal = "points"`); default: "lightpink", a pale pink
+#'   fill, or point color for `marginal = "points"`); default: "orange"
 #' @rdname logist_plot
 #' @export
 logist_plot.default <- function(x, y, marginal = c("hist", "points"),
                                  bins = 30, xlab = NULL, ylab = NULL,
-                                 fit.color = "lightblue", marg.color = "lightpink", ...) {
+                                 fit.color = "steelblue", marg.color = "orange", ...) {
   xlab <- xlab %||% deparse(substitute(x))
   ylab <- ylab %||% deparse(substitute(y))
   .logist_plot_impl(x, y, marginal = marginal, bins = bins, xlab = xlab, ylab = ylab,
@@ -130,7 +190,7 @@ logist_plot.default <- function(x, y, marginal = c("hist", "points"),
 logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
                                     marginal = c("hist", "points"),
                                     bins = 30, xlab = NULL, ylab = NULL,
-                                    fit.color = "lightblue", marg.color = "lightpink", ...) {
+                                    fit.color = "steelblue", marg.color = "orange", ...) {
   if (ncol(x) < 2L) {
     stop("`x` must have at least 2 columns.", call. = FALSE)
   }
@@ -146,7 +206,7 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
 #' @export
 logist_plot.formula <- function(x, data, marginal = c("hist", "points"),
                                  bins = 30, xlab = NULL, ylab = NULL,
-                                 fit.color = "lightblue", marg.color = "lightpink", ...) {
+                                 fit.color = "steelblue", marg.color = "orange", ...) {
   mf <- stats::model.frame(x, data = data)
   .logist_plot_impl(mf[[2]], mf[[1]], marginal = marginal, bins = bins,
                      xlab = xlab %||% names(mf)[2], ylab = ylab %||% names(mf)[1],
@@ -208,7 +268,7 @@ logist_point <- function(x, ...) {
 # logist_hist()/logist_point().
 .logist_plot_impl <- function(x, y, marginal = c("hist", "points"),
                                bins = 30, xlab = NULL, ylab = NULL,
-                               fit.color = "lightblue", marg.color = "lightpink") {
+                               fit.color = "steelblue", marg.color = "orange") {
   marginal <- match.arg(marginal)
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("Package 'ggplot2' is required for logist_plot(). Please install it.", call. = FALSE)
@@ -269,7 +329,7 @@ logist_point <- function(x, ...) {
       p <- ggplot2::ggplot(data[data$y == lev, ], ggplot2::aes(x = .data$x)) +
         ggplot2::theme_bw(base_size = 16) +
         ggplot2::geom_histogram(fill = marg.color, binwidth = bin_width,
-                                 boundary = min_x, closed = "left") +
+                                 boundary = min_x, closed = "left", alpha = .67) +
         ggplot2::coord_cartesian(xlim = c(min_x, max_x)) +
         ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                        panel.grid.minor = ggplot2::element_blank(),
