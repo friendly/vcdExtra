@@ -51,7 +51,8 @@
 # - Removed dead code (`min_y`/`max_y` were computed but never used).
 #
 # - Renamed loop variables `a`, `b`, `c` (the last of which shadowed base::c()) to `p_main`,
-#   `p_top`, `p_bottom`.
+#   `p_hist_y0`, `p_hist_y1` (originally `p_top`/`p_bottom`; renamed again, see review notes
+#   below, once those names turned out to be backwards from what they render).
 #
 # Kept, per discussion: the *idea* behind the old loghistplot()/logpointplot() single-purpose
 # functions is not dropped -- they're reimplemented, and renamed, as thin convenience wrappers
@@ -120,11 +121,20 @@
 #   dependency in the next bullet below (level order no longer comes from unique()-encounter
 #   order), though the separate p_top/p_bottom naming-vs-rendered-direction question there is
 #   still open.]
+#   [**FIXED** (Michael, 2026-08-08): confirmed via dev/loghist-test.R's
+#   .demo_top_bottom_direction() that the logic was already correct -- uy[1]=0 (unreversed
+#   scale) really does grow up from the bottom and uy[2]=1 (scale_y_reverse()) really does hang
+#   down from the top, matching the intended mirrored-histogram design. Only the variable names
+#   were backwards. Renamed p_top/p_bottom -> p_hist_y0/p_hist_y1, naming by response group
+#   instead of assumed screen position, plus a comment at the call site stating the
+#   grows-up-from-0 / hangs-down-from-1 convention explicitly.]
 #
 # - Define which response value is the modeled event and use that same ordering for the fit
 #   and marginal plots. .check_binary_y() returns unique() order, so reordering rows can swap
 #   the two histograms. The p_top/p_bottom names are also opposite the rendered directions:
 #   the ordinary scale grows from the bottom and the reversed scale grows from the top.
+#   [**FIXED** (Michael, 2026-08-08): row-order independence already fixed above via
+#   .to_binary01(); the naming half fixed by the p_hist_y0/p_hist_y1 rename in the bullet above.]
 #
 # - Vector and data-frame calls retain incomplete cases, unlike model.frame() in the formula
 #   method. NA/Inf x values make histogram setup fail; constant x gives invalid histogram
@@ -484,10 +494,14 @@ logist_point <- function(x, ...) {
       }
     }
 
-    p_top <- marginal_hist(uy[1], reverse = FALSE)
-    p_bottom <- marginal_hist(uy[2], reverse = TRUE)
+    # y = 0 group: bars grow up from the probability = 0 baseline (unreversed scale).
+    # y = 1 group: bars hang down from the probability = 1 baseline (scale_y_reverse()).
+    # Named by group, not by screen position -- "top"/"bottom" would describe where each
+    # one renders, not what it is, and (as discovered in review) is easy to get backwards.
+    p_hist_y0 <- marginal_hist(uy[1], reverse = FALSE)
+    p_hist_y1 <- marginal_hist(uy[2], reverse = TRUE)
 
-    cowplot::ggdraw() + cowplot::draw_plot(p_top) + cowplot::draw_plot(p_bottom) +
+    cowplot::ggdraw() + cowplot::draw_plot(p_hist_y0) + cowplot::draw_plot(p_hist_y1) +
       cowplot::draw_plot(p_main)
   }
 }
