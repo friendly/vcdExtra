@@ -113,6 +113,7 @@
 #   works reliably, contradicting the @param y doc. Fix is as Gavin describes above -- convert
 #   y to numeric 0/1 immediately after .check_binary_y(), before it ever reaches ggplot() --
 #   not yet applied.]
+#
 #   [**FIXED** (Michael, 2026-08-08): .check_binary_y() replaced with .to_binary01(), which
 #   validates AND canonicalizes in one step (see its own comment for the level-ordering
 #   convention per type). .logist_plot_impl() converts data$y to numeric 0/1 immediately after
@@ -121,6 +122,7 @@
 #   dependency in the next bullet below (level order no longer comes from unique()-encounter
 #   order), though the separate p_top/p_bottom naming-vs-rendered-direction question there is
 #   still open.]
+#
 #   [**FIXED** (Michael, 2026-08-08): confirmed via dev/loghist-test.R's
 #   .demo_top_bottom_direction() that the logic was already correct -- uy[1]=0 (unreversed
 #   scale) really does grow up from the bottom and uy[2]=1 (scale_y_reverse()) really does hang
@@ -140,6 +142,7 @@
 #   method. NA/Inf x values make histogram setup fail; constant x gives invalid histogram
 #   bins. Validate equal lengths and numeric/finite x after applying one consistent NA policy,
 #   then either reject a zero-range predictor or provide a defined histogram fallback.
+#
 #   [**FIXED** (Michael, 2026-08-08): .logist_plot_impl() now applies one policy for all calling
 #   conventions -- complete.cases() + is.finite(x) right after building `data`, and an explicit
 #   error if x has zero range (min_x == max_x). model.frame()'s own NA-dropping in the formula
@@ -149,6 +152,7 @@
 #   mf[[2]] and mf[[1]]. Reject formulas that do not contain exactly one response and one
 #   predictor. Also decide whether the promised `formula =` spelling should work: currently
 #   logist_plot(formula = y ~ x, data = d) fails because the generic requires an argument x.
+#
 #   [**FIXED** (Michael, 2026-08-08): logist_plot.formula()'s first argument renamed from `x` to
 #   `formula` -- an S3 method's formals don't have to match the generic's names (verified this
 #   is legal and matches base R's own boxplot.formula()/lm() convention), so
@@ -164,6 +168,7 @@
 #
 # - The methods accept ... but do not forward or check it, so misspelled arguments are silently
 #   ignored. Either document a purpose for ..., pass it onward, or check that it is empty.
+#
 #   [**RESOLVED** (Michael, 2026-08-08): option (b) -- ... is now forwarded from all three public
 #   methods into .logist_plot_impl(), which calls rlang::check_dots_empty() and errors on
 #   anything unconsumed. Not (c): a flat ... can't be routed unambiguously to one of several
@@ -173,6 +178,7 @@
 #
 # - p_main already has coord_cartesian(); the points branch adds a second coordinate system and
 #   reports that the first is being replaced on every call. Construct the coordinate once.
+#
 #   [**FIXED** (Michael, 2026-08-08): removed coord_cartesian() from p_main's base construction;
 #   each branch now sets it exactly once (points: xlim+ylim together; hist: xlim, alongside the
 #   scale_y_continuous() it already adds). No more "replacing" message.]
@@ -182,6 +188,7 @@
 # - The compatibility comment says loghistplot()/logpointplot() were not dropped, but those
 #   names are not defined here; the new wrappers are logist_hist()/logist_point(). Clarify that
 #   this is a rename, or retain aliases if the old names were ever public.
+#
 #   [**FIXED** (Michael, 2026-08-08): reworded the top-of-file comment to say explicitly that the
 #   old names are gone and this is a rename, not a preserved alias. The old names were never
 #   public (this file has never shipped in R/), so no alias is needed.]
