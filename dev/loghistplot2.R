@@ -19,30 +19,37 @@
 # Original sketch implemented by Scott Chamberlain, https://recology.info/2012/01/logistic-regression-barplot-fig/
 #
 # TODO status vs. dev/loghistplot.R:
-# [DONE] Combine hist/points into one function via `marginal = c("hist", "points")` (Gavin)
-# [DONE] Make into a proper, general function with x=, y=, data= -- via S3 methods below
+# [**DONE**] Combine hist/points into one function via `marginal = c("hist", "points")` (Gavin)
+# [**DONE**] Make into a proper, general function with x=, y=, data= -- via S3 methods below
 #        (default / data.frame / formula), matching base R's plot()/boxplot() convention.
 #        Deliberately dropped `data=` from the generic itself -- it only makes sense for the
 #        `formula` method, so it lives there, not on every call.
-# [DONE] Get variable labels from data or xlab=/ylab= args -- each method derives sensible
+# [**DONE**] Get variable labels from data or xlab=/ylab= args -- each method derives sensible
 #        defaults (deparsed vector expression / data frame column name / formula term name),
 #        overridable via xlab=/ylab=.
 #
 # CRAN-readiness fixes vs. the original:
+#
 # - No more `require()` inside functions (not CRAN-compliant) -- guarded via requireNamespace()
 #   + `pkg::fun()`, matching this package's existing style (see R/color_table.R).
+#
 # - Dropped the `gridExtra` dependency entirely -- it was require()d but never actually used
 #   (all grid calls were from `grid` itself). The marginal="hist" compositing (previously raw
 #   grid::viewport overlays, drawn as a side effect, returning invisible(NULL)) is now done with
 #   cowplot::ggdraw() + draw_plot(), which returns an actual ggplot object -- verified against the
 #   Donner data to render identically to the original grid-viewport version.
+#
 # - Fixed deprecated ggplot2 arg: `geom_smooth(..., size = 1.5, ...)` -> `linewidth = 1.5`
 #   (the "points" branch was still using the pre-3.4.0 `size` aesthetic for lines).
+#
 # - `aes(x = x, y = y)` -> `aes(x = .data$x, y = .data$y)` to avoid an R CMD check NOTE
 #   ("no visible binding for global variable").
+#
 # - Added input validation: `data` must have >= 2 columns (data.frame method), and `y` must be
 #   binary (exactly 2 distinct values) -- both silently misbehaved before.
+#
 # - Removed dead code (`min_y`/`max_y` were computed but never used).
+#
 # - Renamed loop variables `a`, `b`, `c` (the last of which shadowed base::c()) to `p_main`,
 #   `p_top`, `p_bottom`.
 #
@@ -70,7 +77,7 @@
 #   Use Suggests and keep the requireNamespace() guard if histogram mode is optional; use
 #   Imports and remove the guard if histogram mode should always be available. Either way,
 #   cowplot must be declared in DESCRIPTION or R CMD check reports a WARNING.
-#   [RESOLVED (Michael): both ggplot2 (>= 3.4.0) and cowplot moved to Imports in DESCRIPTION;
+#   [**RESOLVED** (Michael): both ggplot2 (>= 3.4.0) and cowplot moved to Imports in DESCRIPTION;
 #   both requireNamespace() guards removed below. .data now imported via
 #   @importFrom rlang .data, since it's used unqualified inside aes().]
 #
@@ -82,14 +89,14 @@
 #   formals use marginal = c("hist", "points"), so match.arg() selects "hist" when marginal is
 #   omitted. If the no-default proposal is adopted, remove the marginal default from all three
 #   public methods and from .logist_plot_impl(), and remove "(default)" from @param marginal.
-#   [RESOLVED (Michael): keep the "hist" default as-is on logist_plot(); logist_hist()/
+#   [**RESOLVED** (Michael): keep the "hist" default as-is on logist_plot(); logist_hist()/
 #   logist_point() remain convenience wrappers, not the only way to skip specifying it.]
 #
 # - The documented factor/character/logical response support is not implemented reliably.
 #   Histogram mode errors on a discrete y scale, while point mode can draw points but fails
 #   one or more glm smooth groups. Convert the two response levels deterministically to 0/1;
 #   for numeric y, either require 0/1 or document and perform the same conversion.
-#   [CLARIFIED (2026-08-08), not yet fixed -- see dev/loghist-test.R for reproducible cases:
+#   [**CLARIFIED** (2026-08-08), not yet fixed -- see dev/loghist-test.R for reproducible cases:
 #   ggplot2 treats any non-numeric y (factor/character/logical) as *discrete*. aes(y = .data$y)
 #   sets no explicit group=, so ggplot2's implicit grouping splits stat_smooth()'s calculation
 #   into one glm() fit PER DISTINCT y VALUE -- each such subset has a constant y, which
@@ -105,7 +112,7 @@
 #   works reliably, contradicting the @param y doc. Fix is as Gavin describes above -- convert
 #   y to numeric 0/1 immediately after .check_binary_y(), before it ever reaches ggplot() --
 #   not yet applied.]
-#   [FIXED (Michael, 2026-08-08): .check_binary_y() replaced with .to_binary01(), which
+#   [**FIXED** (Michael, 2026-08-08): .check_binary_y() replaced with .to_binary01(), which
 #   validates AND canonicalizes in one step (see its own comment for the level-ordering
 #   convention per type). .logist_plot_impl() converts data$y to numeric 0/1 immediately after
 #   building `data`, before anything reaches ggplot(). Re-run dev/loghist-test.R to confirm --
@@ -123,7 +130,7 @@
 #   method. NA/Inf x values make histogram setup fail; constant x gives invalid histogram
 #   bins. Validate equal lengths and numeric/finite x after applying one consistent NA policy,
 #   then either reject a zero-range predictor or provide a defined histogram fallback.
-#   [FIXED (Michael, 2026-08-08): .logist_plot_impl() now applies one policy for all calling
+#   [**FIXED** (Michael, 2026-08-08): .logist_plot_impl() now applies one policy for all calling
 #   conventions -- complete.cases() + is.finite(x) right after building `data`, and an explicit
 #   error if x has zero range (min_x == max_x). model.frame()'s own NA-dropping in the formula
 #   method still runs first, but re-filtering already-clean data afterward is a harmless no-op.]
@@ -132,7 +139,7 @@
 #   mf[[2]] and mf[[1]]. Reject formulas that do not contain exactly one response and one
 #   predictor. Also decide whether the promised `formula =` spelling should work: currently
 #   logist_plot(formula = y ~ x, data = d) fails because the generic requires an argument x.
-#   [FIXED (Michael, 2026-08-08): logist_plot.formula()'s first argument renamed from `x` to
+#   [**FIXED** (Michael, 2026-08-08): logist_plot.formula()'s first argument renamed from `x` to
 #   `formula` -- an S3 method's formals don't have to match the generic's names (verified this
 #   is legal and matches base R's own boxplot.formula()/lm() convention), so
 #   logist_plot(formula = y ~ x, data = d) now works, as does the existing positional form.
@@ -141,20 +148,22 @@
 #
 # - Validate xvar and yvar as single existing column names or valid positions before [[ ]]. An
 #   unknown name currently fails later with an unrelated differing-row-count message.
-#   [FIXED (Michael, 2026-08-08): logist_plot.data.frame() now validates xcol/ycol resolve to
+#   [**FIXED** (Michael, 2026-08-08): logist_plot.data.frame() now validates xcol/ycol resolve to
 #   an existing column name before subsetting, erroring immediately with a clear message
 #   otherwise.]
 #
 # - The methods accept ... but do not forward or check it, so misspelled arguments are silently
 #   ignored. Either document a purpose for ..., pass it onward, or check that it is empty.
-#   [OPEN (Michael + Gavin to decide): three real options here -- (a) leave as-is (silently
-#   ignored), (b) error on any unconsumed ... to catch typos, or (c) actually forward ... into
-#   theme()/geom_point()/geom_histogram() for further customization. This changes the API
-#   surface, not a bug fix, so deliberately not decided unilaterally.]
+#   [**RESOLVED** (Michael, 2026-08-08): option (b) -- ... is now forwarded from all three public
+#   methods into .logist_plot_impl(), which calls rlang::check_dots_empty() and errors on
+#   anything unconsumed. Not (c): a flat ... can't be routed unambiguously to one of several
+#   ggplot layers (geom_smooth vs. the two geom_histogram calls) without colliding names, so
+#   future visual-control options (e.g. hist.color) should be added as explicit named params,
+#   the way fit.color/marg.color already are -- not as generic passthrough.]
 #
 # - p_main already has coord_cartesian(); the points branch adds a second coordinate system and
 #   reports that the first is being replaced on every call. Construct the coordinate once.
-#   [FIXED (Michael, 2026-08-08): removed coord_cartesian() from p_main's base construction;
+#   [**FIXED** (Michael, 2026-08-08): removed coord_cartesian() from p_main's base construction;
 #   each branch now sets it exactly once (points: xlim+ylim together; hist: xlim, alongside the
 #   scale_y_continuous() it already adds). No more "replacing" message.]
 #
@@ -163,18 +172,18 @@
 # - The compatibility comment says loghistplot()/logpointplot() were not dropped, but those
 #   names are not defined here; the new wrappers are logist_hist()/logist_point(). Clarify that
 #   this is a rename, or retain aliases if the old names were ever public.
-#   [FIXED (Michael, 2026-08-08): reworded the top-of-file comment to say explicitly that the
+#   [**FIXED** (Michael, 2026-08-08): reworded the top-of-file comment to say explicitly that the
 #   old names are gone and this is a rename, not a preserved alias. The old names were never
 #   public (this file has never shipped in R/), so no alias is needed.]
 #
 # - If cowplot remains optional, do not wrap point-only examples in the cowplot availability
 #   check; otherwise those examples are skipped even though they need only ggplot2.
-#   [MOOT (Michael): cowplot is now a hard Imports (see dependency section above), so
+#   [**MOOT** (Michael): cowplot is now a hard Imports (see dependency section above), so
 #   @examples no longer wraps in any availability check at all -- doesn't apply anymore.]
 #
 # - @seealso is not required for CRAN, but @seealso [vcd::binreg_plot()] would be useful. With
 #   no other help topic in this @family, the family tag currently adds no related-page links.
-#   [FIXED (Michael, 2026-08-08): added.]
+#   [**FIXED** (Michael, 2026-08-08): added.]
 #
 # - Add tests for the three interfaces, both marginal modes, the omitted-marginal error,
 #   response encodings/event direction, row reordering, NA/Inf/constant x, column selection,
@@ -200,7 +209,9 @@
 #' @param x a numeric predictor vector or a data frame; see `formula` below for the
 #'   model-formula interface
 #' @param ... arguments passed to methods, or on to `logist_plot()` from `logist_hist()`/
-#'   `logist_point()`
+#'   `logist_point()`. Currently reserved for future visual-control options (e.g. a
+#'   `hist.color`); passing any unrecognized argument is an error rather than being
+#'   silently ignored.
 #'
 #' @return A `ggplot` object.
 #' @author Gavin Klorfine, Michael Friendly
@@ -248,7 +259,7 @@ logist_plot.default <- function(x, y, marginal = c("hist", "points"),
   xlab <- xlab %||% deparse(substitute(x))
   ylab <- ylab %||% deparse(substitute(y))
   .logist_plot_impl(x, y, marginal = marginal, bins = bins, xlab = xlab, ylab = ylab,
-                     fit.color = fit.color, marg.color = marg.color)
+                     fit.color = fit.color, marg.color = marg.color, ...)
 }
 
 #' @param xvar,yvar which columns of `x` to use as predictor/response -- column name or
@@ -273,7 +284,7 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
   }
   .logist_plot_impl(x[[xcol]], x[[ycol]], marginal = marginal, bins = bins,
                      xlab = xlab %||% xcol, ylab = ylab %||% ycol,
-                     fit.color = fit.color, marg.color = marg.color)
+                     fit.color = fit.color, marg.color = marg.color, ...)
 }
 
 #' @param formula a model formula, `y ~ x` -- exactly one response and one predictor;
@@ -293,7 +304,7 @@ logist_plot.formula <- function(formula, data, marginal = c("hist", "points"),
   }
   .logist_plot_impl(mf[[2]], mf[[1]], marginal = marginal, bins = bins,
                      xlab = xlab %||% names(mf)[2], ylab = ylab %||% names(mf)[1],
-                     fit.color = fit.color, marg.color = marg.color)
+                     fit.color = fit.color, marg.color = marg.color, ...)
 }
 
 # ---- convenience wrappers (fixed marginal=) ------------------------------------------------
@@ -376,7 +387,8 @@ logist_point <- function(x, ...) {
 # logist_hist()/logist_point().
 .logist_plot_impl <- function(x, y, marginal = c("hist", "points"),
                                bins = 30, xlab = NULL, ylab = NULL,
-                               fit.color = "steelblue", marg.color = "orange") {
+                               fit.color = "steelblue", marg.color = "orange", ...) {
+  rlang::check_dots_empty()
   marginal <- match.arg(marginal)
 
   data <- data.frame(x = x, y = y)
