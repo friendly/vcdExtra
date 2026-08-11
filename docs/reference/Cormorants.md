@@ -70,6 +70,7 @@ response measures rate.
 ## Examples
 
 ``` r
+
 data(Cormorants)
 str(Cormorants)
 #> 'data.frame':    343 obs. of  8 variables:
@@ -121,7 +122,7 @@ if (requireNamespace("car"))
 #> density       47.266  2  5.450e-11 ***
 #> tree_health    0.070  1    0.79199    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # plot fitted effects
 if (requireNamespace("effects"))

@@ -50,6 +50,7 @@ often taken as a baseline category in multinomial response models.
 ## Examples
 
 ``` r
+
 data(Alligator)
 
 # change from frequency data.frame to table

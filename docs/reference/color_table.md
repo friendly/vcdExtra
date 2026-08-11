@@ -249,6 +249,7 @@ For **PDF or Word output**, gt does not render natively. Use the
 with
 [`include_graphics`](https://rdrr.io/pkg/knitr/man/include_graphics.html):
 
+
         color_table(my_table, filename = "my_table.png")
         knitr::include_graphics("my_table.png")
 
@@ -261,6 +262,7 @@ that branches on
 [`is_html_output`](https://rdrr.io/pkg/knitr/man/output_type.html)
 avoids duplicating code:
 
+
         gt_obj <- color_table(my_table)
         if (knitr::is_html_output()) {
           gt_obj
@@ -272,6 +274,7 @@ avoids duplicating code:
 If you need a caption or cross-reference label, use
 [`gt::tab_caption()`](https://gt.rstudio.com/reference/tab_caption.html)
 on the returned object:
+
 
         color_table(my_table) |>
           gt::tab_caption("Table 1: Pattern of association in MyTable")
@@ -305,119 +308,3 @@ color_table(HEC)
   
 
 ```
-
-Eye
-
-Total
-
-Brown
-
-Blue
-
-Hazel
-
-Green
-
-Black
-
-68
-
-20
-
-15
-
-5
-
-108
-
-Brown
-
-119
-
-84
-
-54
-
-29
-
-286
-
-Red
-
-26
-
-17
-
-14
-
-14
-
-71
-
-Blond
-
-7
-
-94
-
-10
-
-16
-
-127
-
-Total
-
-220
-
-215
-
-93
-
-64
-
-592
-
-\# Shade by frequencies instead (no message printed) color_table(HEC,
-shade = "freq")
-
-[TABLE]
-
-\# 3-way table - using a formula to specify layout (col_vars ~
-row_vars): \# Eye is the single column variable, Hair and Sex are row
-variables shown \# as separate stub columns color_table(HairEyeColor,
-formula = Eye ~ Hair + Sex) \#\> Re-fitting to get frequencies and
-fitted values \#\> Shading based on residuals from model of complete
-independence, X^2 = 164.92, df = 24, p = 0
-
-[TABLE]
-
-\# Display residual values in cells instead of frequencies
-color_table(HEC, values = "residuals") \#\> Shading based on residuals
-from model of independence, \#\> X^2 = 138.29, df = 9, p = 2.325e-25
-
-[TABLE]
-
-\# Multiple column variables - shown using nested spanner headings
-instead \# of concatenated column labels
-[data](https://rdrr.io/r/utils/data.html)(Titanic) color_table(Titanic,
-formula = Class + Sex ~ Survived) \#\> Re-fitting to get frequencies and
-fitted values \#\> Shading based on residuals from model of complete
-independence, X^2 = 1637.45, df = 25, p = 0
-
-[TABLE]
-
-\# Multiple row AND column variables together: column spanners (Class,
-Sex) \# combined with row-variable stub columns (Age, Survived)
-color_table(Titanic, formula = Class + Sex ~ Age + Survived, legend =
-TRUE) \#\> Re-fitting to get frequencies and fitted values \#\> Shading
-based on residuals from model of complete independence, X^2 = 1637.45,
-df = 25, p = 0
-
-[TABLE]
-
-if (FALSE) { \# \dontrun{ \# From a data.frame in frequency form (2-way)
-hec_df \<-
-[as.data.frame](https://rdrr.io/r/base/as.data.frame.html)(HEC)
-color_table(hec_df) \# Save table as an image file color_table(HEC,
-filename = "hair_eye_table.png") } \# }

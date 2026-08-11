@@ -32,6 +32,7 @@ varies. As shown below, the discrete table that is visualized is
 returned by the function.
 
 ``` r
+
 (spine(Improved ~ Age, data = Arthritis, breaks = 3))
 ##          Improved
 ## Age       None Some Marked
@@ -62,6 +63,7 @@ variable. As well, it uses the original `x` axis and not a distorted
 one.
 
 ``` r
+
 cdplot(Improved ~ Age, data = Arthritis)
 ```
 
@@ -81,6 +83,7 @@ uses [`cdplot()`](https://rdrr.io/r/graphics/cdplot.html) from the
 is produced with
 
 ``` r
+
 cdplot(Improved ~ Age, data = Arthritis)
 with(Arthritis, rug(jitter(Age), col="white", quiet=TRUE))
 ```
@@ -120,6 +123,7 @@ before they could be rescued, nearly half of the party had died. What
 factors affected who lived and who died?
 
 ``` r
+
 data(Donner, package="vcdExtra")
 str(Donner)
 ## 'data.frame':    90 obs. of  5 variables:
@@ -139,6 +143,7 @@ The `formula = y ~ x` specifies a linear fit on the logit scale
 (@ref{fig:donner3}, left)
 
 ``` r
+
 # separate linear fits on age for M/F
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +
@@ -152,6 +157,7 @@ Alternatively, we can allow a quadratic relation with `age` by
 specifying `formula = y ~ poly(x,2)` ((**ref?**)(fig:donner3), right).
 
 ``` r
+
 # separate quadratics
 ggplot(Donner, aes(age, survived, color = sex)) +
   geom_point(position = position_jitter(height = 0.02, width = 0)) +

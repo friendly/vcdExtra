@@ -9,6 +9,7 @@ Celtic and Anglo-Saxon origin.
 
 The format is:
 
+
       num [1:4, 1:5, 1:2] 326 688 343 98 38 116 84 48 241 584 ...
     - attr(*, "dimnames")=List of 3
     ..$ Eye  : chr [1:4] "Blue" "Light" "Medium" "Dark"
@@ -40,6 +41,7 @@ Eugenics*, 10, 422-429.
 ## Examples
 
 ``` r
+
 data(HairEyePlace)
 
 # separate mosaics

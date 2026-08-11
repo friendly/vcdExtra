@@ -10,6 +10,7 @@ chances of being called to serve in the US army.
 
 The format is:
 
+
     'table' int [1:12, 1:3] 9 7 5 8 9 11 12 13 10 9 ...
     - attr(*, "dimnames")=List of 2
     ..$ Month: chr [1:12] "Jan" "Feb" "Mar" "Apr" ...
@@ -46,6 +47,7 @@ Statistics Education*, v.5, n.2
 ## Examples
 
 ``` r
+
 data(Draft1970table)
 chisq.test(Draft1970table)
 #> 
@@ -105,7 +107,7 @@ anova(indep, linlin, test="Chisq")
 #> 1        22     38.261                          
 #> 2        21     23.885  1   14.376 0.0001497 ***
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 mosaic(linlin, residuals_type="rstandard", gp=shading_Friendly)
 #> Warning: no formula provided, assuming ~Month + Risk
 

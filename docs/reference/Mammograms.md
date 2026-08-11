@@ -7,6 +7,7 @@ mammograms rated by two readers.
 
 A frequency table in matrix form. The format is:
 
+
       num [1:4, 1:4] 34 6 2 0 10 8 5 1 2 8 ...
     - attr(*, "dimnames")=List of 2
     ..$ Reader2: chr [1:4] "Absent" "Minimal" "Moderate" "Severe"
@@ -20,6 +21,7 @@ Agreement", *Radiology*, **228**, 303-308, Table A1
 ## Examples
 
 ``` r
+
 data(Mammograms)
 B <- agreementplot(Mammograms, main="Mammogram ratings")
 

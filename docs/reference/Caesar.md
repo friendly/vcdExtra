@@ -39,6 +39,7 @@ data recorded as a frequency data frame with other variables.
 ## Examples
 
 ``` r
+
 data(Caesar)
 #display table;  note that there are quite a few 0 cells
 structable(Caesar)
@@ -128,7 +129,7 @@ add1(Caesar.mod0, ~.^2, test="Chisq")
 #> Infection:Antibiotics  2  72.187 36.922 9.603e-09 ***
 #> Infection:Planned      2 107.742  1.368    0.5047    
 #> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 # add Association of Infection:Antibiotics
 Caesar.mod1 <- update(Caesar.mod0, ~ . + Infection:Antibiotics)

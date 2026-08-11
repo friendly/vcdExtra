@@ -8,6 +8,7 @@ November 6, 1995.
 
 A 5 x 11 x 3 array of cell frequencies with the following structure:
 
+
       int [1:5, 1:11, 1:3] 146 244 233 174 294 151 181 161 183 281 ...
       - attr(*, "dimnames")=List of 3
       ..$ Day    : chr [1:5] "Monday" "Tuesday" "Wednesday" "Thursday" ...
@@ -45,6 +46,7 @@ American Statistician*, 1984, 38, 32-35.
 ## Examples
 
 ``` r
+
 data(TV)
 structable(TV)
 #>                   Time 8:00 8:15 8:30 8:45 9:00 9:15 9:30 9:45 10:00 10:15 10:30

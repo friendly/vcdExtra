@@ -52,6 +52,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 vietnam.tab <- xtabs(Freq ~ sex + year + response, data=Vietnam)
 
 update(vietnam.tab, formula = ~ . -year)

@@ -55,6 +55,7 @@ Boca Raton, FL: Chapman & Hall/CRC. <http://ddar.datavis.ca>. Example
 ## Examples
 
 ``` r
+
 data(Toxaemia)
 
 tox.tab <- xtabs(Freq ~ class + smoke + hyper + urea, Toxaemia)

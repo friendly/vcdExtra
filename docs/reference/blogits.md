@@ -70,6 +70,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 data(Toxaemia)
 tox.tab <- xtabs(Freq~class + smoke + hyper + urea, Toxaemia)
 

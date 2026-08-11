@@ -61,6 +61,7 @@ for families of size 12.
 ## Examples
 
 ``` r
+
 data(Geissler)
 str(Geissler)
 #> 'data.frame':    90 obs. of  4 variables:

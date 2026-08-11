@@ -11,6 +11,7 @@ of analysis of categorical data and graphical display.
 I’ll use the following packages in this vignette.
 
 ``` r
+
 library(vcdExtra)
 library(MASS)
 library(effects)
@@ -34,6 +35,7 @@ by their:
 Load the data:
 
 ``` r
+
 data(housing, package="MASS")
 str(housing)
 ## 'data.frame':    72 obs. of  5 variables:
@@ -65,6 +67,7 @@ The `housing` data.frame was constructed so that the levels of `Sat` and
 `Infl` appear in the dataset in their appropriate order.
 
 ``` r
+
 levels(housing$Sat)
 ## [1] "Low"    "Medium" "High"
 levels(housing$Infl)
@@ -86,6 +89,7 @@ terms in separate `[ ]` are supposed to be independent. This is
 [`glm()`](https://rdrr.io/r/stats/glm.html).
 
 ``` r
+
 house.null <- glm(Freq ~ Sat + Infl + Type + Cont, family = poisson,
                   data = housing)
 ```
@@ -103,6 +107,7 @@ depends on the combinations of the other variables. The baseline model
 therefore includes the full three-way term for the predictors.
 
 ``` r
+
 house.glm0 <- glm(Freq ~ Sat + Infl*Type*Cont, family = poisson,
                   data = housing)
 ```
@@ -112,6 +117,7 @@ Both of these models fit terribly, but we can always use
 models.
 
 ``` r
+
 anova(house.null, house.glm0, test = "Chisq")
 ## Analysis of Deviance Table
 ## 
@@ -137,6 +143,7 @@ sides of the plot. The `labeling_args` argument can be used to set more
 informative variable names and abbreviate factor levels where necessary.
 
 ``` r
+
 # labeling_args for mosaic()
 largs <- list(set_varnames = c(
       Infl="Influence on management", 
@@ -173,6 +180,7 @@ last variable in the splitting / conditioning sequence. I also use
 to add the LR \\G^2\\ fit statistic to the plot title.
 
 ``` r
+
 mosaic(house.glm0, 
        formula = ~ Type + Infl + Cont + Sat, 
        labeling_args=largs, 
@@ -193,6 +201,7 @@ analysis is carried out using
 [`MASS::addterm()`](https://rdrr.io/pkg/MASS/man/addterm.html).
 
 ``` r
+
 MASS::addterm(house.glm0, 
               ~ . + Sat:(Infl + Type + Cont), 
               test = "Chisq")
@@ -219,6 +228,7 @@ on the right side (`Sat + Infl*Type*Cont`) of the model (`house.glm0`)
 that is being updated.
 
 ``` r
+
 house.glm1 <- update(house.glm0, 
                      . ~ . + Sat*(Infl + Type + Cont))
 ```
@@ -228,6 +238,7 @@ iterative proportional scaling algorithm of
 [`MASS::loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html).
 
 ``` r
+
 (house.loglm1 <- MASS::loglm(Freq ~ Infl * Type * Cont + 
                               Sat*(Infl + Type + Cont), data = housing))
 ## Call:
@@ -251,6 +262,7 @@ revised model `house.glm1`. The difference, \\G^2(M1 \| M0) = G^2 (12) =
 association of satisfaction with the predictors.
 
 ``` r
+
 anova(house.glm0, house.glm1, test="Chisq")
 ## Analysis of Deviance Table
 ## 
@@ -273,6 +285,7 @@ distinguished by color, and they are filled when the absolute value of
 the residual is outside \\\pm 2, 4\\.
 
 ``` r
+
 mosaic(house.glm1, 
        labeling_args=largs, 
        main=paste('Model [IS][TS][CS],', modFit(house.glm1) ), 
@@ -300,6 +313,7 @@ previously added term is no longer important. Running
 `housel.glm1` model checks for this.
 
 ``` r
+
 MASS::dropterm(house.glm1, test = "Chisq")
 ## Single term deletions
 ## 
@@ -334,6 +348,7 @@ adding all possible two-way interactions for `Sat`, one at a time, with
 [`addterm()`](https://rdrr.io/pkg/MASS/man/addterm.html).
 
 ``` r
+
 MASS::addterm(house.glm1,
                ~. + Sat:(Infl + Type + Cont)^2, 
               test  =  "Chisq")
@@ -362,6 +377,7 @@ machinery. Nonetheless, it seems arguably sensible to add one two-way
 term to the model, giving `house.glm2`.
 
 ``` r
+
 house.glm2 <- update(house.glm1,
                      . ~ . + Sat:Infl:Type)
 ```
@@ -390,6 +406,7 @@ models using
 [`vcdExtra::LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md).
 
 ``` r
+
 LRstats(house.glm0, house.glm1, house.glm2)
 ## Likelihood summary table:
 ##               AIC    BIC LR Chisq Df Pr(>Chisq)    

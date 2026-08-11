@@ -59,6 +59,7 @@ passengers and crew.
 ## Examples
 
 ``` r
+
 data(Titanicp)
 ## maybe str(Titanicp) ; plot(Titanicp) ...
 ```

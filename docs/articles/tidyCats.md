@@ -22,6 +22,7 @@ package for this purpose. Other possible names for this: `tidyCDA`,
 `tidyfreq` but `tidyCat` makes for a nice logo!
 
 ``` r
+
 library(MASS)
 library(vcdExtra)
 ```
@@ -63,6 +64,7 @@ Tidy equivalents might be:
   converts that to case form
 
 ``` r
+
 data("HairEyeColor")
 hec.df <- as.data.frame(HairEyeColor)
 head(hec.df)
@@ -92,6 +94,7 @@ expand.dft(hec.df) |> head()
   with a formula method,
 
 ``` r
+
 structable(Titanic)
 ##             Sex      Male     Female    
 ##             Survived   No Yes     No Yes
@@ -142,6 +145,7 @@ Also needed:
   order.
 
 ``` r
+
 data(Glass, package="vcdExtra")
 str(Glass)
 ## 'data.frame':    25 obs. of  3 variables:
@@ -162,6 +166,7 @@ This can be reordered manually by indexing, to arrange the categories by
 **status**, giving an order `Professional` down to `Unskilled`:
 
 ``` r
+
 # reorder by status
 ord <- c(2, 1, 4, 3, 5) 
 glass.tab[ord, ord]
@@ -185,6 +190,7 @@ and applying
 result.
 
 ``` r
+
 library(seriation)
 order <- seriate(glass.tab, method = "CA")
 # the permuted row and column labels
@@ -228,6 +234,7 @@ required is accessible from standard functions, but not in a tidy form.
   functions in `vcdExtra`, which report `AIC` and `BIC`.
 
 ``` r
+
 hec.indep <- loglm(~Hair+Eye+Sex, data=HairEyeColor)
 hec.indep
 ## Call:
@@ -255,6 +262,7 @@ LRstats(hec.indep)
   Standard errors & p-values might be a problem.
 
 ``` r
+
 coef(hec.indep)
 ## $`(Intercept)`
 ## [1] 2.646879
@@ -276,6 +284,7 @@ coef(hec.indep)
   values, residuals, …
 
 ``` r
+
 fitted(hec.indep)
 ## Re-fitting to get fitted values
 ## , , Sex = Male
@@ -319,6 +328,7 @@ residuals(hec.indep)
 What about `hatvalues`? Not implemented, but shouldn’t be too hard.
 
 ``` r
+
 hatvalues(hec.indep)
 ## Error in `UseMethod()`:
 ## ! no applicable method for 'hatvalues' applied to an object of class "loglm"

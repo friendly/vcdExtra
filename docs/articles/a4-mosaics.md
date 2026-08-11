@@ -73,6 +73,7 @@ people given the placebo experienced no improvement, while more people
 given the active treatment reported marked improvement.
 
 ``` r
+
 data(Arthritis, package="vcd")
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 mosaic(art, gp = shading_max, 
@@ -92,6 +93,7 @@ model were not large (as shown in the legend), yet the association
 between `Treatment` and `Improved` is highly significant.
 
 ``` r
+
 summary(art)
 ## Call: xtabs(formula = ~Treatment + Improved, data = Arthritis)
 ## Number of cases in table: 84 
@@ -107,6 +109,7 @@ to shade cells which are *individually* significant at approximately
 below uses `gp = shading_Friendly`.
 
 ``` r
+
 mosaic(art, gp = shading_Friendly, 
             split_vertical = TRUE, 
             main="Arthritis: gp = shading_Friendly")
@@ -136,6 +139,7 @@ British fathers and their sons, where the occupational categories are
 listed in alphabetic order.
 
 ``` r
+
 data(Glass, package="vcdExtra")
 (glass.tab <- xtabs(Freq ~ father + son, data=Glass))
 ##               son
@@ -154,6 +158,7 @@ occupational category labels. and `interpolate` to set the shading
 levels for the mosaic.
 
 ``` r
+
 largs <- list(set_varnames=list(father="Father's Occupation", 
                                 son="Son's Occupation"),
               abbreviate=10)
@@ -174,6 +179,7 @@ The occupational categories differ in **status**, and can be reordered
 correctly as follows, from `Professional` down to `Unskilled`.
 
 ``` r
+
 # reorder by status
 ord <- c(2, 1, 4, 3, 5) 
 row.names(glass.tab)[ord]
@@ -184,6 +190,7 @@ The revised mosaic plot can be produced by indexing the rows and columns
 of the table using `ord`.
 
 ``` r
+
 mosaic(glass.tab[ord, ord], 
   shade=TRUE, 
   labeling_args=largs,  
@@ -200,6 +207,7 @@ re-define `father` and `son` as **ordered** factors in the original
 `Glass` frequency data.frame.
 
 ``` r
+
 Glass.ord <- Glass
 Glass.ord$father <- ordered(Glass.ord$father, levels=levels(Glass$father)[ord])
 Glass.ord$son    <- ordered(Glass.ord$son,    levels=levels(Glass$son)[ord])
@@ -268,6 +276,7 @@ For example, the following generates a term for a diagonal factor in a
 each diagonal cell. Off-diagonal values, “.” are ignored.
 
 ``` r
+
 rowfac <- gl(4, 4, 16)
 colfac <- gl(4, 1, 16)
 diag4by4 <- Diag(rowfac, colfac)
@@ -285,6 +294,7 @@ matter is that the same value, e.g., `1:2` appears in both the (1,2) and
 (2,1) cells.
 
 ``` r
+
 symm4by4 <- Symm(rowfac, colfac)
 matrix(symm4by4, 4, 4)
 ##      [,1]  [,2]  [,3]  [,4] 
@@ -301,6 +311,7 @@ to reflect the restricted forms of association, e.g.,
 symmetry.
 
 ``` r
+
 library(gnm)
 glass.indep <- glm(Freq ~ father + son, 
                    data = Glass.ord, family=poisson)
@@ -321,6 +332,7 @@ method, which extends mosaic displays to handle fitted `glm` objects.
 default Pearson residuals in mosaic plots and analysis.
 
 ``` r
+
 mosaic(glass.quasi, 
   residuals_type="rstandard", 
   shade=TRUE, 
@@ -341,6 +353,7 @@ tests of how much better a more complex model is compared to the
 previous one.
 
 ``` r
+
 # model comparisons: for *nested* models
 anova(glass.indep, glass.quasi, glass.qsymm, test="Chisq")
 ## Analysis of Deviance Table
@@ -362,6 +375,7 @@ gives model summaries for a collection of models, not necessarily
 nested, with AIC and BIC statistics reflecting model parsimony.
 
 ``` r
+
 models <- glmlist(glass.indep, glass.quasi, glass.symm, glass.qsymm)
 LRstats(models)
 ## Likelihood summary table:
@@ -384,6 +398,7 @@ main title, using
 for this purpose.
 
 ``` r
+
 mosaic(glass.qsymm, 
   residuals_type="rstandard", 
   shade=TRUE, 
@@ -426,6 +441,7 @@ done jointly or alternating between husband and wife. But the `Task` and
 `Who` levels are both in alphabetical order.
 
 ``` r
+
 data("HouseTasks", package = "vcdExtra")
 HouseTasks
 ##            Who
@@ -450,6 +466,7 @@ by `Task` and then by `Who`. Due to the length of the factor labels,
 some features of `labeling` were used to make the display more readable.
 
 ``` r
+
 require(vcd)
 mosaic(HouseTasks, shade = TRUE,
        labeling = labeling_border(rot_labels = c(45,0, 0, 0), 
@@ -467,6 +484,7 @@ package](https://cran.r-project.org/package=ca), shows that nearly 89%
 of the \\\chi^2\\ can be accounted for in two dimensions.
 
 ``` r
+
 require(ca)
 ## Loading required package: ca
 HT.ca <- ca(HouseTasks)
@@ -488,6 +506,7 @@ Dim2 distinguishes tasks that are done singly vs. those that are done
 jointly.
 
 ``` r
+
 plot(HT.ca, lines = TRUE)
 ```
 
@@ -499,6 +518,7 @@ to find the order of permutations of `Task` and `Who` along the CA
 dimensions.
 
 ``` r
+
 require(seriation)
 order <- seriate(HouseTasks, method = "CA")
 # the permuted row and column labels
@@ -516,6 +536,7 @@ to use `order` for the permutations of `Task` and `Who`, and plot the
 resulting mosaic:
 
 ``` r
+
 # do the permutation
 HT_perm <- permute(HouseTasks, order, margin=1)
 

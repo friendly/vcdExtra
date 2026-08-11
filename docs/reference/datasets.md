@@ -92,6 +92,7 @@ Michael Friendly, with R-help from Curt Seeliger
 ## Examples
 
 ``` r
+
 datasets("vcdExtra")
 #>              Item      class         dim
 #> 1        Abortion      table       2x2x2
@@ -226,7 +227,7 @@ datasets("datasets", maxTitle=50)
 #> 32                      USArrests data.frame    50x4
 #> 33                 USJudgeRatings data.frame   43x12
 #> 34          USPersonalExpenditure      array     5x5
-#> 35                      UScitiesD       dist   10x10
+#> 35                      UScitiesD       dist      45
 #> 36                       VADeaths      array     5x4
 #> 37                       WWWusage         ts     100
 #> 38                    WorldPhones      array     7x7
@@ -247,7 +248,7 @@ datasets("datasets", maxTitle=50)
 #> 53                          esoph data.frame    88x5
 #> 54                           euro    numeric      11
 #> 55              euro.cross (euro)      array   11x11
-#> 56                       eurodist       dist   21x21
+#> 56                       eurodist       dist     210
 #> 57                       faithful data.frame   272x2
 #> 58         fdeaths (UKLungDeaths)         ts      72
 #> 59                         freeny data.frame    39x5

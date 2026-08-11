@@ -7,6 +7,7 @@ visiting patterns, originally from Wing (1962).
 
 A 3 by 3 frequency table, with format:
 
+
     table [1:3, 1:3] 43 6 9 16 11 18 3 10 16
     - attr(*, "dimnames")=List of 2
     ..$ visit: chr [1:3] "Regular" "Infrequent" "Never"
@@ -39,6 +40,7 @@ Journal of Social and Clinical Psychology*, 1 (1), 38-51.
 ## Examples
 
 ``` r
+
 data(HospVisits)
 mosaic(HospVisits, gp=shading_Friendly)
 
