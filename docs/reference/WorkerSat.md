@@ -36,7 +36,6 @@ Ed., Springer-Verlag.
 ## Examples
 
 ``` r
-
 data(WorkerSat)
 
 worker.tab <- xtabs(Freq ~ Worker + Super + Manage, data=WorkerSat)

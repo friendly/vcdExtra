@@ -98,7 +98,6 @@ Michael Friendly and Heather Turner
 ## Examples
 
 ``` r
-
 ## artificial data
 factors <- expand.grid(A=factor(1:3),
                        B=factor(1:2),
@@ -111,19 +110,19 @@ mods3 <- Kway(Freq ~ A + B + C, data=df, family=poisson)
 LRstats(mods3)
 #> Likelihood summary table:
 #>           AIC    BIC LR Chisq Df Pr(>Chisq)
-#> kway.0 240.88 242.46   41.380 35     0.2121
-#> kway.1 245.02 254.52   35.524 30     0.2241
-#> kway.2 251.34 273.51   25.846 22     0.2584
-#> kway.3 254.08 282.58   20.584 18     0.3009
+#> kway.0 239.79 241.37   37.830 35     0.3413
+#> kway.1 244.19 253.69   32.228 30     0.3570
+#> kway.2 251.12 273.29   23.159 22     0.3928
+#> kway.3 255.36 283.86   19.404 18     0.3674
 mods4 <- Kway(Freq ~ A + B + C + D, data=df, family=poisson)
 LRstats(mods4)
 #> Likelihood summary table:
 #>           AIC    BIC LR Chisq Df Pr(>Chisq)
-#> kway.0 240.88 242.46   41.380 35     0.2121
-#> kway.1 245.57 256.66   34.074 29     0.2366
-#> kway.2 253.27 284.94   15.774 16     0.4688
-#> kway.3 263.64 314.31    2.142  4     0.7097
-#> kway.4 269.50 326.50    0.000  0     1.0000
+#> kway.0 239.79 241.37   37.830 35     0.3413
+#> kway.1 245.37 256.45   31.408 29     0.3465
+#> kway.2 252.86 284.53   12.904 16     0.6798
+#> kway.3 269.79 320.46    5.832  4     0.2120
+#> kway.4 271.96 328.96    0.000  0     1.0000
 
 # JobSatisfaction data
 data(JobSatisfaction, package="vcd")
@@ -138,7 +137,7 @@ LRstats(modSat)
 #> JobSat.2  63.541  64.097    0.065  1     0.7989    
 #> JobSat.3  65.476  66.111    0.000  0     1.0000    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 anova(modSat, test="Chisq")
 #> Analysis of Deviance Table
 #> 
@@ -154,7 +153,7 @@ anova(modSat, test="Chisq")
 #> 3         1      0.065  3  117.932   <2e-16 ***
 #> 4         0      0.000  1    0.065   0.7989    
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Rochdale data: very sparse, in table form
 data(Rochdale, package="vcd")

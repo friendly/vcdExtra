@@ -50,7 +50,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 data(Mental)
 require(MASS)
 (Mental.tab <- xtabs(Freq ~ ses + mental, data=Mental))

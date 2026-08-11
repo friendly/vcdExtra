@@ -84,7 +84,6 @@ package by Mikis Stasinopoulos.
 ## Examples
 
 ``` r
-
 XL <-expand.grid(x=1:5, p=c(0.33, 0.66, 0.99))
 lgs.df <- data.frame(XL, prob=dlogseries(XL[,"x"], XL[,"p"]))
 lgs.df$p = factor(lgs.df$p)
@@ -97,11 +96,11 @@ str(lgs.df)
 require(lattice)
 #> Loading required package: lattice
 #> 
-#> Attaching package: ‘lattice’
-#> The following object is masked from ‘package:seriation’:
+#> Attaching package: 'lattice'
+#> The following object is masked from 'package:seriation':
 #> 
 #>     panel.lines
-#> The following object is masked from ‘package:gnm’:
+#> The following object is masked from 'package:gnm':
 #> 
 #>     barley
 mycol <- palette()[2:4]

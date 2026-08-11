@@ -221,7 +221,6 @@ Michael Friendly, with the help of Duncan Murdoch and Achim Zeileis
 ## Examples
 
 ``` r
-
 # 2 x 2 x 2
 if (!rgl::rgl.useNULL() && interactive()){
 mosaic3d(Bartlett, box=TRUE)

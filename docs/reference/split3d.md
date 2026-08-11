@@ -87,7 +87,6 @@ Duncan Murdoch, with refinements by Michael Friendly
 ## Examples
 
 ``` r
-
 if (!rgl::rgl.useNULL() && interactive()){
   open3d()
   cube <- cube3d(alpha=0.4)

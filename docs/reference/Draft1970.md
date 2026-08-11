@@ -58,7 +58,6 @@ Hanley, J. A., "US Selective Service Lotteries 1917-1975: Datasets,"
 ## Examples
 
 ``` r
-
 data(Draft1970)
 
 # scatterplot
@@ -90,7 +89,7 @@ anova(lm(Rank ~ Month, data=Draft1970))
 #> Month      11  290507   26410  2.4634 0.00558 **
 #> Residuals 354 3795120   10721                   
 #> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # make the table version
 Draft1970$Risk <- cut(Draft1970$Rank, breaks=3, labels=c("High", "Med", "Low"))

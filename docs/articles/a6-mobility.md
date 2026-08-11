@@ -61,7 +61,6 @@ The data comes from Hauser (1980) and has been also analysed by Powers &
 Xie (2008). The discussion draws on Friendly & Meyer (2016), Ch. 10.
 
 ``` r
-
 data("Hauser79", package="vcdExtra")
 str(Hauser79)
 ## 'data.frame':    25 obs. of  3 variables:
@@ -98,7 +97,6 @@ so:
 ### Load packages
 
 ``` r
-
 library(vcdExtra)
 library(gnm)
 library(dplyr)
@@ -113,7 +111,6 @@ a
 [`graphics::mosaicplot()`](https://rdrr.io/r/graphics/mosaicplot.html).
 
 ``` r
-
 plot(Hauser_tab, shade=TRUE)
 ```
 
@@ -136,7 +133,6 @@ column variables, using the `labeling_args` argument to
 [`mosaic()`](https://rdrr.io/pkg/vcd/man/mosaic.html).
 
 ``` r
-
 labels <- list(set_varnames = c(Father="Father's occupation", 
                                 Son="Son's occupation"))
 
@@ -167,7 +163,6 @@ argument determines the order of splitting in the mosaic, not a
 loglinear formula.)
 
 ``` r
-
 hauser.indep <- glm(Freq ~ Father + Son, 
   data=Hauser79, 
   family=poisson)
@@ -203,7 +198,6 @@ appropriate term in the model formula, using a symbol in the diagonal
 cells and “.” otherwise.
 
 ``` r
-
 # with symbols
 with(Hauser79, Diag(Father, Son)) |> matrix(nrow=5)
 ##      [,1]   [,2]   [,3]  [,4]  [,5]  
@@ -218,7 +212,6 @@ We proceed to fit and plot the quasi-independence model by updating the
 independence model, adding the term `Diag(Father, Son)`.
 
 ``` r
-
 hauser.quasi <-  update(hauser.indep, 
                         ~ . + Diag(Father, Son))
 
@@ -257,7 +250,6 @@ Symmetry is modeled by the function
 factor with the same labels for positions above and below the diagonal.
 
 ``` r
-
 with(Hauser79, Symm(Father, Son)) |> matrix(nrow=5)
 ##      [,1]        [,2]        [,3]       [,4]       [,5]       
 ## [1,] "UpNM:UpNM" "UpNM:LoNM" "UpNM:UpM" "UpNM:LoM" "UpNM:Farm"
@@ -273,7 +265,6 @@ To fit the model of quasi-symmetry, add both
 independence.
 
 ``` r
-
 hauser.qsymm <-  update(hauser.indep, 
                         ~ . + Diag(Father,Son) + Symm(Father,Son))
 ```
@@ -283,7 +274,6 @@ To compare the models so far, we can use
 \`vcdExtra::LRstats():
 
 ``` r
-
 anova(hauser.indep, hauser.quasi, hauser.qsymm, test="Chisq")
 ## Analysis of Deviance Table
 ## 
@@ -316,7 +306,6 @@ To visualize this in the mosaic, we can label the cells with their
 standardized residuals.
 
 ``` r
-
 mosaic(hauser.qsymm, ~ Father+Son, 
        labeling_args = labels,
        labeling = labeling_residuals,
@@ -343,7 +332,6 @@ of associations can be specified, implemented in
 [`gnm::Topo()`](https://rdrr.io/pkg/gnm/man/Topo.html).
 
 ``` r
-
 # Levels for Hauser 5-level model
 levels <- matrix(c(
       2,  4,  5,  5,  5,
@@ -356,7 +344,6 @@ levels <- matrix(c(
 ```
 
 ``` r
-
 hauser.topo <- update(hauser.indep, 
                       ~ . + Topo(Father, Son, spec=levels))
 
@@ -374,7 +361,6 @@ Comparing models, we can see that the model of quasi-symmetry is the
 best so far, using AIC as the measure:
 
 ``` r
-
 LRstats(hauser.indep, hauser.quasi, hauser.qsymm, hauser.topo, sortby = "AIC")
 ## Likelihood summary table:
 ##                 AIC    BIC LR Chisq Df Pr(>Chisq)    
@@ -408,7 +394,6 @@ include a diagonal term,
 [`Diag()`](https://rdrr.io/pkg/gnm/man/Diag.html)
 
 ``` r
-
 Sscore <- as.numeric(Hauser79$Son)
 Fscore <- as.numeric(Hauser79$Father)
 
@@ -427,7 +412,6 @@ association and add `Diag(Father, Son)` to fit the diagonal cells
 exactly.
 
 ``` r
-
 hauser.UAdiag <- update(hauser.indep,
                         . ~ . + Fscore : Sscore + Diag(Father, Son))
 
@@ -443,7 +427,6 @@ In this model, the estimated common local log odds ratio—the coefficient
 \\\gamma\\ for the linear-by-linear term `Fscore:Sscore`, is given by:
 
 ``` r
-
 coef(hauser.UAdiag)[["Fscore:Sscore"]]
 ## [1] 0.1584003
 ```
@@ -459,7 +442,6 @@ residuals of various signs in the lower triangular, where the son’s
 occupation is of a higher level than that of the father.
 
 ``` r
-
 mosaic(hauser.UAdiag, ~ Father+Son, 
        labeling_args = labels,
        labeling = labeling_residuals,

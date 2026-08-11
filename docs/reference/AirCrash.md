@@ -51,7 +51,6 @@ Rick Wicklin,
 ## Examples
 
 ``` r
-
 data(AirCrash)
 aircrash.tab <- xtabs(~Phase + Cause, data=AirCrash)
 mosaic(aircrash.tab, shade=TRUE)

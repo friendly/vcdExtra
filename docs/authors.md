@@ -28,7 +28,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/friendly/vcdExtra/blob/HEAD/DESCRIPTION)
 
 Friendly M, Klorfine G (2026). *vcdExtra: 'vcd' Extensions and
 Additions*. R package version 0.9.7,

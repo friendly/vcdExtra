@@ -180,7 +180,7 @@ Relative Risks*. Wiley, p. 124-125.
 
 [`stats::mantelhaen.test()`](https://rdrr.io/r/stats/mantelhaen.test.html),
 [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md),
-`DescTools::BreslowDayTest()`
+[`DescTools::BreslowDayTest()`](https://andrisignorell.github.io/DescTools/reference/BreslowDayTest.html)
 
 Other association tests:
 [`CMHtest()`](https://friendly.github.io/vcdExtra/reference/CMHtest.md),

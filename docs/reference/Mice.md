@@ -43,7 +43,6 @@ calculate the no three-factor interaction hypothesis. *Biometrics*, 15,
 ## Examples
 
 ``` r
-
 data(Mice)
 # make a table
 ftable(mice.tab <- xtabs(Freq ~ litter + treatment + deaths, data=Mice))

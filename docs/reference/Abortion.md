@@ -43,7 +43,6 @@ analysis.
 ## Examples
 
 ``` r
-
 data(Abortion)
 
 

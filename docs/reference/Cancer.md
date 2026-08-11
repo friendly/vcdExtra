@@ -26,7 +26,6 @@ New York: John Wiley and Sons, p. 220.
 ## Examples
 
 ``` r
-
 data(Cancer)
 
 MASS::loglm(~Survival + Grade + Center, data = Cancer)

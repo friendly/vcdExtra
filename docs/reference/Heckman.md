@@ -46,7 +46,6 @@ married women." *Journal of Political Economy*, 85: 27-58
 ## Examples
 
 ``` r
-
 data(Heckman)
 
 # independence model

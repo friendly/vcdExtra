@@ -92,7 +92,6 @@ Michael Friendly; original version by Laura Thompson
 ## Examples
 
 ``` r
-
 data(JobSat)
 GKgamma(JobSat)
 #> gamma        : 0.221 

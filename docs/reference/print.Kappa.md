@@ -54,7 +54,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 data("SexualFun")
 Kappa(SexualFun)
 #>             value     ASE     z

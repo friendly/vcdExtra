@@ -100,7 +100,6 @@ Michael Friendly
 
 ``` r
 
-
 data(Titanic, package="datasets")
 
 seq_mosaic(Titanic)  # models of joint independence, Survived last

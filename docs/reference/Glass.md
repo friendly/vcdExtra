@@ -49,7 +49,6 @@ Boca Raton, FL: Chapman & Hall/CRC. <http://ddar.datavis.ca>.
 ## Examples
 
 ``` r
-
 data(Glass)
 glass.tab <- xtabs(Freq ~ father + son, data=Glass)
 

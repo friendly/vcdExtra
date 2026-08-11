@@ -63,7 +63,6 @@ Achim Zeileis
 ## Examples
 
 ``` r
-
 if (require(AER)) {
 data("NMES1988", package="AER")
 nmes <- NMES1988[, c(1, 6:8, 13, 15, 18)]
@@ -82,8 +81,8 @@ plot(log(visits+1) ~ cutfac(hospital, c(0:2, 8)),
 #> Loading required package: lmtest
 #> Loading required package: zoo
 #> 
-#> Attaching package: ‘zoo’
-#> The following objects are masked from ‘package:base’:
+#> Attaching package: 'zoo'
+#> The following objects are masked from 'package:base':
 #> 
 #>     as.Date, as.Date.numeric
 #> Loading required package: sandwich

@@ -69,7 +69,6 @@ Mark Schwarz
 ## Examples
 
 ``` r
-
 library(vcd)
 art <- xtabs(~Treatment + Improved, data = Arthritis)
 art
@@ -86,25 +85,25 @@ str(artdf)
 # 1D case
 (tab <- table(sample(head(letters), 20, replace=TRUE)))
 #> 
-#> a c d e f 
-#> 4 2 2 3 9 
+#> a b c d e f 
+#> 3 5 3 1 3 5 
 expand.table(tab, var.names="letter")
 #>    letter
 #> 1       a
 #> 2       a
 #> 3       a
-#> 4       a
-#> 5       c
-#> 6       c
-#> 7       d
-#> 8       d
-#> 9       e
-#> 10      e
-#> 11      e
-#> 12      f
-#> 13      f
-#> 14      f
-#> 15      f
+#> 4       b
+#> 5       b
+#> 6       b
+#> 7       b
+#> 8       b
+#> 9       c
+#> 10      c
+#> 11      c
+#> 12      d
+#> 13      e
+#> 14      e
+#> 15      e
 #> 16      f
 #> 17      f
 #> 18      f

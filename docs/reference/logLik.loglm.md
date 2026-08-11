@@ -64,7 +64,6 @@ Achim Zeileis
 ## Examples
 
 ``` r
-
 data(Titanic, package="datasets")
 
 require(MASS)

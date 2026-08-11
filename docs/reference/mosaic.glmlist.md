@@ -152,7 +152,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 data(JobSatisfaction, package="vcd")
 
 # view all pairwise mosaics

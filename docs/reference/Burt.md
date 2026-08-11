@@ -54,7 +54,6 @@ population.
 ## Examples
 
 ``` r
-
 data(Burt)
 mosaic(Freq ~ Hair + Eyes + Head + Stature, data=Burt, shade=TRUE)
 #> Error in eval(predvars, data, env): object 'Hair' not found
