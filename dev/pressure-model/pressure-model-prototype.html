@@ -1,0 +1,572 @@
+<title>Chamber Pressure</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #eef0ee;
+    --surface: #f7f8f6;
+    --surface-inset: #e2e5e1;
+    --ink-primary: #171a16;
+    --ink-secondary: #52564f;
+    --ink-muted: #82867d;
+    --border: rgba(23,26,22,0.14);
+    --border-soft: rgba(23,26,22,0.08);
+    --accent: #96692a;
+    --accent-ink: #fff8ee;
+    --accent-soft: rgba(150,105,42,0.14);
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+    --font-display: "Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+    --font-body: "Segoe UI",system-ui,-apple-system,sans-serif;
+    --font-mono: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #101312;
+      --surface: #171b19;
+      --surface-inset: #0b0d0c;
+      --ink-primary: #f1efe9;
+      --ink-secondary: #b9bcb2;
+      --ink-muted: #7c8079;
+      --border: rgba(241,239,233,0.16);
+      --border-soft: rgba(241,239,233,0.08);
+      --accent: #d1a34a;
+      --accent-ink: #171106;
+      --accent-soft: rgba(209,163,74,0.18);
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --series-3: #199e70;
+      --series-4: #c98500;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #101312;
+    --surface: #171b19;
+    --surface-inset: #0b0d0c;
+    --ink-primary: #f1efe9;
+    --ink-secondary: #b9bcb2;
+    --ink-muted: #7c8079;
+    --border: rgba(241,239,233,0.16);
+    --border-soft: rgba(241,239,233,0.08);
+    --accent: #d1a34a;
+    --accent-ink: #171106;
+    --accent-soft: rgba(209,163,74,0.18);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--page);
+    color: var(--ink-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 40px 20px 56px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .sheet {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .intro { margin-bottom: 22px; }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 0 0 12px;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 4.5vw, 2.15rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .lede {
+    margin: 0;
+    max-width: 58ch;
+    color: var(--ink-secondary);
+    font-size: 0.96rem;
+  }
+  .lede code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--surface-inset);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .apparatus-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 580 / 440;
+    background: var(--surface-inset);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: inset 0 1px 6px rgba(0,0,0,0.18);
+    overflow: hidden;
+  }
+
+  #apparatus {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .chamber-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .chamber-label {
+    position: absolute;
+    left: 41.5%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.25;
+  }
+  .chamber-label .lbl-name {
+    font-weight: 600;
+    font-size: 12.5px;
+    color: var(--ink-primary);
+  }
+  .chamber-label .lbl-stat {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 11px;
+    color: var(--ink-secondary);
+  }
+
+  .target-note {
+    margin: 8px 2px 0;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .readout {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin: 18px 2px 4px;
+  }
+  .stat { display: flex; flex-direction: column; gap: 3px; }
+  .stat-label {
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .stat-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.25rem;
+    color: var(--ink-primary);
+  }
+  .stat-value.accent { color: var(--accent); }
+
+  .controls {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 9px 14px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--ink-primary);
+    cursor: pointer;
+  }
+  .btn:hover:not(:disabled) { background: var(--border-soft); }
+  .btn:disabled { opacity: 0.5; cursor: default; }
+  .btn-accent {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: transparent;
+  }
+  .btn-accent:hover:not(:disabled) { filter: brightness(1.07); }
+  .btn:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .slider-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--ink-secondary);
+  }
+  .slider-field input[type="range"] {
+    width: 120px;
+    accent-color: var(--accent);
+  }
+
+  .credit {
+    margin: 20px 4px 0;
+    font-size: 12px;
+    color: var(--ink-muted);
+    max-width: 58ch;
+  }
+  .credit em { font-style: italic; }
+
+  @media (max-width: 460px) {
+    .chamber-label { left: 44%; }
+    .chamber-label .lbl-name { font-size: 11.5px; }
+    .chamber-label .lbl-stat { font-size: 10px; }
+  }
+</style>
+
+<div class="sheet">
+  <div class="intro">
+    <p class="eyebrow">Physical analog · Friendly (1995)</p>
+    <h1>Chamber Pressure</h1>
+    <p class="lede">
+      Hair-color frequencies from <code>HairEyeColor</code> (N&nbsp;=&nbsp;592) as molecules of
+      gas in four chambers. Partition heights fit by maximum likelihood give equal density
+      everywhere &mdash; the gas is at rest. Force the partitions to the hypothesis of equal
+      proportions (H&#8320;: &pi; = &frac14; each) and some chambers get compressed, others vented.
+      The pressure it takes is <em>G&sup2;</em>, twice the work done against the data.
+    </p>
+  </div>
+
+  <div class="panel">
+    <div class="apparatus-frame">
+      <canvas id="apparatus" width="1160" height="880" aria-label="Animated simulation of four gas chambers sized by hair-color frequency, with partitions that can be forced to equal heights"></canvas>
+      <div class="chamber-labels" id="labels"></div>
+    </div>
+    <p class="target-note">- - - H&#8320; target: partitions at &frac14; height each</p>
+
+    <div class="readout">
+      <div class="stat">
+        <span class="stat-label">Phase</span>
+        <span class="stat-value" id="phaseLabel" role="status" aria-live="polite">Equilibrium</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Energy expended (2&Sigma;n&middot;log(&pi;&#772;/&pi;))</span>
+        <span class="stat-value accent" id="energyValue">0.00</span>
+      </div>
+      <div class="stat" id="finalStat" style="display:none">
+        <span class="stat-label">G&sup2; (df = 3)</span>
+        <span class="stat-value" id="finalValue">&mdash;</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="playBtn" type="button">Pause</button>
+      <button class="btn btn-accent" id="actionBtn" type="button">Test H&#8320;: force equal proportions</button>
+      <label class="slider-field">
+        <span>Molecular agitation</span>
+        <input type="range" id="agitationSlider" min="0" max="1.5" step="0.05" value="0.55">
+      </label>
+      <label class="slider-field">
+        <span>Transition speed</span>
+        <input type="range" id="speedSlider" min="1.5" max="8" step="0.5" value="4">
+      </label>
+    </div>
+  </div>
+
+  <p class="credit">
+    From &ldquo;Conceptual and Visual Models for Categorical Data,&rdquo; <em>The American
+    Statistician</em>, 1995. Prototype for tuning the animation&rsquo;s physics/feel before
+    porting to R (gganimate or a base-graphics frame loop).
+  </p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var categories = [
+    { name: "Black", n: 108, colorVar: "--series-1" },
+    { name: "Brown", n: 286, colorVar: "--series-2" },
+    { name: "Red",   n: 71,  colorVar: "--series-3" },
+    { name: "Blond", n: 127, colorVar: "--series-4" }
+  ];
+  var N = categories.reduce(function (s, c) { return s + c.n; }, 0);
+  var pHat = categories.map(function (c) { return c.n / N; });
+  var P0 = 0.25;
+  var G2_FINAL = 2 * categories.reduce(function (s, c, i) {
+    return s + c.n * Math.log(pHat[i] / P0);
+  }, 0);
+
+  var LW = 580, LH = 440;
+  var chamber = { x0: 28, x1: 218, y0: 22, y1: 418, gap: 3 };
+
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var state = {
+    phase: "idle",       // idle -> testing -> done
+    s: 0,
+    duration: reduceMotion ? 0.9 : 4,
+    agitation: reduceMotion ? 0 : 0.55,
+    playing: true
+  };
+
+  var canvas = document.getElementById("apparatus");
+  var ctx = canvas.getContext("2d");
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = LW * dpr;
+  canvas.height = LH * dpr;
+  ctx.scale(dpr, dpr);
+
+  var labelRoot = document.getElementById("labels");
+  var labelEls = categories.map(function (c, i) {
+    var el = document.createElement("div");
+    el.className = "chamber-label";
+    var swatch = document.createElement("div");
+    swatch.style.cssText = "width:9px;height:9px;border-radius:2px;margin-bottom:3px;";
+    var nameEl = document.createElement("div");
+    nameEl.className = "lbl-name";
+    nameEl.textContent = c.name;
+    var statEl = document.createElement("div");
+    statEl.className = "lbl-stat";
+    el.appendChild(swatch);
+    el.appendChild(nameEl);
+    el.appendChild(statEl);
+    labelRoot.appendChild(el);
+    return { root: el, swatch: swatch, stat: statEl };
+  });
+
+  var seriesColors = [];
+  function refreshColors() {
+    var cs = getComputedStyle(document.documentElement);
+    seriesColors = categories.map(function (c) {
+      return cs.getPropertyValue(c.colorVar).trim();
+    });
+    labelEls.forEach(function (l, i) { l.swatch.style.background = seriesColors[i]; });
+  }
+  refreshColors();
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", refreshColors);
+  }
+  new MutationObserver(refreshColors).observe(document.documentElement, {
+    attributes: true, attributeFilter: ["data-theme"]
+  });
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function fractions(s) {
+    var e = easeInOutCubic(s);
+    return pHat.map(function (p) { return p + (P0 - p) * e; });
+  }
+
+  function boundsFor(fr) {
+    var y = chamber.y0;
+    var H = chamber.y1 - chamber.y0;
+    var out = [];
+    for (var i = 0; i < fr.length; i++) {
+      var h = H * fr[i];
+      out.push({
+        x0: chamber.x0, x1: chamber.x1,
+        y0: y + chamber.gap / 2, y1: y + h - chamber.gap / 2
+      });
+      y += h;
+    }
+    return out;
+  }
+
+  function energyAt(s) {
+    var fr = fractions(s);
+    var e = 0;
+    for (var i = 0; i < fr.length; i++) {
+      e += categories[i].n * Math.log(pHat[i] / fr[i]);
+    }
+    return 2 * e;
+  }
+
+  var R = 2.1;
+  var particles = [];
+  (function initParticles() {
+    var b = boundsFor(fractions(0));
+    categories.forEach(function (c, i) {
+      for (var k = 0; k < c.n; k++) {
+        particles.push({
+          cat: i,
+          x: b[i].x0 + Math.random() * (b[i].x1 - b[i].x0),
+          y: b[i].y0 + Math.random() * (b[i].y1 - b[i].y0)
+        });
+      }
+    });
+  })();
+
+  function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
+
+  function update(dt) {
+    if (state.phase === "testing") {
+      state.s = Math.min(1, state.s + dt / state.duration);
+      if (state.s >= 1) { state.phase = "done"; onPhaseChange(); }
+    }
+    var fr = fractions(state.s);
+    var b = boundsFor(fr);
+    var amp = state.agitation;
+    for (var k = 0; k < particles.length; k++) {
+      var p = particles[k];
+      var bb = b[p.cat];
+      var nx = p.x + (Math.random() - 0.5) * amp;
+      var ny = p.y + (Math.random() - 0.5) * amp;
+      if (nx < bb.x0 + R) nx = bb.x0 + R + (bb.x0 + R - nx);
+      else if (nx > bb.x1 - R) nx = bb.x1 - R - (nx - (bb.x1 - R));
+      if (ny < bb.y0 + R) ny = bb.y0 + R + (bb.y0 + R - ny);
+      else if (ny > bb.y1 - R) ny = bb.y1 - R - (ny - (bb.y1 - R));
+      p.x = clamp(nx, bb.x0 + R, bb.x1 - R);
+      p.y = clamp(ny, bb.y0 + R, bb.y1 - R);
+    }
+    return { fr: fr, b: b };
+  }
+
+  function draw(fr, b) {
+    ctx.clearRect(0, 0, LW, LH);
+
+    var borderColor = getComputedStyle(document.documentElement).getPropertyValue("--border").trim();
+
+    for (var i = 0; i < categories.length; i++) {
+      var bb = b[i];
+      ctx.fillStyle = seriesColors[i] + "1f";
+      ctx.fillRect(bb.x0, bb.y0, bb.x1 - bb.x0, bb.y1 - bb.y0);
+      ctx.strokeStyle = borderColor;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(bb.x0 + 0.5, bb.y0 + 0.5, bb.x1 - bb.x0 - 1, bb.y1 - bb.y0 - 1);
+    }
+
+    // H0 target guide lines (quarter marks)
+    var H = chamber.y1 - chamber.y0;
+    ctx.setLineDash([3, 3]);
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--ink-muted").trim();
+    ctx.lineWidth = 1;
+    [0.25, 0.5, 0.75].forEach(function (f) {
+      var y = chamber.y0 + H * f;
+      ctx.beginPath();
+      ctx.moveTo(chamber.x0 - 4, y);
+      ctx.lineTo(chamber.x1 + 4, y);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    for (var k = 0; k < particles.length; k++) {
+      var p = particles[k];
+      ctx.fillStyle = seriesColors[p.cat];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, R, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    for (var j = 0; j < categories.length; j++) {
+      var mid = (b[j].y0 + b[j].y1) / 2;
+      var topPct = (mid / LH * 100).toFixed(2) + "%";
+      labelEls[j].root.style.top = topPct;
+      labelEls[j].stat.textContent = "n=" + categories[j].n + " · " + (fr[j] * 100).toFixed(1) + "%";
+    }
+  }
+
+  var phaseLabelEl = document.getElementById("phaseLabel");
+  var energyEl = document.getElementById("energyValue");
+  var finalStatEl = document.getElementById("finalStat");
+  var finalValueEl = document.getElementById("finalValue");
+  var actionBtn = document.getElementById("actionBtn");
+  var playBtn = document.getElementById("playBtn");
+  var agitationSlider = document.getElementById("agitationSlider");
+  var speedSlider = document.getElementById("speedSlider");
+
+  agitationSlider.value = state.agitation;
+  speedSlider.value = state.duration;
+
+  function onPhaseChange() {
+    if (state.phase === "idle") {
+      phaseLabelEl.textContent = "Equilibrium — model fit to data";
+      finalStatEl.style.display = "none";
+    } else if (state.phase === "testing") {
+      phaseLabelEl.textContent = "Testing H₀ — forcing equal partitions";
+    } else {
+      phaseLabelEl.textContent = "Constrained — H₀ enforced";
+      finalValueEl.textContent = G2_FINAL.toFixed(2) + " · p < .0001";
+      finalStatEl.style.display = "";
+    }
+    actionBtn.textContent =
+      state.phase === "idle" ? "Test H₀: force equal proportions" :
+      state.phase === "testing" ? "Testing…" :
+      "Reset to fitted model";
+    actionBtn.disabled = state.phase === "testing";
+  }
+  onPhaseChange();
+
+  actionBtn.addEventListener("click", function () {
+    if (state.phase === "idle") {
+      state.phase = "testing";
+      state.s = 0;
+    } else if (state.phase === "done") {
+      state.phase = "idle";
+      state.s = 0;
+    }
+    onPhaseChange();
+  });
+
+  playBtn.addEventListener("click", function () {
+    state.playing = !state.playing;
+    playBtn.textContent = state.playing ? "Pause" : "Resume";
+  });
+
+  agitationSlider.addEventListener("input", function () {
+    state.agitation = parseFloat(agitationSlider.value);
+  });
+  speedSlider.addEventListener("input", function () {
+    state.duration = parseFloat(speedSlider.value);
+  });
+
+  var lastT = null;
+  function frame(t) {
+    if (lastT === null) lastT = t;
+    var dt = Math.min(0.05, (t - lastT) / 1000);
+    lastT = t;
+
+    if (state.playing) {
+      var res = update(dt);
+      draw(res.fr, res.b);
+      energyEl.textContent = energyAt(state.s).toFixed(2);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
