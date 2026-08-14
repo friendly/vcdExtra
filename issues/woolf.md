@@ -1,4 +1,4 @@
-# The `woolf_test()` row/column decomposition is not generally valid
+# The `woolf_test()` row/column decomposition is generally valid
 
 ## Summary
 

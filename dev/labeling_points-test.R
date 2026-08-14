@@ -12,11 +12,11 @@ HairEye <- margin.table(HairEyeColor, 2:1)
 #
 # default: clip = TRUE, unit(0.1, "npc")
 mosaic(HairEye,
-       labeling = labeling_points(scale = 1, size = 1.2, seed = 42))
+       labeling = labeling_points(scale = 1, size = 1.1, seed = 42))
 
 # don't clip
 mosaic(HairEye,
-       labeling = labeling_points(scale = 1, size = 1.2, seed = 42,
+       labeling = labeling_points(scale = 1, size = 1.1, seed = 42,
                                   clip =FALSE))
 
 # set margin = 0
@@ -41,7 +41,8 @@ mosaic(HairEye,
             value_type = "expected",
             scale = 1,
             seed = 42),
-       main = "Hair-Eye Color\n # of points = expected n",
+       shade = TRUE, legend = FALSE,
+#       main = "Hair-Eye Color\n # of points = expected n",
        main_gp = gpar(fontsize = 16)
        )
 
@@ -53,8 +54,10 @@ mosaic(HairEye,
        labeling = labeling_points(
          value_type = "observed",
          scale = 1,
-         seed = 42)
-       )
+         seed = 42),
+       shade = TRUE, legend = FALSE,
+       main_gp = gpar(fontsize = 16)
+)
 
 # Combine with residual shading
 mosaic(HairEye, # direction = c("v", "h"),
