@@ -31,7 +31,7 @@
 ## Extra notes from GK (model MA-2)
 
 - Once we think this is good to go I should do one (hopefully last) check with Claude Fable to see if it can catch anything
-- We should have an argument for plot title
+- We should have an argument for plot title [MF: NO; just use `labs()`]
 - Should support `with(data, logist_plot(y ~ x, ...))`
 
 ## Extra notes from GPT (model 5.6 Sol)

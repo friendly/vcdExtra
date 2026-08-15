@@ -238,8 +238,9 @@
 #' @seealso [vcd::binreg_plot()], a similar plot using `grid` graphics directly.
 #'
 #' @references
-#' Smart, S. M. et al. (2004). A New Means of Presenting the Results of Logistic Regression,
-#' *Bulletin of the Ecological Society of America*, 85(3).
+#' Smart, J. M. R., Sutherland, W. J., Watkinson, A. R., and Gill, J. A. (2004). A New Means of
+#' Presenting the Results of Logistic Regression, *Bulletin of the Ecological Society of
+#' America*, 85(3), 100--102. \doi{10.1890/0012-9623(2004)85[100:ANMOPT]2.0.CO;2}
 #' <https://esapubs.org/bulletin/backissues/085-3/bulletinjuly2004_2column.htm#tools1>
 #'
 #' @examples
@@ -291,16 +292,10 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
   if (ncol(x) < 2L) {
     stop("`x` must have at least 2 columns.", call. = FALSE)
   }
-  xcol <- if (is.numeric(xvar)) names(x)[xvar] else xvar
-  ycol <- if (is.numeric(yvar)) names(x)[yvar] else yvar
-  if (is.na(xcol) || !xcol %in% names(x)) {
-    stop("`xvar` does not identify an existing column of `x`.", call. = FALSE)
-  }
-  if (is.na(ycol) || !ycol %in% names(x)) {
-    stop("`yvar` does not identify an existing column of `x`.", call. = FALSE)
-  }
-  .logist_plot_impl(x[[xcol]], x[[ycol]], marginal = marginal, bins = bins,
-                     xlab = xlab %||% xcol, ylab = ylab %||% ycol,
+  xres <- .resolve_col(x, xvar, "xvar")
+  yres <- .resolve_col(x, yvar, "yvar")
+  .logist_plot_impl(xres$value, yres$value, marginal = marginal, bins = bins,
+                     xlab = xlab %||% xres$name, ylab = ylab %||% yres$name,
                      fit.color = fit.color, marg.color = marg.color, ...)
 }
 
@@ -314,7 +309,7 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
 logist_plot.formula <- function(formula, data, marginal = c("hist", "points"),
                                  bins = 30, xlab = NULL, ylab = NULL,
                                  fit.color = "steelblue", marg.color = "orange", ...) {
-  mf <- stats::model.frame(formula, data = data)
+  mf <- stats::model.frame(formula, data = data, na.action = stats::na.pass)
   if (ncol(mf) != 2L) {
     stop("`formula` must have exactly one response and one predictor (y ~ x); found ",
          ncol(mf) - 1L, " predictor(s).", call. = FALSE)
@@ -328,14 +323,14 @@ logist_plot.formula <- function(formula, data, marginal = c("hist", "points"),
 
 #' @rdname logist_plot
 #' @export
-logist_hist <- function(x, ...) {
-  logist_plot(x, ..., marginal = "hist")
+logist_hist <- function(...) {
+  logist_plot(..., marginal = "hist")
 }
 
 #' @rdname logist_plot
 #' @export
-logist_point <- function(x, ...) {
-  logist_plot(x, ..., marginal = "points")
+logist_point <- function(...) {
+  logist_plot(..., marginal = "points")
 }
 
 # if (FALSE) {
@@ -359,6 +354,35 @@ logist_point <- function(x, ...) {
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
+# Resolve a xvar=/yvar= selector to a single column. Numeric positions are extracted directly
+# by position (never converted to a name and re-looked-up), so this still works correctly when
+# `x` has duplicate column names. Character selectors must match exactly one column name.
+.resolve_col <- function(x, var, argname) {
+  if (length(var) != 1L || is.na(var)) {
+    stop("`", argname, "` must be a single column name or position.", call. = FALSE)
+  }
+  if (is.character(var)) {
+    idx <- which(names(x) == var)
+    if (length(idx) == 0L) {
+      stop("`", argname, "` does not identify an existing column of `x`.", call. = FALSE)
+    }
+    if (length(idx) > 1L) {
+      stop("`", argname, "` (\"", var, "\") matches more than one column of `x`; ",
+           "column names must be unique for name-based selection.", call. = FALSE)
+    }
+    list(value = x[[idx]], name = var)
+  } else if (is.numeric(var)) {
+    if (var != floor(var) || var < 1L || var > ncol(x)) {
+      stop("`", argname, "` must be a whole number between 1 and ", ncol(x), ".", call. = FALSE)
+    }
+    idx <- as.integer(var)
+    list(value = x[[idx]], name = names(x)[idx])
+  } else {
+    stop("`", argname, "` must be a single column name (character) or position (integer).",
+         call. = FALSE)
+  }
+}
+
 .check_bins <- function(bins) {
   if (length(bins) != 1L || !is.numeric(bins) || is.na(bins) ||
       !is.finite(bins) || bins < 1 || bins != floor(bins)) {
@@ -378,6 +402,14 @@ logist_point <- function(x, ...) {
 #   numeric:   must already be coded 0/1; any other numeric coding is rejected rather than
 #              guessed at
 .to_binary01 <- function(y) {
+  if (!is.null(dim(y))) {
+    stop("`y` must be a plain vector, not a matrix/array (e.g. not `cbind(success, failure)`).",
+         call. = FALSE)
+  }
+  if (!(is.logical(y) || is.factor(y) || is.character(y) || is.numeric(y))) {
+    stop("`y` must be numeric, logical, factor, or character; found class \"",
+         paste(class(y), collapse = "/"), "\".", call. = FALSE)
+  }
   uy <- unique(y[!is.na(y)])
   if (length(uy) != 2L) {
     stop("`y` must be binary (exactly 2 distinct values); found ", length(uy), ".",
@@ -394,7 +426,9 @@ logist_point <- function(x, ...) {
     }
     c(0, 1)
   } else {
-    sort(as.character(uy))
+    # method = "radix" sorts by C-locale byte order, independent of the session locale --
+    # otherwise the modeled "event" (which level maps to 1) could differ across systems.
+    sort(as.character(uy), method = "radix")
   }
   list(y01 = as.numeric(factor(as.character(y), levels = as.character(levs))) - 1,
        levels = levs)
@@ -407,6 +441,19 @@ logist_point <- function(x, ...) {
                                fit.color = "steelblue", marg.color = "orange", ...) {
   rlang::check_dots_empty()
   marginal <- match.arg(marginal)
+
+  if (length(x) != length(y)) {
+    stop("`x` and `y` must be the same length; found ", length(x), " and ", length(y), ".",
+         call. = FALSE)
+  }
+  if (!is.null(dim(x))) {
+    stop("`x` must be a plain vector, not a matrix/array (e.g. a multi-column formula term ",
+         "such as poly(x, 2) is not supported).", call. = FALSE)
+  }
+  if (!is.numeric(x)) {
+    stop("`x` must be numeric; found class \"", paste(class(x), collapse = "/"), "\".",
+         call. = FALSE)
+  }
 
   data <- data.frame(x = x, y = y)
   data <- data[stats::complete.cases(data) & is.finite(data$x), , drop = FALSE]
@@ -455,8 +502,14 @@ logist_point <- function(x, ...) {
     max_count <- max(unlist(hist_counts))
     bin_no <- 4 * max_count
 
+    # pretty() can return fractional ticks when max_count is small (e.g. 0, 0.2, 0.4, ... for
+    # max_count = 1); counts are always whole numbers, so round + dedupe, then guarantee at
+    # least two distinct ticks (0 and max_count) rather than let rounding collapse them.
     count_ticks <- pretty(c(0, max_count))
-    count_ticks <- count_ticks[count_ticks >= 0 & count_ticks <= max_count]
+    count_ticks <- unique(round(count_ticks[count_ticks >= 0 & count_ticks <= max_count]))
+    if (length(count_ticks) < 2L) {
+      count_ticks <- unique(c(0L, max_count))
+    }
     count_positions <- sort(c(count_ticks / bin_no, 1 - count_ticks / bin_no))
     count_labels <- round(bin_no * pmin(count_positions, 1 - count_positions))
 
