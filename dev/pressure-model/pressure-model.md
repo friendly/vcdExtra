@@ -52,63 +52,81 @@ motion + moving chamber walls, (2) render frames, (3) assemble into a GIF/video
 or drive it live. Four viable routes:
 
 ### A. R + gganimate
+
 Precompute one big long-format data frame: `frame, id, hair, x, y` for particles,
 plus `frame, hair, ymin, ymax` for the moving partitions. Draw with
 `geom_point()` + `geom_rect()`, `transition_manual(frame)`, render via
 `gganimate::animate()` / `gifski`.
+
 - + Fits the R/ggplot ecosystem — natural if this ends up in a vignette or
   paper reproduction alongside vcdExtra's other mosaic/fourfold plots.
+  
 - - Physics has to be fully precomputed before gganimate ever sees it (fine,
   just means the simulation loop is separate code, not "in" ggplot). Many
   points x many frames can render slowly.
 
 ### B. Base R + `animation::saveGIF()` (or `magick` + `gifski`)
+
 Stateful for-loop: each iteration updates particle positions and partition
 y-coords, draws with `rect()` + `points()`, one call per frame.
+
 - + Simplest, most direct translation of the physics idea — no need to
   materialize a giant precomputed data frame, simulate and draw in the same
   loop. Fastest to prototype and iterate on the physics.
+  
 - - Less polished/shareable as a ggplot object; base-graphics look.
 
 ### C. Shiny app (reactive loop via `invalidateLater`)
+
 Live simulation: chambers jiggle continuously; a button/slider triggers the
 walls migrating toward the H0 (equal-height) configuration while particles
 keep moving, so the density change is watched live rather than played back.
+
 - + Best as a *teaching* tool — could ship as `vcdExtra::pressureDemo()` for
   talks/class. Natural place to add a slider interpolating between the ML
   fit and H0, or a live G² counter.
+  
 - - More build effort than a canned animation; not a static artifact you can
   drop in a paper or vignette without also exporting frames separately.
 
 ### D. Standalone HTML/JS (Canvas or SVG), no R involved
+
 Client-side particle sim (random walk + reflect off walls) driven by
 `requestAnimationFrame`; chamber walls are SVG rects with animated
 y-position/height. Can add sliders for jiggle amplitude, phase durations,
 particle count, speed.
+
 - + Smoothest motion, cheapest to iterate on visually/interactively — good
   for nailing the "feel" (how much jiggle reads as pressure, how the
   compression should look) before committing to R code. Easy to share as a
   quick demo link.
+  
 - - Lives outside the package; would need porting to R (B or A) if the final
   deliverable must be an R-generated GIF for a vignette/paper.
 
 ### Recommended path
+
 Prototype interactively in HTML (D) to tune the physics/visual parameters
 quickly, then port the finalized version to R (B for a fast, simple loop, or
 A/gganimate if a polished ggplot-native GIF is wanted for a vignette).
 
 ### Physics/algorithm sketch (applies to any of the above)
+
 1. **Data**: `n <- margin.table(HairEyeColor, 1)` → Black, Brown, Red, Blond
    frequencies; `N <- sum(n)`.
+   
 2. **Chamber layout**: one vertical column, width `W`, total height `H`.
    Chamber heights `h_i = H * n_i / N`, stacked in category order — literally
    the area-proportional column from Fig. 3 (a 1-D spine plot).
+   
 3. **Particles**: seed `n_i` points per chamber at random `(x, y)` within
    that chamber's rectangle; color/shape by hair category.
+   
 4. **Phase 1 — equilibrium jiggle** (~T1 frames): each particle takes a
    small random step per frame, reflecting off its chamber's walls (including
    shared partitions) so it never leaves its chamber. Reads as "pressure
    balanced, no drift."
+   
 5. **Phase 2 — constraint / hypothesis test** (~T2 frames): linearly
    interpolate each partition's y-position from the data-based `h_i` toward
    the H0 value `H/4`. Each frame: (a) nudge partitions toward the target,
@@ -116,9 +134,11 @@ A/gganimate if a polished ggplot-native GIF is wanted for a vignette).
    that shrink compress their particles (denser, more wall collisions — more
    "pressure"); chambers that grow spread out (less dense). This is a direct
    visualization of the unequal per-cell contribution to G².
+   
 6. **Optional overlay**: running/cumulative G² counter, or a per-chamber
    pressure indicator (color intensity, small gauge) tied to
    `-log(pi_hat_i / pi0_i)`, operationalizing the paper's energy argument.
+   
 7. **End state**: hold on the final frame — four equal-height, unequal-density
    chambers — with a caption giving the G² value for the Hair-color data.
 
@@ -133,18 +153,22 @@ Brown 286, Red 71, Blond 127; N=592; G² = 165.59, df=3, p<.0001).
 
 - Four stacked chambers sized by fitted proportions; 592 reflecting-random-walk
   particles (one per observation), colored by hair category.
+  
 - "Test H₀" button interpolates the partitions toward equal quarters
   (eased, adjustable duration) while particles keep jiggling against the
   moving walls — compresses Brown, vents Red, exactly as the pressure
   analogy predicts.
+  
 - Live "energy expended" readout = 2·Σ nᵢ·log(π̂ᵢ/πᵢ(t)), which is a
   monotonically increasing path from 0 to the true G² (it's N times the KL
   divergence from the fitted distribution to the partition's current
   distribution, convex along the linear interpolation path — guaranteed
   non-decreasing, so it doubles as a literal "effort so far" gauge).
+  
 - Sliders for jiggle amplitude ("molecular agitation") and transition speed;
   "Reset" lets the chambers relax back to the fitted state without
   re-seeding particles, so the re-expansion is watched live too.
+  
 - Respects `prefers-reduced-motion` (cuts jiggle amplitude to 0, shortens
   the transition) and both light/dark themes.
 
