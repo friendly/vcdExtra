@@ -56,6 +56,9 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   `10.1890/0012-9623(2004)85[100:ANMOPT]2.0.CO;2`. The existing `esapubs.org` URL returned HTTP
   200 in direct verification. Keep that working link if desired and add the DOI as stable
   bibliographic metadata.
+  [**FIXED** (Claude, 2026-08-14): `@references` corrected to
+  "Smart, J. M. R., Sutherland, W. J., Watkinson, A. R., and Gill, J. A. (2004)", pages 100--102,
+  DOI added via `\doi{}`.]
 
 - Before moving this file into `R/`, trim the large historical review log and machine-specific
   Windows paths from the production source. In particular, several comments point maintainers
@@ -71,6 +74,9 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   The plot is especially cluttered with small samples or many bins. Filter the pretty breaks
   to distinct whole-number counts (and ensure 0 plus a useful upper tick remain) before mapping
   them to probability-axis positions.
+  [**FIXED** (Claude, 2026-08-14): `count_ticks` now rounded + deduplicated, with a fallback to
+  `c(0, max_count)` if that collapses below 2 distinct ticks. Verified `max_count` in
+  {1,2,3,5,10,50,100} all now produce clean whole-number, non-duplicated labels.]
 
 - **Nonzero range is not sufficient validation for histogram arithmetic.** Two reproducible
   cases return a plot but lose the histogram layers with only ggplot warnings:
@@ -82,6 +88,10 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   `bin_width` are finite and strictly positive and that the effective breaks are unique. It may
   be better to reduce the effective number of bins for low-resolution data or fail clearly
   instead of returning a visually incomplete object.
+  [**FIXED** (Claude, 2026-08-14): added explicit checks right after computing `bin_width`/
+  `hist_breaks` -- non-finite/non-positive `bin_width` and non-unique breaks both now error
+  clearly instead of silently dropping the histogram layers. Both reproducers above (near-eps
+  duplicate x, -1e308..1e308 range) now error with an actionable message instead of warning.]
 
 - **A failed smoother can still produce a successful plot object with no fitted curve.** With
   `marginal = "points"` and a finite numeric predictor alternating between `-1e308` and
@@ -107,6 +117,10 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   length/missing-value errors; a fractional selector such as `1.9` silently selects column 1;
   and factor selectors are accepted accidentally. Validate that each selector is exactly one
   non-missing character name or one finite whole-number position in range.
+  [**FIXED** (Claude, 2026-08-14): new `.resolve_col()` helper validates `xvar`/`yvar` is a
+  single non-NA character name or whole-number position in `[1, ncol(x)]`, erroring clearly on
+  vectors, fractional/zero/negative positions, and factor/logical selectors. Verified all these
+  cases against Donner.]
 
 - **Duplicate data-frame names break even positional selection.** Numeric positions are first
   converted back to names and then extracted by name. With two columns both named `dup`,
@@ -114,6 +128,11 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   rather than the second. Either extract numeric selectors directly by position or reject
   duplicate names when name-based selection would be ambiguous. Unnamed data frames also fail
   with `missing value where TRUE/FALSE needed` rather than a diagnostic.
+  [**FIXED** (Claude, 2026-08-14): `.resolve_col()` extracts numeric positions directly via
+  `x[[idx]]` by position, never round-tripping through a name; character selectors matching more
+  than one column now error explicitly ("column names must be unique for name-based selection")
+  instead of silently picking the first match. Verified with a synthetic 2-column `dup`/`dup`
+  data frame that `yvar = 2` resolves to the second column's actual values.]
 
 - **The claimed equal-length/numeric-predictor fix is incomplete.** Unequal vectors still fail
   inside `data.frame()` with `arguments imply differing number of rows`; character, factor,
@@ -122,6 +141,13 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   numeric. Validate equal positive lengths, an atomic one-dimensional numeric `x`, and finite
   values before building the internal data frame. If Date/POSIXct support is intentional, it
   needs an explicit, tested modeling conversion rather than accidental acceptance.
+  [**FIXED** (Claude, 2026-08-14): `.logist_plot_impl()` now checks, in order, `dim(x)`/`dim(y)`
+  (rejects matrix/array/data.frame, including matrix-valued formula terms like `poly(x, 2)`),
+  `is.list()` (rejects plain lists with an accurate message), `length(x) == length(y)`, then
+  `is.numeric(x)` -- so logical/Date/POSIXct/character/factor/complex predictors are now
+  rejected explicitly (matching the documented "numeric predictor" contract) rather than
+  silently accepted or failing downstream with an unrelated message. Verified each case
+  individually against Donner.]
 
 - **Response type checking is too permissive outside the documented types.** Complex, Date,
   and `difftime` responses can be silently converted to 0/1, while raw/list responses fail with
@@ -129,18 +155,35 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   reject matrices/dimensions), then validate finite numeric values. A matrix response such as
   `cbind(success, failure)` should get a direct unsupported-response error rather than
   “found 0 distinct values.”
+  [**FIXED** (Claude, 2026-08-14): `.to_binary01()` now rejects non-NULL `dim()` and any type
+  other than numeric/logical/factor/character up front, with the class name in the message.
+  Combined with the `dim()`/`is.list()` guards in `.logist_plot_impl()` above, Date/complex/
+  matrix/list `y` all now get a clear, specific error instead of silent coercion or "found 0
+  distinct values."]
 
 - **Formula calls do not actually share the same missing-data policy under all user options.**
   With `options(na.action = "na.fail")`, `logist_plot(y ~ x, data = d)` errors in
   `model.frame()`, whereas the equivalent vector call removes the incomplete row and succeeds.
   If the intended policy is always the internal complete/finite-case filter, call
   `model.frame(..., na.action = stats::na.pass)` and let the common implementation perform it.
+  [**FIXED** (Claude, 2026-08-14): `logist_plot.formula()` now calls `model.frame(formula,
+  data = data, na.action = stats::na.pass)`; verified `logist_plot(survived ~ age, data =
+  Donner)` succeeds under `options(na.action = "na.fail")`.]
 
 - **Named formula dispatch does not propagate through the convenience wrappers.**
   `logist_plot(formula = y ~ x, data = d)` works, but both
   `logist_hist(formula = y ~ x, data = d)` and `logist_point(formula = y ~ x, data = d)` fail
   with `argument "x" is missing`. Either give the wrappers a formula-aware interface or narrow
   the claim that they accept the same calling conventions; positional formula calls do work.
+  [**FIXED** (Claude, 2026-08-14): `logist_hist`/`logist_point` no longer declare a named `x`
+  formal -- both are now `function(...)`, forwarding everything unchanged to `logist_plot()`.
+  This works because `UseMethod()` dispatches on the class of the first argument *as it appears
+  in the call*, independent of how it matches the generic's own formals (verified this
+  empirically: a generic can dispatch correctly on a named argument that doesn't match its
+  declared parameter name at all, e.g. `f(zzzz = a ~ b)` dispatches to `f.formula`; the wrapper
+  broke only because it was an ordinary function forcing a genuinely-missing `x` promise, not
+  because of anything formula-specific). Verified `logist_hist(formula = survived ~ age, data =
+  Donner)` and the `logist_point` equivalent both now build successfully.]
 
 - **The modeled-event convention is still missing from user-facing help and is not portable
   for character responses.** The implementation comment defines the mapping, but `bin$levels`
@@ -150,6 +193,12 @@ and roxygen2 8.0.0. Every runtime claim retained below was reproduced from the c
   across systems. Document the mapping in `@param y`/details and label the axis as something
   like `Pr(y = <event>)`; preferably add an explicit `event=`/`success=` argument. For a
   deterministic fallback, do not rely on locale-sensitive character sorting.
+  [**PARTIALLY FIXED** (Claude, 2026-08-14): the locale-sensitivity half is fixed --
+  `.to_binary01()` now sorts character `y` values with `method = "radix"` (C-locale byte order),
+  deterministic across systems. Still open: `bin$levels` is still discarded by
+  `.logist_plot_impl()`, so the modeled event is still not surfaced in the axis label, return
+  value, or `@param y` docs -- that part needs a design decision (e.g. `Pr(y = <event>)` label
+  vs. an explicit `event=`/`success=` argument) before it's worth implementing.]
 
 - The formula validation counts columns of `model.frame()` rather than validating the formula
   and resulting predictor shape. This gives misleading messages for `~ x` (reported as zero

@@ -442,13 +442,23 @@ logist_point <- function(...) {
   rlang::check_dots_empty()
   marginal <- match.arg(marginal)
 
+  if (!is.null(dim(x))) {
+    stop("`x` must be a plain vector, not a matrix/array/data.frame (e.g. a multi-column ",
+         "formula term such as poly(x, 2) is not supported).", call. = FALSE)
+  }
+  if (!is.null(dim(y))) {
+    stop("`y` must be a plain vector, not a matrix/array/data.frame (e.g. not ",
+         "`cbind(success, failure)`).", call. = FALSE)
+  }
+  if (is.list(x)) {
+    stop("`x` must be a plain atomic vector, not a list.", call. = FALSE)
+  }
+  if (is.list(y)) {
+    stop("`y` must be a plain atomic vector, not a list.", call. = FALSE)
+  }
   if (length(x) != length(y)) {
     stop("`x` and `y` must be the same length; found ", length(x), " and ", length(y), ".",
          call. = FALSE)
-  }
-  if (!is.null(dim(x))) {
-    stop("`x` must be a plain vector, not a matrix/array (e.g. a multi-column formula term ",
-         "such as poly(x, 2) is not supported).", call. = FALSE)
   }
   if (!is.numeric(x)) {
     stop("`x` must be numeric; found class \"", paste(class(x), collapse = "/"), "\".",
@@ -494,7 +504,17 @@ logist_point <- function(...) {
     .check_bins(bins)
 
     bin_width <- (max_x - min_x) / bins
+    if (!is.finite(bin_width) || bin_width <= 0) {
+      stop("Cannot compute histogram bins for `x`: the range of `x` (", min_x, " to ", max_x,
+           ") produces a non-finite or non-positive bin width. Try fewer `bins` or check for ",
+           "extreme values.", call. = FALSE)
+    }
     hist_breaks <- seq(min_x, max_x, length.out = bins + 1)
+    if (length(unique(hist_breaks)) != length(hist_breaks)) {
+      stop("Cannot compute histogram bins for `x`: the range of `x` is too small relative to ",
+           "`bins` (", bins, ") to produce distinct break points. Try fewer `bins`.",
+           call. = FALSE)
+    }
     hist_counts <- lapply(uy, function(lev) {
       graphics::hist(data$x[data$y == lev], breaks = hist_breaks, right = FALSE,
                       include.lowest = TRUE, plot = FALSE)$counts
