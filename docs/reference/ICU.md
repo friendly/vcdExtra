@@ -270,11 +270,12 @@ risks <- apply(risks, 1, paste, collapse="")
 risks[risks==""] <- "(none)"
 icu.fit$risks <- risks
 
-library(ggplot2)
-ggplot(icu.fit, aes(x=age, y=prob, color=risks)) +
+if (require("ggplot2")) {
+print(ggplot(icu.fit, aes(x=age, y=prob, color=risks)) +
   geom_point(size=2) +
   geom_line(size=1.25, alpha=0.5) +
-  theme_bw() + ylab("Probability of death")
+  theme_bw() + ylab("Probability of death"))
+}
 
 
 ```

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,12 @@
       <small>Source: <a href="https://github.com/friendly/vcdExtra/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.9.8" id="version-098">Version 0.9.8<a class="anchor" aria-label="anchor" href="#version-098"></a></h2>
+<ul><li><p>Added <code><a href="../reference/drop1.loglm.html">drop1.loglm()</a></code>, <code><a href="../reference/drop1.loglm.html">LRanova()</a></code>, and <code><a href="../reference/drop1.loglm.html">assoc_strength()</a></code> for term-level analysis of <code>loglm</code> models. <code><a href="../reference/drop1.loglm.html">drop1.loglm()</a></code> (registered as an S3 method for <code><a href="https://rdrr.io/r/stats/add1.html" class="external-link">stats::drop1()</a></code>, and also directly callable by name) performs single-term deletion tests for a model’s generating class, refitting via <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code> and reporting both LR (<code>G^2</code>) and Pearson (<code>X^2</code>) statistics per term.</p></li>
+<li><p><code><a href="../reference/drop1.loglm.html">LRanova()</a></code> wraps it with a partial R^2 effect-size column relative to a (nesting-checked) baseline model.</p></li>
+<li><p><code><a href="../reference/drop1.loglm.html">assoc_strength()</a></code> wraps it with a partial Cramer’s V / Cohen’s w effect-size column, generalized to terms of any order. The fitted models underlying each test are attached as a <code>loglmlist</code> (<code>attr(., "models")</code>), reusable directly with <code><a href="https://rdrr.io/pkg/vcd/man/mosaic.html" class="external-link">mosaic()</a></code>, <code><a href="../reference/LRstats.html">LRstats()</a></code>, and <code><a href="../reference/get_model.html">get_models()</a></code> without refitting.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.7" id="version-097">Version 0.9.7<a class="anchor" aria-label="anchor" href="#version-097"></a></h2><p class="text-muted">CRAN release: 2026-08-03</p>
 <p>This is a significant release, with a number of new features</p>

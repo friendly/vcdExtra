@@ -1,5 +1,35 @@
 # Changelog
 
+## Version 0.9.8
+
+- Added
+  [`drop1.loglm()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md),
+  [`LRanova()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md),
+  and
+  [`assoc_strength()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md)
+  for term-level analysis of `loglm` models.
+  [`drop1.loglm()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md)
+  (registered as an S3 method for
+  [`stats::drop1()`](https://rdrr.io/r/stats/add1.html), and also
+  directly callable by name) performs single-term deletion tests for a
+  model’s generating class, refitting via
+  [`update()`](https://rdrr.io/r/stats/update.html) and reporting both
+  LR (`G^2`) and Pearson (`X^2`) statistics per term.
+
+- [`LRanova()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md)
+  wraps it with a partial R^2 effect-size column relative to a
+  (nesting-checked) baseline model.
+
+- [`assoc_strength()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md)
+  wraps it with a partial Cramer’s V / Cohen’s w effect-size column,
+  generalized to terms of any order. The fitted models underlying each
+  test are attached as a `loglmlist` (`attr(., "models")`), reusable
+  directly with [`mosaic()`](https://rdrr.io/pkg/vcd/man/mosaic.html),
+  [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md),
+  and
+  [`get_models()`](https://friendly.github.io/vcdExtra/reference/get_model.md)
+  without refitting.
+
 ## Version 0.9.7
 
 CRAN release: 2026-08-03

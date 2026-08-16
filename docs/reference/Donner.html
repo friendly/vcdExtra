@@ -21,7 +21,7 @@ died."><meta property="og:image" content="https://friendly.github.io/vcdExtra/lo
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -221,31 +221,31 @@ Raton, FL: Chapman &amp; Hall/CRC. <a href="http://ddar.datavis.ca" class="exter
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># plot fitted probabilities from mod2 and mod3</span></span></span>
 <span class="r-in"><span><span class="co"># idea from: http://www.ling.upenn.edu/~joseff/rstudy/summer2010_ggplot2_intro.html</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># separate linear fits on age for M/F</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Donner</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">survived</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Donner</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">survived</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html" class="external-link">position_jitter</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">0.02</span>, width <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>,</span></span>
 <span class="r-in"><span>              method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>              formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="va">x</span>,</span></span>
 <span class="r-in"><span>              alpha <span class="op">=</span> <span class="fl">0.2</span>,</span></span>
 <span class="r-in"><span>              size<span class="op">=</span><span class="fl">2</span>,</span></span>
-<span class="r-in"><span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="Donner-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># separate quadratics</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Donner</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">survived</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">Donner</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">survived</span>, color <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html" class="external-link">position_jitter</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">0.02</span>, width <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">stat_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"glm"</span>,</span></span>
 <span class="r-in"><span>              method.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>              formula <span class="op">=</span> <span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">2</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>              alpha <span class="op">=</span> <span class="fl">0.2</span>,</span></span>
 <span class="r-in"><span>              size<span class="op">=</span><span class="fl">2</span>,</span></span>
-<span class="r-in"><span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>              <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-plt img"><img src="Donner-2.png" alt="" width="700" height="433"></span>
 <span class="r-plt img"><img src="Donner-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

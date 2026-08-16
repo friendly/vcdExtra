@@ -90,13 +90,11 @@ doubledecker(Knowledge ~ Reading + Newspaper + Radio,
 
 drop1(dyke.mod0, test="Chisq")
 #> Single term deletions
-#> 
-#> Model:
-#> ~Knowledge + (Reading * Radio * Lectures * Newspaper)
-#>                                  Df    AIC    LRT Pr(>Chi)    
-#> <none>                              250.26                    
-#> Knowledge                         1 338.37 90.114   <2e-16 ***
-#> Reading:Radio:Lectures:Newspaper  1 248.63  0.374   0.5406    
+#> Model: [Knowledge] [Reading,Radio,Lectures,Newspaper]
+#>                                  Df LR Chisq Pearson Chisq Pr(>Chi)    
+#> <none>                                                                 
+#> Knowledge                         1   90.114        78.607   <2e-16 ***
+#> Reading:Radio:Lectures:Newspaper  1    0.374         0.418   0.5406    
 #> ---
 #> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 

@@ -77,6 +77,10 @@ Other functions for visualizing contingency tables
 
 Statistical tests for categorical data
 
+- [`drop1(`*`<loglm>`*`)`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md)
+  [`LRanova()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md)
+  [`assoc_strength()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md)
+  : Term-level tests and effect sizes for loglm models
 - [`breslow_day_test()`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md)
   [`print(`*`<breslow_day_test>`*`)`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md)
   : Breslow-Day Test for Homogeneity of Odds Ratios

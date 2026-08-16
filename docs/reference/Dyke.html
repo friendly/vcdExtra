@@ -21,7 +21,7 @@ treated as the response."><meta property="og:image" content="https://friendly.gi
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,13 +130,11 @@ Oxford University Press, p. 57.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/add1.html" class="external-link">drop1</a></span><span class="op">(</span><span class="va">dyke.mod0</span>, test<span class="op">=</span><span class="st">"Chisq"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Single term deletions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ~Knowledge + (Reading * Radio * Lectures * Newspaper)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  Df    AIC    LRT Pr(&gt;Chi)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;none&gt;                              250.26                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Knowledge                         1 338.37 90.114   &lt;2e-16 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reading:Radio:Lectures:Newspaper  1 248.63  0.374   0.5406    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: [Knowledge] [Reading,Radio,Lectures,Newspaper]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  Df LR Chisq Pearson Chisq Pr(&gt;Chi)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;none&gt;                                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Knowledge                         1   90.114        78.607   &lt;2e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Reading:Radio:Lectures:Newspaper  1    0.374         0.418   0.5406    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-in"><span></span></span>
