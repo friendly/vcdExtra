@@ -1,3 +1,15 @@
+## Version 0.9.8
+
+* Added `drop1.loglm()`, `LRanova()`, and `assoc_strength()` for term-level analysis of `loglm`
+  models. `drop1.loglm()` (registered as an S3 method for `stats::drop1()`, and also directly
+  callable by name) performs single-term deletion tests for a model's generating class, refitting
+  via `update()` and reporting both LR (`G^2`) and Pearson (`X^2`) statistics per term.
+  `LRanova()` wraps it with a partial R^2 effect-size column relative to a (nesting-checked)
+  baseline model, and `assoc_strength()` wraps it with a partial Cramer's V / Cohen's w
+  effect-size column, generalized to terms of any order. The fitted models underlying each test
+  are attached as a `loglmlist` (`attr(., "models")`), reusable directly with `mosaic()`,
+  `LRstats()`, and `get_models()` without refitting.
+
 ## Version 0.9.7
 
 This is a significant release, with a number of new features 
