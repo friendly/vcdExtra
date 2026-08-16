@@ -1,51 +1,16 @@
-# Term-level likelihood-ratio tests for MASS::loglm models -- second draft.
+# drop1.loglm()/LRanova()/assoc_strength(): term-level tests and effect
+# sizes for a fitted loglm model's generating class.
 #
-# This file lives under dev/, alongside the original prototype in
-# anova-like.R (kept for reference/history) and the design notes in
-# README.md / anova-like.md.
-#
-# drop1.loglm() is the primary interface (per MF, README.md). For each term
-# in the model's generating class (the highest-order terms in $margin --
-# "Just the generating class", README.md), it drops that term, refits, and
-# reports the change in both the LR statistic (G^2) and the Pearson
-# statistic (X^2), together with the LR-based p-value.
-#
-# LRanova() is a thin wrapper around drop1.loglm() that adds a partial R^2
-# effect-size column relative to a baseline model (default: mutual
-# independence over the variables in the generating class), after checking
-# that the baseline is nested within the fitted model.
-#
-# --- What changed from anova-like.R, and why -------------------------------
-#
-# The first draft rebuilt each reduced-model formula by hand from $margin
-# via .margin_formula()/.drop_loglm_margin(). That discards the response
-# variable, which is why LRanova() failed on DaytonSurvey with "formula
-# specifies no response": DaytonSurvey is fit as `Freq ~ ...` (data.frame
-# form), and the hand-built formula `~ A:B + ...` has no LHS. The
-# array/table examples (UCBAdmissions, HairEyeColor) happened to work
-# because those formulas have no response to lose in the first place.
-#
-# The fix is to not rebuild formulas at all. MASS already supplies
-# update.loglm(), extractAIC.loglm(), and a working terms()/formula() for
-# "loglm" objects -- which means stats::drop1() and MASS::dropterm() already
-# dispatch to their .default methods and work correctly for loglm objects,
-# response variable included (verified against both UCBAdmissions and
-# DaytonSurvey; MASS 7.3-66 / R 4.6.1). So drop1.loglm() below refits each
-# reduced model via update(object, ~ . - term), exactly as
-# drop1.default()/dropterm.default() do, instead of reconstructing formulas.
-#
-# The one thing base R's drop1()/dropterm() don't give us is the Pearson X^2
-# alongside the LR G^2 (they only expose a deviance/AIC-derived LRT). loglm
-# objects conveniently store both $lrt and $pearson directly on the fitted
-# object, so we read those off the full model and each refit rather than
-# going through extractAIC().
-#
-# Reused from the vcdExtra package itself (via devtools::load_all()):
-#   - get_model(x, type = "brackets") for the bracket-notation "[A,B] [C,D]"
-#     headings, consistent with LRstats()/seq_loglm() output elsewhere in
-#     the package, instead of a raw deparse(formula(x)).
-
-devtools::load_all(".", quiet = TRUE)
+# MASS already supplies update.loglm(), extractAIC.loglm(), and a working
+# terms()/formula() for "loglm" objects, so stats::drop1()/MASS::dropterm()
+# already dispatch correctly (including data.frame/`Freq ~ ...` fits) via
+# their .default methods, refitting through update(). drop1.loglm() below
+# does the same -- refits via update(object, ~ . - term) rather than
+# reconstructing formulas from $margin by hand, which is both simpler and
+# avoids accidentally dropping the response variable on data.frame fits.
+# It adds the Pearson X^2 alongside the LR G^2 (loglm objects store both
+# $lrt and $pearson directly; extractAIC.loglm()/drop1.default() only
+# expose a deviance-derived LRT).
 
 #' Term-level tests and effect sizes for loglm models
 #'
@@ -142,6 +107,7 @@ devtools::load_all(".", quiet = TRUE)
 #' @aliases drop1.loglm LRanova assoc_strength
 #' @rdname drop1.loglm
 #' @export
+#' @rawNamespace export(drop1.loglm)
 #'
 #' @examples
 #' library(MASS)
@@ -273,9 +239,9 @@ LRanova <- function(object, baseline = NULL, test = c("Chisq", "none"), abbrev =
     stop("'baseline' must be NULL or a fitted 'loglm' model.", call. = FALSE)
   }
 
-  # Nesting check (README: "MF: Yes, ensure nesting"). terms() on a
-  # hierarchical loglm already expands to include implied lower-order
-  # relatives, so a plain term.labels subset check is sufficient and cheap.
+  # Nesting check: terms() on a hierarchical loglm already expands to
+  # include implied lower-order relatives, so a plain term.labels subset
+  # check is sufficient and cheap.
   base_terms  <- attr(stats::terms(baseline), "term.labels")
   model_terms <- attr(stats::terms(object),   "term.labels")
   extra <- setdiff(base_terms, model_terms)
@@ -338,72 +304,4 @@ assoc_strength <- function(object, scope, method = c("Cramer", "Cohen"), abbrev 
     sprintf("Model: %s", get_model(object, type = "brackets", abbrev = abbrev))
   )
   aod
-}
-
-
-# Worked examples ---------------------------------------------------------
-
-if(FALSE) {
-  library(MASS)
-
-  ## Array/table-based data, no response variable in the formula -----------
-  ucb_all_2way <- MASS::loglm(
-    ~ (Admit + Gender + Dept)^2,
-    data = UCBAdmissions
-  ) |> print()
-
-  ucb_drop1 <- drop1.loglm(ucb_all_2way) |> print()
-
-  ## attr(., "models") is a loglmlist of {<none>, one per dropped term},
-  ## free to compute (already fit for the Delta-statistics above) and usable
-  ## with the existing *.loglmlist toolchain without refitting anything:
-  mosaic(attr(ucb_drop1, "models"), ask = FALSE)   # grid of all models
-  mosaic(attr(ucb_drop1, "models"), "Admit:Gender") # just the one of interest
-  LRstats(attr(ucb_drop1, "models"))                # AIC/BIC comparison, for free
-  get_models(attr(ucb_drop1, "models"))
-
-  LRanova(ucb_all_2way) |> print()
-
-  ## Partial effect sizes: Admit:Gender should come out much weaker than the
-  ## marginal Cramer's V (0.143, per vcd::assocstats on the raw 2-way margin)
-  ## -- the well-known Simpson's-paradox story for this dataset (the gender
-  ## gap is largely a department effect).
-  assoc_strength(ucb_all_2way)
-  assoc_strength(ucb_all_2way, method = "Cohen")
-  vcd::assocstats(margin.table(UCBAdmissions, c(1, 2)))
-
-  ## Compare to base R, unchanged by this file -------------------------------
-  stats::drop1(ucb_all_2way, test = "Chisq")
-  MASS::dropterm(ucb_all_2way, test = "Chisq")
-
-  ## ------------------------------------------------------------
-
-  hair_eye_all_2way <- MASS::loglm(~ (Hair + Eye + Sex)^2, data = HairEyeColor)
-  drop1.loglm(hair_eye_all_2way)
-  LRanova(hair_eye_all_2way)
-  assoc_strength(hair_eye_all_2way)
-
-  ## data.frame + Freq response: this is the case that broke the first draft
-  data("DaytonSurvey")
-
-  DS_indep <- loglm(
-    Freq ~ (cigarette + alcohol + marijuana + sex + race),
-    data = DaytonSurvey
-  ) |> print()
-
-  DS_all_two_way <- update(DS_indep, . ~ .^2) |> print()
-
-  DS_drop1 <- drop1.loglm(DS_all_two_way) |> print()
-  DS_anova <- LRanova(DS_all_two_way) |> print()
-
-  ## scope subset
-  drop1.loglm(DS_all_two_way, scope = c("cigarette:alcohol", "cigarette:marijuana"))
-  assoc_strength(DS_all_two_way)
-  assoc_strength(DS_all_two_way, method = "Cohen")
-
-  ## nesting check: a deliberately bad (non-nested) baseline should error
-  ## (includes a 3-way term that DS_all_two_way, capped at 2-way, doesn't have)
-  bad_baseline <- loglm(Freq ~ cigarette * alcohol * marijuana, data = DaytonSurvey)
-  tryCatch(LRanova(DS_all_two_way, baseline = bad_baseline),
-           error = function(e) cat("Expected error:", conditionMessage(e), "\n"))
 }

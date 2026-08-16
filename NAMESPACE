@@ -19,6 +19,7 @@ S3method(color_table,ftable)
 S3method(color_table,matrix)
 S3method(color_table,structable)
 S3method(color_table,table)
+S3method(drop1,loglm)
 S3method(logLik,loglm)
 S3method(modFit,glm)
 S3method(modFit,loglm)
@@ -48,6 +49,7 @@ export(Crossings)
 export(GKgamma)
 export(HLtest)
 export(Kway)
+export(LRanova)
 export(LRstats)
 export(Summarise)
 export(as_array)
@@ -56,6 +58,7 @@ export(as_freqform)
 export(as_matrix)
 export(as_table)
 export(assoc_graph)
+export(assoc_strength)
 export(blogits)
 export(breslow_day_test)
 export(center3d)
@@ -66,6 +69,8 @@ export(conditional)
 export(cutfac)
 export(datasets)
 export(dlogseries)
+export(drop1.loglm)
+
 export(expand.dft)
 export(expand.table)
 export(get_model)
@@ -95,76 +100,96 @@ export(update.xtabs)
 export(woolf_test)
 export(zero.test)
 importFrom(MASS,loglm)
-importFrom(ca,cacoord)
-importFrom(ca,multilines)
-importFrom(dplyr,all_of)
-importFrom(dplyr,as_tibble)
-importFrom(dplyr,everything)
-importFrom(dplyr,is.tbl)
-importFrom(dplyr,rename)
-importFrom(dplyr,summarise)
+importFrom(ca,
+  cacoord,
+  multilines
+)
+importFrom(dplyr,
+  all_of,
+  as_tibble,
+  everything,
+  is.tbl,
+  rename,
+  summarise
+)
 importFrom(forcats,fct_collapse)
 importFrom(gnm,meanResiduals)
-importFrom(grDevices,col2rgb)
-importFrom(grDevices,hsv)
-importFrom(grDevices,rgb)
-importFrom(graphics,abline)
-importFrom(graphics,plot)
-importFrom(graphics,points)
-importFrom(graphics,text)
-importFrom(grid,gpar)
-importFrom(grid,grid.layout)
-importFrom(grid,grid.newpage)
-importFrom(grid,grid.points)
-importFrom(grid,popViewport)
-importFrom(grid,pushViewport)
-importFrom(grid,seekViewport)
-importFrom(grid,unit)
-importFrom(grid,upViewport)
-importFrom(grid,viewport)
+importFrom(grDevices,
+  col2rgb,
+  hsv,
+  rgb
+)
+importFrom(graphics,
+  abline,
+  plot,
+  points,
+  text
+)
+importFrom(grid,
+  gpar,
+  grid.layout,
+  grid.newpage,
+  grid.points,
+  popViewport,
+  pushViewport,
+  seekViewport,
+  unit,
+  upViewport,
+  viewport
+)
 importFrom(htmlwidgets,saveWidget)
-importFrom(knitr,include_graphics)
-importFrom(knitr,is_html_output)
+importFrom(knitr,
+  include_graphics,
+  is_html_output
+)
 importFrom(methods,is)
-importFrom(rlang,.data)
-importFrom(rlang,set_names)
-importFrom(stats,as.formula)
-importFrom(stats,chisq.test)
-importFrom(stats,deviance)
-importFrom(stats,family)
-importFrom(stats,fitted)
-importFrom(stats,formula)
-importFrom(stats,glm)
-importFrom(stats,logLik)
-importFrom(stats,loglin)
-importFrom(stats,mantelhaen.test)
-importFrom(stats,model.frame)
-importFrom(stats,na.pass)
-importFrom(stats,nobs)
-importFrom(stats,pchisq)
-importFrom(stats,poisson)
-importFrom(stats,qnorm)
-importFrom(stats,quantile)
-importFrom(stats,reformulate)
-importFrom(stats,residuals)
-importFrom(stats,rstandard)
-importFrom(stats,runif)
-importFrom(stats,setNames)
-importFrom(stats,terms)
-importFrom(stats,update)
-importFrom(stats,update.formula)
-importFrom(stats,weighted.mean)
-importFrom(stats,xtabs)
-importFrom(utils,data)
-importFrom(utils,menu)
-importFrom(utils,type.convert)
-importFrom(vcd,assoc)
-importFrom(vcd,assocstats)
-importFrom(vcd,is.structable)
-importFrom(vcd,labeling_border)
-importFrom(vcd,labeling_values)
-importFrom(vcd,mosaic)
-importFrom(vcd,rootogram)
-importFrom(vcd,shading_hcl)
-importFrom(vcd,sieve)
+importFrom(rlang,
+  .data,
+  set_names
+)
+importFrom(stats,
+  as.formula,
+  chisq.test,
+  deviance,
+  family,
+  fitted,
+  formula,
+  glm,
+  logLik,
+  loglin,
+  mantelhaen.test,
+  model.frame,
+  na.pass,
+  nobs,
+  pchisq,
+  poisson,
+  qnorm,
+  quantile,
+  reformulate,
+  residuals,
+  rstandard,
+  runif,
+  setNames,
+  terms,
+  update,
+  update.formula,
+  weighted.mean,
+  xtabs
+)
+importFrom(utils,
+  data,
+  menu,
+  type.convert
+)
+importFrom(vcd,
+  assoc,
+  assocstats,
+  is.structable,
+  labeling_border,
+  labeling_values,
+  mosaic,
+  rootogram,
+  shading_hcl,
+  sieve
+)
 importFrom(webshot2,webshot)
