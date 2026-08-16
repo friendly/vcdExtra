@@ -75,6 +75,7 @@ reference:
   - title: Statistical tests
     desc: Statistical tests for categorical data
     contents:
+      - assoc_strength
       - breslow_day_test
       - CMHtest
       - GKgamma
@@ -83,6 +84,8 @@ reference:
       - HLtest
       - HosmerLemeshow
       - logLik.loglm
+      - drop1.loglm
+      - LRanova
       - LRstats
       - modFit
       - modFit.glm
