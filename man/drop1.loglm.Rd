@@ -118,6 +118,18 @@ they're very much still part of the fitted model. This is exactly what
 only that interaction, leaving \code{A} and \code{B}'s main effects in place
 (still implied by \code{A:C}/\code{A:D} and \code{B:C}/\code{B:D} respectively), so the
 reduced model stays hierarchical.
+\subsection{Comparison with \code{drop1.glm()}}{
+
+A hierarchical \code{loglm()} model has an equivalent fit via
+\code{glm(family = poisson)}, and \code{stats::drop1.glm()}'s default \code{scope}
+already restricts to the same generating-class terms as \code{object$margin},
+so \code{Df} and the LR statistic agree exactly between the two. \code{drop1.loglm()}
+works directly on table/array or \code{Freq ~ ...} data, adds the Pearson X^2
+column, and returns the fitted drop-one models for reuse; its \code{scope}
+validation also guards against testing a non-generating-class term, which
+\code{drop1.glm()} will silently allow with a misleading result. See
+\code{dev/anova-like/drop1-compare.R} for a worked comparison.
+}
 }
 \examples{
 library(MASS)
