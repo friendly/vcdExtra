@@ -27,7 +27,7 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 -->
 <!-- Version 0.8-6 -->
 
-Version 0.9.7; documentation built for `pkgdown` 2026-07-31
+Version 0.9.8; documentation built for `pkgdown` 2026-08-17
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -66,11 +66,11 @@ to be a love letter 💌 to CDA.
 
 ## 📂 Installation
 
-Get the released version (0.9.6) from CRAN:
+Get the released version (0.9.7) from CRAN:
 
      install.packages("vcdExtra")
 
-The current development version (0.9.7) can be installed from
+The current development version (0.9.8) can be installed from
 [R-universe](https://friendly.r-universe.dev/vcdExtra) or directly from
 the [GitHub repo](https://github.com/friendly/vcdExtra) via:
 
