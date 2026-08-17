@@ -2,6 +2,15 @@
 
 ## Version 0.9.8
 
+- Fixed bug in `CMHtest3()` (the internal `overall = TRUE` helper) which
+  suppressed `Df` and `Prob` (p-value) for the overall population
+  results whenever `types` was not the full default set of four
+  ([\#2](https://github.com/friendly/vcdExtra/issues/2), reported by
+  [@bill-raynor](https://github.com/bill-raynor) and
+  [@imazubi](https://github.com/imazubi); fix by
+  [@danielinteractive](https://github.com/danielinteractive) in
+  [\#26](https://github.com/friendly/vcdExtra/issues/26)).
+
 - Added
   [`drop1.loglm()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md),
   [`LRanova()`](https://friendly.github.io/vcdExtra/reference/drop1.loglm.md),
