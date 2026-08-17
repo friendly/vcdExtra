@@ -159,6 +159,34 @@ What’s in the box?
   `gnm::Diag()`, `gnm::Topo(),` etc. in the
   [gnm](https://CRAN.R-project.org/package=gnm) package.
 
+### Statistical tests
+
+The package also includes a variety of improvements / enhancements of
+common statistical tests for categorical data analysis.
+
+- `vcd::woolf_test()` is extended to provide a decomposition of the
+  overall test for homogeneity of odds ratios in 2 x 2 tables when the
+  strata themselves represent an R x C table of two other factors
+
+A few others worth knowing about:
+
+- `breslow_day_test()` is a complementary test for homogeneity of odds
+  ratios across strata in 2 x 2 x K tables, with the same `decompose`
+  option as `woolf_test()` for R x C strata.
+
+- `HLtest()` provides the Hosmer-Lemeshow goodness-of-fit test for a
+  binary `glm()` model, useful for logistic regression models not
+  otherwise well summarized by deviance alone.
+
+- `zero.test()` is a score test for zero-inflation in Poisson count
+  data, testing whether the observed number of zero counts exceeds what
+  a Poisson model would predict.
+
+- `drop1.loglm()`, and its wrappers `LRanova()` and `assoc_strength()`,
+  give term-level deletion tests for the generating class of a
+  `MASS::loglm()` model, with partial R^2 and partial Cramer’s V /
+  Cohen’s w effect-size measures for each term.
+
 ### 🗃️ Datasets
 
 Beyond the wide range of \*\*datasets\* in the `vcd` package, this
