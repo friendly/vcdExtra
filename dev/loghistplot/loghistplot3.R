@@ -2,7 +2,7 @@
 #
 # GOAL: `logist_plot()`, a general function for plotting a `glm(y ~ x, family = binomial)`
 #       fit for a single quantitative predictor, with a representation of the marginal
-#       distribution of cases for which y==0 vs. y==1 (histogram or jittered points).
+#       distribution of cases for which y==0 vs. y==1 (histogram, density, or jittered points).
 #
 # This version starts from dev/loghistplot/loghistplot2.R and replaces the histogram-mode
 # cowplot composite with rectangle layers drawn in the main plot's probability coordinates.
@@ -56,9 +56,10 @@
 # Kept, per discussion: the *idea* behind the old loghistplot()/logpointplot() single-purpose
 # functions is not dropped -- they're reimplemented, and renamed, as thin convenience wrappers
 # `logist_hist()` / `logist_point()` that just call `logist_plot(..., marginal = "hist"/
-# "points")`, so they inherit all three calling conventions (vector/data.frame/formula) for
-# free instead of duplicating the implementation. The old names themselves are gone; nothing
-# in this file is still literally called loghistplot()/logpointplot().
+# "points")`, plus `logist_density()` for the density mode, so they inherit all three calling
+# conventions (vector/data.frame/formula) for free instead of duplicating the implementation.
+# The old names themselves are gone; nothing in this file is still literally called
+# loghistplot()/logpointplot().
 
 # ---- review notes ------------------------------------------------------------------------
 #
@@ -112,7 +113,7 @@
 #   validates AND canonicalizes in one step (see its own comment for the level-ordering
 #   convention per type). .logist_plot_impl() converts data$y to numeric 0/1 immediately after
 #   building `data`, before anything reaches ggplot(). Re-run dev/loghist-test.R to confirm --
-#   all four y types now render cleanly in both marginal modes. This also fixes the row-order
+#   all four y types now render cleanly in the histogram and point modes. This also fixes the row-order
 #   dependency in the next bullet below (level order no longer comes from unique()-encounter
 #   order), though the separate p_top/p_bottom naming-vs-rendered-direction question there is
 #   still open.]
@@ -162,12 +163,11 @@
 # - The methods accept ... but do not forward or check it, so misspelled arguments are silently
 #   ignored. Either document a purpose for ..., pass it onward, or check that it is empty.
 #
-#   [**RESOLVED** (Michael, 2026-08-08): option (b) -- ... is now forwarded from all three public
-#   methods into .logist_plot_impl(), which calls rlang::check_dots_empty() and errors on
-#   anything unconsumed. Not (c): a flat ... can't be routed unambiguously to one of several
-#   ggplot layers (the fitted curve versus the marginal geom) without colliding names, so
-#   future visual-control options (e.g. hist.color) should be added as explicit named params,
-#   the way fit.color/marg.color already are -- not as generic passthrough.]
+#   [**RESOLVED** (Michael, 2026-08-08; extended 2026-08-17): ... is forwarded from all three
+#   public methods into .logist_plot_impl(), which calls rlang::check_dots_empty() and errors
+#   on anything unconsumed. A flat ... is not routed to ggplot layers. Advanced layer control
+#   instead uses the explicitly scoped fit.args and marginal.args lists; fit.color/marginal.color
+#   remain convenience arguments, with the scoped lists taking precedence.]
 #
 # - The shared plot already has coord_cartesian(); the points branch adds a second coordinate system and
 #   reports that the first is being replaced on every call. Construct the coordinate once.
@@ -190,7 +190,7 @@
 #   no other help topic in this @family, the family tag currently adds no related-page links.
 #   [**FIXED** (Michael, 2026-08-08): added.]
 #
-# - Add tests for the three interfaces, both marginal modes, the omitted-marginal error,
+# - Add tests for the three interfaces, all marginal modes, the omitted-marginal error,
 #   response encodings/event direction, row reordering, NA/Inf/constant x, column selection,
 #   formula validation, labels/colors, optional dependencies, and successful plot building.
 
@@ -202,26 +202,26 @@
 #' quantitative predictor `x` and binary response `y`, and also with the smoothed
 #' logistic fit and its confidence band.
 #' What this plot method adds is a representation of
-#' the marginal distribution of `x` within each `y` group -- mirrored histograms above and
-#' below the curve, or jittered points -- as suggested by Smart et al. (2004). These help you
+#' the marginal distribution of `x` within each `y` group -- mirrored histograms or filled
+#' density estimates above and below the curve, or jittered points -- as suggested by Smart et
+#' al. (2004). These help you
 #' see where the data supporting the fit exist; e.g., where the data are "thin", so the confidence band is wide.
 #'
 #' `logist_plot()` is generic, with methods for a pair of vectors, a data frame, or a
-#' model formula. `logist_hist()` and `logist_point()` are convenience wrappers with
-#' `marginal=` fixed to `"hist"`/`"points"`, but otherwise accept the same `x`/`...` as
-#' `logist_plot()` -- i.e., they also work with a data frame or a formula.
+#' model formula. `logist_hist()`, `logist_point()`, and `logist_density()` are convenience
+#' wrappers with `marginal=` fixed to `"hist"`/`"points"`/`"density"`, but otherwise accept
+#' the same `x`/`...` as `logist_plot()` -- i.e., they also work with a data frame or a formula.
 #'
-#' Both marginal modes return a native ggplot object. Standard additions such as
+#' All marginal modes return a native ggplot object. Standard additions such as
 #' [ggplot2::labs()] and [ggplot2::theme()] can therefore be applied after construction.
 #' Adding another `scale_y_*()` replaces the internally configured probability scale; in
 #' histogram mode this can remove or invalidate the secondary count-axis mapping.
 #'
 #' @param x a numeric predictor vector or a data frame; see `formula` below for the
 #'   model-formula interface
-#' @param ... arguments passed to methods, or on to `logist_plot()` from `logist_hist()`/
-#'   `logist_point()`. Currently reserved for future visual-control options (e.g. a
-#'   `hist.color`); passing any unrecognized argument is an error rather than being
-#'   silently ignored.
+#' @param ... arguments passed to methods, or on to `logist_plot()` from the convenience
+#'   wrappers. Arguments not consumed by the selected method are an error rather than being
+#'   silently ignored. Use `fit.args` and `marginal.args` for layer customization.
 #'
 #' @return A native `ggplot` object that can be extended with ordinary ggplot2 additions.
 #' @author Gavin Klorfine, Michael Friendly
@@ -242,16 +242,24 @@
 #' # three interfaces to the same underlying plot
 #' logist_plot(Donner$age, Donner$survived, marginal = "points")
 #' logist_plot(Donner[, c("age", "survived")], marginal = "hist")
-#' logist_plot(survived ~ age, data = Donner, marginal = "hist")
+#' logist_plot(survived ~ age, data = Donner, marginal = "density")
 #'
 #' # post-hoc labels and themes work in histogram mode
 #' logist_plot(survived ~ age, data = Donner, marginal = "hist") +
 #'   ggplot2::labs(title = "Survival of the Donner Party") +
 #'   ggplot2::theme(plot.title = ggplot2::element_text(face = "bold"))
 #'
+#' # layer-specific customization; scoped lists override graphical defaults
+#' logist_plot(
+#'   survived ~ age, data = Donner, marginal = "hist",
+#'   fit.args = list(linewidth = 2, fill = "lightblue"),
+#'   marginal.args = list(colour = "black", linewidth = 0.2, alpha = 0.8)
+#' )
+#'
 #' # convenience wrappers -- marginal= fixed, still get all calling conventions
 #' logist_point(survived ~ age, data = Donner)
 #' logist_hist(survived ~ age, data = Donner)
+#' logist_density(survived ~ age, data = Donner, adjust = 1.25)
 #'
 #' @importFrom rlang .data
 #' @export
@@ -260,22 +268,37 @@ logist_plot <- function(x, ...) {
 }
 
 #' @param y a binary (0/1, or 2-level factor/character/logical) response vector
-#' @param marginal character string, how to represent the marginal distribution of x within each y group: one of
-#'   "hist", a histogram (default) or "points",jittered points
+#' @param marginal character string, how to represent the marginal distribution of `x` within
+#'   each `y` group: `"hist"`, mirrored histograms (default); `"points"`, jittered points; or
+#'   `"density"`, mirrored filled density estimates
 #' @param bins number of histogram bins, for `marginal = "hist"`; default: 30
+#' @param adjust positive numeric bandwidth adjustment passed to [stats::density()] for
+#'   `marginal = "density"`; default: 1
 #' @param xlab,ylab axis labels; default to the deparsed `x`/`y` expressions
 #' @param fit.color color of the fitted logistic curve and its confidence band; default: "steelblue"
-#' @param marg.color color of the marginal representation of x within each y group (histogram
-#'   fill, or point color for `marginal = "points"`); default: "orange"
+#' @param marginal.color color of the marginal representation of `x` within each `y` group
+#'   (histogram/density fill, or point color for `marginal = "points"`); default: "orange"
+#' @param fit.args named list of graphical arguments for the fitted curve and confidence band.
+#'   Values override the defaults established by `fit.color`. The fit remains a binomial GLM,
+#'   so `data`, `mapping`, `stat`, `position`, `inherit.aes`, `method`, `formula`, and
+#'   `method.args` cannot be replaced.
+#' @param marginal.args named list of graphical arguments for the active marginal layer.
+#'   Values override the defaults established by `marginal.color`. Valid arguments depend on
+#'   `marginal`: point aesthetics and `position` for `"points"`, rectangle aesthetics for
+#'   `"hist"`, or ribbon aesthetics for `"density"`. Histogram computation remains controlled
+#'   by `bins`; density bandwidth remains controlled by `adjust`.
 #' @rdname logist_plot
 #' @export
-logist_plot.default <- function(x, y, marginal = c("hist", "points"),
-                                 bins = 30, xlab = NULL, ylab = NULL,
-                                 fit.color = "steelblue", marg.color = "orange", ...) {
+logist_plot.default <- function(x, y, marginal = c("hist", "points", "density"),
+                                 bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
+                                 fit.color = "steelblue", marginal.color = "orange",
+                                 fit.args = list(), marginal.args = list(), ...) {
   xlab <- xlab %||% deparse(substitute(x))
   ylab <- ylab %||% deparse(substitute(y))
-  .logist_plot_impl(x, y, marginal = marginal, bins = bins, xlab = xlab, ylab = ylab,
-                     fit.color = fit.color, marg.color = marg.color, ...)
+  .logist_plot_impl(x, y, marginal = marginal, bins = bins, adjust = adjust,
+                     xlab = xlab, ylab = ylab,
+                     fit.color = fit.color, marginal.color = marginal.color,
+                     fit.args = fit.args, marginal.args = marginal.args, ...)
 }
 
 #' @param xvar,yvar which columns of `x` to use as predictor/response -- column name or
@@ -284,17 +307,19 @@ logist_plot.default <- function(x, y, marginal = c("hist", "points"),
 #' @rdname logist_plot
 #' @export
 logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
-                                    marginal = c("hist", "points"),
-                                    bins = 30, xlab = NULL, ylab = NULL,
-                                    fit.color = "steelblue", marg.color = "orange", ...) {
+                                    marginal = c("hist", "points", "density"),
+                                    bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
+                                    fit.color = "steelblue", marginal.color = "orange",
+                                    fit.args = list(), marginal.args = list(), ...) {
   if (ncol(x) < 2L) {
     stop("`x` must have at least 2 columns.", call. = FALSE)
   }
   xres <- .resolve_col(x, xvar, "xvar")
   yres <- .resolve_col(x, yvar, "yvar")
-  .logist_plot_impl(xres$value, yres$value, marginal = marginal, bins = bins,
+  .logist_plot_impl(xres$value, yres$value, marginal = marginal, bins = bins, adjust = adjust,
                      xlab = xlab %||% xres$name, ylab = ylab %||% yres$name,
-                     fit.color = fit.color, marg.color = marg.color, ...)
+                     fit.color = fit.color, marginal.color = marginal.color,
+                     fit.args = fit.args, marginal.args = marginal.args, ...)
 }
 
 #' @param formula a model formula, `y ~ x` -- exactly one response and one predictor;
@@ -304,17 +329,19 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
 #' @param data a data frame -- `formula` method only
 #' @rdname logist_plot
 #' @export
-logist_plot.formula <- function(formula, data, marginal = c("hist", "points"),
-                                 bins = 30, xlab = NULL, ylab = NULL,
-                                 fit.color = "steelblue", marg.color = "orange", ...) {
+logist_plot.formula <- function(formula, data, marginal = c("hist", "points", "density"),
+                                 bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
+                                 fit.color = "steelblue", marginal.color = "orange",
+                                 fit.args = list(), marginal.args = list(), ...) {
   mf <- stats::model.frame(formula, data = data, na.action = stats::na.pass)
   if (ncol(mf) != 2L) {
     stop("`formula` must have exactly one response and one predictor (y ~ x); found ",
          ncol(mf) - 1L, " predictor(s).", call. = FALSE)
   }
-  .logist_plot_impl(mf[[2]], mf[[1]], marginal = marginal, bins = bins,
+  .logist_plot_impl(mf[[2]], mf[[1]], marginal = marginal, bins = bins, adjust = adjust,
                      xlab = xlab %||% names(mf)[2], ylab = ylab %||% names(mf)[1],
-                     fit.color = fit.color, marg.color = marg.color, ...)
+                     fit.color = fit.color, marginal.color = marginal.color,
+                     fit.args = fit.args, marginal.args = marginal.args, ...)
 }
 
 # ---- convenience wrappers (fixed marginal=) ------------------------------------------------
@@ -331,6 +358,12 @@ logist_point <- function(...) {
   logist_plot(..., marginal = "points")
 }
 
+#' @rdname logist_plot
+#' @export
+logist_density <- function(...) {
+  logist_plot(..., marginal = "density")
+}
+
 # if (FALSE) {
 #   data(Donner, package = "vcdExtra")
 #
@@ -345,6 +378,7 @@ logist_point <- function(...) {
 #   # convenience wrappers -- marginal= fixed, still get all 3 calling conventions
 #   logist_hist(survived ~ age, data = Donner)
 #   logist_point(survived ~ age, data = Donner)
+#   logist_density(survived ~ age, data = Donner, adjust = 1.25)
 #   logist_point(Donner[, c("age", "survived")])
 # }
 
@@ -386,6 +420,65 @@ logist_point <- function(...) {
       !is.finite(bins) || bins < 1 || bins != floor(bins)) {
     stop("`bins` must be one positive whole number.", call. = FALSE)
   }
+}
+
+.check_adjust <- function(adjust) {
+  if (length(adjust) != 1L || !is.numeric(adjust) || is.na(adjust) ||
+      !is.finite(adjust) || adjust <= 0) {
+    stop("`adjust` must be one finite positive number.", call. = FALSE)
+  }
+}
+
+# Validate an explicitly scoped ggplot layer-argument list. Structural arguments are kept
+# under logist_plot()'s control; the per-layer allowlist makes misspellings fail eagerly
+# instead of surfacing later as a ggplot warning during rendering.
+.check_layer_args <- function(args, argname, allowed, protected, layer) {
+  if (!is.list(args)) {
+    stop("`", argname, "` must be a named list.", call. = FALSE)
+  }
+  if (length(args) == 0L) {
+    return(args)
+  }
+
+  nms <- names(args)
+  if (is.null(nms) || anyNA(nms) || any(nms == "")) {
+    stop("Every element of `", argname, "` must be named.", call. = FALSE)
+  }
+  dup <- unique(nms[duplicated(nms)])
+  if (length(dup)) {
+    stop("`", argname, "` contains duplicate argument name(s): ",
+         paste(dup, collapse = ", "), ".", call. = FALSE)
+  }
+
+  # ggplot2 accepts both spellings. Canonicalizing before the merge gives them one
+  # deterministic precedence slot instead of potentially passing both to a layer.
+  if ("color" %in% nms && "colour" %in% nms) {
+    if (!identical(args[["color"]], args[["colour"]])) {
+      stop("`", argname, "` supplies conflicting `color` and `colour` values.",
+           call. = FALSE)
+    }
+    args[["color"]] <- NULL
+  } else if ("color" %in% nms) {
+    names(args)[names(args) == "color"] <- "colour"
+  }
+
+  blocked <- intersect(names(args), protected)
+  if (length(blocked)) {
+    stop("`", argname, "` cannot replace protected ", layer, " argument(s): ",
+         paste(blocked, collapse = ", "), ".", call. = FALSE)
+  }
+  unknown <- setdiff(names(args), allowed)
+  if (length(unknown)) {
+    stop("Unsupported argument(s) in `", argname, "` for ", layer, ": ",
+         paste(unknown, collapse = ", "), ".", call. = FALSE)
+  }
+  args
+}
+
+# Merge named layer arguments with user values taking precedence over defaults.
+.merge_layer_args <- function(defaults, user) {
+  defaults[names(defaults) %in% names(user)] <- NULL
+  c(defaults, user)
 }
 
 # Validate and canonicalize a binary response to numeric 0/1, so ggplot2 never sees a
@@ -433,12 +526,57 @@ logist_point <- function(...) {
 }
 
 # The one real implementation, shared by all logist_plot() methods and by
-# logist_hist()/logist_point().
-.logist_plot_impl <- function(x, y, marginal = c("hist", "points"),
-                               bins = 30, xlab = NULL, ylab = NULL,
-                               fit.color = "steelblue", marg.color = "orange", ...) {
+# logist_hist()/logist_point()/logist_density().
+.logist_plot_impl <- function(x, y, marginal = c("hist", "points", "density"),
+                               bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
+                               fit.color = "steelblue", marginal.color = "orange",
+                               fit.args = list(), marginal.args = list(), ...) {
   rlang::check_dots_empty()
   marginal <- match.arg(marginal)
+
+  fit.args <- .check_layer_args(
+    fit.args,
+    argname = "fit.args",
+    allowed = c("se", "n", "span", "fullrange", "level", "na.rm", "orientation",
+                "show.legend", "colour", "fill", "linewidth", "linetype", "alpha"),
+    protected = c("data", "mapping", "stat", "position", "inherit.aes",
+                  "method", "formula", "method.args"),
+    layer = "fitted-curve layer"
+  )
+  marginal.args <- if (marginal == "points") {
+    .check_layer_args(
+      marginal.args,
+      argname = "marginal.args",
+      allowed = c("position", "na.rm", "show.legend", "colour", "fill", "alpha",
+                  "shape", "size", "stroke"),
+      protected = c("data", "mapping", "stat", "inherit.aes"),
+      layer = '`marginal = "points"` layer'
+    )
+  } else if (marginal == "hist") {
+    .check_layer_args(
+      marginal.args,
+      argname = "marginal.args",
+      allowed = c("na.rm", "show.legend", "colour", "fill", "alpha", "linetype",
+                  "linewidth", "lineend", "linejoin"),
+      protected = c("data", "mapping", "stat", "position", "inherit.aes",
+                    "binwidth", "boundary", "closed"),
+      layer = '`marginal = "hist"` rectangle layer'
+    )
+  } else {
+    if (is.list(marginal.args) && "adjust" %in% names(marginal.args)) {
+      stop("Supply `adjust` as a top-level argument, not inside `marginal.args`.",
+           call. = FALSE)
+    }
+    .check_layer_args(
+      marginal.args,
+      argname = "marginal.args",
+      allowed = c("na.rm", "show.legend", "colour", "fill", "alpha", "linetype",
+                  "linewidth", "lineend", "linejoin", "linemitre", "outline.type"),
+      protected = c("data", "mapping", "stat", "position", "orientation", "inherit.aes",
+                    "adjust"),
+      layer = '`marginal = "density"` ribbon layers'
+    )
+  }
 
   if (!is.null(dim(x))) {
     stop("`x` must be a plain vector, not a matrix/array/data.frame (e.g. a multi-column ",
@@ -489,20 +627,36 @@ logist_point <- function(...) {
                    plot.background = ggplot2::element_blank()) +
     ggplot2::labs(y = paste0(ylab, "\n"), x = paste0("\n", xlab))
 
-  fit_layer <- ggplot2::geom_smooth(
-    method = "glm", formula = y ~ x,
-    method.args = list(family = "binomial"),
-    se = TRUE, colour = fit.color, fill = fit.color,
-    linewidth = 1.5, alpha = 0.3
+  fit_layer <- do.call(
+    ggplot2::geom_smooth,
+    .merge_layer_args(
+      list(
+        method = "glm", formula = y ~ x,
+        method.args = list(family = "binomial"),
+        se = TRUE, colour = fit.color, fill = fit.color,
+        linewidth = 1.5, alpha = 0.3
+      ),
+      fit.args
+    )
   )
 
   if (marginal == "points") {
+    point_layer <- do.call(
+      ggplot2::geom_point,
+      .merge_layer_args(
+        list(
+          colour = marginal.color,
+          alpha = 0.5,
+          position = ggplot2::position_jitter(w = 0, h = 0.02)
+        ),
+        marginal.args
+      )
+    )
     p_base +
       fit_layer +
-      ggplot2::geom_point(colour = marg.color, alpha = 0.5,
-                           position = ggplot2::position_jitter(w = 0, h = 0.02)) +
+      point_layer +
       ggplot2::coord_cartesian(xlim = c(min_x, max_x), ylim = c(0, 1))
-  } else {
+  } else if (marginal == "hist") {
     .check_bins(bins)
 
     bin_width <- (max_x - min_x) / bins
@@ -554,17 +708,25 @@ logist_point <- function(...) {
       )
     )
 
-    p_base +
-      ggplot2::geom_rect(
-        data = hist_data,
-        mapping = ggplot2::aes(
-          xmin = .data$xmin, xmax = .data$xmax,
-          ymin = .data$ymin, ymax = .data$ymax
+    rect_layer <- do.call(
+      ggplot2::geom_rect,
+      .merge_layer_args(
+        list(
+          data = hist_data,
+          mapping = ggplot2::aes(
+            xmin = .data$xmin, xmax = .data$xmax,
+            ymin = .data$ymin, ymax = .data$ymax
+          ),
+          inherit.aes = FALSE,
+          fill = marginal.color,
+          alpha = 0.67
         ),
-        inherit.aes = FALSE,
-        fill = marg.color,
-        alpha = 0.67
-      ) +
+        marginal.args
+      )
+    )
+
+    p_base +
+      rect_layer +
       # Draw the fitted curve last so its line and confidence band remain visible over the bars.
       fit_layer +
       ggplot2::scale_y_continuous(
@@ -572,6 +734,100 @@ logist_point <- function(...) {
         breaks = seq(0, 1, by = 0.2),
         expand = ggplot2::expansion(mult = 0),
         sec.axis = ggplot2::dup_axis(breaks = count_positions, labels = count_labels, name = "Count")
+      ) +
+      ggplot2::coord_cartesian(xlim = c(min_x, max_x))
+  } else {
+    .check_adjust(adjust)
+
+    densities <- lapply(uy, function(lev) {
+      group_x <- data$x[data$y == lev]
+      original_level <- bin$levels[lev + 1L]
+      if (length(group_x) < 2L) {
+        stop("Cannot estimate the marginal density for response level ",
+             dQuote(as.character(original_level)), ": at least 2 observations are required; ",
+             "found ", length(group_x), ".", call. = FALSE)
+      }
+      tryCatch(
+        stats::density(group_x, from = min_x, to = max_x, adjust = adjust),
+        error = function(e) {
+          stop("Cannot estimate the marginal density for response level ",
+               dQuote(as.character(original_level)), ": ", conditionMessage(e),
+               call. = FALSE)
+        }
+      )
+    })
+
+    density_is_finite <- vapply(
+      densities,
+      function(z) all(is.finite(z$x)) && all(is.finite(z$y)),
+      logical(1)
+    )
+    if (!all(density_is_finite)) {
+      bad <- which(!density_is_finite)[1L]
+      stop("Density estimation produced non-finite values for response level ",
+           dQuote(as.character(bin$levels[bad])), ".", call. = FALSE)
+    }
+    if (any(vapply(densities, function(z) any(z$y < 0), logical(1)))) {
+      stop("Density estimation produced negative values; cannot map the marginal density ",
+           "into probability coordinates.", call. = FALSE)
+    }
+
+    max_density <- max(vapply(densities, function(z) max(z$y), numeric(1)))
+    # Continuous filled ribbons are visually heavier than histogram bars, so cap the tallest
+    # density at 15% of the panel on each side (histograms retain their 25% cap).
+    density_height <- 0.15
+    density_headroom <- max_density / density_height
+    if (!is.finite(density_headroom) || density_headroom <= 0) {
+      stop("Density estimation produced a non-finite or non-positive maximum density.",
+           call. = FALSE)
+    }
+
+    density_y0 <- data.frame(
+      x = densities[[1L]]$x,
+      ymin = 0,
+      ymax = densities[[1L]]$y / density_headroom
+    )
+    density_y1 <- data.frame(
+      x = densities[[2L]]$x,
+      ymin = 1 - densities[[2L]]$y / density_headroom,
+      ymax = 1
+    )
+
+    density_mapping <- ggplot2::aes(
+      x = .data$x,
+      ymin = .data$ymin,
+      ymax = .data$ymax
+    )
+    density_layer <- function(layer_data, outline_type) {
+      do.call(
+        ggplot2::geom_ribbon,
+        .merge_layer_args(
+          list(
+            data = layer_data,
+            mapping = density_mapping,
+            inherit.aes = FALSE,
+            fill = marginal.color,
+            colour = NA,
+            alpha = 0.67,
+            outline.type = outline_type
+          ),
+          marginal.args
+        )
+      )
+    }
+
+    density_y0_layer <- density_layer(density_y0, "upper")
+    density_y1_layer <- density_layer(density_y1, "lower")
+
+    p_base +
+      density_y0_layer +
+      density_y1_layer +
+      # As in histogram mode, keep the fit visible above the filled marginal layers.
+      fit_layer +
+      ggplot2::scale_y_continuous(
+        limits = c(0, 1),
+        breaks = seq(0, 1, by = 0.2),
+        expand = ggplot2::expansion(mult = 0)
       ) +
       ggplot2::coord_cartesian(xlim = c(min_x, max_x))
   }
