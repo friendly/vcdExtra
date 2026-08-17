@@ -965,6 +965,7 @@ logist_density <- function(...) {
 
     if (grouped) {
       density_lane_height <- 0.05
+      density_lane_gap <- density_lane_height * 0.2
       # The outermost density edge reaches the nominal y limit exactly. Reserve a small
       # display-only margin so geom_ribbon()'s centered outline stroke is not clipped by the
       # panel border; this does not change the density estimates or their 0.05 lane height.
@@ -1014,8 +1015,10 @@ logist_density <- function(...) {
         list(estimates = pair, headroom = pair_max / density_lane_height)
       })
       density_limits <- c(
-        -length(group.levels) * density_lane_height,
-        1 + length(group.levels) * density_lane_height
+        -length(group.levels) * density_lane_height -
+          (length(group.levels) - 1L) * density_lane_gap,
+        1 + length(group.levels) * density_lane_height +
+          (length(group.levels) - 1L) * density_lane_gap
       )
 
       make_group_density_data <- function(group_index, response) {
@@ -1025,12 +1028,13 @@ logist_density <- function(...) {
         # highest peak from being removed by the exact outer y-scale limit.
         scaled_density <- pmin(estimate$y / pair$headroom, density_lane_height)
         lane_index <- group_index - 1L
+        lane_offset <- lane_index * (density_lane_height + density_lane_gap)
         if (response == 0) {
-          baseline <- -lane_index * density_lane_height
+          baseline <- -lane_offset
           ymin <- pmax(baseline - scaled_density, density_limits[1L])
           ymax <- baseline
         } else {
-          baseline <- 1 + lane_index * density_lane_height
+          baseline <- 1 + lane_offset
           ymin <- baseline
           ymax <- pmin(baseline + scaled_density, density_limits[2L])
         }
