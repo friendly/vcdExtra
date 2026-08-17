@@ -2,7 +2,8 @@
 #
 # GOAL: `logist_plot()`, a general function for plotting a `glm(y ~ x, family = binomial)`
 #       fit for a single quantitative predictor, with a representation of the marginal
-#       distribution of cases for which y==0 vs. y==1 (histogram, density, or jittered points).
+#       distribution of cases for which y==0 vs. y==1 (histogram, density, or jittered points),
+#       optionally conditioning the fit and supported marginals on a grouping variable.
 #
 # This version starts from dev/loghistplot/loghistplot2.R and replaces the histogram-mode
 # cowplot composite with rectangle layers drawn in the main plot's probability coordinates.
@@ -211,6 +212,12 @@
 #' model formula. `logist_hist()`, `logist_point()`, and `logist_density()` are convenience
 #' wrappers with `marginal=` fixed to `"hist"`/`"points"`/`"density"`, but otherwise accept
 #' the same `x`/`...` as `logist_plot()` -- i.e., they also work with a data frame or a formula.
+#' An optional `group` produces separate fits and colour identities in point and density
+#' modes. Grouped histograms are deliberately unsupported because stacked or overlapping
+#' mirrored bars obscure both the distributions and the fitted curves.
+#' Grouped density lanes begin at 0 and 1 and stack outward in fixed, narrow bands. Each
+#' group's two response-specific densities are normalized together within that band, so the
+#' shapes show conditional distributions but do not encode group sample sizes.
 #'
 #' All marginal modes return a native ggplot object. Standard additions such as
 #' [ggplot2::labs()] and [ggplot2::theme()] can therefore be applied after construction.
@@ -261,6 +268,14 @@
 #' logist_hist(survived ~ age, data = Donner)
 #' logist_density(survived ~ age, data = Donner, adjust = 1.25)
 #'
+#' # grouped fits and marginals; grouped density lanes extend outward from 0 and 1
+#' logist_point(survived ~ age, data = Donner, group = "sex")
+#' logist_density(
+#'   survived ~ age, data = Donner, group = "sex",
+#'   group.colors = c(Female = "#D55E00", Male = "#0072B2"),
+#'   marginal.args = list(alpha = 0.35, linewidth = 0.6)
+#' )
+#'
 #' @importFrom rlang .data
 #' @export
 logist_plot <- function(x, ...) {
@@ -275,30 +290,46 @@ logist_plot <- function(x, ...) {
 #' @param adjust positive numeric bandwidth adjustment passed to [stats::density()] for
 #'   `marginal = "density"`; default: 1
 #' @param xlab,ylab axis labels; default to the deparsed `x`/`y` expressions
-#' @param fit.color color of the fitted logistic curve and its confidence band; default: "steelblue"
+#' @param fit.color color of the fitted logistic curve and its confidence band; default:
+#'   "steelblue". This scalar is inactive when `group` is supplied; use `group.colors`
+#'   instead.
 #' @param marginal.color color of the marginal representation of `x` within each `y` group
 #'   (histogram/density fill, or point color for `marginal = "points"`); default: "orange"
+#'   This scalar is inactive when `group` is supplied; use `group.colors` instead.
+#' @param group optional grouping input. For the default method, a vector the same length as
+#'   `x` and `y`; for data-frame and formula methods, a single column name or position.
+#'   Grouping is supported for `marginal = "points"` and `"density"`, but not `"hist"`.
+#' @param group.colors optional character vector of colours for grouped plots. An unnamed
+#'   vector is applied in group-level order; a named vector must contain every observed group
+#'   label. The same palette is used for fits, marginals, and the legend. The default `NULL`
+#'   uses ggplot2's discrete scales.
 #' @param fit.args named list of graphical arguments for the fitted curve and confidence band.
 #'   Values override the defaults established by `fit.color`. The fit remains a binomial GLM,
 #'   so `data`, `mapping`, `stat`, `position`, `inherit.aes`, `method`, `formula`, and
-#'   `method.args` cannot be replaced.
+#'   `method.args` cannot be replaced. In grouped mode, `colour` and `fill` must instead be
+#'   controlled through `group.colors`.
 #' @param marginal.args named list of graphical arguments for the active marginal layer.
 #'   Values override the defaults established by `marginal.color`. Valid arguments depend on
 #'   `marginal`: point aesthetics and `position` for `"points"`, rectangle aesthetics for
 #'   `"hist"`, or ribbon aesthetics for `"density"`. Histogram computation remains controlled
-#'   by `bins`; density bandwidth remains controlled by `adjust`.
+#'   by `bins`; density bandwidth remains controlled by `adjust`. In grouped mode, `colour`
+#'   and `fill` must instead be controlled through `group.colors`.
 #' @rdname logist_plot
 #' @export
 logist_plot.default <- function(x, y, marginal = c("hist", "points", "density"),
                                  bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
                                  fit.color = "steelblue", marginal.color = "orange",
-                                 fit.args = list(), marginal.args = list(), ...) {
+                                 fit.args = list(), marginal.args = list(),
+                                 group = NULL, group.colors = NULL, ...) {
   xlab <- xlab %||% deparse(substitute(x))
   ylab <- ylab %||% deparse(substitute(y))
+  group.label <- if (is.null(group)) NULL else paste(deparse(substitute(group)), collapse = "")
   .logist_plot_impl(x, y, marginal = marginal, bins = bins, adjust = adjust,
                      xlab = xlab, ylab = ylab,
                      fit.color = fit.color, marginal.color = marginal.color,
-                     fit.args = fit.args, marginal.args = marginal.args, ...)
+                     fit.args = fit.args, marginal.args = marginal.args,
+                     group = group, group.label = group.label,
+                     group.colors = group.colors, ...)
 }
 
 #' @param xvar,yvar which columns of `x` to use as predictor/response -- column name or
@@ -310,16 +341,21 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
                                     marginal = c("hist", "points", "density"),
                                     bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
                                     fit.color = "steelblue", marginal.color = "orange",
-                                    fit.args = list(), marginal.args = list(), ...) {
+                                    fit.args = list(), marginal.args = list(),
+                                    group = NULL, group.colors = NULL, ...) {
   if (ncol(x) < 2L) {
     stop("`x` must have at least 2 columns.", call. = FALSE)
   }
   xres <- .resolve_col(x, xvar, "xvar")
   yres <- .resolve_col(x, yvar, "yvar")
+  gres <- if (is.null(group)) NULL else .resolve_col(x, group, "group")
   .logist_plot_impl(xres$value, yres$value, marginal = marginal, bins = bins, adjust = adjust,
                      xlab = xlab %||% xres$name, ylab = ylab %||% yres$name,
                      fit.color = fit.color, marginal.color = marginal.color,
-                     fit.args = fit.args, marginal.args = marginal.args, ...)
+                     fit.args = fit.args, marginal.args = marginal.args,
+                     group = if (is.null(gres)) NULL else gres$value,
+                     group.label = if (is.null(gres)) NULL else gres$name,
+                     group.colors = group.colors, ...)
 }
 
 #' @param formula a model formula, `y ~ x` -- exactly one response and one predictor;
@@ -332,7 +368,9 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
 logist_plot.formula <- function(formula, data, marginal = c("hist", "points", "density"),
                                  bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
                                  fit.color = "steelblue", marginal.color = "orange",
-                                 fit.args = list(), marginal.args = list(), ...) {
+                                 fit.args = list(), marginal.args = list(),
+                                 group = NULL, group.colors = NULL, ...) {
+  gres <- if (is.null(group)) NULL else .resolve_col(data, group, "group")
   mf <- stats::model.frame(formula, data = data, na.action = stats::na.pass)
   if (ncol(mf) != 2L) {
     stop("`formula` must have exactly one response and one predictor (y ~ x); found ",
@@ -341,7 +379,10 @@ logist_plot.formula <- function(formula, data, marginal = c("hist", "points", "d
   .logist_plot_impl(mf[[2]], mf[[1]], marginal = marginal, bins = bins, adjust = adjust,
                      xlab = xlab %||% names(mf)[2], ylab = ylab %||% names(mf)[1],
                      fit.color = fit.color, marginal.color = marginal.color,
-                     fit.args = fit.args, marginal.args = marginal.args, ...)
+                     fit.args = fit.args, marginal.args = marginal.args,
+                     group = if (is.null(gres)) NULL else gres$value,
+                     group.label = if (is.null(gres)) NULL else gres$name,
+                     group.colors = group.colors, ...)
 }
 
 # ---- convenience wrappers (fixed marginal=) ------------------------------------------------
@@ -426,6 +467,97 @@ logist_density <- function(...) {
   if (length(adjust) != 1L || !is.numeric(adjust) || is.na(adjust) ||
       !is.finite(adjust) || adjust <= 0) {
     stop("`adjust` must be one finite positive number.", call. = FALSE)
+  }
+}
+
+# Convert a supported discrete grouping vector to a factor with deterministic levels.
+# Existing factor order is meaningful and therefore retained; other supported types are
+# sorted independently of row order so colours, legends, and density lanes remain stable.
+.as_group_factor <- function(group) {
+  if (!is.null(dim(group))) {
+    stop("`group` must be a plain vector, not a matrix/array/data.frame.", call. = FALSE)
+  }
+  if (is.list(group)) {
+    stop("`group` must be a plain atomic vector, not a list.", call. = FALSE)
+  }
+  if (!(is.factor(group) || is.character(group) || is.logical(group) || is.numeric(group))) {
+    stop("`group` must be numeric, logical, factor, or character; found class \"",
+         paste(class(group), collapse = "/"), "\".", call. = FALSE)
+  }
+
+  observed <- group[!is.na(group)]
+  levs <- if (is.factor(group)) {
+    levels(group)[levels(group) %in% as.character(observed)]
+  } else if (is.logical(group)) {
+    c(FALSE, TRUE)[c(FALSE, TRUE) %in% observed]
+  } else if (is.numeric(group)) {
+    sort(unique(observed))
+  } else {
+    sort(unique(observed), method = "radix")
+  }
+  factor(as.character(group), levels = as.character(levs))
+}
+
+# Validate and order an optional manual palette against the observed group levels.
+.check_group_colors <- function(group.colors, group.levels) {
+  if (is.null(group.colors)) {
+    return(NULL)
+  }
+  if (!is.character(group.colors) || !length(group.colors) ||
+      anyNA(group.colors) || any(group.colors == "")) {
+    stop("`group.colors` must be a non-empty character vector of valid colours.",
+         call. = FALSE)
+  }
+
+  color_names <- names(group.colors)
+  if (!is.null(color_names) && any(nzchar(color_names))) {
+    if (anyNA(color_names) || any(color_names == "") || anyDuplicated(color_names)) {
+      stop("Named `group.colors` must have one unique, non-empty name per colour.",
+           call. = FALSE)
+    }
+    missing_groups <- setdiff(group.levels, color_names)
+    if (length(missing_groups)) {
+      stop("Named `group.colors` is missing colour(s) for group(s): ",
+           paste(missing_groups, collapse = ", "), ".", call. = FALSE)
+    }
+    group.colors <- group.colors[group.levels]
+  } else {
+    if (length(group.colors) < length(group.levels)) {
+      stop("`group.colors` must provide at least ", length(group.levels),
+           " colours, one for each observed group.", call. = FALSE)
+    }
+    group.colors <- group.colors[seq_along(group.levels)]
+    names(group.colors) <- group.levels
+  }
+
+  valid <- vapply(group.colors, function(col) {
+    tryCatch({
+      grDevices::col2rgb(col)
+      TRUE
+    }, error = function(e) FALSE)
+  }, logical(1))
+  if (!all(valid)) {
+    stop("Invalid colour value(s) in `group.colors`: ",
+         paste(group.colors[!valid], collapse = ", "), ".", call. = FALSE)
+  }
+  group.colors
+}
+
+# Apply a shared colour identity and legend title to every grouped layer.
+.add_group_scales <- function(plot, group.label, group.levels, group.colors) {
+  if (is.null(group.colors)) {
+    plot + ggplot2::labs(colour = group.label, fill = group.label)
+  } else {
+    plot +
+      ggplot2::scale_colour_manual(
+        values = group.colors,
+        breaks = group.levels, limits = group.levels, drop = FALSE
+      ) +
+      ggplot2::scale_fill_manual(
+        values = group.colors,
+        breaks = group.levels, limits = group.levels, drop = FALSE
+      ) +
+      ggplot2::labs(colour = group.label, fill = group.label)
   }
 }
 
@@ -530,9 +662,19 @@ logist_density <- function(...) {
 .logist_plot_impl <- function(x, y, marginal = c("hist", "points", "density"),
                                bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
                                fit.color = "steelblue", marginal.color = "orange",
-                               fit.args = list(), marginal.args = list(), ...) {
+                               fit.args = list(), marginal.args = list(),
+                               group = NULL, group.label = NULL,
+                               group.colors = NULL, ...) {
   rlang::check_dots_empty()
   marginal <- match.arg(marginal)
+  grouped <- !is.null(group)
+  if (grouped && marginal == "hist") {
+    stop("Grouping is not supported for `marginal = \"hist\"`; use ",
+         "`marginal = \"points\"` or `marginal = \"density\"`.", call. = FALSE)
+  }
+  if (!grouped && !is.null(group.colors)) {
+    stop("`group.colors` requires a non-NULL `group`.", call. = FALSE)
+  }
 
   fit.args <- .check_layer_args(
     fit.args,
@@ -578,6 +720,19 @@ logist_density <- function(...) {
     )
   }
 
+  if (grouped) {
+    fit_color_args <- intersect(names(fit.args), c("colour", "fill"))
+    marginal_color_args <- intersect(names(marginal.args), c("colour", "fill"))
+    if (length(fit_color_args)) {
+      stop("Grouped plots map fit colours to `group`; supply colours through ",
+           "`group.colors`, not `fit.args`.", call. = FALSE)
+    }
+    if (length(marginal_color_args)) {
+      stop("Grouped plots map marginal colours to `group`; supply colours through ",
+           "`group.colors`, not `marginal.args`.", call. = FALSE)
+    }
+  }
+
   if (!is.null(dim(x))) {
     stop("`x` must be a plain vector, not a matrix/array/data.frame (e.g. a multi-column ",
          "formula term such as poly(x, 2) is not supported).", call. = FALSE)
@@ -601,7 +756,24 @@ logist_density <- function(...) {
          call. = FALSE)
   }
 
-  data <- data.frame(x = x, y = y)
+  if (grouped) {
+    if (!is.null(dim(group))) {
+      stop("`group` must be a plain vector, not a matrix/array/data.frame.", call. = FALSE)
+    }
+    if (is.list(group)) {
+      stop("`group` must be a plain atomic vector, not a list.", call. = FALSE)
+    }
+    if (length(group) != length(x)) {
+      stop("`group` must have the same length as `x` and `y`; found ", length(group),
+           " and ", length(x), ".", call. = FALSE)
+    }
+  }
+
+  data <- if (grouped) {
+    data.frame(x = x, y = y, group = group)
+  } else {
+    data.frame(x = x, y = y)
+  }
   data <- data[stats::complete.cases(data) & is.finite(data$x), , drop = FALSE]
   if (nrow(data) == 0L) {
     stop("No complete observations remain after removing missing/non-finite `x` values.",
@@ -613,13 +785,52 @@ logist_density <- function(...) {
   xlab <- xlab %||% "x"
   ylab <- ylab %||% "y"
 
+  group.levels <- NULL
+  if (grouped) {
+    data$group <- .as_group_factor(data$group)
+    group.levels <- levels(data$group)
+    if (length(group.levels) < 2L) {
+      stop("`group` must contain at least 2 observed groups after filtering; found ",
+           length(group.levels), ".", call. = FALSE)
+    }
+    if (is.null(group.label) || length(group.label) != 1L ||
+        is.na(group.label) || !nzchar(group.label)) {
+      group.label <- "group"
+    }
+    group.colors <- .check_group_colors(group.colors, group.levels)
+
+    group_has_both_y <- vapply(group.levels, function(lev) {
+      setequal(unique(data$y[data$group == lev]), uy)
+    }, logical(1))
+    if (!all(group_has_both_y)) {
+      stop("Every group must contain both response outcomes; missing an outcome in group(s): ",
+           paste(group.levels[!group_has_both_y], collapse = ", "), ".", call. = FALSE)
+    }
+    group_has_x_range <- vapply(group.levels, function(lev) {
+      length(unique(data$x[data$group == lev])) >= 2L
+    }, logical(1))
+    if (!all(group_has_x_range)) {
+      stop("Every group must contain at least 2 distinct predictor values; insufficient ",
+           "variation in group(s): ", paste(group.levels[!group_has_x_range], collapse = ", "),
+           ".", call. = FALSE)
+    }
+  }
+
   min_x <- min(data$x)
   max_x <- max(data$x)
   if (min_x == max_x) {
     stop("`x` has zero range (all values are identical); cannot fit or bin.", call. = FALSE)
   }
 
-  p_base <- ggplot2::ggplot(data, ggplot2::aes(x = .data$x, y = .data$y)) +
+  base_mapping <- if (grouped) {
+    ggplot2::aes(
+      x = .data$x, y = .data$y,
+      colour = .data$group, fill = .data$group, group = .data$group
+    )
+  } else {
+    ggplot2::aes(x = .data$x, y = .data$y)
+  }
+  p_base <- ggplot2::ggplot(data, base_mapping) +
     ggplot2::theme_bw(base_size = 16) +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank(),
@@ -627,35 +838,48 @@ logist_density <- function(...) {
                    plot.background = ggplot2::element_blank()) +
     ggplot2::labs(y = paste0(ylab, "\n"), x = paste0("\n", xlab))
 
+  fit_defaults <- list(
+    method = "glm", formula = y ~ x,
+    method.args = list(family = "binomial"),
+    se = TRUE, linewidth = 1.5, alpha = 0.3
+  )
+  if (!grouped) {
+    fit_defaults$colour <- fit.color
+    fit_defaults$fill <- fit.color
+  }
   fit_layer <- do.call(
     ggplot2::geom_smooth,
     .merge_layer_args(
-      list(
-        method = "glm", formula = y ~ x,
-        method.args = list(family = "binomial"),
-        se = TRUE, colour = fit.color, fill = fit.color,
-        linewidth = 1.5, alpha = 0.3
-      ),
+      fit_defaults,
       fit.args
     )
   )
 
   if (marginal == "points") {
+    point_defaults <- list(
+      alpha = 0.5,
+      position = ggplot2::position_jitter(w = 0, h = 0.02)
+    )
+    if (!grouped) {
+      point_defaults$colour <- marginal.color
+    }
     point_layer <- do.call(
       ggplot2::geom_point,
       .merge_layer_args(
-        list(
-          colour = marginal.color,
-          alpha = 0.5,
-          position = ggplot2::position_jitter(w = 0, h = 0.02)
-        ),
+        point_defaults,
         marginal.args
       )
     )
-    p_base +
+    point_plot <- p_base +
       fit_layer +
       point_layer +
       ggplot2::coord_cartesian(xlim = c(min_x, max_x), ylim = c(0, 1))
+    if (grouped) {
+      point_plot <- .add_group_scales(
+        point_plot, group.label, group.levels, group.colors
+      )
+    }
+    point_plot
   } else if (marginal == "hist") {
     .check_bins(bins)
 
@@ -738,6 +962,134 @@ logist_density <- function(...) {
       ggplot2::coord_cartesian(xlim = c(min_x, max_x))
   } else {
     .check_adjust(adjust)
+
+    if (grouped) {
+      density_lane_height <- 0.05
+      # The outermost density edge reaches the nominal y limit exactly. Reserve a small
+      # display-only margin so geom_ribbon()'s centered outline stroke is not clipped by the
+      # panel border; this does not change the density estimates or their 0.05 lane height.
+      density_outline_padding <- density_lane_height * 0.15
+
+      estimate_group_density <- function(group_level, response) {
+        cell_x <- data$x[data$group == group_level & data$y == response]
+        original_level <- bin$levels[response + 1L]
+        if (length(cell_x) < 2L) {
+          stop("Cannot estimate the marginal density for group ",
+               dQuote(as.character(group_level)), " and response level ",
+               dQuote(as.character(original_level)),
+               ": at least 2 observations are required; found ", length(cell_x), ".",
+               call. = FALSE)
+        }
+        estimate <- tryCatch(
+          stats::density(cell_x, from = min_x, to = max_x, adjust = adjust),
+          error = function(e) {
+            stop("Cannot estimate the marginal density for group ",
+                 dQuote(as.character(group_level)), " and response level ",
+                 dQuote(as.character(original_level)), ": ", conditionMessage(e),
+                 call. = FALSE)
+          }
+        )
+        if (!all(is.finite(estimate$x)) || !all(is.finite(estimate$y))) {
+          stop("Density estimation produced non-finite values for group ",
+               dQuote(as.character(group_level)), " and response level ",
+               dQuote(as.character(original_level)), ".", call. = FALSE)
+        }
+        if (any(estimate$y < 0)) {
+          stop("Density estimation produced negative values for group ",
+               dQuote(as.character(group_level)), " and response level ",
+               dQuote(as.character(original_level)), ".", call. = FALSE)
+        }
+        estimate
+      }
+
+      density_pairs <- lapply(group.levels, function(group_level) {
+        pair <- lapply(uy, function(response) {
+          estimate_group_density(group_level, response)
+        })
+        pair_max <- max(vapply(pair, function(z) max(z$y), numeric(1)))
+        if (!is.finite(pair_max) || pair_max <= 0) {
+          stop("Density estimation produced a non-finite or non-positive maximum density ",
+               "for group ", dQuote(as.character(group_level)), ".", call. = FALSE)
+        }
+        list(estimates = pair, headroom = pair_max / density_lane_height)
+      })
+      density_limits <- c(
+        -length(group.levels) * density_lane_height,
+        1 + length(group.levels) * density_lane_height
+      )
+
+      make_group_density_data <- function(group_index, response) {
+        pair <- density_pairs[[group_index]]
+        estimate <- pair$estimates[[response + 1L]]
+        # Clamp at the nominal lane height to prevent floating-point overshoot at the
+        # highest peak from being removed by the exact outer y-scale limit.
+        scaled_density <- pmin(estimate$y / pair$headroom, density_lane_height)
+        lane_index <- group_index - 1L
+        if (response == 0) {
+          baseline <- -lane_index * density_lane_height
+          ymin <- pmax(baseline - scaled_density, density_limits[1L])
+          ymax <- baseline
+        } else {
+          baseline <- 1 + lane_index * density_lane_height
+          ymin <- baseline
+          ymax <- pmin(baseline + scaled_density, density_limits[2L])
+        }
+        data.frame(
+          x = estimate$x,
+          ymin = ymin,
+          ymax = ymax,
+          group = factor(
+            rep(group.levels[group_index], length(estimate$x)),
+            levels = group.levels
+          )
+        )
+      }
+
+      density_y0 <- do.call(rbind, lapply(seq_along(group.levels), function(i) {
+        make_group_density_data(i, 0)
+      }))
+      density_y1 <- do.call(rbind, lapply(seq_along(group.levels), function(i) {
+        make_group_density_data(i, 1)
+      }))
+
+      grouped_density_mapping <- ggplot2::aes(
+        x = .data$x,
+        ymin = .data$ymin,
+        ymax = .data$ymax,
+        fill = .data$group,
+        colour = .data$group,
+        group = .data$group
+      )
+      grouped_density_layer <- function(layer_data, outline_type) {
+        do.call(
+          ggplot2::geom_ribbon,
+          .merge_layer_args(
+            list(
+              data = layer_data,
+              mapping = grouped_density_mapping,
+              inherit.aes = FALSE,
+              alpha = 0.35,
+              linewidth = 0.5,
+              outline.type = outline_type
+            ),
+            marginal.args
+          )
+        )
+      }
+
+      density_plot <- p_base +
+        grouped_density_layer(density_y0, "lower") +
+        grouped_density_layer(density_y1, "upper") +
+        fit_layer +
+        ggplot2::scale_y_continuous(
+          limits = density_limits,
+          breaks = seq(0, 1, by = 0.2),
+          expand = ggplot2::expansion(add = density_outline_padding)
+        ) +
+        ggplot2::coord_cartesian(xlim = c(min_x, max_x))
+
+      .add_group_scales(density_plot, group.label, group.levels, group.colors)
+    } else {
 
     densities <- lapply(uy, function(lev) {
       group_x <- data$x[data$y == lev]
@@ -830,5 +1182,6 @@ logist_density <- function(...) {
         expand = ggplot2::expansion(mult = 0)
       ) +
       ggplot2::coord_cartesian(xlim = c(min_x, max_x))
+    }
   }
 }
