@@ -1,5 +1,10 @@
 ## Version 0.9.8
 
+* Fixed bug in `CMHtest3()` (the internal `overall = TRUE` helper) which
+  suppressed `Df` and `Prob` (p-value) for the overall population results
+  whenever `types` was not the full default set of four (#2, reported by
+  @bill-raynor and @imazubi; fix by @danielinteractive in #26).
+
 * Added `drop1.loglm()`, `LRanova()`, and `assoc_strength()` for term-level analysis of `loglm`
   models. `drop1.loglm()` (registered as an S3 method for `stats::drop1()`, and also directly
   callable by name) performs single-term deletion tests for a model's generating class, refitting
