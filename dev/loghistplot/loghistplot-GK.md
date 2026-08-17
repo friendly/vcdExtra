@@ -32,6 +32,13 @@
 
 - Once we think this is good to go I should do one (hopefully last) check with Claude Fable to see if it can catch anything
 - We should have an argument for plot title [MF: NO; just use `labs()`]
+
+GK: But see top of document; `labs()` and `theme()` calls do not work when added to `logist_plot()` if `marginal = "hist"`. Run the example below to see what I mean; sorry if I am missing anything:
+
+```r
+logist_plot(survived ~ age, data = Donner, marginal = "hist") + labs(title="test")
+```
+
 - Should support `with(data, logist_plot(y ~ x, ...))`
 
 ## Extra notes from GPT (model 5.6 Sol)
