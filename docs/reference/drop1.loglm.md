@@ -144,6 +144,20 @@ leaving `A` and `B`'s main effects in place (still implied by
 `A:C`/`A:D` and `B:C`/`B:D` respectively), so the reduced model stays
 hierarchical.
 
+### Comparison with `drop1.glm()`
+
+A hierarchical [`loglm()`](https://rdrr.io/pkg/MASS/man/loglm.html)
+model has an equivalent fit via `glm(family = poisson)`, and
+[`stats::drop1.glm()`](https://rdrr.io/r/stats/add1.html)'s default
+`scope` already restricts to the same generating-class terms as
+`object$margin`, so `Df` and the LR statistic agree exactly between the
+two. `drop1.loglm()` works directly on table/array or `Freq ~ ...` data,
+adds the Pearson X^2 column, and returns the fitted drop-one models for
+reuse; its `scope` validation also guards against testing a
+non-generating-class term, which `drop1.glm()` will silently allow with
+a misleading result. See `dev/anova-like/drop1-compare.R` for a worked
+comparison.
+
 ## See also
 
 [`mosaic.loglmlist()`](https://friendly.github.io/vcdExtra/reference/mosaic.glmlist.md),

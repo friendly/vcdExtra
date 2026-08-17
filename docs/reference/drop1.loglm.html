@@ -174,7 +174,21 @@ they're very much still part of the fitted model. This is exactly what
 <code>scope</code> defaults to and <code>drop1.loglm()</code> tests: dropping <code>A:B</code> removes
 only that interaction, leaving <code>A</code> and <code>B</code>'s main effects in place
 (still implied by <code>A:C</code>/<code>A:D</code> and <code>B:C</code>/<code>B:D</code> respectively), so the
-reduced model stays hierarchical.</p>
+reduced model stays hierarchical.</p><div class="section">
+<h3 id="comparison-with-drop-glm-">Comparison with <code>drop1.glm()</code><a class="anchor" aria-label="anchor" href="#comparison-with-drop-glm-"></a></h3>
+
+
+<p>A hierarchical <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">loglm()</a></code> model has an equivalent fit via
+<code>glm(family = poisson)</code>, and <code><a href="https://rdrr.io/r/stats/add1.html" class="external-link">stats::drop1.glm()</a></code>'s default <code>scope</code>
+already restricts to the same generating-class terms as <code>object$margin</code>,
+so <code>Df</code> and the LR statistic agree exactly between the two. <code>drop1.loglm()</code>
+works directly on table/array or <code>Freq ~ ...</code> data, adds the Pearson X^2
+column, and returns the fitted drop-one models for reuse; its <code>scope</code>
+validation also guards against testing a non-generating-class term, which
+<code>drop1.glm()</code> will silently allow with a misleading result. See
+<code>dev/anova-like/drop1-compare.R</code> for a worked comparison.</p>
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
