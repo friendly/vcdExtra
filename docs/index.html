@@ -129,6 +129,22 @@
 </ul>
 </div>
 <div class="section level3">
+<h3 id="statistical-tests">Statistical tests<a class="anchor" aria-label="anchor" href="#statistical-tests"></a>
+</h3>
+<p>The package also includes a variety of improvements / enhancements of common statistical tests for categorical data analysis.</p>
+<ul>
+<li>
+<code><a href="https://rdrr.io/pkg/vcd/man/woolf_test.html" class="external-link">vcd::woolf_test()</a></code> is extended to provide a decomposition of the overall test for homogeneity of odds ratios in 2 x 2 tables when the strata themselves represent an R x C table of two other factors</li>
+</ul>
+<p>A few others worth knowing about:</p>
+<ul>
+<li><p><code><a href="reference/breslow_day_test.html">breslow_day_test()</a></code> is a complementary test for homogeneity of odds ratios across strata in 2 x 2 x K tables, with the same <code>decompose</code> option as <code><a href="reference/woolf_test.html">woolf_test()</a></code> for R x C strata.</p></li>
+<li><p><code><a href="reference/HLtest.html">HLtest()</a></code> provides the Hosmer-Lemeshow goodness-of-fit test for a binary <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> model, useful for logistic regression models not otherwise well summarized by deviance alone.</p></li>
+<li><p><code><a href="reference/zero.test.html">zero.test()</a></code> is a score test for zero-inflation in Poisson count data, testing whether the observed number of zero counts exceeds what a Poisson model would predict.</p></li>
+<li><p><code><a href="reference/drop1.loglm.html">drop1.loglm()</a></code>, and its wrappers <code><a href="reference/drop1.loglm.html">LRanova()</a></code> and <code><a href="reference/drop1.loglm.html">assoc_strength()</a></code>, give term-level deletion tests for the generating class of a <code><a href="https://rdrr.io/pkg/MASS/man/loglm.html" class="external-link">MASS::loglm()</a></code> model, with partial R^2 and partial Cramer’s V / Cohen’s w effect-size measures for each term.</p></li>
+</ul>
+</div>
+<div class="section level3">
 <h3 id="card_file_box-datasets">🗃️ Datasets<a class="anchor" aria-label="anchor" href="#card_file_box-datasets"></a>
 </h3>
 <p>Beyond the wide range of **datasets* in the <code>vcd</code> package, this <code>vcdExtra</code> package includes many new data sets, that I’ve found useful for illustrating various ideas, models, methods and visualization. Use <code>datasets("vcdExtra")</code> to see a list with titles and descriptions. The vignette, <code><a href="articles/datasets.html">vignette("datasets", package="vcdExtra")</a></code> provides a classification of these according to methods of analysis.</p>
