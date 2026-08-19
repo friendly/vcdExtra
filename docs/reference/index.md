@@ -72,6 +72,12 @@ Other functions for visualizing contingency tables
   : Include an HTML-renderable object in any knitr output format
 - [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
   : Simple and enhanced plot of MCA solutions
+- [`logist_plot()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
+  [`logist_hist()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
+  [`logist_point()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
+  [`logist_density()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
+  : Plot a fitted logistic regression with marginal distributions of the
+  predictor
 
 ## Statistical tests
 

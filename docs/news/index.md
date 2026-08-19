@@ -2,6 +2,26 @@
 
 ## Version 0.9.8
 
+This is a significant release, with a number of new features
+
+- Added
+  [`logist_plot()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
+  for plotting a `glm(y ~ x, family = binomial)` fit for a single
+  quantitative predictor together with a representation of the marginal
+  distribution of `x` within each response group – mirrored histograms,
+  filled density estimates, or jittered points – as suggested by Smart
+  et al. (2004). Supports vector, data frame, and formula calling
+  conventions; an optional `group=` for grouped fits and marginals with
+  per-group colours; and `fit.args=`/`marginal.args=`/`marginal.height=`
+  for layer-level customization beyond the
+  `fit.color=`/`marginal.color=` convenience arguments.
+  [`logist_hist()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md),
+  [`logist_point()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md),
+  and
+  [`logist_density()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
+  are convenience wrappers with `marginal=` fixed to
+  `"hist"`/`"points"`/`"density"`. Work by Gavin Klorfine.
+
 - Fixed bug in `CMHtest3()` (the internal `overall = TRUE` helper) which
   suppressed `Df` and `Prob` (p-value) for the overall population
   results whenever `types` was not the full default set of four

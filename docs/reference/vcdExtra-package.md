@@ -267,7 +267,7 @@ example(mosaic.glm)
 #> msc.gl+  }
 #> Initialising
 #> Running start-up iterations..
-#> Running main iterations........
+#> Running main iterations.......
 #> Done
 
 #> 
@@ -581,7 +581,7 @@ demo("mental-glm")
 #> +                 family = poisson, data = Mental)
 #> Initialising
 #> Running start-up iterations..
-#> Running main iterations........
+#> Running main iterations.......
 #> Done
 #> 
 #> > mosaic(RC1model,residuals_type="rstandard", 
