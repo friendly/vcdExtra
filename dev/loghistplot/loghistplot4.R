@@ -26,12 +26,12 @@
 # Original sketch implemented by Scott Chamberlain, https://recology.info/2012/01/logistic-regression-barplot-fig/
 #
 # TODO status vs. dev/loghistplot.R:
-# [**DONE**] Combine hist/points into one function via `marginal = c("hist", "points")` (Gavin)
-# [**DONE**] Make into a proper, general function with x=, y=, data= -- via S3 methods below
+# ✅ [**DONE**] Combine hist/points into one function via `marginal = c("hist", "points")` (Gavin)
+# ✅ [**DONE**] Make into a proper, general function with x=, y=, data= -- via S3 methods below
 #        (default / data.frame / formula), matching base R's plot()/boxplot() convention.
 #        Deliberately dropped `data=` from the generic itself -- it only makes sense for the
 #        `formula` method, so it lives there, not on every call.
-# [**DONE**] Get variable labels from data or xlab=/ylab= args -- each method derives sensible
+# ✅ [**DONE**] Get variable labels from data or xlab=/ylab= args -- each method derives sensible
 #        defaults (deparsed vector expression / data frame column name / formula term name),
 #        overridable via xlab=/ylab=.
 #
@@ -91,7 +91,7 @@
 #   formals use marginal = c("hist", "points"), so match.arg() selects "hist" when marginal is
 #   omitted. If the no-default proposal is adopted, remove the marginal default from all three
 #   public methods and from .logist_plot_impl(), and remove "(default)" from @param marginal.
-#   [**RESOLVED** (Michael): keep the "hist" default as-is on logist_plot(); logist_hist()/
+#   ✅ [**RESOLVED** (Michael): keep the "hist" default as-is on logist_plot(); logist_hist()/
 #   logist_point() remain convenience wrappers, not the only way to skip specifying it.]
 #
 # - The documented factor/character/logical response support is not implemented reliably.
@@ -115,7 +115,7 @@
 #   y to numeric 0/1 immediately after .check_binary_y(), before it ever reaches ggplot() --
 #   not yet applied.]
 #
-#   [**FIXED** (Michael, 2026-08-08): .check_binary_y() replaced with .to_binary01(), which
+#   ✅ [**FIXED** (Michael, 2026-08-08): .check_binary_y() replaced with .to_binary01(), which
 #   validates AND canonicalizes in one step (see its own comment for the level-ordering
 #   convention per type). .logist_plot_impl() converts data$y to numeric 0/1 immediately after
 #   building `data`, before anything reaches ggplot(). Re-run dev/loghist-test.R to confirm --
@@ -124,7 +124,7 @@
 #   order), though the separate p_top/p_bottom naming-vs-rendered-direction question there is
 #   still open.]
 #
-#   [**FIXED** (Michael, 2026-08-08): confirmed via dev/loghist-test.R's
+#   ✅ [**FIXED** (Michael, 2026-08-08): confirmed via dev/loghist-test.R's
 #   .demo_top_bottom_direction() that the logic was already correct -- uy[1]=0 (unreversed
 #   scale) really does grow up from the bottom and uy[2]=1 (scale_y_reverse()) really does hang
 #   down from the top, matching the intended mirrored-histogram design. Version 2 renamed the
@@ -135,7 +135,7 @@
 #   and marginal plots. .check_binary_y() returns unique() order, so reordering rows can swap
 #   the two histograms. The p_top/p_bottom names are also opposite the rendered directions:
 #   the ordinary scale grows from the bottom and the reversed scale grows from the top.
-#   [**FIXED** (Michael, 2026-08-08): row-order independence already fixed above via
+#   ✅ [**FIXED** (Michael, 2026-08-08): row-order independence already fixed above via
 #   .to_binary01(); rectangle construction now uses that canonical 0/1 order directly.]
 #
 # - Vector and data-frame calls retain incomplete cases, unlike model.frame() in the formula
@@ -143,7 +143,7 @@
 #   bins. Validate equal lengths and numeric/finite x after applying one consistent NA policy,
 #   then either reject a zero-range predictor or provide a defined histogram fallback.
 #
-#   [**FIXED** (Michael, 2026-08-08): .logist_plot_impl() now applies one policy for all calling
+#   ✅ [**FIXED** (Michael, 2026-08-08): .logist_plot_impl() now applies one policy for all calling
 #   conventions -- complete.cases() + is.finite(x) right after building `data`, and an explicit
 #   error if x has zero range (min_x == max_x). model.frame()'s own NA-dropping in the formula
 #   method still runs first, but re-filtering already-clean data afterward is a harmless no-op.]
@@ -153,7 +153,7 @@
 #   predictor. Also decide whether the promised `formula =` spelling should work: currently
 #   logist_plot(formula = y ~ x, data = d) fails because the generic requires an argument x.
 #
-#   [**FIXED** (Michael, 2026-08-08): logist_plot.formula()'s first argument renamed from `x` to
+#   ✅ [**FIXED** (Michael, 2026-08-08): logist_plot.formula()'s first argument renamed from `x` to
 #   `formula` -- an S3 method's formals don't have to match the generic's names (verified this
 #   is legal and matches base R's own boxplot.formula()/lm() convention), so
 #   logist_plot(formula = y ~ x, data = d) now works, as does the existing positional form.
@@ -162,14 +162,14 @@
 #
 # - Validate xvar and yvar as single existing column names or valid positions before [[ ]]. An
 #   unknown name currently fails later with an unrelated differing-row-count message.
-#   [**FIXED** (Michael, 2026-08-08): logist_plot.data.frame() now validates xcol/ycol resolve to
+#   ✅ [**FIXED** (Michael, 2026-08-08): logist_plot.data.frame() now validates xcol/ycol resolve to
 #   an existing column name before subsetting, erroring immediately with a clear message
 #   otherwise.]
 #
 # - The methods accept ... but do not forward or check it, so misspelled arguments are silently
 #   ignored. Either document a purpose for ..., pass it onward, or check that it is empty.
 #
-#   [**RESOLVED** (Michael, 2026-08-08; extended 2026-08-17): ... is forwarded from all three
+#   ✅ [**RESOLVED** (Michael, 2026-08-08; extended 2026-08-17): ... is forwarded from all three
 #   public methods into .logist_plot_impl(), which calls rlang::check_dots_empty() and errors
 #   on anything unconsumed. A flat ... is not routed to ggplot layers. Advanced layer control
 #   instead uses the explicitly scoped fit.args and marginal.args lists; fit.color/marginal.color
@@ -178,7 +178,7 @@
 # - The shared plot already has coord_cartesian(); the points branch adds a second coordinate system and
 #   reports that the first is being replaced on every call. Construct the coordinate once.
 #
-#   [**FIXED** (Michael, 2026-08-08): removed coord_cartesian() from the shared base construction;
+#   ✅ [**FIXED** (Michael, 2026-08-08): removed coord_cartesian() from the shared base construction;
 #   each branch now sets it exactly once (points: xlim+ylim together; hist: xlim, alongside the
 #   scale_y_continuous() it already adds). No more "replacing" message.]
 #
@@ -188,13 +188,13 @@
 #   names are not defined here; the new wrappers are logist_hist()/logist_point(). Clarify that
 #   this is a rename, or retain aliases if the old names were ever public.
 #
-#   [**FIXED** (Michael, 2026-08-08): reworded the top-of-file comment to say explicitly that the
+#   ✅ [**FIXED** (Michael, 2026-08-08): reworded the top-of-file comment to say explicitly that the
 #   old names are gone and this is a rename, not a preserved alias. The old names were never
 #   public (this file has never shipped in R/), so no alias is needed.]
 #
 # - @seealso is not required for CRAN, but @seealso [vcd::binreg_plot()] would be useful. With
 #   no other help topic in this @family, the family tag currently adds no related-page links.
-#   [**FIXED** (Michael, 2026-08-08): added.]
+#   ✅ [**FIXED** (Michael, 2026-08-08): added.]
 #
 # - Add tests for the three interfaces, all marginal modes, the omitted-marginal error,
 #   response encodings/event direction, row reordering, NA/Inf/constant x, column selection,
