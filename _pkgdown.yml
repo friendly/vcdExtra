@@ -70,6 +70,10 @@ reference:
       - color_table
       - knit_include
       - mcaplot
+      - logist_plot
+      - logist_hist
+      - logist_point
+      - logist_density
 
 
   - title: Statistical tests
