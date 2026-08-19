@@ -999,14 +999,14 @@ logist_density <- function(...) {
     # bin/count correspondence explicit.
     hist_data <- rbind(
       data.frame(
-        xmin = head(hist_breaks, -1L),
-        xmax = tail(hist_breaks, -1L),
+        xmin = utils::head(hist_breaks, -1L),
+        xmax = utils::tail(hist_breaks, -1L),
         ymin = 0,
         ymax = hist_counts[[1L]] / bin_no
       ),
       data.frame(
-        xmin = head(hist_breaks, -1L),
-        xmax = tail(hist_breaks, -1L),
+        xmin = utils::head(hist_breaks, -1L),
+        xmax = utils::tail(hist_breaks, -1L),
         ymin = 1 - hist_counts[[2L]] / bin_no,
         ymax = 1
       )
