@@ -22,7 +22,7 @@ change.
 
 Do not implement density mode with either cowplot or ggdist.
 
-The exploratory density prototype predates `loghistplot3.R`. At that time,
+The exploratory density prototype predates `logist-plot.R` (canonical v3). At that time,
 histogram mode used cowplot to overlay three completed plots, so the notes
 correctly recommended giving density the same architecture. Version 3 has since
 replaced that composite with values precomputed and drawn directly in the main

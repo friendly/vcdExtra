@@ -12,7 +12,7 @@ grouping feature will support:
 
 The grouped density design is inspired by the compact orange strips in
 `loghist-ggdist-naive.png`, but it will use the native, precomputed density
-geometry already established in `loghistplot3.R`. The reference image's slabs
+geometry already established in `logist-plot.R` (canonical v3). The reference image's slabs
 rendered almost flat because the ggdist thickness calculation did not work, so
 its literal thickness is not a usable measurement. Treat it as a visual target
 for narrow density strips rather than as geometry to reproduce exactly.

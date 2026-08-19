@@ -1,4 +1,4 @@
-# Examples of grouping behaviour for loghistplot3.R and loghistplot4.R
+# Examples of grouping behaviour for logist-plot.R (canonical v3) and loghistplot4.R
 
 library(vcdExtra)
 

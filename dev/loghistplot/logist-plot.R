@@ -219,6 +219,12 @@
 #' group's two response-specific densities are normalized together within that band, so the
 #' shapes show conditional distributions but do not encode group sample sizes.
 #'
+#' `bins`, `adjust`, and `marginal.height` control computation of the marginal geometry;
+#' they are not graphical layer arguments and therefore belong at the top level rather than
+#' inside `marginal.args`.
+#' When a small histogram height would crowd the secondary count axis, its integer ticks are
+#' thinned symmetrically while retaining the correct count-to-height mapping.
+#'
 #' All marginal modes return a native ggplot object. Standard additions such as
 #' [ggplot2::labs()] and [ggplot2::theme()] can therefore be applied after construction.
 #' Adding another `scale_y_*()` replaces the internally configured probability scale; in
@@ -289,6 +295,13 @@ logist_plot <- function(x, ...) {
 #' @param bins number of histogram bins, for `marginal = "hist"`; default: 30
 #' @param adjust positive numeric bandwidth adjustment passed to [stats::density()] for
 #'   `marginal = "density"`; default: 1
+#' @param marginal.height optional finite positive number controlling marginal height. For
+#'   histograms and ungrouped densities, this is the maximum proportion of the fixed 0--1
+#'   probability panel occupied on each side; defaults are 0.25 and 0.15, respectively, and
+#'   values cannot exceed 0.5. For grouped densities, it is the full height of each outward
+#'   lane in the original probability-coordinate units; the default is 0.05 and values cannot
+#'   exceed 1. `NULL` selects the applicable default. For `marginal = "points"`, a non-`NULL`
+#'   value is ignored with a warning; control vertical jitter through `marginal.args` instead.
 #' @param xlab,ylab axis labels; default to the deparsed `x`/`y` expressions
 #' @param fit.color color of the fitted logistic curve and its confidence band; default:
 #'   "steelblue". This scalar is inactive when `group` is supplied; use `group.colors`
@@ -312,15 +325,17 @@ logist_plot <- function(x, ...) {
 #'   Values override the defaults established by `marginal.color`. Valid arguments depend on
 #'   `marginal`: point aesthetics and `position` for `"points"`, rectangle aesthetics for
 #'   `"hist"`, or ribbon aesthetics for `"density"`. Histogram computation remains controlled
-#'   by `bins`; density bandwidth remains controlled by `adjust`. In grouped mode, `colour`
-#'   and `fill` must instead be controlled through `group.colors`.
+#'   by `bins`; density bandwidth remains controlled by `adjust`; and marginal geometry height
+#'   remains controlled by `marginal.height`. In grouped mode, `colour` and `fill` must instead
+#'   be controlled through `group.colors`.
 #' @rdname logist_plot
 #' @export
 logist_plot.default <- function(x, y, marginal = c("hist", "points", "density"),
                                  bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
                                  fit.color = "steelblue", marginal.color = "orange",
                                  fit.args = list(), marginal.args = list(),
-                                 group = NULL, group.colors = NULL, ...) {
+                                 group = NULL, group.colors = NULL,
+                                 marginal.height = NULL, ...) {
   xlab <- xlab %||% deparse(substitute(x))
   ylab <- ylab %||% deparse(substitute(y))
   group.label <- if (is.null(group)) NULL else paste(deparse(substitute(group)), collapse = "")
@@ -329,7 +344,7 @@ logist_plot.default <- function(x, y, marginal = c("hist", "points", "density"),
                      fit.color = fit.color, marginal.color = marginal.color,
                      fit.args = fit.args, marginal.args = marginal.args,
                      group = group, group.label = group.label,
-                     group.colors = group.colors, ...)
+                     group.colors = group.colors, marginal.height = marginal.height, ...)
 }
 
 #' @param xvar,yvar which columns of `x` to use as predictor/response -- column name or
@@ -342,7 +357,8 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
                                     bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
                                     fit.color = "steelblue", marginal.color = "orange",
                                     fit.args = list(), marginal.args = list(),
-                                    group = NULL, group.colors = NULL, ...) {
+                                    group = NULL, group.colors = NULL,
+                                    marginal.height = NULL, ...) {
   if (ncol(x) < 2L) {
     stop("`x` must have at least 2 columns.", call. = FALSE)
   }
@@ -355,7 +371,7 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
                      fit.args = fit.args, marginal.args = marginal.args,
                      group = if (is.null(gres)) NULL else gres$value,
                      group.label = if (is.null(gres)) NULL else gres$name,
-                     group.colors = group.colors, ...)
+                     group.colors = group.colors, marginal.height = marginal.height, ...)
 }
 
 #' @param formula a model formula, `y ~ x` -- exactly one response and one predictor;
@@ -369,7 +385,8 @@ logist_plot.formula <- function(formula, data, marginal = c("hist", "points", "d
                                  bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
                                  fit.color = "steelblue", marginal.color = "orange",
                                  fit.args = list(), marginal.args = list(),
-                                 group = NULL, group.colors = NULL, ...) {
+                                 group = NULL, group.colors = NULL,
+                                 marginal.height = NULL, ...) {
   gres <- if (is.null(group)) NULL else .resolve_col(data, group, "group")
   mf <- stats::model.frame(formula, data = data, na.action = stats::na.pass)
   if (ncol(mf) != 2L) {
@@ -382,7 +399,7 @@ logist_plot.formula <- function(formula, data, marginal = c("hist", "points", "d
                      fit.args = fit.args, marginal.args = marginal.args,
                      group = if (is.null(gres)) NULL else gres$value,
                      group.label = if (is.null(gres)) NULL else gres$name,
-                     group.colors = group.colors, ...)
+                     group.colors = group.colors, marginal.height = marginal.height, ...)
 }
 
 # ---- convenience wrappers (fixed marginal=) ------------------------------------------------
@@ -467,6 +484,20 @@ logist_density <- function(...) {
   if (length(adjust) != 1L || !is.numeric(adjust) || is.na(adjust) ||
       !is.finite(adjust) || adjust <= 0) {
     stop("`adjust` must be one finite positive number.", call. = FALSE)
+  }
+}
+
+.check_marginal_height <- function(marginal.height, grouped = FALSE) {
+  if (length(marginal.height) != 1L || !is.numeric(marginal.height) ||
+      is.na(marginal.height) || !is.finite(marginal.height) || marginal.height <= 0) {
+    stop("`marginal.height` must be one finite positive number.", call. = FALSE)
+  }
+
+  upper <- if (grouped) 1 else 0.5
+  if (marginal.height > upper) {
+    context <- if (grouped) "grouped density lanes" else "histograms and ungrouped densities"
+    stop("`marginal.height` cannot exceed ", upper, " for ", context, ".",
+         call. = FALSE)
   }
 }
 
@@ -664,16 +695,34 @@ logist_density <- function(...) {
                                fit.color = "steelblue", marginal.color = "orange",
                                fit.args = list(), marginal.args = list(),
                                group = NULL, group.label = NULL,
-                               group.colors = NULL, ...) {
+                               group.colors = NULL, marginal.height = NULL, ...) {
   rlang::check_dots_empty()
   marginal <- match.arg(marginal)
   grouped <- !is.null(group)
+  if (marginal == "points" && !is.null(marginal.height)) {
+    warning(
+      "`marginal.height` is ignored for `marginal = \"points\"`; ",
+      "control vertical jitter through `marginal.args` instead.",
+      call. = FALSE
+    )
+  }
   if (grouped && marginal == "hist") {
     stop("Grouping is not supported for `marginal = \"hist\"`; use ",
          "`marginal = \"points\"` or `marginal = \"density\"`.", call. = FALSE)
   }
   if (!grouped && !is.null(group.colors)) {
     stop("`group.colors` requires a non-NULL `group`.", call. = FALSE)
+  }
+
+  if (marginal != "points" && is.list(marginal.args)) {
+    misplaced_height <- intersect(
+      names(marginal.args),
+      c("marginal.height", "height", "lane.height", "lane_height")
+    )
+    if (length(misplaced_height)) {
+      stop("Supply `marginal.height` as a top-level argument, not inside `marginal.args`.",
+           call. = FALSE)
+    }
   }
 
   fit.args <- .check_layer_args(
@@ -882,6 +931,8 @@ logist_density <- function(...) {
     point_plot
   } else if (marginal == "hist") {
     .check_bins(bins)
+    height <- marginal.height %||% 0.25
+    .check_marginal_height(height)
 
     bin_width <- (max_x - min_x) / bins
     if (!is.finite(bin_width) || bin_width <= 0) {
@@ -900,23 +951,52 @@ logist_density <- function(...) {
                       include.lowest = TRUE, plot = FALSE)$counts
     })
     max_count <- max(unlist(hist_counts))
-    bin_no <- 4 * max_count
+    bin_no <- max_count / height
 
     # pretty() can return fractional ticks when max_count is small (e.g. 0, 0.2, 0.4, ... for
-    # max_count = 1); counts are always whole numbers, so round + dedupe, then guarantee at
-    # least two distinct ticks (0 and max_count) rather than let rounding collapse them.
+    # max_count = 1); counts are always whole numbers, so round + dedupe and include both
+    # endpoints. If a small marginal height compresses adjacent labels, replace the pretty
+    # ticks with evenly spaced integer counts. At extremely small heights, show only the
+    # maximum count on each side; zero remains visually implied by the histogram baseline.
     count_ticks <- pretty(c(0, max_count))
     count_ticks <- unique(round(count_ticks[count_ticks >= 0 & count_ticks <= max_count]))
-    if (length(count_ticks) < 2L) {
-      count_ticks <- unique(c(0L, max_count))
+    count_ticks <- sort(unique(c(0L, count_ticks, max_count)))
+    min_count_tick_spacing <- 0.05
+    count_tick_spacing <- diff(count_ticks / bin_no)
+    if (length(count_tick_spacing) && min(count_tick_spacing) < min_count_tick_spacing) {
+      count_label_capacity <- floor(
+        height / min_count_tick_spacing + sqrt(.Machine$double.eps)
+      ) + 1L
+      if (count_label_capacity < 2L) {
+        count_ticks <- max_count
+      } else {
+        repeat {
+          count_ticks <- unique(round(seq(
+            0, max_count, length.out = count_label_capacity
+          )))
+          count_tick_spacing <- diff(count_ticks / bin_no)
+          if (!length(count_tick_spacing) ||
+              min(count_tick_spacing) >= min_count_tick_spacing ||
+              count_label_capacity <= 2L) {
+            break
+          }
+          count_label_capacity <- count_label_capacity - 1L
+        }
+      }
     }
-    count_positions <- sort(c(count_ticks / bin_no, 1 - count_ticks / bin_no))
-    count_labels <- round(bin_no * pmin(count_positions, 1 - count_positions))
+    count_positions <- c(count_ticks / bin_no, 1 - count_ticks / bin_no)
+    count_labels <- rep(count_ticks, 2L)
+    count_order <- order(count_positions)
+    count_positions <- count_positions[count_order]
+    count_labels <- count_labels[count_order]
+    keep_count_position <- !duplicated(count_positions)
+    count_positions <- count_positions[keep_count_position]
+    count_labels <- count_labels[keep_count_position]
 
     # Draw both response-specific histograms in the probability coordinate system. Each row
-    # describes one bin rectangle: y = 0 grows up from 0; y = 1 hangs down from 1. Since
-    # bin_no is four times the largest count, neither side can occupy more than one quarter
-    # of the panel. Keeping zero-count rows makes the bin/count correspondence explicit.
+    # describes one bin rectangle: y = 0 grows up from 0; y = 1 hangs down from 1. The tallest
+    # bar occupies `height` of the panel on its side. Keeping zero-count rows makes the
+    # bin/count correspondence explicit.
     hist_data <- rbind(
       data.frame(
         xmin = head(hist_breaks, -1L),
@@ -957,19 +1037,27 @@ logist_density <- function(...) {
         limits = c(0, 1),
         breaks = seq(0, 1, by = 0.2),
         expand = ggplot2::expansion(mult = 0),
-        sec.axis = ggplot2::dup_axis(breaks = count_positions, labels = count_labels, name = "Count")
+        sec.axis = ggplot2::dup_axis(
+          breaks = count_positions,
+          labels = count_labels,
+          name = "Count",
+          guide = ggplot2::guide_axis(check.overlap = TRUE)
+        )
       ) +
       ggplot2::coord_cartesian(xlim = c(min_x, max_x))
   } else {
     .check_adjust(adjust)
+    density_height <- marginal.height %||% if (grouped) 0.05 else 0.15
+    .check_marginal_height(density_height, grouped = grouped)
 
     if (grouped) {
-      density_lane_height <- 0.05
+      density_lane_height <- density_height
       density_lane_gap <- density_lane_height * 0.2
       # The outermost density edge reaches the nominal y limit exactly. Reserve a small
       # display-only margin so geom_ribbon()'s centered outline stroke is not clipped by the
-      # panel border; this does not change the density estimates or their 0.05 lane height.
-      density_outline_padding <- density_lane_height * 0.15
+      # panel border. Because linewidth is measured in fixed physical units, retain the
+      # canonical 0.0075 padding as a floor when lanes are made unusually thin.
+      density_outline_padding <- max(density_lane_height * 0.15, 0.0075)
 
       estimate_group_density <- function(group_level, response) {
         cell_x <- data$x[data$group == group_level & data$y == response]
@@ -1129,9 +1217,8 @@ logist_density <- function(...) {
     }
 
     max_density <- max(vapply(densities, function(z) max(z$y), numeric(1)))
-    # Continuous filled ribbons are visually heavier than histogram bars, so cap the tallest
-    # density at 15% of the panel on each side (histograms retain their 25% cap).
-    density_height <- 0.15
+    # Continuous filled ribbons are visually heavier than histogram bars, so the default caps
+    # the tallest density at 15% of the panel on each side (histograms default to 25%).
     density_headroom <- max_density / density_height
     if (!is.finite(density_headroom) || density_headroom <= 0) {
       stop("Density estimation produced a non-finite or non-positive maximum density.",
