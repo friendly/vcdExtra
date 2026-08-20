@@ -91,15 +91,6 @@ Achim Zeileis
 data(Mental)
 indep <- glm(Freq ~ mental+ses,
                 family = poisson, data = Mental)
-Summarise(indep)
-#> Warning: 'Summarise' is deprecated.
-#> Use 'LRstats' instead.
-#> See help("Deprecated") and help("vcdExtra-deprecated").
-#> Likelihood summary table:
-#>          AIC    BIC LR Chisq Df Pr(>Chisq)    
-#> indep 209.59 220.19   47.418 15  3.155e-05 ***
-#> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
 
@@ -110,18 +101,12 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore,
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
 
+# Summarise() is deprecated; see LRstats() for the same comparison
+if (FALSE) { # \dontrun{
+Summarise(indep)
+
 # compare models
 Summarise(indep, coleff, roweff, linlin)
-#> Warning: 'Summarise' is deprecated.
-#> Use 'LRstats' instead.
-#> See help("Deprecated") and help("vcdExtra-deprecated").
-#> Likelihood summary table:
-#>           AIC    BIC LR Chisq Df Pr(>Chisq)    
-#> indep  209.59 220.19   47.418 15  3.155e-05 ***
-#> coleff 179.00 195.50    6.829 10     0.7415    
-#> roweff 174.45 188.59    6.281 12     0.9013    
-#> linlin 174.07 185.85    9.895 14     0.7698    
-#> ---
-#> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+} # }
 
 ```
