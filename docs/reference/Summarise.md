@@ -1,11 +1,15 @@
 # Brief Summary of Model Fit for glm and loglm Models
 
-For `glm` objects, the `print` and `summary` methods give too much
-information if all one wants to see is a brief summary of model goodness
-of fit, and there is no easy way to display a compact comparison of
-model goodness of fit for a collection of models fit to the same data.
-All `loglm` models have equivalent glm forms, but the `print` and
-`summary` methods give quite different results.
+**Deprecated**: use
+[`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
+instead, which provides the same brief model-fit comparison.
+`Summarise()` predates
+[`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
+and its capitalized name reads as an easy-to-mistype near-collision with
+[`dplyr::summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)
+(which this package also imports internally) –
+[`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
+avoids the naming clash entirely and is otherwise a drop-in replacement.
 
 ## Usage
 
@@ -51,6 +55,13 @@ from the names of the model object(s).
 
 ## Details
 
+For `glm` objects, the `print` and `summary` methods give too much
+information if all one wants to see is a brief summary of model goodness
+of fit, and there is no easy way to display a compact comparison of
+model goodness of fit for a collection of models fit to the same data.
+All `loglm` models have equivalent glm forms, but the `print` and
+`summary` methods give quite different results.
+
 `Summarise` provides a brief summary for one or more models fit to the
 same dataset for which `logLik` and `nobs` methods exist (e.g., `glm`
 and `loglm` models).
@@ -81,6 +92,9 @@ data(Mental)
 indep <- glm(Freq ~ mental+ses,
                 family = poisson, data = Mental)
 Summarise(indep)
+#> Warning: 'Summarise' is deprecated.
+#> Use 'LRstats' instead.
+#> See help("Deprecated") and help("vcdExtra-deprecated").
 #> Likelihood summary table:
 #>          AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> indep 209.59 220.19   47.418 15  3.155e-05 ***
@@ -98,6 +112,9 @@ linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
 
 # compare models
 Summarise(indep, coleff, roweff, linlin)
+#> Warning: 'Summarise' is deprecated.
+#> Use 'LRstats' instead.
+#> See help("Deprecated") and help("vcdExtra-deprecated").
 #> Likelihood summary table:
 #>           AIC    BIC LR Chisq Df Pr(>Chisq)    
 #> indep  209.59 220.19   47.418 15  3.155e-05 ***

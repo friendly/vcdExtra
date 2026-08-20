@@ -4,6 +4,18 @@
 
 This is a significant release, with a number of new features
 
+- [`Summarise()`](https://friendly.github.io/vcdExtra/reference/Summarise.md)
+  is now formally deprecated (`.Deprecated("LRstats")`), in favor of
+  [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md),
+  which provides the same brief model-fit comparison.
+  [`Summarise()`](https://friendly.github.io/vcdExtra/reference/Summarise.md)’s
+  capitalized name reads as an easy-to-mistype near-collision with
+  [`dplyr::summarise()`](https://dplyr.tidyverse.org/reference/summarise.html),
+  which vcdExtra also imports internally;
+  [`LRstats()`](https://friendly.github.io/vcdExtra/reference/LRstats.md)
+  has been the recommended replacement since 0.6-5 but was never
+  actually wired up to warn. See `?vcdExtra-deprecated`.
+
 - Added
   [`logist_plot()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
   for plotting a `glm(y ~ x, family = binomial)` fit for a single

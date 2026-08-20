@@ -1,6 +1,6 @@
 # vcdExtra _(Extensions and additions to vcd: Visualizing Categorical Data)
 
-Version 0.9.8; documentation built for `pkgdown` 2026-08-17
+Version 0.9.8; documentation built for `pkgdown` 2026-08-20
 
 This package provides additional data sets, documentation, and many
 functions designed to extend the
@@ -227,8 +227,8 @@ vcdExtra::datasets("vcdExtra")[,1]
 ### 📖 Vignettes
 
 A [collection of **tutorial
-vignettes**](https://cran.r-project.org/web/packages/vcdExtra/vignettes/).
-In the installed package, they can be viewed using
+vignettes**](https://CRAN.R-project.org/package=vcdExtra). In the
+installed package, they can be viewed using
 `browseVignettes(package = "vcdExtra")`;
 
 ``` r

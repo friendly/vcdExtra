@@ -5,17 +5,15 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Brief Summary of Model Fit for glm and loglm Models — Summarise"><meta name="description" content="For glm objects, the print and summary methods give too
-much information if all one wants to see is a brief summary of model
-goodness of fit, and there is no easy way to display a compact comparison of
-model goodness of fit for a collection of models fit to the same data. All
-loglm models have equivalent glm forms, but the print and
-summary methods give quite different results."><meta property="og:description" content="For glm objects, the print and summary methods give too
-much information if all one wants to see is a brief summary of model
-goodness of fit, and there is no easy way to display a compact comparison of
-model goodness of fit for a collection of models fit to the same data. All
-loglm models have equivalent glm forms, but the print and
-summary methods give quite different results."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Brief Summary of Model Fit for glm and loglm Models — Summarise"><meta name="description" content="Deprecated: use LRstats() instead, which provides the same brief
+model-fit comparison. Summarise() predates LRstats() and its capitalized
+name reads as an easy-to-mistype near-collision with dplyr::summarise()
+(which this package also imports internally) – LRstats() avoids the
+naming clash entirely and is otherwise a drop-in replacement."><meta property="og:description" content="Deprecated: use LRstats() instead, which provides the same brief
+model-fit comparison. Summarise() predates LRstats() and its capitalized
+name reads as an easy-to-mistype near-collision with dplyr::summarise()
+(which this package also imports internally) – LRstats() avoids the
+naming clash entirely and is otherwise a drop-in replacement."><meta property="og:image" content="https://friendly.github.io/vcdExtra/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -50,12 +48,11 @@ summary methods give quite different results."><meta property="og:image" content
     </div>
 
     <div class="ref-description section level2">
-    <p>For <code>glm</code> objects, the <code>print</code> and <code>summary</code> methods give too
-much information if all one wants to see is a brief summary of model
-goodness of fit, and there is no easy way to display a compact comparison of
-model goodness of fit for a collection of models fit to the same data. All
-<code>loglm</code> models have equivalent glm forms, but the <code>print</code> and
-<code>summary</code> methods give quite different results.</p>
+    <p><strong>Deprecated</strong>: use <code><a href="LRstats.html">LRstats()</a></code> instead, which provides the same brief
+model-fit comparison. <code>Summarise()</code> predates <code><a href="LRstats.html">LRstats()</a></code> and its capitalized
+name reads as an easy-to-mistype near-collision with <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">dplyr::summarise()</a></code>
+(which this package also imports internally) – <code><a href="LRstats.html">LRstats()</a></code> avoids the
+naming clash entirely and is otherwise a drop-in replacement.</p>
     </div>
 
     <div class="section level2">
@@ -101,7 +98,13 @@ from the names of the model object(s).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>Summarise</code> provides a brief summary for one or more models fit to the
+    <p>For <code>glm</code> objects, the <code>print</code> and <code>summary</code> methods give too
+much information if all one wants to see is a brief summary of model
+goodness of fit, and there is no easy way to display a compact comparison of
+model goodness of fit for a collection of models fit to the same data. All
+<code>loglm</code> models have equivalent glm forms, but the <code>print</code> and
+<code>summary</code> methods give quite different results.</p>
+<p><code>Summarise</code> provides a brief summary for one or more models fit to the
 same dataset for which <code>logLik</code> and <code>nobs</code> methods exist (e.g.,
 <code>glm</code> and <code>loglm</code> models).</p>
 <p>The function relies on residual degrees of freedom for the LR chisq test
@@ -126,6 +129,9 @@ from <code>lm</code>, <code>glm</code>, <code>loglm</code>, <code>polr</code> an
 <span class="r-in"><span><span class="va">indep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Freq</span> <span class="op">~</span> <span class="va">mental</span><span class="op">+</span><span class="va">ses</span>,</span></span>
 <span class="r-in"><span>                family <span class="op">=</span> <span class="va">poisson</span>, data <span class="op">=</span> <span class="va">Mental</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">Summarise</span><span class="op">(</span><span class="va">indep</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'Summarise' is deprecated.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Use 'LRstats' instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> See help("Deprecated") and help("vcdExtra-deprecated").</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> indep 209.59 220.19   47.418 15  3.155e-05 ***</span>
@@ -143,6 +149,9 @@ from <code>lm</code>, <code>glm</code>, <code>loglm</code>, <code>polr</code> an
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compare models</span></span></span>
 <span class="r-in"><span><span class="fu">Summarise</span><span class="op">(</span><span class="va">indep</span>, <span class="va">coleff</span>, <span class="va">roweff</span>, <span class="va">linlin</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'Summarise' is deprecated.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Use 'LRstats' instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> See help("Deprecated") and help("vcdExtra-deprecated").</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Likelihood summary table:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           AIC    BIC LR Chisq Df Pr(&gt;Chisq)    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> indep  209.59 220.19   47.418 15  3.155e-05 ***</span>
