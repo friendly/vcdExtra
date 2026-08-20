@@ -5,6 +5,8 @@ inst/doc/*.pdf
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .build-steps.R
+.release_checks.R
+^\.release_check_result\.rds$
 Rplots.pdf
 ^CRAN-RELEASE$
 ^revdep/
