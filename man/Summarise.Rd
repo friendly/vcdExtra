@@ -31,14 +31,20 @@ A data frame (also of class \code{anova}) with columns
 from the names of the model object(s).
 }
 \description{
+\strong{Deprecated}: use \code{\link[=LRstats]{LRstats()}} instead, which provides the same brief
+model-fit comparison. \code{Summarise()} predates \code{LRstats()} and its capitalized
+name reads as an easy-to-mistype near-collision with \code{dplyr::summarise()}
+(which this package also imports internally) -- \code{LRstats()} avoids the
+naming clash entirely and is otherwise a drop-in replacement.
+}
+\details{
 For \code{glm} objects, the \code{print} and \code{summary} methods give too
 much information if all one wants to see is a brief summary of model
 goodness of fit, and there is no easy way to display a compact comparison of
 model goodness of fit for a collection of models fit to the same data. All
 \code{loglm} models have equivalent glm forms, but the \code{print} and
 \code{summary} methods give quite different results.
-}
-\details{
+
 \code{Summarise} provides a brief summary for one or more models fit to the
 same dataset for which \code{logLik} and \code{nobs} methods exist (e.g.,
 \code{glm} and \code{loglm} models).
