@@ -3,13 +3,85 @@
 Broken out from the cross-package working list in `C:\Users\friendly\Dropbox\R\TASKS.md`
 (2026-07-28). This package's local clone was significantly behind origin/master (HEAD was at
 `c758cb9`, ~73 commits stale) when this file was created — pulled forward to `0dfa83b` first, so
-the list below reflects the current repo state (v0.9.7), not the older audit. Update here as items
+the list below reflects the current repo state, not the older audit. Update here as items
 are finished; sync back to the main list only if it's useful to see vcdExtra status at a glance.
+
+**Updated 2026-08-20**: package is at v0.9.8 (unreleased; current CRAN version is 0.9.7), and
+Michael is actively working toward a CRAN release of the accumulated 0.9.8 work — see "Release
+checklist status" below for where that stands.
 
 By far the messiest of the packages reviewed so far — uses `dev/`, `extra/`, *and* `issues/` as
 scratch folders.
 
 As these items are resolved, check them off as [X]
+
+## Recent work (2026-08-17 to 2026-08-20)
+
+- [X] **`CMHtest3()` `Df`/`Prob` bug** (#2, PR #26) — `CMHtest3()` (the internal `overall = TRUE`
+  helper) extracted the overall `Df` column as an unnamed vector, so `Df[type]` returned `NA`
+  whenever `types` wasn't the full default set of four. Reported by @bill-raynor (2018) and
+  @imazubi (2026); @danielinteractive's fix in PR #26 was correct but the PR itself could no longer
+  merge cleanly (`R/CMHtest.R` had been rewritten via a roxygen2md conversion after the PR was
+  opened) — ported the one-line `stats::setNames()` fix directly onto `master`, plus PR #26's two
+  regression tests and its `DESCRIPTION`/ORCID update for Daniel. PR #26 closed, #2 auto-closed.
+
+- [X] **`drop1.loglm()`/`LRanova()`/`assoc_strength()`** — promoted from `dev/anova-like/` to `R/`.
+  Term-level deletion tests for a `loglm` model's generating class (`drop1.loglm()`, also an S3
+  method for `stats::drop1()`), a partial-R² wrapper (`LRanova()`), and a partial Cramer's V/Cohen's
+  w wrapper (`assoc_strength()`). Comparison against `stats::drop1.glm()` on the equivalent Poisson
+  GLM documented in `dev/anova-like/drop1-compare.R` and summarized in the `@details` of
+  `drop1.loglm()`'s roxygen.
+
+- [X] **pkgdown GHA workflow stuck queuing** — `.github/workflows/pkgdown.yaml`'s concurrency group
+  intentionally collapses to the same literal group for every push (by design, to stop concurrent
+  writes to `docs/`), but was missing `cancel-in-progress: true` — so pushes queued strictly FIFO
+  instead of the newest push preempting a stale one, observed as a run stuck "pending" with zero
+  steps started for 25+ minutes. Fixed by adding `cancel-in-progress: true`; confirmed working
+  (a stuck run got cancelled immediately once a new push landed).
+
+### Release checklist status (toward CRAN submission of 0.9.8)
+
+Added `.release_checks.R` (adapted from `C:\R\Projects\heplots\.release_checks.R`) — see that
+file's own header for what each `release_*()` step does. Local/automatable steps have all been run
+once already:
+
+- `release_preflight`, `release_document`, `release_spelling`: clean.
+
+- `release_urls`: 20 URLs flagged. One real fix made (README's CRAN vignettes link wasn't in
+  canonical form). Rest are noise: one `vignettes/vcd.bib` hit is a checker false-positive on an
+  already-commented-out (`%%`) line; the other 15 in `vcd.bib` turned out to belong to citation keys
+  that are never actually cited in any of the 9 vignettes (`vcd.bib` is inherited wholesale from
+  `vcd`'s own bibliography, most entries unused here) — left alone per Michael's call, revisit later
+  if CRAN's own incoming check flags them (raw `.bib` source ships in the tarball regardless of
+  citation status, so it's still theoretically visible to CRAN even though invisible to readers).
+
+- `release_site`: README re-rendered; pkgdown site confirmed live via the (now-fixed) GHA workflow.
+
+- `release_build`: OK. Two non-blocking notes: a handful of vignettes emit `[WARNING] Citeproc:
+  citation ref/fig not found` (looks like literal `@ref`/`@fig` text meant as bookdown-style
+  cross-references, written without the backslash — cosmetic, not investigated further);
+  `devtools::build_vignettes()` (used internally) is deprecated as of devtools 2.5.0, script may
+  need updating eventually.
+
+- `release_check`: **0 errors, 0 warnings, 0 notes.**
+
+- `release_revdep`: **10/10 OK, 0 broken, 0 new problems** (junco's 1 pre-existing error is present
+  under CRAN's current vcdExtra too, confirmed via `revdep/cran.md`'s "0 new problems").
+
+- `release_check_win` (win-builder): **blocked** — both this session's sandbox and Michael's own
+  network get a hard connection timeout hitting `win-builder.r-project.org` specifically (confirmed
+  via direct `curl`: `cran.r-project.org` responds fine in 0.4s, win-builder times out completely on
+  both HTTPS and FTP). Not a transient retry-fixable issue. Worth trying again later, or consider
+  adding a `release_check_rhub()` step (`rhub::rhub_check()`, GitHub-Actions-based, no FTP
+  dependency) as an alternative — flagged as a TODO in heplots' own `.release_checks.R` too, so
+  worth doing once and reusing the pattern across both packages.
+
+- `release_cran_comments`: not yet run (wants `release_check_win`/`release_revdep` output first,
+  though revdep's part is now ready).
+
+Still manual/not started: bump `DESCRIPTION` `Version`/`Date` right before actual submission (not
+before — see `release_preflight()`'s own staleness warning), review/finalize `cran-comments.md`,
+`devtools::release()`.
 
 ## `vcd` package migration (2026-07-29, updated 2026-07-30)
 
@@ -90,8 +162,26 @@ of `vcd`'s build).
 - [ ] **Hurdle-model test/methods** — adapted from `pscl::hurdletest`; unclear final intent, not
   shipped. Files: `dev/hurdletest.R`, `dev/hurdle-methods.R`, `dev/hurdle-test.R`
 
-- [ ] **Log-histogram plot** — no NEWS mention, not shipped. This is an idea to display logistic regression fits
-  with histograms of the 0/1 values at bottom/top. File: `dev/loghistplot.R`
+- [X] **Log-histogram plot** — shipped 2026-08-19 as `R/logist_plot.R` (moved from
+  `dev/loghistplot/logist-plot.R`, formerly "v3"). `logist_plot()` (generic, with vector/
+  data.frame/formula methods) plots a `glm(y ~ x, family = binomial)` fit with a representation of
+  the marginal distribution of `x` within each response group — mirrored histograms
+  (`marginal = "hist"`), filled density estimates (`"density"`), or jittered points (`"points"`),
+  per Smart et al. (2004). `logist_hist()`/`logist_point()`/`logist_density()` are fixed-`marginal=`
+  convenience wrappers. Also shipped: optional `group=` for grouped fits/marginals with
+  `group.colors=`; `fit.args=`/`marginal.args=` scoped-list layer customization (design in
+  `dev/loghistplot/implemented-plans/forwarding.md`); `marginal.height=` to control the vertical
+  space given to the marginal display (design in `dev/loghistplot/marginal_height.md`). `ggplot2`
+  moved from `Suggests` to `Imports` accordingly. 46 `testthat` tests added
+  (`tests/testthat/test-logist_plot.R`). A copy is kept at `dev/loghistplot/logist-plot.R` pending
+  cleanup (see Clean-up candidates below); `dev/loghistplot/loghistplot4.R` (an alternate,
+  thinner-strip grouped-density rendering, kept for visual comparison — never shipped) and
+  `dev/loghistplot/logist-plot-history.md` (the file's development log, split out before promotion
+  to `R/`) are still there too. **Deferred, not yet implemented**: expressing `group=` as
+  `y ~ x | group` in the formula, matching `CMHtest()`'s `|`-strata convention — design notes in
+  `dev/loghistplot/formula-groups.md` (base R's `model.frame()`/`terms()` don't support `|` as a
+  conditioning operator at all, so this needs hand-parsing like `CMHtest.formula()` already does,
+  not a `model.frame()` trick).
 
 - [ ] **New shading idea**: `shading_marimekko()` — a non-residual-based mosaic shading using distinct
   colors per split (like `ggmosaic`), sketched in `dev/vcdExtra-new.md`; would extend a function
@@ -123,11 +213,18 @@ of `vcd`'s build).
 - [ ] `R/CMHtest.R` — 2 live TODOs in the source: better p-value printing, determining/labeling score
   types (integer vs midrank).
 
-- [ ] **`Summarise()` vs `LRstats()` duplication** — `Summarise.R` is still a near-duplicate of
-  `LRstats.R`, never formally deprecated (no `vcdExtra-deprecated.R` exists; the `.Deprecated()`
-  call in `Summarise()` is commented out). Flagged in `issues/improvement-suggestions.md` as
-  unresolved. Note: don't confuse with the lowercase `summarise()` generic, which *is* already
-  deprecated (see clean-up list below) — that's a separate, already-resolved item.
+- [X] **`Summarise()` vs `LRstats()` duplication** — resolved 2026-08-20. Motivated by `Summarise()`'s
+  capitalized name being a near-collision with `dplyr::summarise()`, which vcdExtra also imports
+  internally (confirmed: `NAMESPACE` has `importFrom(dplyr, ..., summarise)` alongside
+  `export(Summarise)`). Activated the previously-commented-out `.Deprecated("LRstats", package =
+  "vcdExtra")` call in `Summarise()`'s generic (fires on every call regardless of dispatch method);
+  added `R/vcdExtra-deprecated.R` (the `?vcdExtra-deprecated` topic `.Deprecated()` already pointed
+  to but which never existed); updated `Summarise()`'s roxygen with a deprecation notice pointing to
+  `LRstats()`; NEWS entry added. No internal callers (`R/`, `tests/`, `vignettes/`) needed updating.
+  Note: don't confuse with the lowercase `summarise()` generic, which was a *different*, older,
+  already-fully-removed function (see clean-up list below) — that was a separate, already-resolved
+  item.
+
 - [ ] `issues/improvement-suggestions.md` — a large Dec-2025 backlog audit (12 sections: testing, CI,
   performance, docs, community...) written against v0.8-7. Partly stale now (package is v0.9.7,
   CI already exists via `.github/`), but several items look still open (test coverage, error
