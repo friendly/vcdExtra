@@ -58,7 +58,6 @@ from \code{lm}, \code{glm}, \code{loglm}, \code{polr} and \code{negbin}.
 data(Mental)
 indep <- glm(Freq ~ mental+ses,
                 family = poisson, data = Mental)
-Summarise(indep)
 Cscore <- as.numeric(Mental$ses)
 Rscore <- as.numeric(Mental$mental)
 
@@ -69,8 +68,13 @@ roweff <- glm(Freq ~ mental + ses + mental:Cscore,
 linlin <- glm(Freq ~ mental + ses + Rscore:Cscore,
                 family = poisson, data = Mental)
 
+# Summarise() is deprecated; see LRstats() for the same comparison
+\dontrun{
+Summarise(indep)
+
 # compare models
 Summarise(indep, coleff, roweff, linlin)
+}
 
 
 }
