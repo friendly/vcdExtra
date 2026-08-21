@@ -2,7 +2,9 @@
 
 ## Version 0.9.8
 
-This is a significant release, with a number of new features
+This is a significant release, with a number of new features, notably
+plotting logistic regression models with display of marginal
+distributions of x, and term-level tests for loglinear models.
 
 - [`Summarise()`](https://friendly.github.io/vcdExtra/reference/Summarise.md)
   is now formally deprecated (`.Deprecated("LRstats")`), in favor of
