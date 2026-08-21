@@ -90,8 +90,11 @@ Description: Provides additional data sets, methods and documentation to complem
     and the 'gnm' package for Generalized Nonlinear Models.
 	In particular, 'vcdExtra' extends mosaic, assoc and sieve plots from 'vcd' to handle 'glm()' and 'gnm()' models and
 	adds a 3D version in 'mosaic3d'.  Additionally, methods are provided for comparing and visualizing lists of
-	'glm' and 'loglm' objects. This package is now a support package for the book, "Discrete Data Analysis with R" by
-  Michael Friendly and David Meyer.
+	'glm' and 'loglm' objects. This package is now a support package for the book Friendly, M. and Meyer, D.
+  (2016, ISBN:978-1-4987-2583-5) 'Discrete Data Analysis with R: Visualization and Modeling Techniques for
+  Categorical and Count Data'. Recent work adds colorized tables of frequencies to highlight patterns of association,
+  association graphs to visualize conditional independence and a variety of new or improved statistical tests for
+  categorical data analysis.
 License: GPL (>=2)
 URL: https://friendly.github.io/vcdExtra/, https://github.com/friendly/vcdExtra
 BugReports: https://github.com/friendly/vcdExtra/issues
