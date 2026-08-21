@@ -1,7 +1,7 @@
 ## Test environments
 * local Windows 10 x64 install, R version 4.6.1 (2026-06-24 ucrt)
 * R-hub v2: linux, macos-arm64, windows (R-devel) -- all OK (2026-08-20)
-* win-builder (R-devel): attempted 2026-08-20, blocked by a persistent connection timeout reaching win-builder.r-project.org specifically (confirmed from two independent networks; other hosts, including cran.r-project.org, are reachable fine) -- not yet completed
+* win-builder: R Under development (unstable) (2026-08-17 r90424 ucrt)
 
 ## R CMD check results
 0 error(s) | 0 warning(s) | 0 note(s)
@@ -21,14 +21,9 @@ We checked 10 reverse dependencies, comparing R CMD check results across CRAN an
 
 ## Version 0.9.8
 
-This is a significant release, with a number of new features
-
-* `Summarise()` is now formally deprecated (`.Deprecated("LRstats")`), in
-favor of `LRstats()`, which provides the same brief model-fit comparison.
-`Summarise()`'s capitalized name reads as an easy-to-mistype near-collision
-with `dplyr::summarise()`, which vcdExtra also imports internally; `LRstats()`
-has been the recommended replacement since 0.6-5 but was never actually
-wired up to warn. See `?vcdExtra-deprecated`.
+This is a significant release, with a number of new features, notably plotting
+logistic regression models with display of marginal distributions of x,
+and term-level tests for loglinear models.
 
 * Added `logist_plot()` for plotting a `glm(y ~ x, family = binomial)` fit for a single
 quantitative predictor together with a representation of the marginal distribution of `x`
@@ -57,4 +52,11 @@ baseline model.
 effect-size column, generalized to terms of any order. The fitted models underlying each test
 are attached as a `loglmlist` (`attr(., "models")`), reusable directly with `mosaic()`,
 `LRstats()`, and `get_models()` without refitting.
+
+* `Summarise()` is now formally deprecated (`.Deprecated("LRstats")`), in
+favor of `LRstats()`, which provides the same brief model-fit comparison.
+`Summarise()`'s capitalized name reads as an easy-to-mistype near-collision
+with `dplyr::summarise()`, which vcdExtra also imports internally; `LRstats()`
+has been the recommended replacement since 0.6-5 but was never actually
+wired up to warn. See `?vcdExtra-deprecated`.
 
