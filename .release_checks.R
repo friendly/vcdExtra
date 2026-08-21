@@ -225,7 +225,19 @@ release_revdep <- function(num_workers = 4) {
 #'        issues known for vcdExtra yet; pass a character vector if one
 #'        turns up (e.g. from release_check_win()'s incoming-feasibility
 #'        output), or leave NULL to omit the section.
-release_cran_comments <- function(known_issues = NULL) {
+#' @param rhub_status Optional single string describing R-hub results, added
+#'        as an extra "Test environments" bullet (e.g.
+#'        `"* R-hub v2: linux, macos-arm64, windows (R-devel) -- all OK"`).
+#'        There's no `release_check_rhub()` step (yet) to source this from
+#'        automatically -- `rhub::rhub_check()` runs asynchronously via GitHub
+#'        Actions, so summarize its `gh run view` result by hand. Leave NULL
+#'        (default) to omit the bullet entirely, e.g. if R-hub wasn't run.
+#' @param winbuilder_status Optional single string overriding the default
+#'        `"* win-builder (R-devel)"` bullet -- use this if win-builder
+#'        wasn't actually reachable/completed, so cran-comments.md doesn't
+#'        silently claim an environment that wasn't actually checked.
+release_cran_comments <- function(known_issues = NULL, rhub_status = NULL,
+                                   winbuilder_status = "* win-builder (R-devel)") {
   info <- release_preflight()
 
   check_section <- if (file.exists(".release_check_result.rds")) {
@@ -269,10 +281,17 @@ release_cran_comments <- function(known_issues = NULL) {
     ""
   }
 
+  # paste0(), not glue::glue() -- glue::glue() always strips exactly one
+  # trailing newline from its result (see known_issues_section above), which
+  # would otherwise run these two lines together with no line break.
+  rhub_line <- if (!is.null(rhub_status)) paste0(rhub_status, "\n") else ""
+  winbuilder_line <- if (!is.null(winbuilder_status)) paste0(winbuilder_status, "\n") else ""
+
   content <- glue::glue(
     "## Test environments\n",
     "* local {Sys.info()[['sysname']]} {Sys.info()[['release']]} install, {R.version.string}\n",
-    "* win-builder (R-devel)\n",
+    "{rhub_line}",
+    "{winbuilder_line}",
     "\n",
     "## R CMD check results\n",
     "{check_section}\n",
