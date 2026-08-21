@@ -2,7 +2,7 @@
 % Please edit documentation in R/logseries.R
 \name{dlogseries}
 \alias{dlogseries}
-\alias{Logseries}
+\alias{logseries}
 \alias{plogseries}
 \alias{qlogseries}
 \alias{rlogseries}

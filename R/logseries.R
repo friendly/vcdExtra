@@ -14,7 +14,7 @@
 #' \eqn{\alpha= -1 / \log(1 - p)} and \eqn{0 < p < 1}.
 #' % Note that counts `x==2` cannot occur.
 #'
-#' @aliases Logseries dlogseries plogseries qlogseries rlogseries
+#' @aliases logseries dlogseries plogseries qlogseries rlogseries
 #' @param x,q vector of quantiles representing the number of events.
 #' @param prob parameter for the distribution, `0 < prob < 1`
 #' @param log,log.p logical; if TRUE, probabilities `p` are given as `log(p)`
