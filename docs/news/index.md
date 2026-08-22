@@ -2,6 +2,8 @@
 
 ## Version 0.9.8
 
+CRAN release: 2026-08-21
+
 This is a significant release, with a number of new features, notably
 plotting logistic regression models with display of marginal
 distributions of x, and term-level tests for loglinear models.
