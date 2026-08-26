@@ -16,10 +16,21 @@
 #       standalone pkgdown/assets/404.html)
 # DONE: 2026-08-11 tried in vcdExtra (see heplots/dev/404.R for the
 #       original) -- confirms the function is portable across packages
-# FIXME: pkgdown_404_install() relies on undocumented pkgdown behavior:
-#        build_404() only writes docs/404.html when .github/404.md is
-#        *absent* -- read from pkgdown:::build_404 source, verified against
-#        pkgdown 2.2.1. Could change in a future pkgdown release.
+# DONE: 2026-08-26 installed in HistData, copied verbatim from heplots/vcdExtra
+# DONE: 2026-08-26 pkgdown::build_home() (and build_site()) was found to
+#       actively overwrite docs/404.html with its own templated render of
+#       the .github/404.md marker's (comment-only) content -- so the
+#       earlier FIXME's assumption was wrong, or at least incomplete: the
+#       marker's presence does NOT stop build_404() from writing a page,
+#       it only stops pkgdown's *default* boilerplate page. The asset copy
+#       that puts our real 404.html/404.png in place happens in
+#       init_site(), which must run AFTER build_404()/build_home() to win.
+#       pkgdown_404_install() now calls init_site() itself at the end, but
+#       this must be re-run after any LATER build_site()/build_home() call
+#       too, since those will re-clobber docs/404.html each time.
+# FIXME: this ordering dependency relies on undocumented pkgdown internals
+#        (verified against pkgdown 2.2.1) and could change in a future
+#        pkgdown release.
 
 library(ggplot2)
 library(showtext)
@@ -121,7 +132,12 @@ make_404_page <- function(package,
 #' `404.html` beside it in `pkgdown/assets/` (copied verbatim into `docs/`
 #' on every pkgdown build), and adds a `.github/404.md` marker file so
 #' pkgdown's own `build_404()` doesn't overwrite it with its bare-bones
-#' default page.
+#' default page, then runs [pkgdown::init_site()] to actually copy the
+#' assets into `docs/` -- `build_404()` writes *some* page to
+#' `docs/404.html` regardless of the marker (see DONE log above), so the
+#' asset copy has to happen last to win. Re-run `pkgdown::init_site()`
+#' yourself after any later `build_site()`/`build_home()` call, or the
+#' custom page will get overwritten again.
 #'
 #' The `404.html` written here is a small standalone page (its own
 #' `<head>`/`<style>`, no site navbar) rather than one built through
@@ -210,7 +226,12 @@ pkgdown_404_install <- function(package,
   message(glue("Wrote {img_file}"))
   message(glue("Wrote {marker_path}"))
   message(glue("Wrote {html_path}"))
-  message("Next: run pkgdown::build_site() (or build_home()) to publish.")
+
+  pkgdown::init_site(pkg = pkg_root)
+  message("Ran pkgdown::init_site() to copy the custom 404 page into docs/ now.")
+  message("NOTE: any LATER pkgdown::build_site()/build_home() call will overwrite")
+  message("docs/404.html again (see FIXME above) -- re-run pkgdown::init_site()")
+  message("afterward each time to restore the custom page.")
 
   invisible(list(image = img_file, marker = marker_path, html = html_path))
 }
