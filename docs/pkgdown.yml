@@ -1,4 +1,4 @@
-pandoc: 3.1.2
+pandoc: 3.8.3
 pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
@@ -13,7 +13,7 @@ articles:
   articles/color_table: color_table.html
   datasets: datasets.html
   tidyCats: tidyCats.html
-last_built: 2026-08-26T17:41Z
+last_built: 2026-08-26T17:46Z
 urls:
   reference: https://friendly.github.io/vcdExtra/reference
   article: https://friendly.github.io/vcdExtra/articles
