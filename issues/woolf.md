@@ -447,6 +447,45 @@ Property-based tests over many randomly generated positive tables would be
 particularly useful for ensuring that a purported chi-squared component never
 becomes materially negative.
 
+## Related
+
+A companion derivation,
+[`planning/woolf-decomposition.md`](https://github.com/gklorfine/GeneralWoolf/blob/master/planning/woolf-decomposition.md)
+in the separate [`GeneralWoolf`](https://github.com/gklorfine/GeneralWoolf)
+GitHub project (Gavin Klorfine), works out *why* the failure above occurs,
+from the geometry of the weighted quadratic form, going beyond what's
+argued here:
+
+- It reduces the "Two separable issues" argument above to an inner-product
+  statement: under the *ordinary* (equal-weight) inner product, row-contrast
+  and column-contrast spaces are orthogonal for *any* complete $R \times C$
+  factorial layout -- that's the free, textbook two-way ANOVA identity. Woolf
+  weighting replaces that inner product with $\langle u,v\rangle_W =
+  \sum_{ij} w_{ij}u_{ij}v_{ij}$, and the orthogonality argument simply does
+  not transfer to $\langle\cdot,\cdot\rangle_W$ in general.
+- It derives a precise condition for when order-free (Type II/III-style)
+  additivity *would* survive unequal weighting: the weight table $w_{ij}$
+  must be (at least effectively) separable, $w_{ij} = r_i c_j$. Equal
+  weights are the degenerate case $r_i = c_j = 1$.
+- It confirms, by SVD of the weight matrix from the counterexample above,
+  that Woolf weights are generically *not* separable (a second singular
+  value carrying real variance, not rank 1) -- so order-dependence isn't a
+  pathological edge case, it's the expected outcome.
+- It gives a self-contained fallback proof that doesn't require the
+  separability theorem: for the counterexample data, $Q_R = 54.620$
+  (rows unadjusted) and $Q_{R\mid C} = 63.352$ (rows adjusted for columns)
+  are both valid nested-model statistics that differ by 8.7; no single
+  order-free "the row effect" could equal both, so no order-free split
+  exists for this table.
+- It identifies a **second, independent fault** in the current code, beyond
+  the weighting/ordering issue discussed here: `rows`/`cols` are recomputed
+  from pooled counts (`apply(x, c(1,2,3), sum)`, etc.), and because the log
+  odds ratio is non-collapsible, $\log$ of a ratio of summed counts is not a
+  weighted average of the original $\log$ odds ratios. So the current
+  `rows`/`cols` values aren't even linear functionals of $y_{ij}$ -- they
+  wouldn't participate correctly in *any* quadratic-form decomposition, even
+  one with fully separable weights.
+
 ## Related code
 
 `breslow_day_test(x, decompose = TRUE)` currently uses the same general pattern:
