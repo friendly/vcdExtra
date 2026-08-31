@@ -644,6 +644,8 @@ Other functions for visualizing contingency tables
   : Include an HTML-renderable object in any knitr output format
 - [`mcaplot()`](https://friendly.github.io/vcdExtra/reference/mcaplot.md)
   : Simple and enhanced plot of MCA solutions
+- [`woolf_twoway()`](https://friendly.github.io/vcdExtra/reference/woolf_twoway.md)
+  : Weighted Two-Way (Tukey) Decomposition of Log Odds Ratios
 - [`logist_plot()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
   [`logist_hist()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)
   [`logist_point()`](https://friendly.github.io/vcdExtra/reference/logist_plot.md)

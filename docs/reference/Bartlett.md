@@ -88,13 +88,15 @@ MASS::loglm(formula = ~(Alive + Time + Length)^2, data = Bartlett)
 #> Pearson          2.270373  1 0.1318681
 
 # Use woolf_test() for a formal test of homogeneity of odds ratios
-vcd::woolf_test(Bartlett)
+woolf_test(Bartlett)
 #> 
-#>  Woolf-test on Homogeneity of Odds Ratios (no 3-Way assoc.)
+#> Woolf-test on Homogeneity of Odds Ratios (no 3-way association) 
 #> 
-#> data:  Bartlett
-#> X-squared = 2.264, df = 1, p-value = 0.1324
+#> Data:          Bartlett 
+#> OR variables:  Alive, Time 
+#> Strata:        Length 
 #> 
+#> X-squared = 2.2640, df = 1, p-value = 0.1324
 
 
 # Plots

@@ -83,6 +83,7 @@ Other association tests:
 [`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md),
 [`breslow_day_test()`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md),
 [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md),
+[`woolf_twoway()`](https://friendly.github.io/vcdExtra/reference/woolf_twoway.md),
 [`zero.test()`](https://friendly.github.io/vcdExtra/reference/zero.test.md)
 
 ## Author

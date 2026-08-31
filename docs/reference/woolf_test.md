@@ -68,11 +68,21 @@ containing the following components:
 
 - observed:
 
-  the observed log odds ratios.
+  the observed log odds ratios, as a flat vector.
 
 - expected:
 
   the expected log odds ratio under the null hypothesis (weighted mean).
+
+- LOR:
+
+  the log odds ratio for each stratum, shaped as an array over the
+  stratifying dimensions (e.g., a vector for a 3-way table, or an R x C
+  matrix for a 4-way table), with dimnames carried over from `x`.
+
+- LOR_se:
+
+  the standard error of each log odds ratio in `LOR`, same shape.
 
 - decomposed:
 
@@ -168,6 +178,7 @@ Other association tests:
 [`GKgamma()`](https://friendly.github.io/vcdExtra/reference/GKgamma.md),
 [`HLtest()`](https://friendly.github.io/vcdExtra/reference/HLtest.md),
 [`breslow_day_test()`](https://friendly.github.io/vcdExtra/reference/breslow_day_test.md),
+[`woolf_twoway()`](https://friendly.github.io/vcdExtra/reference/woolf_twoway.md),
 [`zero.test()`](https://friendly.github.io/vcdExtra/reference/zero.test.md)
 
 ## Examples
@@ -195,6 +206,19 @@ woolf_test(Heart)
 #> Strata:        Occup 
 #> 
 #> X-squared = 81.0807, df = 2, p-value = 0
+
+# Bartlett (1935): the classic example for testing no three-way
+# interaction / homogeneity of the odds ratio across strata
+data(Bartlett, package = "vcdExtra")
+woolf_test(Bartlett)
+#> 
+#> Woolf-test on Homogeneity of Odds Ratios (no 3-way association) 
+#> 
+#> Data:          Bartlett 
+#> OR variables:  Alive, Time 
+#> Strata:        Length 
+#> 
+#> X-squared = 2.2640, df = 1, p-value = 0.1324
 
 # 4-way table without decomposition
 data(Fungicide, package = "vcdExtra")

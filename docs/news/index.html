@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,11 @@
       <small>Source: <a href="https://github.com/friendly/vcdExtra/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.9.9" id="version-099">Version 0.9.9<a class="anchor" aria-label="anchor" href="#version-099"></a></h2>
+<ul><li><p><code><a href="../reference/woolf_test.html">woolf_test()</a></code> now returns <code>LOR</code> and <code>LOR_se</code>, the per-stratum log odds ratio and its standard error, shaped as an array over the stratifying dimensions (e.g., an R x C matrix for a 4-way table) rather than a flat vector, with dimnames carried over from the input. This avoids having to recompute them from scratch for further analysis of the log odds ratios.</p></li>
+<li><p>Added <code><a href="../reference/woolf_twoway.html">woolf_twoway()</a></code>, which decomposes the stratum log odds ratios of a 2 x 2 x R x C table into additive row and column effects, following Tukey’s two-way fit as implemented by the <code>twoway</code> package. Since <code><a href="https://friendly.github.io/twoway/reference/twoway.html" class="external-link">twoway::twoway()</a></code> has no <code>weight</code> argument, <code><a href="../reference/woolf_twoway.html">woolf_twoway()</a></code> fits the additive model directly by weighted least squares using the same Woolf inverse-variance weights as <code><a href="../reference/woolf_test.html">woolf_test()</a></code> (<code>weighted = TRUE</code>, the default), or via <code><a href="https://friendly.github.io/twoway/reference/twoway.html" class="external-link">twoway::twoway()</a></code> directly for the ordinary unweighted mean-polish (<code>weighted = FALSE</code>). The result is an object of class <code>"twoway"</code>, so <code>twoway</code>’s own <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>/<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> methods (<code>which = "fit"</code> or <code>"diagnose"</code>) work on it unchanged.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.8" id="version-098">Version 0.9.8<a class="anchor" aria-label="anchor" href="#version-098"></a></h2><p class="text-muted">CRAN release: 2026-08-21</p>
 <p>This is a significant release, with a number of new features, notably plotting logistic regression models with display of marginal distributions of x, and term-level tests for loglinear models.</p>

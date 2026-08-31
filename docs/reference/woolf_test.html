@@ -21,7 +21,7 @@ of the homogeneity test into row effects, column effects, and residual."><meta p
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,10 +109,18 @@ distribution of the test statistic.</p></dd>
 <dd><p>names of the stratifying variables (dimensions 3 and beyond).</p></dd>
 
 <dt>observed</dt>
-<dd><p>the observed log odds ratios.</p></dd>
+<dd><p>the observed log odds ratios, as a flat vector.</p></dd>
 
 <dt>expected</dt>
 <dd><p>the expected log odds ratio under the null hypothesis (weighted mean).</p></dd>
+
+<dt>LOR</dt>
+<dd><p>the log odds ratio for each stratum, shaped as an array over the
+stratifying dimensions (e.g., a vector for a 3-way table, or an R x C
+matrix for a 4-way table), with dimnames carried over from <code>x</code>.</p></dd>
+
+<dt>LOR_se</dt>
+<dd><p>the standard error of each log odds ratio in <code>LOR</code>, same shape.</p></dd>
 
 <dt>decomposed</dt>
 <dd><p>logical indicating if decomposition was performed.</p></dd>
@@ -183,6 +191,7 @@ strata to provide more detailed insight into the sources of heterogeneity.</p>
 <code><a href="GKgamma.html">GKgamma()</a></code>,
 <code><a href="HLtest.html">HLtest()</a></code>,
 <code><a href="breslow_day_test.html">breslow_day_test()</a></code>,
+<code><a href="woolf_twoway.html">woolf_twoway()</a></code>,
 <code><a href="zero.test.html">zero.test()</a></code></p></div>
     </div>
 
@@ -210,6 +219,19 @@ strata to provide more detailed insight into the sources of heterogeneity.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Strata:        Occup </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X-squared = 81.0807, df = 2, p-value = 0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Bartlett (1935): the classic example for testing no three-way</span></span></span>
+<span class="r-in"><span><span class="co"># interaction / homogeneity of the odds ratio across strata</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Bartlett</span>, package <span class="op">=</span> <span class="st">"vcdExtra"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">woolf_test</span><span class="op">(</span><span class="va">Bartlett</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Woolf-test on Homogeneity of Odds Ratios (no 3-way association) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Data:          Bartlett </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> OR variables:  Alive, Time </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Strata:        Length </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> X-squared = 2.2640, df = 1, p-value = 0.1324</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 4-way table without decomposition</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Fungicide</span>, package <span class="op">=</span> <span class="st">"vcdExtra"</span><span class="op">)</span></span></span>

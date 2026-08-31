@@ -19,7 +19,7 @@ and their survival was later recorded."><meta property="og:image" content="https
 
     <a class="navbar-brand me-2" href="../index.html">vcdExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,13 +128,15 @@ three-way interaction in a contingency table.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pearson          2.270373  1 0.1318681</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use woolf_test() for a formal test of homogeneity of odds ratios</span></span></span>
-<span class="r-in"><span><span class="fu">vcd</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vcd/man/woolf_test.html" class="external-link">woolf_test</a></span><span class="op">(</span><span class="va">Bartlett</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="woolf_test.html">woolf_test</a></span><span class="op">(</span><span class="va">Bartlett</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	Woolf-test on Homogeneity of Odds Ratios (no 3-Way assoc.)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Woolf-test on Homogeneity of Odds Ratios (no 3-way association) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> data:  Bartlett</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> X-squared = 2.264, df = 1, p-value = 0.1324</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Data:          Bartlett </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> OR variables:  Alive, Time </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Strata:        Length </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> X-squared = 2.2640, df = 1, p-value = 0.1324</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plots</span></span></span>

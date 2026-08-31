@@ -1,5 +1,33 @@
 # Changelog
 
+## Version 0.9.9
+
+- [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
+  now returns `LOR` and `LOR_se`, the per-stratum log odds ratio and its
+  standard error, shaped as an array over the stratifying dimensions
+  (e.g., an R x C matrix for a 4-way table) rather than a flat vector,
+  with dimnames carried over from the input. This avoids having to
+  recompute them from scratch for further analysis of the log odds
+  ratios.
+
+- Added
+  [`woolf_twoway()`](https://friendly.github.io/vcdExtra/reference/woolf_twoway.md),
+  which decomposes the stratum log odds ratios of a 2 x 2 x R x C table
+  into additive row and column effects, following Tukey’s two-way fit as
+  implemented by the `twoway` package. Since
+  [`twoway::twoway()`](https://friendly.github.io/twoway/reference/twoway.html)
+  has no `weight` argument,
+  [`woolf_twoway()`](https://friendly.github.io/vcdExtra/reference/woolf_twoway.md)
+  fits the additive model directly by weighted least squares using the
+  same Woolf inverse-variance weights as
+  [`woolf_test()`](https://friendly.github.io/vcdExtra/reference/woolf_test.md)
+  (`weighted = TRUE`, the default), or via
+  [`twoway::twoway()`](https://friendly.github.io/twoway/reference/twoway.html)
+  directly for the ordinary unweighted mean-polish (`weighted = FALSE`).
+  The result is an object of class `"twoway"`, so `twoway`’s own
+  [`print()`](https://rdrr.io/r/base/print.html)/[`plot()`](https://rdrr.io/r/graphics/plot.default.html)
+  methods (`which = "fit"` or `"diagnose"`) work on it unchanged.
+
 ## Version 0.9.8
 
 CRAN release: 2026-08-21
