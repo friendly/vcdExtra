@@ -353,7 +353,7 @@ display: none;
 
 
 <div id="the-woolf_test-rowcolumn-decomposition-is-not-generally-valid" class="section level1">
-<h1>The <code>woolf_test()</code> row/column decomposition is not
+<h1>The <code>woolf_test()</code> row/column decomposition is NOT
 generally valid</h1>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
@@ -394,6 +394,46 @@ invalid.</p>
 is confined to the interpretation and inference produced by
 <code>decompose = TRUE</code>.</p>
 </div>
+<div id="two-separable-issues-weighting-and-sequential-partitioning" class="section level2">
+<h2>Two separable issues: weighting and sequential partitioning</h2>
+<p>An earlier version of this document proposed “use weighted least
+squares” as <em>the</em> fix (see Fix 2 below), which conflates two
+independent design decisions. It helps to separate them, by analogy with
+Type I (“sequential”) vs. Type II/III sums of squares in regression:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>How each stratum is weighted.</strong> The stratum-level
+responses here are <span class="math inline">\(y_{ij} =
+\log\widehat\theta_{ij}\)</span>, with Woolf inverse-variance weights
+<span class="math inline">\(w_{ij}\)</span>. Using <span class="math inline">\(w_{ij}\)</span> (WLS) rather than equal weights
+(OLS) is an efficiency choice, justified because strata differ in
+precision. It has nothing to do with additivity.</p></li>
+<li><p><strong>How Row and Column sums of squares are combined.</strong>
+In a <em>complete</em> <span class="math inline">\(R \times C\)</span>
+layout with one observation per cell (exactly our case: one <span class="math inline">\(y_{ij}\)</span> per stratum), the row and column
+sum-to-zero contrasts are <strong>automatically orthogonal under equal
+weights</strong> – this is the standard two-way ANOVA fact that a
+balanced, complete factorial design has Type I = Type II = Type III sums
+of squares. So with equal weights, the simultaneous (order-independent)
+split <span class="math inline">\(S_0 = (S_0 - S_R) + (S_0 - S_C) +
+S_A\)</span> is <em>already</em> exact, with no need for sequential
+fitting at all – <code>twoway::twoway()</code>’s plain mean-polish
+computes exactly this, for free (see <a href="../R/woolf_twoway.R"><code>woolf_twoway(x, weighted = FALSE)</code></a>).</p>
+<p>Once <strong>unequal</strong> weights are introduced, that
+orthogonality is generally lost. Additivity is then only guaranteed by a
+<em>sequential</em> (Type I-style) construction – fitting nested models
+in a chosen order – exactly as in weighted regression: sequential SS
+always telescope to the model SS regardless of weighting or
+collinearity, but Type II/III SS generally do not sum to the model SS
+once predictors are non-orthogonal.</p></li>
+</ol>
+<p>The bug documented below is a failure of <em>both</em> good practice
+at once: Rows and Columns are computed from two different
+collapsed-count tables (each with its own re-derived odds ratio and
+weight), rather than as nested submodels fit to the <em>same</em>
+per-stratum <span class="math inline">\(y_{ij}\)</span>/<span class="math inline">\(w_{ij}\)</span>. That would be non-additive even
+with equal weights – switching to WLS alone, without also switching to
+sequential (nested-model) fitting, would not have fixed it.</p>
+</div>
 <div id="current-calculation" class="section level2">
 <h2>Current calculation</h2>
 <p>For original stratum <span class="math inline">\((i,j)\)</span>,
@@ -430,8 +470,11 @@ difference should not be given a chi-squared reference distribution.</p>
 </div>
 <div id="counterexample" class="section level2">
 <h2>Counterexample</h2>
-<p>The failure occurs even when every cell count is positive, so it is
-not caused by the continuity correction. For example, consider these six
+<p><strong>Source of the data:</strong> this is not a real dataset. It
+is constructed (synthetic) data, chosen only to make the failure large
+and unambiguous. It is a <span class="math inline">\(2 \times 2 \times 3
+\times 2\)</span> table (<span class="math inline">\(R\)</span> has 3
+levels, <span class="math inline">\(C\)</span> has 2), with these six
 <span class="math inline">\(2 \times 2\)</span> strata:</p>
 <table>
 <thead>
@@ -495,36 +538,52 @@ not caused by the continuity correction. For example, consider these six
 </tr>
 </tbody>
 </table>
-<p>The current implementation gives approximately:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Term</th>
-<th align="right">Statistic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Total</td>
-<td align="right">85.230</td>
-</tr>
-<tr class="even">
-<td>Rows</td>
-<td align="right">88.251</td>
-</tr>
-<tr class="odd">
-<td>Columns</td>
-<td align="right">12.716</td>
-</tr>
-<tr class="even">
-<td>Residual by subtraction</td>
-<td align="right">-15.737</td>
-</tr>
-</tbody>
-</table>
-<p><code>Fungicide</code>, the example currently used in the
-documentation, happens to give a small positive residual. That example
-therefore does not reveal the general problem.</p>
+<p>Built into a <code>2x2x3x2</code> array <code>x</code> (dimensions
+<code>Group</code>, <code>Outcome</code>, <code>R</code>,
+<code>C</code>) and run through the <em>current, unmodified</em>
+<code>woolf_test()</code>:</p>
+<pre class="r"><code>x &lt;- array(0, dim = c(2, 2, 3, 2),
+           dimnames = list(Group = c(&quot;g1&quot;, &quot;g2&quot;), Outcome = c(&quot;o1&quot;, &quot;o2&quot;),
+                            R = c(&quot;R1&quot;, &quot;R2&quot;, &quot;R3&quot;), C = c(&quot;C1&quot;, &quot;C2&quot;)))
+x[,, &quot;R1&quot;, &quot;C1&quot;] &lt;- matrix(c(51, 34, 138, 129), 2)
+x[,, &quot;R2&quot;, &quot;C1&quot;] &lt;- matrix(c(43, 187, 26, 143), 2)
+x[,, &quot;R3&quot;, &quot;C1&quot;] &lt;- matrix(c(186, 29, 152, 170), 2)
+x[,, &quot;R1&quot;, &quot;C2&quot;] &lt;- matrix(c(48, 39, 24, 181), 2)
+x[,, &quot;R2&quot;, &quot;C2&quot;] &lt;- matrix(c(40, 83, 90, 163), 2)
+x[,, &quot;R3&quot;, &quot;C2&quot;] &lt;- matrix(c(43, 1, 29, 78), 2)
+
+woolf_test(x, decompose = TRUE)</code></pre>
+<p>which gives the actual output (vcdExtra 0.9.9):</p>
+<pre><code>Woolf-test on Homogeneity of Odds Ratios (no 4-way association)
+
+Data:          x
+OR variables:  Group, Outcome
+Strata:        R, C
+
+Overall homogeneity test:
+  X-squared = 85.2300, df = 5, p-value = 1.11e-16
+
+Decomposition:
+  Rows (R): X-squared = 88.2505, df = 2, p-value = 0
+  Cols (C): X-squared = 12.7162, df = 1, p-value = 0.0003625
+  Residual: X-squared = -15.7367, df = 2, p-value = 1
+
+Note: Overall = Rows + Columns + Residual</code></pre>
+<p>The residual is negative, and its reported p-value of 1 is
+meaningless.</p>
+<p><code>Fungicide</code>, the example currently used in
+<code>?woolf_test</code>, happens to give a small positive residual, and
+so does not reveal the problem. But this is not only a synthetic-data
+artifact: <code>Detergent</code> (a real, published dataset already
+bundled with vcdExtra; see <code>?Detergent</code>), rearranged so that
+<code>Temperature</code> (2 levels) and <code>Water_softness</code> (3
+levels) are the strata, reproduces the same failure with real data:</p>
+<pre><code>Decomposition:
+  Rows (Temperature):    X-squared = 2.7742, df = 1, p-value = 0.09579
+  Cols (Water_softness): X-squared = 5.3351, df = 2, p-value = 0.06942
+  Residual:              X-squared = -0.0961, df = 2, p-value = 1</code></pre>
+<p>(see <code>issues/Woolf_examples.R</code> for the full, runnable
+example).</p>
 </div>
 <div id="possible-fixes" class="section level2">
 <h2>Possible fixes</h2>
@@ -542,9 +601,13 @@ homogeneity statistic.</p>
 <p>This is the lowest-risk release fix, but it removes the factorial
 breakdown that motivated the option.</p>
 </div>
-<div id="use-weighted-least-squares-on-the-original-log-odds-ratios" class="section level3">
-<h3>2. Use weighted least squares on the original log odds ratios</h3>
-<p>A valid Woolf-scale analysis can be obtained by retaining <span class="math inline">\(y_{ij}\)</span> and <span class="math inline">\(w_{ij}\)</span> and fitting weighted least-squares
+<div id="a-sequential-type-i-style-partition-using-wls-weights" class="section level3">
+<h3>2. A sequential (Type I-style) partition, using WLS weights</h3>
+<p>As explained above, additivity comes from fitting a <em>sequence</em>
+of nested models, not from switching to WLS per se – WLS is the
+separate, justified choice of weights (<span class="math inline">\(w_{ij}\)</span>, the Woolf inverse variances) that
+this sequence should use, given that strata differ in precision. A valid
+Woolf-scale analysis can be obtained by retaining <span class="math inline">\(y_{ij}\)</span> and <span class="math inline">\(w_{ij}\)</span> and fitting weighted least-squares
 models to the <span class="math inline">\(R \times C\)</span> layout.
 Define:</p>
 <ul>
@@ -588,6 +651,47 @@ Q_{R:C}=S_A.
 large-sample normal approximation used by the Woolf test, their
 quadratic-form statistics have the corresponding approximate chi-squared
 distributions.</p>
+<p><strong>Worked illustration.</strong> Using the same synthetic
+counterexample table above (<code>x</code>, from
+<code>woolf_test(x)$LOR</code> and <code>$LOR_se</code>), fit
+<code>y ~ 1</code>, <code>y ~ row</code>, <code>y ~ col</code>,
+<code>y ~ row + col</code> by WLS with
+<code>weights = 1 / LOR_se^2</code>, and take the weighted SSE of each
+(<code>S0</code>, <code>SR</code>, <code>SC</code>,
+<code>SA</code>):</p>
+<pre><code>S0 = 85.230   SR = 30.610   SC = 85.047   SA = 21.695</code></pre>
+<p>(<code>S0</code> matches the overall Woolf statistic above,
+<code>85.2300</code>, up to rounding.) Row-first partition:</p>
+<pre><code>Q_R      = S0 - SR = 54.620   df = 2
+Q_{C|R}  = SR - SA =  8.915   df = 1
+Q_{R:C}  = SA      = 21.695   df = 2
+sum = 54.620 + 8.915 + 21.695 = 85.230 = S0  ✓ nonnegative, additive</code></pre>
+<p>Column-first partition:</p>
+<pre><code>Q_C      = S0 - SC =  0.183   df = 1
+Q_{R|C}  = SC - SA = 63.352   df = 2
+Q_{R:C}  = SA      = 21.695   df = 2
+sum = 0.183 + 63.352 + 21.695 = 85.230 = S0  ✓ nonnegative, additive</code></pre>
+<p>Both partitions are valid, additive, and nonnegative – exactly the
+two properties the current <code>decompose = TRUE</code> output lacks.
+But they disagree sharply on how much is attributed to Rows vs. Columns
+(<span class="math inline">\(Q_R = 54.62\)</span> vs. <span class="math inline">\(Q_{R\mid C} = 63.35\)</span>; <span class="math inline">\(Q_C = 0.18\)</span> vs. <span class="math inline">\(Q_{C\mid R} = 8.92\)</span>), which is the
+“important limitation” below made concrete: <strong>the choice of order
+is not cosmetic here</strong>, so an implementation cannot silently pick
+one.</p>
+<p>As a sanity check, refitting the same four models
+<strong>unweighted</strong> (equal weights,
+i.e. <code>weights = 1</code> throughout) gives
+<code>S0 - SR = 11.201</code>, <code>S0 - SC = 3.081</code>,
+<code>SA = 2.639</code>, and <span class="math inline">\(S_0 - S_R - S_C
++ S_A = -4.4\times10^{-16} \approx 0\)</span> – confirming that Rows and
+Columns <em>are</em> orthogonal once weights are equal, so the row-first
+and column-first partitions coincide exactly, and simultaneous
+(order-independent) sums of squares are already additive with no
+sequential machinery needed. This is exactly the
+<code>woolf_twoway(x, weighted = FALSE)</code> case (plain Tukey
+mean-polish). It is only the switch to unequal Woolf weights –
+appropriate here on efficiency grounds – that reintroduces
+order-dependence and makes a sequential construction necessary.</p>
 <p>The important limitation is that the row and column subspaces are not
 generally orthogonal under unequal Woolf weights. Therefore the two
 valid sequential decompositions can allocate different amounts to rows
@@ -672,7 +776,11 @@ because it can return a negative chi-squared statistic.</li>
 <li>Preserve collapsed row and column tests only if they are explicitly
 labeled as separate marginal analyses.</li>
 <li>For a replacement <code>decompose</code> option, use the original
-cell log odds ratios and Woolf weights with weighted least squares.</li>
+cell log odds ratios and Woolf weights, fit <em>sequentially</em>
+(nested models in a chosen order). Both parts matter: WLS alone (without
+sequential fitting) would not restore additivity, and sequential fitting
+alone (without WLS) would restore additivity but discard the efficiency
+gain from weighting by precision.</li>
 <li>Offer either:
 <ul>
 <li>an explicitly ordered sequential decomposition, which adds exactly;
@@ -711,7 +819,13 @@ orders;</li>
 allocation, not the total or interaction term;</li>
 <li>use the counterexample above as a regression test;</li>
 <li>cover equal weights, strongly unequal weights, zero cells/continuity
-correction, <span class="math inline">\(R=1\)</span> or <span class="math inline">\(C=1\)</span>, and unnamed dimensions; and</li>
+correction, <span class="math inline">\(R=1\)</span> or <span class="math inline">\(C=1\)</span>, and unnamed dimensions;</li>
+<li>with <strong>equal weights specifically</strong>, verify that the
+row-first and column-first partitions coincide (order no longer matters)
+and match the simultaneous split already computed by
+<code>woolf_twoway(x, weighted = FALSE)</code> – i.e. that the
+sequential machinery correctly reduces to plain two-way ANOVA when
+weighting is not a factor; and</li>
 <li>compare the implementation with an independently constructed
 weighted model-matrix projection.</li>
 </ul>
