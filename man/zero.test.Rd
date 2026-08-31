@@ -66,7 +66,8 @@ Other association tests:
 \code{\link[=GKgamma]{GKgamma()}},
 \code{\link[=HLtest]{HLtest()}},
 \code{\link[=breslow_day_test]{breslow_day_test()}},
-\code{\link[=woolf_test]{woolf_test()}}
+\code{\link[=woolf_test]{woolf_test()}},
+\code{\link[=woolf_twoway]{woolf_twoway()}}
 }
 \author{
 Michael Friendly

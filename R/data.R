@@ -399,7 +399,7 @@ NULL
 #' MASS::loglm(formula = ~(Alive + Time + Length)^2, data = Bartlett)
 #'
 #' # Use woolf_test() for a formal test of homogeneity of odds ratios
-#' vcd::woolf_test(Bartlett)
+#' woolf_test(Bartlett)
 #'
 #'
 #' # Plots

@@ -135,6 +135,7 @@ Other association tests:
 \code{\link[=GKgamma]{GKgamma()}},
 \code{\link[=HLtest]{HLtest()}},
 \code{\link[=woolf_test]{woolf_test()}},
+\code{\link[=woolf_twoway]{woolf_twoway()}},
 \code{\link[=zero.test]{zero.test()}}
 }
 \author{

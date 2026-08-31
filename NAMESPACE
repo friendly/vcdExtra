@@ -105,6 +105,7 @@ export(seq_mosaic)
 export(split3d)
 export(update.xtabs)
 export(woolf_test)
+export(woolf_twoway)
 export(zero.test)
 importFrom(MASS,loglm)
 importFrom(ca,

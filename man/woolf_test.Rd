@@ -30,8 +30,12 @@ distribution of the test statistic.}
 \item{data.name}{a character string giving the name of the data.}
 \item{or_vars}{names of the first two dimensions (the 2x2 table variables).}
 \item{strata_vars}{names of the stratifying variables (dimensions 3 and beyond).}
-\item{observed}{the observed log odds ratios.}
+\item{observed}{the observed log odds ratios, as a flat vector.}
 \item{expected}{the expected log odds ratio under the null hypothesis (weighted mean).}
+\item{LOR}{the log odds ratio for each stratum, shaped as an array over the
+stratifying dimensions (e.g., a vector for a 3-way table, or an R x C
+matrix for a 4-way table), with dimnames carried over from \code{x}.}
+\item{LOR_se}{the standard error of each log odds ratio in \code{LOR}, same shape.}
 \item{decomposed}{logical indicating if decomposition was performed.}
 
 When \code{decompose = TRUE} (only for 4-dimensional tables), additional components:
@@ -106,6 +110,11 @@ woolf_test(CoalMiners)
 data(Heart, package = "vcdExtra")
 woolf_test(Heart)
 
+# Bartlett (1935): the classic example for testing no three-way
+# interaction / homogeneity of the odds ratio across strata
+data(Bartlett, package = "vcdExtra")
+woolf_test(Bartlett)
+
 # 4-way table without decomposition
 data(Fungicide, package = "vcdExtra")
 woolf_test(Fungicide)
@@ -134,6 +143,7 @@ Other association tests:
 \code{\link[=GKgamma]{GKgamma()}},
 \code{\link[=HLtest]{HLtest()}},
 \code{\link[=breslow_day_test]{breslow_day_test()}},
+\code{\link[=woolf_twoway]{woolf_twoway()}},
 \code{\link[=zero.test]{zero.test()}}
 }
 \concept{association tests}

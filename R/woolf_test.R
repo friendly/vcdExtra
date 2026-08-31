@@ -110,8 +110,12 @@
 #'   \item{data.name}{a character string giving the name of the data.}
 #'   \item{or_vars}{names of the first two dimensions (the 2x2 table variables).}
 #'   \item{strata_vars}{names of the stratifying variables (dimensions 3 and beyond).}
-#'   \item{observed}{the observed log odds ratios.}
+#'   \item{observed}{the observed log odds ratios, as a flat vector.}
 #'   \item{expected}{the expected log odds ratio under the null hypothesis (weighted mean).}
+#'   \item{LOR}{the log odds ratio for each stratum, shaped as an array over the
+#'     stratifying dimensions (e.g., a vector for a 3-way table, or an R x C
+#'     matrix for a 4-way table), with dimnames carried over from `x`.}
+#'   \item{LOR_se}{the standard error of each log odds ratio in `LOR`, same shape.}
 #'   \item{decomposed}{logical indicating if decomposition was performed.}
 #'
 #'   When \code{decompose = TRUE} (only for 4-dimensional tables), additional components:
@@ -134,6 +138,11 @@
 #'
 #' data(Heart, package = "vcdExtra")
 #' woolf_test(Heart)
+#'
+#' # Bartlett (1935): the classic example for testing no three-way
+#' # interaction / homogeneity of the odds ratio across strata
+#' data(Bartlett, package = "vcdExtra")
+#' woolf_test(Bartlett)
 #'
 #' # 4-way table without decomposition
 #' data(Fungicide, package = "vcdExtra")
@@ -181,13 +190,20 @@ woolf_test <- function(x, decompose = FALSE) {
   if (any(x == 0))
     x <- x + 1 / 2
 
-  # Internal helper function to compute Woolf test on 2x2xk array
-  woolf_internal <- function(y) {
-    k <- dim(y)[3]
-    or <- apply(y, 3, function(x) (x[1,1] * x[2,2]) / (x[1,2] * x[2,1]))
-    w <-  apply(y, 3, function(x) 1 / sum(1 / x))
-    o <- log(or)
-    e <- weighted.mean(log(or), w)
+  # Log odds ratio and its standard error for every stratum, preserving the
+  # original strata dimensions (e.g. a vector for 2x2xk, or an R x C matrix
+  # for 2x2xRxC), so callers (e.g. woolf_twoway()) don't need to recompute them.
+  strata_margin <- seq_along(dims)[-(1:2)]
+  OR_arr <- apply(x, strata_margin,
+                   function(tab) (tab[1, 1] * tab[2, 2]) / (tab[1, 2] * tab[2, 1]))
+  W_arr <- apply(x, strata_margin, function(tab) 1 / sum(1 / tab))
+  LOR <- log(OR_arr)
+  LOR_se <- sqrt(1 / W_arr)
+
+  # Internal helper: Woolf statistic from a vector of log odds ratios and weights
+  woolf_stat <- function(o, w) {
+    k <- length(o)
+    e <- weighted.mean(o, w)
     statistic <- sum(w * (o - e)^2)
     df <- k - 1
     pval <- 1 - pchisq(statistic, df)
@@ -195,14 +211,20 @@ woolf_test <- function(x, decompose = FALSE) {
          observed = o, expected = e, weights = w)
   }
 
+  # Internal helper function to compute Woolf test on 2x2xk array
+  woolf_internal <- function(y) {
+    or <- apply(y, 3, function(x) (x[1,1] * x[2,2]) / (x[1,2] * x[2,1]))
+    w <-  apply(y, 3, function(x) 1 / sum(1 / x))
+    woolf_stat(log(or), w)
+  }
+
   # Handle 4-dimensional case with decomposition
   if (length(dims) == 4 && decompose) {
     R <- dims[3]
     C <- dims[4]
 
-    # Overall test (all R*C strata)
-    x_all <- array(x, dim = c(2, 2, R * C))
-    overall <- woolf_internal(x_all)
+    # Overall test (all R*C strata), reusing the LOR/weights computed above
+    overall <- woolf_stat(as.vector(LOR), as.vector(W_arr))
 
     # Row effects: pool across columns (dimension 4) for each row (dimension 3)
     # Result: 2 x 2 x R array
@@ -233,6 +255,8 @@ woolf_test <- function(x, decompose = FALSE) {
       strata_vars = strata_vars,
       observed = overall$observed,
       expected = overall$expected,
+      LOR = LOR,
+      LOR_se = LOR_se,
       decomposed = TRUE,
       rows = list(
         statistic = rows$statistic,
@@ -259,19 +283,12 @@ woolf_test <- function(x, decompose = FALSE) {
     return(result)
   }
 
-  # Standard case: general k-way test
-  # If more than 3 dimensions, reshape to collapse dimensions 3+ into one
-  if (length(dims) > 3) {
-    new_dim <- c(dims[1:2], prod(dims[3:length(dims)]))
-    x <- array(x, dim = new_dim)
-  }
-
-  # Compute standard Woolf test
-  k <- dim(x)[3]
-  or <- apply(x, 3, function(x) (x[1,1] * x[2,2]) / (x[1,2] * x[2,1]))
-  w <-  apply(x, 3, function(x) 1 / sum(1 / x))
-  o <- log(or)
-  e <- weighted.mean(log(or), w)
+  # Standard case: general k-way test, using the per-stratum LOR/weights
+  # computed above (dimensions 3+ collapse naturally via as.vector())
+  o <- as.vector(LOR)
+  w <- as.vector(W_arr)
+  k <- length(o)
+  e <- weighted.mean(o, w)
   STATISTIC <- sum(w * (o - e)^2)
   PARAMETER <- k - 1
   PVAL <- 1 - pchisq(STATISTIC, PARAMETER)
@@ -296,6 +313,8 @@ woolf_test <- function(x, decompose = FALSE) {
                  strata_vars = strata_vars,
                  observed = o,
                  expected = e,
+                 LOR = LOR,
+                 LOR_se = LOR_se,
                  decomposed = FALSE),
             class = c("woolf_test", "htest"))
 }

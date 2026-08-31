@@ -70,6 +70,7 @@ reference:
       - color_table
       - knit_include
       - mcaplot
+      - woolf_twoway
       - logist_plot
       - logist_hist
       - logist_point

@@ -105,6 +105,7 @@ Other association tests:
 \code{\link[=GKgamma]{GKgamma()}},
 \code{\link[=breslow_day_test]{breslow_day_test()}},
 \code{\link[=woolf_test]{woolf_test()}},
+\code{\link[=woolf_twoway]{woolf_twoway()}},
 \code{\link[=zero.test]{zero.test()}}
 }
 \author{
