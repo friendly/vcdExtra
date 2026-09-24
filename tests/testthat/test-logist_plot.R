@@ -127,6 +127,91 @@ test_that("NA/Inf x rows are dropped consistently across calling conventions", {
 
 # ---- grouping ---------------------------------------------------------------------------
 
+test_that("ungrouped defaults use Okabe-Ito colours across interfaces and modes", {
+  interfaces <- list(
+    function(mode) logist_plot(Donner$age, Donner$survived, marginal = mode),
+    function(mode) logist_plot(Donner[, c("age", "survived")], marginal = mode),
+    function(mode) logist_plot(survived ~ age, data = Donner, marginal = mode)
+  )
+  for (make_plot in interfaces) {
+    for (mode in c("hist", "points", "density")) {
+      p <- make_plot(mode)
+      built <- ggplot2::ggplot_build(p)
+      is_fit <- vapply(p$layers, function(l) inherits(l$geom, "GeomSmooth"), logical(1))
+      fit <- built$data[[which(is_fit)]]
+      expect_identical(unique(fit$colour), "#0072B2")
+      expect_identical(unique(fit$fill), "#0072B2")
+      for (marginal in built$data[!is_fit]) {
+        aesthetic <- if (mode == "points") "colour" else "fill"
+        expect_identical(unique(marginal[[aesthetic]]), "#E69F00")
+      }
+    }
+  }
+})
+
+# Check trained scales (including legend order) and the colours rendered by every layer.
+expect_group_palette <- function(p, palette) {
+  built <- ggplot2::ggplot_build(p)
+  for (aesthetic in c("colour", "fill")) {
+    scale <- built$plot$scales$get_scales(aesthetic)
+    expect_equal(unname(scale$map(names(palette))), unname(palette))
+    expect_equal(as.character(scale$get_breaks()), names(palette))
+    for (layer in built$data) {
+      for (i in seq_along(palette)) {
+        expect_equal(unique(layer[[aesthetic]][layer$group == i]), unname(palette[i]))
+      }
+    }
+  }
+}
+
+test_that("grouped defaults share Okabe-Ito colours across interfaces and layers", {
+  interfaces <- list(
+    function(mode) logist_plot(Donner$age, Donner$survived, group = Donner$sex,
+                               marginal = mode),
+    function(mode) logist_plot(Donner, xvar = "age", yvar = "survived", group = "sex",
+                               marginal = mode),
+    function(mode) logist_plot(survived ~ age, data = Donner, group = "sex",
+                               marginal = mode)
+  )
+  for (make_plot in interfaces) {
+    for (mode in c("points", "density")) {
+      expect_group_palette(make_plot(mode), c(Female = "#0072B2", Male = "#D55E00"))
+    }
+  }
+})
+
+test_that("default palette capacity uses observed groups and accepts larger custom palettes", {
+  d <- expand.grid(x = seq_len(8), g = LETTERS[seq_len(9)])
+  d$y <- rep(c(0, 1), nrow(d) / 2)
+  palette <- c("#0072B2", "#D55E00", "#009E73", "#CC79A7",
+               "#E69F00", "#56B4E9", "#000000", "#F0E442")
+  for (mode in c("points", "density")) {
+    # The unused ninth factor level must not count against the default palette.
+    p <- logist_plot(y ~ x, data = d[d$g != "I", ], group = "g", marginal = mode)
+    expect_group_palette(p, stats::setNames(palette, LETTERS[seq_len(8)]))
+    expect_error(logist_plot(y ~ x, data = d, group = "g", marginal = mode),
+                 "at most 8 observed groups.*supply `group.colors`.*9 groups")
+    custom <- stats::setNames(c(palette, "grey40"), LETTERS[seq_len(9)])
+    p <- logist_plot(y ~ x, data = d, group = "g", marginal = mode,
+                     group.colors = custom)
+    expect_group_palette(p, custom)
+  }
+})
+
+test_that("named and unnamed group palettes override defaults consistently", {
+  for (mode in c("points", "density")) {
+    for (colours in list(c("purple", "darkgreen"), c(Male = "darkgreen", Female = "purple"))) {
+      p <- logist_plot(survived ~ age, data = Donner, group = "sex", marginal = mode,
+                       group.colors = colours)
+      expect_group_palette(p, c(Female = "purple", Male = "darkgreen"))
+    }
+    d <- Donner
+    d$sex <- factor(d$sex, levels = c("Male", "Female"))
+    p <- logist_plot(survived ~ age, data = d, group = "sex", marginal = mode)
+    expect_group_palette(p, c(Male = "#0072B2", Female = "#D55E00"))
+  }
+})
+
 test_that("group= builds for points and density but errors for hist", {
   expect_built(logist_plot(survived ~ age, data = Donner, group = "sex", marginal = "points"))
   expect_built(logist_plot(survived ~ age, data = Donner, group = "sex", marginal = "density"))
@@ -143,6 +228,8 @@ test_that("group order is stable regardless of row order", {
   p2 <- logist_plot(survived ~ age, data = shuffled, group = "sex", marginal = "points")
   expect_identical(levels(ggplot2::ggplot_build(p1)$plot$data$group),
                     levels(ggplot2::ggplot_build(p2)$plot$data$group))
+  expect_group_palette(p1, c(Female = "#0072B2", Male = "#D55E00"))
+  expect_group_palette(p2, c(Female = "#0072B2", Male = "#D55E00"))
 })
 
 test_that("every group must contain both response outcomes", {
@@ -289,10 +376,19 @@ test_that("histogram count-axis ticks stay symmetric and thin out at small heigh
 # ---- fit.args / marginal.args forwarding ----------------------------------------------------
 
 test_that("fit.color and marginal.color retain their existing behavior", {
-  p <- logist_plot(survived ~ age, data = Donner, marginal = "points",
-                    fit.color = "navy", marginal.color = "goldenrod")
-  built <- ggplot2::layer_data(p, 1)
-  expect_true(all(built$colour %in% c("navy") | built$fill %in% c("navy")))
+  for (mode in c("hist", "points", "density")) {
+    p <- logist_plot(survived ~ age, data = Donner, marginal = mode,
+                     fit.color = "navy", marginal.color = "goldenrod")
+    built <- ggplot2::ggplot_build(p)
+    is_fit <- vapply(p$layers, function(l) inherits(l$geom, "GeomSmooth"), logical(1))
+    fit <- built$data[[which(is_fit)]]
+    expect_identical(unique(fit$colour), "navy")
+    expect_identical(unique(fit$fill), "navy")
+    for (marginal in built$data[!is_fit]) {
+      aesthetic <- if (mode == "points") "colour" else "fill"
+      expect_identical(unique(marginal[[aesthetic]]), "goldenrod")
+    }
+  }
 })
 
 test_that("fit.args overrides fit.color for the same aesthetic", {

@@ -1,5 +1,9 @@
 ## Version 0.9.9
 
+* `logist_plot()` and its convenience wrappers now use the eight distinct colours of the
+  Okabe-Ito palette by default. Plots with more than eight observed groups must supply
+  `group.colors`.
+
 * `woolf_test()` now returns `LOR` and `LOR_se`, the per-stratum log odds ratio and its
   standard error, shaped as an array over the stratifying dimensions (e.g., an R x C matrix
   for a 4-way table) rather than a flat vector, with dimnames carried over from the input.

@@ -20,8 +20,8 @@ logist_plot(x, ...)
   adjust = 1,
   xlab = NULL,
   ylab = NULL,
-  fit.color = "steelblue",
-  marginal.color = "orange",
+  fit.color = "#0072B2",
+  marginal.color = "#E69F00",
   fit.args = list(),
   marginal.args = list(),
   group = NULL,
@@ -39,8 +39,8 @@ logist_plot(x, ...)
   adjust = 1,
   xlab = NULL,
   ylab = NULL,
-  fit.color = "steelblue",
-  marginal.color = "orange",
+  fit.color = "#0072B2",
+  marginal.color = "#E69F00",
   fit.args = list(),
   marginal.args = list(),
   group = NULL,
@@ -57,8 +57,8 @@ logist_plot(x, ...)
   adjust = 1,
   xlab = NULL,
   ylab = NULL,
-  fit.color = "steelblue",
-  marginal.color = "orange",
+  fit.color = "#0072B2",
+  marginal.color = "#E69F00",
   fit.args = list(),
   marginal.args = list(),
   group = NULL,
@@ -95,11 +95,12 @@ each \code{y} group: \code{"hist"}, mirrored histograms (default); \code{"points
 \item{xlab, ylab}{axis labels; default to the deparsed \code{x}/\code{y} expressions}
 
 \item{fit.color}{color of the fitted logistic curve and its confidence band; default:
-"steelblue". This scalar is inactive when \code{group} is supplied; use \code{group.colors}
+\code{"#0072B2"} (Okabe--Ito blue). This scalar is inactive when \code{group} is supplied; use \code{group.colors}
 instead.}
 
 \item{marginal.color}{color of the marginal representation of \code{x} within each \code{y} group
-(histogram/density fill, or point color for \code{marginal = "points"}); default: "orange"
+(histogram/density fill, or point color for \code{marginal = "points"}); default:
+\code{"#E69F00"} (Okabe--Ito orange).
 This scalar is inactive when \code{group} is supplied; use \code{group.colors} instead.}
 
 \item{fit.args}{named list of graphical arguments for the fitted curve and confidence band.
@@ -123,7 +124,12 @@ Grouping is supported for \code{marginal = "points"} and \code{"density"}, but n
 \item{group.colors}{optional character vector of colours for grouped plots. An unnamed
 vector is applied in group-level order; a named vector must contain every observed group
 label. The same palette is used for fits, marginals, and the legend. The default \code{NULL}
-uses ggplot2's discrete scales.}
+uses the colours of the eight-colour Okabe--Ito palette: blue, vermilion,
+bluish green, reddish purple, orange, sky blue, black, and yellow, in that order.
+Factor groups follow their observed factor-level order; other supported grouping
+vectors use sorted observed values.
+More than eight observed groups requires an explicit \code{group.colors} vector with a colour
+for every group. Colours are not recycled.}
 
 \item{marginal.height}{optional finite positive number controlling marginal height. For
 histograms and ungrouped densities, this is the maximum proportion of the fixed 0--1
@@ -209,7 +215,7 @@ logist_density(survived ~ age, data = Donner, adjust = 1.25)
 logist_point(survived ~ age, data = Donner, group = "sex")
 logist_density(
   survived ~ age, data = Donner, group = "sex",
-  group.colors = c(Female = "#D55E00", Male = "#0072B2"),
+  group.colors = c(Female = "tomato", Male = "turquoise"),
   marginal.args = list(alpha = 0.35, linewidth = 0.6)
 )
 
@@ -219,6 +225,10 @@ Smart, J. M. R., Sutherland, W. J., Watkinson, A. R., and Gill, J. A. (2004). A 
 Presenting the Results of Logistic Regression, \emph{Bulletin of the Ecological Society of
 America}, 85(3), 100--102. \doi{10.1890/0012-9623(2004)85[100:ANMOPT]2.0.CO;2}
 \url{https://esapubs.org/bulletin/backissues/085-3/bulletinjuly2004_2column.htm#tools1}
+
+Okabe, M. and Ito, K. (2002). \emph{Color Universal Design (CUD): How to Make Figures and
+Presentations That Are Friendly to Colorblind People}. J*FLY.
+\url{https://jfly.uni-koeln.de/color/}
 }
 \seealso{
 \code{\link[vcd:binreg_plot]{vcd::binreg_plot()}}, a similar plot using \code{grid} graphics directly.

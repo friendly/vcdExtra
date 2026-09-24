@@ -69,6 +69,10 @@
 #' America*, 85(3), 100--102. \doi{10.1890/0012-9623(2004)85[100:ANMOPT]2.0.CO;2}
 #' <https://esapubs.org/bulletin/backissues/085-3/bulletinjuly2004_2column.htm#tools1>
 #'
+#' Okabe, M. and Ito, K. (2002). *Color Universal Design (CUD): How to Make Figures and
+#' Presentations That Are Friendly to Colorblind People*. J*FLY.
+#' <https://jfly.uni-koeln.de/color/>
+#'
 #' @examples
 #' data(Donner, package = "vcdExtra")
 #'
@@ -98,7 +102,7 @@
 #' logist_point(survived ~ age, data = Donner, group = "sex")
 #' logist_density(
 #'   survived ~ age, data = Donner, group = "sex",
-#'   group.colors = c(Female = "#D55E00", Male = "#0072B2"),
+#'   group.colors = c(Female = "tomato", Male = "turquoise"),
 #'   marginal.args = list(alpha = 0.35, linewidth = 0.6)
 #' )
 #'
@@ -124,10 +128,11 @@ logist_plot <- function(x, ...) {
 #'   value is ignored with a warning; control vertical jitter through `marginal.args` instead.
 #' @param xlab,ylab axis labels; default to the deparsed `x`/`y` expressions
 #' @param fit.color color of the fitted logistic curve and its confidence band; default:
-#'   "steelblue". This scalar is inactive when `group` is supplied; use `group.colors`
+#'   `"#0072B2"` (Okabe--Ito blue). This scalar is inactive when `group` is supplied; use `group.colors`
 #'   instead.
 #' @param marginal.color color of the marginal representation of `x` within each `y` group
-#'   (histogram/density fill, or point color for `marginal = "points"`); default: "orange"
+#'   (histogram/density fill, or point color for `marginal = "points"`); default:
+#'   `"#E69F00"` (Okabe--Ito orange).
 #'   This scalar is inactive when `group` is supplied; use `group.colors` instead.
 #' @param group optional grouping input. For the default method, a vector the same length as
 #'   `x` and `y`; for data-frame and formula methods, a single column name or position.
@@ -135,7 +140,12 @@ logist_plot <- function(x, ...) {
 #' @param group.colors optional character vector of colours for grouped plots. An unnamed
 #'   vector is applied in group-level order; a named vector must contain every observed group
 #'   label. The same palette is used for fits, marginals, and the legend. The default `NULL`
-#'   uses ggplot2's discrete scales.
+#'   uses the colours of the eight-colour Okabe--Ito palette: blue, vermilion,
+#'   bluish green, reddish purple, orange, sky blue, black, and yellow, in that order.
+#'   Factor groups follow their observed factor-level order; other supported grouping
+#'   vectors use sorted observed values.
+#'   More than eight observed groups requires an explicit `group.colors` vector with a colour
+#'   for every group. Colours are not recycled.
 #' @param fit.args named list of graphical arguments for the fitted curve and confidence band.
 #'   Values override the defaults established by `fit.color`. The fit remains a binomial GLM,
 #'   so `data`, `mapping`, `stat`, `position`, `inherit.aes`, `method`, `formula`, and
@@ -152,7 +162,7 @@ logist_plot <- function(x, ...) {
 #' @export
 logist_plot.default <- function(x, y, marginal = c("hist", "points", "density"),
                                  bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
-                                 fit.color = "steelblue", marginal.color = "orange",
+                                 fit.color = "#0072B2", marginal.color = "#E69F00",
                                  fit.args = list(), marginal.args = list(),
                                  group = NULL, group.colors = NULL,
                                  marginal.height = NULL, ...) {
@@ -175,7 +185,7 @@ logist_plot.default <- function(x, y, marginal = c("hist", "points", "density"),
 logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
                                     marginal = c("hist", "points", "density"),
                                     bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
-                                    fit.color = "steelblue", marginal.color = "orange",
+                                    fit.color = "#0072B2", marginal.color = "#E69F00",
                                     fit.args = list(), marginal.args = list(),
                                     group = NULL, group.colors = NULL,
                                     marginal.height = NULL, ...) {
@@ -203,7 +213,7 @@ logist_plot.data.frame <- function(x, xvar = 1L, yvar = 2L,
 #' @export
 logist_plot.formula <- function(formula, data, marginal = c("hist", "points", "density"),
                                  bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
-                                 fit.color = "steelblue", marginal.color = "orange",
+                                 fit.color = "#0072B2", marginal.color = "#E69F00",
                                  fit.args = list(), marginal.args = list(),
                                  group = NULL, group.colors = NULL,
                                  marginal.height = NULL, ...) {
@@ -349,10 +359,21 @@ logist_density <- function(...) {
   factor(as.character(group), levels = as.character(levs))
 }
 
-# Validate and order an optional manual palette against the observed group levels.
+# Okabe--Ito colours, with blue and vermilion first and yellow last for white backgrounds.
+.logist_palette <- c(
+  "#0072B2", "#D55E00", "#009E73", "#CC79A7",
+  "#E69F00", "#56B4E9", "#000000", "#F0E442"
+)
+
+# Resolve the default or manual palette against the observed group levels.
 .check_group_colors <- function(group.colors, group.levels) {
   if (is.null(group.colors)) {
-    return(NULL)
+    if (length(group.levels) > length(.logist_palette)) {
+      stop("The default Okabe-Ito palette supports at most 8 observed groups; ",
+           "supply `group.colors` with a colour for each of the ", length(group.levels),
+           " groups.", call. = FALSE)
+    }
+    group.colors <- .logist_palette
   }
   if (!is.character(group.colors) || !length(group.colors) ||
       anyNA(group.colors) || any(group.colors == "")) {
@@ -396,20 +417,16 @@ logist_density <- function(...) {
 
 # Apply a shared colour identity and legend title to every grouped layer.
 .add_group_scales <- function(plot, group.label, group.levels, group.colors) {
-  if (is.null(group.colors)) {
-    plot + ggplot2::labs(colour = group.label, fill = group.label)
-  } else {
-    plot +
-      ggplot2::scale_colour_manual(
-        values = group.colors,
-        breaks = group.levels, limits = group.levels, drop = FALSE
-      ) +
-      ggplot2::scale_fill_manual(
-        values = group.colors,
-        breaks = group.levels, limits = group.levels, drop = FALSE
-      ) +
-      ggplot2::labs(colour = group.label, fill = group.label)
-  }
+  plot +
+    ggplot2::scale_colour_manual(
+      values = group.colors,
+      breaks = group.levels, limits = group.levels, drop = FALSE
+    ) +
+    ggplot2::scale_fill_manual(
+      values = group.colors,
+      breaks = group.levels, limits = group.levels, drop = FALSE
+    ) +
+    ggplot2::labs(colour = group.label, fill = group.label)
 }
 
 # Validate an explicitly scoped ggplot layer-argument list. Structural arguments are kept
@@ -512,7 +529,7 @@ logist_density <- function(...) {
 # logist_hist()/logist_point()/logist_density().
 .logist_plot_impl <- function(x, y, marginal = c("hist", "points", "density"),
                                bins = 30, adjust = 1, xlab = NULL, ylab = NULL,
-                               fit.color = "steelblue", marginal.color = "orange",
+                               fit.color = "#0072B2", marginal.color = "#E69F00",
                                fit.args = list(), marginal.args = list(),
                                group = NULL, group.label = NULL,
                                group.colors = NULL, marginal.height = NULL, ...) {
