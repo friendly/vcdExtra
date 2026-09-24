@@ -77,8 +77,8 @@ see where the data supporting the fit exist; e.g., where the data are "thin", so
 <span>  adjust <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fit.color <span class="op">=</span> <span class="st">"steelblue"</span>,</span>
-<span>  marginal.color <span class="op">=</span> <span class="st">"orange"</span>,</span>
+<span>  fit.color <span class="op">=</span> <span class="st">"#0072B2"</span>,</span>
+<span>  marginal.color <span class="op">=</span> <span class="st">"#E69F00"</span>,</span>
 <span>  fit.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  marginal.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -97,8 +97,8 @@ see where the data supporting the fit exist; e.g., where the data are "thin", so
 <span>  adjust <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fit.color <span class="op">=</span> <span class="st">"steelblue"</span>,</span>
-<span>  marginal.color <span class="op">=</span> <span class="st">"orange"</span>,</span>
+<span>  fit.color <span class="op">=</span> <span class="st">"#0072B2"</span>,</span>
+<span>  marginal.color <span class="op">=</span> <span class="st">"#E69F00"</span>,</span>
 <span>  fit.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  marginal.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -116,8 +116,8 @@ see where the data supporting the fit exist; e.g., where the data are "thin", so
 <span>  adjust <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fit.color <span class="op">=</span> <span class="st">"steelblue"</span>,</span>
-<span>  marginal.color <span class="op">=</span> <span class="st">"orange"</span>,</span>
+<span>  fit.color <span class="op">=</span> <span class="st">"#0072B2"</span>,</span>
+<span>  marginal.color <span class="op">=</span> <span class="st">"#E69F00"</span>,</span>
 <span>  fit.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  marginal.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -173,13 +173,14 @@ each <code>y</code> group: <code>"hist"</code>, mirrored histograms (default); <
 
 <dt id="arg-fit-color">fit.color<a class="anchor" aria-label="anchor" href="#arg-fit-color"></a></dt>
 <dd><p>color of the fitted logistic curve and its confidence band; default:
-"steelblue". This scalar is inactive when <code>group</code> is supplied; use <code>group.colors</code>
+<code>"#0072B2"</code> (Okabe–Ito blue). This scalar is inactive when <code>group</code> is supplied; use <code>group.colors</code>
 instead.</p></dd>
 
 
 <dt id="arg-marginal-color">marginal.color<a class="anchor" aria-label="anchor" href="#arg-marginal-color"></a></dt>
 <dd><p>color of the marginal representation of <code>x</code> within each <code>y</code> group
-(histogram/density fill, or point color for <code>marginal = "points"</code>); default: "orange"
+(histogram/density fill, or point color for <code>marginal = "points"</code>); default:
+<code>"#E69F00"</code> (Okabe–Ito orange).
 This scalar is inactive when <code>group</code> is supplied; use <code>group.colors</code> instead.</p></dd>
 
 
@@ -211,7 +212,12 @@ Grouping is supported for <code>marginal = "points"</code> and <code>"density"</
 <dd><p>optional character vector of colours for grouped plots. An unnamed
 vector is applied in group-level order; a named vector must contain every observed group
 label. The same palette is used for fits, marginals, and the legend. The default <code>NULL</code>
-uses ggplot2's discrete scales.</p></dd>
+uses the colours of the eight-colour Okabe–Ito palette: blue, vermilion,
+bluish green, reddish purple, orange, sky blue, black, and yellow, in that order.
+Factor groups follow their observed factor-level order; other supported grouping
+vectors use sorted observed values.
+More than eight observed groups requires an explicit <code>group.colors</code> vector with a colour
+for every group. Colours are not recycled.</p></dd>
 
 
 <dt id="arg-marginal-height">marginal.height<a class="anchor" aria-label="anchor" href="#arg-marginal-height"></a></dt>
@@ -274,6 +280,9 @@ Presenting the Results of Logistic Regression, <em>Bulletin of the Ecological So
 America</em>, 85(3), 100–102. <a href="https://doi.org/10.1890/0012-9623%282004%2985%5B100%3AANMOPT%5D2.0.CO%3B2" class="external-link">doi:10.1890/0012-9623(2004)85[100:ANMOPT]2.0.CO;2</a>
 
 <a href="https://esapubs.org/bulletin/backissues/085-3/bulletinjuly2004_2column.htm#tools1" class="external-link">https://esapubs.org/bulletin/backissues/085-3/bulletinjuly2004_2column.htm#tools1</a></p>
+<p>Okabe, M. and Ito, K. (2002). <em>Color Universal Design (CUD): How to Make Figures and
+Presentations That Are Friendly to Colorblind People</em>. J*FLY.
+<a href="https://jfly.uni-koeln.de/color/" class="external-link">https://jfly.uni-koeln.de/color/</a></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -323,7 +332,7 @@ America</em>, 85(3), 100–102. <a href="https://doi.org/10.1890/0012-9623%28200
 <span class="r-plt img"><img src="logist_plot-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">logist_density</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">survived</span> <span class="op">~</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">Donner</span>, group <span class="op">=</span> <span class="st">"sex"</span>,</span></span>
-<span class="r-in"><span>  group.colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Female <span class="op">=</span> <span class="st">"#D55E00"</span>, Male <span class="op">=</span> <span class="st">"#0072B2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  group.colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Female <span class="op">=</span> <span class="st">"tomato"</span>, Male <span class="op">=</span> <span class="st">"turquoise"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  marginal.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.35</span>, linewidth <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="logist_plot-10.png" alt="" width="700" height="433"></span>

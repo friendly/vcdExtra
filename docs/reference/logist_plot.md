@@ -23,8 +23,8 @@ logist_plot(
   adjust = 1,
   xlab = NULL,
   ylab = NULL,
-  fit.color = "steelblue",
-  marginal.color = "orange",
+  fit.color = "#0072B2",
+  marginal.color = "#E69F00",
   fit.args = list(),
   marginal.args = list(),
   group = NULL,
@@ -43,8 +43,8 @@ logist_plot(
   adjust = 1,
   xlab = NULL,
   ylab = NULL,
-  fit.color = "steelblue",
-  marginal.color = "orange",
+  fit.color = "#0072B2",
+  marginal.color = "#E69F00",
   fit.args = list(),
   marginal.args = list(),
   group = NULL,
@@ -62,8 +62,8 @@ logist_plot(
   adjust = 1,
   xlab = NULL,
   ylab = NULL,
-  fit.color = "steelblue",
-  marginal.color = "orange",
+  fit.color = "#0072B2",
+  marginal.color = "#E69F00",
   fit.args = list(),
   marginal.args = list(),
   group = NULL,
@@ -121,15 +121,15 @@ logist_density(...)
 - fit.color:
 
   color of the fitted logistic curve and its confidence band; default:
-  "steelblue". This scalar is inactive when `group` is supplied; use
-  `group.colors` instead.
+  `"#0072B2"` (Okabe–Ito blue). This scalar is inactive when `group` is
+  supplied; use `group.colors` instead.
 
 - marginal.color:
 
   color of the marginal representation of `x` within each `y` group
   (histogram/density fill, or point color for `marginal = "points"`);
-  default: "orange" This scalar is inactive when `group` is supplied;
-  use `group.colors` instead.
+  default: `"#E69F00"` (Okabe–Ito orange). This scalar is inactive when
+  `group` is supplied; use `group.colors` instead.
 
 - fit.args:
 
@@ -164,8 +164,13 @@ logist_density(...)
   optional character vector of colours for grouped plots. An unnamed
   vector is applied in group-level order; a named vector must contain
   every observed group label. The same palette is used for fits,
-  marginals, and the legend. The default `NULL` uses ggplot2's discrete
-  scales.
+  marginals, and the legend. The default `NULL` uses the colours of the
+  eight-colour Okabe–Ito palette: blue, vermilion, bluish green, reddish
+  purple, orange, sky blue, black, and yellow, in that order. Factor
+  groups follow their observed factor-level order; other supported
+  grouping vectors use sorted observed values. More than eight observed
+  groups requires an explicit `group.colors` vector with a colour for
+  every group. Colours are not recycled.
 
 - marginal.height:
 
@@ -243,6 +248,10 @@ Smart, J. M. R., Sutherland, W. J., Watkinson, A. R., and Gill, J. A.
 [doi:10.1890/0012-9623(2004)85\[100:ANMOPT\]2.0.CO;2](https://doi.org/10.1890/0012-9623%282004%2985%5B100%3AANMOPT%5D2.0.CO%3B2)
 <https://esapubs.org/bulletin/backissues/085-3/bulletinjuly2004_2column.htm#tools1>
 
+Okabe, M. and Ito, K. (2002). *Color Universal Design (CUD): How to Make
+Figures and Presentations That Are Friendly to Colorblind People*.
+J\*FLY. <https://jfly.uni-koeln.de/color/>
+
 ## See also
 
 [`vcd::binreg_plot()`](https://rdrr.io/pkg/vcd/man/binregplot.html), a
@@ -292,7 +301,7 @@ logist_point(survived ~ age, data = Donner, group = "sex")
 
 logist_density(
   survived ~ age, data = Donner, group = "sex",
-  group.colors = c(Female = "#D55E00", Male = "#0072B2"),
+  group.colors = c(Female = "tomato", Male = "turquoise"),
   marginal.args = list(alpha = 0.35, linewidth = 0.6)
 )
 
