@@ -33,8 +33,8 @@ zeros?
 
 ## See also
 
-[`caesar`](https://rdrr.io/pkg/Fahrmeir/man/caesar.html) for the same
-data recorded as a frequency data frame with other variables.
+`caesar` in the Fahrmeir package (archived on CRAN, 2026-10-12) for the
+same data recorded as a frequency data frame with other variables.
 
 ## Examples
 

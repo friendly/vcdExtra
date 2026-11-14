@@ -513,7 +513,7 @@ plot(HT.ca, lines = TRUE)
 ![](a4-mosaics_files/figure-html/housetasks-ca-plot-1.png)
 
 So, we can use the `CA` method of
-[`seriation::seriate()`](https://rdrr.io/pkg/seriation/man/seriate.html)
+[`seriation::seriate()`](https://michael.hahsler.net/seriation/reference/seriate.html)
 to find the order of permutations of `Task` and `Who` along the CA
 dimensions.
 
@@ -531,7 +531,7 @@ colnames(HouseTasks)[order[[2]]]
 ```
 
 Now, use
-[`seriation::permute()`](https://rdrr.io/pkg/seriation/man/permute.html)
+[`seriation::permute()`](https://michael.hahsler.net/seriation/reference/permute.html)
 to use `order` for the permutations of `Task` and `Who`, and plot the
 resulting mosaic:
 

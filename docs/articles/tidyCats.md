@@ -184,10 +184,10 @@ order implied by correspondence analysis dimensions. This is implemented
 in the [`seriation`
 package](https://cran.r-project.org/package=seriation) using the `CA`
 method of
-[`seriation::seriate()`](https://rdrr.io/pkg/seriation/man/seriate.html)
+[`seriation::seriate()`](https://michael.hahsler.net/seriation/reference/seriate.html)
 and applying
-[`permute()`](https://rdrr.io/pkg/seriation/man/permute.html) to the
-result.
+[`permute()`](https://michael.hahsler.net/seriation/reference/permute.html)
+to the result.
 
 ``` r
 
