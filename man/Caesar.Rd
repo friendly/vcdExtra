@@ -79,7 +79,7 @@ mosaic(Caesar.mod1,
 
 }
 \seealso{
-\code{\link[Fahrmeir]{caesar}} for the same data recorded as a
-frequency data frame with other variables.
+\code{caesar} in the Fahrmeir package (archived on CRAN, 2026-10-12) for the same
+data recorded as a frequency data frame with other variables.
 }
 \keyword{datasets}

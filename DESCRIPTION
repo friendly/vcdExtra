@@ -42,7 +42,6 @@ Maintainer: Michael Friendly <friendly@yorku.ca>
 Depends: R (>= 4.1.0), vcd, gnm (>= 1.0-3)
 Suggests: 
     gmodels,
-    Fahrmeir,
     effects,
     VGAM,
     plyr,
