@@ -283,6 +283,12 @@ Identified, not yet deleted (held for manual review).
 
 ## New work
 
+- [ ] **`color_table()` bug: residuals from `model =` go into the wrong cells** for multi-way
+  tables with more than one row/column variable (reshaped with `matrix(as.vector())`, not
+  `structable(formula)`). The shading note is also printed with `cat()`, so it can't be
+  suppressed. Repro, workaround and fix ideas: `issues/color_table-model-residuals.md`
+  (found 2026-11-14 in the Agatha Christie blog post).
+
 - [X] an initial sketch of a novel 2x2 display for CMHtest, `dev/CMH-2x2.md`. Implemented in new print methods
   for CMHtest().  
 
