@@ -296,6 +296,25 @@ Identified, not yet deleted (held for manual review).
   (§3), and `shade = "deviance"` being ignored with `model =` (and recomputed from the
   independence model, ignoring `expected =`).
 
+- [ ] **`drop1.loglm()` breaks `step()` for `loglm` models** (found 2026-11-15). Because
+  `drop1.loglm()` is registered as the S3 `drop1()` method (since `893c6f6`, 2026-08-16),
+  `step(m, direction = "backward")` (or `"both"`) on a `loglm` now fails with
+  "undefined columns selected": `step()` expects `drop1()` to return an `AIC` column (and
+  accept `scale`, `trace`, `k`). No example uses backward `step()`, so `R CMD check` doesn't
+  catch it. Fix: either add the columns/arguments `step()` needs, or stop registering it as
+  the `drop1()` method (keep `drop1.loglm()` as a plain exported function). Check whether
+  0.9.8 on CRAN already has this.
+  - Same family: `drop1.loglm()`/`assoc_strength()` fail when the model's data aren't in the
+    global environment (e.g. fit inside a function). They call `update(..., evaluate = FALSE)`,
+    but MASS's `update.loglm()` has no `evaluate` argument and refits at once with
+    `eval.parent()` in the wrong frame. A fix (evaluate the `update()` call in
+    `environment(formula(object))`) was written then reverted with `a52584a` — see `c2be4a8`.
+  - Lesson from that attempt: an S3 `add1.loglm()` broke forward `step()` in the `Hoyt`
+    example the same way. Any `add1`/`drop1` method for `loglm` must stay `step()`-compatible.
+  - Separately, `devtools::run_examples()` (not `R CMD check`) fails in `Hoyt`, `Caesar`
+    (`mosaic()`/`add1()` refits can't find data outside the global env) and `Burt` (only in a
+    full run; order-dependent). Low priority, but it may affect pkgdown example output.
+
 - [X] an initial sketch of a novel 2x2 display for CMHtest, `dev/CMH-2x2.md`. Implemented in new print methods
   for CMHtest().  
 
