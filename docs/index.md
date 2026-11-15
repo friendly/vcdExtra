@@ -199,9 +199,9 @@ A few others worth knowing about:
 
 ### 🗃️ Datasets
 
-Beyond the wide range of \*\*datasets\* in the `vcd` package, this
-`vcdExtra` package includes many new data sets, that I’ve found useful
-for illustrating various ideas, models, methods and visualization. Use
+Beyond the wide range of datasets in the `vcd` package, this `vcdExtra`
+package includes many new data sets, that I’ve found useful for
+illustrating various ideas, models, methods and visualization. Use
 `datasets("vcdExtra")` to see a list with titles and descriptions. The
 vignette,
 [`vignette("datasets", package="vcdExtra")`](https://friendly.github.io/vcdExtra/articles/datasets.md)
