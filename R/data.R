@@ -2038,7 +2038,7 @@ NULL
 #' # fit baseline log-linear model for Status as response
 #' require(MASS)
 #' hoyt.mod0 <- loglm(~ Status + (Sex*Rank*Occupation),
-#'   data=Hoyt1, fitted=TRUE)
+#'   data=Hoyt1)
 #' hoyt.mod0
 #'
 #' mosaic(hoyt.mod0,
@@ -2047,7 +2047,7 @@ NULL
 #'
 #' # add one-way association of Status with factors
 #' hoyt.mod1 <- loglm(~ Status * (Sex + Rank + Occupation) + (Sex*Rank*Occupation),
-#'   data=Hoyt1, fitted=TRUE)
+#'   data=Hoyt1)
 #' hoyt.mod1
 #'
 #' mosaic(hoyt.mod1,

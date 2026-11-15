@@ -12,21 +12,6 @@
 # $lrt and $pearson directly; extractAIC.loglm()/drop1.default() only
 # expose a deviance-derived LRT).
 
-# Refit a loglm via update() so that its data are found where the model was fit.
-# MASS's update.loglm() re-evaluates the call with eval.parent() (it has no
-# `evaluate` argument), i.e. in the frame that called update(). Called directly
-# from inside a function, that frame is the function's own, so data that are not
-# in the global environment (e.g., created inside another function, or in
-# devtools::run_examples()) aren't found. Evaluating the update() call in the
-# environment of the model's formula makes that the parent frame instead.
-# @noRd
-.update_loglm <- function(object, ...) {
-  env <- environment(stats::formula(object))
-  if (is.null(env)) env <- parent.frame(2L)
-  cl <- as.call(c(list(quote(stats::update), object), list(...)))
-  eval(cl, envir = env)
-}
-
 #' Term-level tests and effect sizes for loglm models
 #'
 #' `drop1.loglm()` performs single-term deletion tests for the generating
@@ -196,8 +181,12 @@ drop1.loglm <- function(object, scope, test = c("Chisq", "none"), abbrev = FALSE
     }
   }
 
+  env <- environment(stats::formula(object))
   refit_drop <- function(term) {
-    .update_loglm(object, stats::as.formula(paste("~ . -", term)))
+    upd <- stats::update(object,
+                          stats::as.formula(paste("~ . -", term)),
+                          evaluate = FALSE)
+    eval(upd, envir = env)
   }
   reduced <- lapply(scope, refit_drop)
 
@@ -302,7 +291,7 @@ assoc_strength <- function(object, scope, method = c("Cramer", "Cohen"), abbrev 
   method <- match.arg(method)
   aod <- drop1.loglm(object, scope = scope, ...)
 
-  full <- if (!is.null(object$fitted)) object else .update_loglm(object, fitted = TRUE)
+  full <- if (!is.null(object$fitted)) object else stats::update(object, fitted = TRUE)
   N <- sum(full$fitted)
   dn <- dimnames(full$fitted)
 
@@ -325,133 +314,5 @@ assoc_strength <- function(object, scope, method = c("Cramer", "Cohen"), abbrev 
     sprintf("Single term deletions, with %s", colname),
     sprintf("Model: %s", get_model(object, type = "brackets", abbrev = abbrev))
   )
-  aod
-}
-
-#' Single-term additions for loglm models
-#'
-#' `add1.loglm()` is the counterpart of [drop1.loglm()]: for each candidate
-#' term, it adds that term to a fitted [MASS::loglm()] model, refits via
-#' `update()`, and reports the reduction in both the LR statistic (G^2) and
-#' the Pearson statistic (X^2).
-#'
-#' @details
-#' By default, the candidate terms are those that can be added to `object`
-#' while keeping the model hierarchical, as found by [stats::add.scope()]:
-#' a term qualifies only when all of its lower-order relatives are already in
-#' the model. For example, `A:B:C` is a candidate only once `A:B`, `A:C` and
-#' `B:C` are all present.
-#'
-#' Unlike `stats::add1.default()`, which `add1()` would otherwise use for
-#' `loglm` objects, `add1.loglm()` finds the model's data where the model was
-#' fit, so it also works for models fit inside a function, adds the Pearson
-#' X^2 column, and returns the fitted models. The `Df` and LR statistics agree
-#' with the `Df` and `LRT` columns of `add1.default()`.
-#'
-#' @param object a fitted `MASS::loglm` model
-#' @param scope the terms to consider adding: either a one-sided formula
-#'   giving the largest model to consider (e.g. `~ .^2`), from which the
-#'   hierarchical candidates are found with [stats::add.scope()], or a
-#'   character vector of term labels (colon-separated, as in `"A:B"`).
-#'   Defaults to the saturated model, i.e. every term that can be added
-#'   hierarchically.
-#' @param test `"Chisq"` (default) to include an LR p-value column, or
-#'   `"none"` to omit it.
-#' @param abbrev passed to [get_model()] for the `Model:` heading line;
-#'   `FALSE` (default) for full factor names, or an integer to abbreviate
-#'   each factor name to that many characters.
-#' @param ... currently unused.
-#'
-#' @return An object of class `c("anova", "data.frame")` with columns `Df`,
-#'   `LR Chisq`, `Pearson Chisq`, and (if `test = "Chisq"`) `Pr(>Chi)`, one
-#'   row per candidate term plus a `<none>` reference row. Each row gives the
-#'   *reduction* in df and in each statistic from adding that term. The fitted
-#'   models -- `object` itself as `"<none>"`, plus the refit adding each term
-#'   -- are attached as `attr(., "models")`, a `loglmlist` (see [loglmlist()]).
-#'
-#' @author Michael Friendly
-#' @seealso [drop1.loglm()], [mosaic.loglmlist()], [LRstats()]
-#' @export
-#' @rawNamespace export(add1.loglm)
-#'
-#' @examples
-#' library(MASS)
-#' ucb <- loglm(~ Admit + Gender + Dept, data = UCBAdmissions)
-#'
-#' add1(ucb)                      # all two-way terms
-#' add1(ucb, scope = ~ .^2)       # the same, with an explicit scope
-#' add1(ucb, scope = "Admit:Dept")
-#'
-#' # after adding all two-way terms, the only candidate is the three-way term
-#' ucb2 <- update(ucb, ~ .^2)
-#' add1(ucb2)
-#'
-#' # the fitted models, for further use
-#' names(attr(add1(ucb), "models"))
-add1.loglm <- function(object, scope, test = c("Chisq", "none"), abbrev = FALSE, ...) {
-  if (!inherits(object, "loglm")) {
-    stop("'object' must inherit from class 'loglm'.", call. = FALSE)
-  }
-  test <- match.arg(test)
-
-  model_terms <- attr(stats::terms(object), "term.labels")
-  fml <- stats::formula(object)
-
-  if (missing(scope) || is.null(scope)) {
-    n_vars <- length(unique(unlist(object$margin, use.names = FALSE)))
-    scope <- stats::as.formula(paste("~ .^", n_vars))
-  }
-  if (inherits(scope, "formula")) {
-    scope <- stats::add.scope(fml, stats::update.formula(fml, scope))
-  } else if (!is.character(scope)) {
-    stop("'scope' must be a formula or a character vector of term labels.", call. = FALSE)
-  }
-  in_model <- intersect(scope, model_terms)
-  if (length(in_model)) {
-    stop("term(s) already in the model: ", paste(in_model, collapse = ", "),
-         call. = FALSE)
-  }
-  if (!length(scope)) {
-    stop("no terms in scope for adding to the model", call. = FALSE)
-  }
-
-  refit_add <- function(term) {
-    .update_loglm(object, stats::as.formula(paste("~ . +", term)))
-  }
-  augmented <- lapply(scope, refit_add)
-
-  models <- c(list(object), augmented)
-  names(models) <- c("<none>", scope)
-  class(models) <- "loglmlist"
-
-  df      <- c(object$df,      vapply(augmented, `[[`, numeric(1L), "df"))
-  lrt     <- c(object$lrt,     vapply(augmented, `[[`, numeric(1L), "lrt"))
-  pearson <- c(object$pearson, vapply(augmented, `[[`, numeric(1L), "pearson"))
-
-  delta_df      <- df[1L] - df
-  delta_lrt     <- lrt[1L] - lrt
-  delta_pearson <- pearson[1L] - pearson
-  delta_df[1L] <- delta_lrt[1L] <- delta_pearson[1L] <- NA_real_
-
-  aod <- data.frame(
-    Df = delta_df,
-    `LR Chisq` = delta_lrt,
-    `Pearson Chisq` = delta_pearson,
-    check.names = FALSE,
-    row.names = c("<none>", scope)
-  )
-
-  if (test == "Chisq") {
-    p <- rep(NA_real_, length(scope) + 1L)
-    p[-1L] <- stats::pchisq(delta_lrt[-1L], delta_df[-1L], lower.tail = FALSE)
-    aod[["Pr(>Chi)"]] <- p
-  }
-
-  attr(aod, "heading") <- c(
-    "Single term additions",
-    sprintf("Model: %s", get_model(object, type = "brackets", abbrev = abbrev))
-  )
-  attr(aod, "models") <- models
-  class(aod) <- c("anova", "data.frame")
   aod
 }
