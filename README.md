@@ -1,7 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- This README requires access to the vignettes in the package. Please run
      devtools::install(build_vignettes = TRUE) before knitting this to README.md -->
+
 <!-- badges: start -->
 
 [![CRAN_Status](http://www.r-pkg.org/badges/version/vcdExtra)](https://cran.r-project.org/package=vcdExtra)
@@ -18,6 +20,7 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 <!--
 [![R-CMD-check](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/friendly/vcdExtra/actions/workflows/R-CMD-check.yaml)
 -->
+
 <!-- badges: end -->
 
 # vcdExtra <img src="man/figures/logo.png" align="right" height="200px" /><br><sub>Extensions and additions to vcd: Visualizing Categorical Data</sub>
@@ -25,6 +28,7 @@ Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=0285
 <!--
 ## Extensions and additions to vcd: Visualizing Categorical Data
 -->
+
 <!-- Version 0.8-6 -->
 
 Version 0.9.9; documentation built for `pkgdown` 2026-11-15
@@ -189,9 +193,9 @@ A few others worth knowing about:
 
 ### 🗃️ Datasets
 
-Beyond the wide range of \*\*datasets\* in the `vcd` package, this
-`vcdExtra` package includes many new data sets, that I’ve found useful
-for illustrating various ideas, models, methods and visualization. Use
+Beyond the wide range of datasets in the `vcd` package, this `vcdExtra`
+package includes many new data sets, that I’ve found useful for
+illustrating various ideas, models, methods and visualization. Use
 `datasets("vcdExtra")` to see a list with titles and descriptions. The
 vignette, `vignette("datasets", package="vcdExtra")` provides a
 classification of these according to methods of analysis.
@@ -226,18 +230,18 @@ vigns$Title <- paste0("[", vigns$Title, "](https://friendly.github.io/vcdExtra/a
 vigns |> knitr::kable()
 ```
 
-| File                     | Title                                                                                                                     |
-|:-------------------------|:--------------------------------------------------------------------------------------------------------------------------|
-| a1-creating.Rmd          | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html)            |
+| File | Title |
+|:---|:---|
+| a1-creating.Rmd | [1. Creating and manipulating frequency tables](https://friendly.github.io/vcdExtra/articles/a1-creating.html) |
 | a1a-convert-collapse.Rmd | [1a. Steps Toward Tidy Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/a1a-convert-collapse.html) |
-| a2-tests.Rmd             | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html)                                    |
-| a3-loglinear.Rmd         | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html)                                     |
-| a4-mosaics.Rmd           | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html)                                           |
-| a5-demo-housing.Rmd      | [5. Demo - Housing Data](https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html)                               |
-| a6-mobility.Rmd          | [6. Mobility tables](https://friendly.github.io/vcdExtra/articles/a6-mobility.html)                                       |
-| a7-continuous.Rmd        | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html)                               |
-| datasets.Rmd             | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html)                      |
-| tidyCats.Rmd             | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html)         |
+| a2-tests.Rmd | [2. Tests of Independence](https://friendly.github.io/vcdExtra/articles/a2-tests.html) |
+| a3-loglinear.Rmd | [3. Loglinear Models](https://friendly.github.io/vcdExtra/articles/a3-loglinear.html) |
+| a4-mosaics.Rmd | [4. Mosaic plots](https://friendly.github.io/vcdExtra/articles/a4-mosaics.html) |
+| a5-demo-housing.Rmd | [5. Demo - Housing Data](https://friendly.github.io/vcdExtra/articles/a5-demo-housing.html) |
+| a6-mobility.Rmd | [6. Mobility tables](https://friendly.github.io/vcdExtra/articles/a6-mobility.html) |
+| a7-continuous.Rmd | [7. Continuous predictors](https://friendly.github.io/vcdExtra/articles/a7-continuous.html) |
+| datasets.Rmd | [Datasets for categorical data analysis](https://friendly.github.io/vcdExtra/articles/datasets.html) |
+| tidyCats.Rmd | [tidyCat: Tidy Methods For Categorical Data Analysis](https://friendly.github.io/vcdExtra/articles/tidyCats.html) |
 
 - there is also a set of simple **demonstration files** illustrating
   analysis of datasets with more detail than provided in their
