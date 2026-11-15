@@ -49,9 +49,6 @@ HEC <- margin.table(HairEyeColor, 1:2)   # collapse over Sex
 color_table(HEC, title = "Hair \u00d7 Eye Color (residual shading)")
 ```
 
-    ## Shading based on residuals from model of independence,
-    ##  X^2 = 138.29, df = 9, p = 2.325e-25
-
 [TABLE]
 
 For comparison, shading by raw frequencies (rather than residuals) gives
@@ -87,9 +84,6 @@ color_table(HairEyeColor,
             title   = "Hair \u00d7 Eye \u00d7 Sex (complete independence residuals)")
 ```
 
-    ## Re-fitting to get frequencies and fitted values
-    ## Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0
-
 [TABLE]
 
 Swapping the formula around puts `Hair` and `Sex` on the columns
@@ -103,9 +97,6 @@ color_table(HairEyeColor,
             legend  = TRUE,
             title   = "Hair \u00d7 Sex as column spanners, Eye as rows")
 ```
-
-    ## Re-fitting to get frequencies and fitted values
-    ## Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0
 
 [TABLE]
 
@@ -148,9 +139,6 @@ color_table(HEC,
   knit_include(width = 520, height = 300)
 ```
 
-    ## Shading based on residuals from model of independence,
-    ##  X^2 = 138.29, df = 9, p = 2.325e-25
-
 [TABLE]
 
 [`knit_include()`](https://friendly.github.io/vcdExtra/reference/knit_include.md)
@@ -179,9 +167,6 @@ color_table(HEC,
   knit_include(width = 520, height = 280)
 ```
 
-    ## Shading based on residuals from model of independence,
-    ##  X^2 = 138.29, df = 9, p = 2.325e-25
-
 [TABLE]
 
 ### Multi-way table: PreSex data
@@ -203,9 +188,6 @@ color_table(PreSex,
   knit_include(width = 520, height = 300)
 ```
 
-    ## Re-fitting to get frequencies and fitted values
-    ## Shading based on residuals from model of complete independence, X^2 = 270.14, df = 11, p = 0
-
 [TABLE]
 
 ### Row and column variables together: Titanic data
@@ -224,8 +206,5 @@ color_table(Titanic,
             title   = "Titanic: Class × Sex as column spanners, Age × Survived as row stubs") |>
   knit_include(width = 620, height = 380)
 ```
-
-    ## Re-fitting to get frequencies and fitted values
-    ## Shading based on residuals from model of complete independence, X^2 = 1637.45, df = 25, p = 0
 
 [TABLE]

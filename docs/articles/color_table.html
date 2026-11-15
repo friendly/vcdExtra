@@ -64,7 +64,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2026-11-14</h4>
+            <h4 data-toc-skip class="date">2026-11-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/vcdExtra/blob/master/vignettes/articles/color_table.Rmd" class="external-link"><code>vignettes/articles/color_table.Rmd</code></a></small>
       <div class="d-none name"><code>color_table.Rmd</code></div>
@@ -111,8 +111,6 @@ Hair×Eye combinations immediately visible.</p>
 <span><span class="va">HEC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/marginSums.html" class="external-link">margin.table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>   <span class="co"># collapse over Sex</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>, title <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color (residual shading)"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Shading based on residuals from model of independence,</span></span>
-<span><span class="co">##  X^2 = 138.29, df = 9, p = 2.325e-25</span></span></code></pre>
 <div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#mwlefoodfi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -628,7 +626,7 @@ Hair×Eye combinations immediately visible.</p>
 <p>For comparison, shading by raw frequencies (rather than residuals)
 gives a different picture — it highlights which combinations are simply
 most common, not which ones deviate from independence.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>, shade <span class="op">=</span> <span class="st">"freq"</span>, title <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color (frequency shading)"</span><span class="op">)</span></span></code></pre></div>
 <div id="eexombwkke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#eexombwkke table {
@@ -1154,13 +1152,11 @@ note reproduces the chi-squared summary printed to the console.</p>
 <code>Hair</code> and <code>Sex</code> are two row variables 014 shown
 as two separate stub columns instead of concatenated labels like
 “Black_Male”:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>,</span>
 <span>            formula <span class="op">=</span> <span class="va">Eye</span> <span class="op">~</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span>,</span>
 <span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>            title   <span class="op">=</span> <span class="st">"Hair \u00d7 Eye \u00d7 Sex (complete independence residuals)"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
-<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0</span></span></code></pre>
 <div id="ulbfdpbcyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#ulbfdpbcyv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1716,13 +1712,11 @@ as two separate stub columns instead of concatenated labels like
 <p>Swapping the formula around puts <code>Hair</code> and
 <code>Sex</code> on the columns instead, shown as nested spanner
 headings, with <code>Eye</code> as the single row variable:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HairEyeColor</span>,</span>
 <span>            formula <span class="op">=</span> <span class="va">Hair</span> <span class="op">+</span> <span class="va">Sex</span> <span class="op">~</span> <span class="va">Eye</span>,</span>
 <span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>            title   <span class="op">=</span> <span class="st">"Hair \u00d7 Sex as column spanners, Eye as rows"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
-<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 164.92, df = 24, p = 0</span></span></code></pre>
 <div id="kgufivjubq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#kgufivjubq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -2291,7 +2285,7 @@ headings, with <code>Eye</code> as the single row variable:</p>
 <p>The chunk below is shown for illustration only
 (<code>eval=FALSE</code>); the HTML approach above is sufficient when
 knitting to HTML.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
 <span>            title    <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color"</span>,</span>
 <span>            filename <span class="op">=</span> <span class="st">"color_table_hec.png"</span>,</span>
@@ -2308,12 +2302,10 @@ knitting to HTML.</p>
 format by hand. Pipe the <code>gt</code> object through it and the same
 chunk works correctly whether you are knitting to HTML, PDF, or
 Word.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
 <span>            title <span class="op">=</span> <span class="st">"Hair \u00d7 Eye Color"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Shading based on residuals from model of independence,</span></span>
-<span><span class="co">##  X^2 = 138.29, df = 9, p = 2.325e-25</span></span></code></pre>
 <div id="txvafbsnay" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#txvafbsnay table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -2844,13 +2836,11 @@ frequencies with the Pearson residual values themselves. This is useful
 when the exact magnitude of each deviation matters, not just its
 direction. Row and column totals are suppressed automatically because
 residuals do not have meaningful marginal sums.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">HEC</span>,</span>
 <span>            values <span class="op">=</span> <span class="st">"residuals"</span>,</span>
 <span>            title  <span class="op">=</span> <span class="st">"Hair \u00d7 Eye \u2014 Pearson residuals"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">280</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Shading based on residuals from model of independence,</span></span>
-<span><span class="co">##  X^2 = 138.29, df = 9, p = 2.325e-25</span></span></code></pre>
 <div id="orehalspkz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#orehalspkz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -3361,15 +3351,13 @@ sexual-attitude variables (<code>PremaritalSex</code>,
 columns rather than concatenated labels — making the interaction
 structure easy to read. The legend note records the goodness-of-fit for
 the complete-independence model.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PreSex</span>, package <span class="op">=</span> <span class="st">"vcd"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">PreSex</span>,</span>
 <span>            formula <span class="op">=</span> <span class="va">MaritalStatus</span> <span class="op">~</span> <span class="va">PremaritalSex</span> <span class="op">+</span> <span class="va">ExtramaritalSex</span>,</span>
 <span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>            title   <span class="op">=</span> <span class="st">"Pre/Extra-marital Sex by Marital Status"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">520</span>, height <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
-<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 270.14, df = 11, p = 0</span></span></code></pre>
 <div id="cbwjcfdjag" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#cbwjcfdjag table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -3885,15 +3873,13 @@ Here <code>Class</code> and <code>Sex</code> (left of <code>~</code>)
 form nested column spanners, while <code>Age</code> and
 <code>Survived</code> (right of <code>~</code>) are shown as two
 separate row-stub columns:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/color_table.html">color_table</a></span><span class="op">(</span><span class="va">Titanic</span>,</span>
 <span>            formula <span class="op">=</span> <span class="va">Class</span> <span class="op">+</span> <span class="va">Sex</span> <span class="op">~</span> <span class="va">Age</span> <span class="op">+</span> <span class="va">Survived</span>,</span>
 <span>            legend  <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>            title   <span class="op">=</span> <span class="st">"Titanic: Class × Sex as column spanners, Age × Survived as row stubs"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/knit_include.html">knit_include</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">620</span>, height <span class="op">=</span> <span class="fl">380</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Re-fitting to get frequencies and fitted values</span></span>
-<span><span class="co">## Shading based on residuals from model of complete independence, X^2 = 1637.45, df = 25, p = 0</span></span></code></pre>
 <div id="fvsybhaagl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#fvsybhaagl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';

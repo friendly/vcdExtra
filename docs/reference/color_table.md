@@ -135,11 +135,17 @@ color_table(x, ...)
 
   A fitted model (loglm or glm) to compute residuals from. If NULL and
   shade involves residuals, uses an independence model for all factors.
+  Its residuals are matched to the cells of the displayed table by the
+  names of the factors, so the order of the dimensions does not matter.
+  A glm must be fit to a frequency data frame (one row per cell)
+  containing all the factors of `x`.
 
 - expected:
 
-  Expected frequencies (alternative to `model`), a data structure of the
-  same shape as `x`
+  Expected frequencies (alternative to `model`): either an array with
+  the same named dimensions as the unflattened table (in any order), or
+  a matrix with the same dimensions as the flattened table that is
+  displayed.
 
 - palette:
 
@@ -154,8 +160,8 @@ color_table(x, ...)
 - legend:
 
   Controls display of shading interpretation note: `TRUE` or `"note"`
-  (default) adds a source note explaining the shading; `FALSE` (default)
-  suppresses the note, but a message is printed in the console.
+  adds a source note explaining the shading; `FALSE` (default) omits the
+  note and instead prints it in the console as a message.
 
 - margins:
 
@@ -204,8 +210,10 @@ the model of complete independence among all factors using
 a model using the `model` or `expected` arguments, in a way similar to
 that provided by
 [`mosaic.glm()`](https://friendly.github.io/vcdExtra/reference/mosaic.glm.md).
-A message is printed showing the chi-squared statistic, degrees of
-freedom, and p-value for this test.
+Unless `legend = TRUE`, a message is printed showing the chi-squared
+statistic, degrees of freedom, and p-value for this test; it can be
+silenced with
+[`suppressMessages()`](https://rdrr.io/r/base/message.html).
 
 **Multi-variable row and column labels**
 
@@ -302,7 +310,7 @@ data(HairEyeColor)
 HEC <- margin.table(HairEyeColor, 1:2)  # 2-way: Hair x Eye
 color_table(HEC)
 #> Shading based on residuals from model of independence,
-#>  X^2 = 138.29, df = 9, p = 2.325e-25 
+#>  X^2 = 138.29, df = 9, p = 2.325e-25
 
 
   
