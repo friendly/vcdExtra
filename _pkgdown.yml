@@ -90,6 +90,7 @@ reference:
       - HosmerLemeshow
       - logLik.loglm
       - drop1.loglm
+      - add1.loglm
       - LRanova
       - LRstats
       - modFit

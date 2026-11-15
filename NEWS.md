@@ -1,5 +1,17 @@
 ## Version 0.9.9
 
+* Added `add1.loglm()`, the counterpart of `drop1.loglm()`: single-term addition tests for a
+  `loglm` model, reporting the reduction in both G^2 and Pearson X^2 and returning the fitted
+  models as a `loglmlist`. It replaces `stats::add1.default()` for `loglm` objects, which
+  could not find a model's data unless they were in the global environment.
+
+* `drop1.loglm()`, `LRanova()` and `assoc_strength()` failed for a `loglm` model whose data
+  were not in the global environment (e.g., a model fit inside a function). They now refit
+  models where the original model was fit.
+
+* The `Hoyt` examples now fit their `loglm` models with `fitted = TRUE`, and run under
+  `devtools::run_examples()` and pkgdown as well as `R CMD check`.
+
 * `color_table()` with `model =` put the residuals into the wrong cells of multi-way tables
   with more than one row or column variable, because they were reshaped in the order of the
   original array rather than the displayed layout. Residuals are now matched to cells by
