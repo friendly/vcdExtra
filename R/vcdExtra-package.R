@@ -101,7 +101,7 @@
 #' `vignette("strucplot", package = "vcd")`
 #'
 #' Turner, H. and Firth, D. *Generalized nonlinear models in R: An
-#' overview of the gnm package*, 2007, <http://eprints.ncrm.ac.uk/472/>.
+#' overview of the gnm package*, 2007, <https://eprints.ncrm.ac.uk/id/eprint/472/>.
 #' Available in R via `vignette("gnmOverview", package = "gnm")`.
 #' 
 #' @importFrom grDevices hsv rgb

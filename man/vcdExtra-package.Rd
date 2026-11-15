@@ -101,7 +101,7 @@ Software}, 2006, \strong{17}, 1-48. Available in R via
 \code{vignette("strucplot", package = "vcd")}
 
 Turner, H. and Firth, D. \emph{Generalized nonlinear models in R: An
-overview of the gnm package}, 2007, \url{http://eprints.ncrm.ac.uk/472/}.
+overview of the gnm package}, 2007, \url{https://eprints.ncrm.ac.uk/id/eprint/472/}.
 Available in R via \code{vignette("gnmOverview", package = "gnm")}.
 }
 \seealso{
