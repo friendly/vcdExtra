@@ -133,8 +133,8 @@ Multi-way Contingency Tables with vcd *Journal of Statistical Software*,
 [`vignette("strucplot", package = "vcd")`](https://cran.rstudio.com/web/packages/vcd/vignettes/strucplot.pdf)
 
 Turner, H. and Firth, D. *Generalized nonlinear models in R: An overview
-of the gnm package*, 2007, <http://eprints.ncrm.ac.uk/472/>. Available
-in R via
+of the gnm package*, 2007, <https://eprints.ncrm.ac.uk/id/eprint/472/>.
+Available in R via
 [`vignette("gnmOverview", package = "gnm")`](https://cran.rstudio.com/web/packages/gnm/vignettes/gnmOverview.pdf).
 
 ## See also
