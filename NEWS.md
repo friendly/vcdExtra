@@ -1,5 +1,19 @@
 ## Version 0.9.9
 
+* `color_table()` with `model =` put the residuals into the wrong cells of multi-way tables
+  with more than one row or column variable, because they were reshaped in the order of the
+  original array rather than the displayed layout. Residuals are now matched to cells by
+  factor names, for `loglm` and `glm` models, and for `table`, `structable` and `ftable`
+  input; a model whose factors don't match the table now gives an error.
+
+* `color_table()`'s `expected =` now also accepts an array over the table's factors (in any
+  order of dimensions), not only a matrix in the flattened layout.
+
+* `color_table()` now reports its shading note with `message()` instead of `cat()`, so it can
+  be silenced with `suppressMessages()` or `message: false`, and only when the note is not
+  already shown in the table (`legend = FALSE`). The "Re-fitting to get frequencies and fitted
+  values" line from its internal independence model no longer appears.
+
 * `logist_plot()` and its convenience wrappers now use the eight distinct colours of the
   Okabe-Ito palette by default. Plots with more than eight observed groups must supply
   `group.colors`.

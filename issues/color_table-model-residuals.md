@@ -53,17 +53,22 @@ the formula still `Killer ~ Related + Financial`.
   re-flatten it with the same `structable()` call that was used for `x` (`formula` if given,
   otherwise the default). It would be simplest to factor this into one helper,
   `.flatten_like_x(arr, formula)`, used by every branch, so the branches can't drift apart.
+  
 - Even better: compute the residuals on the *unflattened* table in every branch and flatten
   once at the end, together with the frequencies.
+  
 - Check that `dimnames(resid_mat)` match `dimnames(x)` before shading, and `stop()` if they
   don't. That guards against this kind of silent mismatch in general.
+  
 - For `glm` models (the docs say `model` may be loglm or glm): `residuals.glm()` returns a
   vector in data-frame row order, not an array. Check how that case is handled. It probably
   needs to be reshaped to an array using the model frame's factors before it is flattened.
+  
 - **Check the `expected =` branch as well.** It computes `(x - expected) / sqrt(expected)` with `x`
   already flattened. The docs say `expected` has "the same shape as `x`", but for a multi-way
   table it is unclear whether that means the array or the flat matrix. Accept the array, and
   flatten it with the same helper.
+  
 - Add a test: a 2x2x2 table with an asymmetric model and two row variables, checking that each
   shaded cell's residual matches `structable(formula, residuals(mod))`. Also test the column side,
   with two column variables.
@@ -85,12 +90,15 @@ ct
 - **Replace `cat()` with `message()`.** This is the standard R convention for informational
   output. Users can then silence it with `suppressMessages()` or `message: false`. This is the
   minimal fix.
+  
 - **Only print when the note isn't shown**, i.e. `if (!show_legend) message(shading_message)`.
   `legend = TRUE` puts it in the table; `legend = FALSE` sends it to the console. This matches
   what the `legend` docs already describe ("FALSE suppresses the note, but a message is printed
   in the console").
+  
 - Optionally add a `verbose` / `quiet` argument, or respect an option such as
   `getOption("vcdExtra.verbose", TRUE)`, if console output should be controllable on its own.
+  
 - The `X^2 = ...` part could also be stored as an attribute of the returned gt object (e.g.
   `attr(gt, "shading")`), so it can still be retrieved programmatically when nothing is printed.
 
@@ -111,7 +119,9 @@ could say to pass `fitted = TRUE`.
   Add the variable names as stub-column headers (`gt::tab_stubhead()`, or labels on the stub
   columns), as the column spanner already does for column variables. The blog works around this
   by relabeling the levels ("Not related"/"Related", "No gain"/"Gain").
+  
 - **`@param legend` doc contradicts itself**: it says both "`TRUE` or `"note"` (default)" and
   "`FALSE` (default)". The code default is `FALSE`. It also uses `\code{}`; convert it to markdown.
+  
 - **`@param palette` doc typo**: `c("#B2182B", "white", , "#2166AC")` has an empty element.
 - `@param filename` still uses `\code{\link[gt]{gtsave}}`. Change it to `[gt::gtsave()]`.

@@ -23,7 +23,7 @@
 #
 # ✔️DONE: For multi-way tables, use MASS::loglm() to fit complete independence model and compute
 #         proper Pearson residuals. Print message with X^2, df, p-value when shade != "freq".
-#         Uses cat() for output to ensure visibility in all R environments.
+#         Uses message() (was cat() before 2026-11-15), only when the note is not shown in the table.
 #
 # ✔️DONE: Note legend for table shading interpretation implemented via `gt::tab_source_note()`.
 #         `legend = TRUE` or `legend = "note"` adds note (default); `legend = FALSE` suppresses.
@@ -90,8 +90,8 @@
 #' model of complete independence among all factors using \code{\link[MASS]{loglm}}.
 #' But you can specify a model using the `model` or `expected` arguments, in a way similar to that provided
 #' by `mosaic.glm()`.
-#' A message is printed showing the chi-squared statistic, degrees of freedom,
-#' and p-value for this test.
+#' Unless `legend = TRUE`, a message is printed showing the chi-squared statistic, degrees of
+#' freedom, and p-value for this test; it can be silenced with [suppressMessages()].
 #'
 #' **Multi-variable row and column labels**
 #'
@@ -213,8 +213,12 @@ color_table <- function(x, ...) {
 #'        `"pearson"`, or `"deviance"`
 #' @param model A fitted model (loglm or glm) to compute residuals from.
 #'        If NULL and shade involves residuals, uses an independence model for all factors.
-#' @param expected Expected frequencies (alternative to `model`), a data structure of the same shape
-#'        as `x`
+#'        Its residuals are matched to the cells of the displayed table by the names of the
+#'        factors, so the order of the dimensions does not matter. A glm must be fit to a
+#'        frequency data frame (one row per cell) containing all the factors of `x`.
+#' @param expected Expected frequencies (alternative to `model`): either an array with the same
+#'        named dimensions as the unflattened table (in any order), or a matrix with the same
+#'        dimensions as the flattened table that is displayed.
 #' @param palette Color palette function or vector for background colors. Default depends on shade
 #'        type. When `shade = "freq"` the default is `palette = c("white", "firebrick")`; otherwise
 #'        `c("#B2182B", "white", , "#2166AC")` ranging from red to blue for negative and positive
@@ -222,8 +226,8 @@ color_table <- function(x, ...) {
 #'         `scales::col_numeric()`.
 #'
 #' @param legend Controls display of shading interpretation note:
-#'        \code{TRUE} or \code{"note"} (default) adds a source note explaining the shading;
-#'        \code{FALSE} (default) suppresses the note, but a message is printed in the console.
+#'        `TRUE` or `"note"` adds a source note explaining the shading;
+#'        `FALSE` (default) omits the note and instead prints it in the console as a message.
 #' @param margins Logical, include row/column totals?
 #' @param digits Number of decimal places for displayed values
 #' @param title Optional table title
@@ -320,6 +324,10 @@ color_table.ftable <- function(x,
 
   # Convert ftable to matrix
   x_mat <- as.matrix(x)
+
+  # Keep the row/column variables so a user-supplied model or expected array
+  # can be flattened in the same layout (not used for stub display)
+  attr(x_mat, "flat_vars") <- list(row = attr(x, "row.vars"), col = attr(x, "col.vars"))
 
   # ftable loses the original structure, so we can only use 2D residuals
   .color_table_impl(x_mat,
@@ -580,8 +588,10 @@ color_table.default <- function(x, ...) {
     stop("Cannot display residuals when shade = 'freq'. Use shade = 'residuals' or similar.")
   }
 
-  # Initialize shading message for legend
+  # Initialize shading message for legend. When the note is shown in the table,
+  # it is not also sent to the console.
   shading_message <- NULL
+  show_legend <- isTRUE(legend) || identical(legend, "note")
 
   # Compute shading values
   # cat("DEBUG: About to compute shading values\n")
@@ -594,20 +604,28 @@ color_table.default <- function(x, ...) {
     # cat("DEBUG: Computing residuals (shade != 'freq')\n")
     # Compute residuals
     if (!is.null(model)) {
-      # Use provided model - extract and reshape residuals
-      resid_arr <- residuals(model, type = "pearson")
-      resid_mat <- matrix(as.vector(resid_arr), nrow = dims[1], ncol = dims[2])
+      # Use provided model: get its residuals as an array over the table's factors,
+      # then flatten it in exactly the same layout as x
+      if (inherits(model, "glm")) {
+        resid_arr <- .glm_resid_array(model, x)
+      } else {
+        resid_arr <- residuals(model, type = "pearson")
+      }
+      resid_mat <- .flatten_like_x(resid_arr, x, what = "residuals(model)")
       # Print model info
       if (inherits(model, "loglm")) {
         shading_message <- sprintf("Shading based on residuals from fitted model, X^2 = %.2f, df = %d, p = %.4g",
                     model$pearson, model$df, 1 - pchisq(model$pearson, model$df))
-        cat(shading_message, "\n")
+      } else {
+        shading_message <- "Shading based on residuals from fitted model"
       }
+      if (!show_legend) message(shading_message)
     } else if (!is.null(expected)) {
-      # Use provided expected values
-      resid_mat <- (x - expected) / sqrt(expected)
+      # Use provided expected values, flattened in the same layout as x
+      exp_mat <- .flatten_like_x(expected, x, what = "expected")
+      resid_mat <- (x - exp_mat) / sqrt(exp_mat)
       shading_message <- "Shading based on residuals from user-supplied expected frequencies"
-      cat(shading_message, "\n")
+      if (!show_legend) message(shading_message)
     } else {
       # Fit independence model
       # For multi-way tables, use loglm for complete independence
@@ -623,7 +641,7 @@ color_table.default <- function(x, ...) {
         indep_formula <- as.formula(paste("~", paste(var_names, collapse = " + ")))
 
         # Use do.call to avoid scoping issues with loglm's non-standard evaluation
-        mod_indep <- do.call(MASS::loglm, list(formula = indep_formula, data = x_orig))
+        mod_indep <- do.call(MASS::loglm, list(formula = indep_formula, data = x_orig, fitted = TRUE))
 
         # Get residuals from the model
         resid_arr <- residuals(mod_indep, type = "pearson")
@@ -646,7 +664,7 @@ color_table.default <- function(x, ...) {
         if (is.null(formula)) {
           shading_message <- paste0(shading_message, "\nUse formula for better control.")
         }
-        cat(shading_message, "\n")
+        if (!show_legend) message(shading_message)
 
       } else {
         # 2-way table: use chisq.test (equivalent to independence)
@@ -660,7 +678,7 @@ color_table.default <- function(x, ...) {
                     unname(chi_result$statistic),
                     unname(chi_result$parameter),
                     chi_result$p.value)
-        cat(shading_message, "\n")
+        if (!show_legend) message(shading_message)
       }
     }
 
@@ -670,7 +688,7 @@ color_table.default <- function(x, ...) {
       if (!is.null(x_orig) && length(dim(x_orig)) > 2) {
         var_names <- names(dimnames(x_orig))
         indep_formula <- as.formula(paste("~", paste(var_names, collapse = " + ")))
-        mod_indep <- do.call(MASS::loglm, list(formula = indep_formula, data = x_orig))
+        mod_indep <- do.call(MASS::loglm, list(formula = indep_formula, data = x_orig, fitted = TRUE))
         exp_arr <- fitted(mod_indep)
         if (!is.null(formula)) {
           exp_st <- vcd::structable(formula, data = exp_arr)
@@ -948,8 +966,6 @@ color_table.default <- function(x, ...) {
   }
 
   # Add source note legend if requested
-
-  show_legend <- isTRUE(legend) || identical(legend, "note")
   if (show_legend && !is.null(shading_message)) {
     gt_tbl <- gt_tbl |> gt::tab_source_note(source_note = shading_message)
   }
@@ -960,4 +976,86 @@ color_table.default <- function(x, ...) {
   }
 
   return(gt_tbl)
+}
+
+# Row and column variables of the flattened matrix x passed to .color_table_impl(),
+# as named lists of levels (in display order).
+# @noRd
+.flat_vars <- function(x) {
+  fv <- attr(x, "flat_vars")
+  rv <- if (!is.null(fv)) fv$row else attr(x, "row_vars")
+  cv <- if (!is.null(fv)) fv$col else attr(x, "col_vars")
+  if (is.null(rv) || is.null(cv)) {
+    dn <- dimnames(x)
+    rv <- dn[1]
+    cv <- dn[2]
+  }
+  list(row = rv, col = cv)
+}
+
+# Flatten an array (residuals, expected frequencies) over the table's factors into
+# the same row/column layout as the flattened matrix x, so that each value lands in
+# the cell it belongs to. An object that is already a matrix with the same
+# dimensions as x, and whose dimnames do not name the table's factors, is used as is.
+# @noRd
+.flatten_like_x <- function(arr, x, what = "values") {
+  fv <- .flat_vars(x)
+  levs <- c(fv$row, fv$col)
+  vars <- names(levs)
+  arr_dn <- dimnames(arr)
+  arr_vars <- names(arr_dn)
+
+  if (!is.null(arr_vars) && all(vars %in% arr_vars)) {
+    extra <- setdiff(arr_vars, vars)
+    if (length(extra) > 0) {
+      stop(sprintf("`%s` has dimensions not in the table: %s", what,
+                   paste(extra, collapse = ", ")), call. = FALSE)
+    }
+    # Put the levels of each factor in the table's order
+    idx <- lapply(arr_vars, function(v) {
+      if (!setequal(arr_dn[[v]], levs[[v]])) {
+        stop(sprintf("Levels of `%s` in `%s` do not match the table", v, what),
+             call. = FALSE)
+      }
+      match(levs[[v]], arr_dn[[v]])
+    })
+    arr <- do.call(`[`, c(list(unclass(arr)), idx, list(drop = FALSE)))
+    out <- as.matrix(stats::ftable(as.table(arr),
+                                   row.vars = names(fv$row),
+                                   col.vars = names(fv$col)))
+    if (!identical(unname(dim(out)), unname(dim(x))) ||
+        !identical(unname(lapply(dimnames(out), as.character)),
+                   unname(lapply(dimnames(x), as.character)))) {
+      stop(sprintf("Internal error: `%s` could not be matched to the cells of the table", what),
+           call. = FALSE)
+    }
+  } else if (identical(unname(dim(arr)), unname(dim(x)))) {
+    out <- as.matrix(unclass(arr))
+  } else {
+    stop(sprintf(paste0("`%s` must be an array whose dimnames name the table's factors (%s),",
+                        " or a matrix with the same dimensions as the flattened table"),
+                 what, paste(vars, collapse = ", ")), call. = FALSE)
+  }
+  matrix(as.vector(out), nrow = nrow(x), ncol = ncol(x), dimnames = dimnames(x))
+}
+
+# Pearson residuals of a glm, arranged as an array over the table's factors,
+# taken from the model frame. The model must have one observation per cell.
+# @noRd
+.glm_resid_array <- function(model, x) {
+  fv <- .flat_vars(x)
+  vars <- c(names(fv$row), names(fv$col))
+  mf <- stats::model.frame(model)
+  missing_vars <- setdiff(vars, names(mf))
+  if (length(missing_vars) > 0) {
+    stop("The glm `model` must include all factors of the table; missing: ",
+         paste(missing_vars, collapse = ", "), call. = FALSE)
+  }
+  cells <- mf[vars]
+  if (anyDuplicated(cells)) {
+    stop("The glm `model` must have one observation per cell of the table ",
+         "(a frequency data frame)", call. = FALSE)
+  }
+  res <- stats::residuals(model, type = "pearson")
+  tapply(res, lapply(cells, as.character), sum)
 }

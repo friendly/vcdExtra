@@ -108,10 +108,14 @@ are suppressed since residuals don't have meaningful totals.}
 \code{"pearson"}, or \code{"deviance"}}
 
 \item{model}{A fitted model (loglm or glm) to compute residuals from.
-If NULL and shade involves residuals, uses an independence model for all factors.}
+If NULL and shade involves residuals, uses an independence model for all factors.
+Its residuals are matched to the cells of the displayed table by the names of the
+factors, so the order of the dimensions does not matter. A glm must be fit to a
+frequency data frame (one row per cell) containing all the factors of \code{x}.}
 
-\item{expected}{Expected frequencies (alternative to \code{model}), a data structure of the same shape
-as \code{x}}
+\item{expected}{Expected frequencies (alternative to \code{model}): either an array with the same
+named dimensions as the unflattened table (in any order), or a matrix with the same
+dimensions as the flattened table that is displayed.}
 
 \item{palette}{Color palette function or vector for background colors. Default depends on shade
 type. When \code{shade = "freq"} the default is \code{palette = c("white", "firebrick")}; otherwise
@@ -120,8 +124,8 @@ residuals. The background colors are computed by interpolation using
 \code{scales::col_numeric()}.}
 
 \item{legend}{Controls display of shading interpretation note:
-\code{TRUE} or \code{"note"} (default) adds a source note explaining the shading;
-\code{FALSE} (default) suppresses the note, but a message is printed in the console.}
+\code{TRUE} or \code{"note"} adds a source note explaining the shading;
+\code{FALSE} (default) omits the note and instead prints it in the console as a message.}
 
 \item{margins}{Logical, include row/column totals?}
 
@@ -160,8 +164,8 @@ For multi-way tables (3 or more dimensions), residuals are computed from the
 model of complete independence among all factors using \code{\link[MASS]{loglm}}.
 But you can specify a model using the \code{model} or \code{expected} arguments, in a way similar to that provided
 by \code{mosaic.glm()}.
-A message is printed showing the chi-squared statistic, degrees of freedom,
-and p-value for this test.
+Unless \code{legend = TRUE}, a message is printed showing the chi-squared statistic, degrees of
+freedom, and p-value for this test; it can be silenced with \code{\link[=suppressMessages]{suppressMessages()}}.
 
 \strong{Multi-variable row and column labels}
 
