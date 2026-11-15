@@ -494,7 +494,6 @@ NULL
 #' data recorded as a frequency data frame with other variables.
 #' @source
 #'
-#' % \cite{Fahrmeir:94}
 #' Fahrmeir, L. & Tutz, G. (1994). Multivariate
 #' Statistical Modelling Based on Generalized Linear Models New York: Springer
 #' Verlag, Table 1.1.
