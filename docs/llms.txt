@@ -559,7 +559,7 @@ anova(indep, linlin, roweff, test = "Chisq")
 
 Friendly, M. (1995). Conceptual and Visual Models for Categorical Data.
 *The American Statistician*, **49**, 153–160.
-<http://www.datavis.ca/papers/amstat95.pdf>
+<https://friendly.github.io/papers/amstat95.pdf>
 
 Friendly, M. & Meyer, D. (2016). *Discrete Data Analysis with R:
 Visualization and Modeling Techniques for Categorical and Count Data*.
