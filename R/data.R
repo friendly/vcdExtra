@@ -2274,7 +2274,7 @@ NULL
 # @seealso \code{\link[stats]{loglin}}, \code{\link[MASS]{loglm}}
 # @references These functions were inspired by the original SAS implementation
 # of mosaic displays, described in the \emph{User's Guide},
-# \url{http://www.datavis.ca/mosaics/mosaics.pdf}
+# \url{https://friendly.github.io/papers/mosaics/mosaics.pdf}
 # @keywords models
 # EXAMPLES NOT COPIED
 # @examples

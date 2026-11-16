@@ -58,7 +58,7 @@
 #'
 #' Friendly, M. (1997). Conceptual Models for Visualizing Contingency Table Data.
 #' In M. Greenacre & J. Blasius (Eds.), \emph{Visualization of Categorical Data} (pp. 17–35).
-#' Academic Press. \url{https://www.datavis.ca/papers/koln/kolnpapr.pdf}
+#' Academic Press. \url{https://friendly.github.io/papers/koln/kolnpapr.pdf}
 #'
 #' Meyer, D., Zeileis, A., and Hornik, K. (2006).
 #' The Strucplot Framework: Visualizing Multi-way Contingency Tables with vcd.

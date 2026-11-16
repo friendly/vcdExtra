@@ -52,7 +52,7 @@
 #'
 #' @references These functions were inspired by the original SAS implementation
 #' of mosaic displays, described in the *User's Guide*,
-#' <http://www.datavis.ca/mosaics/mosaics.pdf>
+#' <https://friendly.github.io/papers/mosaics/mosaics.pdf>
 #'
 #' @keywords models
 #' @examples

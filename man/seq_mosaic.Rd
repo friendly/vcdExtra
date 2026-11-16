@@ -70,7 +70,7 @@ seq_mosaic(Titanic, type="mutual", panel=sieve,
 \references{
 These functions were inspired by the original SAS implementation
 of mosaic displays, described in the \emph{User's Guide for Mosaics},
-\url{http://www.datavis.ca/mosaics/mosaics.pdf}
+\url{https://friendly.github.io/papers/mosaics/mosaics.pdf}
 }
 \seealso{
 \code{\link{loglin-utilities}} for descriptions of sequential
