@@ -55,6 +55,9 @@
   [`print()`](https://rdrr.io/r/base/print.html)/[`plot()`](https://rdrr.io/r/graphics/plot.default.html)
   methods (`which = "fit"` or `"diagnose"`) work on it unchanged.
 
+- Links to papers formerly hosted at datavis.ca now point to
+  <https://friendly.github.io/papers/> or to DOIs.
+
 ## Version 0.9.8
 
 CRAN release: 2026-08-21
