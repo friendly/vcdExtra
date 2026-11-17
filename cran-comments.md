@@ -1,6 +1,6 @@
 ## Test environments
 * local Windows 11 x64 install, R version 4.6.1 (2026-06-24 ucrt)
-* win-builder: R Under development (unstable) (2026-11-14 r90890 ucrt)
+* win-builder: R Under development (unstable) (2026-11-16 r90914 ucrt)
 
 ## R CMD check results
 0 error(s) | 0 warning(s) | 0 note(s)
@@ -52,4 +52,7 @@ Woolf inverse-variance weights as `woolf_test()` (`weighted = TRUE`, the default
 `twoway::twoway()` directly for the ordinary unweighted mean-polish (`weighted = FALSE`).
 The result is an object of class `"twoway"`, so `twoway`'s own `print()`/`plot()` methods
 (`which = "fit"` or `"diagnose"`) work on it unchanged.
+
+* Links to papers formerly hosted at datavis.ca now point to https://friendly.github.io/papers/
+or to DOIs.
 

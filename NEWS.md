@@ -33,6 +33,9 @@
   The result is an object of class `"twoway"`, so `twoway`'s own `print()`/`plot()` methods
   (`which = "fit"` or `"diagnose"`) work on it unchanged.
 
+* Links to papers formerly hosted at datavis.ca now point to https://friendly.github.io/papers/
+  or to DOIs.
+
 ## Version 0.9.8
 
 This is a significant release, with a number of new features, notably plotting
