@@ -2,6 +2,8 @@
 
 ## Version 0.9.9
 
+CRAN release: 2026-11-18
+
 - [`color_table()`](https://friendly.github.io/vcdExtra/reference/color_table.md)
   with `model =` put the residuals into the wrong cells of multi-way
   tables with more than one row or column variable, because they were
